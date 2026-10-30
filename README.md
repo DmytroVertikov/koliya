@@ -10,7 +10,7 @@
 2. **Админ.** В Supabase: Authentication → Users → Add user (ваш email и пароль). Затем Authentication → Sign In / Providers → отключите **Allow new users to sign up**, иначе зарегистрироваться сможет любой.
 3. **Ключи.** Project Settings → API. Скопируйте Project URL и anon public key в `config.js`. Эти ключи публичные, безопасность обеспечивают правила RLS из `schema.sql`.
 4. **GitHub.** Создайте репозиторий `koliia`, загрузите все файлы из этой папки, откройте Settings → Pages → Source: Deploy from a branch → `main` / root.
-5. Сайт будет по адресу `https://<ник>.github.io/koliia/`, админка по адресу `.../admin/`.
+5. Сайт будет по адресу `https://<ник>.github.io/koliya/`, админка по адресу `.../admin/`.
 
 ## Как править
 
