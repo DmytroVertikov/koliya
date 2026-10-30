@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ru"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Колія: админка</title>
+<link rel="stylesheet" href="../style.css">
+<style>
+label{display:block;font-size:13px;color:var(--mute);margin:10px 0 4px;font-weight:600}
+input,textarea,select{width:100%;padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font:inherit}
+textarea{min-height:90px;font-family:ui-monospace,Menlo,monospace;font-size:14px}
+.row{display:flex;gap:10px;flex-wrap:wrap}.row>*{flex:1;min-width:120px}
+button{border:0;border-radius:10px;padding:10px 16px;font:inherit;font-weight:600;cursor:pointer;background:var(--soft);color:var(--brand)}
+button.pri{background:var(--acc);color:var(--accink)}button.del{background:#fde4e4;color:#a11}
+.ok{color:#1a7f37;font-size:13px}.err{color:#c62828;font-size:13px}
+.bar{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+#toast{position:fixed;bottom:calc(16px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 18px;border-radius:99px;display:none}
+</style></head><body>
+<header style="padding-bottom:44px"><div class="wrap bar"><b>⚙️ Колія: админка</b><span><a href="../" style="color:#fff">На сайт</a> <button id="out" style="display:none;margin-left:8px">Выйти</button></span></div></header>
+<main class="wrap" id="app"></main><div id="toast"></div>
+<script src="../config.js"></script><script src="../common.js"></script>
+<script>
+const $=s=>document.querySelector(s);let S=JSON.parse(localStorage.getItem("sb")||"null"),CT=[],RT=[];
+const toast=t=>{const e=$("#toast");e.textContent=t;e.style.display="block";setTimeout(()=>e.style.display="none",2200)};
+const auth=async(q,b)=>{const r=await fetch(U+"/auth/v1/token?grant_type="+q,{method:"POST",headers:{apikey:K,"Content-Type":"application/json"},body:JSON.stringify(b)});const j=await r.json();if(!r.ok)throw new Error(j.error_description||j.msg||"Ошибка входа");S={a:j.access_token,r:j.refresh_token};localStorage.setItem("sb",JSON.stringify(S))};
+const logout=()=>{S=null;localStorage.removeItem("sb");showLogin()};
+async function db(m,p,b,pref,retry=true){const r=await fetch(U+"/rest/v1/"+p,{method:m,headers:{apikey:K,Authorization:"Bearer "+S.a,"Content-Type":"application/json",Prefer:pref||"return=representation"},body:b&&JSON.stringify(b)});
+if(r.status==401&&retry){try{await auth("refresh_token",{refresh_token:S.r})}catch(e){logout();throw e}return db(m,p,b,pref,false)}
+if(!r.ok)throw new Error(await r.text());return r.status==204?null:r.json()}
+function showLogin(){$("#out").style.display="none";$("#app").innerHTML=`<section class="panel" style="max-width:380px;margin:0 auto"><h2>Вход</h2><label>Email</label><input id="em" type="email" autocomplete="username"><label>Пароль</label><input id="pw" type="password" autocomplete="current-password"><p class="err" id="le"></p><button class="pri" id="go">Войти</button></section>`;
+$("#go").onclick=async()=>{try{await auth("password",{email:$("#em").value,password:$("#pw").value});start()}catch(e){$("#le").textContent=e.message}}}
+async function start(){$("#out").style.display="";$("#out").onclick=logout;try{[CT,RT]=await Promise.all([db("GET","countries?order=sort"),db("GET","routes?order=sort")])}catch(e){return showLogin()}home()}
+function home(cur){const app=$("#app");
+app.innerHTML=`<section class="panel" style="margin-top:0"><div class="bar"><h2 style="margin:0">Направления</h2><button id="nr">+ Новое направление</button></div>
+<label>Выберите направление</label><select id="sel"><option value="">—</option>${RT.map(r=>`<option value="${esc(r.slug)}" ${r.slug===cur?"selected":""}>${esc(r.title)} (${esc(r.slug)})</option>`).join("")}</select></section>
+<section class="panel"><details><summary><b>Страны</b></summary><div id="cs"></div></details></section><div id="ed"></div>`;
+$("#sel").onchange=e=>e.target.value?editRoute(RT.find(r=>r.slug===e.target.value)):($("#ed").innerHTML="");
+$("#nr").onclick=()=>editRoute({slug:"",country:CT[0]?.slug,title:"",lead:"",how:"",tickets:"",sort:(RT.length+1)*10},true);
+countries();if(cur)editRoute(RT.find(r=>r.slug===cur))}
+function countries(){$("#cs").innerHTML=CT.concat([{slug:"",name:"",flag:"",sort:(CT.length+1)*10,n:1}]).map((c,i)=>`<div class="row" style="margin-top:10px" data-i="${i}"><input class="s" placeholder="код (pl)" value="${esc(c.slug)}" ${c.slug?"readonly":""}><input class="f" placeholder="🇵🇱" value="${esc(c.flag)}"><input class="n" placeholder="Название" value="${esc(c.name)}"><input class="o" type="number" value="${c.sort}"><button class="pri sv">${c.n?"Добавить":"Сохранить"}</button>${c.n?"":'<button class="del dl">Удалить</button>'}</div>`).join("");
+document.querySelectorAll("#cs .row").forEach(w=>{const g=c=>w.querySelector(c).value.trim();
+w.querySelector(".sv").onclick=async()=>{try{if(!g(".s")||!g(".n"))throw new Error("Заполните код и название");await db("POST","countries?on_conflict=slug",{slug:g(".s"),name:g(".n"),flag:g(".f"),sort:+g(".o")||0},"resolution=merge-duplicates,return=representation");CT=await db("GET","countries?order=sort");toast("Сохранено");countries()}catch(e){alert(e.message)}};
+const d=w.querySelector(".dl");if(d)d.onclick=async()=>{if(!confirm("Удалить страну и все её маршруты?"))return;try{await db("DELETE","countries?slug=eq."+encodeURIComponent(g(".s")));await start()}catch(e){alert(e.message)}}})}
+async function editRoute(r,isNew){const ed=$("#ed");let opts=isNew?[]:await db("GET","options?route_slug=eq."+encodeURIComponent(r.slug)+"&order=sort");
+ed.innerHTML=`<section class="panel"><h2>${isNew?"Новое направление":"Направление"}</h2>
+<div class="row"><div><label>Код (например ua-pl)</label><input id="rs" value="${esc(r.slug)}" ${isNew?"":"readonly"}></div><div><label>Страна</label><select id="rc">${CT.map(c=>`<option value="${esc(c.slug)}" ${c.slug===r.country?"selected":""}>${esc(c.flag)} ${esc(c.name)}</option>`).join("")}</select></div><div><label>Порядок</label><input id="ro" type="number" value="${r.sort}"></div></div>
+<label>Заголовок</label><input id="rt" value="${esc(r.title)}"><label>Описание</label><input id="rl" value="${esc(r.lead)}">
+<label>Как ехать (один шаг на строку)</label><textarea id="rh">${esc(r.how)}</textarea>
+<label>Билеты (формат: Название | https://ссылка, по строке)</label><textarea id="rk">${esc(r.tickets)}</textarea>
+<div class="row" style="margin-top:12px"><button class="pri" id="sr">Сохранить направление</button>${isNew?"":'<button class="del" id="dr">Удалить направление</button>'}</div></section>
+<section class="panel"><div class="bar"><h2 style="margin:0">Варианты маршрута</h2>${isNew?"":'<button id="no">+ Добавить вариант</button>'}</div>
+<p>Формат: <code>№ поезда: Город ЧЧ:ММ &gt; Город ЧЧ:ММ</code>. Пересадка отделяется знаком <code>||</code>.</p><div id="ol"></div></section>`;
+$("#sr").onclick=async()=>{const slug=$("#rs").value.trim();try{if(!/^[a-z-]+$/.test(slug))throw new Error("Код: только латиница и дефис");if(!$("#rt").value.trim())throw new Error("Нужен заголовок");
+await db("POST","routes?on_conflict=slug",{slug,country:$("#rc").value,title:$("#rt").value.trim(),lead:$("#rl").value.trim(),how:$("#rh").value.trim(),tickets:$("#rk").value.trim(),sort:+$("#ro").value||0},"resolution=merge-duplicates,return=representation");RT=await db("GET","routes?order=sort");toast("Сохранено");home(slug)}catch(e){alert(e.message)}};
+if(!isNew){$("#dr").onclick=async()=>{if(!confirm("Удалить направление и все его варианты?"))return;await db("DELETE","routes?slug=eq."+encodeURIComponent(r.slug));RT=await db("GET","routes?order=sort");home()};
+$("#no").onclick=()=>{opts.push({id:null,route_slug:r.slug,dsl:"",note:"",sort:(opts.length+1)*10,active:true});list()}}
+function list(){$("#ol").innerHTML=opts.map((o,i)=>`<div class="opt" data-i="${i}"><label>Вариант</label><textarea class="d">${esc(o.dsl)}</textarea><div class="pv note"></div>
+<div class="row"><div><label>Примечание</label><input class="n" value="${esc(o.note)}"></div><div><label>Порядок</label><input class="o" type="number" value="${o.sort}"></div><div><label>Показывать</label><select class="a"><option value="1" ${o.active?"selected":""}>Да</option><option value="0" ${o.active?"":"selected"}>Скрыт</option></select></div></div>
+<div class="row" style="margin-top:12px"><button class="pri sv">Сохранить</button>${o.id?'<button class="del dl">Удалить</button>':""}</div></div>`).join("");
+document.querySelectorAll("#ol .opt").forEach(w=>{const o=opts[+w.dataset.i],ta=w.querySelector(".d"),pv=w.querySelector(".pv");
+const chk=()=>{try{const L=parseDsl(ta.value),f=L[0].st[0],t=L[L.length-1].st.slice(-1)[0];pv.innerHTML=`<span class="ok">✓ ${esc(f[0])} ${f[1]} → ${esc(t[0])} ${t[1]}, пересадок: ${L.length-1}</span>`;return true}catch(e){pv.innerHTML=`<span class="err">${esc(e.message)}</span>`;return false}};ta.oninput=chk;chk();
+w.querySelector(".sv").onclick=async()=>{if(!chk())return;const b={route_slug:r.slug,dsl:ta.value.trim(),note:w.querySelector(".n").value.trim(),sort:+w.querySelector(".o").value||0,active:w.querySelector(".a").value==="1",updated_at:new Date().toISOString()};
+try{const x=o.id?await db("PATCH","options?id=eq."+o.id,b):await db("POST","options",b);Object.assign(o,x[0]);toast("Сохранено");list()}catch(e){alert(e.message)}};
+const d=w.querySelector(".dl");if(d)d.onclick=async()=>{if(!confirm("Удалить вариант?"))return;try{await db("DELETE","options?id=eq."+o.id);opts.splice(+w.dataset.i,1);list()}catch(e){alert(e.message)}}})}
+list();ed.scrollIntoView({behavior:"smooth"})}
+S?start():showLogin();
+</script></body></html>
