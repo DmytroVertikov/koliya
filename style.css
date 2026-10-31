@@ -43,8 +43,8 @@ h2.sub{font-family:var(--disp);font-weight:800;font-size:20px;margin:30px 0 0}
 /* Билет-вариант */
 .opt{position:relative;background:var(--card);border:1px solid var(--line);border-radius:24px;margin-top:16px;overflow:hidden;box-shadow:0 12px 32px -16px rgba(18,20,92,.35)}
 .board{--t:clamp(34px,10vw,60px);display:grid;grid-template-columns:auto 1fr auto;gap:10px 14px;align-items:center;padding:24px 22px 26px;color:#fff;background:linear-gradient(160deg,var(--board2),var(--board))}
-.pt{display:flex;flex-direction:column;min-width:0}
-.pt.end{text-align:right;align-items:flex-end}
+.pt{display:flex;flex-direction:column;min-width:0;align-items:center;text-align:center}
+.pt.end{align-items:center;text-align:center}
 .pt time{font-family:var(--disp);font-weight:800;font-size:var(--t);line-height:1;letter-spacing:0;color:var(--acc);white-space:nowrap}
 .pt time sup{font-size:.32em;letter-spacing:0;vertical-align:top;margin-left:4px;position:relative;top:.2em;color:#fff;opacity:.85}
 .pt span{margin-top:12px;font-size:clamp(18px,4.6vw,24px);font-weight:700;line-height:1.2;overflow-wrap:anywhere}
