@@ -27,6 +27,7 @@ h2.sub small{font-family:var(--body);font-weight:600;font-size:14px;color:var(--
 </style></head><body>
 <header><div class="wrap"><a class="logo" href="./"><span class="rails">🚆</span> КОЛІЯ</a><h1>Поездом из Киева в Варшаву</h1><p id="lead">Прямой поезд и варианты с пересадкой в Хелме.</p></div></header>
 <main class="wrap"><a class="back" href="./">← Все направления</a><div id="app"><p>Загрузка…</p></div></main>
+<div class="wrap"><aside class="ad wide" data-slot="bottom" hidden></aside></div>
 <footer class="wrap">Расписание меняется, перед поездкой проверьте рейс на сайте перевозчика. Справочная Укрзализныци: 044 465 33 44, 0 800 503 111 (бесплатно с украинских номеров).</footer>
 <script src="config.js"></script><script src="common.js"></script>
 <script>
@@ -40,6 +41,7 @@ fetch(U+"/rest/v1/options?order=sort",{headers:{apikey:K,Authorization:"Bearer "
   if(!list.length){app.innerHTML='<div class="panel"><h2>Пока нет вариантов</h2><p>Добавьте их в админке.</p></div>';return}
   document.getElementById("lead").textContent=`${list.length} ${list.length%10==1&&list.length!=11?"вариант":list.length%10>1&&list.length%10<5&&(list.length<10||list.length>20)?"варианта":"вариантов"}: ${direct.length?"прямой поезд и ":""}с пересадкой.`;
   app.innerHTML=(direct.length?`<h2 class="sub" style="margin-top:6px">Прямой поезд <small>без пересадок</small></h2><div class="direct direct-wrap" style="margin-top:16px">${direct.map(x=>optHtml(x.o)).join("")}</div>`:"")
+   +(direct.length&&transfer.length?`<aside class="ad wide" data-slot="mid" hidden></aside>`:"")
    +(transfer.length?`<h2 class="sub">С пересадкой <small>обычно в Хелме</small></h2><div class="cols" style="margin-top:16px">${transfer.map(x=>optHtml(x.o)).join("")}</div>`:"");
 }).catch(()=>{app.innerHTML='<div class="panel"><h2>Не удалось загрузить данные</h2><p>Обновите страницу позже.</p></div>'});
 </script></body></html>
