@@ -9,7 +9,11 @@
 </head><body>
 <header><div class="wrap"><a class="logo" href="#"><span class="rails">🚆</span> КОЛІЯ</a><h1 id="h1">Как ехать поездом в Украину и из Украины</h1><p id="lead">Простые маршруты с пересадками и расписанием. Выберите страну.</p></div></header>
 <main class="wrap" id="app"><p>Загрузка…</p></main>
-<footer class="wrap">Расписание меняется, перед поездкой проверьте рейс на сайте перевозчика. Справочная Укрзализныци: 044 465 33 44, 0 800 503 111 (бесплатно с украинских номеров). Колія: справочник по поездам. Источник: <a href="https://uz-vezemo.uz.gov.ua/">uz-vezemo.uz.gov.ua</a>.</footer>
+<footer class="wrap"><div class="fcols">
+<div><b>🚆 Колія</b><p>Справочник по поездам из Украины и в Украину: время, станции и удобные пересадки.</p></div>
+<div><b>Важно</b><p>Расписание меняется, перед поездкой проверьте рейс на сайте перевозчика. Проект неофициальный и не связан с Укрзализныцей.</p></div>
+<div><b>Справочная Укрзализныци</b><p>044 465 33 44 · 0 800 503 111<br>Бесплатно с украинских номеров.</p></div></div>
+<p class="fine">Данные о поездах: <a href="https://uz-vezemo.uz.gov.ua/">uz-vezemo.uz.gov.ua</a> · © 2026 Колія</p></footer>
 <script src="config.js"></script><script src="common.js"></script>
 <script>
 const api=p=>fetch(U+"/rest/v1/"+p,{headers:{apikey:K,Authorization:"Bearer "+K}}).then(r=>{if(!r.ok)throw new Error(r.status);return r.json()});
