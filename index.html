@@ -2,6 +2,9 @@
 <html lang="ru"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Колія: поездом из Украины и в Украину</title>
+<meta name="theme-color" content="#12145c">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&family=Unbounded:wght@600;700&display=swap">
 <link rel="stylesheet" href="style.css">
 </head><body>
 <header><div class="wrap"><a class="logo" href="#"><span class="rails">🚆</span> КОЛІЯ</a><h1 id="h1">Как ехать поездом в Украину и из Украины</h1><p id="lead">Простые маршруты с пересадками и расписанием. Выберите страну.</p></div></header>
@@ -24,6 +27,6 @@ app.innerHTML=`<div class="grid">${d.c.map(c=>`<div class="country"><div class="
 <section class="panel"><h2>Купить билеты на УЗ</h2><a class="btn pri" href="https://app.uz.gov.ua/start">Приложение Укрзализныци</a><a class="btn" href="https://uz.gov.ua/">Сайт УЗ</a></section>`;return}
 document.title=r.title+" поездом | Колія";h1.textContent=r.title;lead.textContent=r.lead;
 const how=r.how.split("\n").filter(Boolean),tk=r.tickets.split("\n").filter(Boolean).map(l=>l.split("|").map(s=>s.trim()));
-app.innerHTML=`<a class="back" href="#">← Все направления</a><section class="panel" style="margin-top:0"><h2>Как ехать</h2><ol class="steps">${how.map(x=>`<li>${esc(x)}</li>`).join("")}</ol>${tk.map((k,i)=>`<a class="btn ${i?"":"pri"}" href="${esc(safeUrl(k[1]))}" target="_blank" rel="noopener">${esc(k[0])}</a>`).join("")}</section><h2 style="margin:26px 0 0">Варианты маршрута</h2>${d.o.filter(o=>o.route_slug===id).map(optHtml).join("")||"<p>Пока нет вариантов.</p>"}`}
+app.innerHTML=`<a class="back" href="#">← Все направления</a><section class="panel" style="margin-top:0"><h2>Как ехать</h2><ol class="steps">${how.map(x=>`<li>${esc(x)}</li>`).join("")}</ol>${tk.map((k,i)=>`<a class="btn ${i?"":"pri"}" href="${esc(safeUrl(k[1]))}" target="_blank" rel="noopener">${esc(k[0])}</a>`).join("")}</section><h2 class="sub">Варианты маршрута</h2>${d.o.filter(o=>o.route_slug===id).map(optHtml).join("")||"<p>Пока нет вариантов.</p>"}`}
 addEventListener("hashchange",render);render();
 </script></body></html>
