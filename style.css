@@ -9,16 +9,16 @@ a:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
 .wrap{max-width:900px;margin:0 auto;padding:0 18px}
 
 /* Шапка с «рельсами» */
-header{position:relative;background:radial-gradient(900px 300px at 85% -20%,#4c46d6 0,transparent 60%),linear-gradient(160deg,var(--board2),var(--board));color:#fff;padding:26px 0 74px}
-header::after{content:"";position:absolute;left:0;right:0;bottom:30px;height:14px;opacity:.28;
+header{position:relative;background:radial-gradient(900px 300px at 85% -20%,#4c46d6 0,transparent 60%),linear-gradient(160deg,var(--board2),var(--board));color:#fff;padding:14px 0 40px}
+header::after{content:"";position:absolute;left:0;right:0;bottom:12px;height:12px;opacity:.28;
 background:#fff;
 -webkit-mask:linear-gradient(#000 0 0) top/100% 2px no-repeat,linear-gradient(#000 0 0) bottom/100% 2px no-repeat,repeating-linear-gradient(90deg,#000 0 5px,transparent 5px 20px);
 mask:linear-gradient(#000 0 0) top/100% 2px no-repeat,linear-gradient(#000 0 0) bottom/100% 2px no-repeat,repeating-linear-gradient(90deg,#000 0 5px,transparent 5px 20px)}
 header a.logo{display:inline-flex;align-items:center;gap:10px;text-decoration:none;font-family:var(--disp);font-weight:800;font-size:15px;letter-spacing:.16em;color:var(--acc)}
-.rails{display:grid;place-items:center;width:34px;height:34px;border-radius:10px;background:rgba(255,255,255,.12);font-size:18px;letter-spacing:0}
-h1{font-family:var(--disp);font-weight:800;font-size:clamp(26px,5.6vw,44px);line-height:1.14;letter-spacing:-.01em;margin:22px 0 12px;max-width:700px;text-wrap:balance}
-header p{margin:0;max-width:540px;font-size:17px;opacity:.85}
-main{margin-top:-30px;padding-bottom:40px;position:relative}
+.rails{display:grid;place-items:center;width:28px;height:28px;border-radius:8px;background:rgba(255,255,255,.12);font-size:15px;letter-spacing:0}
+h1{font-family:var(--disp);font-weight:800;font-size:clamp(22px,4.4vw,32px);line-height:1.15;letter-spacing:-.01em;margin:10px 0 4px;max-width:700px;text-wrap:balance}
+header p{margin:0;max-width:540px;font-size:15px;opacity:.85}
+main{margin-top:-18px;padding-bottom:40px;position:relative}
 
 /* Страны */
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px}
@@ -84,3 +84,10 @@ footer{color:var(--mute);font-size:13px;padding:10px 0 34px}
 .body{padding:4px 16px 18px}
 .mid{min-width:44px}
 }
+
+/* Рекламные места (Google AdSense). Пока скрыты атрибутом hidden; зарезервированная высота не даёт странице «прыгать» */
+.ad{display:block;margin:18px 0;min-height:100px;text-align:center;overflow:hidden;border-radius:14px}
+.ad[hidden]{display:none}
+.ad.wide{min-height:90px}.ad.box{min-height:250px}
+.ad::before{content:"Реклама";display:block;font-size:11px;color:var(--mute);text-align:left;margin-bottom:4px}
+.cols .ad{grid-column:1/-1;margin:0}
