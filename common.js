@@ -5,7 +5,13 @@ const safeUrl=u=>/^https?:\/\//i.test(u)?u:"#";
 function parseDsl(s){return s.split("||").map(p=>{const m=p.match(/^([^:]+):(.+)$/);if(!m)throw new Error("Нет «номер поезда:» в части: "+p);
 const st=m[2].split(">").map(x=>{x=x.trim();const t=x.match(/^(.+)\s(\d{1,2}:\d{2})$/);if(!t)throw new Error("Нет времени у станции: «"+x+"»");return[t[1].trim(),t[2]]});
 if(st.length<2)throw new Error("В поезде "+m[1]+" меньше двух станций");return{train:m[1].trim(),st}})}
-function legHtml(l,i){return`${i?`<div class="swap">🔁 Пересадка: ${esc(l.st[0][0])}</div>`:""}<div class="leg"><h4>Поезд ${esc(l.train)}</h4><ul class="tl">${l.st.map(a=>`<li><span>${esc(a[0])}</span><time>${esc(a[1])}</time></li>`).join("")}</ul></div>`}
+// Время в пути и сдвиг по суткам: идём по всем станциям, при «скачке назад» добавляем сутки
+function trip(L){let prev=null,add=0,first=0,abs=0;
+for(const l of L)for(const s of l.st){const[h,m]=s[1].split(":");let v=+h*60+ +m+add;
+if(prev===null)first=v;else if(v<prev){add+=1440;v+=1440}prev=abs=v}
+return{min:abs-first,days:Math.floor(abs/1440)}}
+const durFmt=m=>{const h=Math.floor(m/60),r=m%60;return(h?h+" ч":"")+(h&&r?" ":"")+(r?r+" мин":"")||"0 мин"};
+function legHtml(l,i){return`${i?`<div class="swap">🔁 Пересадка: ${esc(l.st[0][0])}</div>`:""}<div class="leg"><h4>🚆 Поезд ${esc(l.train)}</h4><ul class="tl">${l.st.map(a=>`<li><span>${esc(a[0])}</span><time>${esc(a[1])}</time></li>`).join("")}</ul></div>`}
 function optHtml(o){let L;try{L=parseDsl(o.dsl)}catch(e){return""}
-const f=L[0].st[0],t=L[L.length-1].st.slice(-1)[0];
-return`<article class="opt"><div class="head"><b>${esc(f[0])} → ${esc(t[0])}</b><span class="tag">${L.length>1?"с пересадкой":"без пересадки"}</span></div><div class="note" style="margin:2px 0 0">Отправление ${esc(f[1])} · прибытие ${esc(t[1])}</div>${L.map(legHtml).join("")}${o.note?`<div class="note">ℹ️ ${esc(o.note)}</div>`:""}</article>`}
+const f=L[0].st[0],t=L[L.length-1].st.slice(-1)[0],tr=trip(L),ch=L.length-1;
+return`<article class="opt"><div class="board"><div class="pt"><time>${esc(f[1])}</time><span>${esc(f[0])}</span></div><div class="mid"><span class="dur">${durFmt(tr.min)}</span><i class="line"></i><span class="tag${ch?" x":""}">${ch?(ch===1?"1 пересадка":ch+" пересадки"):"без пересадки"}</span></div><div class="pt end"><time>${esc(t[1])}${tr.days?`<sup>+${tr.days}</sup>`:""}</time><span>${esc(t[0])}</span></div></div><div class="perf"></div><div class="body">${L.map(legHtml).join("")}${o.note?`<div class="note">ℹ️ ${esc(o.note)}</div>`:""}</div></article>`}
