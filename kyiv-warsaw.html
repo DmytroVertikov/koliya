@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ru"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Поездом из Киева в Варшаву | Колія</title>
+<meta name="description" content="Все поезда Киев — Варшава: прямой и с пересадкой в Хелме. Время, станции, длительность.">
+<meta name="theme-color" content="#12145c">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap">
+<link rel="stylesheet" href="style.css">
+<style>
+.wrap{max-width:1080px}
+.cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;align-items:start}
+.cols .opt{margin-top:0}
+.cols .board{--t:clamp(32px,4vw,46px)}
+.direct .opt{margin-top:0}
+/* прямой поезд: зелёный цвет вместо синего */
+.direct .board{background:linear-gradient(160deg,#12875a,#0a4d34)}
+.direct .opt{border-color:#12875a;box-shadow:0 14px 36px -14px rgba(18,135,90,.55)}
+.direct .tl,.direct .tl li:before{border-color:#12875a}
+.direct .tl li.h:before{background:#12875a}
+.direct .leg h4{color:#0a6b46;background:#dcf5e9}
+.direct .tag{background:var(--acc);color:var(--accink)}
+@media (prefers-color-scheme:dark){.direct .leg h4{color:#7be0b0;background:#12392b}}
+h2.sub small{font-family:var(--body);font-weight:600;font-size:14px;color:var(--mute);margin-left:8px}
+.direct-wrap{display:grid;gap:18px}
+@media (max-width:760px){.cols{grid-template-columns:1fr}.cols .board{--t:clamp(34px,10vw,60px)}}
+</style></head><body>
+<header><div class="wrap"><a class="logo" href="./"><span class="rails">🚆</span> КОЛІЯ</a><h1>Поездом из Киева в Варшаву</h1><p id="lead">Прямой поезд и варианты с пересадкой в Хелме.</p></div></header>
+<main class="wrap"><a class="back" href="./">← Все направления</a><div id="app"><p>Загрузка…</p></div></main>
+<footer class="wrap">Расписание меняется, перед поездкой проверьте рейс на сайте перевозчика. Справочная Укрзализныци: 044 465 33 44, 0 800 503 111 (бесплатно с украинских номеров).</footer>
+<script src="config.js"></script><script src="common.js"></script>
+<script>
+const FROM="Киев",TO="Варшава"; // какое направление показывать (как в шапке карточки в админке)
+const app=document.getElementById("app");
+const norm=s=>String(s||"").trim().toLowerCase();
+fetch(U+"/rest/v1/options?order=sort",{headers:{apikey:K,Authorization:"Bearer "+K}}).then(r=>{if(!r.ok)throw 0;return r.json()}).then(all=>{
+  const list=all.filter(o=>o.active!==false).map(o=>{const p=parseOption(o.dsl);return{o,p,h:p.head||deriveHead(p.legs)}})
+    .filter(x=>x.p.legs.length&&norm(x.h.from).startsWith(norm(FROM))&&norm(x.h.to).startsWith(norm(TO)));
+  const direct=list.filter(x=>x.p.legs.length===1),transfer=list.filter(x=>x.p.legs.length>1);
+  if(!list.length){app.innerHTML='<div class="panel"><h2>Пока нет вариантов</h2><p>Добавьте их в админке.</p></div>';return}
+  document.getElementById("lead").textContent=`${list.length} ${list.length%10==1&&list.length!=11?"вариант":list.length%10>1&&list.length%10<5&&(list.length<10||list.length>20)?"варианта":"вариантов"}: ${direct.length?"прямой поезд и ":""}с пересадкой.`;
+  app.innerHTML=(direct.length?`<h2 class="sub" style="margin-top:6px">Прямой поезд <small>без пересадок</small></h2><div class="direct direct-wrap" style="margin-top:16px">${direct.map(x=>optHtml(x.o)).join("")}</div>`:"")
+   +(transfer.length?`<h2 class="sub">С пересадкой <small>обычно в Хелме</small></h2><div class="cols" style="margin-top:16px">${transfer.map(x=>optHtml(x.o)).join("")}</div>`:"");
+}).catch(()=>{app.innerHTML='<div class="panel"><h2>Не удалось загрузить данные</h2><p>Обновите страницу позже.</p></div>'});
+</script></body></html>
