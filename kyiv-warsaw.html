@@ -27,9 +27,19 @@
 .coach p{margin:0;font-size:15.5px;line-height:1.6}
 .coach p+p{margin-top:8px}
 @media (prefers-color-scheme:dark){.coach{background:#12392b;color:#bff0d8;border-color:rgba(123,224,176,.25)}}
+.buy{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin-top:14px}
+.buy>div{background:var(--soft);border-radius:18px;padding:18px 20px}
+.buy>div.d{background:#dcf5e9;color:#0a4d34}
+.buy>div.d .steps li:before{background:#12875a;color:#fff}
+.buy h3{margin:0 0 2px;font-family:var(--disp);font-weight:800;font-size:17px}
+.buy .steps{margin-top:12px}
+.buy .btn{margin-top:14px}
+.buy>div.d .btn{background:#fff;color:#0a6b46}
+.buy-note{margin-top:16px!important;font-size:14px}
+@media (prefers-color-scheme:dark){.buy>div.d{background:#12392b;color:#bff0d8}.buy>div.d .btn{background:#0f2c21;color:#7be0b0}}
 h2.sub small{font-family:var(--body);font-weight:600;font-size:14px;color:var(--mute);margin-left:8px}
 .direct-wrap{display:grid;gap:18px}
-@media (max-width:760px){.direct .body.two{display:block}.cols{grid-template-columns:1fr}.cols .board,.direct .board{--t:clamp(34px,10vw,60px)}}
+@media (max-width:760px){.buy{grid-template-columns:1fr}.direct .body.two{display:block}.cols{grid-template-columns:1fr}.cols .board,.direct .board{--t:clamp(34px,10vw,60px)}}
 </style></head><body>
 <header><div class="wrap"><a class="logo" href="./"><span class="rails">🚆</span> КОЛІЯ</a><h1>Поездом из Киева в Варшаву</h1><p id="lead">Прямой поезд и варианты с пересадкой в Хелме.</p></div></header>
 <main class="wrap"><a class="back" href="./">← Главная</a> <a class="back" href="./#ua-pl">Все направления Украина → Польша</a><div id="app"><p>Загрузка…</p></div><div id="more"></div></main>
@@ -43,6 +53,21 @@ h2.sub small{font-family:var(--body);font-weight:600;font-size:14px;color:var(--
 <script>
 const FROM="Киев",TO="Варшава",BACK="pl-ua"; // BACK: код обратного направления для ссылки // какое направление показывать (как в шапке карточки в админке)
 const COACH=`<aside class="coach"><h4>🛏 Купе RIC</h4><p>Купе RIC оборудованы тремя спальными полками, расположенными одна над другой.</p><p>При разложенной средней полке сидеть на нижней невозможно.</p><p>Для доступа к верхней полке предусмотрена специальная лестница.</p></aside>`;
+const BUY=`<section class="panel"><h2>Как купить билеты</h2>
+<div class="buy">
+<div class="d"><h3>Прямой поезд</h3><ol class="steps">
+<li>Откройте приложение «Укрзализныци» или сайт uz.gov.ua и войдите в аккаунт.</li>
+<li>Выберите маршрут Киев → Варшава и дату. Продажа обычно открывается за 20 суток до отправления, места на прямой поезд разбирают быстро.</li>
+<li>Выберите место в купе RIC и оплатите картой. Электронный билет будет в приложении, при посадке покажите его вместе с паспортом.</li></ol>
+<a class="btn" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Купить в приложении УЗ</a></div>
+<div><h3>С пересадкой в Хелме</h3><ol class="steps">
+<li>Билет до Хелма купите у Укрзализныци, в приложении или на сайте. Номер поезда указан в карточке выше.</li>
+<li>Билет Хелм → Варшава продаёт польский перевозчик PKP Intercity: на сайте intercity.pl или в приложении PKP Intercity. Билет выдаётся на конкретный поезд, поэтому сверьте номер и время с карточкой.</li>
+<li>Купите оба билета заранее и сохраните их в телефоне.</li></ol>
+<a class="btn pri" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Билет до Хелма: УЗ</a>
+<a class="btn" href="https://www.intercity.pl/en/" target="_blank" rel="noopener">Хелм → Варшава: PKP Intercity</a></div>
+</div>
+<p class="buy-note">Покупайте билеты только у перевозчика, не «с рук» и не в соцсетях: встречаются перекупщики и поддельные билеты. Правила продажи и цены меняются, актуальные условия смотрите в приложении УЗ и на сайте PKP Intercity.</p></section>`;
 const app=document.getElementById("app");
 const norm=s=>String(s||"").trim().toLowerCase();
 fetch(U+"/rest/v1/options?order=sort",{headers:{apikey:K,Authorization:"Bearer "+K}}).then(r=>{if(!r.ok)throw 0;return r.json()}).then(all=>{
@@ -58,5 +83,5 @@ fetch(U+"/rest/v1/options?order=sort",{headers:{apikey:K,Authorization:"Bearer "
 }).catch(()=>{app.innerHTML='<div class="panel"><h2>Не удалось загрузить данные</h2><p>Обновите страницу позже.</p></div>'});
 
 const here=location.pathname.split("/").pop()||"index.html",others=((window.CFG&&CFG.PAGES)||[]).filter(p=>p.href!==here);
-document.getElementById("more").innerHTML=`<section class="panel"><h2>Ещё маршруты</h2><div class="grid" style="margin-top:12px"><a class="btn" href="./#${BACK}">← Из Польши в Украину</a>${others.map(p=>`<a class="btn" href="${esc(p.href)}">${esc(p.title)}</a>`).join("")}<a class="btn" href="./">Все страны</a></div></section>`;
+document.getElementById("more").innerHTML=BUY+`<section class="panel"><h2>Ещё маршруты</h2><div class="grid" style="margin-top:12px"><a class="btn" href="./#${BACK}">← Из Польши в Украину</a>${others.map(p=>`<a class="btn" href="${esc(p.href)}">${esc(p.title)}</a>`).join("")}<a class="btn" href="./">Все страны</a></div></section>`;
 </script></body></html>
