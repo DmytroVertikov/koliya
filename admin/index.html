@@ -7,13 +7,31 @@
 <style>
 label{display:block;font-size:13px;color:var(--mute);margin:10px 0 4px;font-weight:600}
 input,textarea,select{width:100%;padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font:inherit}
+input[type=checkbox]{width:22px;height:22px;padding:0;accent-color:var(--brand)}
 textarea{min-height:90px;font-family:ui-monospace,Menlo,monospace;font-size:14px}
 .row{display:flex;gap:10px;flex-wrap:wrap}.row>*{flex:1;min-width:120px}
 button{border:0;border-radius:10px;padding:10px 16px;font:inherit;font-weight:600;cursor:pointer;background:var(--soft);color:var(--brand)}
 button.pri{background:var(--acc);color:var(--accink)}button.del{background:#fde4e4;color:#a11}
+button.sm{padding:6px 10px;font-size:14px}
 .ok{color:#1a7f37;font-size:13px}.err{color:#c62828;font-size:13px}
 .bar{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
-#toast{position:fixed;bottom:calc(16px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 18px;border-radius:99px;display:none}
+#toast{position:fixed;bottom:calc(16px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 18px;border-radius:99px;display:none;z-index:9}
+/* редактор поездов */
+.leg{border:1px solid var(--line);border-radius:16px;padding:14px;margin-top:12px;background:var(--card)}
+.leg .bar input{flex:1;font-weight:700}
+.tw{overflow-x:auto}
+table.st{width:100%;border-collapse:collapse;margin:10px 0 8px;min-width:420px}
+.st th{font-size:12px;color:var(--mute);text-align:left;padding:0 6px 4px;font-weight:600}
+.st td{padding:3px 4px;vertical-align:middle}
+.st td:nth-child(1){width:54px;text-align:center}.st td:nth-child(3){width:110px}.st td:nth-child(4){width:128px;white-space:nowrap}
+.st tr.hl input.nm,.st tr.hl input.tm{font-family:var(--disp);font-weight:800;border-color:var(--brand)}
+.st tr:not(.hl) input.nm,.st tr:not(.hl) input.tm{color:var(--mute)}
+.xfer{text-align:center;margin:12px 0 0;padding:8px;border-radius:12px;background:rgba(255,210,63,.24);font-weight:600;font-size:14px}
+.pv .tl{margin:8px 0 0 6px}.pv .tl li span,.pv .tl li time{font-size:17px}
+.pv .tl li.h span,.pv .tl li.h time{color:var(--ink)}.pv .tl li.m span,.pv .tl li.m time{color:var(--mute);font-weight:600}
+.pv .tl li.h:before{background:var(--brand)}.pv .tl li.m:before{background:var(--card)}
+.pv h4{margin:12px 0 6px}
+.legend{font-size:13px;color:var(--mute);margin:6px 0 0}
 </style></head><body>
 <header style="padding-bottom:44px"><div class="wrap bar"><b>⚙️ Колія: админка</b><span><a href="../" style="color:#fff">На сайт</a> <button id="out" style="display:none;margin-left:8px">Выйти</button></span></div></header>
 <main class="wrap" id="app"></main><div id="toast"></div>
@@ -26,6 +44,40 @@ const logout=()=>{S=null;localStorage.removeItem("sb");showLogin()};
 async function db(m,p,b,pref,retry=true){const r=await fetch(U+"/rest/v1/"+p,{method:m,headers:{apikey:K,Authorization:"Bearer "+S.a,"Content-Type":"application/json",Prefer:pref||"return=representation"},body:b&&JSON.stringify(b)});
 if(r.status==401&&retry){try{await auth("refresh_token",{refresh_token:S.r})}catch(e){logout();throw e}return db(m,p,b,pref,false)}
 if(!r.ok)throw new Error(await r.text());return r.status==204?null:r.json()}
+
+/* ---------- формат: текст <-> таблицы ----------
+   «019: Киев 19:06 > *Хелм 05:00 || IC 12010: Хелм 06:22 > Варшава 09:43»
+   По умолчанию крупно выделены первая и последняя станции поезда.
+   Если выделение другое, нужные станции в тексте помечаются звёздочкой *. */
+const newStop=()=>({name:"",time:"",hl:false});
+const newLeg=()=>({train:"",stops:[{name:"",time:"",hl:true},{name:"",time:"",hl:true}]});
+function parse(dsl){
+  dsl=(dsl||"").trim();if(!dsl)return[newLeg()];
+  return dsl.split("||").map(part=>{
+    const m=part.match(/^([^>]*?):\s([\s\S]*)$/),train=m?m[1].trim():"",rest=m?m[2]:part;
+    let marked=false;
+    const stops=rest.split(">").map(x=>{x=x.trim();let hl=false;if(x.startsWith("*")){hl=true;marked=true;x=x.slice(1).trim()}
+      const t=x.match(/^([\s\S]*?)\s*(\d{1,2}:\d{2}[\s\S]*)$/);return t?{name:t[1].trim(),time:t[2].trim(),hl}:{name:x,time:"",hl}});
+    if(!marked)stops.forEach((s,i)=>s.hl=i===0||i===stops.length-1);
+    return{train,stops}}) }
+function dflt(L){return L.stops.every((s,i)=>s.hl===(i===0||i===L.stops.length-1))}
+function serialize(legs){
+  return legs.map(L=>{const mark=!dflt(L);
+    return L.train.trim()+": "+L.stops.map(s=>(mark&&s.hl?"*":"")+s.name.trim()+" "+s.time.trim()).join(" > ")}).join("||")}
+function validate(legs){
+  const e=[];legs.forEach((L,i)=>{const n="Поезд "+(i+1)+": ";
+    if(!L.train.trim())e.push(n+"укажите номер поезда");
+    if(L.train.includes(":")||L.train.includes(">")||L.train.includes("|"))e.push(n+"в номере нельзя : > |");
+    if(L.stops.length<2)e.push(n+"нужно минимум 2 станции");
+    L.stops.forEach((s,j)=>{if(!s.name.trim())e.push(n+"станция "+(j+1)+" без названия");
+      if(/[>|*]/.test(s.name))e.push(n+"в названии станции нельзя > | *");
+      if(!/^\d{1,2}:\d{2}/.test(s.time.trim()))e.push(n+"станция "+(j+1)+": время вида 19:06")})});
+  return e}
+function previewHtml(legs){
+  const e=validate(legs);if(e.length)return`<div class="err">${e.map(esc).join("<br>")}</div>`;
+  return legs.map((L,i)=>`${i?'<div class="xfer">🔁 Пересадка</div>':""}<h4>🚆 ${esc(L.train)}</h4><ul class="tl">${L.stops.map(s=>`<li class="${s.hl?"h":"m"}"><span>${esc(s.name)}</span><time>${esc(s.time)}</time></li>`).join("")}</ul>`).join("")+`<p class="ok">✓ Всё в порядке. Пересадок: ${legs.length-1}</p>`}
+
+/* ---------- вход ---------- */
 function showLogin(){$("#out").style.display="none";$("#app").innerHTML=`<section class="panel" style="max-width:380px;margin:0 auto"><h2>Вход</h2><label>Email</label><input id="em" type="email" autocomplete="username"><label>Пароль</label><input id="pw" type="password" autocomplete="current-password"><p class="err" id="le"></p><button class="pri" id="go">Войти</button></section>`;
 $("#go").onclick=async()=>{try{await auth("password",{email:$("#em").value,password:$("#pw").value});start()}catch(e){$("#le").textContent=e.message}}}
 async function start(){$("#out").style.display="";$("#out").onclick=logout;try{[CT,RT]=await Promise.all([db("GET","countries?order=sort"),db("GET","routes?order=sort")])}catch(e){return showLogin()}home()}
@@ -40,7 +92,10 @@ function countries(){$("#cs").innerHTML=CT.concat([{slug:"",name:"",flag:"",sort
 document.querySelectorAll("#cs .row").forEach(w=>{const g=c=>w.querySelector(c).value.trim();
 w.querySelector(".sv").onclick=async()=>{try{if(!g(".s")||!g(".n"))throw new Error("Заполните код и название");await db("POST","countries?on_conflict=slug",{slug:g(".s"),name:g(".n"),flag:g(".f"),sort:+g(".o")||0},"resolution=merge-duplicates,return=representation");CT=await db("GET","countries?order=sort");toast("Сохранено");countries()}catch(e){alert(e.message)}};
 const d=w.querySelector(".dl");if(d)d.onclick=async()=>{if(!confirm("Удалить страну и все её маршруты?"))return;try{await db("DELETE","countries?slug=eq."+encodeURIComponent(g(".s")));await start()}catch(e){alert(e.message)}}})}
+
+/* ---------- направление и варианты ---------- */
 async function editRoute(r,isNew){const ed=$("#ed");let opts=isNew?[]:await db("GET","options?route_slug=eq."+encodeURIComponent(r.slug)+"&order=sort");
+opts.forEach(o=>o.legs=parse(o.dsl));
 ed.innerHTML=`<section class="panel"><h2>${isNew?"Новое направление":"Направление"}</h2>
 <div class="row"><div><label>Код (например ua-pl)</label><input id="rs" value="${esc(r.slug)}" ${isNew?"":"readonly"}></div><div><label>Страна</label><select id="rc">${CT.map(c=>`<option value="${esc(c.slug)}" ${c.slug===r.country?"selected":""}>${esc(c.flag)} ${esc(c.name)}</option>`).join("")}</select></div><div><label>Порядок</label><input id="ro" type="number" value="${r.sort}"></div></div>
 <label>Заголовок</label><input id="rt" value="${esc(r.title)}"><label>Описание</label><input id="rl" value="${esc(r.lead)}">
@@ -48,19 +103,55 @@ ed.innerHTML=`<section class="panel"><h2>${isNew?"Новое направлен�
 <label>Билеты (формат: Название | https://ссылка, по строке)</label><textarea id="rk">${esc(r.tickets)}</textarea>
 <div class="row" style="margin-top:12px"><button class="pri" id="sr">Сохранить направление</button>${isNew?"":'<button class="del" id="dr">Удалить направление</button>'}</div></section>
 <section class="panel"><div class="bar"><h2 style="margin:0">Варианты маршрута</h2>${isNew?"":'<button id="no">+ Добавить вариант</button>'}</div>
-<p>Формат: <code>№ поезда: Город ЧЧ:ММ &gt; Город ЧЧ:ММ</code>. Пересадка отделяется знаком <code>||</code>.</p><div id="ol"></div></section>`;
+<p>Каждый вариант это один или несколько поездов. Заполняйте таблицу: станция и время. Галочка <b>«Выд.»</b> = станция выделяется крупным шрифтом. Остальные станции показываются бледнее. Пересадка между поездами добавляется автоматически.</p><div id="ol">${isNew?"<p>Сначала сохраните направление, потом добавляйте варианты.</p>":""}</div></section>`;
 $("#sr").onclick=async()=>{const slug=$("#rs").value.trim();try{if(!/^[a-z-]+$/.test(slug))throw new Error("Код: только латиница и дефис");if(!$("#rt").value.trim())throw new Error("Нужен заголовок");
 await db("POST","routes?on_conflict=slug",{slug,country:$("#rc").value,title:$("#rt").value.trim(),lead:$("#rl").value.trim(),how:$("#rh").value.trim(),tickets:$("#rk").value.trim(),sort:+$("#ro").value||0},"resolution=merge-duplicates,return=representation");RT=await db("GET","routes?order=sort");toast("Сохранено");home(slug)}catch(e){alert(e.message)}};
 if(!isNew){$("#dr").onclick=async()=>{if(!confirm("Удалить направление и все его варианты?"))return;await db("DELETE","routes?slug=eq."+encodeURIComponent(r.slug));RT=await db("GET","routes?order=sort");home()};
-$("#no").onclick=()=>{opts.push({id:null,route_slug:r.slug,dsl:"",note:"",sort:(opts.length+1)*10,active:true});list()}}
-function list(){$("#ol").innerHTML=opts.map((o,i)=>`<div class="opt" data-i="${i}"><label>Вариант</label><textarea class="d">${esc(o.dsl)}</textarea><div class="pv note"></div>
+$("#no").onclick=()=>{opts.push({id:null,route_slug:r.slug,dsl:"",legs:[newLeg()],note:"",sort:(opts.length+1)*10,active:true});list()}}
+
+function legHtml(L,li){return`${li?'<div class="xfer">🔁 Пересадка</div>':""}<div class="leg" data-l="${li}">
+<div class="bar"><input class="tr" placeholder="Номер поезда: 019 или IC 12010" value="${esc(L.train)}">${li?'<button class="del sm rl">Убрать поезд</button>':""}</div>
+<div class="tw"><table class="st"><thead><tr><th>Выд.</th><th>Станция</th><th>Время</th><th></th></tr></thead><tbody>
+${L.stops.map((s,si)=>`<tr data-s="${si}" class="${s.hl?"hl":""}"><td><input type="checkbox" class="hl" ${s.hl?"checked":""}></td><td><input class="nm" placeholder="Город" value="${esc(s.name)}"></td><td><input class="tm" placeholder="19:06" inputmode="numeric" value="${esc(s.time)}"></td><td><button class="sm up">↑</button> <button class="sm dn">↓</button> <button class="sm del rs">×</button></td></tr>`).join("")}
+</tbody></table></div><button class="sm as">+ Станция</button></div>`}
+
+function list(){const box=$("#ol");if(isNew)return;
+box.innerHTML=opts.map((o,i)=>`<div class="opt" data-i="${i}" style="padding:16px;overflow:visible">
+<div class="legs">${o.legs.map(legHtml).join("")}</div>
+<div style="margin-top:12px"><button class="al">+ Ещё поезд (пересадка)</button> <button class="sm tx">Текстом</button></div>
+<div class="txw" style="display:none"><label>Текстовый формат (для опытных)</label><textarea class="dsl"></textarea></div>
+<h3 style="margin:18px 0 0;font-size:15px">Как это увидят на сайте</h3><div class="pv"></div>
 <div class="row"><div><label>Примечание</label><input class="n" value="${esc(o.note)}"></div><div><label>Порядок</label><input class="o" type="number" value="${o.sort}"></div><div><label>Показывать</label><select class="a"><option value="1" ${o.active?"selected":""}>Да</option><option value="0" ${o.active?"":"selected"}>Скрыт</option></select></div></div>
-<div class="row" style="margin-top:12px"><button class="pri sv">Сохранить</button>${o.id?'<button class="del dl">Удалить</button>':""}</div></div>`).join("");
-document.querySelectorAll("#ol .opt").forEach(w=>{const o=opts[+w.dataset.i],ta=w.querySelector(".d"),pv=w.querySelector(".pv");
-const chk=()=>{try{const L=parseDsl(ta.value),f=L[0].st[0],t=L[L.length-1].st.slice(-1)[0];pv.innerHTML=`<span class="ok">✓ ${esc(f[0])} ${f[1]} → ${esc(t[0])} ${t[1]}, пересадок: ${L.length-1}</span>`;return true}catch(e){pv.innerHTML=`<span class="err">${esc(e.message)}</span>`;return false}};ta.oninput=chk;chk();
-w.querySelector(".sv").onclick=async()=>{if(!chk())return;const b={route_slug:r.slug,dsl:ta.value.trim(),note:w.querySelector(".n").value.trim(),sort:+w.querySelector(".o").value||0,active:w.querySelector(".a").value==="1",updated_at:new Date().toISOString()};
-try{const x=o.id?await db("PATCH","options?id=eq."+o.id,b):await db("POST","options",b);Object.assign(o,x[0]);toast("Сохранено");list()}catch(e){alert(e.message)}};
-const d=w.querySelector(".dl");if(d)d.onclick=async()=>{if(!confirm("Удалить вариант?"))return;try{await db("DELETE","options?id=eq."+o.id);opts.splice(+w.dataset.i,1);list()}catch(e){alert(e.message)}}})}
+<div class="row" style="margin-top:12px"><button class="pri sv">Сохранить вариант</button>${o.id?'<button class="del dl">Удалить</button>':""}</div></div>`).join("")||(isNew?"":"<p>Вариантов пока нет.</p>");
+box.querySelectorAll(".opt").forEach(wire)}
+
+function wire(w){const o=opts[+w.dataset.i],pv=w.querySelector(".pv");
+const upd=()=>{pv.innerHTML=previewHtml(o.legs)};
+const redraw=()=>{w.querySelector(".legs").innerHTML=o.legs.map(legHtml).join("");upd()};
+const pos=t=>{const L=t.closest("[data-l]"),S=t.closest("[data-s]");return[L&&+L.dataset.l,S&&+S.dataset.s]};
+w.addEventListener("input",e=>{const t=e.target,[l,s]=pos(t);
+ if(t.classList.contains("tr"))o.legs[l].train=t.value;
+ else if(t.classList.contains("nm"))o.legs[l].stops[s].name=t.value;
+ else if(t.classList.contains("tm"))o.legs[l].stops[s].time=t.value;
+ else if(t.classList.contains("hl")){o.legs[l].stops[s].hl=t.checked;t.closest("tr").classList.toggle("hl",t.checked)}
+ else if(t.classList.contains("dsl")){try{o.legs=parse(t.value);redraw()}catch(_){}return}
+ else return;upd()});
+w.addEventListener("click",e=>{const t=e.target.closest("button");if(!t)return;const[l,s]=pos(t);
+ if(t.classList.contains("as")){const st=o.legs[l].stops,last=st[st.length-1];last.hl=false;st.push({name:"",time:"",hl:true});
+   /* пользователь сам отметит, какие станции выделять; по умолчанию новая последняя */ redraw()}
+ else if(t.classList.contains("rs")){o.legs[l].stops.splice(s,1);if(!o.legs[l].stops.length)o.legs[l].stops.push(newStop());redraw()}
+ else if(t.classList.contains("up")&&s>0){const a=o.legs[l].stops;[a[s-1],a[s]]=[a[s],a[s-1]];redraw()}
+ else if(t.classList.contains("dn")&&s<o.legs[l].stops.length-1){const a=o.legs[l].stops;[a[s+1],a[s]]=[a[s],a[s+1]];redraw()}
+ else if(t.classList.contains("rl")){o.legs.splice(l,1);redraw()}
+ else if(t.classList.contains("al")){o.legs.push(newLeg());redraw()}
+ else if(t.classList.contains("tx")){const x=w.querySelector(".txw");x.style.display=x.style.display=="none"?"":"none";w.querySelector(".dsl").value=serialize(o.legs).replace(/\|\|/g,"\n||\n")}
+ else if(t.classList.contains("sv"))save();
+ else if(t.classList.contains("dl"))del()});
+async function save(){const er=validate(o.legs);if(er.length){alert(er.join("\n"));return}
+ const b={route_slug:r.slug,dsl:serialize(o.legs),note:w.querySelector(".n").value.trim(),sort:+w.querySelector(".o").value||0,active:w.querySelector(".a").value==="1",updated_at:new Date().toISOString()};
+ try{const x=o.id?await db("PATCH","options?id=eq."+o.id,b):await db("POST","options",b);const legs=o.legs;Object.assign(o,x[0]);o.legs=legs;toast("Сохранено");list()}catch(e){alert(e.message)}}
+async function del(){if(!confirm("Удалить вариант?"))return;try{await db("DELETE","options?id=eq."+o.id);opts.splice(+w.dataset.i,1);list()}catch(e){alert(e.message)}}
+upd()}
 list();ed.scrollIntoView({behavior:"smooth"})}
 S?start():showLogin();
 </script></body></html>
