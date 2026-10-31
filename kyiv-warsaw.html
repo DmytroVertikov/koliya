@@ -20,9 +20,16 @@
 .direct .leg h4{color:#0a6b46;background:#dcf5e9}
 .direct .tag{background:var(--acc);color:var(--accink)}
 @media (prefers-color-scheme:dark){.direct .leg h4{color:#7be0b0;background:#12392b}}
+.direct .body.two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:0 28px;align-items:start}
+.direct .body.two .note{grid-column:1/-1}
+.coach{grid-column:2;grid-row:1;margin-top:16px;padding:18px 20px;border-radius:18px;background:#dcf5e9;color:#0a4d34;border:1px solid rgba(18,135,90,.25)}
+.coach h4{margin:0 0 8px;font-family:var(--disp);font-weight:800;font-size:17px}
+.coach p{margin:0;font-size:15.5px;line-height:1.6}
+.coach p+p{margin-top:8px}
+@media (prefers-color-scheme:dark){.coach{background:#12392b;color:#bff0d8;border-color:rgba(123,224,176,.25)}}
 h2.sub small{font-family:var(--body);font-weight:600;font-size:14px;color:var(--mute);margin-left:8px}
 .direct-wrap{display:grid;gap:18px}
-@media (max-width:760px){.cols{grid-template-columns:1fr}.cols .board,.direct .board{--t:clamp(34px,10vw,60px)}}
+@media (max-width:760px){.direct .body.two{display:block}.cols{grid-template-columns:1fr}.cols .board,.direct .board{--t:clamp(34px,10vw,60px)}}
 </style></head><body>
 <header><div class="wrap"><a class="logo" href="./"><span class="rails">🚆</span> КОЛІЯ</a><h1>Поездом из Киева в Варшаву</h1><p id="lead">Прямой поезд и варианты с пересадкой в Хелме.</p></div></header>
 <main class="wrap"><a class="back" href="./">← Главная</a> <a class="back" href="./#ua-pl">Все направления Украина → Польша</a><div id="app"><p>Загрузка…</p></div><div id="more"></div></main>
@@ -35,6 +42,7 @@ h2.sub small{font-family:var(--body);font-weight:600;font-size:14px;color:var(--
 <script src="config.js"></script><script src="common.js"></script>
 <script>
 const FROM="Киев",TO="Варшава",BACK="pl-ua"; // BACK: код обратного направления для ссылки // какое направление показывать (как в шапке карточки в админке)
+const COACH=`<aside class="coach"><h4>🛏 Купе RIC</h4><p>Купе RIC оборудованы тремя спальными полками, расположенными одна над другой.</p><p>При разложенной средней полке сидеть на нижней невозможно.</p><p>Для доступа к верхней полке предусмотрена специальная лестница.</p></aside>`;
 const app=document.getElementById("app");
 const norm=s=>String(s||"").trim().toLowerCase();
 fetch(U+"/rest/v1/options?order=sort",{headers:{apikey:K,Authorization:"Bearer "+K}}).then(r=>{if(!r.ok)throw 0;return r.json()}).then(all=>{
@@ -46,6 +54,7 @@ fetch(U+"/rest/v1/options?order=sort",{headers:{apikey:K,Authorization:"Bearer "
   app.innerHTML=(direct.length?`<h2 class="sub" style="margin-top:6px">Прямой поезд <small>без пересадок</small></h2><div class="direct direct-wrap" style="margin-top:16px">${direct.map(x=>optHtml(x.o)).join("")}</div>`:"")
    +(direct.length&&transfer.length?`<aside class="ad wide" data-slot="mid" hidden></aside>`:"")
    +(transfer.length?`<h2 class="sub">С удобной пересадкой в Хелме на одной платформе</h2><div class="cols" style="margin-top:16px">${transfer.map(x=>optHtml(x.o)).join("")}</div>`:"");
+  document.querySelectorAll(".direct .body").forEach(b=>{b.classList.add("two");b.insertAdjacentHTML("beforeend",COACH)});
 }).catch(()=>{app.innerHTML='<div class="panel"><h2>Не удалось загрузить данные</h2><p>Обновите страницу позже.</p></div>'});
 
 const here=location.pathname.split("/").pop()||"index.html",others=((window.CFG&&CFG.PAGES)||[]).filter(p=>p.href!==here);
