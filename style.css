@@ -64,15 +64,26 @@ h2.sub{font-family:var(--disp);font-weight:800;font-size:20px;margin:30px 0 0}
 .body{padding:6px 22px 20px}
 .leg{margin-top:16px}
 .leg h4{display:inline-flex;align-items:center;gap:8px;margin:0 0 10px;font-size:14px;font-weight:700;color:var(--brand);background:var(--soft);border-radius:10px;padding:4px 12px}
-.tl{list-style:none;margin:0;padding:0 0 0 20px;border-left:3px solid var(--brand)}
-.tl li{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:6px 0 6px 10px;position:relative}
-.tl li:before{content:"";position:absolute;left:-29px;top:50%;transform:translateY(-50%);box-sizing:content-box;width:11px;height:11px;border-radius:50%;background:var(--card);border:3px solid var(--brand)}
-.tl li.h:before{background:var(--brand)}
+
+/* маршрут: время слева, рельса посередине, станция справа */
+.tl{--rail:var(--brand);--tw:64px;--gap:40px;--ax:calc(var(--tw) + var(--gap)/2);list-style:none;margin:0;padding:0}
+.tl li{display:grid;grid-template-columns:var(--tw) 1fr;column-gap:var(--gap);align-items:baseline;padding:9px 0;position:relative}
+.tl li time{grid-column:1;grid-row:1;text-align:right}
+.tl li span{grid-column:2;grid-row:1}
+/* отрезок линии через всю высоту строки; у первой станции только вниз, у последней только вверх */
+.tl li:after{content:"";position:absolute;left:var(--ax);top:0;bottom:0;width:3px;transform:translateX(-50%);background:var(--rail);border-radius:2px}
+.tl li:first-child:after{top:50%}
+.tl li:last-child:after{bottom:50%}
+.tl li:only-child:after{display:none}
+/* кружок: центр ровно на оси и на середине строки */
+.tl li:before{content:"";position:absolute;z-index:1;left:var(--ax);top:50%;transform:translate(-50%,-50%);box-sizing:border-box;width:13px;height:13px;border-radius:50%;background:var(--card);border:3px solid var(--rail)}
+.tl li.h:before{width:18px;height:18px;background:var(--rail);border:3px solid var(--card);box-shadow:0 0 0 3px var(--rail)}
 /* обычная станция: основной шрифт, тоньше, бледнее */
 .tl li span{font-family:var(--body);font-size:17px;font-weight:500;line-height:1.3;color:var(--mute)}
 .tl li time{font-family:var(--body);font-weight:500;font-size:17px;letter-spacing:0;font-variant-numeric:tabular-nums;white-space:nowrap;color:var(--mute)}
 /* выделенная станция: заголовочный шрифт, жирный, крупнее */
 .tl li.h span,.tl li.h time{font-family:var(--disp);font-size:20px;font-weight:800;color:var(--ink)}
+
 .swap{margin-top:16px;padding:10px 14px;border-radius:14px;background:rgba(255,210,63,.24);font-weight:600;font-size:15px}
 .note{font-size:14px;color:var(--mute);margin-top:14px}
 
@@ -88,6 +99,7 @@ footer a{color:var(--brand)}
 .pt span{font-size:17px}
 .body{padding:4px 16px 18px}
 .mid{min-width:44px}
+.tl{--tw:58px;--gap:34px}
 }
 
 /* Рекламные места (Google AdSense). Пока скрыты атрибутом hidden; зарезервированная высота не даёт странице «прыгать» */
