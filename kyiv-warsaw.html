@@ -34,7 +34,8 @@
 .buy h3{margin:0 0 2px;font-family:var(--disp);font-weight:800;font-size:17px}
 .buy .steps{margin-top:12px}
 .buy .btn{margin-top:14px}
-.buy>div.d .btn{background:#fff;color:#0a6b46}
+.buy .btn:not(.pri){box-shadow:inset 0 0 0 2px var(--brand)}
+.buy>div.d .btn{background:#fff;color:#0a6b46;box-shadow:inset 0 0 0 2px #12875a}
 .buy-note{margin-top:16px!important;font-size:14px}
 @media (prefers-color-scheme:dark){.buy>div.d{background:#12392b;color:#bff0d8}.buy>div.d .btn{background:#0f2c21;color:#7be0b0}}
 h2.sub small{font-family:var(--body);font-weight:600;font-size:14px;color:var(--mute);margin-left:8px}
@@ -63,7 +64,7 @@ const BUY=`<section class="panel"><h2>Как купить билеты</h2>
 <div><h3>С пересадкой в Хелме</h3><ol class="steps">
 <li>Откройте приложение «Укрзализныци» и войдите в аккаунт.</li>
 <li>Выберите маршрут Киев → Хелм и дату. Продажа открывается за 20 суток до отправления в 9:00 по Киевскому времени.</li>
-<li>Выберите место в вагоне купе или СВ и оплатите картой. Электронный билет будет в приложении, при посадке покажите его вместе с паспортом.</li></ol>
+<li>Выберите место в вагоне купе или СВ и оплатите картой. Электронный билет будет в приложении, при посадке покажите его вместе с паспортом.</li>
 <li>Билет Хелм → Варшава продаёт польский перевозчик PKP Intercity: на сайте intercity.pl или в приложении PKP Intercity. Также возможно купить на сайте koleo.pl или в приложении KOLEO. Билет выдаётся на конкретный поезд, поэтому сверьте номер и время с карточкой.</li>
 <li>Купите оба билета заранее и сохраните их в телефоне.</li></ol>
 <a class="btn pri" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Купить в приложении УЗ билет Киев - Хелм</a>
