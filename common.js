@@ -15,12 +15,15 @@ function legHtml(l,i){return`${i?`<div class="swap">🔁 Пересадка: ${e
 function optHtml(o){let L;try{L=parseDsl(o.dsl)}catch(e){return""}
 const f=L[0].st[0],t=L[L.length-1].st.slice(-1)[0],tr=trip(L),ch=L.length-1;
 return`<article class="opt"><div class="board"><div class="pt"><time>${esc(f[1])}</time><span>${esc(f[0])}</span></div><div class="mid"><span class="dur">${durFmt(tr.min)}</span><i class="line"></i><span class="tag${ch?" x":""}">${ch?(ch===1?"1 пересадка":ch+" пересадки"):"без пересадки"}</span></div><div class="pt end"><time>${esc(t[1])}</time><span>${esc(t[0])}</span></div></div><div class="perf"></div><div class="body">${L.map(legHtml).join("")}${o.note?`<div class="note">ℹ️ ${esc(o.note)}</div>`:""}</div></article>`}
-// Оптическое выравнивание: название станции встаёт ровно под видимый край первой/последней цифры (у «1» и «2» боковые поля разные)
+// Оптическое выравнивание: название станции встаёт под видимый край первой/последней цифры.
+// Учитываем боковые поля и цифры, и самой буквы; у «1» флажок выступает влево, поэтому равняемся по её ножке.
 function alignBoards(){const c=(alignBoards.c=alignBoards.c||document.createElement("canvas").getContext("2d"));
+const ink=(el,end)=>{const cs=getComputedStyle(el);c.font=cs.fontWeight+" "+cs.fontSize+" "+cs.fontFamily;const m=c.measureText(el.textContent.trim());
+return{v:end?Math.max(0,m.width-m.actualBoundingBoxRight):Math.max(0,-m.actualBoundingBoxLeft),fs:parseFloat(cs.fontSize)}};
 document.querySelectorAll(".pt").forEach(p=>{const t=p.querySelector("time"),s=p.querySelector("span");if(!t||!s)return;
-const cs=getComputedStyle(t);c.font=cs.fontWeight+" "+cs.fontSize+" "+cs.fontFamily;const m=c.measureText(t.textContent);
-const v=p.classList.contains("end")?Math.max(0,m.width-m.actualBoundingBoxRight):Math.max(0,-m.actualBoundingBoxLeft);
-s.style.padding=p.classList.contains("end")?"0 "+v+"px 0 0":"0 0 0 "+v+"px"})}
+const end=p.classList.contains("end"),a=ink(t,end),b=ink(s,end);
+let v=a.v-b.v;if(!end&&t.textContent.trim()[0]==="1")v+=a.fs*.08;v=Math.max(0,v);
+s.style.padding=end?"0 "+v+"px 0 0":"0 0 0 "+v+"px"})}
 (()=>{const run=()=>alignBoards(),app=document.getElementById("app");
 addEventListener("resize",run);
 if(document.fonts){document.fonts.ready.then(run);document.fonts.addEventListener("loadingdone",run)}
