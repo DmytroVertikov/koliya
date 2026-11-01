@@ -114,6 +114,14 @@ function inCity(n) {
     return ""
 }
 
+/* Единый формат названия поезда: УЗ → «№019К», «№0230»; польские с буквенным префиксом → «IC 21010» */
+function trainName(t) {
+    t = String(t || "").trim().replace(/^№\s*/, "").replace(/\s+/g, " ");
+    if (!t) return "";
+    const m = t.match(/^([A-Za-z]+)\s*(\d.*)$/);
+    return m ? m[1].toUpperCase() + " " + m[2].toUpperCase() : "№" + t.toUpperCase()
+}
+
 function optHtml(o) {
     let p;
     try {
@@ -134,7 +142,7 @@ function optHtml(o) {
             const where = b && b !== a ? "Пересадка: " + a + " → " + b : (inCity(a) ? "Пересадка " + inCity(a) : "Пересадка: " + a);
             sw = `<div class="swap">🔁 ${esc(where)}${wait ? " · " + esc(wait) : ""}</div>`
         }
-        return sw + `<div class="leg"><h4>🚆 Поезд №${esc(L.train)}</h4><ul class="tl">${L.stops.map(s => `<li class="${s.hl ? "h" : "m"}"><span>${esc(s.name)}</span><time>${esc(s.time)}</time></li>`).join("")}</ul></div>`
+        return sw + `<div class="leg"><h4>🚆 Поезд ${esc(trainName(L.train))}</h4><ul class="tl">${L.stops.map(s => `<li class="${s.hl ? "h" : "m"}"><span>${esc(s.name)}</span><time>${esc(s.time)}</time></li>`).join("")}</ul></div>`
     }).join("");
     return `<article class="opt">${board}<div class="perf"></div><div class="body">${body}${o.note ? `<div class="note">${esc(o.note)}</div>` : ""}</div></article>`
 }
