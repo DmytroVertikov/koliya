@@ -38,8 +38,8 @@
 
     async function load() {
         if (!D) {
-            const [c, r, o] = await Promise.all([api("countries?order=sort"), api("routes?order=sort"), api("options?order=sort")]);
-            D = {c, r, o}
+            const [c, r] = await Promise.all([api("countries?order=sort"), api("routes?order=sort")]);
+            D = {c, r}
         }
         return D
     }
@@ -73,7 +73,7 @@ ${PG.length ? `<section class="panel"><h2>Популярные маршруты<
         lead.textContent = r.lead;
         const how = r.how.split("\n").filter(Boolean),
             tk = r.tickets.split("\n").filter(Boolean).map(l => l.split("|").map(s => s.trim()));
-        app.innerHTML = `<a class="back" href="#">← Все направления</a>${pageLinks(id)}<section class="panel" style="margin-top:${pageLinks(id) ? 18 : 0}px"><h2>Как ехать</h2><ol class="steps">${how.map(x => `<li>${esc(x)}</li>`).join("")}</ol>${tk.map((k, i) => `<a class="btn ${i ? "" : "pri"}" href="${esc(safeUrl(k[1]))}" target="_blank" rel="noopener">${esc(k[0])}</a>`).join("")}</section><h2 class="sub">Варианты маршрута</h2>${d.o.filter(o => o.route_slug === id).map(optHtml).join("") || "<p>Пока нет вариантов.</p>"}`
+        app.innerHTML = `<a class="back" href="#">← Все направления</a>${pageLinks(id)}<section class="panel" style="margin-top:${pageLinks(id) ? 18 : 0}px"><h2>Как ехать</h2><ol class="steps">${how.map(x => `<li>${esc(x)}</li>`).join("")}</ol>${tk.map((k, i) => `<a class="btn ${i ? "" : "pri"}" href="${esc(safeUrl(k[1]))}" target="_blank" rel="noopener">${esc(k[0])}</a>`).join("")}</section>`
     }
 
     addEventListener("hashchange", render);
