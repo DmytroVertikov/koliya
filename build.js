@@ -9,6 +9,18 @@ const ROUTES = [
   {id: "kyiv_krakow", file: "kyiv-krakow.html", FROM: "Киев", TO: "Краков", BACK: "pl-ua", hash: "ua-pl", rev: "krakow-kyiv.html", uz: ["Киев","Перемышль"], pkp: ["Перемышль","Краков"], t3: "buy.t3out", x: "Перемышль", direct: false},
   {id: "krakow_kyiv", file: "krakow-kyiv.html", FROM: "Краков", TO: "Киев", BACK: "ua-pl", hash: "pl-ua", rev: "kyiv-krakow.html", uz: ["Перемышль","Киев"], pkp: ["Краков","Перемышль"], t3: "buy.t3in", x: "Перемышль", direct: false}
 ];
+/* проверки: повторы в ROUTES и повторяющиеся ключи в i18n.js (при повторе побеждает ПОСЛЕДНИЙ, из-за этого старые тексты могут «возвращаться») */
+{
+  const seen = {};
+  for (const r of ROUTES) for (const k of ["id", "file"]) { if (seen[k + r[k]]) throw new Error("build.js: в ROUTES повтор " + k + " = " + r[k] + ". Оставьте одну запись."); seen[k + r[k]] = 1 }
+  const src = fs.readFileSync("i18n.js", "utf8");
+  for (const l of LANGS) {
+    const m = src.match(new RegExp("\\n" + l + ":\\{([\\s\\S]*?)\\n\\}")), cnt = {};
+    for (const k of (m ? m[1].match(/"[^"\n]+"(?=:)/g) || [] : [])) cnt[k] = (cnt[k] || 0) + 1;
+    const dup = Object.keys(cnt).filter(k => cnt[k] > 1);
+    if (dup.length) console.warn("ВНИМАНИЕ i18n.js, блок " + l + ": повторяющиеся ключи (действует последний): " + dup.join(", "));
+  }
+}
 const tpl0 = fs.readFileSync("route.src.html", "utf8");
 const VIA = {ru: "через", uk: "через", en: "via", pl: "przez"};
 /* «в Хелме» / «in Chełm»: из словаря станций; нет формы — «через Название» */
@@ -26,6 +38,7 @@ for (const r of ROUTES) for (const l of LANGS) {
   for (const k of ["title", "desc", "h1", "lead", "all", "more"]) v["r_" + k] = fill(d[r.id + "." + k], v);
   v["buy.t3"] = fill(d[r.t3], v);
   const X = r.x || "Хелм", direct = r.direct !== false, plat = r.plat !== undefined ? r.plat : X === "Хелм";
+  v.stamp = new Date().toISOString() + " v" + VER + " direct=" + direct + " x=" + X;
   v.xin = xin(X, l); v.hasDirect = String(direct); v.buyone = direct ? "" : " one";
   v["transfer.h"] = fill(d[plat ? "transfer.h" : "transfer.h2"], v);
   const tpl = direct ? tpl0 : tpl0.replace(/<!--D-->[\s\S]*?<!--\/D-->/g, "").replace(/\/\*D\*\/[\s\S]*?\/\*\/D\*\//g, "");
@@ -39,7 +52,7 @@ for (const r of ROUTES) for (const l of LANGS) {
 const ix = fs.readFileSync("index.src.html", "utf8");
 for (const l of LANGS) {
   const d = I[l], pre = l === "ru" ? "" : "../";
-  const v = {ver: VER, lang: l, base: pre, canon: SITE + path(l, "")};
+  const v = {ver: VER, stamp: new Date().toISOString() + " v" + VER, lang: l, base: pre, canon: SITE + path(l, "")};
   v.alts = LANGS.map(x => `    <link rel="alternate" hreflang="${x}" href="${SITE + path(x, "")}">`).join("\n") + `\n    <link rel="alternate" hreflang="x-default" href="${SITE}">`;
   v.langs = LANGS.map(x => `<a href="${pre + path(x, "index.html")}" hreflang="${x}" lang="${x}"${x === l ? ' class="on"' : ""}>${x.toUpperCase()}</a>`).join("");
   const out = ix.replace(/\{\{([\w.]+)\}\}/g, (m, k) => k in v ? v[k] : k in d ? fill(d[k], v) : (console.warn("нет ключа", k), m));
