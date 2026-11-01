@@ -262,8 +262,7 @@
             app.innerHTML = '<div class="panel"><h2>Пока нет вариантов</h2><p>Добавьте их в админке.</p></div>';
             return
         }
-        document.getElementById("lead").textContent = `${list.length} ${list.length % 10 == 1 && list.length != 11 ? "вариант" : list.length % 10 > 1 && list.length % 10 < 5 && (list.length < 10 || list.length > 20) ? "варианта" : "вариантов"}: ${direct.length ? "прямой поезд и " : ""}с пересадкой.`;
-        app.innerHTML = (direct.length ? `<h2 class="sub" style="margin-top:6px">Прямой поезд <small>без пересадок</small></h2><div class="direct direct-wrap" style="margin-top:16px">${direct.map(x => optHtml(x.o)).join("")}</div>` : "")
+        document.getElementById("lead").textContent=direct.length&&transfer.length?"Прямой поезд и маршруты с пересадкой в Хелме.":direct.length?"Прямой поезд.":"Маршруты с пересадкой в Хелме.";        app.innerHTML = (direct.length ? `<h2 class="sub" style="margin-top:6px">Прямой поезд <small>без пересадок</small></h2><div class="direct direct-wrap" style="margin-top:16px">${direct.map(x => optHtml(x.o)).join("")}</div>` : "")
             + (direct.length && transfer.length ? `<aside class="ad wide" data-slot="mid" hidden></aside>` : "")
             + (transfer.length ? `<h2 class="sub">С удобной пересадкой в Хелме на одной платформе</h2><div class="cols" style="margin-top:16px">${transfer.map(x => optHtml(x.o)).join("")}</div>` : "");
         document.querySelectorAll(".direct .body").forEach(b => {
