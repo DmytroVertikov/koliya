@@ -15,7 +15,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap">
-    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../style.css?v=mvy33on7">
 </head>
 <body>
 <header>
@@ -26,9 +26,9 @@
 <main class="wrap" id="app"><p>Loading…</p></main>
 <footer class="wrap" id="site-footer"></footer>
 <script>window.LANG = "en";</script>
-<script src="../config.js"></script>
-<script src="../i18n.js"></script>
-<script src="../common.js"></script>
+<script src="../config.js?v=mvy33on7"></script>
+<script src="../i18n.js?v=mvy33on7"></script>
+<script src="../common.js?v=mvy33on7"></script>
 <script>
     const api = p => fetch(U + "/rest/v1/" + p, {headers: {apikey: K, Authorization: "Bearer " + K}}).then(r => {
         if (!r.ok) throw new Error(r.status);
@@ -42,10 +42,9 @@
     const rkind = r => /^ua-/.test(r.slug) ? ["out", r.slug.slice(3)] : /-ua$/.test(r.slug) ? ["in", r.slug.slice(0, -3)] : null;
     const rform = r => { const k = rkind(r), f = k && CN[k[1]] && CN[k[1]][LG]; return LG !== "ru" && f ? {k: k[0], nom: f[0], gen: f[1] || f[0]} : null };
     const rtitle = r => { const f = rform(r); return f ? t(f.k === "out" ? "ix.rtOut" : "ix.rtIn", f) : r.title };
-    const rlead = r => { const f = rform(r); return f ? t(f.k === "out" ? "ix.leadOut" : "ix.leadIn") : r.lead };
+    const rlead = () => t("ix.leadDir"); /* один подзаголовок для всех направлений, текст из базы больше не используется */
     const pageLinks = id => {
-        const parts = id.split("-"), rid = parts.length === 2 ? parts.reverse().join("-") : "";
-        const list = PG.filter(p => p.route === id).concat(rid && rid !== id ? PG.filter(p => p.route === rid) : []);
+        const list = PG.filter(p => p.route === id); /* только страницы этого направления: ua-pl → из Украины в Польшу, pl-ua → обратно; для других стран так же */
         return list.length ? `<section class="panel" style="margin-top:0">${list.map((p, i) => `<a class="btn pri"${i ? "" : ' style="margin-top:0"'} href="${esc(p.href)}">${esc(t("ix.one", {t: trRoute(p.title)}))}</a>`).join("")}</section>` : ""
     };
 
