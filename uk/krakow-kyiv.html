@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <title>Краків → Київ потягом | Колія</title>
-    <meta name="description" content="Усі поїзди Краків — Київ: прямий та з пересадкою. Час, станції, тривалість.">
+    <meta name="description" content="Поїзди Краків — Київ з пересадкою: час, станції, тривалість.">
     <meta name="theme-color" content="#12145c">
     <link rel="canonical" href="https://dmytrovertikov.github.io/koliya/uk/krakow-kyiv.html">
     <link rel="alternate" hreflang="ru" href="https://dmytrovertikov.github.io/koliya/krakow-kyiv.html">
@@ -15,7 +15,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap">
-    <link rel="stylesheet" href="../style.css?v=mvy4pe9e">
+    <link rel="stylesheet" href="../style.css?v=mvy5eajy">
     <style>
         .wrap {
             max-width: 1080px
@@ -171,6 +171,10 @@
             box-shadow: none
         }
 
+        .buy.one {
+            grid-template-columns: minmax(0, 1fr)
+        }
+
         .buy-note {
             margin-top: 16px !important;
             font-size: 14px
@@ -224,7 +228,7 @@
 <header>
     <div class="wrap"><nav class="lang"><a href="../krakow-kyiv.html" hreflang="ru" lang="ru">RU</a><a href="../uk/krakow-kyiv.html" hreflang="uk" lang="uk" class="on">UK</a><a href="../en/krakow-kyiv.html" hreflang="en" lang="en">EN</a><a href="../pl/krakow-kyiv.html" hreflang="pl" lang="pl">PL</a></nav><a class="logo" href="./"><span class="rails">🚆</span> КОЛІЯ</a>
         <h1>Потягом: Краків → Київ</h1>
-        <p id="lead">Розклад поїздів Краків — Київ: прямий поїзд і варіанти з пересадкою. Час у дорозі, зупинки та інформація про купівлю квитків.</p></div>
+        <p id="lead">Розклад поїздів Краків — Київ: варіанти з пересадкою у Перемишлі. Час у дорозі, зупинки та інформація про купівлю квитків.</p></div>
 </header>
 <main class="wrap"><a class="back" href="./">← Головна</a> <a class="back" href="./#pl-ua">Усі маршрути: Польща — Україна</a> <a class="back" href="kyiv-krakow.html">🔄 Київ → Краків</a>
     <div id="app"><p>Завантаження…</p></div>
@@ -233,20 +237,16 @@
 <div class="wrap"><aside class="ad wide" data-slot="bottom" hidden></aside></div>
 <footer class="wrap" id="site-footer"></footer>
 <script>window.LANG = "uk";</script>
-<script src="../config.js?v=mvy4pe9e"></script>
-<script src="../i18n.js?v=mvy4pe9e"></script>
-<script src="../common.js?v=mvy4pe9e"></script>
+<script src="../config.js?v=mvy5eajy"></script>
+<script src="../i18n.js?v=mvy5eajy"></script>
+<script src="../common.js?v=mvy5eajy"></script>
 <script>
     const FROM = "Краков", TO = "Киев", BACK = "ua-pl"; // FROM/TO: русские названия, как в шапке карточки в админке
-    const COACH = `<aside class="coach"><p>У купе передбачено три спальні місця, розташовані одне над одним. Якщо середню полицю переведено у спальне положення, сидіти на нижній полиці не можна. Для підйому на верхню полицю передбачено драбину.</p></aside>`;
+    
     const BUY = `<section class="panel"><h2>Як купити квитки</h2>
-<div class="buy">
-<div class="d"><h3>Прямий поїзд</h3><ol class="steps">
-<li>Відкрийте застосунок «Укрзалізниця» та увійдіть у свій обліковий запис.</li>
-<li>Оберіть маршрут Краків → Київ і вкажіть дату поїздки. Продаж квитків відкривається за 20 діб до відправлення, о 09:00 за київським часом. На прямий поїзд квитки користуються великим попитом, тому радимо купувати їх одразу після початку продажу.</li>
-<li>Оберіть місце в купейному вагоні стандарту RIC і сплатіть квиток банківською карткою. Електронний квиток з’явиться в застосунку. Під час посадки пред’явіть його разом із паспортом.</li></ol>
-<a class="btn" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Відкрити застосунок «Укрзалізниця»</a></div>
-<div><h3>З пересадкою в Хелмі</h3><ol class="steps">
+<div class="buy one">
+
+<div><h3>З пересадкою у Перемишлі</h3><ol class="steps">
 <li>Відкрийте застосунок «Укрзалізниця», оберіть маршрут Перемишль → Київ і вкажіть дату поїздки. Продаж квитків відкривається за 20 діб до відправлення, о 09:00 за київським часом. Оберіть потрібний поїзд і сплатіть квиток.</li>
 <li>Квиток на поїзд Краків → Перемишль придбайте окремо в польського перевізника PKP Intercity — на офіційному сайті intercity.pl або в застосунку PKP Intercity. Також квитки можна купити на сайті koleo.pl або в застосунку KOLEO.</li>
 <li>Обираючи поїзд Краків → Перемишль, орієнтуйтеся на варіанти та розклад, наведені вище на цій сторінці. Зважайте на час відправлення поїзда Перемишль → Київ і тривалість пересадки.</li>
@@ -265,18 +265,15 @@
             const p = parseOption(o.dsl);
             return {o, p, h: p.head || deriveHead(p.legs)}
         }).filter(x => x.p.legs.length && norm(x.h.from).startsWith(norm(FROM)) && norm(x.h.to).startsWith(norm(TO)));
-        const direct = list.filter(x => x.p.legs.length === 1), transfer = list.filter(x => x.p.legs.length > 1);
+        const HAS_DIRECT = false; /* false: страница без прямого поезда, все варианты идут как «с пересадкой» */
+        const direct = HAS_DIRECT ? list.filter(x => x.p.legs.length === 1) : [], transfer = HAS_DIRECT ? list.filter(x => x.p.legs.length > 1) : list;
         if (!list.length) {
             app.innerHTML = `<div class="panel"><h2>Поки що немає варіантів</h2><p>Додайте їх в адмінці.</p></div>`;
             return
         }
-        app.innerHTML = (direct.length ? `<h2 class="sub" style="margin-top:6px">Прямий поїзд <small>без пересадок</small></h2><div class="direct direct-wrap" style="margin-top:16px">${direct.map(x => optHtml(x.o)).join("")}</div>` : "")
-            + (direct.length && transfer.length ? `<aside class="ad wide" data-slot="mid" hidden></aside>` : "")
-            + (transfer.length ? `<h2 class="sub">Зручна пересадка в Хелмі на одній платформі</h2><div class="cols" style="margin-top:16px">${transfer.map(x => optHtml(x.o)).join("")}</div>` : "");
-        document.querySelectorAll(".direct .body").forEach(b => {
-            b.classList.add("two");
-            b.insertAdjacentHTML("beforeend", COACH)
-        });
+        app.innerHTML = ""
+            + (transfer.length ? `<h2 class="sub">З пересадкою у Перемишлі</h2><div class="cols" style="margin-top:16px">${transfer.map(x => optHtml(x.o)).join("")}</div>` : "");
+        
     }).catch(() => {
         app.innerHTML = `<div class="panel"><h2>Не вдалося завантажити дані</h2><p>Оновіть сторінку пізніше.</p></div>`
     });

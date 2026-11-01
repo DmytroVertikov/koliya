@@ -33,6 +33,7 @@ for (const r of ROUTES) for (const l of LANGS) {
   if (l !== "ru") fs.mkdirSync(l, {recursive: true});
   fs.writeFileSync(path(l, r.file), out);
   urls.push(SITE + path(l, r.file));
+  if (l === "ru") console.log("  " + r.file + ": " + (direct ? "есть прямой поезд" : "БЕЗ прямого поезда") + ", пересадка: " + X);
 }
 /* главная и страницы направлений (одна страница, направление в #hash) */
 const ix = fs.readFileSync("index.src.html", "utf8");

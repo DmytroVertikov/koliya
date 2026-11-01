@@ -3,672 +3,93 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-    <meta name="robots" content="noindex">
-    <title>Колія: админка</title>
-    <link rel="stylesheet" href="../style.css">
-    <style>
-        label {
-            display: block;
-            font-size: 13px;
-            color: var(--mute);
-            margin: 10px 0 4px;
-            font-weight: 600
-        }
-
-        input, textarea, select {
-            width: 100%;
-            padding: 10px 12px;
-            border-radius: 10px;
-            border: 1px solid var(--line);
-            background: var(--bg);
-            color: var(--ink);
-            font: inherit
-        }
-
-        input[type=checkbox] {
-            width: 22px;
-            height: 22px;
-            padding: 0;
-            accent-color: var(--brand)
-        }
-
-        textarea {
-            min-height: 90px;
-            font-family: ui-monospace, Menlo, monospace;
-            font-size: 14px
-        }
-
-        .row {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap
-        }
-
-        .row > * {
-            flex: 1;
-            min-width: 120px
-        }
-
-        button {
-            border: 0;
-            border-radius: 10px;
-            padding: 10px 16px;
-            font: inherit;
-            font-weight: 600;
-            cursor: pointer;
-            background: var(--soft);
-            color: var(--brand)
-        }
-
-        button.pri {
-            background: var(--acc);
-            color: var(--accink)
-        }
-
-        button.del {
-            background: #fde4e4;
-            color: #a11
-        }
-
-        button.sm {
-            padding: 6px 10px;
-            font-size: 14px
-        }
-
-        .ok {
-            color: #1a7f37;
-            font-size: 13px
-        }
-
-        .err {
-            color: #c62828;
-            font-size: 13px
-        }
-
-        .bar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 10px;
-            flex-wrap: wrap
-        }
-
-        #toast {
-            position: fixed;
-            bottom: calc(16px + env(safe-area-inset-bottom, 0px));
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--ink);
-            color: var(--bg);
-            padding: 10px 18px;
-            border-radius: 99px;
-            display: none;
-            z-index: 9
-        }
-
-        /* редактор поездов */
-        .eopt {
-            background: var(--card);
-            border: 1px solid var(--line);
-            border-radius: 20px;
-            padding: 16px;
-            margin-top: 16px
-        }
-
-        .hdr {
-            border: 1px dashed var(--brand);
-            border-radius: 16px;
-            padding: 12px 14px;
-            margin-bottom: 6px
-        }
-
-        .hdr h3 {
-            margin: 0;
-            font-size: 16px
-        }
-
-        .lg {
-            border: 1px solid var(--line);
-            border-radius: 16px;
-            padding: 14px;
-            margin-top: 12px;
-            background: var(--card)
-        }
-
-        .lg .bar input {
-            flex: 1
-        }
-
-        .tw {
-            overflow-x: auto
-        }
-
-        table.st {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 10px 0 8px;
-            min-width: 540px
-        }
-
-        .st th {
-            font-size: 12px;
-            color: var(--mute);
-            text-align: left;
-            padding: 0 6px 4px;
-            font-weight: 600
-        }
-
-        .st td {
-            padding: 3px 4px;
-            vertical-align: middle
-        }
-
-        .st td:nth-child(1) {
-            width: 54px;
-            text-align: center
-        }
-
-        .st td:nth-child(3) {
-            width: 125px
-        }
-
-        .st td:nth-child(4) {
-            width: 190px;
-            white-space: nowrap
-        }
-
-        .st input.nm, .st input.tm, .lg .bar input.tr, .hdr input {
-            font-family: var(--body);
-            font-size: 19px;
-            font-weight: 500;
-            padding: 11px 12px
-        }
-
-        .lg .bar input.tr {
-            font-weight: 600
-        }
-
-        .st input.tm, .hdr input {
-            font-variant-numeric: tabular-nums
-        }
-
-        .st tr.hl input.nm, .st tr.hl input.tm {
-            font-weight: 600;
-            border-color: var(--brand)
-        }
-
-        .st tr:not(.hl) input.nm, .st tr:not(.hl) input.tm {
-            color: var(--mute)
-        }
-
-        .xfer {
-            text-align: center;
-            margin: 12px 0 0;
-            padding: 8px;
-            border-radius: 12px;
-            background: rgba(255, 210, 63, .24);
-            font-weight: 600;
-            font-size: 14px
-        }
-
-        .pv .opt {
-            margin-top: 8px
-        }
-
-        .legend {
-            font-size: 13px;
-            color: var(--mute);
-            margin: 6px 0 0
-        }
-    </style>
+    <title>Колія: поездом из Украины и в Украину</title>
+    <meta name="description" content="Простые маршруты с пересадками и расписанием. Выберите страну.">
+    <meta name="theme-color" content="#12145c">
+    <link rel="canonical" href="https://dmytrovertikov.github.io/koliya/">
+    <link rel="alternate" hreflang="ru" href="https://dmytrovertikov.github.io/koliya/">
+    <link rel="alternate" hreflang="uk" href="https://dmytrovertikov.github.io/koliya/uk/">
+    <link rel="alternate" hreflang="en" href="https://dmytrovertikov.github.io/koliya/en/">
+    <link rel="alternate" hreflang="pl" href="https://dmytrovertikov.github.io/koliya/pl/">
+    <link rel="alternate" hreflang="x-default" href="https://dmytrovertikov.github.io/koliya/">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap">
+    <link rel="stylesheet" href="style.css?v=mvy5eajy">
 </head>
 <body>
-<header style="padding-bottom:44px">
-    <div class="wrap bar"><b>⚙️ Колія: админка</b><span><a href="../" style="color:#fff">На сайт</a> <button id="out"
-                                                                                                             style="display:none;margin-left:8px">Выйти</button></span>
-    </div>
+<header>
+    <div class="wrap"><nav class="lang"><a href="index.html" hreflang="ru" lang="ru" class="on">RU</a><a href="uk/index.html" hreflang="uk" lang="uk">UK</a><a href="en/index.html" hreflang="en" lang="en">EN</a><a href="pl/index.html" hreflang="pl" lang="pl">PL</a></nav><a class="logo" href="#"><span class="rails">🚆</span> КОЛІЯ</a>
+        <h1 id="h1">Как ехать поездом в Украину и из Украины</h1>
+        <p id="lead">Простые маршруты с пересадками и расписанием. Выберите страну.</p></div>
 </header>
-<main class="wrap" id="app"></main>
-<div id="toast"></div>
-<script src="../config.js"></script>
-<script src="../i18n.js"></script>
-<script src="../common.js"></script>
+<main class="wrap" id="app"><p>Загрузка…</p></main>
+<footer class="wrap" id="site-footer"></footer>
+<script>window.LANG = "ru";</script>
+<script src="config.js?v=mvy5eajy"></script>
+<script src="i18n.js?v=mvy5eajy"></script>
+<script src="common.js?v=mvy5eajy"></script>
 <script>
-    const $ = s => document.querySelector(s);
-    let S = JSON.parse(localStorage.getItem("sb") || "null"), CT = [], RT = [];
-    const toast = t => {
-        const e = $("#toast");
-        e.textContent = t;
-        e.style.display = "block";
-        setTimeout(() => e.style.display = "none", 2200)
-    };
-    const auth = async (q, b) => {
-        const r = await fetch(U + "/auth/v1/token?grant_type=" + q, {
-            method: "POST",
-            headers: {apikey: K, "Content-Type": "application/json"},
-            body: JSON.stringify(b)
-        });
-        const j = await r.json();
-        if (!r.ok) throw new Error(j.error_description || j.msg || "Ошибка входа");
-        S = {a: j.access_token, r: j.refresh_token};
-        localStorage.setItem("sb", JSON.stringify(S))
-    };
-    const logout = () => {
-        S = null;
-        localStorage.removeItem("sb");
-        showLogin()
+    const api = p => fetch(U + "/rest/v1/" + p, {headers: {apikey: K, Authorization: "Bearer " + K}}).then(r => {
+        if (!r.ok) throw new Error(r.status);
+        return r.json()
+    });
+    let D;
+    const PG = (window.CFG && CFG.PAGES) || [];
+    /* названия стран и направлений: ru берётся из базы, остальные языки из словаря (нет в словаре — как в базе) */
+    const CN = I18N.CN || {};
+    const cname = c => LG !== "ru" && CN[c.slug] && CN[c.slug][LG] ? CN[c.slug][LG][0] : c.name;
+    const rkind = r => /^ua-/.test(r.slug) ? ["out", r.slug.slice(3)] : /-ua$/.test(r.slug) ? ["in", r.slug.slice(0, -3)] : null;
+    const rform = r => { const k = rkind(r), f = k && CN[k[1]] && CN[k[1]][LG]; return LG !== "ru" && f ? {k: k[0], nom: f[0], gen: f[1] || f[0]} : null };
+    const rtitle = r => { const f = rform(r); return f ? t(f.k === "out" ? "ix.rtOut" : "ix.rtIn", f) : r.title };
+    const rlead = () => t("ix.leadDir"); /* один подзаголовок для всех направлений, текст из базы больше не используется */
+    const pageLinks = id => {
+        const list = PG.filter(p => p.route === id); /* только страницы этого направления: ua-pl → из Украины в Польшу, pl-ua → обратно; для других стран так же */
+        return list.length ? `<section class="panel" style="margin-top:0">${list.map((p, i) => `<a class="btn pri"${i ? "" : ' style="margin-top:0"'} href="${esc(p.href)}">${esc(t("ix.one", {t: trRoute(p.title)}))}</a>`).join("")}</section>` : ""
     };
 
-    async function db(m, p, b, pref, retry = true) {
-        const r = await fetch(U + "/rest/v1/" + p, {
-            method: m,
-            headers: {
-                apikey: K,
-                Authorization: "Bearer " + S.a,
-                "Content-Type": "application/json",
-                Prefer: pref || "return=representation"
-            },
-            body: b && JSON.stringify(b)
-        });
-        if (r.status == 401 && retry) {
-            try {
-                await auth("refresh_token", {refresh_token: S.r})
-            } catch (e) {
-                logout();
-                throw e
-            }
-            return db(m, p, b, pref, false)
+    async function load() {
+        if (!D) {
+            const [c, r] = await Promise.all([api("countries?order=sort"), api("routes?order=sort")]);
+            D = {c, r}
         }
-        if (!r.ok) throw new Error(await r.text());
-        return r.status == 204 ? null : r.json()
+        return D
     }
 
-    const newStop = () => ({name: "", time: "", hl: false});
-    const newLeg = () => ({train: "", stops: [{name: "", time: "", hl: true}, {name: "", time: "", hl: true}]});
-    const newHead = () => ({from: "", ft: "", to: "", tt: "", dur: "", tag: ""});
-
-    /* ---------- вход ---------- */
-    function showLogin() {
-        $("#out").style.display = "none";
-        $("#app").innerHTML = `<section class="panel" style="max-width:380px;margin:0 auto"><h2>Вход</h2><label>Email</label><input id="em" type="email" autocomplete="username"><label>Пароль</label><input id="pw" type="password" autocomplete="current-password"><p class="err" id="le"></p><button class="pri" id="go">Войти</button></section>`;
-        $("#go").onclick = async () => {
-            try {
-                await auth("password", {email: $("#em").value, password: $("#pw").value});
-                start()
-            } catch (e) {
-                $("#le").textContent = e.message
-            }
-        }
-    }
-
-    async function start() {
-        $("#out").style.display = "";
-        $("#out").onclick = logout;
+    async function render() {
+        const app = document.getElementById("app"), id = location.hash.slice(1);
+        document.querySelectorAll(".lang a").forEach(a => a.href = a.href.split("#")[0] + location.hash);
+        let d;
         try {
-            [CT, RT] = await Promise.all([db("GET", "countries?order=sort"), db("GET", "routes?order=sort")])
+            d = await load()
         } catch (e) {
-            return showLogin()
+            app.innerHTML = `<div class="panel"><h2>${esc(t("err.h"))}</h2><p>${esc(t("err.p"))}</p></div>`;
+            return
         }
-        home()
-    }
-
-    /* Страницы маршрутов берутся из config.js (CFG.PAGES); варианты на странице = те, у кого шапка «откуда → куда» совпадает с названием страницы */
-    const PAGES = () => (window.CFG && CFG.PAGES) || [];
-    const ends = p => String(p.title).split("→").map(x => x.trim());
-    const norm = s => String(s || "").trim().toLowerCase();
-    const parseO = o => {
-        const p = parseOption(o.dsl);
-        o.legs = p.legs.length ? p.legs : [newLeg()];
-        o.head = p.head || deriveHead(o.legs);
-        return o
-    };
-    const onPage = (o, pg) => {
-        const [a, b] = ends(pg);
-        return norm(o.head.from).startsWith(norm(a)) && norm(o.head.to).startsWith(norm(b))
-    };
-
-    function home(cur) {
-        const app = $("#app");
-        app.innerHTML = `<section class="panel" style="margin-top:0"><h2 style="margin:0">Страницы маршрутов</h2>
-<label>Выберите страницу</label><select id="sel"><option value="">—</option>${PAGES().map(p => `<option value="${esc(p.href)}" ${p.href === cur ? "selected" : ""}>${esc(p.title)} (${esc(p.href)})</option>`).join("")}<option value="__orph" ${cur === "__orph" ? "selected" : ""}>⚠ Варианты без страницы (проверка)</option></select>
-<p class="legend">Новая страница маршрута: добавьте её в <b>config.js</b> (PAGES) и в <b>build.js</b> (ROUTES), потом она появится в этом списке.</p></section>
-<section class="panel"><details><summary><b>🛠 Генератор строк для новой страницы маршрута</b></summary><div id="gen"></div></details></section>
-<section class="panel"><details><summary><b>Страны и направления для главной</b></summary><div id="cs"></div><div id="rts"></div></details></section><div id="ed"></div>`;
-        $("#sel").onchange = e => {
-            const v = e.target.value;
-            if (!v) $("#ed").innerHTML = "";
-            else editPage(v === "__orph" ? {orph: true, title: "Варианты без страницы", route: ""} : PAGES().find(p => p.href === v))
-        };
-        countries();
-        routes();
-        gen();
-        if (cur) $("#sel").onchange({target: $("#sel")})
-    }
-
-    function routes() {
-        $("#rts").innerHTML = `<div class="bar" style="margin-top:18px"><b>Направления (кнопки «Из Украины →» на главной)</b><button id="nr">+ Новое направление</button></div>
-<select id="sel2"><option value="">—</option>${RT.map(r => `<option value="${esc(r.slug)}">${esc(r.title)} (${esc(r.slug)})</option>`).join("")}</select><div id="rm"></div>`;
-        $("#sel2").onchange = e => e.target.value ? routeForm(RT.find(r => r.slug === e.target.value)) : ($("#rm").innerHTML = "");
-        $("#nr").onclick = () => routeForm({slug: "", country: CT[0]?.slug, title: "", sort: (RT.length + 1) * 10}, true)
-    }
-
-    function routeForm(r, isNew) {
-        $("#rm").innerHTML = `<div class="row"><div><label>Код (например ua-pl)</label><input id="rs" value="${esc(r.slug)}" ${isNew ? "" : "readonly"}></div><div><label>Страна</label><select id="rc">${CT.map(c => `<option value="${esc(c.slug)}" ${c.slug === r.country ? "selected" : ""}>${esc(c.flag)} ${esc(c.name)}</option>`).join("")}</select></div><div><label>Порядок</label><input id="ro" type="number" value="${r.sort}"></div></div>
-<label>Заголовок</label><input id="rt" value="${esc(r.title)}">
-<div class="row" style="margin-top:12px"><button class="pri" id="sr">Сохранить направление</button>${isNew ? "" : '<button class="del" id="dr">Удалить направление</button>'}</div>`;
-        $("#sr").onclick = async () => {
-            const slug = $("#rs").value.trim();
-            try {
-                if (!/^[a-z-]+$/.test(slug)) throw new Error("Код: только латиница и дефис");
-                if (!$("#rt").value.trim()) throw new Error("Нужен заголовок");
-                /* lead/how/tickets на сайте больше не используются; существующие значения не затираем */
-                await db("POST", "routes?on_conflict=slug", {
-                    slug, country: $("#rc").value, title: $("#rt").value.trim(),
-                    lead: r.lead || "", how: r.how || "", tickets: r.tickets || "", sort: +$("#ro").value || 0
-                }, "resolution=merge-duplicates,return=representation");
-                RT = await db("GET", "routes?order=sort");
-                toast("Сохранено");
-                routes()
-            } catch (e) {
-                alert(e.message)
-            }
-        };
-        if (!isNew) $("#dr").onclick = async () => {
-            if (!confirm("Удалить направление и все его варианты?")) return;
-            try {
-                await db("DELETE", "routes?slug=eq." + encodeURIComponent(r.slug));
-                RT = await db("GET", "routes?order=sort");
-                routes();
-                $("#rm").innerHTML = ""
-            } catch (e) {
-                alert(e.message)
-            }
+        const r = d.r.find(x => x.slug === id);
+        window.scrollTo(0, 0);
+        if (!r) {
+            document.title = t("ix.title");
+            h1.textContent = t("ix.h1");
+            lead.textContent = t("ix.lead");
+            const has = s => d.r.some(x => x.slug === s);
+            const air = [["Варшава", "https://www.lotnisko-chopina.pl/en/index.html"], ["Будапешт", "https://www.bud.hu/en"], ["Вена", "https://www.viennaairport.com/"], ["Краков", "https://www.krakowairport.pl/en/"], ["Жешув", "https://www.rzeszowairport.pl/ua"], ["Кошице", "https://www.airportkosice.sk/en"], ["Кишинёв", "https://airport.md/"], ["Яссы", "https://www.aeroport-iasi.ro"]];
+            app.innerHTML = `<div class="grid">${d.c.map(c => `<div class="country"><div class="fl"><img src="https://flagcdn.com/w80/${esc(c.slug)}.png" srcset="https://flagcdn.com/w160/${esc(c.slug)}.png 2x" width="40" height="30" alt="${esc(cname(c))}" onerror="this.replaceWith(document.createTextNode('${esc(c.flag)}'))"></div><h3>${esc(cname(c))}</h3>${has("ua-" + c.slug) ? `<a class="btn pri" href="#ua-${esc(c.slug)}">${esc(t("ix.fromUa"))}</a>` : ""}${has(c.slug + "-ua") ? `<a class="btn" href="#${esc(c.slug)}-ua">${esc(t("ix.toUa"))}</a>` : ""}</div>`).join("")}</div>
+${PG.length ? `<section class="panel"><h2>${esc(t("ix.popular"))}</h2><div class="grid" style="margin-top:12px">${PG.map(p => `<a class="btn pri" href="${esc(p.href)}">${esc(trRoute(p.title))}</a>`).join("")}</div></section>` : ""}
+<section class="panel"><h2>${esc(t("ix.how.h"))}</h2><ol class="steps"><li>${esc(t("ix.how1"))}</li><li>${esc(t("ix.how2"))}</li><li>${esc(t("ix.how3"))}</li></ol></section>
+<section class="panel"><h2>${esc(t("ix.help.h"))}</h2><p><b>044 465 33 44</b> · <b>0 800 503 111</b><br>${esc(t("ix.help.p"))}</p><a class="btn" href="https://uz-vezemo.uz.gov.ua/ticketoffices">${esc(t("ix.help.b1"))}</a><a class="btn" href="https://uz-vezemo.uz.gov.ua/delayform">${esc(t("ix.help.b2"))}</a></section>
+<section class="panel"><h2>${esc(t("ix.fly.h"))}</h2><p>${esc(t("ix.fly.p"))}</p><div class="grid" style="margin-top:12px">${air.map(a => `<a class="btn" href="${a[1]}" target="_blank" rel="noopener">${esc(stn(a[0]))}</a>`).join("")}</div></section>
+<section class="panel"><h2>${esc(t("ix.buy.h"))}</h2><a class="btn pri" href="https://app.uz.gov.ua/start">${esc(t("ix.buy.b1"))}</a><a class="btn" href="https://uz.gov.ua/">${esc(t("ix.buy.b2"))}</a></section>`;
+            return
         }
+        document.title = t("ix.dirTitle", {t: rtitle(r)});
+        h1.textContent = rtitle(r);
+        lead.textContent = rlead(r);
+        app.innerHTML = `<a class="back" href="#">${esc(t("ix.all"))}</a>${pageLinks(id) || `<section class="panel" style="margin-top:0"><p>${esc(t("ix.soon"))}</p></section>`}`
     }
 
-
-    /* ---------- генератор строк для новой страницы (обе стороны: туда и обратно) ---------- */
-    const UA = {ru: "Украина", uk: "Україна", en: "Ukraine", pl: "Ukraina"};
-    const TXT = {
-        ru: {title: "{a} → {b} поездом | Колія", h1: "Поездом: {a} → {b}", desc: "Все поезда {a} — {b}: прямой и с пересадкой. Время, станции, длительность.", lead: "Расписание поездов {a} — {b}: прямой поезд и варианты с пересадкой. Время в пути, остановки и информация о покупке билетов.", all: "Все маршруты: {x} — {y}", more: "← {y} — {x}"},
-        uk: {title: "{a} → {b} потягом | Колія", h1: "Потягом: {a} → {b}", desc: "Усі поїзди {a} — {b}: прямий та з пересадкою. Час, станції, тривалість.", lead: "Розклад поїздів {a} — {b}: прямий поїзд і варіанти з пересадкою. Час у дорозі, зупинки та інформація про купівлю квитків.", all: "Усі маршрути: {x} — {y}", more: "← {y} — {x}"},
-        en: {title: "{a} → {b} by train | Koliya", h1: "By train: {a} → {b}", desc: "All trains {a} — {b}: direct and with a transfer. Times, stations, duration.", lead: "Train timetable {a} — {b}: the direct train and options with a transfer. Journey time, stops and ticket information.", all: "All routes: {x} — {y}", more: "← {y} — {x}"},
-        pl: {title: "{a} → {b} pociągiem | Koliya", h1: "Pociągiem: {a} → {b}", desc: "Wszystkie pociągi {a} — {b}: bezpośrednie i z przesiadką. Godziny, stacje, czas podróży.", lead: "Rozkład pociągów {a} — {b}: pociąg bezpośredni i warianty z przesiadką. Czas podróży, postoje i informacje o zakupie biletów.", all: "Wszystkie trasy: {x} — {y}", more: "← {y} — {x}"}
-    };
-
-    const TXTN = {
-        ru: {desc: "Поезда {a} — {b} с пересадкой: время, станции, длительность.", lead: "Расписание поездов {a} — {b}: варианты с пересадкой {xin}. Время в пути, остановки и информация о покупке билетов."},
-        uk: {desc: "Поїзди {a} — {b} з пересадкою: час, станції, тривалість.", lead: "Розклад поїздів {a} — {b}: варіанти з пересадкою {xin}. Час у дорозі, зупинки та інформація про купівлю квитків."},
-        en: {desc: "Trains {a} — {b} with a transfer: times, stations, duration.", lead: "Train timetable {a} — {b}: options with a transfer {xin}. Journey time, stops and ticket information."},
-        pl: {desc: "Pociągi {a} — {b} z przesiadką: godziny, stacje, czas podróży.", lead: "Rozkład pociągów {a} — {b}: warianty z przesiadką {xin}. Czas podróży, postoje i informacje o zakupie biletów."}
-    };
-    const VIA = {ru: "через", uk: "через", en: "via", pl: "przez"};
-
-    function genPages(a, b, al, bl, route, X, hasDirect = true) {
-        const [c1, c2] = route.split("-"), rev = c2 + "-" + c1, ST = (window.I18N && I18N.ST) || {}, CN = (window.I18N && I18N.CN) || {};
-        const stn2 = (n, l) => { const e = ST[n], i = {uk: 0, en: 1, pl: 2}[l]; return l === "ru" || !e || !e[i] ? n : e[i] };
-        const cn = (code, l) => { if (code === "ua") return UA[l]; const c = CT.find(x => x.slug === code); return l !== "ru" && CN[code] && CN[code][l] ? CN[code][l][0] : (c ? c.name : code) };
-        const xin = l => { const e = ST[X], i = {ru: 3, uk: 4, pl: 5}[l]; return l === "en" ? "in " + stn2(X, l) : e && e[i] ? e[i] : VIA[l] + " " + stn2(X, l) };
-        const mk = (f, t, fl, tl, rt, back, fromUa) => ({from: f, to: t, route: rt, back, file: fl + "-" + tl + ".html", rev: tl + "-" + fl + ".html", id: (fl + "_" + tl).replace(/-/g, "_"),
-            uz: fromUa ? [f, X] : [X, t], pkp: fromUa ? [X, t] : [f, X], t3: fromUa ? "buy.t3out" : "buy.t3in"});
-        const extra = (X !== "Хелм" ? `, x: ${JSON.stringify(X)}` : "") + (hasDirect ? "" : ", direct: false");
-        const P = [mk(a, b, al, bl, route, rev, c1 === "ua"), mk(b, a, bl, al, rev, route, c1 !== "ua")];
-        const q = JSON.stringify, cfg = P.map(p => `        {href: ${q(p.file)}, title: ${q(p.from + " → " + p.to)}, route: ${q(p.route)}}`).join(",\n");
-        const bld = P.map(p => `  {id: ${q(p.id)}, file: ${q(p.file)}, FROM: ${q(p.from)}, TO: ${q(p.to)}, BACK: ${q(p.back)}, hash: ${q(p.route)}, rev: ${q(p.rev)}, uz: ${q(p.uz)}, pkp: ${q(p.pkp)}, t3: ${q(p.t3)}${extra}}`).join(",\n");
-        const i18n = {};
-        for (const l of ["ru", "uk", "en", "pl"]) i18n[l] = P.map(p => {
-            const [x, y] = p.route.split("-").map(c => cn(c, l)), v = {a: stn2(p.from, l), b: stn2(p.to, l), x, y, xin: xin(l)};
-            return ["title", "desc", "h1", "lead", "all", "more"].map(k => `${q(p.id + "." + k)}:${q((!hasDirect && TXTN[l][k] || TXT[l][k]).replace(/\{(\w+)\}/g, (m, z) => v[z]))}`).join(",\n")
-        }).join(",\n");
-        const miss = [...new Set([a, b, X])].filter(n => !ST[n]).map(n => `${q(n)}:["","","","","",""]`).join(",\n");
-        return {cfg, bld, i18n, miss, P}
-    }
-
-    function gen() {
-        $("#gen").innerHTML = `<p class="legend">Заполните поля и получите готовые строки для config.js, build.js и i18n.js сразу для обеих страниц (туда и обратно). После вставки выполните <b>node build.js</b>.</p>
-<div class="row"><div><label>Откуда (по-русски, как в шапке)</label><input id="gf" placeholder="Киев"></div><div><label>Куда (по-русски)</label><input id="gt" placeholder="Краков"></div></div>
-<div class="row"><div><label>Откуда латиницей (для имени файла)</label><input id="gfl" placeholder="kyiv"></div><div><label>Куда латиницей</label><input id="gtl" placeholder="krakow"></div></div>
-<div class="row"><div><label>Направление страницы «Откуда → Куда»</label><select id="gr">${RT.map(r => `<option value="${esc(r.slug)}">${esc(r.title)} (${esc(r.slug)})</option>`).join("")}</select></div><div><label>Станция пересадки (по-русски)</label><input id="gx" value="Хелм"></div></div>
-<label style="display:flex;gap:8px;align-items:center;margin-top:12px"><input type="checkbox" id="gd" checked style="width:22px"> На маршруте есть прямой поезд</label>
-<div style="margin-top:12px"><button class="pri" id="gg">Сгенерировать</button></div><div id="go"></div>`;
-        $("#gg").onclick = () => {
-            const g = i => $(i).value.trim(), a = g("#gf"), b = g("#gt"), al = g("#gfl").toLowerCase(), bl = g("#gtl").toLowerCase(), route = g("#gr"), X = g("#gx") || "Хелм";
-            if (!a || !b || !/^[a-z0-9-]+$/.test(al) || !/^[a-z0-9-]+$/.test(bl)) return alert("Заполните названия по-русски и имена файлов латиницей (a–z, цифры, дефис)");
-            if (route.split("-").length !== 2) return alert("Код направления должен быть вида ua-pl");
-            const r = genPages(a, b, al, bl, route, X, $("#gd").checked);
-            const blk = (t, hint, txt) => `<label>${t}</label><p class="legend" style="margin:0 0 4px">${hint}</p><textarea readonly style="min-height:120px">${esc(txt)}</textarea><button class="sm cp" style="margin-top:6px">Копировать</button>`;
-            $("#go").innerHTML = (X !== "Хелм" ? '<p class="legend">Пересадка не в Хелме: заголовок страницы будет «С пересадкой …» без слов «на одной платформе».</p>' : "")
-                + blk("1. config.js", "в массив PAGES, после последней записи (не забудьте запятую)", r.cfg)
-                + blk("2. build.js", "в массив ROUTES", r.bld)
-                + ["ru", "uk", "en", "pl"].map(l => blk("3. i18n.js — " + l, `внутрь блока ${l}:{ … } после последнего ключа (не забудьте запятую)`, r.i18n[l])).join("")
-                + (r.miss ? blk("4. i18n.js — станции (ST)", "впишите переводы: [uk, en, pl, «в…» ru, «у…» uk, «w…» pl]; пустое поле = покажется русское название", r.miss) : '<p class="ok">Все станции уже есть в словаре.</p>')
-                + `<p class="legend">Файлы страниц: <b>${esc(r.P[0].file)}</b> и <b>${esc(r.P[1].file)}</b> (в каждом языке). Тексты сгенерированы по шаблону без склонений, при желании отредактируйте их в i18n.js.</p>`;
-            document.querySelectorAll("#go .cp").forEach(b => b.onclick = () => { navigator.clipboard.writeText(b.previousElementSibling.value); toast("Скопировано") })
-        }
-    }
-
-    function countries() {
-        $("#cs").innerHTML = CT.concat([{
-            slug: "",
-            name: "",
-            flag: "",
-            sort: (CT.length + 1) * 10,
-            n: 1
-        }]).map((c, i) => `<div class="row" style="margin-top:10px" data-i="${i}"><input class="s" placeholder="код (pl)" value="${esc(c.slug)}" ${c.slug ? "readonly" : ""}><input class="f" placeholder="🇵🇱" value="${esc(c.flag)}"><input class="n" placeholder="Название" value="${esc(c.name)}"><input class="o" type="number" value="${c.sort}"><button class="pri sv">${c.n ? "Добавить" : "Сохранить"}</button>${c.n ? "" : '<button class="del dl">Удалить</button>'}</div>`).join("");
-        document.querySelectorAll("#cs .row").forEach(w => {
-            const g = c => w.querySelector(c).value.trim();
-            w.querySelector(".sv").onclick = async () => {
-                try {
-                    if (!g(".s") || !g(".n")) throw new Error("Заполните код и название");
-                    await db("POST", "countries?on_conflict=slug", {
-                        slug: g(".s"),
-                        name: g(".n"),
-                        flag: g(".f"),
-                        sort: +g(".o") || 0
-                    }, "resolution=merge-duplicates,return=representation");
-                    CT = await db("GET", "countries?order=sort");
-                    toast("Сохранено");
-                    countries()
-                } catch (e) {
-                    alert(e.message)
-                }
-            };
-            const d = w.querySelector(".dl");
-            if (d) d.onclick = async () => {
-                if (!confirm("Удалить страну и все её маршруты?")) return;
-                try {
-                    await db("DELETE", "countries?slug=eq." + encodeURIComponent(g(".s")));
-                    await start()
-                } catch (e) {
-                    alert(e.message)
-                }
-            }
-        })
-    }
-
-    /* ---------- варианты на странице маршрута ---------- */
-    async function editPage(pg) {
-        const ed = $("#ed"), isNew = false, r = {slug: pg.route};
-        const all = (await db("GET", "options?order=sort")).map(parseO), pages = PAGES();
-        const opts = pg.orph ? all.filter(o => !pages.some(p => onPage(o, p))) : all.filter(o => onPage(o, pg));
-        const [fa, fb] = pg.orph ? ["", ""] : ends(pg);
-        ed.innerHTML = `<section class="panel"><div class="bar"><h2 style="margin:0">${esc(pg.title)}</h2>${pg.orph ? "" : '<button id="no">+ Добавить вариант</button>'}</div>
-<p class="legend">${pg.orph ? "Варианты, шапка которых не совпадает ни с одной страницей из config.js: на сайте они нигде не показываются. Поправьте шапку или удалите вариант." : `Страница: <a href="../${esc(pg.href)}" target="_blank" rel="noopener">${esc(pg.href)}</a>. Сюда попадают варианты, у которых шапка «${esc(fa)} → ${esc(fb)}». Новые варианты сохраняются с направлением ${esc(pg.route)}.`}</p>
-<p>Вариант состоит из <b>шапки</b> (крупно сверху: откуда и куда, вы задаёте её сами) и <b>поездов</b> с таблицами станций. Галочка <b>«Выд.»</b> = станция выделяется крупным шрифтом, остальные показываются мельче и бледнее. Пересадка между поездами добавляется автоматически. Название станции пишите по-русски: на других языках сайт переведёт его по словарю.</p><div id="ol"></div></section>`;
-        if (!pg.orph) $("#no").onclick = () => {
-            opts.push({
-                id: null, route_slug: pg.route, dsl: "", legs: [newLeg()], head: Object.assign(newHead(), {from: fa, to: fb}),
-                note: "", sort: (opts.length + 1) * 10, active: true
-            });
-            list()
-        };
-
-        function legHtml(L, li) {
-            return `${li ? '<div class="xfer">🔁 Пересадка</div>' : ""}<div class="lg" data-l="${li}">
-<div class="bar"><input class="tr" placeholder="Номер поезда: 019 или IC 12010" value="${esc(L.train)}">${li ? '<button class="del sm rl">Убрать поезд</button>' : ""}</div>
-<div class="tw"><table class="st"><thead><tr><th>Выд.</th><th>Станция</th><th>Время</th><th></th></tr></thead><tbody>
-${L.stops.map((s, si) => `<tr data-s="${si}" class="${s.hl ? "hl" : ""}"><td><input type="checkbox" class="hl" ${s.hl ? "checked" : ""}></td><td><input class="nm" placeholder="Город" value="${esc(s.name)}"></td><td><input class="tm" placeholder="19:06" inputmode="numeric" value="${esc(s.time)}"></td><td><button class="sm up" title="Выше">↑</button> <button class="sm dn" title="Ниже">↓</button> <button class="sm ins" title="Добавить станцию ниже">＋</button> <button class="sm del rs" title="Удалить">×</button></td></tr>`).join("")}
-</tbody></table></div><button class="sm as">+ Станция в конец</button></div>`
-        }
-
-        function list() {
-            const box = $("#ol");
-            if (isNew) return;
-            box.innerHTML = opts.map((o, i) => {
-                const h = o.head;
-                return `<div class="eopt" data-i="${i}">
-<div class="hdr"><h3>Шапка карточки</h3><p class="legend">Крупно сверху на сайте. Задаётся вручную, от таблиц ниже не зависит.</p>
-<div class="row"><div><label>Откуда</label><input class="hf" placeholder="Киев" value="${esc(h.from)}"></div><div><label>Отправление</label><input class="hft" placeholder="19:29" inputmode="numeric" value="${esc(h.ft)}"></div></div>
-<div class="row"><div><label>Куда</label><input class="ht" placeholder="Варшава" value="${esc(h.to)}"></div><div><label>Прибытие</label><input class="htt" placeholder="10:24" inputmode="numeric" value="${esc(h.tt)}"></div></div>
-<div class="row"><div><label>В пути (необязательно)</label><input class="hdur" value="${esc(h.dur)}"></div><div><label>Плашка (необязательно)</label><input class="htag" value="${esc(h.tag)}"></div></div>
-<div style="margin-top:10px"><button class="sm fill">↧ Заполнить из таблиц (первая и последняя станция)</button></div></div>
-<div class="legs">${o.legs.map(legHtml).join("")}</div>
-<div style="margin-top:12px"><button class="al">+ Ещё поезд (пересадка)</button> <button class="sm tx">Текстом</button></div>
-<div class="txw" style="display:none"><label>Текстовый формат (для опытных)</label><textarea class="dsl" style="min-height:140px"></textarea><button class="sm ap" style="margin-top:6px">Применить текст</button></div>
-<h3 style="margin:18px 0 0;font-size:15px">Как это увидят на сайте</h3><div class="pv"></div>
-<div class="row"><div><label>Примечание</label><input class="n" value="${esc(o.note)}"></div><div><label>Порядок</label><input class="o" type="number" value="${o.sort}"></div><div><label>Показывать</label><select class="a"><option value="1" ${o.active ? "selected" : ""}>Да</option><option value="0" ${o.active ? "" : "selected"}>Скрыт</option></select></div></div>
-<div class="row" style="margin-top:12px"><button class="pri sv">Сохранить вариант</button>${o.id ? '<button class="del dl">Удалить</button>' : ""}</div></div>`
-            }).join("") || (isNew ? "" : "<p>Вариантов пока нет.</p>");
-            box.querySelectorAll(".eopt").forEach(wire)
-        }
-
-        function wire(w) {
-            const o = opts[+w.dataset.i], pv = w.querySelector(".pv"), q = c => w.querySelector(c);
-            const upd = () => {
-                const er = validateOption(o);
-                let card = "";
-                try {
-                    card = optHtml({dsl: serializeOption(o), note: o.note})
-                } catch (_) {
-                }
-                pv.innerHTML = (er.length ? `<div class="err" style="margin:8px 0">${er.map(esc).join("<br>")}</div>` : '<p class="ok" style="margin:8px 0">✓ Всё в порядке</p>') + card;
-                q(".hdur").placeholder = "авто: " + (autoDur(o.head.ft, o.head.tt) || "—");
-                q(".htag").placeholder = "авто: " + autoTag(o.legs.length - 1)
-            };
-            const redraw = () => {
-                q(".legs").innerHTML = o.legs.map(legHtml).join("");
-                upd()
-            };
-            const pos = t => {
-                const L = t.closest("[data-l]"), S = t.closest("[data-s]");
-                return [L && +L.dataset.l, S && +S.dataset.s]
-            };
-            const HF = {hf: "from", hft: "ft", ht: "to", htt: "tt", hdur: "dur", htag: "tag"};
-            w.addEventListener("input", e => {
-                const t = e.target, [l, s] = pos(t), c = [...t.classList];
-                const hk = c.find(x => HF[x]);
-                if (hk) o.head[HF[hk]] = t.value;
-                else if (t.classList.contains("tr")) o.legs[l].train = t.value;
-                else if (t.classList.contains("nm")) o.legs[l].stops[s].name = t.value;
-                else if (t.classList.contains("tm")) o.legs[l].stops[s].time = t.value;
-                else if (t.classList.contains("hl")) {
-                    o.legs[l].stops[s].hl = t.checked;
-                    t.closest("tr").classList.toggle("hl", t.checked)
-                } else if (t.classList.contains("n")) o.note = t.value;
-                else if (t.classList.contains("o")) o.sort = +t.value || 0;
-                else if (t.classList.contains("a")) o.active = t.value === "1";
-                else return;
-                upd()
-            });
-            w.addEventListener("click", e => {
-                const t = e.target.closest("button");
-                if (!t) return;
-                const [l, s] = pos(t);
-                if (t.classList.contains("as")) {
-                    o.legs[l].stops.push(newStop());
-                    redraw()
-                } else if (t.classList.contains("ins")) {
-                    o.legs[l].stops.splice(s + 1, 0, newStop());
-                    redraw()
-                } else if (t.classList.contains("rs")) {
-                    o.legs[l].stops.splice(s, 1);
-                    if (!o.legs[l].stops.length) o.legs[l].stops.push(newStop());
-                    redraw()
-                } else if (t.classList.contains("up") && s > 0) {
-                    const a = o.legs[l].stops;
-                    [a[s - 1], a[s]] = [a[s], a[s - 1]];
-                    redraw()
-                } else if (t.classList.contains("dn") && s < o.legs[l].stops.length - 1) {
-                    const a = o.legs[l].stops;
-                    [a[s + 1], a[s]] = [a[s], a[s + 1]];
-                    redraw()
-                } else if (t.classList.contains("rl")) {
-                    o.legs.splice(l, 1);
-                    redraw()
-                } else if (t.classList.contains("al")) {
-                    o.legs.push(newLeg());
-                    redraw()
-                } else if (t.classList.contains("fill")) {
-                    const d = deriveHead(o.legs);
-                    Object.assign(o.head, {from: d.from, ft: d.ft, to: d.to, tt: d.tt});
-                    q(".hf").value = o.head.from;
-                    q(".hft").value = o.head.ft;
-                    q(".ht").value = o.head.to;
-                    q(".htt").value = o.head.tt;
-                    upd()
-                } else if (t.classList.contains("tx")) {
-                    const x = q(".txw");
-                    x.style.display = x.style.display == "none" ? "" : "none";
-                    q(".dsl").value = serializeOption(o).replace(/\|\|/g, "\n||\n")
-                } else if (t.classList.contains("ap")) {
-                    const p = parseOption(q(".dsl").value);
-                    if (!p.legs.length) {
-                        alert("Пустой текст");
-                        return
-                    }
-                    o.legs = p.legs;
-                    o.head = p.head || deriveHead(p.legs);
-                    list()
-                } else if (t.classList.contains("sv")) save();
-                else if (t.classList.contains("dl")) del()
-            });
-
-            async function save() {
-                const er = validateOption(o);
-                if (er.length) {
-                    alert(er.join("\n"));
-                    return
-                }
-                const b = {
-                    route_slug: o.route_slug || r.slug,
-                    dsl: serializeOption(o),
-                    note: o.note.trim(),
-                    sort: o.sort,
-                    active: o.active,
-                    updated_at: new Date().toISOString()
-                };
-                try {
-                    const x = o.id ? await db("PATCH", "options?id=eq." + o.id, b) : await db("POST", "options", b);
-                    const legs = o.legs, head = o.head;
-                    Object.assign(o, x[0]);
-                    o.legs = legs;
-                    o.head = head;
-                    toast(!pg.orph && !onPage(o, pg) ? "Сохранено, но шапка не совпадает со страницей: на ней вариант не появится" : "Сохранено");
-                    list()
-                } catch (e) {
-                    alert(e.message)
-                }
-            }
-
-            async function del() {
-                if (!confirm("Удалить вариант?")) return;
-                try {
-                    await db("DELETE", "options?id=eq." + o.id);
-                    opts.splice(+w.dataset.i, 1);
-                    list()
-                } catch (e) {
-                    alert(e.message)
-                }
-            }
-
-            upd()
-        }
-
-        list();
-        ed.scrollIntoView({behavior: "smooth"})
-    }
-
-    S ? start() : showLogin();
+    addEventListener("hashchange", render);
+    render();
 </script>
 </body>
 </html>

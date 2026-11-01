@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <title>Kraków → Kyiv by train | Koliya</title>
-    <meta name="description" content="All trains Kraków — Kyiv: direct and with a transfer. Times, stations, duration.">
+    <meta name="description" content="Trains Kraków — Kyiv with a transfer: times, stations, duration.">
     <meta name="theme-color" content="#12145c">
     <link rel="canonical" href="https://dmytrovertikov.github.io/koliya/en/krakow-kyiv.html">
     <link rel="alternate" hreflang="ru" href="https://dmytrovertikov.github.io/koliya/krakow-kyiv.html">
@@ -15,7 +15,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap">
-    <link rel="stylesheet" href="../style.css?v=mvy4pe9e">
+    <link rel="stylesheet" href="../style.css?v=mvy5eajy">
     <style>
         .wrap {
             max-width: 1080px
@@ -171,6 +171,10 @@
             box-shadow: none
         }
 
+        .buy.one {
+            grid-template-columns: minmax(0, 1fr)
+        }
+
         .buy-note {
             margin-top: 16px !important;
             font-size: 14px
@@ -224,7 +228,7 @@
 <header>
     <div class="wrap"><nav class="lang"><a href="../krakow-kyiv.html" hreflang="ru" lang="ru">RU</a><a href="../uk/krakow-kyiv.html" hreflang="uk" lang="uk">UK</a><a href="../en/krakow-kyiv.html" hreflang="en" lang="en" class="on">EN</a><a href="../pl/krakow-kyiv.html" hreflang="pl" lang="pl">PL</a></nav><a class="logo" href="./"><span class="rails">🚆</span> КОЛІЯ</a>
         <h1>By train: Kraków → Kyiv</h1>
-        <p id="lead">Train timetable Kraków — Kyiv: the direct train and options with a transfer. Journey time, stops and ticket information.</p></div>
+        <p id="lead">Train timetable Kraków — Kyiv: options with a transfer in Przemyśl. Journey time, stops and ticket information.</p></div>
 </header>
 <main class="wrap"><a class="back" href="./">← Home</a> <a class="back" href="./#pl-ua">All routes: Poland — Ukraine</a> <a class="back" href="kyiv-krakow.html">🔄 Kyiv → Kraków</a>
     <div id="app"><p>Loading…</p></div>
@@ -233,20 +237,16 @@
 <div class="wrap"><aside class="ad wide" data-slot="bottom" hidden></aside></div>
 <footer class="wrap" id="site-footer"></footer>
 <script>window.LANG = "en";</script>
-<script src="../config.js?v=mvy4pe9e"></script>
-<script src="../i18n.js?v=mvy4pe9e"></script>
-<script src="../common.js?v=mvy4pe9e"></script>
+<script src="../config.js?v=mvy5eajy"></script>
+<script src="../i18n.js?v=mvy5eajy"></script>
+<script src="../common.js?v=mvy5eajy"></script>
 <script>
     const FROM = "Краков", TO = "Киев", BACK = "ua-pl"; // FROM/TO: русские названия, как в шапке карточки в админке
-    const COACH = `<aside class="coach"><p>Each compartment has three berths, one above another. When the middle berth is folded down for sleeping, the lower berth cannot be used for sitting. A ladder is provided for climbing to the upper berth.</p></aside>`;
+    
     const BUY = `<section class="panel"><h2>How to buy tickets</h2>
-<div class="buy">
-<div class="d"><h3>Direct train</h3><ol class="steps">
-<li>Open the Ukrzaliznytsia app and sign in to your account.</li>
-<li>Choose the route Kraków → Kyiv and the travel date. Sales open 20 days before departure at 09:00 Kyiv time. Tickets for the direct train are in high demand, so we recommend buying them as soon as sales open.</li>
-<li>Pick a berth in an RIC-standard compartment car and pay by bank card. The e-ticket will appear in the app. Show it with your passport when boarding.</li></ol>
-<a class="btn" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Open the Ukrzaliznytsia app</a></div>
-<div><h3>With a transfer in Chełm</h3><ol class="steps">
+<div class="buy one">
+
+<div><h3>With a transfer in Przemyśl</h3><ol class="steps">
 <li>Open the Ukrzaliznytsia app, choose the route Przemyśl → Kyiv and the travel date. Sales open 20 days before departure at 09:00 Kyiv time. Choose a suitable train and pay for the ticket.</li>
 <li>Buy the Kraków → Przemyśl ticket separately from the Polish carrier PKP Intercity, on intercity.pl or in the PKP Intercity app. You can also buy it on koleo.pl or in the KOLEO app.</li>
 <li>When choosing the Kraków → Przemyśl train, use the options and timetable shown above on this page. Allow for the departure time of the Przemyśl → Kyiv train and the length of the transfer.</li>
@@ -265,18 +265,15 @@
             const p = parseOption(o.dsl);
             return {o, p, h: p.head || deriveHead(p.legs)}
         }).filter(x => x.p.legs.length && norm(x.h.from).startsWith(norm(FROM)) && norm(x.h.to).startsWith(norm(TO)));
-        const direct = list.filter(x => x.p.legs.length === 1), transfer = list.filter(x => x.p.legs.length > 1);
+        const HAS_DIRECT = false; /* false: страница без прямого поезда, все варианты идут как «с пересадкой» */
+        const direct = HAS_DIRECT ? list.filter(x => x.p.legs.length === 1) : [], transfer = HAS_DIRECT ? list.filter(x => x.p.legs.length > 1) : list;
         if (!list.length) {
             app.innerHTML = `<div class="panel"><h2>No options yet</h2><p>Add them in the admin panel.</p></div>`;
             return
         }
-        app.innerHTML = (direct.length ? `<h2 class="sub" style="margin-top:6px">Direct train <small>no transfers</small></h2><div class="direct direct-wrap" style="margin-top:16px">${direct.map(x => optHtml(x.o)).join("")}</div>` : "")
-            + (direct.length && transfer.length ? `<aside class="ad wide" data-slot="mid" hidden></aside>` : "")
-            + (transfer.length ? `<h2 class="sub">With a convenient same-platform transfer in Chełm</h2><div class="cols" style="margin-top:16px">${transfer.map(x => optHtml(x.o)).join("")}</div>` : "");
-        document.querySelectorAll(".direct .body").forEach(b => {
-            b.classList.add("two");
-            b.insertAdjacentHTML("beforeend", COACH)
-        });
+        app.innerHTML = ""
+            + (transfer.length ? `<h2 class="sub">With a transfer in Przemyśl</h2><div class="cols" style="margin-top:16px">${transfer.map(x => optHtml(x.o)).join("")}</div>` : "");
+        
     }).catch(() => {
         app.innerHTML = `<div class="panel"><h2>Could not load the data</h2><p>Please refresh the page later.</p></div>`
     });
