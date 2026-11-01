@@ -15,7 +15,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap">
-    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../style.css?v=mvy2tmts">
 </head>
 <body>
 <header>
@@ -26,9 +26,9 @@
 <main class="wrap" id="app"><p>Loading…</p></main>
 <footer class="wrap" id="site-footer"></footer>
 <script>window.LANG = "en";</script>
-<script src="../config.js"></script>
-<script src="../i18n.js"></script>
-<script src="../common.js"></script>
+<script src="../config.js?v=mvy2tmts"></script>
+<script src="../i18n.js?v=mvy2tmts"></script>
+<script src="../common.js?v=mvy2tmts"></script>
 <script>
     const api = p => fetch(U + "/rest/v1/" + p, {headers: {apikey: K, Authorization: "Bearer " + K}}).then(r => {
         if (!r.ok) throw new Error(r.status);

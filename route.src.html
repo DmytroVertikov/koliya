@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap">
-    <link rel="stylesheet" href="{{base}}style.css">
+    <link rel="stylesheet" href="{{base}}style.css?v={{ver}}">
     <style>
         .wrap {
             max-width: 1080px
@@ -229,9 +229,9 @@
 <div class="wrap"><aside class="ad wide" data-slot="bottom" hidden></aside></div>
 <footer class="wrap" id="site-footer"></footer>
 <script>window.LANG = "{{lang}}";</script>
-<script src="{{base}}config.js"></script>
-<script src="{{base}}i18n.js"></script>
-<script src="{{base}}common.js"></script>
+<script src="{{base}}config.js?v={{ver}}"></script>
+<script src="{{base}}i18n.js?v={{ver}}"></script>
+<script src="{{base}}common.js?v={{ver}}"></script>
 <script>
     const FROM = "{{FROM}}", TO = "{{TO}}", BACK = "{{BACK}}"; // FROM/TO: русские названия, как в шапке карточки в админке
     const COACH = `<aside class="coach"><p>{{coach}}</p></aside>`;
