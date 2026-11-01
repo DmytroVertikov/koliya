@@ -222,11 +222,11 @@
 </head>
 <body>
 <header>
-    <div class="wrap"><nav class="lang"><a href="../warsaw-kyiv.html" hreflang="ru" lang="ru">RU</a><a href="../uk/warsaw-kyiv.html" hreflang="uk" lang="uk">UK</a><a href="../en/warsaw-kyiv.html" hreflang="en" lang="en" class="on">EN</a><a href="../pl/warsaw-kyiv.html" hreflang="pl" lang="pl">PL</a></nav><a class="logo" href="../"><span class="rails">🚆</span> КОЛІЯ</a>
+    <div class="wrap"><nav class="lang"><a href="../warsaw-kyiv.html" hreflang="ru" lang="ru">RU</a><a href="../uk/warsaw-kyiv.html" hreflang="uk" lang="uk">UK</a><a href="../en/warsaw-kyiv.html" hreflang="en" lang="en" class="on">EN</a><a href="../pl/warsaw-kyiv.html" hreflang="pl" lang="pl">PL</a></nav><a class="logo" href="./"><span class="rails">🚆</span> КОЛІЯ</a>
         <h1>From Warsaw to Kyiv by train</h1>
         <p id="lead">Train timetable Warsaw — Kyiv: the direct train and options with a transfer in Chełm. Journey time, stops and ticket information.</p></div>
 </header>
-<main class="wrap"><a class="back" href="../">← Home</a> <a class="back" href="../#pl-ua">All routes: Poland — Ukraine</a> <a class="back" href="kyiv-warsaw.html">🔄 Kyiv → Warsaw</a>
+<main class="wrap"><a class="back" href="./">← Home</a> <a class="back" href="./#pl-ua">All routes: Poland — Ukraine</a> <a class="back" href="kyiv-warsaw.html">🔄 Kyiv → Warsaw</a>
     <div id="app"><p>Loading…</p></div>
     <div id="more"></div>
 </main>
@@ -282,7 +282,7 @@
     });
     const here = location.pathname.split("/").pop() || "index.html",
         others = ((window.CFG && CFG.PAGES) || []).filter(p => p.href !== here);
-    document.getElementById("more").innerHTML = BUY + `<section class="panel"><h2>More routes</h2><div class="grid" style="margin-top:12px"><a class="btn" href="../#${BACK}">← From Ukraine to Poland</a>${others.map(p => `<a class="btn" href="${esc(p.href)}">${esc(trRoute(p.title))}</a>`).join("")}<a class="btn" href="../">All countries</a></div></section>`;
+    document.getElementById("more").innerHTML = BUY + `<section class="panel"><h2>More routes</h2><div class="grid" style="margin-top:12px"><a class="btn" href="./#${BACK}">← From Ukraine to Poland</a>${others.map(p => `<a class="btn" href="${esc(p.href)}">${esc(trRoute(p.title))}</a>`).join("")}<a class="btn" href="./">All countries</a></div></section>`;
 </script>
 </body>
 </html>

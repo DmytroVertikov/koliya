@@ -222,11 +222,11 @@
 </head>
 <body>
 <header>
-    <div class="wrap"><nav class="lang"><a href="../kyiv-warsaw.html" hreflang="ru" lang="ru">RU</a><a href="../uk/kyiv-warsaw.html" hreflang="uk" lang="uk">UK</a><a href="../en/kyiv-warsaw.html" hreflang="en" lang="en">EN</a><a href="../pl/kyiv-warsaw.html" hreflang="pl" lang="pl" class="on">PL</a></nav><a class="logo" href="../"><span class="rails">🚆</span> КОЛІЯ</a>
+    <div class="wrap"><nav class="lang"><a href="../kyiv-warsaw.html" hreflang="ru" lang="ru">RU</a><a href="../uk/kyiv-warsaw.html" hreflang="uk" lang="uk">UK</a><a href="../en/kyiv-warsaw.html" hreflang="en" lang="en">EN</a><a href="../pl/kyiv-warsaw.html" hreflang="pl" lang="pl" class="on">PL</a></nav><a class="logo" href="./"><span class="rails">🚆</span> КОЛІЯ</a>
         <h1>Z Kijowa do Warszawy pociągiem</h1>
         <p id="lead">Rozkład pociągów Kijów — Warszawa: pociąg bezpośredni i warianty z przesiadką w Chełmie. Czas podróży, postoje i informacje o zakupie biletów.</p></div>
 </header>
-<main class="wrap"><a class="back" href="../">← Strona główna</a> <a class="back" href="../#ua-pl">Wszystkie trasy: Ukraina — Polska</a> <a class="back" href="warsaw-kyiv.html">🔄 Warszawa → Kijów</a>
+<main class="wrap"><a class="back" href="./">← Strona główna</a> <a class="back" href="./#ua-pl">Wszystkie trasy: Ukraina — Polska</a> <a class="back" href="warsaw-kyiv.html">🔄 Warszawa → Kijów</a>
     <div id="app"><p>Ładowanie…</p></div>
     <div id="more"></div>
 </main>
@@ -282,7 +282,7 @@
     });
     const here = location.pathname.split("/").pop() || "index.html",
         others = ((window.CFG && CFG.PAGES) || []).filter(p => p.href !== here);
-    document.getElementById("more").innerHTML = BUY + `<section class="panel"><h2>Inne trasy</h2><div class="grid" style="margin-top:12px"><a class="btn" href="../#${BACK}">← Z Polski na Ukrainę</a>${others.map(p => `<a class="btn" href="${esc(p.href)}">${esc(trRoute(p.title))}</a>`).join("")}<a class="btn" href="../">Wszystkie kraje</a></div></section>`;
+    document.getElementById("more").innerHTML = BUY + `<section class="panel"><h2>Inne trasy</h2><div class="grid" style="margin-top:12px"><a class="btn" href="./#${BACK}">← Z Polski na Ukrainę</a>${others.map(p => `<a class="btn" href="${esc(p.href)}">${esc(trRoute(p.title))}</a>`).join("")}<a class="btn" href="./">Wszystkie kraje</a></div></section>`;
 </script>
 </body>
 </html>

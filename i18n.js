@@ -27,7 +27,22 @@ ST: {
 "Зелена-Гура":["Зелена-Гура","Zielona Góra","Zielona Góra","","","w Zielonej Górze"],
 "Харьков":["Харків","Kharkiv","Charków","в Харькове","у Харкові","w Charkowie"],
 "Свиноуйсьце":["Свіноуйсьце","Świnoujście","Świnoujście","","","w Świnoujściu"],
-"Днепр":["Дніпро","Dnipro","Dnipro","в Днепре","у Дніпрі","w Dnipro"]
+"Днепр":["Дніпро","Dnipro","Dnipro","в Днепре","у Дніпрі","w Dnipro"],
+"Будапешт":["Будапешт","Budapest","Budapeszt","","",""],
+"Вена":["Відень","Vienna","Wiedeń","","",""],
+"Кошице":["Кошице","Košice","Koszyce","","",""],
+"Кишинёв":["Кишинів","Chișinău","Kiszyniów","","",""],
+"Яссы":["Яси","Iași","Jassy","","",""]
+},
+CN: { /* страны для направлений: uk [назв., род.], en [назв.], pl [назв., род.] */
+pl:{uk:["Польща","Польщі"],en:["Poland"],pl:["Polska","Polski"]},
+sk:{uk:["Словаччина","Словаччини"],en:["Slovakia"],pl:["Słowacja","Słowacji"]},
+hu:{uk:["Угорщина","Угорщини"],en:["Hungary"],pl:["Węgry","Węgier"]},
+ro:{uk:["Румунія","Румунії"],en:["Romania"],pl:["Rumunia","Rumunii"]},
+md:{uk:["Молдова","Молдови"],en:["Moldova"],pl:["Mołdawia","Mołdawii"]},
+at:{uk:["Австрія","Австрії"],en:["Austria"],pl:["Austria","Austrii"]},
+cz:{uk:["Чехія","Чехії"],en:["Czechia"],pl:["Czechy","Czech"]},
+de:{uk:["Німеччина","Німеччини"],en:["Germany"],pl:["Niemcy","Niemiec"]}
 },
 ru:{
 h:"ч",min:"мин",tag0:"без пересадок",tag1:"1 пересадка",tag2:"{n} пересадки",tag5:"{n} пересадок",
@@ -55,7 +70,15 @@ coach:"В купе предусмотрены три спальных места
 "kw.title":"Поездом из Киева в Варшаву | Колія","kw.h1":"Из Киева в Варшаву поездом","kw.desc":"Все поезда Киев — Варшава: прямой и с пересадкой в Хелме. Время, станции, длительность.",
 "kw.lead":"Расписание поездов Киев — Варшава: прямой поезд и варианты с пересадкой в Хелме. Время в пути, остановки и информация о покупке билетов.","kw.all":"Все маршруты: Украина — Польша","kw.more":"← Из Польши в Украину",
 "wk.title":"Поездом из Варшавы в Киев | Колія","wk.h1":"Из Варшавы в Киев поездом","wk.desc":"Все поезда Варшава — Киев: прямой и с пересадкой в Хелме. Время, станции, длительность.",
-"wk.lead":"Расписание поездов Варшава — Киев: прямой поезд и варианты с пересадкой в Хелме. Время в пути, остановки и информация о покупке билетов.","wk.all":"Все маршруты: Польша — Украина","wk.more":"← Из Украины в Польшу"
+"wk.lead":"Расписание поездов Варшава — Киев: прямой поезд и варианты с пересадкой в Хелме. Время в пути, остановки и информация о покупке билетов.","wk.all":"Все маршруты: Польша — Украина","wk.more":"← Из Украины в Польшу",
+"ix.title":"Колія: поездом из Украины и в Украину","ix.h1":"Как ехать поездом в Украину и из Украины","ix.lead":"Простые маршруты с пересадками и расписанием. Выберите страну.",
+"ix.fromUa":"Из Украины →","ix.toUa":"← В Украину","ix.popular":"Популярные маршруты","ix.how.h":"Как это устроено",
+"ix.how1":"Выберите направление и посмотрите подходящий поезд.","ix.how2":"Купите билеты. УЗ продаёт свои в приложении, зарубежные берите у местного перевозчика.","ix.how3":"На границе (Хелм, Перемышль, Чоп) пересядьте на следующий поезд.",
+"ix.help.h":"Справочная Укрзализныци","ix.help.p":"Бесплатно с украинских номеров.","ix.help.b1":"График работы касс","ix.help.b2":"Список задерживающихся рейсов",
+"ix.fly.h":"Прилететь самолётом ✈️","ix.fly.p":"В Украину можно добраться из любой страны. Выберите рейс до одного из аэропортов, откуда удобные пересадки на наши поезда.",
+"ix.buy.h":"Купить билеты на УЗ","ix.buy.b1":"Приложение Укрзализныци","ix.buy.b2":"Сайт УЗ","ix.all":"← Все направления","ix.soon":"Маршруты для этого направления скоро появятся.",
+"ix.one":"⚡ {t}: все поезда на одной странице →","ix.dirTitle":"{t} поездом | Колія",
+"ix.rtOut":"Из Украины в {nom}","ix.rtIn":"Из {gen} в Украину","ix.leadOut":"Поезд Укрзализныци довезёт до границы, дальше пересадка на поезд местного перевозчика.","ix.leadIn":"Поезд местного перевозчика довезёт до границы, дальше пересадка на поезд Укрзализныци."
 },
 uk:{
 h:"год",min:"хв",tag0:"без пересадок",tag1:"1 пересадка",tag2:"{n} пересадки",tag5:"{n} пересадок",
@@ -83,7 +106,15 @@ coach:"У купе передбачено три спальні місця, ро
 "kw.title":"Потягом з Києва до Варшави | Колія","kw.h1":"З Києва до Варшави потягом","kw.desc":"Усі поїзди Київ — Варшава: прямий та з пересадкою в Хелмі. Час, станції, тривалість.",
 "kw.lead":"Розклад поїздів Київ — Варшава: прямий поїзд і варіанти з пересадкою в Хелмі. Час у дорозі, зупинки та інформація про купівлю квитків.","kw.all":"Усі маршрути: Україна — Польща","kw.more":"← З Польщі в Україну",
 "wk.title":"Потягом з Варшави до Києва | Колія","wk.h1":"З Варшави до Києва потягом","wk.desc":"Усі поїзди Варшава — Київ: прямий та з пересадкою в Хелмі. Час, станції, тривалість.",
-"wk.lead":"Розклад поїздів Варшава — Київ: прямий поїзд і варіанти з пересадкою в Хелмі. Час у дорозі, зупинки та інформація про купівлю квитків.","wk.all":"Усі маршрути: Польща — Україна","wk.more":"← З України до Польщі"
+"wk.lead":"Розклад поїздів Варшава — Київ: прямий поїзд і варіанти з пересадкою в Хелмі. Час у дорозі, зупинки та інформація про купівлю квитків.","wk.all":"Усі маршрути: Польща — Україна","wk.more":"← З України до Польщі",
+"ix.title":"Колія: потягом з України та в Україну","ix.h1":"Як доїхати потягом в Україну та з України","ix.lead":"Прості маршрути з пересадками та розкладом. Оберіть країну.",
+"ix.fromUa":"З України →","ix.toUa":"← В Україну","ix.popular":"Популярні маршрути","ix.how.h":"Як це працює",
+"ix.how1":"Оберіть напрям і подивіться відповідний поїзд.","ix.how2":"Купіть квитки. УЗ продає свої в застосунку, закордонні купуйте в місцевого перевізника.","ix.how3":"На кордоні (Хелм, Перемишль, Чоп) пересядьте на наступний поїзд.",
+"ix.help.h":"Довідкова Укрзалізниці","ix.help.p":"Безкоштовно з українських номерів.","ix.help.b1":"Графік роботи кас","ix.help.b2":"Список поїздів, що затримуються",
+"ix.fly.h":"Прилетіти літаком ✈️","ix.fly.p":"В Україну можна дістатися з будь-якої країни. Оберіть рейс до одного з аеропортів, звідки зручні пересадки на наші поїзди.",
+"ix.buy.h":"Купити квитки на УЗ","ix.buy.b1":"Застосунок Укрзалізниці","ix.buy.b2":"Сайт УЗ","ix.all":"← Усі напрями","ix.soon":"Маршрути для цього напряму скоро з’являться.",
+"ix.one":"⚡ {t}: усі поїзди на одній сторінці →","ix.dirTitle":"{t} потягом | Колія",
+"ix.rtOut":"З України до {gen}","ix.rtIn":"З {gen} в Україну","ix.leadOut":"Поїзд Укрзалізниці довезе до кордону, далі пересадка на поїзд місцевого перевізника.","ix.leadIn":"Поїзд місцевого перевізника довезе до кордону, далі пересадка на поїзд Укрзалізниці."
 },
 en:{
 h:"h",min:"min",tag0:"direct",tag1:"1 transfer",tag2:"{n} transfers",tag5:"{n} transfers",
@@ -111,7 +142,15 @@ coach:"Each compartment has three berths, one above another. When the middle ber
 "kw.title":"By train from Kyiv to Warsaw | Koliya","kw.h1":"From Kyiv to Warsaw by train","kw.desc":"All trains from Kyiv to Warsaw: direct and with a transfer in Chełm. Times, stations, duration.",
 "kw.lead":"Train timetable Kyiv — Warsaw: the direct train and options with a transfer in Chełm. Journey time, stops and ticket information.","kw.all":"All routes: Ukraine — Poland","kw.more":"← From Poland to Ukraine",
 "wk.title":"By train from Warsaw to Kyiv | Koliya","wk.h1":"From Warsaw to Kyiv by train","wk.desc":"All trains from Warsaw to Kyiv: direct and with a transfer in Chełm. Times, stations, duration.",
-"wk.lead":"Train timetable Warsaw — Kyiv: the direct train and options with a transfer in Chełm. Journey time, stops and ticket information.","wk.all":"All routes: Poland — Ukraine","wk.more":"← From Ukraine to Poland"
+"wk.lead":"Train timetable Warsaw — Kyiv: the direct train and options with a transfer in Chełm. Journey time, stops and ticket information.","wk.all":"All routes: Poland — Ukraine","wk.more":"← From Ukraine to Poland",
+"ix.title":"Koliya: by train from and to Ukraine","ix.h1":"How to travel by train to and from Ukraine","ix.lead":"Simple routes with transfers and timetables. Choose a country.",
+"ix.fromUa":"From Ukraine →","ix.toUa":"← To Ukraine","ix.popular":"Popular routes","ix.how.h":"How it works",
+"ix.how1":"Choose a direction and find a suitable train.","ix.how2":"Buy your tickets. UZ sells its own in the app; buy foreign ones from the local carrier.","ix.how3":"At the border (Chełm, Przemyśl, Chop) change to the next train.",
+"ix.help.h":"Ukrzaliznytsia information line","ix.help.p":"Free from Ukrainian numbers.","ix.help.b1":"Ticket office hours","ix.help.b2":"List of delayed trains",
+"ix.fly.h":"Arrive by air ✈️","ix.fly.p":"You can reach Ukraine from any country. Pick a flight to one of the airports with convenient connections to our trains.",
+"ix.buy.h":"Buy UZ tickets","ix.buy.b1":"Ukrzaliznytsia app","ix.buy.b2":"UZ website","ix.all":"← All directions","ix.soon":"Routes for this direction are coming soon.",
+"ix.one":"⚡ {t}: all trains on one page →","ix.dirTitle":"{t} by train | Koliya",
+"ix.rtOut":"From Ukraine to {nom}","ix.rtIn":"From {nom} to Ukraine","ix.leadOut":"A Ukrzaliznytsia train takes you to the border, then you change to a train of the local carrier.","ix.leadIn":"A local carrier’s train takes you to the border, then you change to a Ukrzaliznytsia train."
 },
 pl:{
 h:"godz.",min:"min",tag0:"bez przesiadek",tag1:"1 przesiadka",tag2:"{n} przesiadki",tag5:"{n} przesiadek",
@@ -139,6 +178,14 @@ coach:"W przedziale są trzy miejsca do spania, jedno nad drugim. Gdy środkowa 
 "kw.title":"Pociągiem z Kijowa do Warszawy | Koliya","kw.h1":"Z Kijowa do Warszawy pociągiem","kw.desc":"Wszystkie pociągi Kijów — Warszawa: bezpośredni i z przesiadką w Chełmie. Godziny, stacje, czas podróży.",
 "kw.lead":"Rozkład pociągów Kijów — Warszawa: pociąg bezpośredni i warianty z przesiadką w Chełmie. Czas podróży, postoje i informacje o zakupie biletów.","kw.all":"Wszystkie trasy: Ukraina — Polska","kw.more":"← Z Polski na Ukrainę",
 "wk.title":"Pociągiem z Warszawy do Kijowa | Koliya","wk.h1":"Z Warszawy do Kijowa pociągiem","wk.desc":"Wszystkie pociągi Warszawa — Kijów: bezpośredni i z przesiadką w Chełmie. Godziny, stacje, czas podróży.",
-"wk.lead":"Rozkład pociągów Warszawa — Kijów: pociąg bezpośredni i warianty z przesiadką w Chełmie. Czas podróży, postoje i informacje o zakupie biletów.","wk.all":"Wszystkie trasy: Polska — Ukraina","wk.more":"← Z Ukrainy do Polski"
+"wk.lead":"Rozkład pociągów Warszawa — Kijów: pociąg bezpośredni i warianty z przesiadką w Chełmie. Czas podróży, postoje i informacje o zakupie biletów.","wk.all":"Wszystkie trasy: Polska — Ukraina","wk.more":"← Z Ukrainy do Polski",
+"ix.title":"Koliya: pociągiem z Ukrainy i na Ukrainę","ix.h1":"Jak dojechać pociągiem na Ukrainę i z Ukrainy","ix.lead":"Proste trasy z przesiadkami i rozkładem jazdy. Wybierz kraj.",
+"ix.fromUa":"Z Ukrainy →","ix.toUa":"← Na Ukrainę","ix.popular":"Popularne trasy","ix.how.h":"Jak to działa",
+"ix.how1":"Wybierz kierunek i znajdź odpowiedni pociąg.","ix.how2":"Kup bilety. UZ sprzedaje swoje w aplikacji, zagraniczne kup u lokalnego przewoźnika.","ix.how3":"Na granicy (Chełm, Przemyśl, Czop) przesiądź się do następnego pociągu.",
+"ix.help.h":"Infolinia Ukrzaliznyci","ix.help.p":"Bezpłatnie z numerów ukraińskich.","ix.help.b1":"Godziny pracy kas","ix.help.b2":"Lista opóźnionych pociągów",
+"ix.fly.h":"Przylot samolotem ✈️","ix.fly.p":"Na Ukrainę można dotrzeć z każdego kraju. Wybierz lot do jednego z lotnisk, skąd są wygodne przesiadki na nasze pociągi.",
+"ix.buy.h":"Kup bilety UZ","ix.buy.b1":"Aplikacja Ukrzaliznyci","ix.buy.b2":"Strona UZ","ix.all":"← Wszystkie kierunki","ix.soon":"Trasy dla tego kierunku pojawią się wkrótce.",
+"ix.one":"⚡ {t}: wszystkie pociągi na jednej stronie →","ix.dirTitle":"{t} pociągiem | Koliya",
+"ix.rtOut":"Z Ukrainy do {gen}","ix.rtIn":"Z {gen} na Ukrainę","ix.leadOut":"Pociąg Ukrzaliznyci dowiezie do granicy, dalej przesiadka na pociąg lokalnego przewoźnika.","ix.leadIn":"Pociąg lokalnego przewoźnika dowiezie do granicy, dalej przesiadka na pociąg Ukrzaliznyci."
 }};
 if (typeof module !== "undefined") module.exports = I18N;

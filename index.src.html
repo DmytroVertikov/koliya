@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="{{lang}}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>{{ix.title}}</title>
+    <meta name="description" content="{{ix.lead}}">
+    <meta name="theme-color" content="#12145c">
+    <link rel="canonical" href="{{canon}}">
+{{alts}}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap">
+    <link rel="stylesheet" href="{{base}}style.css">
+</head>
+<body>
+<header>
+    <div class="wrap"><nav class="lang">{{langs}}</nav><a class="logo" href="#"><span class="rails">🚆</span> КОЛІЯ</a>
+        <h1 id="h1">{{ix.h1}}</h1>
+        <p id="lead">{{ix.lead}}</p></div>
+</header>
+<main class="wrap" id="app"><p>{{loading}}</p></main>
+<footer class="wrap" id="site-footer"></footer>
+<script>window.LANG = "{{lang}}";</script>
+<script src="{{base}}config.js"></script>
+<script src="{{base}}i18n.js"></script>
+<script src="{{base}}common.js"></script>
+<script>
+    const api = p => fetch(U + "/rest/v1/" + p, {headers: {apikey: K, Authorization: "Bearer " + K}}).then(r => {
+        if (!r.ok) throw new Error(r.status);
+        return r.json()
+    });
+    let D;
+    const PG = (window.CFG && CFG.PAGES) || [];
+    /* названия стран и направлений: ru берётся из базы, остальные языки из словаря (нет в словаре — как в базе) */
+    const CN = I18N.CN || {};
+    const cname = c => LG !== "ru" && CN[c.slug] && CN[c.slug][LG] ? CN[c.slug][LG][0] : c.name;
+    const rkind = r => /^ua-/.test(r.slug) ? ["out", r.slug.slice(3)] : /-ua$/.test(r.slug) ? ["in", r.slug.slice(0, -3)] : null;
+    const rform = r => { const k = rkind(r), f = k && CN[k[1]] && CN[k[1]][LG]; return LG !== "ru" && f ? {k: k[0], nom: f[0], gen: f[1] || f[0]} : null };
+    const rtitle = r => { const f = rform(r); return f ? t(f.k === "out" ? "ix.rtOut" : "ix.rtIn", f) : r.title };
+    const rlead = r => { const f = rform(r); return f ? t(f.k === "out" ? "ix.leadOut" : "ix.leadIn") : r.lead };
+    const pageLinks = id => {
+        const parts = id.split("-"), rid = parts.length === 2 ? parts.reverse().join("-") : "";
+        const list = PG.filter(p => p.route === id).concat(rid && rid !== id ? PG.filter(p => p.route === rid) : []);
+        return list.length ? `<section class="panel" style="margin-top:0">${list.map((p, i) => `<a class="btn pri"${i ? "" : ' style="margin-top:0"'} href="${esc(p.href)}">${esc(t("ix.one", {t: trRoute(p.title)}))}</a>`).join("")}</section>` : ""
+    };
+
+    async function load() {
+        if (!D) {
+            const [c, r] = await Promise.all([api("countries?order=sort"), api("routes?order=sort")]);
+            D = {c, r}
+        }
+        return D
+    }
+
+    async function render() {
+        const app = document.getElementById("app"), id = location.hash.slice(1);
+        document.querySelectorAll(".lang a").forEach(a => a.href = a.href.split("#")[0] + location.hash);
+        let d;
+        try {
+            d = await load()
+        } catch (e) {
+            app.innerHTML = `<div class="panel"><h2>${esc(t("err.h"))}</h2><p>${esc(t("err.p"))}</p></div>`;
+            return
+        }
+        const r = d.r.find(x => x.slug === id);
+        window.scrollTo(0, 0);
+        if (!r) {
+            document.title = t("ix.title");
+            h1.textContent = t("ix.h1");
+            lead.textContent = t("ix.lead");
+            const has = s => d.r.some(x => x.slug === s);
+            const air = [["Варшава", "https://www.lotnisko-chopina.pl/en/index.html"], ["Будапешт", "https://www.bud.hu/en"], ["Вена", "https://www.viennaairport.com/"], ["Краков", "https://www.krakowairport.pl/en/"], ["Жешув", "https://www.rzeszowairport.pl/ua"], ["Кошице", "https://www.airportkosice.sk/en"], ["Кишинёв", "https://airport.md/"], ["Яссы", "https://www.aeroport-iasi.ro"]];
+            app.innerHTML = `<div class="grid">${d.c.map(c => `<div class="country"><div class="fl"><img src="https://flagcdn.com/w80/${esc(c.slug)}.png" srcset="https://flagcdn.com/w160/${esc(c.slug)}.png 2x" width="40" height="30" alt="${esc(cname(c))}" onerror="this.replaceWith(document.createTextNode('${esc(c.flag)}'))"></div><h3>${esc(cname(c))}</h3>${has("ua-" + c.slug) ? `<a class="btn pri" href="#ua-${esc(c.slug)}">${esc(t("ix.fromUa"))}</a>` : ""}${has(c.slug + "-ua") ? `<a class="btn" href="#${esc(c.slug)}-ua">${esc(t("ix.toUa"))}</a>` : ""}</div>`).join("")}</div>
+${PG.length ? `<section class="panel"><h2>${esc(t("ix.popular"))}</h2><div class="grid" style="margin-top:12px">${PG.map(p => `<a class="btn pri" href="${esc(p.href)}">${esc(trRoute(p.title))}</a>`).join("")}</div></section>` : ""}
+<section class="panel"><h2>${esc(t("ix.how.h"))}</h2><ol class="steps"><li>${esc(t("ix.how1"))}</li><li>${esc(t("ix.how2"))}</li><li>${esc(t("ix.how3"))}</li></ol></section>
+<section class="panel"><h2>${esc(t("ix.help.h"))}</h2><p><b>044 465 33 44</b> · <b>0 800 503 111</b><br>${esc(t("ix.help.p"))}</p><a class="btn" href="https://uz-vezemo.uz.gov.ua/ticketoffices">${esc(t("ix.help.b1"))}</a><a class="btn" href="https://uz-vezemo.uz.gov.ua/delayform">${esc(t("ix.help.b2"))}</a></section>
+<section class="panel"><h2>${esc(t("ix.fly.h"))}</h2><p>${esc(t("ix.fly.p"))}</p><div class="grid" style="margin-top:12px">${air.map(a => `<a class="btn" href="${a[1]}" target="_blank" rel="noopener">${esc(stn(a[0]))}</a>`).join("")}</div></section>
+<section class="panel"><h2>${esc(t("ix.buy.h"))}</h2><a class="btn pri" href="https://app.uz.gov.ua/start">${esc(t("ix.buy.b1"))}</a><a class="btn" href="https://uz.gov.ua/">${esc(t("ix.buy.b2"))}</a></section>`;
+            return
+        }
+        document.title = t("ix.dirTitle", {t: rtitle(r)});
+        h1.textContent = rtitle(r);
+        lead.textContent = rlead(r);
+        app.innerHTML = `<a class="back" href="#">${esc(t("ix.all"))}</a>${pageLinks(id) || `<section class="panel" style="margin-top:0"><p>${esc(t("ix.soon"))}</p></section>`}`
+    }
+
+    addEventListener("hashchange", render);
+    render();
+</script>
+</body>
+</html>
