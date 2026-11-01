@@ -38,7 +38,7 @@
     const rkind = r => /^ua-/.test(r.slug) ? ["out", r.slug.slice(3)] : /-ua$/.test(r.slug) ? ["in", r.slug.slice(0, -3)] : null;
     const rform = r => { const k = rkind(r), f = k && CN[k[1]] && CN[k[1]][LG]; return LG !== "ru" && f ? {k: k[0], nom: f[0], gen: f[1] || f[0]} : null };
     const rtitle = r => { const f = rform(r); return f ? t(f.k === "out" ? "ix.rtOut" : "ix.rtIn", f) : r.title };
-    const rlead = r => { const f = rform(r); return f ? t(f.k === "out" ? "ix.leadOut" : "ix.leadIn") : r.lead };
+    const rlead = () => t("ix.leadDir"); /* один подзаголовок для всех направлений, текст из базы больше не используется */
     const pageLinks = id => {
         const list = PG.filter(p => p.route === id); /* только страницы этого направления: ua-pl → из Украины в Польшу, pl-ua → обратно; для других стран так же */
         return list.length ? `<section class="panel" style="margin-top:0">${list.map((p, i) => `<a class="btn pri"${i ? "" : ' style="margin-top:0"'} href="${esc(p.href)}">${esc(t("ix.one", {t: trRoute(p.title)}))}</a>`).join("")}</section>` : ""

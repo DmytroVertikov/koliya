@@ -78,7 +78,7 @@ coach:"В купе предусмотрены три спальных места
 "ix.fly.h":"Прилететь самолётом ✈️","ix.fly.p":"В Украину можно добраться из любой страны. Выберите рейс до одного из аэропортов, откуда удобные пересадки на наши поезда.",
 "ix.buy.h":"Купить билеты на УЗ","ix.buy.b1":"Приложение Укрзализныци","ix.buy.b2":"Сайт УЗ","ix.all":"← Все направления","ix.soon":"Маршруты для этого направления скоро появятся.",
 "ix.one":"⚡ {t}: все поезда на одной странице →","ix.dirTitle":"{t} поездом | Колія",
-"ix.rtOut":"Из Украины в {nom}","ix.rtIn":"Из {gen} в Украину","ix.leadOut":"Поезд Укрзализныци довезёт до границы, дальше пересадка на поезд местного перевозчика.","ix.leadIn":"Поезд местного перевозчика довезёт до границы, дальше пересадка на поезд Укрзализныци."
+"ix.rtOut":"Из Украины в {nom}","ix.rtIn":"Из {gen} в Украину","ix.leadDir":"Прямые поезда и варианты с пересадкой"
 },
 uk:{
 h:"год",min:"хв",tag0:"без пересадок",tag1:"1 пересадка",tag2:"{n} пересадки",tag5:"{n} пересадок",
@@ -114,7 +114,7 @@ coach:"У купе передбачено три спальні місця, ро
 "ix.fly.h":"Прилетіти літаком ✈️","ix.fly.p":"В Україну можна дістатися з будь-якої країни. Оберіть рейс до одного з аеропортів, звідки зручні пересадки на наші поїзди.",
 "ix.buy.h":"Купити квитки на УЗ","ix.buy.b1":"Застосунок Укрзалізниці","ix.buy.b2":"Сайт УЗ","ix.all":"← Усі напрями","ix.soon":"Маршрути для цього напряму скоро з’являться.",
 "ix.one":"⚡ {t}: усі поїзди на одній сторінці →","ix.dirTitle":"{t} потягом | Колія",
-"ix.rtOut":"З України до {gen}","ix.rtIn":"З {gen} в Україну","ix.leadOut":"Поїзд Укрзалізниці довезе до кордону, далі пересадка на поїзд місцевого перевізника.","ix.leadIn":"Поїзд місцевого перевізника довезе до кордону, далі пересадка на поїзд Укрзалізниці."
+"ix.rtOut":"З України до {gen}","ix.rtIn":"З {gen} в Україну","ix.leadDir":"Прямі поїзди та варіанти з пересадкою"
 },
 en:{
 h:"h",min:"min",tag0:"direct",tag1:"1 transfer",tag2:"{n} transfers",tag5:"{n} transfers",
@@ -150,7 +150,7 @@ coach:"Each compartment has three berths, one above another. When the middle ber
 "ix.fly.h":"Arrive by air ✈️","ix.fly.p":"You can reach Ukraine from any country. Pick a flight to one of the airports with convenient connections to our trains.",
 "ix.buy.h":"Buy UZ tickets","ix.buy.b1":"Ukrzaliznytsia app","ix.buy.b2":"UZ website","ix.all":"← All directions","ix.soon":"Routes for this direction are coming soon.",
 "ix.one":"⚡ {t}: all trains on one page →","ix.dirTitle":"{t} by train | Koliya",
-"ix.rtOut":"From Ukraine to {nom}","ix.rtIn":"From {nom} to Ukraine","ix.leadOut":"A Ukrzaliznytsia train takes you to the border, then you change to a train of the local carrier.","ix.leadIn":"A local carrier’s train takes you to the border, then you change to a Ukrzaliznytsia train."
+"ix.rtOut":"From Ukraine to {nom}","ix.rtIn":"From {nom} to Ukraine","ix.leadDir":"Direct trains and options with a transfer"
 },
 pl:{
 h:"godz.",min:"min",tag0:"bez przesiadek",tag1:"1 przesiadka",tag2:"{n} przesiadki",tag5:"{n} przesiadek",
@@ -186,6 +186,6 @@ coach:"W przedziale są trzy miejsca do spania, jedno nad drugim. Gdy środkowa 
 "ix.fly.h":"Przylot samolotem ✈️","ix.fly.p":"Na Ukrainę można dotrzeć z każdego kraju. Wybierz lot do jednego z lotnisk, skąd są wygodne przesiadki na nasze pociągi.",
 "ix.buy.h":"Kup bilety UZ","ix.buy.b1":"Aplikacja Ukrzaliznyci","ix.buy.b2":"Strona UZ","ix.all":"← Wszystkie kierunki","ix.soon":"Trasy dla tego kierunku pojawią się wkrótce.",
 "ix.one":"⚡ {t}: wszystkie pociągi na jednej stronie →","ix.dirTitle":"{t} pociągiem | Koliya",
-"ix.rtOut":"Z Ukrainy do {gen}","ix.rtIn":"Z {gen} na Ukrainę","ix.leadOut":"Pociąg Ukrzaliznyci dowiezie do granicy, dalej przesiadka na pociąg lokalnego przewoźnika.","ix.leadIn":"Pociąg lokalnego przewoźnika dowiezie do granicy, dalej przesiadka na pociąg Ukrzaliznyci."
+"ix.rtOut":"Z Ukrainy do {gen}","ix.rtIn":"Z {gen} na Ukrainę","ix.leadDir":"Pociągi bezpośrednie i połączenia z przesiadką"
 }};
 if (typeof module !== "undefined") module.exports = I18N;
