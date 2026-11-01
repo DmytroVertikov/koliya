@@ -167,6 +167,10 @@
             box-shadow: none
         }
 
+        .buy.one {
+            grid-template-columns: minmax(0, 1fr)
+        }
+
         .buy-note {
             margin-top: 16px !important;
             font-size: 14px
@@ -234,14 +238,14 @@
 <script src="{{base}}common.js?v={{ver}}"></script>
 <script>
     const FROM = "{{FROM}}", TO = "{{TO}}", BACK = "{{BACK}}"; // FROM/TO: русские названия, как в шапке карточки в админке
-    const COACH = `<aside class="coach"><p>{{coach}}</p></aside>`;
+    /*D*/const COACH = `<aside class="coach"><p>{{coach}}</p></aside>`;/*/D*/
     const BUY = `<section class="panel"><h2>{{buy.h}}</h2>
-<div class="buy">
-<div class="d"><h3>{{buy.d.h}}</h3><ol class="steps">
+<div class="buy{{buyone}}">
+<!--D--><div class="d"><h3>{{buy.d.h}}</h3><ol class="steps">
 <li>{{buy.s1}}</li>
 <li>{{buy.d.s2}}</li>
 <li>{{buy.d.s3}}</li></ol>
-<a class="btn" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">{{buy.d.btn}}</a></div>
+<a class="btn" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">{{buy.d.btn}}</a></div><!--/D-->
 <div><h3>{{buy.t.h}}</h3><ol class="steps">
 <li>{{buy.t.s1}}</li>
 <li>{{buy.t.s2}}</li>
@@ -261,18 +265,19 @@
             const p = parseOption(o.dsl);
             return {o, p, h: p.head || deriveHead(p.legs)}
         }).filter(x => x.p.legs.length && norm(x.h.from).startsWith(norm(FROM)) && norm(x.h.to).startsWith(norm(TO)));
-        const direct = list.filter(x => x.p.legs.length === 1), transfer = list.filter(x => x.p.legs.length > 1);
+        const HAS_DIRECT = {{hasDirect}}; /* false: страница без прямого поезда, все варианты идут как «с пересадкой» */
+        const direct = HAS_DIRECT ? list.filter(x => x.p.legs.length === 1) : [], transfer = HAS_DIRECT ? list.filter(x => x.p.legs.length > 1) : list;
         if (!list.length) {
             app.innerHTML = `<div class="panel"><h2>{{noopts.h}}</h2><p>{{noopts.p}}</p></div>`;
             return
         }
-        app.innerHTML = (direct.length ? `<h2 class="sub" style="margin-top:6px">{{direct.h}} <small>{{direct.s}}</small></h2><div class="direct direct-wrap" style="margin-top:16px">${direct.map(x => optHtml(x.o)).join("")}</div>` : "")
-            + (direct.length && transfer.length ? `<aside class="ad wide" data-slot="mid" hidden></aside>` : "")
+        app.innerHTML = ""/*D*/ + (direct.length ? `<h2 class="sub" style="margin-top:6px">{{direct.h}} <small>{{direct.s}}</small></h2><div class="direct direct-wrap" style="margin-top:16px">${direct.map(x => optHtml(x.o)).join("")}</div>` : "")
+            + (direct.length && transfer.length ? `<aside class="ad wide" data-slot="mid" hidden></aside>` : "")/*/D*/
             + (transfer.length ? `<h2 class="sub">{{transfer.h}}</h2><div class="cols" style="margin-top:16px">${transfer.map(x => optHtml(x.o)).join("")}</div>` : "");
-        document.querySelectorAll(".direct .body").forEach(b => {
+        /*D*/document.querySelectorAll(".direct .body").forEach(b => {
             b.classList.add("two");
             b.insertAdjacentHTML("beforeend", COACH)
-        });
+        });/*/D*/
     }).catch(() => {
         app.innerHTML = `<div class="panel"><h2>{{err.h}}</h2><p>{{err.p}}</p></div>`
     });
