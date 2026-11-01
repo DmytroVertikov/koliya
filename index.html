@@ -28,9 +28,12 @@
     });
     let D;
     const PG = (window.CFG && CFG.PAGES) || [];
+    /* на странице направления: основная кнопка своей одностраничной + кнопка обратного маршрута (ua-pl ↔ pl-ua) */
     const pageLinks = id => {
-        const l = PG.filter(p => p.route === id);
-        return l.length ? `<section class="panel" style="margin-top:0">${l.map(p => `<a class="btn pri" style="margin-top:0" href="${esc(p.href)}">⚡ ${esc(p.title)}: все поезда на одной странице →</a>`).join("")}</section>` : ""
+        const parts = id.split("-"), rid = parts.length === 2 ? parts.reverse().join("-") : "";
+        const btns = PG.filter(p => p.route === id).map(p => ({p, cls: "btn pri", txt: `⚡ ${p.title}: все поезда на одной странице →`}))
+            .concat(rid && rid !== id ? PG.filter(p => p.route === rid).map(p => ({p, cls: "btn", txt: `🔄 ${p.title}: обратный маршрут →`})) : []);
+        return btns.length ? `<section class="panel" style="margin-top:0">${btns.map((b, i) => `<a class="${b.cls}"${i ? "" : ' style="margin-top:0"'} href="${esc(b.p.href)}">${esc(b.txt)}</a>`).join("")}</section>` : ""
     };
 
     async function load() {
