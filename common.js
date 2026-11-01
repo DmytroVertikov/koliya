@@ -21,7 +21,7 @@ const safeUrl = u => {
 const LG = window.LANG || "ru", TR = (window.I18N && I18N[LG]) || {};
 const t = (k, v) => String(TR[k] != null ? TR[k] : (window.I18N && I18N.ru && I18N.ru[k] != null ? I18N.ru[k] : k)).replace(/\{(\w+)\}/g, (m, x) => v && v[x] != null ? v[x] : m);
 const stn = n => {
-    const s = (window.I18N && I18N.ST || {})[n], i = {uk: 0, en: 1, pl: 2}[LG];
+    const s = (window.I18N && I18N.ST || {})[String(n || "").trim()], i = {uk: 0, en: 1, pl: 2}[LG];
     if (i == null) return n;
     if (s && s[i]) return s[i];
     if (n && window.console) console.info("i18n: нет перевода станции «" + n + "» (" + LG + ")");
@@ -113,21 +113,7 @@ function parseDsl(t) {
 }
 
 /* «в Хелме»: предложный падеж для односложных названий; для составных вернёт "" и плашка покажет «Пересадка: Название» */
-const CITY_IN = {
-    "Хелм": "в Хелме",
-    "Перемышль": "в Перемышле",
-    "Чоп": "в Чопе",
-    "Жешув": "в Жешуве",
-    "Люблин": "в Люблине",
-    "Варшава": "в Варшаве",
-    "Краков": "в Кракове",
-    "Львов": "во Львове",
-    "Киев": "в Киеве",
-    "Ясиня": "в Ясине",
-    "Мостиска": "в Мостисках",
-    "Медика": "в Медике",
-    "Дорогуск": "в Дорогуске"
-};
+const CITY_IN = {"Хелм": "в Хелме", "Перемышль": "в Перемышле", "Чоп": "в Чопе", "Жешув": "в Жешуве", "Люблин": "в Люблине", "Варшава": "в Варшаве", "Краков": "в Кракове", "Львов": "во Львове", "Киев": "в Киеве", "Ясиня": "в Ясине", "Мостиска": "в Мостисках", "Медика": "в Медике", "Дорогуск": "в Дорогуске"};
 
 function inCity(n) {
     n = String(n || "").trim();
@@ -169,10 +155,7 @@ function optHtml(o) {
         if (i) {
             const pa = legs[i - 1].stops[legs[i - 1].stops.length - 1], a = pa.name, b = L.stops[0].name;
             const wait = autoDur(pa.time, L.stops[0].time);
-            const where = b && b !== a ? t("swapArr", {
-                a: stn(a),
-                b: stn(b)
-            }) : (inCity(a) ? t("swapIn", {c: inCity(a)}) : t("swap", {a: stn(a)}));
+            const where = b && b !== a ? t("swapArr", {a: stn(a), b: stn(b)}) : (inCity(a) ? t("swapIn", {c: inCity(a)}) : t("swap", {a: stn(a)}));
             sw = `<div class="swap">🔁 ${esc(where)}${wait ? " · " + esc(wait) : ""}</div>`
         }
         return sw + `<div class="leg"><h4>🚆 ${esc(t("train"))} ${esc(trainName(L.train))}</h4><ul class="tl">${L.stops.map(s => `<li class="${s.hl ? "h" : "m"}"><span>${esc(stn(s.name))}</span><time>${esc(s.time)}</time></li>`).join("")}</ul></div>`
