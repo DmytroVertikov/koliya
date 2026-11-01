@@ -5,6 +5,8 @@ window.CFG = {
     // Одностраничники маршрутов: показываются на главной и на странице направления (route = код направления)
     PAGES: [
         {href: "kyiv-warsaw.html", title: "Киев → Варшава", route: "ua-pl"},
-        {href: "warsaw-kyiv.html", title: "Варшава → Киев", route: "pl-ua"}
+        {href: "warsaw-kyiv.html", title: "Варшава → Киев", route: "pl-ua"},
+        {href: "kyiv-krakow.html", title: "Киев → Краков", route: "ua-pl"},
+        {href: "krakow-kyiv.html", title: "Краков → Киев", route: "pl-ua"}
     ]
 };
