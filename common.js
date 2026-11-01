@@ -128,7 +128,7 @@ const FOOTER_HTML = `<div class="fcols">
 <div><b>🚆 Колія</b><p>Справочник по поездам из Украины и в Украину: время, станции и удобные пересадки.</p></div>
 <div><b>Важно</b><p>Расписание может меняться. Перед поездкой проверяйте актуальную информацию на сайте перевозчика. Проект неофициальный и не связан с Укрзализныцей.</p></div>
 <div><b>Справочная Укрзализныци</b><p>0 800 503 111 · 044 465 33 44<br>Бесплатно с украинских номеров.</p></div></div>
-<p class="fine">Данные о поездах: <a href="https://uz-vezemo.uz.gov.ua/">uz-vezemo.uz.gov.ua</a> · © ${new Date().getFullYear()} Колія</p>`;
+<p class="fine">Данные о поездах: <a href="https://uz.gov.ua/">uz.gov.ua</a> · <a href="https://intercity.pl/">intercity.pl</a> · © ${new Date().getFullYear()} Колія</p>`;
 (function () {
     const f = document.getElementById("site-footer");
     if (f) f.innerHTML = FOOTER_HTML
