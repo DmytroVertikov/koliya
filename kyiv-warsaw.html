@@ -4,13 +4,17 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <title>Поездом из Киева в Варшаву | Колія</title>
-    <meta name="description"
-          content="Все поезда Киев — Варшава: прямой и с пересадкой в Хелме. Время, станции, длительность.">
+    <meta name="description" content="Все поезда Киев — Варшава: прямой и с пересадкой в Хелме. Время, станции, длительность.">
     <meta name="theme-color" content="#12145c">
+    <link rel="canonical" href="https://dmytrovertikov.github.io/koliya/kyiv-warsaw.html">
+    <link rel="alternate" hreflang="ru" href="https://dmytrovertikov.github.io/koliya/kyiv-warsaw.html">
+    <link rel="alternate" hreflang="uk" href="https://dmytrovertikov.github.io/koliya/uk/kyiv-warsaw.html">
+    <link rel="alternate" hreflang="en" href="https://dmytrovertikov.github.io/koliya/en/kyiv-warsaw.html">
+    <link rel="alternate" hreflang="pl" href="https://dmytrovertikov.github.io/koliya/pl/kyiv-warsaw.html">
+    <link rel="alternate" hreflang="x-default" href="https://dmytrovertikov.github.io/koliya/kyiv-warsaw.html">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap">
     <link rel="stylesheet" href="style.css">
     <style>
         .wrap {
@@ -218,24 +222,22 @@
 </head>
 <body>
 <header>
-    <div class="wrap"><a class="logo" href="./"><span class="rails">🚆</span> КОЛІЯ</a>
+    <div class="wrap"><nav class="lang"><a href="kyiv-warsaw.html" hreflang="ru" lang="ru" class="on">RU</a><a href="uk/kyiv-warsaw.html" hreflang="uk" lang="uk">UK</a><a href="en/kyiv-warsaw.html" hreflang="en" lang="en">EN</a><a href="pl/kyiv-warsaw.html" hreflang="pl" lang="pl">PL</a></nav><a class="logo" href="./"><span class="rails">🚆</span> КОЛІЯ</a>
         <h1>Из Киева в Варшаву поездом</h1>
-        <p id="lead">Расписание поездов Киев — Варшава: прямой поезд и варианты с пересадкой в Хелме. Время в пути,
-            остановки и информация о покупке билетов.</p></div>
+        <p id="lead">Расписание поездов Киев — Варшава: прямой поезд и варианты с пересадкой в Хелме. Время в пути, остановки и информация о покупке билетов.</p></div>
 </header>
-<main class="wrap"><a class="back" href="./">← Главная</a> <a class="back" href="./#ua-pl">Все маршруты: Украина —
-    Польша</a> <a class="back" href="warsaw-kyiv.html">🔄 Варшава → Киев</a>
+<main class="wrap"><a class="back" href="./">← Главная</a> <a class="back" href="./#ua-pl">Все маршруты: Украина — Польша</a> <a class="back" href="warsaw-kyiv.html">🔄 Варшава → Киев</a>
     <div id="app"><p>Загрузка…</p></div>
     <div id="more"></div>
 </main>
-<div class="wrap">
-    <aside class="ad wide" data-slot="bottom" hidden></aside>
-</div>
+<div class="wrap"><aside class="ad wide" data-slot="bottom" hidden></aside></div>
 <footer class="wrap" id="site-footer"></footer>
+<script>window.LANG = "ru";</script>
 <script src="config.js"></script>
+<script src="i18n.js"></script>
 <script src="common.js"></script>
 <script>
-    const FROM = "Киев", TO = "Варшава", BACK = "pl-ua"; // BACK: код обратного направления для ссылки // какое направление показывать (как в шапке карточки в админке)
+    const FROM = "Киев", TO = "Варшава", BACK = "pl-ua"; // FROM/TO: русские названия, как в шапке карточки в админке
     const COACH = `<aside class="coach"><p>В купе предусмотрены три спальных места, расположенные одно над другим. Если средняя полка приведена в спальное положение, пользоваться нижней полкой для сидения нельзя. Для подъёма на верхнюю полку предусмотрена лестница.</p></aside>`;
     const BUY = `<section class="panel"><h2>Как купить билеты</h2>
 <div class="buy">
@@ -247,10 +249,10 @@
 <div><h3>С пересадкой в Хелме</h3><ol class="steps">
 <li>Откройте приложение «Укрзалізниця», выберите маршрут Киев → Хелм и укажите дату поездки. Продажа билетов открывается за 20 суток до отправления, в 09:00 по киевскому времени. Выберите подходящий поезд и оплатите билет.</li>
 <li>Билет на поезд Хелм → Варшава приобретите отдельно у польского перевозчика PKP Intercity — на официальном сайте intercity.pl или в приложении PKP Intercity. Также билеты можно приобрести на сайте koleo.pl или в приложении KOLEO.</li>
-<li>При выборе поезда Хелм → Варшава ориентируйтесь на варианты и расписание, представленные выше на этой странице. Учитывайте время прибытия поезда из Киева в Хелм и продолжительность пересадки.</li>
+<li>При выборе поезда Хелм → Варшава ориентируйтесь на варианты и расписание, представленные выше на этой странице. Учитывайте время прибытия поезда Киев → Хелм и продолжительность пересадки.</li>
 <li>После покупки сохраните оба электронных билета в телефоне. Перед поездкой проверьте даты, время отправления и станции прибытия.</li></ol>
-<a class="btn pri" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Купить в приложении УЗ билет Киев - Хелм</a>
-<a class="btn" href="https://www.intercity.pl/" target="_blank" rel="noopener">Купить на сайте PKP Intercity билет Хелм - Варшава</a></div>
+<a class="btn pri" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Купить в приложении УЗ билет Киев → Хелм</a>
+<a class="btn" href="https://www.intercity.pl/" target="_blank" rel="noopener">Купить на сайте PKP Intercity билет Хелм → Варшава</a></div>
 </div>
 <p class="buy-note">Графики движения поездов могут измениться, актуальную информацию смотрите в приложении УЗ и на сайте PKP Intercity.</p></section>`;
     const app = document.getElementById("app");
@@ -262,11 +264,10 @@
         const list = all.filter(o => o.active !== false).map(o => {
             const p = parseOption(o.dsl);
             return {o, p, h: p.head || deriveHead(p.legs)}
-        })
-            .filter(x => x.p.legs.length && norm(x.h.from).startsWith(norm(FROM)) && norm(x.h.to).startsWith(norm(TO)));
+        }).filter(x => x.p.legs.length && norm(x.h.from).startsWith(norm(FROM)) && norm(x.h.to).startsWith(norm(TO)));
         const direct = list.filter(x => x.p.legs.length === 1), transfer = list.filter(x => x.p.legs.length > 1);
         if (!list.length) {
-            app.innerHTML = '<div class="panel"><h2>Пока нет вариантов</h2><p>Добавьте их в админке.</p></div>';
+            app.innerHTML = `<div class="panel"><h2>Пока нет вариантов</h2><p>Добавьте их в админке.</p></div>`;
             return
         }
         app.innerHTML = (direct.length ? `<h2 class="sub" style="margin-top:6px">Прямой поезд <small>без пересадок</small></h2><div class="direct direct-wrap" style="margin-top:16px">${direct.map(x => optHtml(x.o)).join("")}</div>` : "")
@@ -277,12 +278,11 @@
             b.insertAdjacentHTML("beforeend", COACH)
         });
     }).catch(() => {
-        app.innerHTML = '<div class="panel"><h2>Не удалось загрузить данные</h2><p>Обновите страницу позже.</p></div>'
+        app.innerHTML = `<div class="panel"><h2>Не удалось загрузить данные</h2><p>Обновите страницу позже.</p></div>`
     });
-
     const here = location.pathname.split("/").pop() || "index.html",
         others = ((window.CFG && CFG.PAGES) || []).filter(p => p.href !== here);
-    document.getElementById("more").innerHTML = BUY + `<section class="panel"><h2>Ещё маршруты</h2><div class="grid" style="margin-top:12px"><a class="btn" href="./#${BACK}">← Из Польши в Украину</a>${others.map(p => `<a class="btn" href="${esc(p.href)}">${esc(p.title)}</a>`).join("")}<a class="btn" href="./">Все страны</a></div></section>`;
+    document.getElementById("more").innerHTML = BUY + `<section class="panel"><h2>Ещё маршруты</h2><div class="grid" style="margin-top:12px"><a class="btn" href="./#${BACK}">← Из Польши в Украину</a>${others.map(p => `<a class="btn" href="${esc(p.href)}">${esc(trRoute(p.title))}</a>`).join("")}<a class="btn" href="./">Все страны</a></div></section>`;
 </script>
 </body>
 </html>

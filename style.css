@@ -653,3 +653,9 @@ footer a {
     grid-column: 1/-1;
     margin: 0
 }
+
+/* Переключатель языка */
+header .wrap{position:relative}
+.lang{position:absolute;right:18px;top:0;display:flex;gap:4px}
+.lang a{padding:4px 9px;border-radius:99px;font-size:12.5px;font-weight:700;letter-spacing:.04em;text-decoration:none;color:#fff;background:rgba(255,255,255,.12)}
+.lang a.on{background:var(--acc);color:var(--accink)}

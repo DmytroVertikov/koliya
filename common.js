@@ -17,6 +17,18 @@ const safeUrl = u => {
     return /^https?:\/\//i.test(u) ? u : "#"
 };
 
+/* i18n: язык страницы задаёт window.LANG (ru по умолчанию), словари лежат в i18n.js (подключать до common.js) */
+const LG = window.LANG || "ru", TR = (window.I18N && I18N[LG]) || {};
+const t = (k, v) => String(TR[k] != null ? TR[k] : (window.I18N && I18N.ru && I18N.ru[k] != null ? I18N.ru[k] : k)).replace(/\{(\w+)\}/g, (m, x) => v && v[x] != null ? v[x] : m);
+const stn = n => {
+    const s = (window.I18N && I18N.ST || {})[n], i = {uk: 0, en: 1, pl: 2}[LG];
+    if (i == null) return n;
+    if (s && s[i]) return s[i];
+    if (n && window.console) console.info("i18n: нет перевода станции «" + n + "» (" + LG + ")");
+    return n
+};
+const t_no = () => t("no");
+const trRoute = x => String(x).split(" → ").map(stn).join(" → ");
 const toMin = t => {
     const m = String(t || "").match(/(\d{1,2}):(\d{2})/);
     return m ? (+m[1]) * 60 + (+m[2]) : null
@@ -26,10 +38,10 @@ function autoDur(a, b) {
     const x = toMin(a), y = toMin(b);
     if (x == null || y == null) return "";
     const d = ((y - x) % 1440 + 1440) % 1440, h = Math.floor(d / 60), m = d % 60;
-    return (h ? h + " ч" : "") + (h && m ? " " : "") + (m ? m + " мин" : "") || "0 мин"
+    return (h ? h + " " + t("h") : "") + (h && m ? " " : "") + (m ? m + " " + t("min") : "") || "0 " + t("min")
 }
 
-const autoTag = n => n < 1 ? "без пересадок" : n == 1 ? "1 пересадка" : n < 5 ? n + " пересадки" : n + " пересадок";
+const autoTag = n => n < 1 ? t("tag0") : n == 1 ? t("tag1") : n < 5 ? t("tag2", {n}) : t("tag5", {n});
 
 function splitStop(x) {
     x = String(x).trim();
@@ -101,16 +113,34 @@ function parseDsl(t) {
 }
 
 /* «в Хелме»: предложный падеж для односложных названий; для составных вернёт "" и плашка покажет «Пересадка: Название» */
-const CITY_IN = {"Хелм": "в Хелме", "Перемышль": "в Перемышле", "Чоп": "в Чопе", "Жешув": "в Жешуве", "Люблин": "в Люблине", "Варшава": "в Варшаве", "Краков": "в Кракове", "Львов": "во Львове", "Киев": "в Киеве", "Ясиня": "в Ясине", "Мостиска": "в Мостисках", "Медика": "в Медике", "Дорогуск": "в Дорогуске"};
+const CITY_IN = {
+    "Хелм": "в Хелме",
+    "Перемышль": "в Перемышле",
+    "Чоп": "в Чопе",
+    "Жешув": "в Жешуве",
+    "Люблин": "в Люблине",
+    "Варшава": "в Варшаве",
+    "Краков": "в Кракове",
+    "Львов": "во Львове",
+    "Киев": "в Киеве",
+    "Ясиня": "в Ясине",
+    "Мостиска": "в Мостисках",
+    "Медика": "в Медике",
+    "Дорогуск": "в Дорогуске"
+};
 
 function inCity(n) {
     n = String(n || "").trim();
+    const e = (window.I18N && I18N.ST || {})[n];
+    if (LG === "en") return e ? "in " + e[1] : "";
+    const k = {ru: 3, uk: 4, pl: 5}[LG];
+    if (e && e[k]) return e[k];
+    if (LG !== "ru") return "";
     if (CITY_IN[n]) return CITY_IN[n];
     if (!/^[А-Яа-яЁёІіЇїЄє'’-]+$/.test(n)) return "";
     const l = n.slice(-1);
     if (/[бвгдзклмнпрстфхцчшщ]/i.test(l)) return "в " + n + "е";
-    if (l === "ь") return "в " + n.slice(0, -1) + "е";
-    if (l === "а") return "в " + n.slice(0, -1) + "е";
+    if (l === "ь" || l === "а") return "в " + n.slice(0, -1) + "е";
     return ""
 }
 
@@ -119,7 +149,7 @@ function trainName(t) {
     t = String(t || "").trim().replace(/^№\s*/, "").replace(/\s+/g, " ");
     if (!t) return "";
     const m = t.match(/^([A-Za-z]+)\s*(\d.*)$/);
-    return m ? m[1].toUpperCase() + " " + m[2].toUpperCase() : "№" + t.toUpperCase()
+    return m ? m[1].toUpperCase() + " " + m[2].toUpperCase() : t_no() + t.toUpperCase()
 }
 
 function optHtml(o) {
@@ -133,30 +163,33 @@ function optHtml(o) {
     if (!legs.length) return "";
     const h = p.head || deriveHead(legs), n = legs.length - 1, dur = h.dur || autoDur(h.ft, h.tt),
         tag = h.tag || autoTag(n);
-    const board = `<div class="board"><div class="pt"><time>${esc(h.ft)}</time><span>${esc(h.from)}</span></div><div class="mid">${dur ? `<span class="dur">${esc(dur)}</span>` : ""}<span class="loc">Время местное</span><span class="line"></span><span class="tag${n > 0 ? " x" : ""}">${esc(tag)}</span></div><div class="pt end"><time>${esc(h.tt)}</time><span>${esc(h.to)}</span></div></div>`;
+    const board = `<div class="board"><div class="pt"><time>${esc(h.ft)}</time><span>${esc(stn(h.from))}</span></div><div class="mid">${dur ? `<span class="dur">${esc(dur)}</span>` : ""}<span class="loc">${esc(t("loc"))}</span><span class="line"></span><span class="tag${n > 0 ? " x" : ""}">${esc(tag)}</span></div><div class="pt end"><time>${esc(h.tt)}</time><span>${esc(stn(h.to))}</span></div></div>`;
     const body = legs.map((L, i) => {
         let sw = "";
         if (i) {
             const pa = legs[i - 1].stops[legs[i - 1].stops.length - 1], a = pa.name, b = L.stops[0].name;
             const wait = autoDur(pa.time, L.stops[0].time);
-            const where = b && b !== a ? "Пересадка: " + a + " → " + b : (inCity(a) ? "Пересадка " + inCity(a) : "Пересадка: " + a);
+            const where = b && b !== a ? t("swapArr", {
+                a: stn(a),
+                b: stn(b)
+            }) : (inCity(a) ? t("swapIn", {c: inCity(a)}) : t("swap", {a: stn(a)}));
             sw = `<div class="swap">🔁 ${esc(where)}${wait ? " · " + esc(wait) : ""}</div>`
         }
-        return sw + `<div class="leg"><h4>🚆 Поезд ${esc(trainName(L.train))}</h4><ul class="tl">${L.stops.map(s => `<li class="${s.hl ? "h" : "m"}"><span>${esc(s.name)}</span><time>${esc(s.time)}</time></li>`).join("")}</ul></div>`
+        return sw + `<div class="leg"><h4>🚆 ${esc(t("train"))} ${esc(trainName(L.train))}</h4><ul class="tl">${L.stops.map(s => `<li class="${s.hl ? "h" : "m"}"><span>${esc(stn(s.name))}</span><time>${esc(s.time)}</time></li>`).join("")}</ul></div>`
     }).join("");
     return `<article class="opt">${board}<div class="perf"></div><div class="body">${body}${o.note ? `<div class="note">${esc(o.note)}</div>` : ""}</div></article>`
 }
 
 /* Общий футер: правится здесь, подключается на всех страницах, где есть <footer id="site-footer"> */
-const FOOTER_HTML = `<div class="fcols">
-<div><b>🚆 Колія</b><p>Справочник железнодорожных маршрутов из Украины и в Украину. Расписания, станции, пересадки и полезная информация для пассажиров.</p></div>
-<div><b>Актуальность информации</b>
-<p>Расписание поездов, время отправления и прибытия могут изменяться. Перед поездкой проверяйте актуальную информацию на сайтах перевозчиков.</p>
-<p>Информация на странице обновлена: 01.11.2026.</p>
-<p>«Колія» — независимый информационный проект, не связанный с АО «Укрзализныця».</p></div>
-<div><b>Справочная служба Укрзализныци</b><p>0 800 503 111 · 044 465 33 44<br>Звонки на номер 0 800 бесплатны с украинских номеров.</p></div></div>
-<p class="fine">Источник данных о поездах: <a href="https://uz.gov.ua/">uz.gov.ua</a> · <a href="https://intercity.pl/">intercity.pl</a> · © ${new Date().getFullYear()} Колія</p>`;
+const FOOTER_HTML = () => `<div class="fcols">
+<div><b>🚆 Колія</b><p>${t("f1")}</p></div>
+<div><b>${t("f2h")}</b>
+<p>${t("f2a")}</p>
+<p>${t("f2b")}</p>
+<p>${t("f2c")}</p></div>
+<div><b>${t("f3h")}</b><p>${t("f3")}</p></div></div>
+<p class="fine">${t("fsrc")} <a href="https://uz.gov.ua/">uz.gov.ua</a> · <a href="https://intercity.pl/">intercity.pl</a> · © ${new Date().getFullYear()} Колія</p>`;
 (function () {
     const f = document.getElementById("site-footer");
-    if (f) f.innerHTML = FOOTER_HTML
+    if (f) f.innerHTML = FOOTER_HTML()
 })();
