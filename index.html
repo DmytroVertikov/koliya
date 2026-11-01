@@ -28,12 +28,11 @@
     });
     let D;
     const PG = (window.CFG && CFG.PAGES) || [];
-    /* на странице направления: основная кнопка своей одностраничной + кнопка обратного маршрута (ua-pl ↔ pl-ua) */
+    /* на странице направления: кнопки на одностраничники этого направления и обратного (ua-pl ↔ pl-ua), оформление одинаковое */
     const pageLinks = id => {
         const parts = id.split("-"), rid = parts.length === 2 ? parts.reverse().join("-") : "";
-        const btns = PG.filter(p => p.route === id).map(p => ({p, cls: "btn pri", txt: `⚡ ${p.title}: все поезда на одной странице →`}))
-            .concat(rid && rid !== id ? PG.filter(p => p.route === rid).map(p => ({p, cls: "btn", txt: `🔄 ${p.title}: обратный маршрут →`})) : []);
-        return btns.length ? `<section class="panel" style="margin-top:0">${btns.map((b, i) => `<a class="${b.cls}"${i ? "" : ' style="margin-top:0"'} href="${esc(b.p.href)}">${esc(b.txt)}</a>`).join("")}</section>` : ""
+        const list = PG.filter(p => p.route === id).concat(rid && rid !== id ? PG.filter(p => p.route === rid) : []);
+        return list.length ? `<section class="panel" style="margin-top:0">${list.map((p, i) => `<a class="btn pri"${i ? "" : ' style="margin-top:0"'} href="${esc(p.href)}">⚡ ${esc(p.title)}: все поезда на одной странице →</a>`).join("")}</section>` : ""
     };
 
     async function load() {
@@ -71,9 +70,7 @@ ${PG.length ? `<section class="panel"><h2>Популярные маршруты<
         document.title = r.title + " поездом | Колія";
         h1.textContent = r.title;
         lead.textContent = r.lead;
-        const how = r.how.split("\n").filter(Boolean),
-            tk = r.tickets.split("\n").filter(Boolean).map(l => l.split("|").map(s => s.trim()));
-        app.innerHTML = `<a class="back" href="#">← Все направления</a>${pageLinks(id)}<section class="panel" style="margin-top:${pageLinks(id) ? 18 : 0}px"><h2>Как ехать</h2><ol class="steps">${how.map(x => `<li>${esc(x)}</li>`).join("")}</ol>${tk.map((k, i) => `<a class="btn ${i ? "" : "pri"}" href="${esc(safeUrl(k[1]))}" target="_blank" rel="noopener">${esc(k[0])}</a>`).join("")}</section>`
+        app.innerHTML = `<a class="back" href="#">← Все направления</a>${pageLinks(id) || '<section class="panel" style="margin-top:0"><p>Маршруты для этого направления скоро появятся.</p></section>'}`
     }
 
     addEventListener("hashchange", render);
