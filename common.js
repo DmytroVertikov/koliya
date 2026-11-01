@@ -118,7 +118,7 @@ function optHtml(o) {
             const a = legs[i - 1].stops[legs[i - 1].stops.length - 1].name, b = L.stops[0].name;
             sw = `<div class="swap">🔁 Пересадка: ${esc(a)}${b && b !== a ? " → " + esc(b) : ""}</div>`
         }
-        return sw + `<div class="leg"><h4>🚆 Поезд ${esc(L.train)}</h4><ul class="tl">${L.stops.map(s => `<li class="${s.hl ? "h" : "m"}"><span>${esc(s.name)}</span><time>${esc(s.time)}</time></li>`).join("")}</ul></div>`
+        return sw + `<div class="leg"><h4>🚆 Поезд №${esc(L.train)}</h4><ul class="tl">${L.stops.map(s => `<li class="${s.hl ? "h" : "m"}"><span>${esc(s.name)}</span><time>${esc(s.time)}</time></li>`).join("")}</ul></div>`
     }).join("");
     return `<article class="opt">${board}<div class="perf"></div><div class="body">${body}${o.note ? `<div class="note">${esc(o.note)}</div>` : ""}</div></article>`
 }
