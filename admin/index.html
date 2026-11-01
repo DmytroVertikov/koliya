@@ -332,6 +332,7 @@
         app.innerHTML = `<section class="panel" style="margin-top:0"><h2 style="margin:0">Страницы маршрутов</h2>
 <label>Выберите страницу</label><select id="sel"><option value="">—</option>${PAGES().map(p => `<option value="${esc(p.href)}" ${p.href === cur ? "selected" : ""}>${esc(p.title)} (${esc(p.href)})</option>`).join("")}<option value="__orph" ${cur === "__orph" ? "selected" : ""}>⚠ Варианты без страницы (проверка)</option></select>
 <p class="legend">Новая страница маршрута: добавьте её в <b>config.js</b> (PAGES) и в <b>build.js</b> (ROUTES), потом она появится в этом списке.</p></section>
+<section class="panel"><details><summary><b>🛠 Генератор строк для новой страницы маршрута</b></summary><div id="gen"></div></details></section>
 <section class="panel"><details><summary><b>Страны и направления для главной</b></summary><div id="cs"></div><div id="rts"></div></details></section><div id="ed"></div>`;
         $("#sel").onchange = e => {
             const v = e.target.value;
@@ -340,6 +341,7 @@
         };
         countries();
         routes();
+        gen();
         if (cur) $("#sel").onchange({target: $("#sel")})
     }
 
@@ -381,6 +383,56 @@
             } catch (e) {
                 alert(e.message)
             }
+        }
+    }
+
+
+    /* ---------- генератор строк для новой страницы (обе стороны: туда и обратно) ---------- */
+    const UA = {ru: "Украина", uk: "Україна", en: "Ukraine", pl: "Ukraina"};
+    const TXT = {
+        ru: {title: "{a} → {b} поездом | Колія", h1: "Поездом: {a} → {b}", desc: "Все поезда {a} — {b}: прямой и с пересадкой. Время, станции, длительность.", lead: "Расписание поездов {a} — {b}: прямой поезд и варианты с пересадкой. Время в пути, остановки и информация о покупке билетов.", all: "Все маршруты: {x} — {y}", more: "← {y} — {x}"},
+        uk: {title: "{a} → {b} потягом | Колія", h1: "Потягом: {a} → {b}", desc: "Усі поїзди {a} — {b}: прямий та з пересадкою. Час, станції, тривалість.", lead: "Розклад поїздів {a} — {b}: прямий поїзд і варіанти з пересадкою. Час у дорозі, зупинки та інформація про купівлю квитків.", all: "Усі маршрути: {x} — {y}", more: "← {y} — {x}"},
+        en: {title: "{a} → {b} by train | Koliya", h1: "By train: {a} → {b}", desc: "All trains {a} — {b}: direct and with a transfer. Times, stations, duration.", lead: "Train timetable {a} — {b}: the direct train and options with a transfer. Journey time, stops and ticket information.", all: "All routes: {x} — {y}", more: "← {y} — {x}"},
+        pl: {title: "{a} → {b} pociągiem | Koliya", h1: "Pociągiem: {a} → {b}", desc: "Wszystkie pociągi {a} — {b}: bezpośrednie i z przesiadką. Godziny, stacje, czas podróży.", lead: "Rozkład pociągów {a} — {b}: pociąg bezpośredni i warianty z przesiadką. Czas podróży, postoje i informacje o zakupie biletów.", all: "Wszystkie trasy: {x} — {y}", more: "← {y} — {x}"}
+    };
+
+    function genPages(a, b, al, bl, route, X) {
+        const [c1, c2] = route.split("-"), rev = c2 + "-" + c1, ST = (window.I18N && I18N.ST) || {}, CN = (window.I18N && I18N.CN) || {};
+        const stn2 = (n, l) => { const e = ST[n], i = {uk: 0, en: 1, pl: 2}[l]; return l === "ru" || !e || !e[i] ? n : e[i] };
+        const cn = (code, l) => { if (code === "ua") return UA[l]; const c = CT.find(x => x.slug === code); return l !== "ru" && CN[code] && CN[code][l] ? CN[code][l][0] : (c ? c.name : code) };
+        const mk = (f, t, fl, tl, rt, back, fromUa) => ({from: f, to: t, route: rt, back, file: fl + "-" + tl + ".html", rev: tl + "-" + fl + ".html", id: (fl + "_" + tl).replace(/-/g, "_"),
+            uz: fromUa ? [f, X] : [X, t], pkp: fromUa ? [X, t] : [f, X], t3: fromUa ? "buy.t3out" : "buy.t3in"});
+        const P = [mk(a, b, al, bl, route, rev, c1 === "ua"), mk(b, a, bl, al, rev, route, c1 !== "ua")];
+        const q = JSON.stringify, cfg = P.map(p => `        {href: ${q(p.file)}, title: ${q(p.from + " → " + p.to)}, route: ${q(p.route)}}`).join(",\n");
+        const bld = P.map(p => `  {id: ${q(p.id)}, file: ${q(p.file)}, FROM: ${q(p.from)}, TO: ${q(p.to)}, BACK: ${q(p.back)}, hash: ${q(p.route)}, rev: ${q(p.rev)}, uz: ${q(p.uz)}, pkp: ${q(p.pkp)}, t3: ${q(p.t3)}}`).join(",\n");
+        const i18n = {};
+        for (const l of ["ru", "uk", "en", "pl"]) i18n[l] = P.map(p => {
+            const [x, y] = p.route.split("-").map(c => cn(c, l)), v = {a: stn2(p.from, l), b: stn2(p.to, l), x, y};
+            return ["title", "desc", "h1", "lead", "all", "more"].map(k => `${q(p.id + "." + k)}:${q(TXT[l][k].replace(/\{(\w)\}/g, (m, z) => v[z]))}`).join(",\n")
+        }).join(",\n");
+        const miss = [...new Set([a, b, X])].filter(n => !ST[n]).map(n => `${q(n)}:["","","","","",""]`).join(",\n");
+        return {cfg, bld, i18n, miss, P}
+    }
+
+    function gen() {
+        $("#gen").innerHTML = `<p class="legend">Заполните поля и получите готовые строки для config.js, build.js и i18n.js сразу для обеих страниц (туда и обратно). После вставки выполните <b>node build.js</b>.</p>
+<div class="row"><div><label>Откуда (по-русски, как в шапке)</label><input id="gf" placeholder="Киев"></div><div><label>Куда (по-русски)</label><input id="gt" placeholder="Краков"></div></div>
+<div class="row"><div><label>Откуда латиницей (для имени файла)</label><input id="gfl" placeholder="kyiv"></div><div><label>Куда латиницей</label><input id="gtl" placeholder="krakow"></div></div>
+<div class="row"><div><label>Направление страницы «Откуда → Куда»</label><select id="gr">${RT.map(r => `<option value="${esc(r.slug)}">${esc(r.title)} (${esc(r.slug)})</option>`).join("")}</select></div><div><label>Станция пересадки (по-русски)</label><input id="gx" value="Хелм"></div></div>
+<div style="margin-top:12px"><button class="pri" id="gg">Сгенерировать</button></div><div id="go"></div>`;
+        $("#gg").onclick = () => {
+            const g = i => $(i).value.trim(), a = g("#gf"), b = g("#gt"), al = g("#gfl").toLowerCase(), bl = g("#gtl").toLowerCase(), route = g("#gr"), X = g("#gx") || "Хелм";
+            if (!a || !b || !/^[a-z0-9-]+$/.test(al) || !/^[a-z0-9-]+$/.test(bl)) return alert("Заполните названия по-русски и имена файлов латиницей (a–z, цифры, дефис)");
+            if (route.split("-").length !== 2) return alert("Код направления должен быть вида ua-pl");
+            const r = genPages(a, b, al, bl, route, X);
+            const blk = (t, hint, txt) => `<label>${t}</label><p class="legend" style="margin:0 0 4px">${hint}</p><textarea readonly style="min-height:120px">${esc(txt)}</textarea><button class="sm cp" style="margin-top:6px">Копировать</button>`;
+            $("#go").innerHTML = (X !== "Хелм" ? '<p class="err">Тексты «Как купить билеты» в i18n.js написаны про пересадку в Хелме. Для другой станции их нужно поправить вручную.</p>' : "")
+                + blk("1. config.js", "в массив PAGES, после последней записи (не забудьте запятую)", r.cfg)
+                + blk("2. build.js", "в массив ROUTES", r.bld)
+                + ["ru", "uk", "en", "pl"].map(l => blk("3. i18n.js — " + l, `внутрь блока ${l}:{ … } после последнего ключа (не забудьте запятую)`, r.i18n[l])).join("")
+                + (r.miss ? blk("4. i18n.js — станции (ST)", "впишите переводы: [uk, en, pl, «в…» ru, «у…» uk, «w…» pl]; пустое поле = покажется русское название", r.miss) : '<p class="ok">Все станции уже есть в словаре.</p>')
+                + `<p class="legend">Файлы страниц: <b>${esc(r.P[0].file)}</b> и <b>${esc(r.P[1].file)}</b> (в каждом языке). Тексты сгенерированы по шаблону без склонений, при желании отредактируйте их в i18n.js.</p>`;
+            document.querySelectorAll("#go .cp").forEach(b => b.onclick = () => { navigator.clipboard.writeText(b.previousElementSibling.value); toast("Скопировано") })
         }
     }
 
