@@ -161,6 +161,12 @@
             box-shadow: inset 0 0 0 2px #12875a
         }
 
+        .buy > div:not(.d) .btn:not(.pri) {
+            background: var(--brand);
+            color: var(--card);
+            box-shadow: none
+        }
+
         .buy-note {
             margin-top: 16px !important;
             font-size: 14px
@@ -214,9 +220,11 @@
 <header>
     <div class="wrap"><a class="logo" href="./"><span class="rails">🚆</span> КОЛІЯ</a>
         <h1>Из Киева в Варшаву поездом</h1>
-        <p id="lead">Расписание поездов Киев — Варшава: прямой поезд и варианты с пересадкой в Хелме. Время в пути, остановки и информация о покупке билетов.</p></div>
+        <p id="lead">Расписание поездов Киев — Варшава: прямой поезд и варианты с пересадкой в Хелме. Время в пути,
+            остановки и информация о покупке билетов.</p></div>
 </header>
-<main class="wrap"><a class="back" href="./">← Главная</a> <a class="back" href="./#ua-pl">Все маршруты: Украина — Польша</a>
+<main class="wrap"><a class="back" href="./">← Главная</a> <a class="back" href="./#ua-pl">Все маршруты: Украина —
+    Польша</a>
     <div id="app"><p>Загрузка…</p></div>
     <div id="more"></div>
 </main>
@@ -261,7 +269,8 @@
             app.innerHTML = '<div class="panel"><h2>Пока нет вариантов</h2><p>Добавьте их в админке.</p></div>';
             return
         }
-        document.getElementById("lead").textContent=direct.length&&transfer.length?"Прямой поезд и маршруты с пересадкой в Хелме.":direct.length?"Прямой поезд.":"Маршруты с пересадкой в Хелме.";        app.innerHTML = (direct.length ? `<h2 class="sub" style="margin-top:6px">Прямой поезд <small>без пересадок</small></h2><div class="direct direct-wrap" style="margin-top:16px">${direct.map(x => optHtml(x.o)).join("")}</div>` : "")
+        document.getElementById("lead").textContent = direct.length && transfer.length ? "Прямой поезд и маршруты с пересадкой в Хелме." : direct.length ? "Прямой поезд." : "Маршруты с пересадкой в Хелме.";
+        app.innerHTML = (direct.length ? `<h2 class="sub" style="margin-top:6px">Прямой поезд <small>без пересадок</small></h2><div class="direct direct-wrap" style="margin-top:16px">${direct.map(x => optHtml(x.o)).join("")}</div>` : "")
             + (direct.length && transfer.length ? `<aside class="ad wide" data-slot="mid" hidden></aside>` : "")
             + (transfer.length ? `<h2 class="sub">С удобной пересадкой в Хелме на одной платформе</h2><div class="cols" style="margin-top:16px">${transfer.map(x => optHtml(x.o)).join("")}</div>` : "");
         document.querySelectorAll(".direct .body").forEach(b => {
