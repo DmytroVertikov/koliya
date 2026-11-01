@@ -100,6 +100,20 @@ function parseDsl(t) {
     return p.legs.map(L => ({train: L.train, st: L.stops.map(s => [s.name, s.time])}))
 }
 
+/* «в Хелме»: предложный падеж для односложных названий; для составных вернёт "" и плашка покажет «Пересадка: Название» */
+const CITY_IN = {"Хелм": "в Хелме", "Перемышль": "в Перемышле", "Чоп": "в Чопе", "Жешув": "в Жешуве", "Люблин": "в Люблине", "Варшава": "в Варшаве", "Краков": "в Кракове", "Львов": "во Львове", "Киев": "в Киеве", "Ясиня": "в Ясине", "Мостиска": "в Мостисках", "Медика": "в Медике", "Дорогуск": "в Дорогуске"};
+
+function inCity(n) {
+    n = String(n || "").trim();
+    if (CITY_IN[n]) return CITY_IN[n];
+    if (!/^[А-Яа-яЁёІіЇїЄє'’-]+$/.test(n)) return "";
+    const l = n.slice(-1);
+    if (/[бвгдзклмнпрстфхцчшщ]/i.test(l)) return "в " + n + "е";
+    if (l === "ь") return "в " + n.slice(0, -1) + "е";
+    if (l === "а") return "в " + n.slice(0, -1) + "е";
+    return ""
+}
+
 function optHtml(o) {
     let p;
     try {
@@ -115,8 +129,10 @@ function optHtml(o) {
     const body = legs.map((L, i) => {
         let sw = "";
         if (i) {
-            const a = legs[i - 1].stops[legs[i - 1].stops.length - 1].name, b = L.stops[0].name;
-            sw = `<div class="swap">🔁 Пересадка: ${esc(a)}${b && b !== a ? " → " + esc(b) : ""}</div>`
+            const pa = legs[i - 1].stops[legs[i - 1].stops.length - 1], a = pa.name, b = L.stops[0].name;
+            const wait = autoDur(pa.time, L.stops[0].time);
+            const where = b && b !== a ? "Пересадка: " + a + " → " + b : (inCity(a) ? "Пересадка " + inCity(a) : "Пересадка: " + a);
+            sw = `<div class="swap">🔁 ${esc(where)}${wait ? " · " + esc(wait) : ""}</div>`
         }
         return sw + `<div class="leg"><h4>🚆 Поезд №${esc(L.train)}</h4><ul class="tl">${L.stops.map(s => `<li class="${s.hl ? "h" : "m"}"><span>${esc(s.name)}</span><time>${esc(s.time)}</time></li>`).join("")}</ul></div>`
     }).join("");
