@@ -11,7 +11,11 @@ const ROUTES = [
   {id: "dnipro_warsaw", file: "dnipro-warsaw.html", FROM: "Днепр", TO: "Варшава", BACK: "pl-ua", hash: "ua-pl", rev: "warsaw-dnipro.html", uz: ["Днепр","Хелм"], pkp: ["Хелм","Варшава"], t3: "buy.t3out", x: "Хелм", direct: false, plat: false, one: true},
   {id: "warsaw_dnipro", file: "warsaw-dnipro.html", FROM: "Варшава", TO: "Днепр", BACK: "ua-pl", hash: "pl-ua", rev: "dnipro-warsaw.html", uz: ["Хелм","Днепр"], pkp: ["Варшава","Хелм"], t3: "buy.t3in", x: "Хелм", direct: false, plat: false, one: true},
   {id: "dnipro_krakow", file: "dnipro-krakow.html", FROM: "Днепр", TO: "Краков", BACK: "pl-ua", hash: "ua-pl", rev: "krakow-dnipro.html", uz: ["Днепр","Перемышль"], pkp: ["Перемышль","Краков"], t3: "buy.t3out", x: "Перемышль", direct: false, border: "after", one: true},
-  {id: "krakow_dnipro", file: "krakow-dnipro.html", FROM: "Краков", TO: "Днепр", BACK: "ua-pl", hash: "pl-ua", rev: "dnipro-krakow.html", uz: ["Перемышль","Днепр"], pkp: ["Краков","Перемышль"], t3: "buy.t3in", x: "Перемышль", direct: false, border: "before", one: true}
+  {id: "krakow_dnipro", file: "krakow-dnipro.html", FROM: "Краков", TO: "Днепр", BACK: "ua-pl", hash: "pl-ua", rev: "dnipro-krakow.html", uz: ["Перемышль","Днепр"], pkp: ["Краков","Перемышль"], t3: "buy.t3in", x: "Перемышль", direct: false, border: "before", one: true},
+  {id: "kharkiv_warsaw", file: "kharkiv-warsaw.html", FROM: "Харьков", TO: "Варшава", BACK: "pl-ua", hash: "ua-pl", rev: "warsaw-kharkiv.html", uz: ["Харьков","Хелм"], pkp: ["Хелм","Варшава"], t3: "buy.t3out", x: "Хелм", direct: false, plat: false, one: true},
+  {id: "warsaw_kharkiv", file: "warsaw-kharkiv.html", FROM: "Варшава", TO: "Харьков", BACK: "ua-pl", hash: "pl-ua", rev: "kharkiv-warsaw.html", uz: ["Хелм","Харьков"], pkp: ["Варшава","Хелм"], t3: "buy.t3in", x: "Хелм", direct: false, plat: false, one: true},
+  {id: "kharkiv_krakow", file: "kharkiv-krakow.html", FROM: "Харьков", TO: "Краков", BACK: "pl-ua", hash: "ua-pl", rev: "krakow-kharkiv.html", uz: ["Харьков","Перемышль"], pkp: ["Перемышль","Краков"], t3: "buy.t3out", x: "Перемышль", direct: false, border: "after", one: true},
+  {id: "krakow_kharkiv", file: "krakow-kharkiv.html", FROM: "Краков", TO: "Харьков", BACK: "ua-pl", hash: "pl-ua", rev: "kharkiv-krakow.html", uz: ["Перемышль","Харьков"], pkp: ["Краков","Перемышль"], t3: "buy.t3in", x: "Перемышль", direct: false, border: "before", one: true}
 ];
 /* проверки: повторы в ROUTES и повторяющиеся ключи в i18n.js (при повторе побеждает ПОСЛЕДНИЙ, из-за этого старые тексты могут «возвращаться») */
 {

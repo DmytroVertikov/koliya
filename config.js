@@ -11,6 +11,10 @@ window.CFG = {
         {href: "dnipro-warsaw.html", title: "Днепр → Варшава", route: "ua-pl"},
         {href: "warsaw-dnipro.html", title: "Варшава → Днепр", route: "pl-ua"},
         {href: "dnipro-krakow.html", title: "Днепр → Краков", route: "ua-pl"},
-        {href: "krakow-dnipro.html", title: "Краков → Днепр", route: "pl-ua"}
+        {href: "krakow-dnipro.html", title: "Краков → Днепр", route: "pl-ua"},
+        {href: "kharkiv-warsaw.html", title: "Харьков → Варшава", route: "ua-pl"},
+        {href: "warsaw-kharkiv.html", title: "Варшава → Харьков", route: "pl-ua"},
+        {href: "kharkiv-krakow.html", title: "Харьков → Краков", route: "ua-pl"},
+        {href: "krakow-kharkiv.html", title: "Краков → Харьков", route: "pl-ua"}
     ]
 };
