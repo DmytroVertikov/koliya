@@ -436,6 +436,16 @@ h2.sub {
     padding: 4px 12px
 }
 
+.leg h4 .seat {
+    background: var(--acc);
+    color: var(--accink);
+    border-radius: 99px;
+    padding: 1px 9px;
+    font-size: 12.5px;
+    font-weight: 700;
+    white-space: nowrap
+}
+
 /* маршрут: время слева, рельса посередине, станция справа */
 .tl {
     --rail: var(--brand);
