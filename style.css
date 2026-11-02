@@ -436,7 +436,7 @@ h2.sub {
     padding: 4px 12px
 }
 
-.leg h4 .seat {
+.leg h4 .tb {
     background: var(--acc);
     color: var(--accink);
     border-radius: 99px;
@@ -444,6 +444,16 @@ h2.sub {
     font-size: 12.5px;
     font-weight: 700;
     white-space: nowrap
+}
+
+.leg h4 .tb.odd {
+    background: var(--card);
+    color: var(--brand);
+    box-shadow: inset 0 0 0 1.5px var(--brand)
+}
+
+.leg h4 {
+    flex-wrap: wrap
 }
 
 /* маршрут: время слева, рельса посередине, станция справа */

@@ -138,10 +138,14 @@ function trainName(t) {
     return m ? m[1].toUpperCase() + " " + m[2].toUpperCase() : t_no() + t.toUpperCase()
 }
 
-/* Поезда с особыми вагонами: номер → бейдж «сидячий интерсити». Номер пишется кириллической «К», регистр и пробелы не важны */
-const SEATED = ["705К", "715К"];
+/* Пометки у поездов: ключ подписи в i18n → номера поездов. Номер пишется кириллической «К», регистр, пробелы и ведущие нули не важны */
+const TRAIN_BADGES = {
+    seat: ["705К", "715К"], /* сидячий интерсити */
+    odd: ["070", "070К"] /* ходит по нечётным числам */
+};
 const trainKey = n => String(n || "").toUpperCase().replace(/[\s№]/g, "").replace(/K/g, "К").replace(/^0+/, "");
-const isSeated = n => SEATED.includes(trainKey(n));
+const trainBadges = n => Object.keys(TRAIN_BADGES).filter(k => TRAIN_BADGES[k].some(x => trainKey(x) === trainKey(n)));
+const badgesHtml = n => trainBadges(n).map(k => `<span class="tb ${k}">${k === "seat" ? "💺" : "📅"} ${esc(t(k))}</span>`).join("");
 
 function optHtml(o) {
     let p;
@@ -163,7 +167,7 @@ function optHtml(o) {
             const where = b && b !== a ? t("swapArr", {a: stn(a), b: stn(b)}) : (inCity(a) ? t("swapIn", {c: inCity(a)}) : t("swap", {a: stn(a)}));
             sw = `<div class="swap">🔁 ${esc(where)}${wait ? " · " + esc(wait) : ""}</div>`
         }
-        return sw + `<div class="leg"><h4>🚆 ${esc(t("train"))} ${esc(trainName(L.train))}${isSeated(L.train) ? `<span class="seat">💺 ${esc(t("seat"))}</span>` : ""}</h4><ul class="tl">${L.stops.map(s => `<li class="${s.hl ? "h" : "m"}"><span>${esc(stn(s.name))}</span><time>${esc(s.time)}</time></li>`).join("")}</ul></div>`
+        return sw + `<div class="leg"><h4>🚆 ${esc(t("train"))} ${esc(trainName(L.train))}${badgesHtml(L.train)}</h4><ul class="tl">${L.stops.map(s => `<li class="${s.hl ? "h" : "m"}"><span>${esc(stn(s.name))}</span><time>${esc(s.time)}</time></li>`).join("")}</ul></div>`
     }).join("");
     return `<article class="opt">${board}<div class="perf"></div><div class="body">${body}${o.note ? `<div class="note">${esc(o.note)}</div>` : ""}</div></article>`
 }
