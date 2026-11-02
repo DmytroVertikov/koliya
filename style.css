@@ -446,7 +446,7 @@ h2.sub {
     white-space: nowrap
 }
 
-.leg h4 .tb.odd {
+.leg h4 .tb.odd, .leg h4 .tb.even {
     background: var(--card);
     color: var(--brand);
     box-shadow: inset 0 0 0 1.5px var(--brand)

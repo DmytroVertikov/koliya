@@ -46,7 +46,7 @@ de:{uk:["Німеччина","Німеччини"],en:["Germany"],pl:["Niemcy","
 },
 ru:{
 h:"ч",min:"мин",tag0:"без пересадок",tag1:"1 пересадка",tag2:"{n} пересадки",tag5:"{n} пересадок",
-loc:"Время местное",seat:"Сидячий интерсити",odd:"Ходит по нечётным числам",train:"Поезд",no:"№",swap:"Пересадка: {a}",swapIn:"Пересадка {c}",swapArr:"Пересадка: {a} → {b}",
+loc:"Время местное",seat:"Сидячий интерсити",odd:"Ходит по нечётным числам",even:"Ходит по чётным числам",train:"Поезд",no:"№",swap:"Пересадка: {a}",swapIn:"Пересадка {c}",swapArr:"Пересадка: {a} → {b}",
 f1:"Справочник железнодорожных маршрутов из Украины и в Украину. Расписания, станции, пересадки и полезная информация для пассажиров.",
 f2h:"Актуальность информации",f2a:"Расписание поездов, время отправления и прибытия могут изменяться. Перед поездкой проверяйте актуальную информацию на сайтах перевозчиков.",
 f2b:"Информация на странице обновлена: 01.11.2026.",f2c:"«Колія» — независимый информационный проект, не связанный с АО «Укрзализныця».",
@@ -95,7 +95,7 @@ coach:"В купе предусмотрены три спальных места
 },
 uk:{
 h:"год",min:"хв",tag0:"без пересадок",tag1:"1 пересадка",tag2:"{n} пересадки",tag5:"{n} пересадок",
-loc:"Час місцевий",seat:"Сидячий інтерсіті",odd:"Курсує за непарними числами",train:"Поїзд",no:"№",swap:"Пересадка: {a}",swapIn:"Пересадка {c}",swapArr:"Пересадка: {a} → {b}",
+loc:"Час місцевий",seat:"Сидячий інтерсіті",odd:"Курсує за непарними числами",even:"Курсує за парними числами",train:"Поїзд",no:"№",swap:"Пересадка: {a}",swapIn:"Пересадка {c}",swapArr:"Пересадка: {a} → {b}",
 f1:"Довідник залізничних маршрутів з України та в Україну. Розклади, станції, пересадки та корисна інформація для пасажирів.",
 f2h:"Актуальність інформації",f2a:"Розклад поїздів, час відправлення та прибуття можуть змінюватися. Перед поїздкою перевіряйте актуальну інформацію на сайтах перевізників.",
 f2b:"Інформацію на сторінці оновлено: 01.11.2026.",f2c:"«Колія» — незалежний інформаційний проєкт, не пов’язаний з АТ «Укрзалізниця».",
@@ -144,7 +144,7 @@ coach:"У купе передбачено три спальні місця, ро
 },
 en:{
 h:"h",min:"min",tag0:"direct",tag1:"1 transfer",tag2:"{n} transfers",tag5:"{n} transfers",
-loc:"Local time",seat:"Seated InterCity",odd:"Runs on odd-numbered dates",train:"Train",no:"No. ",swap:"Transfer: {a}",swapIn:"Transfer {c}",swapArr:"Transfer: {a} → {b}",
+loc:"Local time",seat:"Seated InterCity",odd:"Runs on odd-numbered dates",even:"Runs on even-numbered dates",train:"Train",no:"No. ",swap:"Transfer: {a}",swapIn:"Transfer {c}",swapArr:"Transfer: {a} → {b}",
 f1:"A guide to rail routes from and to Ukraine: timetables, stations, transfers and useful information for passengers.",
 f2h:"Keeping information up to date",f2a:"Train timetables and departure and arrival times may change. Before you travel, check current information on the carriers’ websites.",
 f2b:"Page last updated: 01.11.2026.",f2c:"Koliya is an independent information project and is not affiliated with JSC Ukrzaliznytsia.",
@@ -193,7 +193,7 @@ coach:"Each compartment has three berths, one above another. When the middle ber
 },
 pl:{
 h:"godz.",min:"min",tag0:"bez przesiadek",tag1:"1 przesiadka",tag2:"{n} przesiadki",tag5:"{n} przesiadek",
-loc:"Czas lokalny",seat:"InterCity, miejsca siedzące",odd:"Kursuje w nieparzyste dni",train:"Pociąg",no:"nr ",swap:"Przesiadka: {a}",swapIn:"Przesiadka {c}",swapArr:"Przesiadka: {a} → {b}",
+loc:"Czas lokalny",seat:"InterCity, miejsca siedzące",odd:"Kursuje w nieparzyste dni",even:"Kursuje w parzyste dni",train:"Pociąg",no:"nr ",swap:"Przesiadka: {a}",swapIn:"Przesiadka {c}",swapArr:"Przesiadka: {a} → {b}",
 f1:"Przewodnik po trasach kolejowych z Ukrainy i do Ukrainy: rozkłady jazdy, stacje, przesiadki i przydatne informacje dla pasażerów.",
 f2h:"Aktualność informacji",f2a:"Rozkłady jazdy oraz godziny odjazdów i przyjazdów mogą ulec zmianie. Przed podróżą sprawdź aktualne informacje na stronach przewoźników.",
 f2b:"Informacje na stronie zaktualizowano: 01.11.2026.",f2c:"„Koliya” to niezależny projekt informacyjny, niezwiązany z JSC Ukrzaliznytsia.",

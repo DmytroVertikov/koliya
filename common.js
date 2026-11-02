@@ -140,8 +140,9 @@ function trainName(t) {
 
 /* Пометки у поездов: ключ подписи в i18n → номера поездов. Номер пишется кириллической «К», регистр, пробелы и ведущие нули не важны */
 const TRAIN_BADGES = {
-    seat: ["705К", "715К"], /* сидячий интерсити */
-    odd: ["070О"] /* ходит по нечётным числам */
+    seat: ["705К", "706Л", "715К", "716Л"], /* сидячий интерсити */
+    odd:  ["070О"],           // по нечётным числам
+    even: ["070К"]            // по чётным числам
 };
 const trainKey = n => String(n || "").toUpperCase().replace(/[\s№]/g, "").replace(/K/g, "К").replace(/^0+/, "");
 const trainBadges = n => Object.keys(TRAIN_BADGES).filter(k => TRAIN_BADGES[k].some(x => trainKey(x) === trainKey(n)));
