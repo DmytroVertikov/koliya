@@ -279,6 +279,7 @@
             b.classList.add("two");
             b.insertAdjacentHTML("beforeend", COACH)
         });/*/D*/
+        /*B*/document.querySelectorAll(".swap").forEach(s => s.insertAdjacentHTML("afterend", `<div class="swap border">🛂 {{border}}</div>`));/*/B*/
     }).catch(() => {
         app.innerHTML = `<div class="panel"><h2>{{err.h}}</h2><p>{{err.p}}</p></div>`
     });

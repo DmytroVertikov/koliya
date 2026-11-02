@@ -91,7 +91,8 @@ coach:"В купе предусмотрены три спальных места
 "krakow_kyiv.h1":"Поездом: Краков → Киев",
 "krakow_kyiv.lead":"Расписание поездов Краков — Киев: варианты с пересадкой в Перемышле. Время в пути, остановки и информация о покупке билетов.",
 "krakow_kyiv.all":"Все маршруты: Польша — Украина",
-"krakow_kyiv.more":"← Украина — Польша"
+"krakow_kyiv.more":"← Украина — Польша",
+"border.after":"После прибытия в Перемышль проходит пограничный контроль","border.before":"Перед отправлением из Перемышля проходит пограничный контроль"
 },
 uk:{
 h:"год",min:"хв",tag0:"без пересадок",tag1:"1 пересадка",tag2:"{n} пересадки",tag5:"{n} пересадок",
@@ -140,7 +141,8 @@ coach:"У купе передбачено три спальні місця, ро
 "krakow_kyiv.h1":"Потягом: Краків → Київ",
 "krakow_kyiv.lead":"Розклад поїздів Краків — Київ: варіанти з пересадкою у Перемишлі. Час у дорозі, зупинки та інформація про купівлю квитків.",
 "krakow_kyiv.all":"Усі маршрути: Польща — Україна",
-"krakow_kyiv.more":"← Україна — Польща"
+"krakow_kyiv.more":"← Україна — Польща",
+"border.after":"Після прибуття до Перемишля проходить прикордонний контроль","border.before":"Перед відправленням із Перемишля проходить прикордонний контроль"
 },
 en:{
 h:"h",min:"min",tag0:"direct",tag1:"1 transfer",tag2:"{n} transfers",tag5:"{n} transfers",
@@ -189,7 +191,8 @@ coach:"Each compartment has three berths, one above another. When the middle ber
 "krakow_kyiv.h1":"By train: Kraków → Kyiv",
 "krakow_kyiv.lead":"Train timetable Kraków — Kyiv: options with a transfer in Przemyśl. Journey time, stops and ticket information.",
 "krakow_kyiv.all":"All routes: Poland — Ukraine",
-"krakow_kyiv.more":"← Ukraine — Poland"
+"krakow_kyiv.more":"← Ukraine — Poland",
+"border.after":"Border control takes place in Przemyśl after arrival","border.before":"Border control takes place in Przemyśl before departure"
 },
 pl:{
 h:"godz.",min:"min",tag0:"bez przesiadek",tag1:"1 przesiadka",tag2:"{n} przesiadki",tag5:"{n} przesiadek",
@@ -238,6 +241,7 @@ coach:"W przedziale są trzy miejsca do spania, jedno nad drugim. Gdy środkowa 
 "krakow_kyiv.h1":"Pociągiem: Kraków → Kijów",
 "krakow_kyiv.lead":"Rozkład pociągów Kraków — Kijów: warianty z przesiadką w Przemyślu. Czas podróży, postoje i informacje o zakupie biletów.",
 "krakow_kyiv.all":"Wszystkie trasy: Polska — Ukraina",
-"krakow_kyiv.more":"← Ukraina — Polska"
+"krakow_kyiv.more":"← Ukraina — Polska",
+"border.after":"Po przyjeździe do Przemyśla odbywa się kontrola graniczna","border.before":"Przed odjazdem z Przemyśla odbywa się kontrola graniczna"
 }};
 if (typeof module !== "undefined") module.exports = I18N;

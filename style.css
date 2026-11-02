@@ -572,6 +572,12 @@ h2.sub {
     font-size: 15px
 }
 
+.swap.border {
+    margin-top: 8px;
+    background: var(--soft);
+    color: var(--ink)
+}
+
 .note {
     font-size: 14px;
     color: var(--mute);

@@ -6,8 +6,8 @@ const SITE = "https://dmytrovertikov.github.io/koliya/", LANGS = ["ru", "uk", "e
 const ROUTES = [
   {id: "kw", file: "kyiv-warsaw.html", FROM: "Киев", TO: "Варшава", BACK: "pl-ua", hash: "ua-pl", rev: "warsaw-kyiv.html", uz: ["Киев", "Хелм"], pkp: ["Хелм", "Варшава"], t3: "buy.t3out"},
   {id: "wk", file: "warsaw-kyiv.html", FROM: "Варшава", TO: "Киев", BACK: "ua-pl", hash: "pl-ua", rev: "kyiv-warsaw.html", uz: ["Хелм", "Киев"], pkp: ["Варшава", "Хелм"], t3: "buy.t3in"},
-  {id: "kyiv_krakow", file: "kyiv-krakow.html", FROM: "Киев", TO: "Краков", BACK: "pl-ua", hash: "ua-pl", rev: "krakow-kyiv.html", uz: ["Киев","Перемышль"], pkp: ["Перемышль","Краков"], t3: "buy.t3out", x: "Перемышль", direct: false},
-  {id: "krakow_kyiv", file: "krakow-kyiv.html", FROM: "Краков", TO: "Киев", BACK: "ua-pl", hash: "pl-ua", rev: "kyiv-krakow.html", uz: ["Перемышль","Киев"], pkp: ["Краков","Перемышль"], t3: "buy.t3in", x: "Перемышль", direct: false}
+  {id: "kyiv_krakow", file: "kyiv-krakow.html", FROM: "Киев", TO: "Краков", BACK: "pl-ua", hash: "ua-pl", rev: "krakow-kyiv.html", uz: ["Киев","Перемышль"], pkp: ["Перемышль","Краков"], t3: "buy.t3out", x: "Перемышль", direct: false, border: "after"},
+  {id: "krakow_kyiv", file: "krakow-kyiv.html", FROM: "Краков", TO: "Киев", BACK: "ua-pl", hash: "pl-ua", rev: "kyiv-krakow.html", uz: ["Перемышль","Киев"], pkp: ["Краков","Перемышль"], t3: "buy.t3in", x: "Перемышль", direct: false, border: "before"}
 ];
 /* проверки: повторы в ROUTES и повторяющиеся ключи в i18n.js (при повторе побеждает ПОСЛЕДНИЙ, из-за этого старые тексты могут «возвращаться») */
 {
@@ -39,9 +39,10 @@ for (const r of ROUTES) for (const l of LANGS) {
   v["buy.t3"] = fill(d[r.t3], v);
   const X = r.x || "Хелм", direct = r.direct !== false, plat = r.plat !== undefined ? r.plat : X === "Хелм";
   v.stamp = new Date().toISOString() + " v" + VER + " direct=" + direct + " x=" + X;
-  v.xin = xin(X, l); v.hasDirect = String(direct); v.buyone = direct ? "" : " one";
+  v.border = r.border ? fill(d["border." + r.border], v) : ""; v.xin = xin(X, l); v.hasDirect = String(direct); v.buyone = direct ? "" : " one";
   v["transfer.h"] = fill(d[plat ? "transfer.h" : "transfer.h2"], v);
-  const tpl = direct ? tpl0 : tpl0.replace(/<!--D-->[\s\S]*?<!--\/D-->/g, "").replace(/\/\*D\*\/[\s\S]*?\/\*\/D\*\//g, "");
+  const tpl1 = direct ? tpl0 : tpl0.replace(/<!--D-->[\s\S]*?<!--\/D-->/g, "").replace(/\/\*D\*\/[\s\S]*?\/\*\/D\*\//g, ""),
+    tpl = r.border ? tpl1 : tpl1.replace(/\/\*B\*\/[\s\S]*?\/\*\/B\*\//g, "");
   const out = tpl.replace(/\{\{([\w.]+)\}\}/g, (m, k) => k in v ? v[k] : k in d ? fill(d[k], v) : (console.warn("нет ключа", k), m));
   if (l !== "ru") fs.mkdirSync(l, {recursive: true});
   fs.writeFileSync(path(l, r.file), out);
