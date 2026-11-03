@@ -34,11 +34,32 @@ const toMin = t => {
     return m ? (+m[1]) * 60 + (+m[2]) : null
 };
 
+const fmtDur = d => {
+    const h = Math.floor(d / 60), m = d % 60;
+    return (h ? h + " " + t("h") : "") + (h && m ? " " : "") + (m ? m + " " + t("min") : "") || "0 " + t("min")
+};
+
+/* между двумя временами «как на табло»: до 24 ч (сутки теряются, годится для пересадки) */
 function autoDur(a, b) {
     const x = toMin(a), y = toMin(b);
     if (x == null || y == null) return "";
-    const d = ((y - x) % 1440 + 1440) % 1440, h = Math.floor(d / 60), m = d % 60;
-    return (h ? h + " " + t("h") : "") + (h && m ? " " : "") + (m ? m + " " + t("min") : "") || "0 " + t("min")
+    return fmtDur(((y - x) % 1440 + 1440) % 1440)
+}
+
+/* полное время в пути: суммируем промежутки между соседними станциями по всем поездам (включая ожидание на пересадке),
+   так сутки и более учитываются. Предполагается, что между соседними станциями проходит меньше суток */
+function legsDur(legs) {
+    let prev = null, sum = 0, n = 0;
+    (legs || []).forEach(L => L.stops.forEach(s => {
+        const m = toMin(s.time);
+        if (m == null) return;
+        if (prev != null) {
+            sum += ((m - prev) % 1440 + 1440) % 1440;
+            n++
+        }
+        prev = m
+    }));
+    return n ? fmtDur(sum) : ""
 }
 
 const autoTag = n => n < 1 ? t("tag0") : n == 1 ? t("tag1") : n < 5 ? t("tag2", {n}) : t("tag5", {n});
@@ -138,15 +159,16 @@ function trainName(t) {
     return m ? m[1].toUpperCase() + " " + m[2].toUpperCase() : t_no() + t.toUpperCase()
 }
 
-/* Пометки у поездов: ключ подписи в i18n → номера поездов. Номер пишется кириллической «К», регистр, пробелы и ведущие нули не важны */
+/* Пометки у поездов: ключ подписи в i18n → номера поездов. Буква в номере — кириллическая («070О», «070К»), но латиница O/K тоже сработает; регистр, пробелы и ведущие нули не важны */
 const TRAIN_BADGES = {
-    seat: ["705К", "706Л", "715К", "716Л"], /* сидячий интерсити */
-    odd:  ["070О"],           // по нечётным числам
-    even: ["070К"]            // по чётным числам
+    seat: ["705К", "715К"], /* сидячий интерсити */
+    odd: ["070О"], /* ходит по нечётным числам */
+    even: ["070К"] /* ходит по чётным числам */
 };
-const trainKey = n => String(n || "").toUpperCase().replace(/[\s№]/g, "").replace(/K/g, "К").replace(/^0+/, "");
+const ICON = {seat: "💺", odd: "📅", even: "📅"};
+const trainKey = n => String(n || "").toUpperCase().replace(/[\s№]/g, "").replace(/K/g, "К").replace(/O/g, "О").replace(/^0+/, "");
 const trainBadges = n => Object.keys(TRAIN_BADGES).filter(k => TRAIN_BADGES[k].some(x => trainKey(x) === trainKey(n)));
-const badgesHtml = n => trainBadges(n).map(k => `<span class="tb ${k}">${k === "seat" ? "💺" : "📅"} ${esc(t(k))}</span>`).join("");
+const badgesHtml = n => trainBadges(n).map(k => `<span class="tb ${k}">${ICON[k]} ${esc(t(k))}</span>`).join("");
 
 function optHtml(o) {
     let p;
@@ -157,7 +179,7 @@ function optHtml(o) {
     }
     const legs = p.legs;
     if (!legs.length) return "";
-    const h = p.head || deriveHead(legs), n = legs.length - 1, dur = h.dur || autoDur(h.ft, h.tt),
+    const h = p.head || deriveHead(legs), n = legs.length - 1, dur = h.dur || legsDur(legs) || autoDur(h.ft, h.tt),
         tag = h.tag || autoTag(n);
     const board = `<div class="board"><div class="pt"><time>${esc(h.ft)}</time><span>${esc(stn(h.from))}</span></div><div class="mid">${dur ? `<span class="dur">${esc(dur)}</span>` : ""}<span class="loc">${esc(t("loc"))}</span><span class="line"></span><span class="tag${n > 0 ? " x" : ""}">${esc(tag)}</span></div><div class="pt end"><time>${esc(h.tt)}</time><span>${esc(stn(h.to))}</span></div></div>`;
     const body = legs.map((L, i) => {

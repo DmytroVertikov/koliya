@@ -502,7 +502,7 @@ ${L.stops.map((s, si) => `<tr data-s="${si}" class="${s.hl ? "hl" : ""}"><td><in
                 } catch (_) {
                 }
                 pv.innerHTML = (er.length ? `<div class="err" style="margin:8px 0">${er.map(esc).join("<br>")}</div>` : '<p class="ok" style="margin:8px 0">✓ Всё в порядке</p>') + card;
-                q(".hdur").placeholder = "авто: " + (autoDur(o.head.ft, o.head.tt) || "—");
+                q(".hdur").placeholder = "авто: " + (legsDur(o.legs) || autoDur(o.head.ft, o.head.tt) || "—");
                 q(".htag").placeholder = "авто: " + autoTag(o.legs.length - 1)
             };
             const redraw = () => {
