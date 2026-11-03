@@ -235,6 +235,27 @@
 <script src="../common.js"></script>
 <script>
     const $ = s => document.querySelector(s);
+
+    /* авто-двоеточие в полях времени (.tm, .hft, .htt): вводите только цифры, «1906» → «19:06».
+       Слушатель в фазе перехвата срабатывает раньше обработчика редактора, поэтому в данные попадает уже готовое значение.
+       Если в поле есть что-то кроме цифр и двоеточия (например «05:00 +1»), оно не трогается. */
+    const fmtTime = (raw, del) => {
+        let d = raw.replace(/\D/g, "");
+        if (d[0] > "2") d = "0" + d;
+        if (d[0] === "2" && d[1] > "3") d = "0" + d;
+        if (d.length >= 3 && d[2] > "5") d = d.slice(0, 2) + "0" + d.slice(2);
+        d = d.slice(0, 4);
+        return d.length < 2 ? d : d.length === 2 ? (del ? d : d + ":") : d.slice(0, 2) + ":" + d.slice(2)
+    };
+    document.addEventListener("input", e => {
+        const t = e.target;
+        if (!t.matches || !t.matches("input.tm, input.hft, input.htt") || /[^\d:]/.test(t.value)) return;
+        const v = fmtTime(t.value, /^delete/.test(e.inputType || ""));
+        if (v !== t.value) {
+            t.value = v;
+            t.setSelectionRange(v.length, v.length)
+        }
+    }, true);
     let S = JSON.parse(localStorage.getItem("sb") || "null"), CT = [], RT = [];
     const toast = t => {
         const e = $("#toast");
