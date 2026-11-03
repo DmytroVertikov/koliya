@@ -46,20 +46,30 @@ function autoDur(a, b) {
     return fmtDur(((y - x) % 1440 + 1440) % 1440)
 }
 
-/* полное время в пути: суммируем промежутки между соседними станциями по всем поездам (включая ожидание на пересадке),
-   так сутки и более учитываются. Предполагается, что между соседними станциями проходит меньше суток */
-function legsDur(legs) {
-    let prev = null, sum = 0, n = 0;
-    (legs || []).forEach(L => L.stops.forEach(s => {
+/* Часовой пояс станции: Украина, Румыния, Молдова — UTC+2, Польша, Венгрия, Словакия, Австрия, Чехия, Германия — UTC+1 (переходы на летнее время у них совпадают).
+   Станция, которой нет в списке, считается украинской (UTC+2). Список — начала русских названий в нижнем регистре. */
+const CET_STATIONS = ["варшав", "хелм", "люблин", "перемышль", "пшемысль", "жешув", "краков", "щецин", "познан", "зелена", "свиноуй", "вроцлав", "гданьск", "катовиц", "лодзь", "белосток", "дорогуск", "медика", "будапешт", "вена", "кошице", "прага", "братислав", "берлин", "дрезден"];
+const tzOf = n => CET_STATIONS.some(p => String(n || "").trim().toLowerCase().startsWith(p)) ? 1 : 2;
+
+/* полное время в пути по часам на табло: суммируем промежутки между соседними станциями по всем поездам (включая ожидание на пересадке),
+   так сутки и более учитываются; считаем до станции прибытия из шапки (поезд может идти дальше), затем поправка на разницу часовых поясов.
+   Предполагается, что между соседними станциями проходит меньше суток. */
+function legsDur(legs, head) {
+    const st = [];
+    (legs || []).forEach((L, li) => L.stops.forEach(s => {
         const m = toMin(s.time);
-        if (m == null) return;
-        if (prev != null) {
-            sum += ((m - prev) % 1440 + 1440) % 1440;
-            n++
-        }
-        prev = m
+        if (m != null) st.push({m, name: s.name, li})
     }));
-    return n ? fmtDur(sum) : ""
+    if (st.length < 2) return "";
+    const last = legs.length - 1, tt = head ? toMin(head.tt) : null, to = head ? String(head.to || "").trim().toLowerCase() : "";
+    const byName = s => !to || String(s.name || "").trim().toLowerCase().startsWith(to);
+    let e = tt == null ? -1 : st.findIndex(s => s.li === last && s.m === tt && byName(s));
+    if (e < 0 && tt != null) e = st.findIndex(s => s.li === last && s.m === tt);
+    if (e < 1) e = st.length - 1;
+    let sum = 0;
+    for (let k = 1; k <= e; k++) sum += ((st[k].m - st[k - 1].m) % 1440 + 1440) % 1440;
+    sum += (tzOf(st[0].name) - tzOf(st[e].name)) * 60;
+    return sum > 0 ? fmtDur(sum) : ""
 }
 
 const autoTag = n => n < 1 ? t("tag0") : n == 1 ? t("tag1") : n < 5 ? t("tag2", {n}) : t("tag5", {n});
@@ -179,7 +189,7 @@ function optHtml(o) {
     }
     const legs = p.legs;
     if (!legs.length) return "";
-    const h = p.head || deriveHead(legs), n = legs.length - 1, dur = h.dur || legsDur(legs) || autoDur(h.ft, h.tt),
+    const h = p.head || deriveHead(legs), n = legs.length - 1, dur = h.dur || legsDur(legs, h) || autoDur(h.ft, h.tt),
         tag = h.tag || autoTag(n);
     const board = `<div class="board"><div class="pt"><time>${esc(h.ft)}</time><span>${esc(stn(h.from))}</span></div><div class="mid">${dur ? `<span class="dur">${esc(dur)}</span>` : ""}<span class="loc">${esc(t("loc"))}</span><span class="line"></span><span class="tag${n > 0 ? " x" : ""}">${esc(tag)}</span></div><div class="pt end"><time>${esc(h.tt)}</time><span>${esc(stn(h.to))}</span></div></div>`;
     const body = legs.map((L, i) => {
