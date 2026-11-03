@@ -61,14 +61,23 @@ function legsDur(legs, head) {
         if (m != null) st.push({m, name: s.name, li})
     }));
     if (st.length < 2) return "";
-    const last = legs.length - 1, tt = head ? toMin(head.tt) : null, to = head ? String(head.to || "").trim().toLowerCase() : "";
-    const byName = s => !to || String(s.name || "").trim().toLowerCase().startsWith(to);
-    let e = tt == null ? -1 : st.findIndex(s => s.li === last && s.m === tt && byName(s));
-    if (e < 0 && tt != null) e = st.findIndex(s => s.li === last && s.m === tt);
-    if (e < 1) e = st.length - 1;
+    const last = legs.length - 1, nm = v => String(v || "").trim().toLowerCase();
+    /* первая и последняя станции из шапки: поезд может начинаться раньше и идти дальше, их остановки не считаются */
+    const find = (li, time, name) => {
+        const t = time == null ? null : toMin(time);
+        if (t == null) return -1;
+        const ok = (s, byName) => s.li === li && s.m === t && (!byName || !nm(name) || nm(s.name).startsWith(nm(name)));
+        let k = st.findIndex(s => ok(s, true));
+        if (k < 0) k = st.findIndex(s => ok(s, false));
+        return k
+    };
+    let b = head ? find(0, head.ft, head.from) : -1, e = head ? find(last, head.tt, head.to) : -1;
+    if (b < 0) b = 0;
+    if (e <= b) e = st.length - 1;
+    if (e <= b) return "";
     let sum = 0;
-    for (let k = 1; k <= e; k++) sum += ((st[k].m - st[k - 1].m) % 1440 + 1440) % 1440;
-    sum += (tzOf(st[0].name) - tzOf(st[e].name)) * 60;
+    for (let k = b + 1; k <= e; k++) sum += ((st[k].m - st[k - 1].m) % 1440 + 1440) % 1440;
+    sum += (tzOf(st[b].name) - tzOf(st[e].name)) * 60;
     return sum > 0 ? fmtDur(sum) : ""
 }
 
