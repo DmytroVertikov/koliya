@@ -26,6 +26,7 @@ ST: {
 "Познань":["Познань","Poznań","Poznań","в Познани","у Познані","w Poznaniu"],
 "Зелена-Гура":["Зелена-Гура","Zielona Góra","Zielona Góra","","","w Zielonej Górze"],
 "Харьков":["Харків","Kharkiv","Charków","в Харькове","у Харкові","w Charkowie"],
+"Одесса":["Одеса","Odesa","Odessa","в Одессе","в Одесі","w Odessie"],
 "Свиноуйсьце":["Свіноуйсьце","Świnoujście","Świnoujście","","","w Świnoujściu"],
 "Днепр":["Дніпро","Dnipro","Dnipro","в Днепре","у Дніпрі","w Dnipro"],
 "Будапешт":["Будапешт","Budapest","Budapeszt","","",""],
@@ -140,7 +141,19 @@ coach:"В купе предусмотрены три спальных места
 "krakow_kharkiv.h1":"Поездом: Краков → Харьков",
 "krakow_kharkiv.lead":"Расписание поездов Краков — Харьков: варианты с пересадкой в Перемышле. Время в пути, остановки и информация о покупке билетов.",
 "krakow_kharkiv.all":"Все маршруты: Польша — Украина",
-"krakow_kharkiv.more":"← Украина — Польша"
+"krakow_kharkiv.more":"← Украина — Польша",
+"odesa_krakow.title":"Одесса → Краков поездом | Колія",
+"odesa_krakow.desc":"Поезда Одесса — Краков с пересадкой: время, станции, длительность.",
+"odesa_krakow.h1":"Поездом: Одесса → Краков",
+"odesa_krakow.lead":"Расписание поездов Одесса — Краков: варианты с пересадкой в Перемышле. Время в пути, остановки и информация о покупке билетов.",
+"odesa_krakow.all":"Все маршруты: Украина — Польша",
+"odesa_krakow.more":"← Польша — Украина",
+"krakow_odesa.title":"Краков → Одесса поездом | Колія",
+"krakow_odesa.desc":"Поезда Краков — Одесса с пересадкой: время, станции, длительность.",
+"krakow_odesa.h1":"Поездом: Краков → Одесса",
+"krakow_odesa.lead":"Расписание поездов Краков — Одесса: варианты с пересадкой в Перемышле. Время в пути, остановки и информация о покупке билетов.",
+"krakow_odesa.all":"Все маршруты: Польша — Украина",
+"krakow_odesa.more":"← Украина — Польша"
 },
 uk:{
 h:"год",min:"хв",tag0:"без пересадок",tag1:"1 пересадка",tag2:"{n} пересадки",tag5:"{n} пересадок",
@@ -238,7 +251,19 @@ coach:"У купе передбачено три спальні місця, ро
 "krakow_kharkiv.h1":"Потягом: Краків → Харків",
 "krakow_kharkiv.lead":"Розклад поїздів Краків — Харків: варіанти з пересадкою у Перемишлі. Час у дорозі, зупинки та інформація про купівлю квитків.",
 "krakow_kharkiv.all":"Усі маршрути: Польща — Україна",
-"krakow_kharkiv.more":"← Україна — Польща"
+"krakow_kharkiv.more":"← Україна — Польща",
+"odesa_krakow.title":"Одеса → Краків потягом | Колія",
+"odesa_krakow.desc":"Поїзди Одеса — Краків з пересадкою: час, станції, тривалість.",
+"odesa_krakow.h1":"Потягом: Одеса → Краків",
+"odesa_krakow.lead":"Розклад поїздів Одеса — Краків: варіанти з пересадкою у Перемишлі. Час у дорозі, зупинки та інформація про купівлю квитків.",
+"odesa_krakow.all":"Усі маршрути: Україна — Польща",
+"odesa_krakow.more":"← Польща — Україна",
+"krakow_odesa.title":"Краків → Одеса потягом | Колія",
+"krakow_odesa.desc":"Поїзди Краків — Одеса з пересадкою: час, станції, тривалість.",
+"krakow_odesa.h1":"Потягом: Краків → Одеса",
+"krakow_odesa.lead":"Розклад поїздів Краків — Одеса: варіанти з пересадкою у Перемишлі. Час у дорозі, зупинки та інформація про купівлю квитків.",
+"krakow_odesa.all":"Усі маршрути: Польща — Україна",
+"krakow_odesa.more":"← Україна — Польща"
 },
 en:{
 h:"h",min:"min",tag0:"direct",tag1:"1 transfer",tag2:"{n} transfers",tag5:"{n} transfers",
@@ -336,7 +361,19 @@ coach:"Each compartment has three berths, one above another. When the middle ber
 "krakow_kharkiv.h1":"By train: Kraków → Kharkiv",
 "krakow_kharkiv.lead":"Train timetable Kraków — Kharkiv: options with a transfer in Przemyśl. Journey time, stops and ticket information.",
 "krakow_kharkiv.all":"All routes: Poland — Ukraine",
-"krakow_kharkiv.more":"← Ukraine — Poland"
+"krakow_kharkiv.more":"← Ukraine — Poland",
+"odesa_krakow.title":"Odesa → Kraków by train | Koliya",
+"odesa_krakow.desc":"Trains Odesa — Kraków with a transfer: times, stations, duration.",
+"odesa_krakow.h1":"By train: Odesa → Kraków",
+"odesa_krakow.lead":"Train timetable Odesa — Kraków: options with a transfer in Przemyśl. Journey time, stops and ticket information.",
+"odesa_krakow.all":"All routes: Ukraine — Poland",
+"odesa_krakow.more":"← Poland — Ukraine",
+"krakow_odesa.title":"Kraków → Odesa by train | Koliya",
+"krakow_odesa.desc":"Trains Kraków — Odesa with a transfer: times, stations, duration.",
+"krakow_odesa.h1":"By train: Kraków → Odesa",
+"krakow_odesa.lead":"Train timetable Kraków — Odesa: options with a transfer in Przemyśl. Journey time, stops and ticket information.",
+"krakow_odesa.all":"All routes: Poland — Ukraine",
+"krakow_odesa.more":"← Ukraine — Poland"
 },
 pl:{
 h:"godz.",min:"min",tag0:"bez przesiadek",tag1:"1 przesiadka",tag2:"{n} przesiadki",tag5:"{n} przesiadek",
@@ -434,6 +471,18 @@ coach:"W przedziale są trzy miejsca do spania, jedno nad drugim. Gdy środkowa 
 "krakow_kharkiv.h1":"Pociągiem: Kraków → Charków",
 "krakow_kharkiv.lead":"Rozkład pociągów Kraków — Charków: warianty z przesiadką w Przemyślu. Czas podróży, postoje i informacje o zakupie biletów.",
 "krakow_kharkiv.all":"Wszystkie trasy: Polska — Ukraina",
-"krakow_kharkiv.more":"← Ukraina — Polska"
+"krakow_kharkiv.more":"← Ukraina — Polska",
+"odesa_krakow.title":"Odessa → Kraków pociągiem | Koliya",
+"odesa_krakow.desc":"Pociągi Odessa — Kraków z przesiadką: godziny, stacje, czas podróży.",
+"odesa_krakow.h1":"Pociągiem: Odessa → Kraków",
+"odesa_krakow.lead":"Rozkład pociągów Odessa — Kraków: warianty z przesiadką w Przemyślu. Czas podróży, postoje i informacje o zakupie biletów.",
+"odesa_krakow.all":"Wszystkie trasy: Ukraina — Polska",
+"odesa_krakow.more":"← Polska — Ukraina",
+"krakow_odesa.title":"Kraków → Odessa pociągiem | Koliya",
+"krakow_odesa.desc":"Pociągi Kraków — Odessa z przesiadką: godziny, stacje, czas podróży.",
+"krakow_odesa.h1":"Pociągiem: Kraków → Odessa",
+"krakow_odesa.lead":"Rozkład pociągów Kraków — Odessa: warianty z przesiadką w Przemyślu. Czas podróży, postoje i informacje o zakupie biletów.",
+"krakow_odesa.all":"Wszystkie trasy: Polska — Ukraina",
+"krakow_odesa.more":"← Ukraina — Polska"
 }};
 if (typeof module !== "undefined") module.exports = I18N;
