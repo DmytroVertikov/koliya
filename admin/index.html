@@ -487,7 +487,7 @@ ${L.stops.map((s, si) => `<tr data-s="${si}" class="${s.hl ? "hl" : ""}"><td><in
 <div class="txw" style="display:none"><label>Текстовый формат (для опытных)</label><textarea class="dsl" style="min-height:140px"></textarea><button class="sm ap" style="margin-top:6px">Применить текст</button></div>
 <h3 style="margin:18px 0 0;font-size:15px">Как это увидят на сайте</h3><div class="pv"></div>
 <div class="row"><div><label>Примечание</label><input class="n" value="${esc(o.note)}"></div><div><label>Порядок</label><input class="o" type="number" value="${o.sort}"></div><div><label>Показывать</label><select class="a"><option value="1" ${o.active ? "selected" : ""}>Да</option><option value="0" ${o.active ? "" : "selected"}>Скрыт</option></select></div></div>
-<div class="row" style="margin-top:12px"><button class="pri sv">Сохранить вариант</button>${o.id ? '<button class="del dl">Удалить</button>' : ""}</div></div>`
+<div class="row" style="margin-top:12px"><button class="pri sv">Сохранить вариант</button>${o.id ? '<button class="del dl">Удалить</button>' : ""}${o.id && !pg.orph ? '<button class="sm cp">📋 Копировать на другую страницу</button>' : ""}</div>${o.id && !pg.orph ? `<div class="cpw" style="display:none;margin-top:10px"><label>Куда скопировать (копия создаётся скрытой)</label><div class="row"><select class="cps">${PAGES().filter(p => p.href !== pg.href).map(p => `<option value="${esc(p.href)}">${esc(p.title)}</option>`).join("")}</select><button class="sm cpg">Создать копию</button></div></div>` : ""}</div>`
             }).join("") || (isNew ? "" : "<p>Вариантов пока нет.</p>");
             box.querySelectorAll(".eopt").forEach(wire)
         }
@@ -579,7 +579,11 @@ ${L.stops.map((s, si) => `<tr data-s="${si}" class="${s.hl ? "hl" : ""}"><td><in
                     o.legs = p.legs;
                     o.head = p.head || deriveHead(p.legs);
                     list()
-                } else if (t.classList.contains("sv")) save();
+                } else if (t.classList.contains("cp")) {
+                    const x = q(".cpw");
+                    x.style.display = x.style.display == "none" ? "" : "none"
+                } else if (t.classList.contains("cpg")) copyTo();
+                else if (t.classList.contains("sv")) save();
                 else if (t.classList.contains("dl")) del()
             });
 
@@ -605,6 +609,36 @@ ${L.stops.map((s, si) => `<tr data-s="${si}" class="${s.hl ? "hl" : ""}"><td><in
                     o.head = head;
                     toast(!pg.orph && !onPage(o, pg) ? "Сохранено, но шапка не совпадает со страницей: на ней вариант не появится" : "Сохранено");
                     list()
+                } catch (e) {
+                    alert(e.message)
+                }
+            }
+
+            /* копия варианта на другую страницу: названия начальной и конечной станций заменяются на названия той страницы
+               («Одесса» → «Кременчуг»), «в пути» сбрасывается; копия создаётся скрытой, чтобы не показывать недоделанное.
+               Дальше откройте страницу, поправьте номер поезда, станцию и время и включите «Показывать». */
+            async function copyTo() {
+                const tp = PAGES().find(p => p.href === q(".cps").value);
+                if (!tp) return;
+                const [sa, sb] = ends(pg), [ta, tb] = ends(tp);
+                const ren = n => {
+                    const v = String(n || "").trim(), x = norm(v);
+                    if (sa && x.startsWith(norm(sa))) return ta + v.slice(sa.length);
+                    if (sb && x.startsWith(norm(sb))) return tb + v.slice(sb.length);
+                    return v
+                };
+                const c = JSON.parse(JSON.stringify({head: o.head, legs: o.legs}));
+                c.head.from = ren(c.head.from);
+                c.head.to = ren(c.head.to);
+                c.head.dur = "";
+                c.legs.forEach(L => L.stops.forEach(s => s.name = ren(s.name)));
+                try {
+                    await db("POST", "options", {
+                        route_slug: tp.route, dsl: serializeOption(c), note: (o.note || "").trim(),
+                        sort: o.sort, active: false, updated_at: new Date().toISOString()
+                    });
+                    toast("Копия создана и скрыта: откройте «" + tp.title + "», поправьте и включите показ");
+                    home(tp.href)
                 } catch (e) {
                     alert(e.message)
                 }

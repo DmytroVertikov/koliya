@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<!-- build 2026-11-03T14:53:38.032Z vmw0t5nx5 direct=false x=Перемышль -->
+<html lang="uk">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>Кременчук → Варшава потягом | Колія</title>
+    <meta name="description" content="Поїзди Кременчук — Варшава з пересадкою: час, станції, тривалість.">
+    <meta name="theme-color" content="#12145c">
+    <link rel="canonical" href="https://dmytrovertikov.github.io/koliya/uk/kremenchuk-warsaw.html">
+    <link rel="alternate" hreflang="ru" href="https://dmytrovertikov.github.io/koliya/kremenchuk-warsaw.html">
+    <link rel="alternate" hreflang="uk" href="https://dmytrovertikov.github.io/koliya/uk/kremenchuk-warsaw.html">
+    <link rel="alternate" hreflang="en" href="https://dmytrovertikov.github.io/koliya/en/kremenchuk-warsaw.html">
+    <link rel="alternate" hreflang="pl" href="https://dmytrovertikov.github.io/koliya/pl/kremenchuk-warsaw.html">
+    <link rel="alternate" hreflang="x-default" href="https://dmytrovertikov.github.io/koliya/kremenchuk-warsaw.html">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap">
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        .wrap {
+            max-width: 1080px
+        }
+
+        .cols {
+            display: grid;
+            grid-template-columns:repeat(2, minmax(0, 1fr));
+            gap: 18px
+        }
+
+        .cols .opt {
+            margin-top: 0
+        }
+
+        /* один вариант: карточка и заголовок по центру */
+        .cols.one {
+            grid-template-columns: minmax(0, 640px);
+            justify-content: center
+        }
+
+        h2.sub.c {
+            text-align: center
+        }
+
+        .cols .board, .direct .board {
+            --t: clamp(32px, 4vw, 46px)
+        }
+
+        .direct .opt {
+            margin-top: 0
+        }
+
+        /* прямой поезд: зелёный цвет вместо синего */
+        .direct .board {
+            background: linear-gradient(160deg, #12875a, #0a4d34)
+        }
+
+        .direct .opt {
+            border-color: #12875a;
+            box-shadow: 0 14px 36px -14px rgba(18, 135, 90, .55)
+        }
+
+        .direct .tl {
+            --rail: #12875a
+        }
+
+        .direct .leg h4 {
+            color: #0a6b46;
+            background: #dcf5e9
+        }
+
+        .direct .tag {
+            background: var(--acc);
+            color: var(--accink)
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .direct .leg h4 {
+                color: #7be0b0;
+                background: #12392b
+            }
+        }
+
+        .direct .body.two {
+            display: grid;
+            grid-template-columns:minmax(0, 1fr) minmax(0, 1fr);
+            gap: 0 28px;
+            align-items: start
+        }
+
+        .direct .body.two .note {
+            grid-column: 1/-1
+        }
+
+        .coach {
+            grid-column: 2;
+            grid-row: 1;
+            margin-top: 16px;
+            padding: 18px 20px;
+            border-radius: 18px;
+            background: #dcf5e9;
+            color: #0a4d34;
+            border: 1px solid rgba(18, 135, 90, .25)
+        }
+
+        .coach h4 {
+            margin: 0 0 8px;
+            font-family: var(--disp);
+            font-weight: 800;
+            font-size: 17px
+        }
+
+        .coach p {
+            margin: 0;
+            font-size: 15.5px;
+            line-height: 1.6
+        }
+
+        .coach p + p {
+            margin-top: 8px
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .coach {
+                background: #12392b;
+                color: #bff0d8;
+                border-color: rgba(123, 224, 176, .25)
+            }
+        }
+
+        .buy {
+            display: grid;
+            grid-template-columns:repeat(2, minmax(0, 1fr));
+            gap: 18px;
+            margin-top: 14px
+        }
+
+        .buy > div {
+            background: var(--soft);
+            border-radius: 18px;
+            padding: 18px 20px
+        }
+
+        .buy > div.d {
+            background: #dcf5e9;
+            color: #0a4d34
+        }
+
+        .buy > div.d .steps li:before {
+            background: #12875a;
+            color: #fff
+        }
+
+        .buy h3 {
+            margin: 0 0 2px;
+            font-family: var(--disp);
+            font-weight: 800;
+            font-size: 17px
+        }
+
+        .buy .steps {
+            margin-top: 12px
+        }
+
+        .buy .btn {
+            margin-top: 14px
+        }
+
+        .buy .btn:not(.pri) {
+            box-shadow: inset 0 0 0 2px var(--brand)
+        }
+
+        .buy > div.d .btn {
+            background: #fff;
+            color: #0a6b46;
+            box-shadow: inset 0 0 0 2px #12875a
+        }
+
+        .buy > div:not(.d) .btn:not(.pri) {
+            background: var(--brand);
+            color: var(--card);
+            box-shadow: none
+        }
+
+        .buy.one {
+            grid-template-columns: minmax(0, 1fr)
+        }
+
+        .buy-note {
+            margin-top: 16px !important;
+            font-size: 14px
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .buy > div.d {
+                background: #12392b;
+                color: #bff0d8
+            }
+
+            .buy > div.d .btn {
+                background: #0f2c21;
+                color: #7be0b0
+            }
+        }
+
+        h2.sub small {
+            font-family: var(--body);
+            font-weight: 600;
+            font-size: 14px;
+            color: var(--mute);
+            margin-left: 8px
+        }
+
+        .direct-wrap {
+            display: grid;
+            gap: 18px
+        }
+
+        @media (max-width: 760px) {
+            .buy {
+                grid-template-columns:1fr
+            }
+
+            .direct .body.two {
+                display: block
+            }
+
+            .cols {
+                grid-template-columns:1fr
+            }
+
+            .cols .board, .direct .board {
+                --t: clamp(34px, 10vw, 60px)
+            }
+        }
+    </style>
+</head>
+<body>
+<header>
+    <div class="wrap"><nav class="lang"><a href="../kremenchuk-warsaw.html" hreflang="ru" lang="ru">RU</a><a href="../uk/kremenchuk-warsaw.html" hreflang="uk" lang="uk" class="on">UK</a><a href="../en/kremenchuk-warsaw.html" hreflang="en" lang="en">EN</a><a href="../pl/kremenchuk-warsaw.html" hreflang="pl" lang="pl">PL</a></nav><a class="logo" href="./"><span class="rails">🚆</span> КОЛІЯ</a>
+        <h1>Потягом: Кременчук → Варшава</h1>
+        <p id="lead">Розклад поїздів Кременчук — Варшава: варіанти з пересадкою у Перемишлі. Час у дорозі, зупинки та інформація про купівлю квитків.</p></div>
+</header>
+<main class="wrap"><a class="back" href="./">← Головна</a> <a class="back" href="./#ua-pl">Усі маршрути: Україна — Польща</a> <a class="back" href="warsaw-kremenchuk.html">🔄 Варшава → Кременчук</a>
+    <div id="app"><p>Завантаження…</p></div>
+    <div id="more"></div>
+</main>
+<div class="wrap"><aside class="ad wide" data-slot="bottom" hidden></aside></div>
+<footer class="wrap" id="site-footer"></footer>
+<script>window.LANG = "uk";</script>
+<script src="../config.js"></script>
+<script src="../i18n.js"></script>
+<script src="../common.js"></script>
+<script>
+    const FROM = "Кременчуг", TO = "Варшава", BACK = "pl-ua"; // FROM/TO: русские названия, как в шапке карточки в админке
+    
+    const BUY = `<section class="panel"><h2>Як купити квитки</h2>
+<div class="buy one">
+
+<!--T--><div><h3>З пересадкою у Перемишлі</h3><ol class="steps">
+<li>Відкрийте застосунок «Укрзалізниця», оберіть маршрут Кременчук → Перемишль і вкажіть дату поїздки. Продаж квитків відкривається за 20 діб до відправлення, о 09:00 за київським часом. Оберіть поїзд і сплатіть квиток.</li>
+<li>Квиток на поїзд Перемишль → Варшава придбайте окремо в польського перевізника PKP Intercity — на офіційному сайті intercity.pl або в застосунку PKP Intercity. Також квитки можна купити на сайті koleo.pl або в застосунку KOLEO.</li>
+
+<li>Після купівлі збережіть обидва електронні квитки в телефоні. Перед поїздкою перевірте дати, час відправлення та станції прибуття.</li></ol>
+<a class="btn pri" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Купити в застосунку УЗ квиток Кременчук → Перемишль</a>
+<a class="btn" href="https://www.intercity.pl/" target="_blank" rel="noopener">Купити на сайті PKP Intercity квиток Перемишль → Варшава</a></div><!--/T-->
+
+</div>
+<p class="buy-note">Графіки руху поїздів можуть змінюватися, актуальну інформацію дивіться в застосунку УЗ та на сайті PKP Intercity.</p></section>`;
+    const app = document.getElementById("app");
+    const norm = s => String(s || "").trim().toLowerCase();
+    fetch(U + "/rest/v1/options?order=sort", {headers: {apikey: K, Authorization: "Bearer " + K}}).then(r => {
+        if (!r.ok) throw 0;
+        return r.json()
+    }).then(all => {
+        const list = all.filter(o => o.active !== false).map(o => {
+            const p = parseOption(o.dsl);
+            return {o, p, h: p.head || deriveHead(p.legs)}
+        }).filter(x => x.p.legs.length && norm(x.h.from).startsWith(norm(FROM)) && norm(x.h.to).startsWith(norm(TO)));
+        const HAS_DIRECT = false; /* false: страница без прямого поезда, все варианты идут как «с пересадкой» */
+        const direct = HAS_DIRECT ? list.filter(x => x.p.legs.length === 1) : [], transfer = HAS_DIRECT ? list.filter(x => x.p.legs.length > 1) : list;
+        if (!list.length) {
+            app.innerHTML = `<div class="panel"><h2>Поки що немає варіантів</h2><p>Додайте їх в адмінці.</p></div>`;
+            return
+        }
+        app.innerHTML = ""
+            + (transfer.length ? `<h2 class="sub${transfer.length === 1 ? " c" : ""}">З пересадкою у Перемишлі</h2><div class="cols${transfer.length === 1 ? " one" : ""}" style="margin-top:16px">${transfer.map(x => optHtml(x.o)).join("")}</div>` : "");
+        
+        /*B*/document.querySelectorAll(".swap").forEach(s => s.insertAdjacentHTML("afterend", `<div class="swap border">🛂 Після прибуття до Перемишля відбувається прикордонний контроль</div>`));/*/B*/
+    }).catch(() => {
+        app.innerHTML = `<div class="panel"><h2>Не вдалося завантажити дані</h2><p>Оновіть сторінку пізніше.</p></div>`
+    });
+    const here = location.pathname.split("/").pop() || "index.html",
+        others = ((window.CFG && CFG.PAGES) || []).filter(p => p.href !== here);
+    document.getElementById("more").innerHTML = BUY + `<section class="panel"><h2>Інші маршрути</h2><div class="grid" style="margin-top:12px"><a class="btn" href="./#${BACK}">← Польща — Україна</a>${others.map(p => `<a class="btn" href="${esc(p.href)}">${esc(trRoute(p.title))}</a>`).join("")}<a class="btn" href="./">Усі країни</a></div></section>`;
+</script>
+</body>
+</html>
