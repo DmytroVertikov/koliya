@@ -20,8 +20,8 @@ const ROUTES = [
   {id: "warsaw_odesa", file: "warsaw-odesa.html", FROM: "Варшава", TO: "Одесса", BACK: "ua-pl", hash: "pl-ua", rev: "odesa-warsaw.html", uz: ["Перемышль","Одесса"], pkp: ["Варшава","Перемышль"], t3: "buy.t3in", x: "Перемышль", direct: false, plat: false, border: "before", one: true},
   {id: "odesa_krakow", file: "odesa-krakow.html", FROM: "Одесса", TO: "Краков", BACK: "pl-ua", hash: "ua-pl", rev: "krakow-odesa.html", uz: ["Одесса","Перемышль"], pkp: ["Перемышль","Краков"], t3: "buy.t3out", x: "Перемышль", direct: false, border: "after", one: true},
   {id: "krakow_odesa", file: "krakow-odesa.html", FROM: "Краков", TO: "Одесса", BACK: "ua-pl", hash: "pl-ua", rev: "odesa-krakow.html", uz: ["Перемышль","Одесса"], pkp: ["Краков","Перемышль"], t3: "buy.t3in", x: "Перемышль", direct: false, border: "before", one: true},
-  {id: "lviv_warsaw", file: "lviv-warsaw.html", FROM: "Львов", TO: "Варшава", BACK: "pl-ua", hash: "ua-pl", rev: "warsaw-lviv.html", uz: ["Львов","Перемышль"], pkp: ["Перемышль","Варшава"], t3: "buy.t3out", x: "Перемышль", direct: false, plat: false, border: "after"},
-  {id: "warsaw_lviv", file: "warsaw-lviv.html", FROM: "Варшава", TO: "Львов", BACK: "ua-pl", hash: "pl-ua", rev: "lviv-warsaw.html", uz: ["Перемышль","Львов"], pkp: ["Варшава","Перемышль"], t3: "buy.t3in", x: "Перемышль", direct: false, plat: false, border: "before"},
+  {id: "lviv_warsaw", file: "lviv-warsaw.html", FROM: "Львов", TO: "Варшава", BACK: "pl-ua", hash: "ua-pl", rev: "warsaw-lviv.html", uz: ["Львов","Перемышль"], pkp: ["Перемышль","Варшава"], t3: "buy.t3out", x: "Рава-Русская", direct: false, plat: false, app: true},
+  {id: "warsaw_lviv", file: "warsaw-lviv.html", FROM: "Варшава", TO: "Львов", BACK: "ua-pl", hash: "pl-ua", rev: "lviv-warsaw.html", uz: ["Перемышль","Львов"], pkp: ["Варшава","Перемышль"], t3: "buy.t3in", x: "Рава-Русская", direct: false, plat: false, app: true},
   {id: "lviv_krakow", file: "lviv-krakow.html", FROM: "Львов", TO: "Краков", BACK: "pl-ua", hash: "ua-pl", rev: "krakow-lviv.html", uz: ["Львов","Перемышль"], pkp: ["Перемышль","Краков"], t3: "buy.t3out", x: "Перемышль", direct: false, border: "after"},
   {id: "krakow_lviv", file: "krakow-lviv.html", FROM: "Краков", TO: "Львов", BACK: "ua-pl", hash: "pl-ua", rev: "lviv-krakow.html", uz: ["Перемышль","Львов"], pkp: ["Краков","Перемышль"], t3: "buy.t3in", x: "Перемышль", direct: false, border: "before"}
 ];
@@ -55,11 +55,12 @@ for (const r of ROUTES) for (const l of LANGS) {
   v["buy.t3"] = fill(d[r.t3], v); v["buy.t.s1x"] = fill(d[r.one ? "buy.t.s1one" : "buy.t.s1"], v);
   const X = r.x || "Хелм", direct = r.direct !== false, plat = r.plat !== undefined ? r.plat : X === "Хелм";
   v.stamp = new Date().toISOString() + " v" + VER + " direct=" + direct + " x=" + X;
-  v.border = r.border ? fill(d["border." + r.border], v) : ""; v.xin = xin(X, l); v.hasDirect = String(direct); v.buyone = direct ? "" : " one";
+  v.border = r.border ? fill(d["border." + r.border], v) : ""; v["buy.notex"] = fill(d[r.app ? "buy.note.a" : "buy.note"], v); v.xin = xin(X, l); v.hasDirect = String(direct); v.buyone = direct ? "" : " one";
   v["transfer.h"] = fill(d[plat ? "transfer.h" : "transfer.h2"], v);
   const tpl1 = direct ? tpl0 : tpl0.replace(/<!--D-->[\s\S]*?<!--\/D-->/g, "").replace(/\/\*D\*\/[\s\S]*?\/\*\/D\*\//g, ""),
     tpl2 = r.border ? tpl1 : tpl1.replace(/\/\*B\*\/[\s\S]*?\/\*\/B\*\//g, ""),
-    tpl = r.one ? tpl2.replace(/<!--T3-->[\s\S]*?<!--\/T3-->/g, "") : tpl2;
+    tpl3 = r.one ? tpl2.replace(/<!--T3-->[\s\S]*?<!--\/T3-->/g, "") : tpl2,
+    tpl = r.app ? tpl3.replace(/<!--T-->[\s\S]*?<!--\/T-->/g, "") : tpl3.replace(/<!--A-->[\s\S]*?<!--\/A-->/g, "");
   const out = tpl.replace(/\{\{([\w.]+)\}\}/g, (m, k) => k in v ? v[k] : k in d ? fill(d[k], v) : (console.warn("нет ключа", k), m));
   if (l !== "ru") fs.mkdirSync(l, {recursive: true});
   fs.writeFileSync(path(l, r.file), out);

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- build 2026-11-03T11:56:00.360Z vmw0mt8eg direct=false x=Перемышль -->
+<!-- build 2026-11-03T12:29:15.908Z vmw0o0061 direct=false x=Рава-Русская -->
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -239,7 +239,7 @@
 <header>
     <div class="wrap"><nav class="lang"><a href="../warsaw-lviv.html" hreflang="ru" lang="ru">RU</a><a href="../uk/warsaw-lviv.html" hreflang="uk" lang="uk">UK</a><a href="../en/warsaw-lviv.html" hreflang="en" lang="en" class="on">EN</a><a href="../pl/warsaw-lviv.html" hreflang="pl" lang="pl">PL</a></nav><a class="logo" href="./"><span class="rails">🚆</span> КОЛІЯ</a>
         <h1>By train: Warsaw → Lviv</h1>
-        <p id="lead">Train timetable Warsaw — Lviv: options with a transfer in Przemyśl. Journey time, stops and ticket information.</p></div>
+        <p id="lead">Train timetable Warsaw — Lviv: options with a transfer in Rava-Ruska. Journey time, stops and ticket information.</p></div>
 </header>
 <main class="wrap"><a class="back" href="./">← Home</a> <a class="back" href="./#pl-ua">All routes: Poland — Ukraine</a> <a class="back" href="lviv-warsaw.html">🔄 Lviv → Warsaw</a>
     <div id="app"><p>Loading…</p></div>
@@ -257,15 +257,14 @@
     const BUY = `<section class="panel"><h2>How to buy tickets</h2>
 <div class="buy one">
 
-<div><h3>With a transfer in Przemyśl</h3><ol class="steps">
-<li>Open the Ukrzaliznytsia app, choose the route Przemyśl → Lviv and the travel date. Sales open 20 days before departure at 09:00 Kyiv time. Choose a suitable train and pay for the ticket.</li>
-<li>Buy the Warsaw → Przemyśl ticket separately from the Polish carrier PKP Intercity, on intercity.pl or in the PKP Intercity app. You can also buy it on koleo.pl or in the KOLEO app.</li>
-<!--T3--><li>When choosing the Warsaw → Przemyśl train, use the options and timetable shown above on this page. Allow for the departure time of the Przemyśl → Lviv train and the length of the transfer.</li><!--/T3-->
-<li>After buying, save both e-tickets on your phone. Before you travel, check the dates, departure times and arrival stations.</li></ol>
-<a class="btn pri" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Buy the Przemyśl → Lviv ticket in the UZ app</a>
-<a class="btn" href="https://www.intercity.pl/" target="_blank" rel="noopener">Buy the Warsaw → Przemyśl ticket on PKP Intercity</a></div>
+
+<!--A--><div><h3>With a transfer in Rava-Ruska</h3><ol class="steps">
+<li>Open the Ukrzaliznytsia app, choose the route Warsaw → Lviv and the travel date. Sales open 20 days before departure at 09:00 Kyiv time.</li>
+<li>Tap “З пересадками” (With transfers), then in the option offered pick seats for each train in turn and pay for both tickets in the app.</li>
+<li>After buying, save the e-tickets on your phone. Before you travel, check the dates, departure times and arrival stations.</li></ol>
+<a class="btn pri" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Buy the Warsaw → Lviv tickets in the UZ app</a></div><!--/A-->
 </div>
-<p class="buy-note">Train schedules may change. Check the latest information in the UZ app and on the PKP Intercity website.</p></section>`;
+<p class="buy-note">Train schedules may change. Check the latest information in the UZ app.</p></section>`;
     const app = document.getElementById("app");
     const norm = s => String(s || "").trim().toLowerCase();
     fetch(U + "/rest/v1/options?order=sort", {headers: {apikey: K, Authorization: "Bearer " + K}}).then(r => {
@@ -283,9 +282,9 @@
             return
         }
         app.innerHTML = ""
-            + (transfer.length ? `<h2 class="sub${transfer.length === 1 ? " c" : ""}">With a transfer in Przemyśl</h2><div class="cols${transfer.length === 1 ? " one" : ""}" style="margin-top:16px">${transfer.map(x => optHtml(x.o)).join("")}</div>` : "");
+            + (transfer.length ? `<h2 class="sub${transfer.length === 1 ? " c" : ""}">With a transfer in Rava-Ruska</h2><div class="cols${transfer.length === 1 ? " one" : ""}" style="margin-top:16px">${transfer.map(x => optHtml(x.o)).join("")}</div>` : "");
         
-        /*B*/document.querySelectorAll(".swap").forEach(s => s.insertAdjacentHTML("afterend", `<div class="swap border">🛂 Border control takes place in Przemyśl before departure</div>`));/*/B*/
+        
     }).catch(() => {
         app.innerHTML = `<div class="panel"><h2>Could not load the data</h2><p>Please refresh the page later.</p></div>`
     });

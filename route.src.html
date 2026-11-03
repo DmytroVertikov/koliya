@@ -257,15 +257,20 @@
 <li>{{buy.d.s2}}</li>
 <li>{{buy.d.s3}}</li></ol>
 <a class="btn" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">{{buy.d.btn}}</a></div><!--/D-->
-<div><h3>{{buy.t.h}}</h3><ol class="steps">
+<!--T--><div><h3>{{buy.t.h}}</h3><ol class="steps">
 <li>{{buy.t.s1x}}</li>
 <li>{{buy.t.s2}}</li>
 <!--T3--><li>{{buy.t3}}</li><!--/T3-->
 <li>{{buy.t.s4}}</li></ol>
 <a class="btn pri" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">{{buy.t.b1}}</a>
-<a class="btn" href="https://www.intercity.pl/" target="_blank" rel="noopener">{{buy.t.b2}}</a></div>
+<a class="btn" href="https://www.intercity.pl/" target="_blank" rel="noopener">{{buy.t.b2}}</a></div><!--/T-->
+<!--A--><div><h3>{{buy.t.h}}</h3><ol class="steps">
+<li>{{buy.a.s1}}</li>
+<li>{{buy.a.s2}}</li>
+<li>{{buy.a.s3}}</li></ol>
+<a class="btn pri" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">{{buy.a.btn}}</a></div><!--/A-->
 </div>
-<p class="buy-note">{{buy.note}}</p></section>`;
+<p class="buy-note">{{buy.notex}}</p></section>`;
     const app = document.getElementById("app");
     const norm = s => String(s || "").trim().toLowerCase();
     fetch(U + "/rest/v1/options?order=sort", {headers: {apikey: K, Authorization: "Bearer " + K}}).then(r => {

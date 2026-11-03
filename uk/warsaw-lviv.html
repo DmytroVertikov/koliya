@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- build 2026-11-03T11:56:00.359Z vmw0mt8eg direct=false x=Перемышль -->
+<!-- build 2026-11-03T12:29:15.907Z vmw0o0061 direct=false x=Рава-Русская -->
 <html lang="uk">
 <head>
     <meta charset="utf-8">
@@ -239,7 +239,7 @@
 <header>
     <div class="wrap"><nav class="lang"><a href="../warsaw-lviv.html" hreflang="ru" lang="ru">RU</a><a href="../uk/warsaw-lviv.html" hreflang="uk" lang="uk" class="on">UK</a><a href="../en/warsaw-lviv.html" hreflang="en" lang="en">EN</a><a href="../pl/warsaw-lviv.html" hreflang="pl" lang="pl">PL</a></nav><a class="logo" href="./"><span class="rails">🚆</span> КОЛІЯ</a>
         <h1>Потягом: Варшава → Львів</h1>
-        <p id="lead">Розклад поїздів Варшава — Львів: варіанти з пересадкою у Перемишлі. Час у дорозі, зупинки та інформація про купівлю квитків.</p></div>
+        <p id="lead">Розклад поїздів Варшава — Львів: варіанти з пересадкою у Раві-Руській. Час у дорозі, зупинки та інформація про купівлю квитків.</p></div>
 </header>
 <main class="wrap"><a class="back" href="./">← Головна</a> <a class="back" href="./#pl-ua">Усі маршрути: Польща — Україна</a> <a class="back" href="lviv-warsaw.html">🔄 Львів → Варшава</a>
     <div id="app"><p>Завантаження…</p></div>
@@ -257,15 +257,14 @@
     const BUY = `<section class="panel"><h2>Як купити квитки</h2>
 <div class="buy one">
 
-<div><h3>З пересадкою у Перемишлі</h3><ol class="steps">
-<li>Відкрийте застосунок «Укрзалізниця», оберіть маршрут Перемишль → Львів і вкажіть дату поїздки. Продаж квитків відкривається за 20 діб до відправлення, о 09:00 за київським часом. Оберіть потрібний поїзд і сплатіть квиток.</li>
-<li>Квиток на поїзд Варшава → Перемишль придбайте окремо в польського перевізника PKP Intercity — на офіційному сайті intercity.pl або в застосунку PKP Intercity. Також квитки можна купити на сайті koleo.pl або в застосунку KOLEO.</li>
-<!--T3--><li>Обираючи поїзд Варшава → Перемишль, орієнтуйтеся на варіанти та розклад, наведені вище на цій сторінці. Зважайте на час відправлення поїзда Перемишль → Львів і тривалість пересадки.</li><!--/T3-->
-<li>Після купівлі збережіть обидва електронні квитки в телефоні. Перед поїздкою перевірте дати, час відправлення та станції прибуття.</li></ol>
-<a class="btn pri" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Купити в застосунку УЗ квиток Перемишль → Львів</a>
-<a class="btn" href="https://www.intercity.pl/" target="_blank" rel="noopener">Купити на сайті PKP Intercity квиток Варшава → Перемишль</a></div>
+
+<!--A--><div><h3>З пересадкою у Раві-Руській</h3><ol class="steps">
+<li>Відкрийте застосунок «Укрзалізниця», оберіть маршрут Варшава → Львів і вкажіть дату поїздки. Продаж квитків відкривається за 20 діб до відправлення, о 09:00 за київським часом.</li>
+<li>Натисніть «З пересадками» і в запропонованому варіанті по черзі оберіть місця для кожного поїзда, а потім сплатіть обидва квитки в застосунку.</li>
+<li>Після купівлі збережіть електронні квитки в телефоні. Перед поїздкою перевірте дати, час відправлення та станції прибуття.</li></ol>
+<a class="btn pri" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Купити в застосунку УЗ квитки Варшава → Львів</a></div><!--/A-->
 </div>
-<p class="buy-note">Графіки руху поїздів можуть змінюватися, актуальну інформацію дивіться в застосунку УЗ та на сайті PKP Intercity.</p></section>`;
+<p class="buy-note">Графіки руху поїздів можуть змінюватися, актуальну інформацію дивіться в застосунку УЗ.</p></section>`;
     const app = document.getElementById("app");
     const norm = s => String(s || "").trim().toLowerCase();
     fetch(U + "/rest/v1/options?order=sort", {headers: {apikey: K, Authorization: "Bearer " + K}}).then(r => {
@@ -283,9 +282,9 @@
             return
         }
         app.innerHTML = ""
-            + (transfer.length ? `<h2 class="sub${transfer.length === 1 ? " c" : ""}">З пересадкою у Перемишлі</h2><div class="cols${transfer.length === 1 ? " one" : ""}" style="margin-top:16px">${transfer.map(x => optHtml(x.o)).join("")}</div>` : "");
+            + (transfer.length ? `<h2 class="sub${transfer.length === 1 ? " c" : ""}">З пересадкою у Раві-Руській</h2><div class="cols${transfer.length === 1 ? " one" : ""}" style="margin-top:16px">${transfer.map(x => optHtml(x.o)).join("")}</div>` : "");
         
-        /*B*/document.querySelectorAll(".swap").forEach(s => s.insertAdjacentHTML("afterend", `<div class="swap border">🛂 Перед відправленням із Перемишля відбувається прикордонний контроль</div>`));/*/B*/
+        
     }).catch(() => {
         app.innerHTML = `<div class="panel"><h2>Не вдалося завантажити дані</h2><p>Оновіть сторінку пізніше.</p></div>`
     });

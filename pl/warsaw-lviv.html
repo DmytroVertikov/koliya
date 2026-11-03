@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- build 2026-11-03T11:56:00.360Z vmw0mt8eg direct=false x=Перемышль -->
+<!-- build 2026-11-03T12:29:15.908Z vmw0o0061 direct=false x=Рава-Русская -->
 <html lang="pl">
 <head>
     <meta charset="utf-8">
@@ -239,7 +239,7 @@
 <header>
     <div class="wrap"><nav class="lang"><a href="../warsaw-lviv.html" hreflang="ru" lang="ru">RU</a><a href="../uk/warsaw-lviv.html" hreflang="uk" lang="uk">UK</a><a href="../en/warsaw-lviv.html" hreflang="en" lang="en">EN</a><a href="../pl/warsaw-lviv.html" hreflang="pl" lang="pl" class="on">PL</a></nav><a class="logo" href="./"><span class="rails">🚆</span> КОЛІЯ</a>
         <h1>Pociągiem: Warszawa → Lwów</h1>
-        <p id="lead">Rozkład pociągów Warszawa — Lwów: warianty z przesiadką w Przemyślu. Czas podróży, postoje i informacje o zakupie biletów.</p></div>
+        <p id="lead">Rozkład pociągów Warszawa — Lwów: warianty z przesiadką w Rawie Ruskiej. Czas podróży, postoje i informacje o zakupie biletów.</p></div>
 </header>
 <main class="wrap"><a class="back" href="./">← Strona główna</a> <a class="back" href="./#pl-ua">Wszystkie trasy: Polska — Ukraina</a> <a class="back" href="lviv-warsaw.html">🔄 Lwów → Warszawa</a>
     <div id="app"><p>Ładowanie…</p></div>
@@ -257,15 +257,14 @@
     const BUY = `<section class="panel"><h2>Jak kupić bilety</h2>
 <div class="buy one">
 
-<div><h3>Z przesiadką w Przemyślu</h3><ol class="steps">
-<li>Otwórz aplikację Ukrzaliznytsia, wybierz trasę Przemyśl → Lwów i datę podróży. Sprzedaż biletów rusza na 20 dni przed odjazdem o 9:00 czasu kijowskiego. Wybierz odpowiedni pociąg i opłać bilet.</li>
-<li>Bilet na pociąg Warszawa → Przemyśl kup osobno u polskiego przewoźnika PKP Intercity — na stronie intercity.pl lub w aplikacji PKP Intercity. Można go też kupić na koleo.pl lub w aplikacji KOLEO.</li>
-<!--T3--><li>Wybierając pociąg Warszawa → Przemyśl, kieruj się wariantami i rozkładem podanymi wyżej na tej stronie. Uwzględnij godzinę odjazdu pociągu Przemyśl → Lwów i czas przesiadki.</li><!--/T3-->
-<li>Po zakupie zapisz oba e-bilety w telefonie. Przed podróżą sprawdź daty, godziny odjazdu i stacje docelowe.</li></ol>
-<a class="btn pri" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Kup w aplikacji UZ bilet Przemyśl → Lwów</a>
-<a class="btn" href="https://www.intercity.pl/" target="_blank" rel="noopener">Kup na stronie PKP Intercity bilet Warszawa → Przemyśl</a></div>
+
+<!--A--><div><h3>Z przesiadką w Rawie Ruskiej</h3><ol class="steps">
+<li>Otwórz aplikację Ukrzaliznytsia, wybierz trasę Warszawa → Lwów i datę podróży. Sprzedaż biletów rusza na 20 dni przed odjazdem o 9:00 czasu kijowskiego.</li>
+<li>Naciśnij „З пересадками” (z przesiadkami), a w zaproponowanym wariancie po kolei wybierz miejsca w każdym pociągu i opłać oba bilety w aplikacji.</li>
+<li>Po zakupie zapisz e-bilety w telefonie. Przed podróżą sprawdź daty, godziny odjazdu i stacje docelowe.</li></ol>
+<a class="btn pri" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Kup w aplikacji UZ bilety Warszawa → Lwów</a></div><!--/A-->
 </div>
-<p class="buy-note">Rozkłady jazdy mogą ulec zmianie. Aktualne informacje znajdziesz w aplikacji UZ i na stronie PKP Intercity.</p></section>`;
+<p class="buy-note">Rozkłady jazdy mogą ulec zmianie. Aktualne informacje znajdziesz w aplikacji UZ.</p></section>`;
     const app = document.getElementById("app");
     const norm = s => String(s || "").trim().toLowerCase();
     fetch(U + "/rest/v1/options?order=sort", {headers: {apikey: K, Authorization: "Bearer " + K}}).then(r => {
@@ -283,9 +282,9 @@
             return
         }
         app.innerHTML = ""
-            + (transfer.length ? `<h2 class="sub${transfer.length === 1 ? " c" : ""}">Z przesiadką w Przemyślu</h2><div class="cols${transfer.length === 1 ? " one" : ""}" style="margin-top:16px">${transfer.map(x => optHtml(x.o)).join("")}</div>` : "");
+            + (transfer.length ? `<h2 class="sub${transfer.length === 1 ? " c" : ""}">Z przesiadką w Rawie Ruskiej</h2><div class="cols${transfer.length === 1 ? " one" : ""}" style="margin-top:16px">${transfer.map(x => optHtml(x.o)).join("")}</div>` : "");
         
-        /*B*/document.querySelectorAll(".swap").forEach(s => s.insertAdjacentHTML("afterend", `<div class="swap border">🛂 Przed odjazdem z Przemyśla odbywa się kontrola graniczna</div>`));/*/B*/
+        
     }).catch(() => {
         app.innerHTML = `<div class="panel"><h2>Nie udało się załadować danych</h2><p>Odśwież stronę później.</p></div>`
     });
