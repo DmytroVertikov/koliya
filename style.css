@@ -685,3 +685,10 @@ header .wrap{position:relative}
 .lang{position:absolute;right:18px;top:0;display:flex;gap:4px}
 .lang a{padding:4px 9px;border-radius:99px;font-size:12.5px;font-weight:700;letter-spacing:.04em;text-decoration:none;color:#fff;background:rgba(255,255,255,.12)}
 .lang a.on{background:var(--acc);color:var(--accink)}
+
+/* Навигация по направлению: группы по городу отправления */
+.dir-group + .dir-group{margin-top:16px;padding-top:16px;border-top:1px solid var(--line)}
+.dir-group h3{margin:0 0 10px;font-family:var(--disp);font-weight:800;font-size:17px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{display:inline-block;padding:8px 16px;border-radius:99px;background:var(--brand);color:var(--card);font-size:14.5px;font-weight:600;line-height:1.3;text-decoration:none;transition:filter .15s}
+.chip:hover{filter:brightness(.92)}

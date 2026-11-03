@@ -46,7 +46,16 @@
     const rlead = () => t("ix.leadDir"); /* один подзаголовок для всех направлений, текст из базы больше не используется */
     const pageLinks = id => {
         const list = PG.filter(p => p.route === id); /* только страницы этого направления: ua-pl → из Украины в Польшу, pl-ua → обратно; для других стран так же */
-        return list.length ? `<section class="panel" style="margin-top:0">${list.map((p, i) => `<a class="btn pri"${i ? "" : ' style="margin-top:0"'} href="${esc(p.href)}">${esc(t("ix.one", {t: trRoute(p.title)}))}</a>`).join("")}</section>` : ""
+        if (!list.length) return "";
+        /* группы по городу отправления (первая часть «A → B»), внутри — компактные ссылки на город прибытия */
+        const groups = new Map();
+        list.forEach(p => {
+            const parts = trRoute(p.title).split(" → "), g = parts.length > 1 ? parts[0] : "", label = parts.length > 1 ? parts.slice(1).join(" → ") : parts[0];
+            if (!groups.has(g)) groups.set(g, []);
+            groups.get(g).push({p, label})
+        });
+        const full = p => t("ix.one", {t: trRoute(p.title)}).replace(/⚡\s*/g, "");
+        return `<section class="panel" style="margin-top:0">${[...groups].map(([g, items]) => `<div class="dir-group">${g ? `<h3>${esc(g)}</h3>` : ""}<div class="chips">${items.map(({p, label}) => `<a class="chip" href="${esc(p.href)}" title="${esc(full(p))}" aria-label="${esc(full(p))}">${esc(label)}</a>`).join("")}</div></div>`).join("")}</section>`
     };
 
     async function load() {
