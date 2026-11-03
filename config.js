@@ -16,6 +16,8 @@ window.CFG = {
         {href: "warsaw-kharkiv.html", title: "Варшава → Харьков", route: "pl-ua"},
         {href: "kharkiv-krakow.html", title: "Харьков → Краков", route: "ua-pl"},
         {href: "krakow-kharkiv.html", title: "Краков → Харьков", route: "pl-ua"},
+        {href: "odesa-warsaw.html", title: "Одесса → Варшава", route: "ua-pl"},
+        {href: "warsaw-odesa.html", title: "Варшава → Одесса", route: "pl-ua"},
         {href: "odesa-krakow.html", title: "Одесса → Краков", route: "ua-pl"},
         {href: "krakow-odesa.html", title: "Краков → Одесса", route: "pl-ua"}
     ]

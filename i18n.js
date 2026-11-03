@@ -153,7 +153,19 @@ coach:"В купе предусмотрены три спальных места
 "krakow_odesa.h1":"Поездом: Краков → Одесса",
 "krakow_odesa.lead":"Расписание поездов Краков — Одесса: варианты с пересадкой в Перемышле. Время в пути, остановки и информация о покупке билетов.",
 "krakow_odesa.all":"Все маршруты: Польша — Украина",
-"krakow_odesa.more":"← Украина — Польша"
+"krakow_odesa.more":"← Украина — Польша",
+"odesa_warsaw.title":"Одесса → Варшава поездом | Колія",
+"odesa_warsaw.desc":"Поезда Одесса — Варшава с пересадкой: время, станции, длительность.",
+"odesa_warsaw.h1":"Поездом: Одесса → Варшава",
+"odesa_warsaw.lead":"Расписание поездов Одесса — Варшава: варианты с пересадкой в Хелме. Время в пути, остановки и информация о покупке билетов.",
+"odesa_warsaw.all":"Все маршруты: Украина — Польша",
+"odesa_warsaw.more":"← Польша — Украина",
+"warsaw_odesa.title":"Варшава → Одесса поездом | Колія",
+"warsaw_odesa.desc":"Поезда Варшава — Одесса с пересадкой: время, станции, длительность.",
+"warsaw_odesa.h1":"Поездом: Варшава → Одесса",
+"warsaw_odesa.lead":"Расписание поездов Варшава — Одесса: варианты с пересадкой в Хелме. Время в пути, остановки и информация о покупке билетов.",
+"warsaw_odesa.all":"Все маршруты: Польша — Украина",
+"warsaw_odesa.more":"← Украина — Польша"
 },
 uk:{
 h:"год",min:"хв",tag0:"без пересадок",tag1:"1 пересадка",tag2:"{n} пересадки",tag5:"{n} пересадок",
@@ -263,7 +275,19 @@ coach:"У купе передбачено три спальні місця, ро
 "krakow_odesa.h1":"Потягом: Краків → Одеса",
 "krakow_odesa.lead":"Розклад поїздів Краків — Одеса: варіанти з пересадкою у Перемишлі. Час у дорозі, зупинки та інформація про купівлю квитків.",
 "krakow_odesa.all":"Усі маршрути: Польща — Україна",
-"krakow_odesa.more":"← Україна — Польща"
+"krakow_odesa.more":"← Україна — Польща",
+"odesa_warsaw.title":"Одеса → Варшава потягом | Колія",
+"odesa_warsaw.desc":"Поїзди Одеса — Варшава з пересадкою: час, станції, тривалість.",
+"odesa_warsaw.h1":"Потягом: Одеса → Варшава",
+"odesa_warsaw.lead":"Розклад поїздів Одеса — Варшава: варіанти з пересадкою у Хелмі. Час у дорозі, зупинки та інформація про купівлю квитків.",
+"odesa_warsaw.all":"Усі маршрути: Україна — Польща",
+"odesa_warsaw.more":"← Польща — Україна",
+"warsaw_odesa.title":"Варшава → Одеса потягом | Колія",
+"warsaw_odesa.desc":"Поїзди Варшава — Одеса з пересадкою: час, станції, тривалість.",
+"warsaw_odesa.h1":"Потягом: Варшава → Одеса",
+"warsaw_odesa.lead":"Розклад поїздів Варшава — Одеса: варіанти з пересадкою у Хелмі. Час у дорозі, зупинки та інформація про купівлю квитків.",
+"warsaw_odesa.all":"Усі маршрути: Польща — Україна",
+"warsaw_odesa.more":"← Україна — Польща"
 },
 en:{
 h:"h",min:"min",tag0:"direct",tag1:"1 transfer",tag2:"{n} transfers",tag5:"{n} transfers",
@@ -373,7 +397,19 @@ coach:"Each compartment has three berths, one above another. When the middle ber
 "krakow_odesa.h1":"By train: Kraków → Odesa",
 "krakow_odesa.lead":"Train timetable Kraków — Odesa: options with a transfer in Przemyśl. Journey time, stops and ticket information.",
 "krakow_odesa.all":"All routes: Poland — Ukraine",
-"krakow_odesa.more":"← Ukraine — Poland"
+"krakow_odesa.more":"← Ukraine — Poland",
+"odesa_warsaw.title":"Odesa → Warsaw by train | Koliya",
+"odesa_warsaw.desc":"Trains Odesa — Warsaw with a transfer: times, stations, duration.",
+"odesa_warsaw.h1":"By train: Odesa → Warsaw",
+"odesa_warsaw.lead":"Train timetable Odesa — Warsaw: options with a transfer in Chełm. Journey time, stops and ticket information.",
+"odesa_warsaw.all":"All routes: Ukraine — Poland",
+"odesa_warsaw.more":"← Poland — Ukraine",
+"warsaw_odesa.title":"Warsaw → Odesa by train | Koliya",
+"warsaw_odesa.desc":"Trains Warsaw — Odesa with a transfer: times, stations, duration.",
+"warsaw_odesa.h1":"By train: Warsaw → Odesa",
+"warsaw_odesa.lead":"Train timetable Warsaw — Odesa: options with a transfer in Chełm. Journey time, stops and ticket information.",
+"warsaw_odesa.all":"All routes: Poland — Ukraine",
+"warsaw_odesa.more":"← Ukraine — Poland"
 },
 pl:{
 h:"godz.",min:"min",tag0:"bez przesiadek",tag1:"1 przesiadka",tag2:"{n} przesiadki",tag5:"{n} przesiadek",
@@ -483,6 +519,18 @@ coach:"W przedziale są trzy miejsca do spania, jedno nad drugim. Gdy środkowa 
 "krakow_odesa.h1":"Pociągiem: Kraków → Odessa",
 "krakow_odesa.lead":"Rozkład pociągów Kraków — Odessa: warianty z przesiadką w Przemyślu. Czas podróży, postoje i informacje o zakupie biletów.",
 "krakow_odesa.all":"Wszystkie trasy: Polska — Ukraina",
-"krakow_odesa.more":"← Ukraina — Polska"
+"krakow_odesa.more":"← Ukraina — Polska",
+"odesa_warsaw.title":"Odessa → Warszawa pociągiem | Koliya",
+"odesa_warsaw.desc":"Pociągi Odessa — Warszawa z przesiadką: godziny, stacje, czas podróży.",
+"odesa_warsaw.h1":"Pociągiem: Odessa → Warszawa",
+"odesa_warsaw.lead":"Rozkład pociągów Odessa — Warszawa: warianty z przesiadką w Chełmie. Czas podróży, postoje i informacje o zakupie biletów.",
+"odesa_warsaw.all":"Wszystkie trasy: Ukraina — Polska",
+"odesa_warsaw.more":"← Polska — Ukraina",
+"warsaw_odesa.title":"Warszawa → Odessa pociągiem | Koliya",
+"warsaw_odesa.desc":"Pociągi Warszawa — Odessa z przesiadką: godziny, stacje, czas podróży.",
+"warsaw_odesa.h1":"Pociągiem: Warszawa → Odessa",
+"warsaw_odesa.lead":"Rozkład pociągów Warszawa — Odessa: warianty z przesiadką w Chełmie. Czas podróży, postoje i informacje o zakupie biletów.",
+"warsaw_odesa.all":"Wszystkie trasy: Polska — Ukraina",
+"warsaw_odesa.more":"← Ukraina — Polska"
 }};
 if (typeof module !== "undefined") module.exports = I18N;
