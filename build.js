@@ -27,7 +27,9 @@ const ROUTES = [
   {id: "kremenchuk_warsaw", file: "kremenchuk-warsaw.html", FROM: "Кременчуг", TO: "Варшава", BACK: "pl-ua", hash: "ua-pl", rev: "warsaw-kremenchuk.html", uz: ["Кременчуг","Перемышль"], pkp: ["Перемышль","Варшава"], t3: "buy.t3out", x: "Перемышль", direct: false, plat: false, border: "after", one: true},
   {id: "warsaw_kremenchuk", file: "warsaw-kremenchuk.html", FROM: "Варшава", TO: "Кременчуг", BACK: "ua-pl", hash: "pl-ua", rev: "kremenchuk-warsaw.html", uz: ["Перемышль","Кременчуг"], pkp: ["Варшава","Перемышль"], t3: "buy.t3in", x: "Перемышль", direct: false, plat: false, border: "before", one: true},
   {id: "kremenchuk_krakow", file: "kremenchuk-krakow.html", FROM: "Кременчуг", TO: "Краков", BACK: "pl-ua", hash: "ua-pl", rev: "krakow-kremenchuk.html", uz: ["Кременчуг","Перемышль"], pkp: ["Перемышль","Краков"], t3: "buy.t3out", x: "Перемышль", direct: false, border: "after", one: true},
-  {id: "krakow_kremenchuk", file: "krakow-kremenchuk.html", FROM: "Краков", TO: "Кременчуг", BACK: "ua-pl", hash: "pl-ua", rev: "kremenchuk-krakow.html", uz: ["Перемышль","Кременчуг"], pkp: ["Краков","Перемышль"], t3: "buy.t3in", x: "Перемышль", direct: false, border: "before", one: true}
+  {id: "krakow_kremenchuk", file: "krakow-kremenchuk.html", FROM: "Краков", TO: "Кременчуг", BACK: "ua-pl", hash: "pl-ua", rev: "kremenchuk-krakow.html", uz: ["Перемышль","Кременчуг"], pkp: ["Краков","Перемышль"], t3: "buy.t3in", x: "Перемышль", direct: false, border: "before", one: true},
+  {id: "kyiv_bratislava", file: "kyiv-bratislava.html", FROM: "Киев", TO: "Братислава", BACK: "sk-ua", hash: "ua-sk", rev: "bratislava-kyiv.html", uz: ["Киев","Чоп"], pkp: ["Чоп","Братислава"], t3: "buy.t3out", x: "Чоп", direct: false, plat: false, car: "zssk"},
+  {id: "bratislava_kyiv", file: "bratislava-kyiv.html", FROM: "Братислава", TO: "Киев", BACK: "ua-sk", hash: "sk-ua", rev: "kyiv-bratislava.html", uz: ["Чоп","Киев"], pkp: ["Братислава","Чоп"], t3: "buy.t3in", x: "Чоп", direct: false, plat: false, car: "zssk"}
 ];
 /* проверки: повторы в ROUTES и повторяющиеся ключи в i18n.js (при повторе побеждает ПОСЛЕДНИЙ, из-за этого старые тексты могут «возвращаться») */
 {
@@ -59,7 +61,10 @@ for (const r of ROUTES) for (const l of LANGS) {
   v["buy.t3"] = fill(d[r.t3], v); v["buy.t.s1x"] = fill(d[r.one ? "buy.t.s1one" : "buy.t.s1"], v);
   const X = r.x || "Хелм", direct = r.direct !== false, plat = r.plat !== undefined ? r.plat : X === "Хелм";
   v.stamp = new Date().toISOString() + " v" + VER + " direct=" + direct + " x=" + X;
-  v.border = r.border ? fill(d["border." + r.border], v) : ""; v["buy.notex"] = fill(d[r.app ? "buy.note.a" : "buy.note"], v); v.xin = xin(X, l); v.hasDirect = String(direct); v.buyone = direct ? "" : " one";
+  const z = r.car === "zssk"; /* второй отрезок у словацкого перевозчика ZSSK, а не PKP Intercity */
+  v["buy.t.url"] = z ? "https://www.zssk.sk/" : "https://www.intercity.pl/";
+  v["buy.t.s2"] = fill(d[z ? "buy.t.s2z" : "buy.t.s2"], v); v["buy.t.b2"] = fill(d[z ? "buy.t.b2z" : "buy.t.b2"], v);
+  v.border = r.border ? fill(d["border." + r.border], v) : ""; v["buy.notex"] = fill(d[r.app ? "buy.note.a" : z ? "buy.note.z" : "buy.note"], v); v.xin = xin(X, l); v.hasDirect = String(direct); v.buyone = direct ? "" : " one";
   v["transfer.h"] = fill(d[plat ? "transfer.h" : "transfer.h2"], v);
   const tpl1 = direct ? tpl0 : tpl0.replace(/<!--D-->[\s\S]*?<!--\/D-->/g, "").replace(/\/\*D\*\/[\s\S]*?\/\*\/D\*\//g, ""),
     tpl2 = r.border ? tpl1 : tpl1.replace(/\/\*B\*\/[\s\S]*?\/\*\/B\*\//g, ""),
