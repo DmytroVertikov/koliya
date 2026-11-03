@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- build 2026-11-03T11:21:44.351Z vmw0ll5zb direct=false x=Хелм -->
+<!-- build 2026-11-03T11:45:15.581Z vmw0mfew0 direct=false x=Перемышль -->
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -239,7 +239,7 @@
 <header>
     <div class="wrap"><nav class="lang"><a href="../warsaw-odesa.html" hreflang="ru" lang="ru">RU</a><a href="../uk/warsaw-odesa.html" hreflang="uk" lang="uk">UK</a><a href="../en/warsaw-odesa.html" hreflang="en" lang="en" class="on">EN</a><a href="../pl/warsaw-odesa.html" hreflang="pl" lang="pl">PL</a></nav><a class="logo" href="./"><span class="rails">🚆</span> КОЛІЯ</a>
         <h1>By train: Warsaw → Odesa</h1>
-        <p id="lead">Train timetable Warsaw — Odesa: options with a transfer in Chełm. Journey time, stops and ticket information.</p></div>
+        <p id="lead">Train timetable Warsaw — Odesa: options with a transfer in Przemyśl. Journey time, stops and ticket information.</p></div>
 </header>
 <main class="wrap"><a class="back" href="./">← Home</a> <a class="back" href="./#pl-ua">All routes: Poland — Ukraine</a> <a class="back" href="odesa-warsaw.html">🔄 Odesa → Warsaw</a>
     <div id="app"><p>Loading…</p></div>
@@ -257,13 +257,13 @@
     const BUY = `<section class="panel"><h2>How to buy tickets</h2>
 <div class="buy one">
 
-<div><h3>With a transfer in Chełm</h3><ol class="steps">
-<li>Open the Ukrzaliznytsia app, choose the route Chełm → Odesa and the travel date. Sales open 20 days before departure at 09:00 Kyiv time. Choose the train and pay for the ticket.</li>
-<li>Buy the Warsaw → Chełm ticket separately from the Polish carrier PKP Intercity, on intercity.pl or in the PKP Intercity app. You can also buy it on koleo.pl or in the KOLEO app.</li>
+<div><h3>With a transfer in Przemyśl</h3><ol class="steps">
+<li>Open the Ukrzaliznytsia app, choose the route Przemyśl → Odesa and the travel date. Sales open 20 days before departure at 09:00 Kyiv time. Choose the train and pay for the ticket.</li>
+<li>Buy the Warsaw → Przemyśl ticket separately from the Polish carrier PKP Intercity, on intercity.pl or in the PKP Intercity app. You can also buy it on koleo.pl or in the KOLEO app.</li>
 
 <li>After buying, save both e-tickets on your phone. Before you travel, check the dates, departure times and arrival stations.</li></ol>
-<a class="btn pri" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Buy the Chełm → Odesa ticket in the UZ app</a>
-<a class="btn" href="https://www.intercity.pl/" target="_blank" rel="noopener">Buy the Warsaw → Chełm ticket on PKP Intercity</a></div>
+<a class="btn pri" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Buy the Przemyśl → Odesa ticket in the UZ app</a>
+<a class="btn" href="https://www.intercity.pl/" target="_blank" rel="noopener">Buy the Warsaw → Przemyśl ticket on PKP Intercity</a></div>
 </div>
 <p class="buy-note">Train schedules may change. Check the latest information in the UZ app and on the PKP Intercity website.</p></section>`;
     const app = document.getElementById("app");
@@ -283,9 +283,9 @@
             return
         }
         app.innerHTML = ""
-            + (transfer.length ? `<h2 class="sub${transfer.length === 1 ? " c" : ""}">With a transfer in Chełm</h2><div class="cols${transfer.length === 1 ? " one" : ""}" style="margin-top:16px">${transfer.map(x => optHtml(x.o)).join("")}</div>` : "");
+            + (transfer.length ? `<h2 class="sub${transfer.length === 1 ? " c" : ""}">With a transfer in Przemyśl</h2><div class="cols${transfer.length === 1 ? " one" : ""}" style="margin-top:16px">${transfer.map(x => optHtml(x.o)).join("")}</div>` : "");
         
-        
+        /*B*/document.querySelectorAll(".swap").forEach(s => s.insertAdjacentHTML("afterend", `<div class="swap border">🛂 Border control takes place in Przemyśl before departure</div>`));/*/B*/
     }).catch(() => {
         app.innerHTML = `<div class="panel"><h2>Could not load the data</h2><p>Please refresh the page later.</p></div>`
     });

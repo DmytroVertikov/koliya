@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- build 2026-11-03T11:21:44.350Z vmw0ll5zb direct=false x=Хелм -->
+<!-- build 2026-11-03T11:45:15.581Z vmw0mfew0 direct=false x=Перемышль -->
 <html lang="ru">
 <head>
     <meta charset="utf-8">
@@ -239,7 +239,7 @@
 <header>
     <div class="wrap"><nav class="lang"><a href="warsaw-odesa.html" hreflang="ru" lang="ru" class="on">RU</a><a href="uk/warsaw-odesa.html" hreflang="uk" lang="uk">UK</a><a href="en/warsaw-odesa.html" hreflang="en" lang="en">EN</a><a href="pl/warsaw-odesa.html" hreflang="pl" lang="pl">PL</a></nav><a class="logo" href="./"><span class="rails">🚆</span> КОЛІЯ</a>
         <h1>Поездом: Варшава → Одесса</h1>
-        <p id="lead">Расписание поездов Варшава — Одесса: варианты с пересадкой в Хелме. Время в пути, остановки и информация о покупке билетов.</p></div>
+        <p id="lead">Расписание поездов Варшава — Одесса: варианты с пересадкой в Перемышле. Время в пути, остановки и информация о покупке билетов.</p></div>
 </header>
 <main class="wrap"><a class="back" href="./">← Главная</a> <a class="back" href="./#pl-ua">Все маршруты: Польша — Украина</a> <a class="back" href="odesa-warsaw.html">🔄 Одесса → Варшава</a>
     <div id="app"><p>Загрузка…</p></div>
@@ -257,13 +257,13 @@
     const BUY = `<section class="panel"><h2>Как купить билеты</h2>
 <div class="buy one">
 
-<div><h3>С пересадкой в Хелме</h3><ol class="steps">
-<li>Откройте приложение «Укрзалізниця», выберите маршрут Хелм → Одесса и укажите дату поездки. Продажа билетов открывается за 20 суток до отправления, в 09:00 по киевскому времени. Выберите поезд и оплатите билет.</li>
-<li>Билет на поезд Варшава → Хелм приобретите отдельно у польского перевозчика PKP Intercity — на официальном сайте intercity.pl или в приложении PKP Intercity. Также билеты можно приобрести на сайте koleo.pl или в приложении KOLEO.</li>
+<div><h3>С пересадкой в Перемышле</h3><ol class="steps">
+<li>Откройте приложение «Укрзалізниця», выберите маршрут Перемышль → Одесса и укажите дату поездки. Продажа билетов открывается за 20 суток до отправления, в 09:00 по киевскому времени. Выберите поезд и оплатите билет.</li>
+<li>Билет на поезд Варшава → Перемышль приобретите отдельно у польского перевозчика PKP Intercity — на официальном сайте intercity.pl или в приложении PKP Intercity. Также билеты можно приобрести на сайте koleo.pl или в приложении KOLEO.</li>
 
 <li>После покупки сохраните оба электронных билета в телефоне. Перед поездкой проверьте даты, время отправления и станции прибытия.</li></ol>
-<a class="btn pri" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Купить в приложении УЗ билет Хелм → Одесса</a>
-<a class="btn" href="https://www.intercity.pl/" target="_blank" rel="noopener">Купить на сайте PKP Intercity билет Варшава → Хелм</a></div>
+<a class="btn pri" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Купить в приложении УЗ билет Перемышль → Одесса</a>
+<a class="btn" href="https://www.intercity.pl/" target="_blank" rel="noopener">Купить на сайте PKP Intercity билет Варшава → Перемышль</a></div>
 </div>
 <p class="buy-note">Графики движения поездов могут измениться, актуальную информацию смотрите в приложении УЗ и на сайте PKP Intercity.</p></section>`;
     const app = document.getElementById("app");
@@ -283,9 +283,9 @@
             return
         }
         app.innerHTML = ""
-            + (transfer.length ? `<h2 class="sub${transfer.length === 1 ? " c" : ""}">С пересадкой в Хелме</h2><div class="cols${transfer.length === 1 ? " one" : ""}" style="margin-top:16px">${transfer.map(x => optHtml(x.o)).join("")}</div>` : "");
+            + (transfer.length ? `<h2 class="sub${transfer.length === 1 ? " c" : ""}">С пересадкой в Перемышле</h2><div class="cols${transfer.length === 1 ? " one" : ""}" style="margin-top:16px">${transfer.map(x => optHtml(x.o)).join("")}</div>` : "");
         
-        
+        /*B*/document.querySelectorAll(".swap").forEach(s => s.insertAdjacentHTML("afterend", `<div class="swap border">🛂 Перед отправлением из Перемышля происходит пограничный контроль</div>`));/*/B*/
     }).catch(() => {
         app.innerHTML = `<div class="panel"><h2>Не удалось загрузить данные</h2><p>Обновите страницу позже.</p></div>`
     });
