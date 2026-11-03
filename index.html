@@ -55,7 +55,7 @@
             groups.get(g).push({p, label})
         });
         const full = p => t("ix.one", {t: trRoute(p.title)}).replace(/⚡\s*/g, "");
-        return `<section class="panel" style="margin-top:0">${[...groups].map(([g, items]) => `<div class="dir-group">${g ? `<h3>${esc(g)}</h3>` : ""}<div class="chips">${items.map(({p, label}) => `<a class="chip" href="${esc(p.href)}" title="${esc(full(p))}" aria-label="${esc(full(p))}">${esc(label)}</a>`).join("")}</div></div>`).join("")}</section>`
+        return `<section class="panel" style="margin-top:0">${[...groups].map(([g, items]) => `<div class="dir-group">${g ? `<h3>${esc(g)}</h3>` : ""}<div class="chips">${items.map(({p, label}) => `<a class="chip" href="${esc(p.href)}" title="${esc(full(p))}" aria-label="${esc(full(p))}"><span class="ar" aria-hidden="true">→</span> ${esc(label)}</a>`).join("")}</div></div>`).join("")}</section>`
     };
 
     async function load() {
