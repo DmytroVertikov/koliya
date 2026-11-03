@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- build 2026-11-02T20:01:25.729Z vmvzopn15 direct=false x=Перемышль -->
+<!-- build 2026-11-03T09:48:54.898Z vmw0i9sko direct=false x=Перемышль -->
 <html lang="pl">
 <head>
     <meta charset="utf-8">
@@ -30,6 +30,16 @@
 
         .cols .opt {
             margin-top: 0
+        }
+
+        /* один вариант: карточка и заголовок по центру */
+        .cols.one {
+            grid-template-columns: minmax(0, 640px);
+            justify-content: center
+        }
+
+        h2.sub.c {
+            text-align: center
         }
 
         .cols .board, .direct .board {
@@ -273,7 +283,7 @@
             return
         }
         app.innerHTML = ""
-            + (transfer.length ? `<h2 class="sub">Z przesiadką w Przemyślu</h2><div class="cols" style="margin-top:16px">${transfer.map(x => optHtml(x.o)).join("")}</div>` : "");
+            + (transfer.length ? `<h2 class="sub${transfer.length === 1 ? " c" : ""}">Z przesiadką w Przemyślu</h2><div class="cols${transfer.length === 1 ? " one" : ""}" style="margin-top:16px">${transfer.map(x => optHtml(x.o)).join("")}</div>` : "");
         
         /*B*/document.querySelectorAll(".swap").forEach(s => s.insertAdjacentHTML("afterend", `<div class="swap border">🛂 Przed odjazdem z Przemyśla odbywa się kontrola graniczna</div>`));/*/B*/
     }).catch(() => {
