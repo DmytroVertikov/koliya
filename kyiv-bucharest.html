@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<!-- build 2026-11-04T10:06:49.979Z vmw1ycopv direct=false x=Сучава -->
+<!-- build 2026-11-04T10:14:27.072Z vmw1ymhfi direct=true x=Хелм -->
 <html lang="ru">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <title>Киев → Бухарест поездом | Колія</title>
-    <meta name="description" content="Поезда Киев — Бухарест с пересадкой: время, станции, длительность.">
+    <meta name="description" content="Поезд Киев — Бухарест без пересадок: время, станции, длительность.">
     <meta name="theme-color" content="#12145c">
     <link rel="canonical" href="https://dmytrovertikov.github.io/koliya/kyiv-bucharest.html">
     <link rel="alternate" hreflang="ru" href="https://dmytrovertikov.github.io/koliya/kyiv-bucharest.html">
@@ -239,7 +239,7 @@
 <header>
     <div class="wrap"><nav class="lang"><a href="kyiv-bucharest.html" hreflang="ru" lang="ru" class="on">RU</a><a href="uk/kyiv-bucharest.html" hreflang="uk" lang="uk">UK</a><a href="en/kyiv-bucharest.html" hreflang="en" lang="en">EN</a><a href="pl/kyiv-bucharest.html" hreflang="pl" lang="pl">PL</a></nav><a class="logo" href="./"><span class="rails">🚆</span> КОЛІЯ</a>
         <h1>Поездом: Киев → Бухарест</h1>
-        <p id="lead">Расписание поездов Киев — Бухарест: варианты с пересадкой в Сучаве. Время в пути, остановки и информация о покупке билетов.</p></div>
+        <p id="lead">Расписание поездов Киев — Бухарест: прямой поезд без пересадок. Время в пути, остановки и информация о покупке билетов.</p></div>
 </header>
 <main class="wrap"><a class="back" href="./">← Главная</a> <a class="back" href="./#ua-ro">Все маршруты: Украина — Румыния</a> <a class="back" href="bucharest-kyiv.html">🔄 Бухарест → Киев</a>
     <div id="app"><p>Загрузка…</p></div>
@@ -253,20 +253,18 @@
 <script src="common.js"></script>
 <script>
     const FROM = "Киев", TO = "Бухарест", BACK = "ro-ua"; // FROM/TO: русские названия, как в шапке карточки в админке
-    
+    /*D*//*/D*/
     const BUY = `<section class="panel"><h2>Как купить билеты</h2>
 <div class="buy one">
+<!--D--><div class="d"><h3>Прямой поезд</h3><ol class="steps">
+<li>Откройте приложение «Укрзалізниця» и войдите в свою учётную запись.</li>
+<li>Выберите маршрут Киев → Бухарест и укажите дату поездки. Продажа билетов открывается за 20 суток до отправления, в 08:00 по киевскому времени. Билеты на прямой поезд пользуются высоким спросом, поэтому рекомендуем покупать их сразу после начала продаж.</li>
+<li>Выберите место в купейном вагоне стандарта RIC и оплатите билет банковской картой. Электронный билет появится в приложении. При посадке предъявите его вместе с паспортом.</li></ol>
+<a class="btn" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Открыть приложение «Укрзалізниця»</a></div><!--/D-->
 
-<!--T--><div><h3>С пересадкой в Сучаве</h3><ol class="steps">
-<li>Откройте приложение «Укрзалізниця», выберите маршрут Киев → Сучава и укажите дату поездки. Продажа билетов открывается за 20 суток до отправления, в 08:00 по киевскому времени. Выберите подходящий поезд и оплатите билет.</li>
-<li>Билет на поезд Сучава → Бухарест приобретите отдельно у румынского перевозчика CFR Călători — на официальном сайте bilete.cfrcalatori.ro.</li>
-
-<li>После покупки сохраните оба электронных билета в телефоне. Перед поездкой проверьте даты, время отправления и станции прибытия.</li></ol>
-<a class="btn pri" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Купить в приложении УЗ билет Киев → Сучава</a>
-<a class="btn" href="https://bilete.cfrcalatori.ro/" target="_blank" rel="noopener">Купить на сайте CFR билет Сучава → Бухарест</a></div><!--/T-->
 
 </div>
-<p class="buy-note">Графики движения поездов могут измениться, актуальную информацию смотрите в приложении УЗ и на сайте CFR Călători.</p></section>`;
+<p class="buy-note">Графики движения поездов могут измениться, актуальную информацию смотрите в приложении УЗ.</p></section>`;
     const app = document.getElementById("app");
     const norm = s => String(s || "").trim().toLowerCase();
     fetch(U + "/rest/v1/options?order=sort", {headers: {apikey: K, Authorization: "Bearer " + K}}).then(r => {
@@ -277,15 +275,16 @@
             const p = parseOption(o.dsl);
             return {o, p, h: p.head || deriveHead(p.legs)}
         }).filter(x => x.p.legs.length && norm(x.h.from).startsWith(norm(FROM)) && norm(x.h.to).startsWith(norm(TO)));
-        const HAS_DIRECT = false; /* false: страница без прямого поезда, все варианты идут как «с пересадкой» */
+        const HAS_DIRECT = true; /* false: страница без прямого поезда, все варианты идут как «с пересадкой» */
         const direct = HAS_DIRECT ? list.filter(x => x.p.legs.length === 1) : [], transfer = HAS_DIRECT ? list.filter(x => x.p.legs.length > 1) : list;
         if (!list.length) {
             app.innerHTML = `<div class="panel"><h2>Пока нет вариантов</h2><p>Добавьте их в админке.</p></div>`;
             return
         }
-        app.innerHTML = ""
-            + (transfer.length ? `<h2 class="sub${transfer.length === 1 ? " c" : ""}">С пересадкой в Сучаве</h2><div class="cols${transfer.length === 1 ? " one" : ""}" style="margin-top:16px">${transfer.map(x => optHtml(x.o)).join("")}</div>` : "");
-        
+        app.innerHTML = ""/*D*/ + (direct.length ? `<h2 class="sub" style="margin-top:6px">Прямой поезд <small>без пересадок</small></h2><div class="direct direct-wrap" style="margin-top:16px">${direct.map(x => optHtml(x.o)).join("")}</div>` : "")
+            + (direct.length && transfer.length ? `<aside class="ad wide" data-slot="mid" hidden></aside>` : "")/*/D*/
+            + (transfer.length ? `<h2 class="sub${transfer.length === 1 ? " c" : ""}">С удобной пересадкой в Хелме на одной платформе</h2><div class="cols${transfer.length === 1 ? " one" : ""}" style="margin-top:16px">${transfer.map(x => optHtml(x.o)).join("")}</div>` : "");
+        /*D*//*/D*/
         
     }).catch(() => {
         app.innerHTML = `<div class="panel"><h2>Не удалось загрузить данные</h2><p>Обновите страницу позже.</p></div>`

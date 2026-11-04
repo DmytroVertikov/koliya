@@ -249,7 +249,7 @@
 <script src="{{base}}common.js"></script>
 <script>
     const FROM = "{{FROM}}", TO = "{{TO}}", BACK = "{{BACK}}"; // FROM/TO: русские названия, как в шапке карточки в админке
-    /*D*/const COACH = `<aside class="coach"><p>{{coach}}</p></aside>`;/*/D*/
+    /*D*//*C*/const COACH = `<aside class="coach"><p>{{coach}}</p></aside>`;/*/C*//*/D*/
     const BUY = `<section class="panel"><h2>{{buy.h}}</h2>
 <div class="buy{{buyone}}">
 <!--D--><div class="d"><h3>{{buy.d.h}}</h3><ol class="steps">
@@ -290,10 +290,10 @@
         app.innerHTML = ""/*D*/ + (direct.length ? `<h2 class="sub" style="margin-top:6px">{{direct.h}} <small>{{direct.s}}</small></h2><div class="direct direct-wrap" style="margin-top:16px">${direct.map(x => optHtml(x.o)).join("")}</div>` : "")
             + (direct.length && transfer.length ? `<aside class="ad wide" data-slot="mid" hidden></aside>` : "")/*/D*/
             + (transfer.length ? `<h2 class="sub${transfer.length === 1 ? " c" : ""}">{{transfer.h}}</h2><div class="cols${transfer.length === 1 ? " one" : ""}" style="margin-top:16px">${transfer.map(x => optHtml(x.o)).join("")}</div>` : "");
-        /*D*/document.querySelectorAll(".direct .body").forEach(b => {
+        /*D*//*C*/document.querySelectorAll(".direct .body").forEach(b => {
             b.classList.add("two");
             b.insertAdjacentHTML("beforeend", COACH)
-        });/*/D*/
+        });/*/C*//*/D*/
         /*B*/document.querySelectorAll(".swap").forEach(s => s.insertAdjacentHTML("afterend", `<div class="swap border">🛂 {{border}}</div>`));/*/B*/
     }).catch(() => {
         app.innerHTML = `<div class="panel"><h2>{{err.h}}</h2><p>{{err.p}}</p></div>`
