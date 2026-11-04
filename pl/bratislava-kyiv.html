@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- build 2026-11-03T21:14:10.284Z vmw16r1ea direct=false x=Чоп -->
+<!-- build 2026-11-04T09:22:27.891Z vmw1wrmol direct=false x=Чоп -->
 <html lang="pl">
 <head>
     <meta charset="utf-8">
@@ -259,14 +259,14 @@
 
 <!--T--><div><h3>Z przesiadką w Czopie</h3><ol class="steps">
 <li>Otwórz aplikację Ukrzaliznytsia, wybierz trasę Czop → Kijów i datę podróży. Sprzedaż biletów rusza na 20 dni przed odjazdem o 9:00 czasu kijowskiego. Wybierz odpowiedni pociąg i opłać bilet.</li>
-<li>Bilet na pociąg Bratysława → Czop kup osobno u słowackiego przewoźnika ZSSK — na stronie zssk.sk lub w aplikacji ZSSK.</li>
-<!--T3--><li>Wybierając pociąg Bratysława → Czop, kieruj się wariantami i rozkładem podanymi wyżej na tej stronie. Uwzględnij godzinę odjazdu pociągu Czop → Kijów i czas przesiadki.</li><!--/T3-->
+<li>Bilet na pociąg Bratysława → Czop możesz kupić w aplikacji Ukrzaliznytsia lub osobno u słowackiego przewoźnika ZSSK w jego aplikacji. Zwykle u ZSSK bilety są tańsze.</li>
+
 <li>Po zakupie zapisz oba e-bilety w telefonie. Przed podróżą sprawdź daty, godziny odjazdu i stacje docelowe.</li></ol>
 <a class="btn pri" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Kup w aplikacji UZ bilet Czop → Kijów</a>
-<a class="btn" href="https://www.zssk.sk/" target="_blank" rel="noopener">Kup na stronie ZSSK bilet Bratysława → Czop</a></div><!--/T-->
+<a class="btn" href="https://www.zssk.sk/ideme-vlakom/" target="_blank" rel="noopener">Kup w aplikacji ZSSK bilet Bratysława → Czop</a></div><!--/T-->
 
 </div>
-<p class="buy-note">Rozkłady jazdy mogą ulec zmianie. Aktualne informacje znajdziesz w aplikacji UZ i na stronie ZSSK.</p></section>`;
+<p class="buy-note">Rozkłady jazdy mogą ulec zmianie. Aktualne informacje znajdziesz w aplikacji UZ i w aplikacji ZSSK.</p></section>`;
     const app = document.getElementById("app");
     const norm = s => String(s || "").trim().toLowerCase();
     fetch(U + "/rest/v1/options?order=sort", {headers: {apikey: K, Authorization: "Bearer " + K}}).then(r => {
