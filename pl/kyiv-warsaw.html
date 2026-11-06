@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- build 2026-11-04T09:45:57.418Z vmw1xluas direct=true x=Хелм -->
+<!-- build 2026-11-06T09:56:39.373Z vmw4svayv direct=true x=Хелм -->
 <html lang="pl">
 <head>
     <meta charset="utf-8">
@@ -253,7 +253,7 @@
 <script src="../common.js"></script>
 <script>
     const FROM = "Киев", TO = "Варшава", BACK = "pl-ua"; // FROM/TO: русские названия, как в шапке карточки в админке
-    /*D*/const COACH = `<aside class="coach"><p>W przedziale są trzy miejsca do spania, jedno nad drugim. Gdy środkowa półka jest rozłożona do spania, nie wolno siedzieć na dolnej. Na górną półkę prowadzi drabinka.</p></aside>`;/*/D*/
+    /*D*//*C*/const COACH = `<aside class="coach"><p>W przedziale są trzy miejsca do spania, jedno nad drugim. Gdy środkowa półka jest rozłożona do spania, nie wolno siedzieć na dolnej. Na górną półkę prowadzi drabinka.</p></aside>`;/*/C*//*/D*/
     const BUY = `<section class="panel"><h2>Jak kupić bilety</h2>
 <div class="buy">
 <!--D--><div class="d"><h3>Pociąg bezpośredni</h3><ol class="steps">
@@ -290,10 +290,10 @@
         app.innerHTML = ""/*D*/ + (direct.length ? `<h2 class="sub" style="margin-top:6px">Pociąg bezpośredni <small>bez przesiadek</small></h2><div class="direct direct-wrap" style="margin-top:16px">${direct.map(x => optHtml(x.o)).join("")}</div>` : "")
             + (direct.length && transfer.length ? `<aside class="ad wide" data-slot="mid" hidden></aside>` : "")/*/D*/
             + (transfer.length ? `<h2 class="sub${transfer.length === 1 ? " c" : ""}">Z wygodną przesiadką w Chełmie na jednym peronie</h2><div class="cols${transfer.length === 1 ? " one" : ""}" style="margin-top:16px">${transfer.map(x => optHtml(x.o)).join("")}</div>` : "");
-        /*D*/document.querySelectorAll(".direct .body").forEach(b => {
+        /*D*//*C*/document.querySelectorAll(".direct .body").forEach(b => {
             b.classList.add("two");
             b.insertAdjacentHTML("beforeend", COACH)
-        });/*/D*/
+        });/*/C*//*/D*/
         
     }).catch(() => {
         app.innerHTML = `<div class="panel"><h2>Nie udało się załadować danych</h2><p>Odśwież stronę później.</p></div>`

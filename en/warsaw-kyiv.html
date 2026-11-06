@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- build 2026-11-04T09:45:57.419Z vmw1xluas direct=true x=Хелм -->
+<!-- build 2026-11-06T09:56:39.374Z vmw4svayv direct=true x=Хелм -->
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -253,7 +253,7 @@
 <script src="../common.js"></script>
 <script>
     const FROM = "Варшава", TO = "Киев", BACK = "ua-pl"; // FROM/TO: русские названия, как в шапке карточки в админке
-    /*D*/const COACH = `<aside class="coach"><p>Each compartment has three berths, one above another. When the middle berth is folded down for sleeping, the lower berth cannot be used for sitting. A ladder is provided for climbing to the upper berth.</p></aside>`;/*/D*/
+    /*D*//*C*/const COACH = `<aside class="coach"><p>Each compartment has three berths, one above another. When the middle berth is folded down for sleeping, the lower berth cannot be used for sitting. A ladder is provided for climbing to the upper berth.</p></aside>`;/*/C*//*/D*/
     const BUY = `<section class="panel"><h2>How to buy tickets</h2>
 <div class="buy">
 <!--D--><div class="d"><h3>Direct train</h3><ol class="steps">
@@ -290,10 +290,10 @@
         app.innerHTML = ""/*D*/ + (direct.length ? `<h2 class="sub" style="margin-top:6px">Direct train <small>no transfers</small></h2><div class="direct direct-wrap" style="margin-top:16px">${direct.map(x => optHtml(x.o)).join("")}</div>` : "")
             + (direct.length && transfer.length ? `<aside class="ad wide" data-slot="mid" hidden></aside>` : "")/*/D*/
             + (transfer.length ? `<h2 class="sub${transfer.length === 1 ? " c" : ""}">With a convenient same-platform transfer in Chełm</h2><div class="cols${transfer.length === 1 ? " one" : ""}" style="margin-top:16px">${transfer.map(x => optHtml(x.o)).join("")}</div>` : "");
-        /*D*/document.querySelectorAll(".direct .body").forEach(b => {
+        /*D*//*C*/document.querySelectorAll(".direct .body").forEach(b => {
             b.classList.add("two");
             b.insertAdjacentHTML("beforeend", COACH)
-        });/*/D*/
+        });/*/C*//*/D*/
         
     }).catch(() => {
         app.innerHTML = `<div class="panel"><h2>Could not load the data</h2><p>Please refresh the page later.</p></div>`

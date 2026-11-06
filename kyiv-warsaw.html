@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- build 2026-11-04T09:45:57.412Z vmw1xluas direct=true x=Хелм -->
+<!-- build 2026-11-06T09:56:39.367Z vmw4svayv direct=true x=Хелм -->
 <html lang="ru">
 <head>
     <meta charset="utf-8">
@@ -253,7 +253,7 @@
 <script src="common.js"></script>
 <script>
     const FROM = "Киев", TO = "Варшава", BACK = "pl-ua"; // FROM/TO: русские названия, как в шапке карточки в админке
-    /*D*/const COACH = `<aside class="coach"><p>В купе предусмотрены три спальных места, расположенные одно над другим. Если средняя полка приведена в спальное положение, пользоваться нижней полкой для сидения нельзя. Для подъёма на верхнюю полку предусмотрена лестница.</p></aside>`;/*/D*/
+    /*D*//*C*/const COACH = `<aside class="coach"><p>В купе предусмотрены три спальных места, расположенные одно над другим. Если средняя полка приведена в спальное положение, пользоваться нижней полкой для сидения нельзя. Для подъёма на верхнюю полку предусмотрена лестница.</p></aside>`;/*/C*//*/D*/
     const BUY = `<section class="panel"><h2>Как купить билеты</h2>
 <div class="buy">
 <!--D--><div class="d"><h3>Прямой поезд</h3><ol class="steps">
@@ -290,10 +290,10 @@
         app.innerHTML = ""/*D*/ + (direct.length ? `<h2 class="sub" style="margin-top:6px">Прямой поезд <small>без пересадок</small></h2><div class="direct direct-wrap" style="margin-top:16px">${direct.map(x => optHtml(x.o)).join("")}</div>` : "")
             + (direct.length && transfer.length ? `<aside class="ad wide" data-slot="mid" hidden></aside>` : "")/*/D*/
             + (transfer.length ? `<h2 class="sub${transfer.length === 1 ? " c" : ""}">С удобной пересадкой в Хелме на одной платформе</h2><div class="cols${transfer.length === 1 ? " one" : ""}" style="margin-top:16px">${transfer.map(x => optHtml(x.o)).join("")}</div>` : "");
-        /*D*/document.querySelectorAll(".direct .body").forEach(b => {
+        /*D*//*C*/document.querySelectorAll(".direct .body").forEach(b => {
             b.classList.add("two");
             b.insertAdjacentHTML("beforeend", COACH)
-        });/*/D*/
+        });/*/C*//*/D*/
         
     }).catch(() => {
         app.innerHTML = `<div class="panel"><h2>Не удалось загрузить данные</h2><p>Обновите страницу позже.</p></div>`
