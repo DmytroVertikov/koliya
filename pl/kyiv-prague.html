@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- build 2026-11-06T20:23:38.213Z vmw5f9lrq direct=false x=Чоп -->
+<!-- build 2026-11-06T20:36:09.300Z vmw5fppd6 direct=false x=Перемышль -->
 <html lang="pl">
 <head>
     <meta charset="utf-8">
@@ -266,28 +266,28 @@
 <script src="../i18n.js"></script>
 <script src="../common.js"></script>
 <script>
-    const SPLIT = [["Чоп","Z przesiadką w Czopie",0],["Перемышль","Z przesiadką w Przemyślu",1]]; /* [станция пересадки, заголовок, пограничный контроль]: страница делится на группы по пересадке */
+    const SPLIT = [["Перемышль","Z przesiadką w Przemyślu",1],["Чоп","Z przesiadką w Czopie",0]]; /* [станция пересадки, заголовок, пограничный контроль]: страница делится на группы по пересадке */
     const FROM = "Киев", TO = "Прага", BACK = "cz-ua"; // FROM/TO: русские названия, как в шапке карточки в админке
     
     const BUY = `<section class="panel"><h2>Jak kupić bilety</h2>
 <div class="buy two">
 
-<!--T--><div><h3>Z przesiadką w Czopie</h3><ol class="steps">
+<!--T--><div><h3>Z przesiadką w Przemyślu</h3><ol class="steps">
 <li>Otwórz aplikację Ukrzaliznytsia, wybierz odpowiedni pociąg na ukraińskim odcinku trasy i datę podróży. Sprzedaż biletów rusza na 20 dni przed odjazdem o 08:00 czasu kijowskiego. Opłać bilet.</li>
-<li>Bilet na pociąg Czop → Praga możesz kupić w aplikacji Ukrzaliznytsia lub osobno u słowackiego przewoźnika ZSSK w jego aplikacji. Zwykle u ZSSK bilety są tańsze.</li>
+<li>Bilet na pociąg Przemyśl → Praga kup osobno u czeskiego przewoźnika České dráhy (ČD) — na stronie cd.cz lub w aplikacji ČD.</li>
 
-<li>Po zakupie zapisz oba e-bilety w telefonie. Przed podróżą sprawdź daty, godziny odjazdu i stacje docelowe.</li></ol>
-<a class="btn pri" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Kup w aplikacji UZ bilet Kijów → Czop</a>
-<a class="btn" href="https://www.zssk.sk/ideme-vlakom/" target="_blank" rel="noopener">Kup w aplikacji ZSSK bilet Czop → Praga</a></div><!--/T-->
-<!--H--><div><h3>Z przesiadką w Przemyślu</h3><ol class="steps">
-<li>Otwórz aplikację Ukrzaliznytsia, wybierz odpowiedni pociąg na ukraińskim odcinku trasy i datę podróży. Sprzedaż biletów rusza na 20 dni przed odjazdem o 08:00 czasu kijowskiego. Opłać bilet.</li>
-<li>Bilet na pociąg Przemyśl → Praga kup osobno u polskiego przewoźnika PKP Intercity — na stronie intercity.pl lub w aplikacji PKP Intercity. Można go też kupić na koleo.pl lub w aplikacji KOLEO.</li>
 <li>Po zakupie zapisz oba e-bilety w telefonie. Przed podróżą sprawdź daty, godziny odjazdu i stacje docelowe.</li></ol>
 <a class="btn pri" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Kup w aplikacji UZ bilet Kijów → Przemyśl</a>
-<a class="btn" href="https://www.intercity.pl/" target="_blank" rel="noopener">Kup na stronie PKP Intercity bilet Przemyśl → Praga</a></div><!--/H-->
+<a class="btn" href="https://www.cd.cz/spojeni-a-jizdenka/" target="_blank" rel="noopener">Kup bilet Przemyśl → Praga na stronie ČD</a></div><!--/T-->
+<!--H--><div><h3>Z przesiadką w Czopie</h3><ol class="steps">
+<li>Otwórz aplikację Ukrzaliznytsia, wybierz odpowiedni pociąg na ukraińskim odcinku trasy i datę podróży. Sprzedaż biletów rusza na 20 dni przed odjazdem o 08:00 czasu kijowskiego. Opłać bilet.</li>
+<li>Bilet na pociąg Czop → Praga możesz kupić w aplikacji Ukrzaliznytsia lub osobno u słowackiego przewoźnika ZSSK w jego aplikacji. Zwykle u ZSSK bilety są tańsze.</li>
+<li>Po zakupie zapisz oba e-bilety w telefonie. Przed podróżą sprawdź daty, godziny odjazdu i stacje docelowe.</li></ol>
+<a class="btn pri" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Kup w aplikacji UZ bilet Kijów → Czop</a>
+<a class="btn" href="https://www.zssk.sk/ideme-vlakom/" target="_blank" rel="noopener">Kup w aplikacji ZSSK bilet Czop → Praga</a></div><!--/H-->
 
 </div>
-<p class="buy-note">Rozkłady jazdy mogą ulec zmianie. Aktualne informacje znajdziesz w aplikacji UZ i w aplikacji ZSSK.</p></section>`;
+<p class="buy-note">Rozkłady jazdy mogą się zmienić, aktualne informacje sprawdź w aplikacji UZ, na stronie ČD i w aplikacji ZSSK.</p></section>`;
     const app = document.getElementById("app");
     const norm = s => String(s || "").trim().toLowerCase();
     fetch(U + "/rest/v1/options?order=sort", {headers: {apikey: K, Authorization: "Bearer " + K}}).then(r => {

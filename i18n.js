@@ -275,7 +275,10 @@ coach:"В купе предусмотрены три спальных места
 "prague_kyiv.h1":"Поездом: Прага → Киев",
 "prague_kyiv.lead":"Расписание поездов Прага — Киев: варианты с пересадкой в Чопе. Время в пути, остановки и информация о покупке билетов.",
 "prague_kyiv.all":"Все маршруты: Чехия — Украина",
-"prague_kyiv.more":"← Украина — Чехия"
+"prague_kyiv.more":"← Украина — Чехия",
+"buy.t.s2cd":"Билет на поезд {pkp} приобретите отдельно у чешского перевозчика České dráhy (ČD) — на официальном сайте cd.cz или в приложении ČD.",
+"buy.t.b2cd":"Купить на сайте ČD билет {pkp}",
+"buy.note.cz":"Графики движения поездов могут измениться, актуальную информацию смотрите в приложении УЗ, на сайте ČD и в приложении ZSSK."
 },
 uk:{
 h:"год",min:"хв",tag0:"без пересадок",tag1:"1 пересадка",tag2:"{n} пересадки",tag5:"{n} пересадок",
@@ -499,7 +502,10 @@ coach:"У купе передбачено три спальні місця, ро
 "prague_kyiv.h1":"Потягом: Прага → Київ",
 "prague_kyiv.lead":"Розклад поїздів Прага — Київ: варіанти з пересадкою в Чопі. Час у дорозі, зупинки та інформація про купівлю квитків.",
 "prague_kyiv.all":"Усі маршрути: Чехія — Україна",
-"prague_kyiv.more":"← Україна — Чехія"
+"prague_kyiv.more":"← Україна — Чехія",
+"buy.t.s2cd":"Квиток на поїзд {pkp} придбайте окремо в чеського перевізника České dráhy (ČD) — на офіційному сайті cd.cz або в застосунку ČD.",
+"buy.t.b2cd":"Купити на сайті ČD квиток {pkp}",
+"buy.note.cz":"Графіки руху поїздів можуть змінитися, актуальну інформацію дивіться в застосунку УЗ, на сайті ČD та в застосунку ZSSK."
 },
 en:{
 h:"h",min:"min",tag0:"direct",tag1:"1 transfer",tag2:"{n} transfers",tag5:"{n} transfers",
@@ -723,7 +729,10 @@ coach:"Each compartment has three berths, one above another. When the middle ber
 "prague_kyiv.h1":"By train: Prague → Kyiv",
 "prague_kyiv.lead":"Train timetable Prague — Kyiv: options with a transfer in Chop. Journey time, stops and ticket information.",
 "prague_kyiv.all":"All routes: Czechia — Ukraine",
-"prague_kyiv.more":"← Ukraine — Czechia"
+"prague_kyiv.more":"← Ukraine — Czechia",
+"buy.t.s2cd":"Buy the {pkp} ticket separately from the Czech carrier České dráhy (ČD), on cd.cz or in the ČD app.",
+"buy.t.b2cd":"Buy the {pkp} ticket on ČD",
+"buy.note.cz":"Train schedules may change. Check the latest information in the UZ app, on the ČD website and in the ZSSK app."
 },
 pl:{
 h:"godz.",min:"min",tag0:"bez przesiadek",tag1:"1 przesiadka",tag2:"{n} przesiadki",tag5:"{n} przesiadek",
@@ -947,6 +956,9 @@ coach:"W przedziale są trzy miejsca do spania, jedno nad drugim. Gdy środkowa 
 "prague_kyiv.h1":"Pociągiem: Praga → Kijów",
 "prague_kyiv.lead":"Rozkład pociągów Praga — Kijów: warianty z przesiadką w Czopie. Czas podróży, postoje i informacje o zakupie biletów.",
 "prague_kyiv.all":"Wszystkie trasy: Czechy — Ukraina",
-"prague_kyiv.more":"← Ukraina — Czechy"
+"prague_kyiv.more":"← Ukraina — Czechy",
+"buy.t.s2cd":"Bilet na pociąg {pkp} kup osobno u czeskiego przewoźnika České dráhy (ČD) — na stronie cd.cz lub w aplikacji ČD.",
+"buy.t.b2cd":"Kup bilet {pkp} na stronie ČD",
+"buy.note.cz":"Rozkłady jazdy mogą się zmienić, aktualne informacje sprawdź w aplikacji UZ, na stronie ČD i w aplikacji ZSSK."
 }};
 if (typeof module !== "undefined") module.exports = I18N;

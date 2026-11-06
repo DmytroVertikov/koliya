@@ -34,8 +34,8 @@ const ROUTES = [
   {id: "bucharest_kyiv", file: "bucharest-kyiv.html", FROM: "Бухарест", TO: "Киев", BACK: "ua-ro", hash: "ro-ua", rev: "kyiv-bucharest.html", dOnly: true, coach: false, ds2: "buy.d.s2z", ds3: "buy.d.s3z"},
   {id: "kyiv_vienna", file: "kyiv-vienna.html", FROM: "Киев", TO: "Вена", BACK: "at-ua", hash: "ua-at", rev: "vienna-kyiv.html", uz: ["Киев","Чоп"], pkp: ["Чоп","Вена"], t3: "buy.t3out", x: "Чоп", plat: false, car: "oebb", s1: "buy.t.s1kv", s2: "buy.t.s2ov", ds2: "buy.d.s2v", third: "Будапешт", h: true},
   {id: "vienna_kyiv", file: "vienna-kyiv.html", FROM: "Вена", TO: "Киев", BACK: "ua-at", hash: "at-ua", rev: "kyiv-vienna.html", uz: ["Чоп","Киев"], pkp: ["Вена","Чоп"], t3: "buy.t3in", x: "Чоп", plat: false, car: "oebb", s1: "buy.t.s1vk", s2: "buy.t.s2vk", h: true, hb1: ["Будапешт", "Киев"], hb2: ["Вена", "Будапешт"], ds2: "buy.d.s2v", third: "Будапешт"},
-  {id: "kyiv_prague", file: "kyiv-prague.html", FROM: "Киев", TO: "Прага", BACK: "cz-ua", hash: "ua-cz", rev: "prague-kyiv.html", uz: ["Киев","Чоп"], pkp: ["Чоп","Прага"], pkp3: ["Перемышль","Прага"], uz3: ["Киев","Перемышль"], t3: "buy.t3out", x: "Чоп", direct: false, plat: false, car: "zssk", s1: "buy.t.s1v", third: "Перемышль", hs1: "buy.t.s1v", hs2: "buy.t.s2", hpkp: true, split: ["Чоп","Перемышль"], border: "after"},
-  {id: "prague_kyiv", file: "prague-kyiv.html", FROM: "Прага", TO: "Киев", BACK: "ua-cz", hash: "cz-ua", rev: "kyiv-prague.html", uz: ["Чоп","Киев"], pkp: ["Прага","Чоп"], pkp3: ["Прага","Перемышль"], uz3: ["Перемышль","Киев"], t3: "buy.t3in", x: "Чоп", direct: false, plat: false, car: "zssk", s1: "buy.t.s1v", third: "Перемышль", hs1: "buy.t.s1v", hs2: "buy.t.s2", hpkp: true, split: ["Чоп","Перемышль"], border: "before"},
+  {id: "kyiv_prague", file: "kyiv-prague.html", FROM: "Киев", TO: "Прага", BACK: "cz-ua", hash: "ua-cz", rev: "prague-kyiv.html", uz: ["Киев","Перемышль"], pkp: ["Перемышль","Прага"], uz3: ["Киев","Чоп"], pkp3: ["Чоп","Прага"], t3: "buy.t3out", x: "Перемышль", direct: false, plat: false, car: "cd", s1: "buy.t.s1v", third: "Чоп", hs1: "buy.t.s1v", hs2: "buy.t.s2z", hurl: "https://www.zssk.sk/ideme-vlakom/", hb2k: "buy.t.b2z", split: ["Перемышль","Чоп"], border: "after"},
+  {id: "prague_kyiv", file: "prague-kyiv.html", FROM: "Прага", TO: "Киев", BACK: "ua-cz", hash: "cz-ua", rev: "kyiv-prague.html", uz: ["Перемышль","Киев"], pkp: ["Прага","Перемышль"], uz3: ["Чоп","Киев"], pkp3: ["Прага","Чоп"], t3: "buy.t3in", x: "Перемышль", direct: false, plat: false, car: "cd", s1: "buy.t.s1v", third: "Чоп", hs1: "buy.t.s1v", hs2: "buy.t.s2z", hurl: "https://www.zssk.sk/ideme-vlakom/", hb2k: "buy.t.b2z", split: ["Перемышль","Чоп"], border: "before"},
 ];
 /* проверки: повторы в ROUTES и повторяющиеся ключи в i18n.js (при повторе побеждает ПОСЛЕДНИЙ, из-за этого старые тексты могут «возвращаться») */
 {
@@ -68,7 +68,7 @@ for (const r of ROUTES) for (const l of LANGS) {
   const X = r.x || "Хелм", direct = r.direct !== false, plat = r.plat !== undefined ? r.plat : X === "Хелм";
   v.stamp = new Date().toISOString() + " v" + VER + " direct=" + direct + " x=" + X;
   /* второй отрезок: PKP Intercity (по умолчанию) или другой перевозчик (car: "zssk" | "cfr" | "oebb"), у него свои тексты покупки */
-  const CARS = {zssk: {url: "https://www.zssk.sk/ideme-vlakom/", s2: "buy.t.s2z", b2: "buy.t.b2z", note: "buy.note.z"}, cfr: {url: "https://bilete.cfrcalatori.ro/", s2: "buy.t.s2c", b2: "buy.t.b2c", note: "buy.note.c"}, oebb: {url: "https://tickets.oebb.at/", s2: "buy.t.s2o", b2: "buy.t.b2o", note: "buy.note.o"}}, cr = CARS[r.car];
+  const CARS = {zssk: {url: "https://www.zssk.sk/ideme-vlakom/", s2: "buy.t.s2z", b2: "buy.t.b2z", note: "buy.note.z"}, cfr: {url: "https://bilete.cfrcalatori.ro/", s2: "buy.t.s2c", b2: "buy.t.b2c", note: "buy.note.c"}, cd: {url: "https://www.cd.cz/spojeni-a-jizdenka/", s2: "buy.t.s2cd", b2: "buy.t.b2cd", note: "buy.note.cz"}, oebb: {url: "https://tickets.oebb.at/", s2: "buy.t.s2o", b2: "buy.t.b2o", note: "buy.note.o"}}, cr = CARS[r.car];
   v["buy.t.url"] = cr ? cr.url : "https://www.intercity.pl/";
   v["buy.t.s2"] = fill(d[r.s2 || (cr ? cr.s2 : "buy.t.s2")], v); v["buy.t.b2"] = fill(d[cr ? cr.b2 : "buy.t.b2"], v);
   v.border = r.border ? fill(d["border." + r.border], v) : ""; v["buy.notex"] = fill(d[r.app || r.dOnly ? "buy.note.a" : cr ? cr.note : "buy.note"], v); v.xin = xin(X, l); v.hasDirect = String(direct); v.buyone = r.third && !direct && !r.dOnly ? " two" : (direct && !r.dOnly ? "" : " one") + (r.third ? " three" : "");
@@ -83,7 +83,7 @@ for (const r of ROUTES) for (const l of LANGS) {
       v["buy.h.btns"] = btn(" pri", "https://app.uz.gov.ua/start", fill(d["buy.h.b1"], hv)) + "\n" + btn("", "https://jegy.mav.hu/", fill(d["buy.h.b2"], hv)) + "\n" + btn("", "https://tickets.oebb.at/", fill(d["buy.h.b3"], hv))
     } else {
       const v3 = r.pkp3 ? Object.assign({}, v, {pkp: pair(r.pkp3), uz: pair(r.uz3 || r.uz || [r.FROM, r.TO])}) : v; v["buy.h.s1"] = r.hs1 ? fill(d[r.hs1], v3) : v["buy.t.s1x"]; v["buy.h.s2"] = r.hs2 ? fill(d[r.hs2], v3) : v["buy.t.s2"]; /* hs1/hs2: тексты третьей колонки, если у основной (s1/s2) они другие */
-      v["buy.h.btns"] = btn(" pri", "https://app.uz.gov.ua/start", fill(d["buy.t.b1"], v3)) + "\n" + (r.hpkp ? btn("", "https://www.intercity.pl/", fill(d["buy.t.b2"], v3)) : btn("", v["buy.t.url"], v["buy.t.b2"]))
+      v["buy.h.btns"] = btn(" pri", "https://app.uz.gov.ua/start", fill(d["buy.t.b1"], v3)) + "\n" + (r.hurl ? btn("", r.hurl, fill(d[r.hb2k || "buy.t.b2"], v3)) : btn("", v["buy.t.url"], v["buy.t.b2"]))
     }
   }
   /* gen: варианты с разными пересадочными станциями (Чоп, Будапешт…): общие заголовок и шаги вместо «в Чопе» */

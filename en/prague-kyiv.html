@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- build 2026-11-06T20:23:38.215Z vmw5f9lrq direct=false x=Чоп -->
+<!-- build 2026-11-06T20:36:09.301Z vmw5fppd6 direct=false x=Перемышль -->
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -266,28 +266,28 @@
 <script src="../i18n.js"></script>
 <script src="../common.js"></script>
 <script>
-    const SPLIT = [["Чоп","With a transfer in Chop",0],["Перемышль","With a transfer in Przemyśl",1]]; /* [станция пересадки, заголовок, пограничный контроль]: страница делится на группы по пересадке */
+    const SPLIT = [["Перемышль","With a transfer in Przemyśl",1],["Чоп","With a transfer in Chop",0]]; /* [станция пересадки, заголовок, пограничный контроль]: страница делится на группы по пересадке */
     const FROM = "Прага", TO = "Киев", BACK = "ua-cz"; // FROM/TO: русские названия, как в шапке карточки в админке
     
     const BUY = `<section class="panel"><h2>How to buy tickets</h2>
 <div class="buy two">
 
-<!--T--><div><h3>With a transfer in Chop</h3><ol class="steps">
+<!--T--><div><h3>With a transfer in Przemyśl</h3><ol class="steps">
 <li>Open the Ukrzaliznytsia app, choose the train you need on the Ukrainian part of the route and set the travel date. Sales open 20 days before departure, at 08:00 Kyiv time. Pay for the ticket.</li>
-<li>You can buy the Prague → Chop ticket in the Ukrzaliznytsia app or separately from the Slovak carrier ZSSK in its app. Tickets from ZSSK are usually cheaper.</li>
+<li>Buy the Prague → Przemyśl ticket separately from the Czech carrier České dráhy (ČD), on cd.cz or in the ČD app.</li>
 
-<li>After buying, save both e-tickets on your phone. Before you travel, check the dates, departure times and arrival stations.</li></ol>
-<a class="btn pri" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Buy the Chop → Kyiv ticket in the UZ app</a>
-<a class="btn" href="https://www.zssk.sk/ideme-vlakom/" target="_blank" rel="noopener">Buy the Prague → Chop ticket in the ZSSK app</a></div><!--/T-->
-<!--H--><div><h3>With a transfer in Przemyśl</h3><ol class="steps">
-<li>Open the Ukrzaliznytsia app, choose the train you need on the Ukrainian part of the route and set the travel date. Sales open 20 days before departure, at 08:00 Kyiv time. Pay for the ticket.</li>
-<li>Buy the Prague → Przemyśl ticket separately from the Polish carrier PKP Intercity, on intercity.pl or in the PKP Intercity app. You can also buy it on koleo.pl or in the KOLEO app.</li>
 <li>After buying, save both e-tickets on your phone. Before you travel, check the dates, departure times and arrival stations.</li></ol>
 <a class="btn pri" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Buy the Przemyśl → Kyiv ticket in the UZ app</a>
-<a class="btn" href="https://www.intercity.pl/" target="_blank" rel="noopener">Buy the Prague → Przemyśl ticket on PKP Intercity</a></div><!--/H-->
+<a class="btn" href="https://www.cd.cz/spojeni-a-jizdenka/" target="_blank" rel="noopener">Buy the Prague → Przemyśl ticket on ČD</a></div><!--/T-->
+<!--H--><div><h3>With a transfer in Chop</h3><ol class="steps">
+<li>Open the Ukrzaliznytsia app, choose the train you need on the Ukrainian part of the route and set the travel date. Sales open 20 days before departure, at 08:00 Kyiv time. Pay for the ticket.</li>
+<li>You can buy the Prague → Chop ticket in the Ukrzaliznytsia app or separately from the Slovak carrier ZSSK in its app. Tickets from ZSSK are usually cheaper.</li>
+<li>After buying, save both e-tickets on your phone. Before you travel, check the dates, departure times and arrival stations.</li></ol>
+<a class="btn pri" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Buy the Chop → Kyiv ticket in the UZ app</a>
+<a class="btn" href="https://www.zssk.sk/ideme-vlakom/" target="_blank" rel="noopener">Buy the Prague → Chop ticket in the ZSSK app</a></div><!--/H-->
 
 </div>
-<p class="buy-note">Train schedules may change. Check the latest information in the UZ app and in the ZSSK app.</p></section>`;
+<p class="buy-note">Train schedules may change. Check the latest information in the UZ app, on the ČD website and in the ZSSK app.</p></section>`;
     const app = document.getElementById("app");
     const norm = s => String(s || "").trim().toLowerCase();
     fetch(U + "/rest/v1/options?order=sort", {headers: {apikey: K, Authorization: "Bearer " + K}}).then(r => {
