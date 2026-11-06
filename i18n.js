@@ -281,8 +281,9 @@ coach:"В купе предусмотрены три спальных места
 "buy.note.cz":"Графики движения поездов могут измениться, актуальную информацию смотрите в приложении УЗ, в приложении ČD My Train и на сайте RegioJet.",
 "buy.t.s2rj":"Билет {pkp} на поезд RJ приобретите отдельно у чешского перевозчика RegioJet — на официальном сайте regiojet.cz или в приложении RegioJet.",
 "buy.t.b2rj":"Купить на сайте RegioJet билет {pkp}",
-"buy.c.h":"С пересадкой {xin} · УЗ + {car}",
-"buy.c.s1":"Откройте приложение «Укрзалізниця», выберите маршрут {uz} и укажите дату поездки. Продажа билетов открывается за 20 суток до отправления, в 08:00 по киевскому времени. Выберите поезд {train} и оплатите билет."
+"buy.c.h":"С пересадкой {xin}",
+"buy.c.s1":"Откройте приложение «Укрзалізниця», выберите маршрут {uz} и укажите дату поездки. Продажа билетов открывается за 20 суток до отправления, в 08:00 по киевскому времени. Выберите поезд {train} и оплатите билет.",
+"buy.c.dt":"отправление из {a} {t1}, прибытие в {b} {t2}"
 },
 uk:{
 h:"год",min:"хв",tag0:"без пересадок",tag1:"1 пересадка",tag2:"{n} пересадки",tag5:"{n} пересадок",
@@ -512,8 +513,9 @@ coach:"У купе передбачено три спальні місця, ро
 "buy.note.cz":"Графіки руху поїздів можуть змінитися, актуальну інформацію дивіться в застосунку УЗ, у застосунку ČD My Train та на сайті RegioJet.",
 "buy.t.s2rj":"Квиток {pkp} на поїзд RJ придбайте окремо в чеського перевізника RegioJet — на офіційному сайті regiojet.cz або в застосунку RegioJet.",
 "buy.t.b2rj":"Купити на сайті RegioJet квиток {pkp}",
-"buy.c.h":"З пересадкою {xin} · УЗ + {car}",
-"buy.c.s1":"Відкрийте застосунок «Укрзалізниця», оберіть маршрут {uz} і вкажіть дату поїздки. Продаж квитків відкривається за 20 діб до відправлення, о 08:00 за київським часом. Оберіть поїзд {train} і сплатіть квиток."
+"buy.c.h":"З пересадкою {xin}",
+"buy.c.s1":"Відкрийте застосунок «Укрзалізниця», оберіть маршрут {uz} і вкажіть дату поїздки. Продаж квитків відкривається за 20 діб до відправлення, о 08:00 за київським часом. Оберіть поїзд {train} і сплатіть квиток.",
+"buy.c.dt":"відправлення з {a} {t1}, прибуття до {b} {t2}"
 },
 en:{
 h:"h",min:"min",tag0:"direct",tag1:"1 transfer",tag2:"{n} transfers",tag5:"{n} transfers",
@@ -743,8 +745,9 @@ coach:"Each compartment has three berths, one above another. When the middle ber
 "buy.note.cz":"Train schedules may change. Check the latest information in the UZ app, in the ČD My Train app and on the RegioJet website.",
 "buy.t.s2rj":"Buy the {pkp} ticket for the RJ train separately from the Czech carrier RegioJet, on regiojet.cz or in the RegioJet app.",
 "buy.t.b2rj":"Buy the {pkp} ticket on RegioJet",
-"buy.c.h":"With a transfer {xin} · UZ + {car}",
-"buy.c.s1":"Open the Ukrzaliznytsia app, choose the route {uz} and the travel date. Sales open 20 days before departure at 08:00 Kyiv time. Choose train {train} and pay for the ticket."
+"buy.c.h":"With a transfer {xin}",
+"buy.c.s1":"Open the Ukrzaliznytsia app, choose the route {uz} and the travel date. Sales open 20 days before departure at 08:00 Kyiv time. Choose train {train} and pay for the ticket.",
+"buy.c.dt":"departure from {a} {t1}, arrival in {b} {t2}"
 },
 pl:{
 h:"godz.",min:"min",tag0:"bez przesiadek",tag1:"1 przesiadka",tag2:"{n} przesiadki",tag5:"{n} przesiadek",
@@ -974,7 +977,8 @@ coach:"W przedziale są trzy miejsca do spania, jedno nad drugim. Gdy środkowa 
 "buy.note.cz":"Rozkłady jazdy mogą się zmienić, aktualne informacje sprawdź w aplikacji UZ, w aplikacji ČD My Train i na stronie RegioJet.",
 "buy.t.s2rj":"Bilet {pkp} na pociąg RJ kup osobno u czeskiego przewoźnika RegioJet — na stronie regiojet.cz lub w aplikacji RegioJet.",
 "buy.t.b2rj":"Kup bilet {pkp} na stronie RegioJet",
-"buy.c.h":"Z przesiadką {xin} · UZ + {car}",
-"buy.c.s1":"Otwórz aplikację Ukrzaliznytsia, wybierz trasę {uz} i datę podróży. Sprzedaż biletów rusza na 20 dni przed odjazdem o 08:00 czasu kijowskiego. Wybierz pociąg {train} i opłać bilet."
+"buy.c.h":"Z przesiadką {xin}",
+"buy.c.s1":"Otwórz aplikację Ukrzaliznytsia, wybierz trasę {uz} i datę podróży. Sprzedaż biletów rusza na 20 dni przed odjazdem o 08:00 czasu kijowskiego. Wybierz pociąg {train} i opłać bilet.",
+"buy.c.dt":"odjazd z {a} {t1}, przyjazd do {b} {t2}"
 }};
 if (typeof module !== "undefined") module.exports = I18N;

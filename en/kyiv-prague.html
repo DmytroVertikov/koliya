@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- build 2026-11-06T20:53:20.962Z vmw5gbter direct=false x=Перемышль -->
+<!-- build 2026-11-06T21:03:38.822Z vmw5gp24y direct=false x=Перемышль -->
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -275,19 +275,19 @@
 
 
 
-<div><h3>With a transfer in Przemyśl · UZ + ČD</h3><ol class="steps">
+<div><h3 data-tr="051К" data-dt="departure from Kyiv {t1}, arrival in Prague {t2}">With a transfer in Przemyśl</h3><ol class="steps">
 <li>Open the Ukrzaliznytsia app, choose the route Kyiv → Przemyśl and the travel date. Sales open 20 days before departure at 08:00 Kyiv time. Choose train 051К and pay for the ticket.</li>
 <li>Buy the Przemyśl → Prague ticket for EC and IC trains separately from the Czech carrier České dráhy (ČD), on cd.cz or in the ČD My Train (Můj vlak) app.</li>
 <li>After buying, save both e-tickets on your phone. Before you travel, check the dates, departure times and arrival stations.</li></ol>
 <a class="btn pri" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Buy the Kyiv → Przemyśl ticket in the UZ app</a>
 <a class="btn" href="https://www.cd.cz/spojeni-a-jizdenka/" target="_blank" rel="noopener">Buy the Przemyśl → Prague ticket on ČD</a></div>
-<div><h3>With a transfer in Przemyśl · UZ + RegioJet</h3><ol class="steps">
+<div><h3 data-tr="715К" data-dt="departure from Kyiv {t1}, arrival in Prague {t2}">With a transfer in Przemyśl</h3><ol class="steps">
 <li>Open the Ukrzaliznytsia app, choose the route Kyiv → Przemyśl and the travel date. Sales open 20 days before departure at 08:00 Kyiv time. Choose train 715К and pay for the ticket.</li>
 <li>Buy the Przemyśl → Prague ticket for the RJ train separately from the Czech carrier RegioJet, on regiojet.cz or in the RegioJet app.</li>
 <li>After buying, save both e-tickets on your phone. Before you travel, check the dates, departure times and arrival stations.</li></ol>
 <a class="btn pri" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Buy the Kyiv → Przemyśl ticket in the UZ app</a>
 <a class="btn" href="https://regiojet.cz/" target="_blank" rel="noopener">Buy the Przemyśl → Prague ticket on RegioJet</a></div>
-<div><h3>With a transfer in Chop · UZ + RegioJet</h3><ol class="steps">
+<div><h3 data-tr="059К" data-dt="departure from Kyiv {t1}, arrival in Prague {t2}">With a transfer in Chop</h3><ol class="steps">
 <li>Open the Ukrzaliznytsia app, choose the route Kyiv → Chop and the travel date. Sales open 20 days before departure at 08:00 Kyiv time. Choose train 059К and pay for the ticket.</li>
 <li>Buy the Chop → Prague ticket for the RJ train separately from the Czech carrier RegioJet, on regiojet.cz or in the RegioJet app.</li>
 <li>After buying, save both e-tickets on your phone. Before you travel, check the dates, departure times and arrival stations.</li></ol>
@@ -307,6 +307,11 @@
         }).filter(x => x.p.legs.length && norm(x.h.from).startsWith(norm(FROM)) && norm(x.h.to).startsWith(norm(TO)));
         const HAS_DIRECT = false; /* false: страница без прямого поезда, все варианты идут как «с пересадкой» */
         const direct = HAS_DIRECT ? list.filter(x => x.p.legs.length === 1) : [], transfer = HAS_DIRECT ? list.filter(x => x.p.legs.length > 1) : list;
+        /* заголовки блоков покупки: времена берём из тех же вариантов, что в таблицах; вариант выбираем по номеру поезда УЗ */
+        document.querySelectorAll("#more h3[data-tr]").forEach(h => {
+            const x = list.find(x => x.p.legs.some(L => trainKey(L.train) === trainKey(h.dataset.tr)));
+            if (x) h.insertAdjacentText("beforeend", " (" + h.dataset.dt.replace("{t1}", x.h.ft).replace("{t2}", x.h.tt) + ")")
+        });
         if (!list.length) {
             app.innerHTML = `<div class="panel"><h2>No options yet</h2><p>Add them in the admin panel.</p></div>`;
             return
