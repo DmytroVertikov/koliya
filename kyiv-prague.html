@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- build 2026-11-06T15:03:28.748Z vmw53tvpn direct=false x=Чоп -->
+<!-- build 2026-11-06T20:23:38.211Z vmw5f9lrq direct=false x=Чоп -->
 <html lang="ru">
 <head>
     <meta charset="utf-8">
@@ -190,8 +190,12 @@
             grid-template-columns:repeat(3, minmax(0, 1fr))
         }
 
+        .buy.two {
+            grid-template-columns:repeat(2, minmax(0, 1fr))
+        }
+
         @media (max-width: 980px) {
-            .buy.three {
+            .buy.two, .buy.three {
                 grid-template-columns: minmax(0, 1fr)
             }
         }
@@ -262,19 +266,25 @@
 <script src="i18n.js"></script>
 <script src="common.js"></script>
 <script>
+    const SPLIT = [["Чоп","С пересадкой в Чопе",0],["Перемышль","С пересадкой в Перемышле",1]]; /* [станция пересадки, заголовок, пограничный контроль]: страница делится на группы по пересадке */
     const FROM = "Киев", TO = "Прага", BACK = "cz-ua"; // FROM/TO: русские названия, как в шапке карточки в админке
     
     const BUY = `<section class="panel"><h2>Как купить билеты</h2>
-<div class="buy one">
+<div class="buy two">
 
 <!--T--><div><h3>С пересадкой в Чопе</h3><ol class="steps">
-<li>Откройте приложение «Укрзалізниця», выберите маршрут Киев → Чоп и укажите дату поездки. Продажа билетов открывается за 20 суток до отправления, в 08:00 по киевскому времени. Выберите поезд 027К и оплатите билет.</li>
-<li>Поезд Чоп → Прага отправляется на следующие сутки, поэтому продажа билетов на него в приложении «Укрзалізниця» открывается на следующий день. Если хотите приобрести билет заранее, его можно отдельно купить в приложении словацкого перевозчика ZSSK. Как правило, билеты у ZSSK дешевле.</li>
+<li>Откройте приложение «Укрзалізниця», выберите нужный поезд на украинском участке маршрута и укажите дату поездки. Продажа билетов открывается за 20 суток до отправления, в 08:00 по киевскому времени. Оплатите билет.</li>
+<li>Билет на поезд Чоп → Прага можно купить в приложении «Укрзалізниця» или отдельно у словацкого перевозчика ZSSK в его приложении. Обычно у ZSSK билеты дешевле.</li>
 
 <li>После покупки сохраните оба электронных билета в телефоне. Перед поездкой проверьте даты, время отправления и станции прибытия.</li></ol>
 <a class="btn pri" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Купить в приложении УЗ билет Киев → Чоп</a>
 <a class="btn" href="https://www.zssk.sk/ideme-vlakom/" target="_blank" rel="noopener">Купить в приложении ZSSK билет Чоп → Прага</a></div><!--/T-->
-
+<!--H--><div><h3>С пересадкой в Перемышле</h3><ol class="steps">
+<li>Откройте приложение «Укрзалізниця», выберите нужный поезд на украинском участке маршрута и укажите дату поездки. Продажа билетов открывается за 20 суток до отправления, в 08:00 по киевскому времени. Оплатите билет.</li>
+<li>Билет на поезд Перемышль → Прага приобретите отдельно у польского перевозчика PKP Intercity — на официальном сайте intercity.pl или в приложении PKP Intercity. Также билеты можно приобрести на сайте koleo.pl или в приложении KOLEO.</li>
+<li>После покупки сохраните оба электронных билета в телефоне. Перед поездкой проверьте даты, время отправления и станции прибытия.</li></ol>
+<a class="btn pri" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Купить в приложении УЗ билет Киев → Перемышль</a>
+<a class="btn" href="https://www.intercity.pl/" target="_blank" rel="noopener">Купить на сайте PKP Intercity билет Перемышль → Прага</a></div><!--/H-->
 
 </div>
 <p class="buy-note">Графики движения поездов могут измениться, актуальную информацию смотрите в приложении УЗ и в приложении ZSSK.</p></section>`;
@@ -295,9 +305,16 @@
             return
         }
         app.innerHTML = ""
-            + (transfer.length ? `<h2 class="sub${transfer.length === 1 ? " c" : ""}">С пересадкой в Чопе</h2><div class="cols${transfer.length === 1 ? " one" : ""}" style="margin-top:16px">${transfer.map(x => optHtml(x.o)).join("")}</div>` : "");
+            + (() => {
+            const block = (arr, h, b) => arr.length ? `<h2 class="sub${arr.length === 1 ? " c" : ""}">${h}</h2><div class="cols${arr.length === 1 ? " one" : ""}"${b ? ' data-b="1"' : ""} style="margin-top:16px">${arr.map(x => optHtml(x.o)).join("")}</div>` : "";
+            if (!SPLIT.length) return block(transfer, "С пересадкой");
+            const at = x => { const s = x.p.legs[0].stops; return norm(s[s.length - 1].name) }; /* станция первой пересадки */
+            const used = new Set();
+            const parts = SPLIT.map(s => { const g = transfer.filter(x => at(x).startsWith(norm(s[0]))); g.forEach(x => used.add(x)); return block(g, esc(s[1]), s[2]) });
+            return parts.join("") + block(transfer.filter(x => !used.has(x)), "С пересадкой")
+        })();
         
-        
+        /*B*/document.querySelectorAll((SPLIT.length ? ".cols[data-b] " : "") + ".swap").forEach(s => s.insertAdjacentHTML("afterend", `<div class="swap border">🛂 После прибытия в Перемышль происходит пограничный контроль</div>`));/*/B*/
     }).catch(() => {
         app.innerHTML = `<div class="panel"><h2>Не удалось загрузить данные</h2><p>Обновите страницу позже.</p></div>`
     });
