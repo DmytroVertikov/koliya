@@ -34,6 +34,7 @@ ST: {
 "Будапешт":["Будапешт","Budapest","Budapeszt","в Будапеште","у Будапешті","w Budapeszcie"],
 "Будапешт Келети":["Будапешт-Келеті","Budapest Keleti","Budapest Keleti","в Будапеште","у Будапешті","w Budapeszcie"],
 "Вена":["Відень","Vienna","Wiedeń","","",""],
+"Прага":["Прага","Prague","Praga","в Праге","у Празі","w Pradze"],
 "Кошице":["Кошице","Košice","Koszyce","","",""],
 "Бухарест Норд":["Бухарест-Норд","Bucharest Nord","Bukareszt Nord","","",""],
 "Бухарест":["Бухарест","Bucharest","Bukareszt","в Бухаресте","у Бухаресті","w Bukareszcie"],
@@ -262,7 +263,19 @@ coach:"В купе предусмотрены три спальных места
 "vienna_kyiv.h1":"Поездом: Вена → Киев",
 "vienna_kyiv.lead":"Расписание поездов Вена — Киев: варианты с пересадкой в Чопе. Время в пути, остановки и информация о покупке билетов.",
 "vienna_kyiv.all":"Все маршруты: Австрия — Украина",
-"vienna_kyiv.more":"← Украина — Австрия"
+"vienna_kyiv.more":"← Украина — Австрия",
+"kyiv_prague.title":"Киев → Прага поездом | Колія",
+"kyiv_prague.desc":"Поезда Киев — Прага с пересадкой: время, станции, длительность.",
+"kyiv_prague.h1":"Поездом: Киев → Прага",
+"kyiv_prague.lead":"Расписание поездов Киев — Прага: варианты с пересадкой в Чопе. Время в пути, остановки и информация о покупке билетов.",
+"kyiv_prague.all":"Все маршруты: Украина — Чехия",
+"kyiv_prague.more":"← Чехия — Украина",
+"prague_kyiv.title":"Прага → Киев поездом | Колія",
+"prague_kyiv.desc":"Поезда Прага — Киев с пересадкой: время, станции, длительность.",
+"prague_kyiv.h1":"Поездом: Прага → Киев",
+"prague_kyiv.lead":"Расписание поездов Прага — Киев: варианты с пересадкой в Чопе. Время в пути, остановки и информация о покупке билетов.",
+"prague_kyiv.all":"Все маршруты: Чехия — Украина",
+"prague_kyiv.more":"← Украина — Чехия"
 },
 uk:{
 h:"год",min:"хв",tag0:"без пересадок",tag1:"1 пересадка",tag2:"{n} пересадки",tag5:"{n} пересадок",
@@ -474,7 +487,19 @@ coach:"У купе передбачено три спальні місця, ро
 "vienna_kyiv.h1":"Потягом: Відень → Київ",
 "vienna_kyiv.lead":"Розклад поїздів Відень — Київ: варіанти з пересадкою в Чопі. Час у дорозі, зупинки та інформація про купівлю квитків.",
 "vienna_kyiv.all":"Усі маршрути: Австрія — Україна",
-"vienna_kyiv.more":"← Україна — Австрія"
+"vienna_kyiv.more":"← Україна — Австрія",
+"kyiv_prague.title":"Київ → Прага потягом | Колія",
+"kyiv_prague.desc":"Поїзди Київ — Прага з пересадкою: час, станції, тривалість.",
+"kyiv_prague.h1":"Потягом: Київ → Прага",
+"kyiv_prague.lead":"Розклад поїздів Київ — Прага: варіанти з пересадкою в Чопі. Час у дорозі, зупинки та інформація про купівлю квитків.",
+"kyiv_prague.all":"Усі маршрути: Україна — Чехія",
+"kyiv_prague.more":"← Чехія — Україна",
+"prague_kyiv.title":"Прага → Київ потягом | Колія",
+"prague_kyiv.desc":"Поїзди Прага — Київ з пересадкою: час, станції, тривалість.",
+"prague_kyiv.h1":"Потягом: Прага → Київ",
+"prague_kyiv.lead":"Розклад поїздів Прага — Київ: варіанти з пересадкою в Чопі. Час у дорозі, зупинки та інформація про купівлю квитків.",
+"prague_kyiv.all":"Усі маршрути: Чехія — Україна",
+"prague_kyiv.more":"← Україна — Чехія"
 },
 en:{
 h:"h",min:"min",tag0:"direct",tag1:"1 transfer",tag2:"{n} transfers",tag5:"{n} transfers",
@@ -686,7 +711,19 @@ coach:"Each compartment has three berths, one above another. When the middle ber
 "vienna_kyiv.h1":"By train: Vienna → Kyiv",
 "vienna_kyiv.lead":"Train timetable Vienna — Kyiv: options with a transfer in Chop. Journey time, stops and ticket information.",
 "vienna_kyiv.all":"All routes: Austria — Ukraine",
-"vienna_kyiv.more":"← Ukraine — Austria"
+"vienna_kyiv.more":"← Ukraine — Austria",
+"kyiv_prague.title":"Kyiv → Prague by train | Koliya",
+"kyiv_prague.desc":"Trains Kyiv — Prague with a transfer: times, stations, duration.",
+"kyiv_prague.h1":"By train: Kyiv → Prague",
+"kyiv_prague.lead":"Train timetable Kyiv — Prague: options with a transfer in Chop. Journey time, stops and ticket information.",
+"kyiv_prague.all":"All routes: Ukraine — Czechia",
+"kyiv_prague.more":"← Czechia — Ukraine",
+"prague_kyiv.title":"Prague → Kyiv by train | Koliya",
+"prague_kyiv.desc":"Trains Prague — Kyiv with a transfer: times, stations, duration.",
+"prague_kyiv.h1":"By train: Prague → Kyiv",
+"prague_kyiv.lead":"Train timetable Prague — Kyiv: options with a transfer in Chop. Journey time, stops and ticket information.",
+"prague_kyiv.all":"All routes: Czechia — Ukraine",
+"prague_kyiv.more":"← Ukraine — Czechia"
 },
 pl:{
 h:"godz.",min:"min",tag0:"bez przesiadek",tag1:"1 przesiadka",tag2:"{n} przesiadki",tag5:"{n} przesiadek",
@@ -898,6 +935,18 @@ coach:"W przedziale są trzy miejsca do spania, jedno nad drugim. Gdy środkowa 
 "vienna_kyiv.h1":"Pociągiem: Wiedeń → Kijów",
 "vienna_kyiv.lead":"Rozkład pociągów Wiedeń — Kijów: warianty z przesiadką w Czopie. Czas podróży, postoje i informacje o zakupie biletów.",
 "vienna_kyiv.all":"Wszystkie trasy: Austria — Ukraina",
-"vienna_kyiv.more":"← Ukraina — Austria"
+"vienna_kyiv.more":"← Ukraina — Austria",
+"kyiv_prague.title":"Kijów → Praga pociągiem | Koliya",
+"kyiv_prague.desc":"Pociągi Kijów — Praga z przesiadką: godziny, stacje, czas podróży.",
+"kyiv_prague.h1":"Pociągiem: Kijów → Praga",
+"kyiv_prague.lead":"Rozkład pociągów Kijów — Praga: warianty z przesiadką w Czopie. Czas podróży, postoje i informacje o zakupie biletów.",
+"kyiv_prague.all":"Wszystkie trasy: Ukraina — Czechy",
+"kyiv_prague.more":"← Czechy — Ukraina",
+"prague_kyiv.title":"Praga → Kijów pociągiem | Koliya",
+"prague_kyiv.desc":"Pociągi Praga — Kijów z przesiadką: godziny, stacje, czas podróży.",
+"prague_kyiv.h1":"Pociągiem: Praga → Kijów",
+"prague_kyiv.lead":"Rozkład pociągów Praga — Kijów: warianty z przesiadką w Czopie. Czas podróży, postoje i informacje o zakupie biletów.",
+"prague_kyiv.all":"Wszystkie trasy: Czechy — Ukraina",
+"prague_kyiv.more":"← Ukraina — Czechy"
 }};
 if (typeof module !== "undefined") module.exports = I18N;
