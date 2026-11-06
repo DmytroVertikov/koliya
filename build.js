@@ -35,12 +35,12 @@ const ROUTES = [
   {id: "kyiv_vienna", file: "kyiv-vienna.html", FROM: "Киев", TO: "Вена", BACK: "at-ua", hash: "ua-at", rev: "vienna-kyiv.html", uz: ["Киев","Чоп"], pkp: ["Чоп","Вена"], t3: "buy.t3out", x: "Чоп", plat: false, car: "oebb", s1: "buy.t.s1kv", s2: "buy.t.s2ov", ds2: "buy.d.s2v", third: "Будапешт", h: true},
   {id: "vienna_kyiv", file: "vienna-kyiv.html", FROM: "Вена", TO: "Киев", BACK: "ua-at", hash: "at-ua", rev: "kyiv-vienna.html", uz: ["Чоп","Киев"], pkp: ["Вена","Чоп"], t3: "buy.t3in", x: "Чоп", plat: false, car: "oebb", s1: "buy.t.s1vk", s2: "buy.t.s2vk", h: true, hb1: ["Будапешт", "Киев"], hb2: ["Вена", "Будапешт"], ds2: "buy.d.s2v", third: "Будапешт"},
   {id: "kyiv_prague", file: "kyiv-prague.html", FROM: "Киев", TO: "Прага", BACK: "cz-ua", hash: "ua-cz", rev: "prague-kyiv.html", uz: ["Киев","Перемышль"], pkp: ["Перемышль","Прага"], t3: "buy.t3out", x: "Перемышль", direct: false, plat: false, car: "cd", split: ["Перемышль","Чоп"], border: "after", cols: [
-    {x: "Перемышль", car: "cd", train: "051К", uz: ["Киев","Перемышль"], pkp: ["Перемышль","Прага"]},
-    {x: "Перемышль", car: "rj", train: "715К", uz: ["Киев","Перемышль"], pkp: ["Перемышль","Прага"]},
+    {x: "Перемышль", open: "09:00", car: "cd", train: "051К", uz: ["Киев","Перемышль"], pkp: ["Перемышль","Прага"]},
+    {x: "Перемышль", open: "09:00", car: "rj", train: "715К", uz: ["Киев","Перемышль"], pkp: ["Перемышль","Прага"]},
     {x: "Чоп", car: "rj", train: "059К", uz: ["Киев","Чоп"], pkp: ["Чоп","Прага"]}]},
   {id: "prague_kyiv", file: "prague-kyiv.html", FROM: "Прага", TO: "Киев", BACK: "ua-cz", hash: "cz-ua", rev: "kyiv-prague.html", uz: ["Перемышль","Киев"], pkp: ["Прага","Перемышль"], t3: "buy.t3in", x: "Перемышль", direct: false, plat: false, car: "cd", split: ["Перемышль","Чоп"], border: "before", cols: [
-    {x: "Перемышль", car: "cd", train: "052Л", uz: ["Перемышль","Киев"], pkp: ["Прага","Перемышль"]},
-    {x: "Перемышль", car: "rj", train: "716Л", uz: ["Перемышль","Киев"], pkp: ["Прага","Перемышль"]},
+    {x: "Перемышль", open: "09:00", car: "cd", train: "052Л", uz: ["Перемышль","Киев"], pkp: ["Прага","Перемышль"]},
+    {x: "Перемышль", open: "09:00", car: "rj", train: "716Л", uz: ["Перемышль","Киев"], pkp: ["Прага","Перемышль"]},
     {x: "Чоп", car: "rj", train: "060Л", uz: ["Чоп","Киев"], pkp: ["Прага","Чоп"]}]},
 ];
 /* проверки: повторы в ROUTES и повторяющиеся ключи в i18n.js (при повторе побеждает ПОСЛЕДНИЙ, из-за этого старые тексты могут «возвращаться») */
@@ -104,9 +104,9 @@ for (const r of ROUTES) for (const l of LANGS) {
   const attr = x => String(x).replace(/&/g, "&amp;").replace(/"/g, "&quot;");
   const dtTpl = r.cols ? fill(d["buy.c.dt"], {a: cf(r.FROM, 0), b: cf(r.TO, 1), t1: "{t1}", t2: "{t2}"}) : "";
   v.buycols = (r.cols || []).map(c => {
-    const cc = CARRIER[c.car], cv = Object.assign({}, v, {uz: pair(c.uz), pkp: pair(c.pkp), train: c.train, xin: xin(c.x, l), car: cc.n});
+    const cc = CARRIER[c.car], cv = Object.assign({}, v, {uz: pair(c.uz), pkp: pair(c.pkp), open: c.open || "08:00", train: `<span class="utr">${c.train}</span>`, xin: xin(c.x, l), car: cc.n});
     const a = (cls, href, label) => `<a class="btn${cls}" href="${href}" target="_blank" rel="noopener">${label}</a>`;
-    return `<div><h3 data-tr="${attr(c.train)}" data-dt="${attr(dtTpl)}">${fill(d["buy.c.h"], cv)}</h3><ol class="steps">\n<li>${fill(d["buy.c.s1"], cv)}</li>\n<li>${fill(d[cc.s2], cv)}</li>\n<li>${fill(d["buy.t.s4"], cv)}</li></ol>\n${a(" pri", "https://app.uz.gov.ua/start", fill(d["buy.t.b1"], cv))}\n${a("", cc.url, fill(d[cc.b2], cv))}</div>`
+    return `<div><h3 data-car="${c.car}" data-x="${attr(c.x)}" data-dt="${attr(dtTpl)}">${fill(d["buy.c.h"], cv)}</h3><ol class="steps">\n<li>${fill(d["buy.c.s1"], cv)}</li>\n<li>${fill(d[cc.s2], cv)}</li>\n<li>${fill(d["buy.t.s4"], cv)}</li></ol>\n${a(" pri", "https://app.uz.gov.ua/start", fill(d["buy.t.b1"], cv))}\n${a("", cc.url, fill(d[cc.b2], cv))}</div>`
   }).join("\n");
   const tpl1 = direct ? tpl0b : tpl0b.replace(/<!--D-->[\s\S]*?<!--\/D-->/g, "").replace(/\/\*D\*\/[\s\S]*?\/\*\/D\*\//g, ""),
     tpl2 = r.border ? tpl1 : tpl1.replace(/\/\*B\*\/[\s\S]*?\/\*\/B\*\//g, ""),

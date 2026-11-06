@@ -282,7 +282,7 @@ coach:"В купе предусмотрены три спальных места
 "buy.t.s2rj":"Билет {pkp} на поезд RJ приобретите отдельно у чешского перевозчика RegioJet — на официальном сайте regiojet.cz или в приложении RegioJet.",
 "buy.t.b2rj":"Купить на сайте RegioJet билет {pkp}",
 "buy.c.h":"С пересадкой {xin}",
-"buy.c.s1":"Откройте приложение «Укрзалізниця», выберите маршрут {uz} и укажите дату поездки. Продажа билетов открывается за 20 суток до отправления, в 08:00 по киевскому времени. Выберите поезд {train} и оплатите билет.",
+"buy.c.s1":"Откройте приложение «Укрзалізниця», выберите маршрут {uz} и укажите дату поездки. Продажа билетов открывается за 20 суток до отправления, в {open} по киевскому времени. Выберите поезд {train} и оплатите билет.",
 "buy.c.dt":"отправление из {a} {t1}, прибытие в {b} {t2}"
 },
 uk:{
@@ -514,7 +514,7 @@ coach:"У купе передбачено три спальні місця, ро
 "buy.t.s2rj":"Квиток {pkp} на поїзд RJ придбайте окремо в чеського перевізника RegioJet — на офіційному сайті regiojet.cz або в застосунку RegioJet.",
 "buy.t.b2rj":"Купити на сайті RegioJet квиток {pkp}",
 "buy.c.h":"З пересадкою {xin}",
-"buy.c.s1":"Відкрийте застосунок «Укрзалізниця», оберіть маршрут {uz} і вкажіть дату поїздки. Продаж квитків відкривається за 20 діб до відправлення, о 08:00 за київським часом. Оберіть поїзд {train} і сплатіть квиток.",
+"buy.c.s1":"Відкрийте застосунок «Укрзалізниця», оберіть маршрут {uz} і вкажіть дату поїздки. Продаж квитків відкривається за 20 діб до відправлення, о {open} за київським часом. Оберіть поїзд {train} і сплатіть квиток.",
 "buy.c.dt":"відправлення з {a} {t1}, прибуття до {b} {t2}"
 },
 en:{
@@ -746,7 +746,7 @@ coach:"Each compartment has three berths, one above another. When the middle ber
 "buy.t.s2rj":"Buy the {pkp} ticket for the RJ train separately from the Czech carrier RegioJet, on regiojet.cz or in the RegioJet app.",
 "buy.t.b2rj":"Buy the {pkp} ticket on RegioJet",
 "buy.c.h":"With a transfer {xin}",
-"buy.c.s1":"Open the Ukrzaliznytsia app, choose the route {uz} and the travel date. Sales open 20 days before departure at 08:00 Kyiv time. Choose train {train} and pay for the ticket.",
+"buy.c.s1":"Open the Ukrzaliznytsia app, choose the route {uz} and the travel date. Sales open 20 days before departure at {open} Kyiv time. Choose train {train} and pay for the ticket.",
 "buy.c.dt":"departure from {a} {t1}, arrival in {b} {t2}"
 },
 pl:{
@@ -978,7 +978,7 @@ coach:"W przedziale są trzy miejsca do spania, jedno nad drugim. Gdy środkowa 
 "buy.t.s2rj":"Bilet {pkp} na pociąg RJ kup osobno u czeskiego przewoźnika RegioJet — na stronie regiojet.cz lub w aplikacji RegioJet.",
 "buy.t.b2rj":"Kup bilet {pkp} na stronie RegioJet",
 "buy.c.h":"Z przesiadką {xin}",
-"buy.c.s1":"Otwórz aplikację Ukrzaliznytsia, wybierz trasę {uz} i datę podróży. Sprzedaż biletów rusza na 20 dni przed odjazdem o 08:00 czasu kijowskiego. Wybierz pociąg {train} i opłać bilet.",
+"buy.c.s1":"Otwórz aplikację Ukrzaliznytsia, wybierz trasę {uz} i datę podróży. Sprzedaż biletów rusza na 20 dni przed odjazdem o {open} czasu kijowskiego. Wybierz pociąg {train} i opłać bilet.",
 "buy.c.dt":"odjazd z {a} {t1}, przyjazd do {b} {t2}"
 }};
 if (typeof module !== "undefined") module.exports = I18N;
