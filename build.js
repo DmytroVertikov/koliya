@@ -32,8 +32,8 @@ const ROUTES = [
   {id: "bratislava_kyiv", file: "bratislava-kyiv.html", FROM: "Братислава", TO: "Киев", BACK: "ua-sk", hash: "sk-ua", rev: "kyiv-bratislava.html", uz: ["Чоп","Киев"], pkp: ["Братислава","Чоп"], t3: "buy.t3in", x: "Чоп", direct: false, plat: false, car: "zssk", s1: "buy.t.s1z"},
   {id: "kyiv_bucharest", file: "kyiv-bucharest.html", FROM: "Киев", TO: "Бухарест", BACK: "ro-ua", hash: "ua-ro", rev: "bucharest-kyiv.html", dOnly: true, coach: false, ds2: "buy.d.s2z", ds3: "buy.d.s3z"},
   {id: "bucharest_kyiv", file: "bucharest-kyiv.html", FROM: "Бухарест", TO: "Киев", BACK: "ua-ro", hash: "ro-ua", rev: "kyiv-bucharest.html", dOnly: true, coach: false, ds2: "buy.d.s2z", ds3: "buy.d.s3z"},
-  {id: "kyiv_vienna", file: "kyiv-vienna.html", FROM: "Киев", TO: "Вена", BACK: "at-ua", hash: "ua-at", rev: "vienna-kyiv.html", uz: ["Киев","Чоп"], pkp: ["Чоп","Вена"], t3: "buy.t3out", x: "Чоп", plat: false, car: "oebb", gen: true, ds2: "buy.d.s2v"},
-  {id: "vienna_kyiv", file: "vienna-kyiv.html", FROM: "Вена", TO: "Киев", BACK: "ua-at", hash: "at-ua", rev: "kyiv-vienna.html", uz: ["Чоп","Киев"], pkp: ["Вена","Чоп"], t3: "buy.t3in", x: "Чоп", plat: false, car: "oebb", gen: true, ds2: "buy.d.s2v"}
+  {id: "kyiv_vienna", file: "kyiv-vienna.html", FROM: "Киев", TO: "Вена", BACK: "at-ua", hash: "ua-at", rev: "vienna-kyiv.html", uz: ["Киев","Чоп"], pkp: ["Чоп","Вена"], t3: "buy.t3out", x: "Чоп", plat: false, car: "oebb", s1: "buy.t.s1z", s2: "buy.t.s2ov", ds2: "buy.d.s2v", third: "Будапешт"},
+  {id: "vienna_kyiv", file: "vienna-kyiv.html", FROM: "Вена", TO: "Киев", BACK: "ua-at", hash: "at-ua", rev: "kyiv-vienna.html", uz: ["Чоп","Киев"], pkp: ["Вена","Чоп"], t3: "buy.t3in", x: "Чоп", plat: false, car: "oebb", s1: "buy.t.s1z", ds2: "buy.d.s2v", third: "Будапешт"}
 ];
 /* проверки: повторы в ROUTES и повторяющиеся ключи в i18n.js (при повторе побеждает ПОСЛЕДНИЙ, из-за этого старые тексты могут «возвращаться») */
 {
@@ -69,12 +69,14 @@ for (const r of ROUTES) for (const l of LANGS) {
   const CARS = {zssk: {url: "https://www.zssk.sk/ideme-vlakom/", s2: "buy.t.s2z", b2: "buy.t.b2z", note: "buy.note.z"}, cfr: {url: "https://bilete.cfrcalatori.ro/", s2: "buy.t.s2c", b2: "buy.t.b2c", note: "buy.note.c"}, oebb: {url: "https://tickets.oebb.at/", s2: "buy.t.s2o", b2: "buy.t.b2o", note: "buy.note.o"}}, cr = CARS[r.car];
   v["buy.t.url"] = cr ? cr.url : "https://www.intercity.pl/";
   v["buy.t.s2"] = fill(d[r.s2 || (cr ? cr.s2 : "buy.t.s2")], v); v["buy.t.b2"] = fill(d[cr ? cr.b2 : "buy.t.b2"], v);
-  v.border = r.border ? fill(d["border." + r.border], v) : ""; v["buy.notex"] = fill(d[r.app || r.dOnly ? "buy.note.a" : cr ? cr.note : "buy.note"], v); v.xin = xin(X, l); v.hasDirect = String(direct); v.buyone = direct && !r.dOnly ? "" : " one";
+  v.border = r.border ? fill(d["border." + r.border], v) : ""; v["buy.notex"] = fill(d[r.app || r.dOnly ? "buy.note.a" : cr ? cr.note : "buy.note"], v); v.xin = xin(X, l); v.hasDirect = String(direct); v.buyone = (direct && !r.dOnly ? "" : " one") + (r.third ? " three" : "");
   v["transfer.h"] = fill(d[plat ? "transfer.h" : "transfer.h2"], v);
+  if (r.third) v["buy.h3"] = fill(d["transfer.h2"], Object.assign({}, v, {xin: xin(r.third, l)}));
   /* gen: варианты с разными пересадочными станциями (Чоп, Будапешт…): общие заголовок и шаги вместо «в Чопе» */
   if (r.gen) { v["transfer.h"] = v["buy.t.h"] = fill(d["transfer.h3"], v); v["buy.t.s1x"] = fill(d["buy.t.s1v"], v); v["buy.t.s2"] = fill(d["buy.t.s2v"], v); v["buy.t.b1"] = fill(d["buy.t.b1v"], v); v["buy.t.b2"] = fill(d["buy.t.b2v"], v) }
   v["buy.d.s2"] = fill(d[r.ds2 || "buy.d.s2"], v); v["buy.d.s3"] = fill(d[r.ds3 || "buy.d.s3"], v); /* dOnly: страница только с прямым поездом (одна колонка покупки УЗ), coach: false: без описания купе */
-  const tpl1 = direct ? tpl0 : tpl0.replace(/<!--D-->[\s\S]*?<!--\/D-->/g, "").replace(/\/\*D\*\/[\s\S]*?\/\*\/D\*\//g, ""),
+  const tpl0b = r.third ? tpl0 : tpl0.replace(/<!--H-->[\s\S]*?<!--\/H-->/g, ""); /* third: третий столбец покупки «С пересадкой в …» (вторая пересадочная станция) */
+  const tpl1 = direct ? tpl0b : tpl0b.replace(/<!--D-->[\s\S]*?<!--\/D-->/g, "").replace(/\/\*D\*\/[\s\S]*?\/\*\/D\*\//g, ""),
     tpl2 = r.border ? tpl1 : tpl1.replace(/\/\*B\*\/[\s\S]*?\/\*\/B\*\//g, ""),
     tpl3 = r.one || r.car ? tpl2.replace(/<!--T3-->[\s\S]*?<!--\/T3-->/g, "") : tpl2,
     tpl = r.app ? tpl3.replace(/<!--T-->[\s\S]*?<!--\/T-->/g, "") : tpl3.replace(/<!--A-->[\s\S]*?<!--\/A-->/g, "");

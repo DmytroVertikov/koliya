@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- build 2026-11-06T09:56:39.398Z vmw4svayv direct=true x=Чоп -->
+<!-- build 2026-11-06T10:19:05.692Z vmw4to5rq direct=true x=Чоп -->
 <html lang="uk">
 <head>
     <meta charset="utf-8">
@@ -186,6 +186,16 @@
             grid-template-columns: minmax(0, 1fr)
         }
 
+        .buy.three {
+            grid-template-columns:repeat(3, minmax(0, 1fr))
+        }
+
+        @media (max-width: 980px) {
+            .buy.three {
+                grid-template-columns: minmax(0, 1fr)
+            }
+        }
+
         .buy-note {
             margin-top: 16px !important;
             font-size: 14px
@@ -255,19 +265,25 @@
     const FROM = "Киев", TO = "Вена", BACK = "at-ua"; // FROM/TO: русские названия, как в шапке карточки в админке
     /*D*//*C*/const COACH = `<aside class="coach"><p>У купе передбачено три спальні місця, розташовані одне над одним. Якщо середню полицю переведено у спальне положення, сидіти на нижній полиці не можна. Для підйому на верхню полицю передбачено драбину.</p></aside>`;/*/C*//*/D*/
     const BUY = `<section class="panel"><h2>Як купити квитки</h2>
-<div class="buy">
+<div class="buy three">
 <!--D--><div class="d"><h3>Прямий поїзд</h3><ol class="steps">
 <li>Відкрийте застосунок «Укрзалізниця» та увійдіть у свій обліковий запис.</li>
 <li>Оберіть маршрут Київ → Відень і вкажіть дату поїздки. Продаж квитків відкривається за 20 діб до відправлення, о 08:00 за київським часом. На прямий поїзд квитки користуються великим попитом, тому радимо купувати їх одразу після початку продажу.</li>
 <li>Оберіть місце в купейному вагоні стандарту RIC і сплатіть квиток банківською карткою. Електронний квиток з’явиться в застосунку. Під час посадки пред’явіть його разом із паспортом.</li></ol>
 <a class="btn" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Відкрити застосунок «Укрзалізниця»</a></div><!--/D-->
-<!--T--><div><h3>З пересадкою</h3><ol class="steps">
-<li>Відкрийте застосунок «Укрзалізниця», оберіть потрібний поїзд на українській ділянці маршруту та вкажіть дату поїздки. Продаж квитків відкривається за 20 діб до відправлення, о 08:00 за київським часом. Сплатіть квиток.</li>
-<li>Квиток на решту шляху придбайте окремо, наприклад в австрійського перевізника ÖBB — на tickets.oebb.at або в застосунку ÖBB Tickets.</li>
+<!--T--><div><h3>З пересадкою у Чопі</h3><ol class="steps">
+<li>Відкрийте застосунок «Укрзалізниця», оберіть маршрут Київ → Чоп і вкажіть дату поїздки. Продаж квитків відкривається за 20 діб до відправлення, о 08:00 за київським часом. Оберіть потрібний поїзд і сплатіть квиток.</li>
+<li>Поїзди Чоп → Відень відправляються наступної доби, тому продаж квитків на них у застосунку «Укрзалізниця» відкривається наступного дня. Також квиток можна придбати заздалегідь в австрійського перевізника ÖBB — на tickets.oebb.at або в застосунку ÖBB Tickets. Але в такому разі він буде суттєво дорожчим, ніж у застосунку «Укрзалізниця».</li>
 
 <li>Після купівлі збережіть обидва електронні квитки в телефоні. Перед поїздкою перевірте дати, час відправлення та станції прибуття.</li></ol>
-<a class="btn pri" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Купити квиток у застосунку УЗ</a>
-<a class="btn" href="https://tickets.oebb.at/" target="_blank" rel="noopener">Купити квиток на сайті ÖBB</a></div><!--/T-->
+<a class="btn pri" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Купити в застосунку УЗ квиток Київ → Чоп</a>
+<a class="btn" href="https://tickets.oebb.at/" target="_blank" rel="noopener">Купити на сайті ÖBB квиток Чоп → Відень</a></div><!--/T-->
+<!--H--><div><h3>З пересадкою у Будапешті</h3><ol class="steps">
+<li>Відкрийте застосунок «Укрзалізниця», оберіть маршрут Київ → Чоп і вкажіть дату поїздки. Продаж квитків відкривається за 20 діб до відправлення, о 08:00 за київським часом. Оберіть потрібний поїзд і сплатіть квиток.</li>
+<li>Поїзди Чоп → Відень відправляються наступної доби, тому продаж квитків на них у застосунку «Укрзалізниця» відкривається наступного дня. Також квиток можна придбати заздалегідь в австрійського перевізника ÖBB — на tickets.oebb.at або в застосунку ÖBB Tickets. Але в такому разі він буде суттєво дорожчим, ніж у застосунку «Укрзалізниця».</li>
+<li>Після купівлі збережіть обидва електронні квитки в телефоні. Перед поїздкою перевірте дати, час відправлення та станції прибуття.</li></ol>
+<a class="btn pri" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Купити в застосунку УЗ квиток Київ → Чоп</a>
+<a class="btn" href="https://tickets.oebb.at/" target="_blank" rel="noopener">Купити на сайті ÖBB квиток Чоп → Відень</a></div><!--/H-->
 
 </div>
 <p class="buy-note">Графіки руху поїздів можуть змінюватися, актуальну інформацію дивіться в застосунку УЗ та на сайті ÖBB.</p></section>`;
@@ -289,7 +305,7 @@
         }
         app.innerHTML = ""/*D*/ + (direct.length ? `<h2 class="sub" style="margin-top:6px">Прямий поїзд <small>без пересадок</small></h2><div class="direct direct-wrap" style="margin-top:16px">${direct.map(x => optHtml(x.o)).join("")}</div>` : "")
             + (direct.length && transfer.length ? `<aside class="ad wide" data-slot="mid" hidden></aside>` : "")/*/D*/
-            + (transfer.length ? `<h2 class="sub${transfer.length === 1 ? " c" : ""}">З пересадкою</h2><div class="cols${transfer.length === 1 ? " one" : ""}" style="margin-top:16px">${transfer.map(x => optHtml(x.o)).join("")}</div>` : "");
+            + (transfer.length ? `<h2 class="sub${transfer.length === 1 ? " c" : ""}">З пересадкою у Чопі</h2><div class="cols${transfer.length === 1 ? " one" : ""}" style="margin-top:16px">${transfer.map(x => optHtml(x.o)).join("")}</div>` : "");
         /*D*//*C*/document.querySelectorAll(".direct .body").forEach(b => {
             b.classList.add("two");
             b.insertAdjacentHTML("beforeend", COACH)

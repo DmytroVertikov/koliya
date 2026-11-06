@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- build 2026-11-06T09:56:39.393Z vmw4svayv direct=false x=Перемышль -->
+<!-- build 2026-11-06T10:19:05.685Z vmw4to5rq direct=false x=Перемышль -->
 <html lang="pl">
 <head>
     <meta charset="utf-8">
@@ -186,6 +186,16 @@
             grid-template-columns: minmax(0, 1fr)
         }
 
+        .buy.three {
+            grid-template-columns:repeat(3, minmax(0, 1fr))
+        }
+
+        @media (max-width: 980px) {
+            .buy.three {
+                grid-template-columns: minmax(0, 1fr)
+            }
+        }
+
         .buy-note {
             margin-top: 16px !important;
             font-size: 14px
@@ -264,6 +274,7 @@
 <li>Po zakupie zapisz oba e-bilety w telefonie. Przed podróżą sprawdź daty, godziny odjazdu i stacje docelowe.</li></ol>
 <a class="btn pri" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Kup w aplikacji UZ bilet Przemyśl → Krzemieńczuk</a>
 <a class="btn" href="https://www.intercity.pl/" target="_blank" rel="noopener">Kup na stronie PKP Intercity bilet Warszawa → Przemyśl</a></div><!--/T-->
+
 
 </div>
 <p class="buy-note">Rozkłady jazdy mogą ulec zmianie. Aktualne informacje znajdziesz w aplikacji UZ i na stronie PKP Intercity.</p></section>`;

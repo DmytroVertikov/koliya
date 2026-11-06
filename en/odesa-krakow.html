@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- build 2026-11-06T09:56:39.388Z vmw4svayv direct=false x=Перемышль -->
+<!-- build 2026-11-06T10:19:05.678Z vmw4to5rq direct=false x=Перемышль -->
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -186,6 +186,16 @@
             grid-template-columns: minmax(0, 1fr)
         }
 
+        .buy.three {
+            grid-template-columns:repeat(3, minmax(0, 1fr))
+        }
+
+        @media (max-width: 980px) {
+            .buy.three {
+                grid-template-columns: minmax(0, 1fr)
+            }
+        }
+
         .buy-note {
             margin-top: 16px !important;
             font-size: 14px
@@ -264,6 +274,7 @@
 <li>After buying, save both e-tickets on your phone. Before you travel, check the dates, departure times and arrival stations.</li></ol>
 <a class="btn pri" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Buy the Odesa → Przemyśl ticket in the UZ app</a>
 <a class="btn" href="https://www.intercity.pl/" target="_blank" rel="noopener">Buy the Przemyśl → Kraków ticket on PKP Intercity</a></div><!--/T-->
+
 
 </div>
 <p class="buy-note">Train schedules may change. Check the latest information in the UZ app and on the PKP Intercity website.</p></section>`;

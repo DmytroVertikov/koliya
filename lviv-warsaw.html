@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- build 2026-11-06T09:56:39.389Z vmw4svayv direct=false x=Рава-Русская -->
+<!-- build 2026-11-06T10:19:05.679Z vmw4to5rq direct=false x=Рава-Русская -->
 <html lang="ru">
 <head>
     <meta charset="utf-8">
@@ -186,6 +186,16 @@
             grid-template-columns: minmax(0, 1fr)
         }
 
+        .buy.three {
+            grid-template-columns:repeat(3, minmax(0, 1fr))
+        }
+
+        @media (max-width: 980px) {
+            .buy.three {
+                grid-template-columns: minmax(0, 1fr)
+            }
+        }
+
         .buy-note {
             margin-top: 16px !important;
             font-size: 14px
@@ -256,6 +266,7 @@
     
     const BUY = `<section class="panel"><h2>Как купить билеты</h2>
 <div class="buy one">
+
 
 
 <!--A--><div><h3>С пересадкой в Раве-Русской</h3><ol class="steps">

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- build 2026-11-06T09:56:39.386Z vmw4svayv direct=false x=Перемышль -->
+<!-- build 2026-11-06T10:19:05.676Z vmw4to5rq direct=false x=Перемышль -->
 <html lang="uk">
 <head>
     <meta charset="utf-8">
@@ -186,6 +186,16 @@
             grid-template-columns: minmax(0, 1fr)
         }
 
+        .buy.three {
+            grid-template-columns:repeat(3, minmax(0, 1fr))
+        }
+
+        @media (max-width: 980px) {
+            .buy.three {
+                grid-template-columns: minmax(0, 1fr)
+            }
+        }
+
         .buy-note {
             margin-top: 16px !important;
             font-size: 14px
@@ -264,6 +274,7 @@
 <li>Після купівлі збережіть обидва електронні квитки в телефоні. Перед поїздкою перевірте дати, час відправлення та станції прибуття.</li></ol>
 <a class="btn pri" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Купити в застосунку УЗ квиток Одеса → Перемишль</a>
 <a class="btn" href="https://www.intercity.pl/" target="_blank" rel="noopener">Купити на сайті PKP Intercity квиток Перемишль → Варшава</a></div><!--/T-->
+
 
 </div>
 <p class="buy-note">Графіки руху поїздів можуть змінюватися, актуальну інформацію дивіться в застосунку УЗ та на сайті PKP Intercity.</p></section>`;

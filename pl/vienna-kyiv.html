@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- build 2026-11-06T09:56:39.400Z vmw4svayv direct=true x=Чоп -->
+<!-- build 2026-11-06T10:19:05.693Z vmw4to5rq direct=true x=Чоп -->
 <html lang="pl">
 <head>
     <meta charset="utf-8">
@@ -186,6 +186,16 @@
             grid-template-columns: minmax(0, 1fr)
         }
 
+        .buy.three {
+            grid-template-columns:repeat(3, minmax(0, 1fr))
+        }
+
+        @media (max-width: 980px) {
+            .buy.three {
+                grid-template-columns: minmax(0, 1fr)
+            }
+        }
+
         .buy-note {
             margin-top: 16px !important;
             font-size: 14px
@@ -255,19 +265,25 @@
     const FROM = "Вена", TO = "Киев", BACK = "ua-at"; // FROM/TO: русские названия, как в шапке карточки в админке
     /*D*//*C*/const COACH = `<aside class="coach"><p>W przedziale są trzy miejsca do spania, jedno nad drugim. Gdy środkowa półka jest rozłożona do spania, nie wolno siedzieć na dolnej. Na górną półkę prowadzi drabinka.</p></aside>`;/*/C*//*/D*/
     const BUY = `<section class="panel"><h2>Jak kupić bilety</h2>
-<div class="buy">
+<div class="buy three">
 <!--D--><div class="d"><h3>Pociąg bezpośredni</h3><ol class="steps">
 <li>Otwórz aplikację Ukrzaliznytsia i zaloguj się na swoje konto.</li>
 <li>Wybierz trasę Wiedeń → Kijów i datę podróży. Sprzedaż biletów rusza na 20 dni przed odjazdem o 08:00 czasu kijowskiego. Bilety na pociąg bezpośredni cieszą się dużym popytem, dlatego warto kupić je zaraz po otwarciu sprzedaży.</li>
 <li>Wybierz miejsce w wagonie z przedziałami standardu RIC i zapłać kartą. E-bilet pojawi się w aplikacji. Przy wsiadaniu okaż go razem z paszportem.</li></ol>
 <a class="btn" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Otwórz aplikację Ukrzaliznytsia</a></div><!--/D-->
-<!--T--><div><h3>Z przesiadką</h3><ol class="steps">
-<li>Otwórz aplikację Ukrzaliznytsia, wybierz odpowiedni pociąg na ukraińskim odcinku trasy i datę podróży. Sprzedaż biletów rusza na 20 dni przed odjazdem o 08:00 czasu kijowskiego. Opłać bilet.</li>
-<li>Bilet na resztę trasy kup osobno, na przykład u austriackiego przewoźnika ÖBB — na tickets.oebb.at lub w aplikacji ÖBB Tickets.</li>
+<!--T--><div><h3>Z przesiadką w Czopie</h3><ol class="steps">
+<li>Otwórz aplikację Ukrzaliznytsia, wybierz trasę Czop → Kijów i datę podróży. Sprzedaż biletów rusza na 20 dni przed odjazdem o 08:00 czasu kijowskiego. Wybierz odpowiedni pociąg i opłać bilet.</li>
+<li>Bilet na pociąg Wiedeń → Czop kup osobno u austriackiego przewoźnika ÖBB — na stronie tickets.oebb.at lub w aplikacji ÖBB Tickets.</li>
 
 <li>Po zakupie zapisz oba e-bilety w telefonie. Przed podróżą sprawdź daty, godziny odjazdu i stacje docelowe.</li></ol>
-<a class="btn pri" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Kup bilet w aplikacji UZ</a>
-<a class="btn" href="https://tickets.oebb.at/" target="_blank" rel="noopener">Kup bilet na stronie ÖBB</a></div><!--/T-->
+<a class="btn pri" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Kup w aplikacji UZ bilet Czop → Kijów</a>
+<a class="btn" href="https://tickets.oebb.at/" target="_blank" rel="noopener">Kup na stronie ÖBB bilet Wiedeń → Czop</a></div><!--/T-->
+<!--H--><div><h3>Z przesiadką w Budapeszcie</h3><ol class="steps">
+<li>Otwórz aplikację Ukrzaliznytsia, wybierz trasę Czop → Kijów i datę podróży. Sprzedaż biletów rusza na 20 dni przed odjazdem o 08:00 czasu kijowskiego. Wybierz odpowiedni pociąg i opłać bilet.</li>
+<li>Bilet na pociąg Wiedeń → Czop kup osobno u austriackiego przewoźnika ÖBB — na stronie tickets.oebb.at lub w aplikacji ÖBB Tickets.</li>
+<li>Po zakupie zapisz oba e-bilety w telefonie. Przed podróżą sprawdź daty, godziny odjazdu i stacje docelowe.</li></ol>
+<a class="btn pri" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Kup w aplikacji UZ bilet Czop → Kijów</a>
+<a class="btn" href="https://tickets.oebb.at/" target="_blank" rel="noopener">Kup na stronie ÖBB bilet Wiedeń → Czop</a></div><!--/H-->
 
 </div>
 <p class="buy-note">Rozkłady jazdy mogą ulec zmianie. Aktualne informacje znajdziesz w aplikacji UZ i na stronie ÖBB.</p></section>`;
@@ -289,7 +305,7 @@
         }
         app.innerHTML = ""/*D*/ + (direct.length ? `<h2 class="sub" style="margin-top:6px">Pociąg bezpośredni <small>bez przesiadek</small></h2><div class="direct direct-wrap" style="margin-top:16px">${direct.map(x => optHtml(x.o)).join("")}</div>` : "")
             + (direct.length && transfer.length ? `<aside class="ad wide" data-slot="mid" hidden></aside>` : "")/*/D*/
-            + (transfer.length ? `<h2 class="sub${transfer.length === 1 ? " c" : ""}">Z przesiadką</h2><div class="cols${transfer.length === 1 ? " one" : ""}" style="margin-top:16px">${transfer.map(x => optHtml(x.o)).join("")}</div>` : "");
+            + (transfer.length ? `<h2 class="sub${transfer.length === 1 ? " c" : ""}">Z przesiadką w Czopie</h2><div class="cols${transfer.length === 1 ? " one" : ""}" style="margin-top:16px">${transfer.map(x => optHtml(x.o)).join("")}</div>` : "");
         /*D*//*C*/document.querySelectorAll(".direct .body").forEach(b => {
             b.classList.add("two");
             b.insertAdjacentHTML("beforeend", COACH)

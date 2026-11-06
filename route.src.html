@@ -182,6 +182,16 @@
             grid-template-columns: minmax(0, 1fr)
         }
 
+        .buy.three {
+            grid-template-columns:repeat(3, minmax(0, 1fr))
+        }
+
+        @media (max-width: 980px) {
+            .buy.three {
+                grid-template-columns: minmax(0, 1fr)
+            }
+        }
+
         .buy-note {
             margin-top: 16px !important;
             font-size: 14px
@@ -264,6 +274,12 @@
 <li>{{buy.t.s4}}</li></ol>
 <a class="btn pri" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">{{buy.t.b1}}</a>
 <a class="btn" href="{{buy.t.url}}" target="_blank" rel="noopener">{{buy.t.b2}}</a></div><!--/T-->
+<!--H--><div><h3>{{buy.h3}}</h3><ol class="steps">
+<li>{{buy.t.s1x}}</li>
+<li>{{buy.t.s2}}</li>
+<li>{{buy.t.s4}}</li></ol>
+<a class="btn pri" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">{{buy.t.b1}}</a>
+<a class="btn" href="{{buy.t.url}}" target="_blank" rel="noopener">{{buy.t.b2}}</a></div><!--/H-->
 <!--A--><div><h3>{{buy.t.h}}</h3><ol class="steps">
 <li>{{buy.a.s1}}</li>
 <li>{{buy.a.s2}}</li>
