@@ -276,9 +276,13 @@ coach:"В купе предусмотрены три спальных места
 "prague_kyiv.lead":"Расписание поездов Прага — Киев: варианты с пересадкой в Чопе. Время в пути, остановки и информация о покупке билетов.",
 "prague_kyiv.all":"Все маршруты: Чехия — Украина",
 "prague_kyiv.more":"← Украина — Чехия",
-"buy.t.s2cd":"Билет на поезд {pkp} приобретите отдельно у чешского перевозчика České dráhy (ČD) — на официальном сайте cd.cz или в приложении ČD.",
+"buy.t.s2cd":"Билет {pkp} на поезда EC и IC приобретите отдельно у чешского перевозчика České dráhy (ČD) — на cd.cz или в приложении ČD My Train (Můj vlak).",
 "buy.t.b2cd":"Купить на сайте ČD билет {pkp}",
-"buy.note.cz":"Графики движения поездов могут измениться, актуальную информацию смотрите в приложении УЗ, на сайте ČD и в приложении ZSSK."
+"buy.note.cz":"Графики движения поездов могут измениться, актуальную информацию смотрите в приложении УЗ, в приложении ČD My Train и на сайте RegioJet.",
+"buy.t.s2rj":"Билет {pkp} на поезд RJ приобретите отдельно у чешского перевозчика RegioJet — на официальном сайте regiojet.cz или в приложении RegioJet.",
+"buy.t.b2rj":"Купить на сайте RegioJet билет {pkp}",
+"buy.c.h":"С пересадкой {xin} · УЗ + {car}",
+"buy.c.s1":"Откройте приложение «Укрзалізниця», выберите маршрут {uz} и укажите дату поездки. Продажа билетов открывается за 20 суток до отправления, в 08:00 по киевскому времени. Выберите поезд {train} и оплатите билет."
 },
 uk:{
 h:"год",min:"хв",tag0:"без пересадок",tag1:"1 пересадка",tag2:"{n} пересадки",tag5:"{n} пересадок",
@@ -503,9 +507,13 @@ coach:"У купе передбачено три спальні місця, ро
 "prague_kyiv.lead":"Розклад поїздів Прага — Київ: варіанти з пересадкою в Чопі. Час у дорозі, зупинки та інформація про купівлю квитків.",
 "prague_kyiv.all":"Усі маршрути: Чехія — Україна",
 "prague_kyiv.more":"← Україна — Чехія",
-"buy.t.s2cd":"Квиток на поїзд {pkp} придбайте окремо в чеського перевізника České dráhy (ČD) — на офіційному сайті cd.cz або в застосунку ČD.",
+"buy.t.s2cd":"Квиток {pkp} на поїзди EC та IC придбайте окремо в чеського перевізника České dráhy (ČD) — на cd.cz або в застосунку ČD My Train (Můj vlak).",
 "buy.t.b2cd":"Купити на сайті ČD квиток {pkp}",
-"buy.note.cz":"Графіки руху поїздів можуть змінитися, актуальну інформацію дивіться в застосунку УЗ, на сайті ČD та в застосунку ZSSK."
+"buy.note.cz":"Графіки руху поїздів можуть змінитися, актуальну інформацію дивіться в застосунку УЗ, у застосунку ČD My Train та на сайті RegioJet.",
+"buy.t.s2rj":"Квиток {pkp} на поїзд RJ придбайте окремо в чеського перевізника RegioJet — на офіційному сайті regiojet.cz або в застосунку RegioJet.",
+"buy.t.b2rj":"Купити на сайті RegioJet квиток {pkp}",
+"buy.c.h":"З пересадкою {xin} · УЗ + {car}",
+"buy.c.s1":"Відкрийте застосунок «Укрзалізниця», оберіть маршрут {uz} і вкажіть дату поїздки. Продаж квитків відкривається за 20 діб до відправлення, о 08:00 за київським часом. Оберіть поїзд {train} і сплатіть квиток."
 },
 en:{
 h:"h",min:"min",tag0:"direct",tag1:"1 transfer",tag2:"{n} transfers",tag5:"{n} transfers",
@@ -730,9 +738,13 @@ coach:"Each compartment has three berths, one above another. When the middle ber
 "prague_kyiv.lead":"Train timetable Prague — Kyiv: options with a transfer in Chop. Journey time, stops and ticket information.",
 "prague_kyiv.all":"All routes: Czechia — Ukraine",
 "prague_kyiv.more":"← Ukraine — Czechia",
-"buy.t.s2cd":"Buy the {pkp} ticket separately from the Czech carrier České dráhy (ČD), on cd.cz or in the ČD app.",
+"buy.t.s2cd":"Buy the {pkp} ticket for EC and IC trains separately from the Czech carrier České dráhy (ČD), on cd.cz or in the ČD My Train (Můj vlak) app.",
 "buy.t.b2cd":"Buy the {pkp} ticket on ČD",
-"buy.note.cz":"Train schedules may change. Check the latest information in the UZ app, on the ČD website and in the ZSSK app."
+"buy.note.cz":"Train schedules may change. Check the latest information in the UZ app, in the ČD My Train app and on the RegioJet website.",
+"buy.t.s2rj":"Buy the {pkp} ticket for the RJ train separately from the Czech carrier RegioJet, on regiojet.cz or in the RegioJet app.",
+"buy.t.b2rj":"Buy the {pkp} ticket on RegioJet",
+"buy.c.h":"With a transfer {xin} · UZ + {car}",
+"buy.c.s1":"Open the Ukrzaliznytsia app, choose the route {uz} and the travel date. Sales open 20 days before departure at 08:00 Kyiv time. Choose train {train} and pay for the ticket."
 },
 pl:{
 h:"godz.",min:"min",tag0:"bez przesiadek",tag1:"1 przesiadka",tag2:"{n} przesiadki",tag5:"{n} przesiadek",
@@ -957,8 +969,12 @@ coach:"W przedziale są trzy miejsca do spania, jedno nad drugim. Gdy środkowa 
 "prague_kyiv.lead":"Rozkład pociągów Praga — Kijów: warianty z przesiadką w Czopie. Czas podróży, postoje i informacje o zakupie biletów.",
 "prague_kyiv.all":"Wszystkie trasy: Czechy — Ukraina",
 "prague_kyiv.more":"← Ukraina — Czechy",
-"buy.t.s2cd":"Bilet na pociąg {pkp} kup osobno u czeskiego przewoźnika České dráhy (ČD) — na stronie cd.cz lub w aplikacji ČD.",
+"buy.t.s2cd":"Bilet {pkp} na pociągi EC i IC kup osobno u czeskiego przewoźnika České dráhy (ČD) — na cd.cz lub w aplikacji ČD My Train (Můj vlak).",
 "buy.t.b2cd":"Kup bilet {pkp} na stronie ČD",
-"buy.note.cz":"Rozkłady jazdy mogą się zmienić, aktualne informacje sprawdź w aplikacji UZ, na stronie ČD i w aplikacji ZSSK."
+"buy.note.cz":"Rozkłady jazdy mogą się zmienić, aktualne informacje sprawdź w aplikacji UZ, w aplikacji ČD My Train i na stronie RegioJet.",
+"buy.t.s2rj":"Bilet {pkp} na pociąg RJ kup osobno u czeskiego przewoźnika RegioJet — na stronie regiojet.cz lub w aplikacji RegioJet.",
+"buy.t.b2rj":"Kup bilet {pkp} na stronie RegioJet",
+"buy.c.h":"Z przesiadką {xin} · UZ + {car}",
+"buy.c.s1":"Otwórz aplikację Ukrzaliznytsia, wybierz trasę {uz} i datę podróży. Sprzedaż biletów rusza na 20 dni przed odjazdem o 08:00 czasu kijowskiego. Wybierz pociąg {train} i opłać bilet."
 }};
 if (typeof module !== "undefined") module.exports = I18N;

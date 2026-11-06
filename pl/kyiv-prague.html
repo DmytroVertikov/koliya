@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- build 2026-11-06T20:36:09.300Z vmw5fppd6 direct=false x=Перемышль -->
+<!-- build 2026-11-06T20:53:20.962Z vmw5gbter direct=false x=Перемышль -->
 <html lang="pl">
 <head>
     <meta charset="utf-8">
@@ -270,24 +270,31 @@
     const FROM = "Киев", TO = "Прага", BACK = "cz-ua"; // FROM/TO: русские названия, как в шапке карточки в админке
     
     const BUY = `<section class="panel"><h2>Jak kupić bilety</h2>
-<div class="buy two">
+<div class="buy three">
 
-<!--T--><div><h3>Z przesiadką w Przemyślu</h3><ol class="steps">
-<li>Otwórz aplikację Ukrzaliznytsia, wybierz odpowiedni pociąg na ukraińskim odcinku trasy i datę podróży. Sprzedaż biletów rusza na 20 dni przed odjazdem o 08:00 czasu kijowskiego. Opłać bilet.</li>
-<li>Bilet na pociąg Przemyśl → Praga kup osobno u czeskiego przewoźnika České dráhy (ČD) — na stronie cd.cz lub w aplikacji ČD.</li>
 
+
+
+<div><h3>Z przesiadką w Przemyślu · UZ + ČD</h3><ol class="steps">
+<li>Otwórz aplikację Ukrzaliznytsia, wybierz trasę Kijów → Przemyśl i datę podróży. Sprzedaż biletów rusza na 20 dni przed odjazdem o 08:00 czasu kijowskiego. Wybierz pociąg 051К i opłać bilet.</li>
+<li>Bilet Przemyśl → Praga na pociągi EC i IC kup osobno u czeskiego przewoźnika České dráhy (ČD) — na cd.cz lub w aplikacji ČD My Train (Můj vlak).</li>
 <li>Po zakupie zapisz oba e-bilety w telefonie. Przed podróżą sprawdź daty, godziny odjazdu i stacje docelowe.</li></ol>
 <a class="btn pri" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Kup w aplikacji UZ bilet Kijów → Przemyśl</a>
-<a class="btn" href="https://www.cd.cz/spojeni-a-jizdenka/" target="_blank" rel="noopener">Kup bilet Przemyśl → Praga na stronie ČD</a></div><!--/T-->
-<!--H--><div><h3>Z przesiadką w Czopie</h3><ol class="steps">
-<li>Otwórz aplikację Ukrzaliznytsia, wybierz odpowiedni pociąg na ukraińskim odcinku trasy i datę podróży. Sprzedaż biletów rusza na 20 dni przed odjazdem o 08:00 czasu kijowskiego. Opłać bilet.</li>
-<li>Bilet na pociąg Czop → Praga możesz kupić w aplikacji Ukrzaliznytsia lub osobno u słowackiego przewoźnika ZSSK w jego aplikacji. Zwykle u ZSSK bilety są tańsze.</li>
+<a class="btn" href="https://www.cd.cz/spojeni-a-jizdenka/" target="_blank" rel="noopener">Kup bilet Przemyśl → Praga na stronie ČD</a></div>
+<div><h3>Z przesiadką w Przemyślu · UZ + RegioJet</h3><ol class="steps">
+<li>Otwórz aplikację Ukrzaliznytsia, wybierz trasę Kijów → Przemyśl i datę podróży. Sprzedaż biletów rusza na 20 dni przed odjazdem o 08:00 czasu kijowskiego. Wybierz pociąg 715К i opłać bilet.</li>
+<li>Bilet Przemyśl → Praga na pociąg RJ kup osobno u czeskiego przewoźnika RegioJet — na stronie regiojet.cz lub w aplikacji RegioJet.</li>
+<li>Po zakupie zapisz oba e-bilety w telefonie. Przed podróżą sprawdź daty, godziny odjazdu i stacje docelowe.</li></ol>
+<a class="btn pri" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Kup w aplikacji UZ bilet Kijów → Przemyśl</a>
+<a class="btn" href="https://regiojet.cz/" target="_blank" rel="noopener">Kup bilet Przemyśl → Praga na stronie RegioJet</a></div>
+<div><h3>Z przesiadką w Czopie · UZ + RegioJet</h3><ol class="steps">
+<li>Otwórz aplikację Ukrzaliznytsia, wybierz trasę Kijów → Czop i datę podróży. Sprzedaż biletów rusza na 20 dni przed odjazdem o 08:00 czasu kijowskiego. Wybierz pociąg 059К i opłać bilet.</li>
+<li>Bilet Czop → Praga na pociąg RJ kup osobno u czeskiego przewoźnika RegioJet — na stronie regiojet.cz lub w aplikacji RegioJet.</li>
 <li>Po zakupie zapisz oba e-bilety w telefonie. Przed podróżą sprawdź daty, godziny odjazdu i stacje docelowe.</li></ol>
 <a class="btn pri" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Kup w aplikacji UZ bilet Kijów → Czop</a>
-<a class="btn" href="https://www.zssk.sk/ideme-vlakom/" target="_blank" rel="noopener">Kup w aplikacji ZSSK bilet Czop → Praga</a></div><!--/H-->
-
+<a class="btn" href="https://regiojet.cz/" target="_blank" rel="noopener">Kup bilet Czop → Praga na stronie RegioJet</a></div>
 </div>
-<p class="buy-note">Rozkłady jazdy mogą się zmienić, aktualne informacje sprawdź w aplikacji UZ, na stronie ČD i w aplikacji ZSSK.</p></section>`;
+<p class="buy-note">Rozkłady jazdy mogą się zmienić, aktualne informacje sprawdź w aplikacji UZ, w aplikacji ČD My Train i na stronie RegioJet.</p></section>`;
     const app = document.getElementById("app");
     const norm = s => String(s || "").trim().toLowerCase();
     fetch(U + "/rest/v1/options?order=sort", {headers: {apikey: K, Authorization: "Bearer " + K}}).then(r => {
