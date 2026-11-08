@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- build 2026-11-08T17:48:06.168Z vmw84lahj direct=true x=Чоп -->
+<!-- build 2026-11-08T17:51:19.469Z vmw84pfn6 direct=true x=Чоп -->
 <html lang="pl">
 <head>
     <meta charset="utf-8">
@@ -266,7 +266,7 @@
 <script src="../i18n.js"></script>
 <script src="../common.js"></script>
 <script>
-    const SPLIT = [["Чоп","Z przesiadką w Czopie",0],["Мукачево","Z przesiadką w Mukaczewie",0]]; /* [станция пересадки, заголовок, пограничный контроль]: страница делится на группы по пересадке */
+    const SPLIT = []; /* [станция пересадки, заголовок, пограничный контроль]: страница делится на группы по пересадке */
     const FROM = "Будапешт", TO = "Киев", BACK = "ua-hu"; // FROM/TO: русские названия, как в шапке карточки в админке
     /*D*//*/D*/
     const BUY = `<section class="panel"><h2>Jak kupić bilety</h2>
@@ -275,13 +275,13 @@
 <li>Otwórz aplikację Ukrzaliznytsia, wybierz trasę Budapeszt → Kijów i datę podróży. Sprzedaż biletów rusza na 20 dni przed odjazdem o 08:00 czasu kijowskiego. Bilety na pociąg bezpośredni cieszą się dużym popytem, dlatego warto kupić je zaraz po otwarciu sprzedaży.</li>
 <li>Wybierz miejsce i zapłać kartą. E-bilet pojawi się w aplikacji. Przy wsiadaniu okaż go razem z paszportem.</li></ol>
 <a class="btn" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Kup w aplikacji UZ bilet Budapeszt → Kijów</a></div><!--/D-->
-<!--T--><div><h3>Z przesiadką w Czopie lub Mukaczewie</h3><ol class="steps">
-<li>Otwórz aplikację Ukrzaliznytsia, wybierz odpowiedni pociąg na ukraińskim odcinku trasy (Czop → Kijów lub Mukaczewo → Kijów) i datę podróży. Sprzedaż biletów rusza na 20 dni przed odjazdem o 08:00 czasu kijowskiego. Opłać bilet.</li>
-<li>Kup bilety na pociągi Budapeszt → Czop i Budapeszt → Mukaczewo w aplikacji Ukrzaliznytsia. Bilet można też kupić wcześniej u węgierskiego przewoźnika MÁV — na oficjalnej stronie jegy.mav.hu lub w aplikacji MÁVPlusz. Zazwyczaj bilety MÁV są tańsze.</li>
+<!--T--><div><h3>Z przesiadką w Czopie</h3><ol class="steps">
+<li>Otwórz aplikację Ukrzaliznytsia, wybierz trasę Czop → Kijów i datę podróży. Sprzedaż biletów rusza na 20 dni przed odjazdem o 08:00 czasu kijowskiego. Wybierz odpowiedni pociąg i opłać bilet.</li>
+<li>Kup bilet na pociąg Budapeszt → Czop w aplikacji Ukrzaliznytsia. Bilet można też kupić wcześniej u węgierskiego przewoźnika MÁV — na oficjalnej stronie jegy.mav.hu lub w aplikacji MÁVPlusz. Zazwyczaj bilety MÁV są tańsze.</li>
 
 <li>Po zakupie zapisz oba e-bilety w telefonie. Przed podróżą sprawdź daty, godziny odjazdu i stacje docelowe.</li></ol>
-<a class="btn pri" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Kup bilety w aplikacji UZ</a>
-<a class="btn" href="https://jegy.mav.hu/" target="_blank" rel="noopener">Kup bilety na stronie MÁV</a></div><!--/T-->
+<a class="btn pri" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Kup w aplikacji UZ bilet Czop → Kijów</a>
+<a class="btn" href="https://jegy.mav.hu/" target="_blank" rel="noopener">Kup na stronie MÁV bilet Budapeszt → Czop</a></div><!--/T-->
 
 
 
@@ -299,7 +299,7 @@
         }).filter(x => x.p.legs.length && norm(x.h.from).startsWith(norm(FROM)) && norm(x.h.to).startsWith(norm(TO)));
         const HAS_DIRECT = true; /* false: страница без прямого поезда, все варианты идут как «с пересадкой» */
         /* LEADX: если среди вариантов есть пересадка на этой станции, подзаголовок страницы берётся из LEADM (с этой станцией) */
-        const LEADX = "Мукачево", LEADM = "Rozkład pociągów Budapeszt — Kijów: pociąg bezpośredni i warianty z przesiadką w Czopie i Mukaczewie. Czas podróży, postoje i informacje o zakupie biletów.";
+        const LEADX = "", LEADM = "";
         if (LEADX && LEADM && list.some(x => x.p.legs.length > 1 && (s => norm(s[s.length - 1].name).startsWith(norm(LEADX)))(x.p.legs[0].stops))) document.getElementById("lead").textContent = LEADM;
         const direct = HAS_DIRECT ? list.filter(x => x.p.legs.length === 1) : [], transfer = HAS_DIRECT ? list.filter(x => x.p.legs.length > 1) : list;
         /* блоки покупки: вариант ищем по перевозчику чешского поезда (EC/IC = ČD, RJ = RegioJet) и станции пересадки;
@@ -332,11 +332,11 @@
             + (direct.length && transfer.length ? `<aside class="ad wide" data-slot="mid" hidden></aside>` : "")/*/D*/
             + (() => {
             const block = (arr, h, b) => arr.length ? `<h2 class="sub${arr.length === 1 ? " c" : ""}">${h}</h2><div class="cols${arr.length === 1 ? " one" : ""}"${b ? ' data-b="1"' : ""} style="margin-top:16px">${arr.map(x => optHtml(x.o)).join("")}</div>` : "";
-            if (!SPLIT.length) return block(transfer, "Z przesiadką");
+            if (!SPLIT.length) return block(transfer, "Z przesiadką w Czopie");
             const at = x => { const s = x.p.legs[0].stops; return norm(s[s.length - 1].name) }; /* станция первой пересадки */
             const used = new Set();
             const parts = SPLIT.map(s => { const g = transfer.filter(x => at(x).startsWith(norm(s[0]))); g.forEach(x => used.add(x)); return block(g, esc(s[1]), s[2]) });
-            return parts.join("") + block(transfer.filter(x => !used.has(x)), "Z przesiadką")
+            return parts.join("") + block(transfer.filter(x => !used.has(x)), "Z przesiadką w Czopie")
         })();
         /*D*//*/D*/
         

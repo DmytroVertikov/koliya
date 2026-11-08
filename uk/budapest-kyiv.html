@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- build 2026-11-08T17:48:06.167Z vmw84lahj direct=true x=Чоп -->
+<!-- build 2026-11-08T17:51:19.469Z vmw84pfn6 direct=true x=Чоп -->
 <html lang="uk">
 <head>
     <meta charset="utf-8">
@@ -266,7 +266,7 @@
 <script src="../i18n.js"></script>
 <script src="../common.js"></script>
 <script>
-    const SPLIT = [["Чоп","З пересадкою у Чопі",0],["Мукачево","З пересадкою у Мукачеві",0]]; /* [станция пересадки, заголовок, пограничный контроль]: страница делится на группы по пересадке */
+    const SPLIT = []; /* [станция пересадки, заголовок, пограничный контроль]: страница делится на группы по пересадке */
     const FROM = "Будапешт", TO = "Киев", BACK = "ua-hu"; // FROM/TO: русские названия, как в шапке карточки в админке
     /*D*//*/D*/
     const BUY = `<section class="panel"><h2>Як купити квитки</h2>
@@ -275,13 +275,13 @@
 <li>Відкрийте застосунок «Укрзалізниця», оберіть маршрут Будапешт → Київ і вкажіть дату поїздки. Продаж квитків відкривається за 20 діб до відправлення, о 08:00 за київським часом. На прямий поїзд квитки користуються великим попитом, тому радимо купувати їх одразу після початку продажу.</li>
 <li>Оберіть місце і сплатіть квиток банківською карткою. Електронний квиток з’явиться в застосунку. Під час посадки пред’явіть його разом із паспортом.</li></ol>
 <a class="btn" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Купити в застосунку УЗ квиток Будапешт → Київ</a></div><!--/D-->
-<!--T--><div><h3>З пересадкою у Чопі або Мукачеві</h3><ol class="steps">
-<li>Відкрийте застосунок «Укрзалізниця», оберіть потрібний поїзд на українській ділянці маршруту (Чоп → Київ або Мукачево → Київ) та вкажіть дату поїздки. Продаж квитків відкривається за 20 діб до відправлення, о 08:00 за київським часом. Сплатіть квиток.</li>
-<li>Придбайте квитки на поїзди Будапешт → Чоп та Будапешт → Мукачево у застосунку «Укрзалізниця». Також квиток можна придбати заздалегідь в угорського перевізника MÁV — на офіційному сайті jegy.mav.hu або в застосунку MÁVPlusz. Як правило, квитки в MÁV дешевші.</li>
+<!--T--><div><h3>З пересадкою у Чопі</h3><ol class="steps">
+<li>Відкрийте застосунок «Укрзалізниця», оберіть маршрут Чоп → Київ і вкажіть дату поїздки. Продаж квитків відкривається за 20 діб до відправлення, о 08:00 за київським часом. Оберіть потрібний поїзд і сплатіть квиток.</li>
+<li>Придбайте квиток на поїзд Будапешт → Чоп у застосунку «Укрзалізниця». Також квиток можна придбати заздалегідь в угорського перевізника MÁV — на офіційному сайті jegy.mav.hu або в застосунку MÁVPlusz. Як правило, квитки в MÁV дешевші.</li>
 
 <li>Після купівлі збережіть обидва електронні квитки в телефоні. Перед поїздкою перевірте дати, час відправлення та станції прибуття.</li></ol>
-<a class="btn pri" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Купити квитки в застосунку УЗ</a>
-<a class="btn" href="https://jegy.mav.hu/" target="_blank" rel="noopener">Купити квитки на сайті MÁV</a></div><!--/T-->
+<a class="btn pri" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Купити в застосунку УЗ квиток Чоп → Київ</a>
+<a class="btn" href="https://jegy.mav.hu/" target="_blank" rel="noopener">Купити на сайті MÁV квиток Будапешт → Чоп</a></div><!--/T-->
 
 
 
@@ -299,7 +299,7 @@
         }).filter(x => x.p.legs.length && norm(x.h.from).startsWith(norm(FROM)) && norm(x.h.to).startsWith(norm(TO)));
         const HAS_DIRECT = true; /* false: страница без прямого поезда, все варианты идут как «с пересадкой» */
         /* LEADX: если среди вариантов есть пересадка на этой станции, подзаголовок страницы берётся из LEADM (с этой станцией) */
-        const LEADX = "Мукачево", LEADM = "Розклад поїздів Будапешт — Київ: прямий поїзд і варіанти з пересадкою в Чопі та Мукачеві. Час у дорозі, зупинки та інформація про купівлю квитків.";
+        const LEADX = "", LEADM = "";
         if (LEADX && LEADM && list.some(x => x.p.legs.length > 1 && (s => norm(s[s.length - 1].name).startsWith(norm(LEADX)))(x.p.legs[0].stops))) document.getElementById("lead").textContent = LEADM;
         const direct = HAS_DIRECT ? list.filter(x => x.p.legs.length === 1) : [], transfer = HAS_DIRECT ? list.filter(x => x.p.legs.length > 1) : list;
         /* блоки покупки: вариант ищем по перевозчику чешского поезда (EC/IC = ČD, RJ = RegioJet) и станции пересадки;
@@ -332,11 +332,11 @@
             + (direct.length && transfer.length ? `<aside class="ad wide" data-slot="mid" hidden></aside>` : "")/*/D*/
             + (() => {
             const block = (arr, h, b) => arr.length ? `<h2 class="sub${arr.length === 1 ? " c" : ""}">${h}</h2><div class="cols${arr.length === 1 ? " one" : ""}"${b ? ' data-b="1"' : ""} style="margin-top:16px">${arr.map(x => optHtml(x.o)).join("")}</div>` : "";
-            if (!SPLIT.length) return block(transfer, "З пересадкою");
+            if (!SPLIT.length) return block(transfer, "З пересадкою у Чопі");
             const at = x => { const s = x.p.legs[0].stops; return norm(s[s.length - 1].name) }; /* станция первой пересадки */
             const used = new Set();
             const parts = SPLIT.map(s => { const g = transfer.filter(x => at(x).startsWith(norm(s[0]))); g.forEach(x => used.add(x)); return block(g, esc(s[1]), s[2]) });
-            return parts.join("") + block(transfer.filter(x => !used.has(x)), "З пересадкою")
+            return parts.join("") + block(transfer.filter(x => !used.has(x)), "З пересадкою у Чопі")
         })();
         /*D*//*/D*/
         

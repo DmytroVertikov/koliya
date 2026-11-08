@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- build 2026-11-08T17:48:06.167Z vmw84lahj direct=true x=Чоп -->
+<!-- build 2026-11-08T17:51:19.469Z vmw84pfn6 direct=true x=Чоп -->
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -266,7 +266,7 @@
 <script src="../i18n.js"></script>
 <script src="../common.js"></script>
 <script>
-    const SPLIT = [["Чоп","With a transfer in Chop",0],["Мукачево","With a transfer in Mukachevo",0]]; /* [станция пересадки, заголовок, пограничный контроль]: страница делится на группы по пересадке */
+    const SPLIT = []; /* [станция пересадки, заголовок, пограничный контроль]: страница делится на группы по пересадке */
     const FROM = "Будапешт", TO = "Киев", BACK = "ua-hu"; // FROM/TO: русские названия, как в шапке карточки в админке
     /*D*//*/D*/
     const BUY = `<section class="panel"><h2>How to buy tickets</h2>
@@ -275,13 +275,13 @@
 <li>Open the Ukrzaliznytsia app, choose the route Budapest → Kyiv and the travel date. Sales open 20 days before departure at 08:00 Kyiv time. Tickets for the direct train are in high demand, so we recommend buying them as soon as sales open.</li>
 <li>Pick a seat and pay by bank card. The e-ticket will appear in the app. Show it with your passport when boarding.</li></ol>
 <a class="btn" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Buy the Budapest → Kyiv ticket in the UZ app</a></div><!--/D-->
-<!--T--><div><h3>With a transfer in Chop or Mukachevo</h3><ol class="steps">
-<li>Open the Ukrzaliznytsia app, choose the train you need on the Ukrainian part of the route (Chop → Kyiv or Mukachevo → Kyiv) and set the travel date. Sales open 20 days before departure, at 08:00 Kyiv time. Pay for the ticket.</li>
-<li>Buy the tickets for the trains Budapest → Chop and Budapest → Mukachevo in the Ukrzaliznytsia app. You can also buy the ticket in advance from the Hungarian carrier MÁV, on the official site jegy.mav.hu or in the MÁVPlusz app. MÁV tickets are usually cheaper.</li>
+<!--T--><div><h3>With a transfer in Chop</h3><ol class="steps">
+<li>Open the Ukrzaliznytsia app, choose the route Chop → Kyiv and the travel date. Sales open 20 days before departure at 08:00 Kyiv time. Choose the train you need and pay for the ticket.</li>
+<li>Buy the Budapest → Chop ticket in the Ukrzaliznytsia app. You can also buy the ticket in advance from the Hungarian carrier MÁV, on the official site jegy.mav.hu or in the MÁVPlusz app. MÁV tickets are usually cheaper.</li>
 
 <li>After buying, save both e-tickets on your phone. Before you travel, check the dates, departure times and arrival stations.</li></ol>
-<a class="btn pri" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Buy tickets in the UZ app</a>
-<a class="btn" href="https://jegy.mav.hu/" target="_blank" rel="noopener">Buy tickets on MÁV</a></div><!--/T-->
+<a class="btn pri" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Buy the Chop → Kyiv ticket in the UZ app</a>
+<a class="btn" href="https://jegy.mav.hu/" target="_blank" rel="noopener">Buy the Budapest → Chop ticket on MÁV</a></div><!--/T-->
 
 
 
@@ -299,7 +299,7 @@
         }).filter(x => x.p.legs.length && norm(x.h.from).startsWith(norm(FROM)) && norm(x.h.to).startsWith(norm(TO)));
         const HAS_DIRECT = true; /* false: страница без прямого поезда, все варианты идут как «с пересадкой» */
         /* LEADX: если среди вариантов есть пересадка на этой станции, подзаголовок страницы берётся из LEADM (с этой станцией) */
-        const LEADX = "Мукачево", LEADM = "Train timetable Budapest — Kyiv: the direct train and options with a transfer in Chop and Mukachevo. Journey time, stops and ticket information.";
+        const LEADX = "", LEADM = "";
         if (LEADX && LEADM && list.some(x => x.p.legs.length > 1 && (s => norm(s[s.length - 1].name).startsWith(norm(LEADX)))(x.p.legs[0].stops))) document.getElementById("lead").textContent = LEADM;
         const direct = HAS_DIRECT ? list.filter(x => x.p.legs.length === 1) : [], transfer = HAS_DIRECT ? list.filter(x => x.p.legs.length > 1) : list;
         /* блоки покупки: вариант ищем по перевозчику чешского поезда (EC/IC = ČD, RJ = RegioJet) и станции пересадки;
@@ -332,11 +332,11 @@
             + (direct.length && transfer.length ? `<aside class="ad wide" data-slot="mid" hidden></aside>` : "")/*/D*/
             + (() => {
             const block = (arr, h, b) => arr.length ? `<h2 class="sub${arr.length === 1 ? " c" : ""}">${h}</h2><div class="cols${arr.length === 1 ? " one" : ""}"${b ? ' data-b="1"' : ""} style="margin-top:16px">${arr.map(x => optHtml(x.o)).join("")}</div>` : "";
-            if (!SPLIT.length) return block(transfer, "With a transfer");
+            if (!SPLIT.length) return block(transfer, "With a transfer in Chop");
             const at = x => { const s = x.p.legs[0].stops; return norm(s[s.length - 1].name) }; /* станция первой пересадки */
             const used = new Set();
             const parts = SPLIT.map(s => { const g = transfer.filter(x => at(x).startsWith(norm(s[0]))); g.forEach(x => used.add(x)); return block(g, esc(s[1]), s[2]) });
-            return parts.join("") + block(transfer.filter(x => !used.has(x)), "With a transfer")
+            return parts.join("") + block(transfer.filter(x => !used.has(x)), "With a transfer in Chop")
         })();
         /*D*//*/D*/
         
