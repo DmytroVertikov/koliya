@@ -85,7 +85,7 @@ for (const r of ROUTES) for (const l of LANGS) {
   /* xs: один общий блок вариантов «С пересадкой в Чопе и Мукачево» вместо разбивки split (заголовок собирается из словаря станций) */
   if (r.xs) { const J = {ru: " и ", uk: " та ", en: " and ", pl: " i "}[l], rest = n => l === "en" ? st(n, l) : xin(n, l).replace(/^\S+\s+/, ""); const XI = xin(r.xs[0], l) + r.xs.slice(1).map(n => J + rest(n)).join(""), out = r.t3 === "buy.t3out"; v["transfer.h"] = fill(d["transfer.h2"], {xin: XI});
     /* блок покупки для всех станций сразу: общий заголовок, шаги и кнопки */
-    v.xp = r.xs.map(n => pair(out ? [n, r.TO] : [r.FROM, n])).join(J); v["buy.t.h"] = fill(d["transfer.h2"], {xin: XI}); v["buy.t.s1x"] = fill(d["buy.t.s1v"], v); v["buy.t.s2"] = fill(d[out ? "buy.x.s2o" : "buy.x.s2i"], v); v["buy.t.b1"] = fill(d["buy.x.b1"], v); v["buy.t.b2"] = fill(d["buy.x.b2"], v) }
+    v.xp = r.xs.map(n => pair(out ? [n, r.TO] : [r.FROM, n])).join(J); v["buy.t.h"] = fill(d["transfer.h2"], {xin: XI}); v.xu = r.xs.map(n => pair(out ? [r.FROM, n] : [n, r.TO])).join(J); v["buy.t.s1x"] = fill(d["buy.x.s1"], v); v["buy.t.s2"] = fill(d[out ? "buy.x.s2o" : "buy.x.s2i"], v); v["buy.t.b1"] = fill(d["buy.x.b1"], v); v["buy.t.b2"] = fill(d["buy.x.b2"], v) }
   if (r.third) v["buy.h3"] = fill(d["transfer.h2"], Object.assign({}, v, {xin: xin(r.third, l)}));
   if (r.third) { /* содержимое третьего столбца: по умолчанию копия колонки про первую пересадку; h: true — свои тексты и кнопки (buy.h.*) */
     const btn = (cls, href, label) => `<a class="btn${cls}" href="${href}" target="_blank" rel="noopener">${label}</a>`;
