@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- build 2026-11-08T17:41:47.887Z vmw84d6lw direct=true x=Чоп -->
+<!-- build 2026-11-08T17:45:29.641Z vmw84hxpt direct=true x=Чоп -->
 <html lang="pl">
 <head>
     <meta charset="utf-8">
@@ -266,7 +266,7 @@
 <script src="../i18n.js"></script>
 <script src="../common.js"></script>
 <script>
-    const SPLIT = []; /* [станция пересадки, заголовок, пограничный контроль]: страница делится на группы по пересадке */
+    const SPLIT = [["Чоп","Z przesiadką w Czopie",0],["Мукачево","Z przesiadką w Mukaczewie",0]]; /* [станция пересадки, заголовок, пограничный контроль]: страница делится на группы по пересадке */
     const FROM = "Будапешт", TO = "Киев", BACK = "ua-hu"; // FROM/TO: русские названия, как в шапке карточки в админке
     /*D*//*/D*/
     const BUY = `<section class="panel"><h2>Jak kupić bilety</h2>
@@ -276,7 +276,7 @@
 <li>Wybierz miejsce i zapłać kartą. E-bilet pojawi się w aplikacji. Przy wsiadaniu okaż go razem z paszportem.</li></ol>
 <a class="btn" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Kup w aplikacji UZ bilet Budapeszt → Kijów</a></div><!--/D-->
 <!--T--><div><h3>Z przesiadką w Czopie i Mukaczewie</h3><ol class="steps">
-<li>Otwórz aplikację Ukrzaliznytsia, wybierz odpowiedni pociąg na ukraińskim odcinku trasy (Czop → Kijów i Mukaczewo → Kijów) i datę podróży. Sprzedaż biletów rusza na 20 dni przed odjazdem o 08:00 czasu kijowskiego. Opłać bilet.</li>
+<li>Otwórz aplikację Ukrzaliznytsia, wybierz odpowiedni pociąg na ukraińskim odcinku trasy (Czop → Kijów lub Mukaczewo → Kijów) i datę podróży. Sprzedaż biletów rusza na 20 dni przed odjazdem o 08:00 czasu kijowskiego. Opłać bilet.</li>
 <li>Kup bilety na pociągi Budapeszt → Czop i Budapeszt → Mukaczewo w aplikacji Ukrzaliznytsia. Bilet można też kupić wcześniej u węgierskiego przewoźnika MÁV — na oficjalnej stronie jegy.mav.hu lub w aplikacji MÁVPlusz. Zazwyczaj bilety MÁV są tańsze.</li>
 
 <li>Po zakupie zapisz oba e-bilety w telefonie. Przed podróżą sprawdź daty, godziny odjazdu i stacje docelowe.</li></ol>
@@ -332,11 +332,11 @@
             + (direct.length && transfer.length ? `<aside class="ad wide" data-slot="mid" hidden></aside>` : "")/*/D*/
             + (() => {
             const block = (arr, h, b) => arr.length ? `<h2 class="sub${arr.length === 1 ? " c" : ""}">${h}</h2><div class="cols${arr.length === 1 ? " one" : ""}"${b ? ' data-b="1"' : ""} style="margin-top:16px">${arr.map(x => optHtml(x.o)).join("")}</div>` : "";
-            if (!SPLIT.length) return block(transfer, "Z przesiadką w Czopie i Mukaczewie");
+            if (!SPLIT.length) return block(transfer, "Z przesiadką");
             const at = x => { const s = x.p.legs[0].stops; return norm(s[s.length - 1].name) }; /* станция первой пересадки */
             const used = new Set();
             const parts = SPLIT.map(s => { const g = transfer.filter(x => at(x).startsWith(norm(s[0]))); g.forEach(x => used.add(x)); return block(g, esc(s[1]), s[2]) });
-            return parts.join("") + block(transfer.filter(x => !used.has(x)), "Z przesiadką w Czopie i Mukaczewie")
+            return parts.join("") + block(transfer.filter(x => !used.has(x)), "Z przesiadką")
         })();
         /*D*//*/D*/
         
