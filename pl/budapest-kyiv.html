@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- build 2026-11-08T10:02:21.304Z vmw7nyc3f direct=true x=Чоп -->
+<!-- build 2026-11-08T15:55:50.696Z vmw80kxbi direct=true x=Чоп -->
 <html lang="pl">
 <head>
     <meta charset="utf-8">
@@ -266,14 +266,14 @@
 <script src="../i18n.js"></script>
 <script src="../common.js"></script>
 <script>
-    const SPLIT = []; /* [станция пересадки, заголовок, пограничный контроль]: страница делится на группы по пересадке */
+    const SPLIT = [["Чоп","Z przesiadką w Czopie",0],["Мукачево","Z przesiadką w Mukaczewie",0]]; /* [станция пересадки, заголовок, пограничный контроль]: страница делится на группы по пересадке */
     const FROM = "Будапешт", TO = "Киев", BACK = "ua-hu"; // FROM/TO: русские названия, как в шапке карточки в админке
-    /*D*//*C*/const COACH = `<aside class="coach"><p>W przedziale są trzy miejsca do spania, jedno nad drugim. Gdy środkowa półka jest rozłożona do spania, nie wolno siedzieć na dolnej. Na górną półkę prowadzi drabinka.</p></aside>`;/*/C*//*/D*/
+    /*D*//*/D*/
     const BUY = `<section class="panel"><h2>Jak kupić bilety</h2>
 <div class="buy">
 <!--D--><div class="d"><h3>Pociąg bezpośredni</h3><ol class="steps">
 <li>Otwórz aplikację Ukrzaliznytsia, wybierz trasę Budapeszt → Kijów i datę podróży. Sprzedaż biletów rusza na 20 dni przed odjazdem o 08:00 czasu kijowskiego. Bilety na pociąg bezpośredni cieszą się dużym popytem, dlatego warto kupić je zaraz po otwarciu sprzedaży.</li>
-<li>Wybierz miejsce w wagonie z przedziałami standardu RIC i zapłać kartą. E-bilet pojawi się w aplikacji. Przy wsiadaniu okaż go razem z paszportem.</li></ol>
+<li>Wybierz miejsce i zapłać kartą. E-bilet pojawi się w aplikacji. Przy wsiadaniu okaż go razem z paszportem.</li></ol>
 <a class="btn" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Kup w aplikacji UZ bilet Budapeszt → Kijów</a></div><!--/D-->
 <!--T--><div><h3>Z przesiadką w Czopie</h3><ol class="steps">
 <li>Otwórz aplikację Ukrzaliznytsia, wybierz trasę Czop → Kijów i datę podróży. Sprzedaż biletów rusza na 20 dni przed odjazdem o 08:00 czasu kijowskiego. Wybierz pociąg 028Л i opłać bilet.</li>
@@ -329,16 +329,13 @@
             + (direct.length && transfer.length ? `<aside class="ad wide" data-slot="mid" hidden></aside>` : "")/*/D*/
             + (() => {
             const block = (arr, h, b) => arr.length ? `<h2 class="sub${arr.length === 1 ? " c" : ""}">${h}</h2><div class="cols${arr.length === 1 ? " one" : ""}"${b ? ' data-b="1"' : ""} style="margin-top:16px">${arr.map(x => optHtml(x.o)).join("")}</div>` : "";
-            if (!SPLIT.length) return block(transfer, "Z przesiadką w Czopie");
+            if (!SPLIT.length) return block(transfer, "Z przesiadką");
             const at = x => { const s = x.p.legs[0].stops; return norm(s[s.length - 1].name) }; /* станция первой пересадки */
             const used = new Set();
             const parts = SPLIT.map(s => { const g = transfer.filter(x => at(x).startsWith(norm(s[0]))); g.forEach(x => used.add(x)); return block(g, esc(s[1]), s[2]) });
-            return parts.join("") + block(transfer.filter(x => !used.has(x)), "Z przesiadką w Czopie")
+            return parts.join("") + block(transfer.filter(x => !used.has(x)), "Z przesiadką")
         })();
-        /*D*//*C*/document.querySelectorAll(".direct .body").forEach(b => {
-            b.classList.add("two");
-            b.insertAdjacentHTML("beforeend", COACH)
-        });/*/C*//*/D*/
+        /*D*//*/D*/
         
     }).catch(() => {
         app.innerHTML = `<div class="panel"><h2>Nie udało się załadować danych</h2><p>Odśwież stronę później.</p></div>`
