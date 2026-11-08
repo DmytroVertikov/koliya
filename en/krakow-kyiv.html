@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- build 2026-11-08T17:18:15.925Z vmw83ix5u direct=false x=Перемышль -->
+<!-- build 2026-11-08T17:23:56.785Z vmw83q869 direct=false x=Перемышль -->
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -295,6 +295,9 @@
             return {o, p, h: p.head || deriveHead(p.legs)}
         }).filter(x => x.p.legs.length && norm(x.h.from).startsWith(norm(FROM)) && norm(x.h.to).startsWith(norm(TO)));
         const HAS_DIRECT = false; /* false: страница без прямого поезда, все варианты идут как «с пересадкой» */
+        /* LEADX: если среди вариантов есть пересадка на этой станции, подзаголовок страницы берётся из LEADM (с этой станцией) */
+        const LEADX = "", LEADM = "";
+        if (LEADX && LEADM && list.some(x => x.p.legs.length > 1 && (s => norm(s[s.length - 1].name).startsWith(norm(LEADX)))(x.p.legs[0].stops))) document.getElementById("lead").textContent = LEADM;
         const direct = HAS_DIRECT ? list.filter(x => x.p.legs.length === 1) : [], transfer = HAS_DIRECT ? list.filter(x => x.p.legs.length > 1) : list;
         /* блоки покупки: вариант ищем по перевозчику чешского поезда (EC/IC = ČD, RJ = RegioJet) и станции пересадки;
            время и номер поезда УЗ берём из остановок варианта, а не из шапки, чтобы не зависеть от ручных правок */

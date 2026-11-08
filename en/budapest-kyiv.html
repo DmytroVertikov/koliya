@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- build 2026-11-08T17:18:16.003Z vmw83ix5u direct=true x=Чоп -->
+<!-- build 2026-11-08T17:23:56.864Z vmw83q869 direct=true x=Чоп -->
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -298,6 +298,9 @@
             return {o, p, h: p.head || deriveHead(p.legs)}
         }).filter(x => x.p.legs.length && norm(x.h.from).startsWith(norm(FROM)) && norm(x.h.to).startsWith(norm(TO)));
         const HAS_DIRECT = true; /* false: страница без прямого поезда, все варианты идут как «с пересадкой» */
+        /* LEADX: если среди вариантов есть пересадка на этой станции, подзаголовок страницы берётся из LEADM (с этой станцией) */
+        const LEADX = "Мукачево", LEADM = "Train timetable Budapest — Kyiv: the direct train and options with a transfer in Chop and Mukachevo. Journey time, stops and ticket information.";
+        if (LEADX && LEADM && list.some(x => x.p.legs.length > 1 && (s => norm(s[s.length - 1].name).startsWith(norm(LEADX)))(x.p.legs[0].stops))) document.getElementById("lead").textContent = LEADM;
         const direct = HAS_DIRECT ? list.filter(x => x.p.legs.length === 1) : [], transfer = HAS_DIRECT ? list.filter(x => x.p.legs.length > 1) : list;
         /* блоки покупки: вариант ищем по перевозчику чешского поезда (EC/IC = ČD, RJ = RegioJet) и станции пересадки;
            время и номер поезда УЗ берём из остановок варианта, а не из шапки, чтобы не зависеть от ручных правок */
