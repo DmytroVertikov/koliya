@@ -22,6 +22,7 @@ ST: {
 "Ягодин":["Ягодин","Yahodyn","Jagodzin","в Ягодине","в Ягодині","w Jagodzinie"],
 "Дорогуск":["Дорогуськ","Dorohusk","Dorohusk","в Дорогуске","у Дорогуську","w Dorohusku"],
 "Чоп":["Чоп","Chop","Czop","в Чопе","у Чопі","w Czopie"],
+"Мукачево":["Мукачево","Mukachevo","Mukaczewo","в Мукачеве","у Мукачеві","w Mukaczewie"],"Дебрецен":["Дебрецен","Debrecen","Debreczyn","в Дебрецене","у Дебрецені","w Debreczynie"],"Будапешт-Келенфельд":["Будапешт-Келенфельд","Budapest-Kelenföld","Budapest-Kelenföld"],"Будапешт Ньюгати":["Будапешт-Ньюгаті","Budapest Nyugati","Budapest Nyugati"],
 "Щецин":["Щецін","Szczecin","Szczecin","в Щецине","у Щецині","w Szczecinie"],
 "Познань":["Познань","Poznań","Poznań","в Познани","у Познані","w Poznaniu"],
 "Зелена-Гура":["Зелена-Гура","Zielona Góra","Zielona Góra","","","w Zielonej Górze"],

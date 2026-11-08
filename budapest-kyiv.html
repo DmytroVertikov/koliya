@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- build 2026-11-08T10:14:24.639Z vmw7odu7w direct=true x=Чоп -->
+<!-- build 2026-11-08T15:45:36.057Z vmw807r3s direct=true x=Чоп -->
 <html lang="ru">
 <head>
     <meta charset="utf-8">
@@ -266,7 +266,7 @@
 <script src="i18n.js"></script>
 <script src="common.js"></script>
 <script>
-    const SPLIT = []; /* [станция пересадки, заголовок, пограничный контроль]: страница делится на группы по пересадке */
+    const SPLIT = [["Чоп","С пересадкой в Чопе",0],["Мукачево","С пересадкой в Мукачеве",0]]; /* [станция пересадки, заголовок, пограничный контроль]: страница делится на группы по пересадке */
     const FROM = "Будапешт", TO = "Киев", BACK = "ua-hu"; // FROM/TO: русские названия, как в шапке карточки в админке
     /*D*//*/D*/
     const BUY = `<section class="panel"><h2>Как купить билеты</h2>
@@ -329,11 +329,11 @@
             + (direct.length && transfer.length ? `<aside class="ad wide" data-slot="mid" hidden></aside>` : "")/*/D*/
             + (() => {
             const block = (arr, h, b) => arr.length ? `<h2 class="sub${arr.length === 1 ? " c" : ""}">${h}</h2><div class="cols${arr.length === 1 ? " one" : ""}"${b ? ' data-b="1"' : ""} style="margin-top:16px">${arr.map(x => optHtml(x.o)).join("")}</div>` : "";
-            if (!SPLIT.length) return block(transfer, "С пересадкой в Чопе");
+            if (!SPLIT.length) return block(transfer, "С пересадкой");
             const at = x => { const s = x.p.legs[0].stops; return norm(s[s.length - 1].name) }; /* станция первой пересадки */
             const used = new Set();
             const parts = SPLIT.map(s => { const g = transfer.filter(x => at(x).startsWith(norm(s[0]))); g.forEach(x => used.add(x)); return block(g, esc(s[1]), s[2]) });
-            return parts.join("") + block(transfer.filter(x => !used.has(x)), "С пересадкой в Чопе")
+            return parts.join("") + block(transfer.filter(x => !used.has(x)), "С пересадкой")
         })();
         /*D*//*/D*/
         
