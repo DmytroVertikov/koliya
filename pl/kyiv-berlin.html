@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- build 2026-11-09T09:17:27.465Z vmw91sg64 direct=false x=Хелм -->
+<!-- build 2026-11-09T09:21:55.499Z vmw91y6zr direct=false x=Хелм -->
 <html lang="pl">
 <head>
     <meta charset="utf-8">
@@ -266,7 +266,7 @@
 <script src="../i18n.js"></script>
 <script src="../common.js"></script>
 <script>
-    const SPLIT = []; /* [станция пересадки, заголовок, пограничный контроль]: страница делится на группы по пересадке */
+    const SPLIT = [["Хелм","Z przesiadką w Chełmie i Warszawie",0],["Перемышль","Z przesiadką w Przemyślu",0]]; /* [станция пересадки, заголовок, пограничный контроль]: страница делится на группы по пересадке */
     const FROM = "Киев", TO = "Берлин", BACK = "de-ua"; // FROM/TO: русские названия, как в шапке карточки в админке
     
     const BUY = `<section class="panel"><h2>Jak kupić bilety</h2>
@@ -296,7 +296,7 @@
         }).filter(x => x.p.legs.length && norm(x.h.from).startsWith(norm(FROM)) && norm(x.h.to).startsWith(norm(TO)));
         const HAS_DIRECT = false; /* false: страница без прямого поезда, все варианты идут как «с пересадкой» */
         /* LEADX: если среди вариантов есть пересадка на этой станции, подзаголовок страницы берётся из LEADM (с этой станцией) */
-        const LEADX = "", LEADM = "";
+        const LEADX = "Перемышль", LEADM = "Rozkład pociągów Kijów — Berlin: warianty z przesiadką w Chełmie, Warszawie i Przemyślu. Czas podróży, postoje i informacje o zakupie biletów.";
         if (LEADX && LEADM && list.some(x => x.p.legs.length > 1 && (s => norm(s[s.length - 1].name).startsWith(norm(LEADX)))(x.p.legs[0].stops))) document.getElementById("lead").textContent = LEADM;
         const direct = HAS_DIRECT ? list.filter(x => x.p.legs.length === 1) : [], transfer = HAS_DIRECT ? list.filter(x => x.p.legs.length > 1) : list;
         /* блоки покупки: вариант ищем по перевозчику чешского поезда (EC/IC = ČD, RJ = RegioJet) и станции пересадки;
@@ -328,11 +328,11 @@
         app.innerHTML = ""
             + (() => {
             const block = (arr, h, b) => arr.length ? `<h2 class="sub${arr.length === 1 ? " c" : ""}">${h}</h2><div class="cols${arr.length === 1 ? " one" : ""}"${b ? ' data-b="1"' : ""} style="margin-top:16px">${arr.map(x => optHtml(x.o)).join("")}</div>` : "";
-            if (!SPLIT.length) return block(transfer, "Z przesiadką w Chełmie i Warszawie");
+            if (!SPLIT.length) return block(transfer, "Z przesiadką");
             const at = x => { const s = x.p.legs[0].stops; return norm(s[s.length - 1].name) }; /* станция первой пересадки */
             const used = new Set();
             const parts = SPLIT.map(s => { const g = transfer.filter(x => at(x).startsWith(norm(s[0]))); g.forEach(x => used.add(x)); return block(g, esc(s[1]), s[2]) });
-            return parts.join("") + block(transfer.filter(x => !used.has(x)), "Z przesiadką w Chełmie i Warszawie")
+            return parts.join("") + block(transfer.filter(x => !used.has(x)), "Z przesiadką")
         })();
         
         
