@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- build 2026-11-09T10:02:49.093Z vmw93es6v direct=false x=Хелм -->
+<!-- build 2026-11-09T12:42:42.431Z vmw994eh2 direct=false x=Хелм -->
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -266,11 +266,11 @@
 <script src="../i18n.js"></script>
 <script src="../common.js"></script>
 <script>
-    const SPLIT = [["Хелм","With a transfer in Chełm",0,2],["Варшава","With a transfer in Warsaw and Chełm",0,3],["Перемышль","With a transfer in Przemyśl",0,0]]; /* [станция пересадки, заголовок, пограничный контроль]: страница делится на группы по пересадке */
+    const SPLIT = [["Перемышль","With a transfer in Przemyśl",1,0],["Варшава","With a transfer in Warsaw and Chełm",0,3],["Хелм","With a transfer in Chełm",0,2]]; /* [станция пересадки, заголовок, пограничный контроль]: страница делится на группы по пересадке */
     const FROM = "Берлин", TO = "Киев", BACK = "ua-de"; // FROM/TO: русские названия, как в шапке карточки в админке
     
     const BUY = `<section class="panel"><h2>How to buy tickets</h2>
-<div class="buy one">
+<div class="buy two">
 
 <!--T--><div><h3>With a transfer in Warsaw and Chełm</h3><ol class="steps">
 <li>Open the Ukrzaliznytsia app, choose the route Chełm → Kyiv and the travel date. Sales open 20 days before departure at 09:00 Kyiv time. Choose a suitable train and pay for the ticket.</li>
@@ -279,7 +279,12 @@
 <li>After buying, save both e-tickets on your phone. Before you travel, check the dates, departure times and arrival stations.</li></ol>
 <a class="btn pri" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Buy the Chełm → Kyiv ticket in the UZ app</a>
 <a class="btn" href="https://www.intercity.pl/" target="_blank" rel="noopener">Buy the Berlin → Chełm ticket on PKP Intercity</a></div><!--/T-->
-
+<!--H--><div><h3>With a transfer in Przemyśl</h3><ol class="steps">
+<li>Open the Ukrzaliznytsia app, choose the route Przemyśl → Kyiv and the travel date. Sales open 20 days before departure at 09:00 Kyiv time. Choose a suitable train and pay for the ticket.</li>
+<li>Buy the Berlin → Przemyśl ticket separately from the Polish carrier PKP Intercity, on intercity.pl or in the PKP Intercity app. You can also buy it on koleo.pl or in the KOLEO app.</li>
+<li>After buying, save both e-tickets on your phone. Before you travel, check the dates, departure times and arrival stations.</li></ol>
+<a class="btn pri" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Buy the Przemyśl → Kyiv ticket in the UZ app</a>
+<a class="btn" href="https://www.intercity.pl/" target="_blank" rel="noopener">Buy the Berlin → Przemyśl ticket on PKP Intercity</a></div><!--/H-->
 
 
 </div>
@@ -296,7 +301,7 @@
         }).filter(x => x.p.legs.length && norm(x.h.from).startsWith(norm(FROM)) && norm(x.h.to).startsWith(norm(TO)));
         const HAS_DIRECT = false; /* false: страница без прямого поезда, все варианты идут как «с пересадкой» */
         /* LEADX: если среди вариантов есть пересадка на этой станции, подзаголовок страницы берётся из LEADM (с этой станцией) */
-        const LEADX = "Перемышль", LEADM = "Train timetable Berlin — Kyiv: options with a transfer in Warsaw, Chełm and Przemyśl. Journey time, stops and ticket information.";
+        const LEADX = "Перемышль", LEADM = "Train timetable Berlin — Kyiv: options with a transfer in Przemyśl, Warsaw and Chełm. Journey time, stops and ticket information.";
         if (LEADX && LEADM && list.some(x => x.p.legs.length > 1 && (s => norm(s[s.length - 1].name).startsWith(norm(LEADX)))(x.p.legs[0].stops))) document.getElementById("lead").textContent = LEADM;
         const direct = HAS_DIRECT ? list.filter(x => x.p.legs.length === 1) : [], transfer = HAS_DIRECT ? list.filter(x => x.p.legs.length > 1) : list;
         /* блоки покупки: вариант ищем по перевозчику чешского поезда (EC/IC = ČD, RJ = RegioJet) и станции пересадки;
@@ -335,7 +340,7 @@
             return parts.join("") + block(transfer.filter(x => !used.has(x)), "With a transfer")
         })();
         
-        
+        /*B*/document.querySelectorAll((SPLIT.length ? ".cols[data-b] " : "") + ".swap").forEach(s => s.insertAdjacentHTML("afterend", `<div class="swap border">🛂 Border control takes place in Przemyśl before departure</div>`));/*/B*/
     }).catch(() => {
         app.innerHTML = `<div class="panel"><h2>Could not load the data</h2><p>Please refresh the page later.</p></div>`
     });
