@@ -36,6 +36,8 @@ window.CFG = {
         {href: "vienna-kyiv.html", title: "Вена → Киев", route: "at-ua"},
         {href: "kyiv-chisinau.html", title: "Киев → Кишинев", route: "ua-md"},
         {href: "chisinau-kyiv.html", title: "Кишинев → Киев", route: "md-ua"},
+        {href: "kyiv-berlin.html", title: "Киев → Берлин", route: "ua-de"},
+        {href: "berlin-kyiv.html", title: "Берлин → Киев", route: "de-ua"},
         {href: "kyiv-prague.html", title: "Киев → Прага", route: "ua-cz"},
         {href: "kyiv-budapest.html", title: "Киев → Будапешт", route: "ua-hu"},
         {href: "budapest-kyiv.html", title: "Будапешт → Киев", route: "hu-ua"},
