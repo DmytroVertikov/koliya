@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- build 2026-11-09T07:43:33.093Z vmw8yfomn direct=false x=Перемышль -->
+<!-- build 2026-11-09T09:17:27.466Z vmw91sg64 direct=false x=Хелм -->
 <html lang="ru">
 <head>
     <meta charset="utf-8">
@@ -253,7 +253,7 @@
 <header>
     <div class="wrap"><nav class="lang"><a href="berlin-kyiv.html" hreflang="ru" lang="ru" class="on">RU</a><a href="uk/berlin-kyiv.html" hreflang="uk" lang="uk">UK</a><a href="en/berlin-kyiv.html" hreflang="en" lang="en">EN</a><a href="pl/berlin-kyiv.html" hreflang="pl" lang="pl">PL</a></nav><a class="logo" href="./"><span class="rails">🚆</span> КОЛІЯ</a>
         <h1>Поездом: Берлин → Киев</h1>
-        <p id="lead">Расписание поездов Берлин — Киев: варианты с пересадкой в Перемышле. Время в пути, остановки и информация о покупке билетов.</p></div>
+        <p id="lead">Расписание поездов Берлин — Киев: варианты с пересадкой в Варшаве и Хелме. Время в пути, остановки и информация о покупке билетов.</p></div>
 </header>
 <main class="wrap"><a class="back" href="./">← Главная</a> <a class="back" href="./#de-ua">Все маршруты: Германия — Украина</a> <a class="back" href="kyiv-berlin.html">🔄 Киев → Берлин</a>
     <div id="app"><p>Загрузка…</p></div>
@@ -272,13 +272,13 @@
     const BUY = `<section class="panel"><h2>Как купить билеты</h2>
 <div class="buy one">
 
-<!--T--><div><h3>С пересадкой в Перемышле</h3><ol class="steps">
-<li>Откройте приложение «Укрзалізниця», выберите маршрут Перемышль → Киев и укажите дату поездки. Продажа билетов открывается за 20 суток до отправления, в 09:00 по киевскому времени. Выберите подходящий поезд и оплатите билет.</li>
-<li>Билет на поезд Берлин → Перемышль приобретите отдельно у польского перевозчика PKP Intercity — на официальном сайте intercity.pl или в приложении PKP Intercity. Также билеты можно приобрести на сайте koleo.pl или в приложении KOLEO.</li>
-<!--T3--><li>При выборе поезда Берлин → Перемышль ориентируйтесь на варианты и расписание, представленные выше на этой странице. Учитывайте время отправления поезда Перемышль → Киев и продолжительность пересадки.</li><!--/T3-->
+<!--T--><div><h3>С пересадкой в Варшаве и Хелме</h3><ol class="steps">
+<li>Откройте приложение «Укрзалізниця», выберите маршрут Хелм → Киев и укажите дату поездки. Продажа билетов открывается за 20 суток до отправления, в 09:00 по киевскому времени. Выберите подходящий поезд и оплатите билет.</li>
+<li>Билет на поезд Берлин → Хелм приобретите отдельно у польского перевозчика PKP Intercity — на официальном сайте intercity.pl или в приложении PKP Intercity. Также билеты можно приобрести на сайте koleo.pl или в приложении KOLEO.</li>
+<!--T3--><li>При выборе поезда Берлин → Хелм ориентируйтесь на варианты и расписание, представленные выше на этой странице. Учитывайте время отправления поезда Хелм → Киев и продолжительность пересадки.</li><!--/T3-->
 <li>После покупки сохраните оба электронных билета в телефоне. Перед поездкой проверьте даты, время отправления и станции прибытия.</li></ol>
-<a class="btn pri" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Купить в приложении УЗ билет Перемышль → Киев</a>
-<a class="btn" href="https://www.intercity.pl/" target="_blank" rel="noopener">Купить на сайте PKP Intercity билет Берлин → Перемышль</a></div><!--/T-->
+<a class="btn pri" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Купить в приложении УЗ билет Хелм → Киев</a>
+<a class="btn" href="https://www.intercity.pl/" target="_blank" rel="noopener">Купить на сайте PKP Intercity билет Берлин → Хелм</a></div><!--/T-->
 
 
 
@@ -328,14 +328,14 @@
         app.innerHTML = ""
             + (() => {
             const block = (arr, h, b) => arr.length ? `<h2 class="sub${arr.length === 1 ? " c" : ""}">${h}</h2><div class="cols${arr.length === 1 ? " one" : ""}"${b ? ' data-b="1"' : ""} style="margin-top:16px">${arr.map(x => optHtml(x.o)).join("")}</div>` : "";
-            if (!SPLIT.length) return block(transfer, "С пересадкой в Перемышле");
+            if (!SPLIT.length) return block(transfer, "С пересадкой в Варшаве и Хелме");
             const at = x => { const s = x.p.legs[0].stops; return norm(s[s.length - 1].name) }; /* станция первой пересадки */
             const used = new Set();
             const parts = SPLIT.map(s => { const g = transfer.filter(x => at(x).startsWith(norm(s[0]))); g.forEach(x => used.add(x)); return block(g, esc(s[1]), s[2]) });
-            return parts.join("") + block(transfer.filter(x => !used.has(x)), "С пересадкой в Перемышле")
+            return parts.join("") + block(transfer.filter(x => !used.has(x)), "С пересадкой в Варшаве и Хелме")
         })();
         
-        /*B*/document.querySelectorAll((SPLIT.length ? ".cols[data-b] " : "") + ".swap").forEach(s => s.insertAdjacentHTML("afterend", `<div class="swap border">🛂 Перед отправлением из Перемышля происходит пограничный контроль</div>`));/*/B*/
+        
     }).catch(() => {
         app.innerHTML = `<div class="panel"><h2>Не удалось загрузить данные</h2><p>Обновите страницу позже.</p></div>`
     });
