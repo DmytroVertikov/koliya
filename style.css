@@ -742,6 +742,7 @@ details.opt[open]>.body{border-top:2px dashed var(--line);padding-top:8px}
 .oc-top{display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px;margin-bottom:10px}
 .bd{display:inline-flex;align-items:center;gap:6px;padding:5px 14px;border-radius:99px;font-weight:700;font-size:14px;line-height:1.3;white-space:nowrap;background:#ffe3a3;color:#4a3500}
 .is-d .bd{background:#12875a;color:#fff}
+.is-x2 .bd{background:#ffd3d9;color:#7a1226}
 .oc-tr{font-family:var(--disp);font-weight:700;font-size:17px;color:var(--ink)}
 .oc-row{display:grid;grid-template-columns:auto minmax(70px,1fr) auto;gap:14px;align-items:center}
 .oc .pt,.oc .pt.end{align-items:flex-start;text-align:left}
@@ -784,6 +785,7 @@ details[open] .more .chev{transform:rotate(-135deg) translate(-2px,-2px)}
 @media (prefers-color-scheme:dark){
   :root:not([data-theme="light"]) .bd{background:#5a4510;color:#ffe3a3}
   :root:not([data-theme="light"]) .is-d .bd{background:#12875a;color:#fff}
+  :root:not([data-theme="light"]) .is-x2 .bd{background:#6b1d2b;color:#ffd3d9}
   :root:not([data-theme="light"]) .opt.is-d{background:#0f2c21}
   :root:not([data-theme="light"]) .nc{background:#12392b;color:#7be0b0}
   :root:not([data-theme="light"]) .opt.is-d .leg h4{color:#7be0b0;background:#12392b}

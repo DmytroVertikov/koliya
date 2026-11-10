@@ -234,7 +234,7 @@ function optHtml(o) {
         const s = swaps[i + 1], sw = s ? `<div class="swap">🔁 ${esc(s.where)}${s.wait ? " · " + esc(s.wait) : ""}</div>` : "";
         return `<div class="stp"><div class="leg"><h4>🚆 ${esc(t("train"))} ${esc(trainName(L.train))}${badgesHtml(L.train)}<small class="fq">🗓 ${esc(freqTxt(L.freq))}</small></h4><ul class="tl">${L.stops.map(s => `<li class="${s.hl ? "h" : "m"}"><span>${esc(stn(s.name))}</span><time>${esc(s.time)}</time></li>`).join("")}</ul></div>${sw}</div>`
     }).join("");
-    return `<details class="opt oc-card ${isD ? "is-d" : "is-x"}">${head}<div class="body">${body}${o.note ? `<div class="note">${esc(o.note)}</div>` : ""}</div></details>`
+    return `<details class="opt oc-card ${isD ? "is-d" : "is-x"}${n > 1 ? " is-x2" : ""}">${head}<div class="body">${body}${o.note ? `<div class="note">${esc(o.note)}</div>` : ""}</div></details>`
 }
 
 /* Общий футер: правится здесь, подключается на всех страницах, где есть <footer id="site-footer"> */

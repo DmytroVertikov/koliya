@@ -90,7 +90,7 @@ for (const r of ROUTES) for (const l of LANGS) {
   const JJ = {ru: " и ", uk: " та ", en: " and ", pl: " i "}[l], hdr = a => xin(a[0], l) + a.slice(1).map(n => JJ + (l === "en" ? st(n, l) : xin(n, l).replace(/^\S+\s+/, ""))).join(""); /* hdr: «в Хелме и Варшаве» */
   /* splitx: группы {s: станция первой пересадки, l: число поездов (0 = любое), h: станции для заголовка}; split: короткая запись только со станциями */
   const SPX = r.splitx || (r.split || []).map(n => ({s: n, h: r.splith && r.splith[n]}));
-  v.split = JSON.stringify(SPX.map(g => [g.s, fill(d["transfer.h2"], {xin: hdr(g.h || [g.s])}), r.border && g.s === "Перемышль" ? 1 : 0, g.l || 0])); if (SPX.length) v["transfer.h"] = fill(d["transfer.h3"], v); /* split: страница делится на подзаголовки «С пересадкой в …» */
+  v.split = JSON.stringify(SPX.map(g => [g.s, fill(d["transfer.h2"], {xin: hdr(g.h || [g.s])}), r.border && g.s === "Перемышль" ? 1 : 0, g.l || 0])); if (SPX.length) v["transfer.h"] = fill(d["transfer.h3"], v); v["transfer.hx"] = fill(d["transfer.h3"], v); /* нейтральный заголовок «С пересадкой» — только если на странице есть прямой поезд */
   /* xs: один общий блок вариантов «С пересадкой в Чопе и Мукачево» вместо разбивки split (заголовок собирается из словаря станций) */
   /* hxs: заголовок группы и блока покупки с несколькими станциями пересадки, напр. «С пересадкой в Хелме и Варшаве» (разбивки и логики покупки не меняет) */
   if (r.hxs) { const J = {ru: " и ", uk: " та ", en: " and ", pl: " i "}[l]; const H = fill(d["transfer.h2"], {xin: hdr(r.hxs)}); if (!SPX.length) v["transfer.h"] = H; v["buy.t.h"] = H }
