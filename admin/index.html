@@ -215,27 +215,12 @@
             margin-top: 8px
         }
 
-        .wdr {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            gap: 4px 12px;
-            margin: 10px 0 0;
-            font-size: 14px
+        .fqr {
+            margin: 10px 0 0
         }
 
-        .wdr label {
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-            margin: 0;
-            color: var(--ink);
-            font-weight: 500
-        }
-
-        .wdr input[type=checkbox] {
-            width: 18px;
-            height: 18px
+        .fqr input {
+            font-size: 16px
         }
 
         .legend {
@@ -328,7 +313,7 @@
     }
 
     const newStop = () => ({name: "", time: "", hl: false});
-    const newLeg = () => ({train: "", days: DAYS_ALL, stops: [{name: "", time: "", hl: true}, {name: "", time: "", hl: true}]});
+    const newLeg = () => ({train: "", freq: "", stops: [{name: "", time: "", hl: true}, {name: "", time: "", hl: true}]});
     /* порядок на сайте — всегда по времени отправления; в базу пишем минуты от полуночи, чтобы колонка sort тоже была осмысленной */
     const tkey = o => {
         const m = String((o.head || {}).ft || "").match(/(\d{1,2}):(\d{2})/);
@@ -487,7 +472,7 @@
         ed.innerHTML = `<section class="panel"><div class="bar"><h2 style="margin:0">${esc(pg.title)}</h2>${pg.orph ? "" : '<span><button id="cf" class="sm" title="Обновляет дату «Проверено» на странице, не меняя вариантов">✓ Подтвердить актуальность</button> <button id="no">+ Добавить вариант</button></span>'}</div>
 <p class="legend">${pg.orph ? "Варианты, шапка которых не совпадает ни с одной страницей из config.js: на сайте они нигде не показываются. Поправьте шапку или удалите вариант." : `Страница: <a href="../${esc(pg.href)}" target="_blank" rel="noopener">${esc(pg.href)}</a>. Сюда попадают варианты, у которых шапка «${esc(fa)} → ${esc(fb)}». Новые варианты сохраняются с направлением ${esc(pg.route)}.`}</p>
 ${pg.orph ? "" : '<p class="legend" id="lu"></p>'}
-<p>Вариант состоит из <b>шапки</b> (крупно сверху: откуда и куда, вы задаёте её сами) и <b>поездов</b> с таблицами станций. Галочка <b>«Выд.»</b> = станция выделяется крупным шрифтом, остальные показываются мельче и бледнее. Пересадка между поездами добавляется автоматически. Дни курсирования у каждого поезда по умолчанию «ежедневно»: снимите галочки с дней, когда поезд не ходит. Варианты на сайте всегда идут по времени отправления. Название станции пишите по-русски: на других языках сайт переведёт его по словарю.</p><div id="ol"></div></section>`;
+<p>Вариант состоит из <b>шапки</b> (крупно сверху: откуда и куда, вы задаёте её сами) и <b>поездов</b> с таблицами станций. Галочка <b>«Выд.»</b> = станция выделяется крупным шрифтом, остальные показываются мельче и бледнее. Пересадка между поездами добавляется автоматически. Периодичность у каждого поезда по умолчанию «ежедневно»; если поезд ходит иначе, впишите в поле, например «по нечётным дням», «по чётным дням» или «пн, ср, пт». Варианты на сайте всегда идут по времени отправления. Название станции пишите по-русски: на других языках сайт переведёт его по словарю.</p><div id="ol"></div></section>`;
         const lastUpd = () => {
             const v = opts.filter(o => o.id && o.active && o.updated_at).map(o => Date.parse(o.updated_at));
             if (!pg.orph) $("#lu").textContent = v.length ? "Дата «Проверено» на сайте: " + fmtD(Math.max(...v)) + " (самое свежее сохранение среди показанных вариантов)." : "Показанных вариантов пока нет."
@@ -518,7 +503,7 @@ ${pg.orph ? "" : '<p class="legend" id="lu"></p>'}
         function legHtml(L, li) {
             return `${li ? '<div class="xfer">🔁 Пересадка</div>' : ""}<div class="lg" data-l="${li}">
 <div class="bar"><input class="tr" placeholder="Номер поезда: 019 или IC 12010" value="${esc(L.train)}">${li ? '<button class="del sm rl">Убрать поезд</button>' : ""}</div>
-<div class="wdr"><span>Курсирует:</span>${["пн", "вт", "ср", "чт", "пт", "сб", "вс"].map((n, k) => `<label><input type="checkbox" class="wd" data-d="${k + 1}" ${(L.days ?? DAYS_ALL).includes(k + 1) ? "checked" : ""}>${n}</label>`).join("")}<span class="legend" style="margin:0">${(L.days ?? DAYS_ALL) === DAYS_ALL ? "ежедневно" : ""}</span></div>
+<div class="fqr"><label>Периодичность (необязательно)</label><input class="fq" placeholder="Ежедневно" value="${esc(L.freq || "")}"></div>
 <div class="tw"><table class="st"><thead><tr><th>Выд.</th><th>Станция</th><th>Время</th><th></th></tr></thead><tbody>
 ${L.stops.map((s, si) => `<tr data-s="${si}" class="${s.hl ? "hl" : ""}"><td><input type="checkbox" class="hl" ${s.hl ? "checked" : ""}></td><td><input class="nm" placeholder="Город" value="${esc(s.name)}"></td><td><input class="tm" placeholder="19:06" inputmode="numeric" value="${esc(s.time)}"></td><td><button class="sm up" title="Выше">↑</button> <button class="sm dn" title="Ниже">↓</button> <button class="sm ins" title="Добавить станцию ниже">＋</button> <button class="sm del rs" title="Удалить">×</button></td></tr>`).join("")}
 </tbody></table></div><button class="sm as">+ Станция в конец</button></div>`
@@ -576,12 +561,8 @@ ${L.stops.map((s, si) => `<tr data-s="${si}" class="${s.hl ? "hl" : ""}"><td><in
                 else if (t.classList.contains("tr")) o.legs[l].train = t.value;
                 else if (t.classList.contains("nm")) o.legs[l].stops[s].name = t.value;
                 else if (t.classList.contains("tm")) o.legs[l].stops[s].time = t.value;
-                else if (t.classList.contains("wd")) {
-                    const set = new Set((o.legs[l].days || "").split(""));
-                    t.checked ? set.add(t.dataset.d) : set.delete(t.dataset.d);
-                    o.legs[l].days = [...set].sort().join("");
-                    t.closest(".wdr").lastElementChild.textContent = o.legs[l].days === DAYS_ALL ? "ежедневно" : ""
-                } else if (t.classList.contains("hl")) {
+                else if (t.classList.contains("fq")) o.legs[l].freq = t.value;
+                else if (t.classList.contains("hl")) {
                     o.legs[l].stops[s].hl = t.checked;
                     t.closest("tr").classList.toggle("hl", t.checked)
                 } else if (t.classList.contains("n")) o.note = t.value;
