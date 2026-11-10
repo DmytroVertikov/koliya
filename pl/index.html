@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- build 2026-11-10T12:35:33.810Z vmwaob2dj -->
+<!-- build 2026-11-10T21:54:23.622Z vmwb89q5l -->
 <html lang="pl">
 <head>
     <meta charset="utf-8">
@@ -23,7 +23,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap">
-    <link rel="stylesheet" href="../style.css?v=mwaob2dj">
+    <link rel="stylesheet" href="../style.css?v=mwb89q5l">
 </head>
 <body>
 <header>
@@ -99,14 +99,20 @@
     const pageLinks = id => {
         const list = PG.filter(p => p.route === id); /* только страницы этого направления: ua-pl → из Украины в Польшу, pl-ua → обратно */
         if (!list.length) return "";
-        /* группы по городу отправления (первая часть «A → B»), внутри — компактные ссылки на город прибытия */
+        /* группы по городу отправления (первая часть «A → B»): каждый город — своя карточка, внутри — строки со ссылками на город прибытия */
         const groups = new Map();
         list.forEach(p => {
             const parts = trRoute(p.title).split(" → "), g = parts.length > 1 ? parts[0] : "", label = parts.length > 1 ? parts.slice(1).join(" → ") : parts[0];
             if (!groups.has(g)) groups.set(g, []);
             groups.get(g).push({p, label})
         });
-        return `<section class="panel" style="margin-top:0">${[...groups].map(([g, items]) => `<div class="dir-group">${g ? `<h2 class="dg">${esc(g)}</h2>` : ""}<div class="chips">${items.map(({p, label}) => `<a class="chip" href="${esc(p.href)}" title="${esc(trRoute(p.title))}" aria-label="${esc(trRoute(p.title))}"><span class="ar" aria-hidden="true">→</span> ${esc(label)}</a>`).join("")}</div></div>`).join("")}</section>`
+        return `<div class="dgrid">${[...groups].map(([g, items]) => `<section class="dcard">${g ? `<h2 class="dg">${esc(g)}</h2>` : ""}<div class="chips">${items.map(({p, label}) => `<a class="chip" href="${esc(p.href)}" title="${esc(trRoute(p.title))}" aria-label="${esc(trRoute(p.title))}"><span class="lb">${esc(label)}</span><span class="ar" aria-hidden="true">→</span></a>`).join("")}</div></section>`).join("")}</div>`
+    };
+
+    /* верхняя панель страницы направления: «← Все направления» и переход в обратное направление (ua-pl ⇄ pl-ua) */
+    const dirBar = id => {
+        const rev = id.split("-").reverse().join("-");
+        return `<div class="dirbar"><a class="back" href="#">${esc(t("ix.all"))}</a>${DIR[rev] && rev !== id ? `<a class="rev" href="#${esc(rev)}"><span aria-hidden="true">⇄</span> ${esc(DIR[rev])}</a>` : ""}</div>`
     };
 
     let cur = null;
@@ -123,7 +129,7 @@
             document.title = t("ix.dirTitle", {t: r});
             h1El.textContent = r;
             leadEl.textContent = t("ix.leadDir");
-            dir.innerHTML = `<a class="back" href="#">${esc(t("ix.all"))}</a>${pageLinks(id) || `<section class="panel" style="margin-top:0"><p>${esc(t("ix.soon"))}</p></section>`}`
+            dir.innerHTML = `${dirBar(id)}${pageLinks(id) || `<section class="panel" style="margin-top:0"><p>${esc(t("ix.soon"))}</p></section>`}`
         } else {
             home.hidden = false;
             dnav.hidden = false;
