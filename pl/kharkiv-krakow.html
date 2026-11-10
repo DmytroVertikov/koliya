@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- build 2026-11-10T12:27:11.119Z vmwao0ak6 direct=false x=Перемышль -->
+<!-- build 2026-11-10T12:35:33.742Z vmwaob2dj direct=false x=Перемышль -->
 <html lang="pl">
 <head>
     <meta charset="utf-8">
@@ -323,10 +323,9 @@
             const L = x.p.legs, last = L[L.length - 1].stops, ft = tm(L[0].stops[0].time) || x.h.ft, tt = tm(last[last.length - 1].time) || x.h.tt, u = L.find(isUz);
             h.insertAdjacentText("beforeend", " (" + h.dataset.dt.replace("{t1}", ft).replace("{t2}", tt) + ")");
             if (u) h.parentNode.querySelectorAll(".utr").forEach(e => e.textContent = String(u.train).trim().replace(/^№\s*/, "").toUpperCase());
-            const g = SPLIT.findIndex(s => norm(L[0].stops[L[0].stops.length - 1].name).startsWith(norm(s[0])));
-            blocks.push({blk: h.parentNode, k: [g < 0 ? 8 : g, list.indexOf(x)]})
+            blocks.push({blk: h.parentNode, k: [0, list.indexOf(x)]})
         });
-        /* блоки покупки идут в том же порядке, что и варианты на странице: сначала группы по пересадке, внутри — как в базе */
+        /* блоки покупки идут в том же порядке, что и варианты на странице: в порядке списка вариантов */
         if (blocks.length) {
             const box = blocks[0].blk.parentNode;
             blocks.map((b, i) => Object.assign({i}, b)).sort((a, b) => a.k[0] - b.k[0] || a.k[1] - b.k[1] || a.i - b.i).forEach(b => box.appendChild(b.blk))
@@ -337,15 +336,16 @@
         }
         app.innerHTML = ""
             + (() => {
-            const block = (arr, h, b) => arr.length ? `<h2 class="sub${arr.length === 1 ? " c" : ""}">${h}</h2><div class="cols${arr.length === 1 ? " one" : ""}"${b ? ' data-b="1"' : ""} style="margin-top:16px">${arr.map(x => optHtml(x.o)).join("")}</div>` : "";
-            if (!SPLIT.length) return block(transfer, "Z przesiadką w Przemyślu");
+            /* все варианты с пересадкой — одним списком (по времени отправления), без подзаголовков по станциям */
+            if (!transfer.length) return "";
             const at = x => { const s = x.p.legs[0].stops; return norm(s[s.length - 1].name) }; /* станция первой пересадки */
-            const used = new Set();
-            const parts = SPLIT.map(s => { const g = transfer.filter(x => !used.has(x) && at(x).startsWith(norm(s[0])) && (!s[3] || x.p.legs.length === s[3])); g.forEach(x => used.add(x)); return block(g, esc(s[1]), s[2]) });
-            return parts.join("") + block(transfer.filter(x => !used.has(x)), "Z przesiadką w Przemyślu")
+            const bf = x => !SPLIT.length || SPLIT.some(s => s[2] && at(x).startsWith(norm(s[0]))); /* пограничный контроль — по карточке */
+            const cards = transfer.map(x => { const c = optHtml(x.o); return bf(x) ? c.replace("<details ", '<details data-b="1" ') : c }).join("");
+            const head = direct.length ? `<h2 class="sub">Z przesiadką</h2>` : ""; /* заголовок только чтобы отделить от блока прямого поезда */
+            return head + `<div class="cols${transfer.length === 1 ? " one" : ""}" style="margin-top:${head ? 16 : 6}px">${cards}</div>`
         })() + HOWBAR;
         
-        /*B*/document.querySelectorAll((SPLIT.length ? ".cols[data-b] " : "") + ".swap").forEach(s => s.insertAdjacentHTML("afterend", `<div class="swap border">🛂 Po przyjeździe do Przemyśla odbywa się kontrola graniczna</div>`));/*/B*/
+        /*B*/document.querySelectorAll(".opt[data-b"+"] .swap").forEach(s => s.insertAdjacentHTML("afterend", `<div class="swap border">🛂 Po przyjeździe do Przemyśla odbywa się kontrola graniczna</div>`));/*/B*/
     }).catch(() => {
         app.innerHTML = `<div class="panel"><h2>Nie udało się załadować danych</h2><p>Odśwież stronę później.</p></div>`
     });
