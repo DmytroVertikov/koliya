@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- build 2026-11-10T09:30:12.528Z vmwahop58 direct=false x=Мукачево -->
+<!-- build 2026-11-10T09:44:34.056Z vmwai75wq direct=false x=Мукачево -->
 <html lang="ru">
 <head>
     <meta charset="utf-8">
@@ -255,7 +255,7 @@
         <p id="lead">Расписание поездов Кошице — Киев: варианты с пересадкой в Мукачево. Время в пути, остановки и информация о покупке билетов.</p></div>
 </header>
 <main class="wrap"><a class="back" href="./">← Главная</a> <a class="back" href="./#sk-ua">Все маршруты: Словакия — Украина</a> <a class="back" href="kyiv-kosice.html">🔄 Киев → Кошице</a>
-    <p class="chk">📅 <b>{{d.checked}}</b></p>
+    <p class="chk">📅 <b>Проверено: 01.11.2026</b></p>
     <div id="app"><p>Загрузка…</p></div>
     <div id="more"></div>
 </main>
@@ -285,7 +285,7 @@
 </div>
 <p class="buy-note">Графики движения поездов могут измениться, актуальную информацию смотрите в приложении УЗ и в приложении ZSSK.</p></section>`;
     const app = document.getElementById("app");
-    const HOWBAR = `<a class="howbar" href="#buy"><span class="hi" aria-hidden="true">i</span><span><b>{{d.howq}}</b><small>{{d.hows}}</small></span><span class="go">{{d.how}} →</span></a>`;
+    const HOWBAR = `<a class="howbar" href="#buy"><span class="hi" aria-hidden="true">i</span><span><b>Как купить билеты?</b><small>Подробная инструкция для каждого варианта маршрута.</small></span><span class="go">Инструкция →</span></a>`;
     const norm = s => String(s || "").trim().toLowerCase();
     fetch(U + "/rest/v1/options?order=sort", {headers: {apikey: K, Authorization: "Bearer " + K}}).then(r => {
         if (!r.ok) throw 0;

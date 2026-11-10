@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- build 2026-11-10T09:30:12.481Z vmwahop58 direct=false x=Перемышль -->
+<!-- build 2026-11-10T09:44:34.022Z vmwai75wq direct=false x=Перемышль -->
 <html lang="uk">
 <head>
     <meta charset="utf-8">
@@ -255,7 +255,7 @@
         <p id="lead">Розклад поїздів Краків — Львів: варіанти з пересадкою у Перемишлі. Час у дорозі, зупинки та інформація про купівлю квитків.</p></div>
 </header>
 <main class="wrap"><a class="back" href="./">← Головна</a> <a class="back" href="./#pl-ua">Усі маршрути: Польща — Україна</a> <a class="back" href="lviv-krakow.html">🔄 Львів → Краків</a>
-    <p class="chk">📅 <b>{{d.checked}}</b></p>
+    <p class="chk">📅 <b>Перевірено: 01.11.2026</b></p>
     <div id="app"><p>Завантаження…</p></div>
     <div id="more"></div>
 </main>
@@ -285,7 +285,7 @@
 </div>
 <p class="buy-note">Графіки руху поїздів можуть змінюватися, актуальну інформацію дивіться в застосунку УЗ та на сайті PKP Intercity.</p></section>`;
     const app = document.getElementById("app");
-    const HOWBAR = `<a class="howbar" href="#buy"><span class="hi" aria-hidden="true">i</span><span><b>{{d.howq}}</b><small>{{d.hows}}</small></span><span class="go">{{d.how}} →</span></a>`;
+    const HOWBAR = `<a class="howbar" href="#buy"><span class="hi" aria-hidden="true">i</span><span><b>Як купити квитки?</b><small>Докладна інструкція для кожного варіанта маршруту.</small></span><span class="go">Інструкція →</span></a>`;
     const norm = s => String(s || "").trim().toLowerCase();
     fetch(U + "/rest/v1/options?order=sort", {headers: {apikey: K, Authorization: "Bearer " + K}}).then(r => {
         if (!r.ok) throw 0;

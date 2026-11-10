@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- build 2026-11-10T09:30:12.530Z vmwahop58 direct=false x=Перемышль -->
+<!-- build 2026-11-10T09:44:34.058Z vmwai75wq direct=false x=Перемышль -->
 <html lang="ru">
 <head>
     <meta charset="utf-8">
@@ -255,7 +255,7 @@
         <p id="lead">Расписание поездов Киев — Прага: варианты с пересадкой в Перемышле и Чопе. Время в пути, остановки и информация о покупке билетов.</p></div>
 </header>
 <main class="wrap"><a class="back" href="./">← Главная</a> <a class="back" href="./#ua-cz">Все маршруты: Украина — Чехия</a> <a class="back" href="prague-kyiv.html">🔄 Прага → Киев</a>
-    <p class="chk">📅 <b>{{d.checked}}</b></p>
+    <p class="chk">📅 <b>Проверено: 01.11.2026</b></p>
     <div id="app"><p>Загрузка…</p></div>
     <div id="more"></div>
 </main>
@@ -296,7 +296,7 @@
 </div>
 <p class="buy-note">Графики движения поездов могут измениться, актуальную информацию смотрите в приложении УЗ, в приложении ČD My Train и на сайте RegioJet.</p></section>`;
     const app = document.getElementById("app");
-    const HOWBAR = `<a class="howbar" href="#buy"><span class="hi" aria-hidden="true">i</span><span><b>{{d.howq}}</b><small>{{d.hows}}</small></span><span class="go">{{d.how}} →</span></a>`;
+    const HOWBAR = `<a class="howbar" href="#buy"><span class="hi" aria-hidden="true">i</span><span><b>Как купить билеты?</b><small>Подробная инструкция для каждого варианта маршрута.</small></span><span class="go">Инструкция →</span></a>`;
     const norm = s => String(s || "").trim().toLowerCase();
     fetch(U + "/rest/v1/options?order=sort", {headers: {apikey: K, Authorization: "Bearer " + K}}).then(r => {
         if (!r.ok) throw 0;
