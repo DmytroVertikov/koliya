@@ -823,3 +823,9 @@ details[open] .more .chev{transform:rotate(-135deg) translate(-2px,-2px)}
 @media (prefers-color-scheme:dark){
   :root:not([data-theme="light"]) .is-x2 .bd{background:#3b3166;color:#ddd5fa}
 }
+
+/* фон карточек с пересадкой (в тёмной теме остаётся обычный фон карточки) */
+.opt.is-x{background:#F0F2FC}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]) .opt.is-x{background:var(--card)}
+}
