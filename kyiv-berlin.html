@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- build 2026-11-10T08:47:53.066Z vmwag69pl direct=false x=Хелм -->
+<!-- build 2026-11-10T09:30:12.519Z vmwahop58 direct=false x=Хелм -->
 <html lang="ru">
 <head>
     <meta charset="utf-8">
@@ -24,7 +24,7 @@
 
         .cols {
             display: grid;
-            grid-template-columns:repeat(2, minmax(0, 1fr));
+            grid-template-columns:minmax(0, 1fr);
             gap: 18px
         }
 
@@ -34,12 +34,11 @@
 
         /* один вариант: карточка и заголовок по центру */
         .cols.one {
-            grid-template-columns: minmax(0, 640px);
-            justify-content: center
+            grid-template-columns: minmax(0, 1fr)
         }
 
         h2.sub.c {
-            text-align: center
+            text-align: left
         }
 
         .cols .board, .direct .board {
@@ -257,6 +256,7 @@
         <p id="lead">Расписание поездов Киев — Берлин: варианты с пересадкой в Хелме и Варшаве. Время в пути, остановки и информация о покупке билетов.</p></div>
 </header>
 <main class="wrap"><a class="back" href="./">← Главная</a> <a class="back" href="./#ua-de">Все маршруты: Украина — Германия</a> <a class="back" href="berlin-kyiv.html">🔄 Берлин → Киев</a>
+    <p class="chk">📅 <b>{{d.checked}}</b></p>
     <div id="app"><p>Загрузка…</p></div>
     <div id="more"></div>
 </main>
@@ -270,7 +270,7 @@
     const SPLIT = [["Перемышль","С пересадкой в Перемышле",1,0],["Хелм","С пересадкой в Хелме и Варшаве",0,3],["Хелм","С пересадкой в Хелме",0,2]]; /* [станция пересадки, заголовок, пограничный контроль]: страница делится на группы по пересадке */
     const FROM = "Киев", TO = "Берлин", BACK = "de-ua"; // FROM/TO: русские названия, как в шапке карточки в админке
     
-    const BUY = `<section class="panel"><h2>Как купить билеты</h2>
+    const BUY = `<section class="panel" id="buy"><h2>Как купить билеты</h2>
 <div class="buy three">
 
 <!--T--><div><h3>С пересадкой в Хелме и Варшаве</h3><ol class="steps">
@@ -299,6 +299,7 @@
 </div>
 <p class="buy-note">Графики движения поездов могут измениться, актуальную информацию смотрите в приложении УЗ, на сайте PKP Intercity и на сайте DB.</p></section>`;
     const app = document.getElementById("app");
+    const HOWBAR = `<a class="howbar" href="#buy"><span class="hi" aria-hidden="true">i</span><span><b>{{d.howq}}</b><small>{{d.hows}}</small></span><span class="go">{{d.how}} →</span></a>`;
     const norm = s => String(s || "").trim().toLowerCase();
     fetch(U + "/rest/v1/options?order=sort", {headers: {apikey: K, Authorization: "Bearer " + K}}).then(r => {
         if (!r.ok) throw 0;
@@ -347,7 +348,7 @@
             const used = new Set();
             const parts = SPLIT.map(s => { const g = transfer.filter(x => !used.has(x) && at(x).startsWith(norm(s[0])) && (!s[3] || x.p.legs.length === s[3])); g.forEach(x => used.add(x)); return block(g, esc(s[1]), s[2]) });
             return parts.join("") + block(transfer.filter(x => !used.has(x)), "С пересадкой")
-        })();
+        })() + HOWBAR;
         
         /*B*/document.querySelectorAll((SPLIT.length ? ".cols[data-b] " : "") + ".swap").forEach(s => s.insertAdjacentHTML("afterend", `<div class="swap border">🛂 После прибытия в Перемышль происходит пограничный контроль</div>`));/*/B*/
     }).catch(() => {

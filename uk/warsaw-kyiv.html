@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- build 2026-11-10T08:47:53.008Z vmwag69pl direct=true x=Хелм -->
+<!-- build 2026-11-10T09:30:12.436Z vmwahop58 direct=true x=Хелм -->
 <html lang="uk">
 <head>
     <meta charset="utf-8">
@@ -24,7 +24,7 @@
 
         .cols {
             display: grid;
-            grid-template-columns:repeat(2, minmax(0, 1fr));
+            grid-template-columns:minmax(0, 1fr);
             gap: 18px
         }
 
@@ -34,12 +34,11 @@
 
         /* один вариант: карточка и заголовок по центру */
         .cols.one {
-            grid-template-columns: minmax(0, 640px);
-            justify-content: center
+            grid-template-columns: minmax(0, 1fr)
         }
 
         h2.sub.c {
-            text-align: center
+            text-align: left
         }
 
         .cols .board, .direct .board {
@@ -256,6 +255,7 @@
         <p id="lead">Розклад поїздів Варшава — Київ: прямий поїзд і варіанти з пересадкою в Хелмі. Час у дорозі, зупинки та інформація про купівлю квитків.</p></div>
 </header>
 <main class="wrap"><a class="back" href="./">← Головна</a> <a class="back" href="./#pl-ua">Усі маршрути: Польща — Україна</a> <a class="back" href="kyiv-warsaw.html">🔄 Київ → Варшава</a>
+    <p class="chk">📅 <b>{{d.checked}}</b></p>
     <div id="app"><p>Завантаження…</p></div>
     <div id="more"></div>
 </main>
@@ -269,7 +269,7 @@
     const SPLIT = []; /* [станция пересадки, заголовок, пограничный контроль]: страница делится на группы по пересадке */
     const FROM = "Варшава", TO = "Киев", BACK = "ua-pl"; // FROM/TO: русские названия, как в шапке карточки в админке
     /*D*//*C*/const COACH = `<aside class="coach"><p>У купе передбачено три спальні місця, розташовані одне над одним. Якщо середню полицю переведено у спальне положення, сидіти на нижній полиці не можна. Для підйому на верхню полицю передбачено драбину.</p></aside>`;/*/C*//*/D*/
-    const BUY = `<section class="panel"><h2>Як купити квитки</h2>
+    const BUY = `<section class="panel" id="buy"><h2>Як купити квитки</h2>
 <div class="buy">
 <!--D--><div class="d"><h3>Прямий поїзд</h3><ol class="steps">
 <li>Відкрийте застосунок «Укрзалізниця», оберіть маршрут Варшава → Київ і вкажіть дату поїздки. Продаж квитків відкривається за 20 діб до відправлення, о 09:00 за київським часом. На прямий поїзд квитки користуються великим попитом, тому радимо купувати їх одразу після початку продажу.</li>
@@ -288,6 +288,7 @@
 </div>
 <p class="buy-note">Графіки руху поїздів можуть змінюватися, актуальну інформацію дивіться в застосунку УЗ та на сайті PKP Intercity.</p></section>`;
     const app = document.getElementById("app");
+    const HOWBAR = `<a class="howbar" href="#buy"><span class="hi" aria-hidden="true">i</span><span><b>{{d.howq}}</b><small>{{d.hows}}</small></span><span class="go">{{d.how}} →</span></a>`;
     const norm = s => String(s || "").trim().toLowerCase();
     fetch(U + "/rest/v1/options?order=sort", {headers: {apikey: K, Authorization: "Bearer " + K}}).then(r => {
         if (!r.ok) throw 0;
@@ -337,7 +338,7 @@
             const used = new Set();
             const parts = SPLIT.map(s => { const g = transfer.filter(x => !used.has(x) && at(x).startsWith(norm(s[0])) && (!s[3] || x.p.legs.length === s[3])); g.forEach(x => used.add(x)); return block(g, esc(s[1]), s[2]) });
             return parts.join("") + block(transfer.filter(x => !used.has(x)), "Зручна пересадка в Хелмі на одній платформі")
-        })();
+        })() + HOWBAR;
         /*D*//*C*/document.querySelectorAll(".direct .body").forEach(b => {
             b.classList.add("two");
             b.insertAdjacentHTML("beforeend", COACH)

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- build 2026-11-10T08:47:53.056Z vmwag69pl direct=true x=Чоп -->
+<!-- build 2026-11-10T09:30:12.505Z vmwahop58 direct=true x=Чоп -->
 <html lang="pl">
 <head>
     <meta charset="utf-8">
@@ -24,7 +24,7 @@
 
         .cols {
             display: grid;
-            grid-template-columns:repeat(2, minmax(0, 1fr));
+            grid-template-columns:minmax(0, 1fr);
             gap: 18px
         }
 
@@ -34,12 +34,11 @@
 
         /* один вариант: карточка и заголовок по центру */
         .cols.one {
-            grid-template-columns: minmax(0, 640px);
-            justify-content: center
+            grid-template-columns: minmax(0, 1fr)
         }
 
         h2.sub.c {
-            text-align: center
+            text-align: left
         }
 
         .cols .board, .direct .board {
@@ -256,6 +255,7 @@
         <p id="lead">Rozkład pociągów Kijów — Wiedeń: warianty z przesiadką w Czopie. Czas podróży, postoje i informacje o zakupie biletów.</p></div>
 </header>
 <main class="wrap"><a class="back" href="./">← Strona główna</a> <a class="back" href="./#ua-at">Wszystkie trasy: Ukraina — Austria</a> <a class="back" href="vienna-kyiv.html">🔄 Wiedeń → Kijów</a>
+    <p class="chk">📅 <b>{{d.checked}}</b></p>
     <div id="app"><p>Ładowanie…</p></div>
     <div id="more"></div>
 </main>
@@ -269,7 +269,7 @@
     const SPLIT = []; /* [станция пересадки, заголовок, пограничный контроль]: страница делится на группы по пересадке */
     const FROM = "Киев", TO = "Вена", BACK = "at-ua"; // FROM/TO: русские названия, как в шапке карточки в админке
     /*D*//*C*/const COACH = `<aside class="coach"><p>W przedziale są trzy miejsca do spania, jedno nad drugim. Gdy środkowa półka jest rozłożona do spania, nie wolno siedzieć na dolnej. Na górną półkę prowadzi drabinka.</p></aside>`;/*/C*//*/D*/
-    const BUY = `<section class="panel"><h2>Jak kupić bilety</h2>
+    const BUY = `<section class="panel" id="buy"><h2>Jak kupić bilety</h2>
 <div class="buy three">
 <!--D--><div class="d"><h3>Pociąg bezpośredni</h3><ol class="steps">
 <li>Otwórz aplikację Ukrzaliznytsia, wybierz trasę Kijów → Wiedeń i datę podróży. Sprzedaż biletów rusza na 20 dni przed odjazdem o 08:00 czasu kijowskiego. Bilety na pociąg bezpośredni cieszą się dużym popytem, dlatego warto kupić je zaraz po otwarciu sprzedaży.</li>
@@ -294,6 +294,7 @@
 </div>
 <p class="buy-note">Rozkłady jazdy mogą ulec zmianie. Aktualne informacje znajdziesz w aplikacji UZ i na stronie ÖBB.</p></section>`;
     const app = document.getElementById("app");
+    const HOWBAR = `<a class="howbar" href="#buy"><span class="hi" aria-hidden="true">i</span><span><b>{{d.howq}}</b><small>{{d.hows}}</small></span><span class="go">{{d.how}} →</span></a>`;
     const norm = s => String(s || "").trim().toLowerCase();
     fetch(U + "/rest/v1/options?order=sort", {headers: {apikey: K, Authorization: "Bearer " + K}}).then(r => {
         if (!r.ok) throw 0;
@@ -343,7 +344,7 @@
             const used = new Set();
             const parts = SPLIT.map(s => { const g = transfer.filter(x => !used.has(x) && at(x).startsWith(norm(s[0])) && (!s[3] || x.p.legs.length === s[3])); g.forEach(x => used.add(x)); return block(g, esc(s[1]), s[2]) });
             return parts.join("") + block(transfer.filter(x => !used.has(x)), "Z przesiadką w Czopie")
-        })();
+        })() + HOWBAR;
         /*D*//*C*/document.querySelectorAll(".direct .body").forEach(b => {
             b.classList.add("two");
             b.insertAdjacentHTML("beforeend", COACH)

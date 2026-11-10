@@ -189,6 +189,9 @@ const trainKey = n => String(n || "").toUpperCase().replace(/[\s№]/g, "").repl
 const trainBadges = n => Object.keys(TRAIN_BADGES).filter(k => TRAIN_BADGES[k].some(x => trainKey(x) === trainKey(n)));
 const badgesHtml = n => trainBadges(n).map(k => `<span class="tb ${k}">${ICON[k]} ${esc(t(k))}</span>`).join("");
 
+const hm = s => (String(s).match(/\d{1,2}:\d{2}/) || [""])[0];
+
+/* Карточка варианта: сворачиваемая (<details>), в сводке — время, длительность, пересадки; в раскрытой части — поезда и станции */
 function optHtml(o) {
     let p;
     try {
@@ -199,19 +202,27 @@ function optHtml(o) {
     const legs = p.legs;
     if (!legs.length) return "";
     const h = p.head || deriveHead(legs), n = legs.length - 1, dur = h.dur || legsDur(legs, h) || autoDur(h.ft, h.tt),
-        tag = h.tag || autoTag(n);
-    const board = `<div class="board"><div class="pt"><time>${esc(h.ft)}</time><span>${esc(stn(h.from))}</span></div><div class="mid">${dur ? `<span class="dur">${esc(dur)}</span>` : ""}<span class="loc">${esc(t("loc"))}</span><span class="line"></span><span class="tag${n > 0 ? " x" : ""}">${esc(tag)}</span></div><div class="pt end"><time>${esc(h.tt)}</time><span>${esc(stn(h.to))}</span></div></div>`;
+        tag = h.tag || autoTag(n), isD = n === 0;
+    /* swaps[i] — пересадка перед поездом i */
+    const swaps = legs.map((L, i) => {
+        if (!i) return null;
+        const pa = legs[i - 1].stops[legs[i - 1].stops.length - 1], a = pa.name, b = L.stops[0].name;
+        const where = b && b !== a ? t("swapArr", {a: stn(a), b: stn(b)}) : (inCity(a) ? t("swapIn", {c: inCity(a)}) : t("swap", {a: stn(a)}));
+        return {where, wait: autoDur(pa.time, L.stops[0].time), t1: hm(pa.time), t2: hm(L.stops[0].time)}
+    });
+    const trains = legs.map(L => trainName(L.train)).filter(Boolean).join(" + ");
+    const badge = isD ? `<span class="bd">✓ ${esc(t("direct.h"))}</span>` : `<span class="bd">⇄ ${esc(tag)}</span>`;
+    const xfs = swaps.filter(Boolean).map(s => `<div class="xf"><span class="xi" aria-hidden="true">⇄</span><div><b>${esc(s.where)}</b>${s.wait ? `<small>${esc(s.wait)}${s.t1 && s.t2 ? " (" + esc(s.t1) + " – " + esc(s.t2) + ")" : ""}</small>` : ""}</div></div>`).join("");
+    const head = `<summary class="oc"><div class="oc-main"><div class="oc-top">${badge}<span class="oc-tr">${esc(trains)}</span></div>` +
+        `<div class="oc-row"><div class="pt"><time>${esc(h.ft)}</time><span>${esc(stn(h.from))}</span></div>` +
+        `<div class="mid"><span class="line"></span>${dur ? `<span class="dur">${esc(dur)}</span>` : ""}<span class="loc">${esc(t("loc"))}</span></div>` +
+        `<div class="pt end"><time>${esc(h.tt)}</time><span>${esc(stn(h.to))}</span></div></div></div>` +
+        `<div class="oc-side">${isD ? `<span class="nc">✓ ${esc(t("d.nochg"))}</span>` : xfs}<span class="more"><span class="t-more">${esc(t("d.more"))}</span><span class="t-less">${esc(t("d.less"))}</span><i class="chev"></i></span></div></summary>`;
     const body = legs.map((L, i) => {
-        let sw = "";
-        if (i) {
-            const pa = legs[i - 1].stops[legs[i - 1].stops.length - 1], a = pa.name, b = L.stops[0].name;
-            const wait = autoDur(pa.time, L.stops[0].time);
-            const where = b && b !== a ? t("swapArr", {a: stn(a), b: stn(b)}) : (inCity(a) ? t("swapIn", {c: inCity(a)}) : t("swap", {a: stn(a)}));
-            sw = `<div class="swap">🔁 ${esc(where)}${wait ? " · " + esc(wait) : ""}</div>`
-        }
-        return sw + `<div class="leg"><h4>🚆 ${esc(t("train"))} ${esc(trainName(L.train))}${badgesHtml(L.train)}</h4><ul class="tl">${L.stops.map(s => `<li class="${s.hl ? "h" : "m"}"><span>${esc(stn(s.name))}</span><time>${esc(s.time)}</time></li>`).join("")}</ul></div>`
+        const s = swaps[i + 1], sw = s ? `<div class="swap">🔁 ${esc(s.where)}${s.wait ? " · " + esc(s.wait) : ""}</div>` : "";
+        return `<div class="stp"><div class="leg"><h4>🚆 ${esc(t("train"))} ${esc(trainName(L.train))}${badgesHtml(L.train)}</h4><ul class="tl">${L.stops.map(s => `<li class="${s.hl ? "h" : "m"}"><span>${esc(stn(s.name))}</span><time>${esc(s.time)}</time></li>`).join("")}</ul></div>${sw}</div>`
     }).join("");
-    return `<article class="opt">${board}<div class="perf"></div><div class="body">${body}${o.note ? `<div class="note">${esc(o.note)}</div>` : ""}</div></article>`
+    return `<details class="opt oc-card ${isD ? "is-d" : "is-x"}">${head}<div class="body">${body}${o.note ? `<div class="note">${esc(o.note)}</div>` : ""}</div></details>`
 }
 
 /* Общий футер: правится здесь, подключается на всех страницах, где есть <footer id="site-footer"> */

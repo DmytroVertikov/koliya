@@ -732,3 +732,67 @@ header .wrap{position:relative}
 .dir-group h2.dg{margin:0 0 10px;font-family:var(--disp);font-weight:800;font-size:17px}
 @media (min-width:640px){.cgrid{grid-template-columns:repeat(4,1fr)}}
 @media (max-width:480px){.panel{padding:16px}.cc{padding:12px}}
+
+/* ===== Карточка варианта маршрута: сворачиваемая, сводка + «Подробнее» ===== */
+details.opt{margin-top:0}
+details.opt>summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:14px 22px;padding:16px 22px}
+details.opt>summary::-webkit-details-marker{display:none}
+details.opt>summary:focus-visible{outline:3px solid var(--acc);outline-offset:-3px;border-radius:24px}
+details.opt[open]>.body{border-top:2px dashed var(--line);padding-top:8px}
+.oc-top{display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px;margin-bottom:10px}
+.bd{display:inline-flex;align-items:center;gap:6px;padding:5px 14px;border-radius:99px;font-weight:700;font-size:14px;line-height:1.3;white-space:nowrap;background:#ffe3a3;color:#4a3500}
+.is-d .bd{background:#12875a;color:#fff}
+.oc-tr{font-family:var(--disp);font-weight:700;font-size:17px;color:var(--ink)}
+.oc-row{display:grid;grid-template-columns:auto minmax(70px,1fr) auto;gap:14px;align-items:center}
+.oc .pt,.oc .pt.end{align-items:flex-start;text-align:left}
+.oc .pt time{font-size:clamp(28px,4.4vw,38px);color:var(--ink)}
+.oc .pt span{margin-top:4px;font-size:16px;font-weight:500;color:var(--ink)}
+.oc .mid{align-self:center;gap:6px;min-width:0}
+.oc .mid .line{height:2px;min-width:0;background:var(--line)}
+.oc .mid .line:before{display:none}
+.oc .mid .line:after{right:0;top:-4px;width:9px;height:9px;border:solid var(--mute);border-width:2px 2px 0 0;border-radius:0;background:none;transform:rotate(45deg)}
+.oc .mid .dur{font-size:15px;font-weight:600;color:var(--ink);opacity:1}
+.oc .mid .loc{margin-top:-4px;color:var(--mute);opacity:1}
+.oc-side{display:flex;align-items:center;gap:18px;align-self:stretch;padding-left:22px;border-left:1px solid var(--line)}
+.xf{display:flex;align-items:center;gap:10px;min-width:0}
+.xf .xi{font-size:22px;color:var(--brand)}
+.xf b{display:block;font-size:15px;font-weight:700;line-height:1.3}
+.xf small{display:block;font-size:14px;color:var(--mute)}
+.nc{display:inline-flex;align-items:center;padding:6px 14px;border-radius:99px;background:#dcf5e9;color:#0a6b46;font-weight:700;font-size:14px;white-space:nowrap}
+.more{display:inline-flex;align-items:center;gap:8px;padding:11px 18px;border-radius:14px;font-weight:600;white-space:nowrap;color:var(--brand);box-shadow:inset 0 0 0 2px var(--brand)}
+.is-d .more{background:#12875a;color:#fff;box-shadow:none}
+.more .chev{width:8px;height:8px;border:solid currentColor;border-width:0 2px 2px 0;transform:rotate(45deg) translate(-2px,-2px);transition:transform .2s}
+.more .t-less{display:none}
+details[open] .more .t-more{display:none}
+details[open] .more .t-less{display:inline}
+details[open] .more .chev{transform:rotate(-135deg) translate(-2px,-2px)}
+.opt.is-d{border:2px solid #12875a;background:#eaf8f0;box-shadow:0 14px 36px -14px rgba(18,135,90,.5)}
+.opt.is-d .tl{--rail:#12875a}
+.opt.is-d .leg h4{color:#0a6b46;background:#dcf5e9}
+.opt.is-d .oc-side{border-left-color:rgba(18,135,90,.3)}
+/* раскрытая часть: поезда рядом, пересадка под своим поездом */
+.body{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:0 32px;align-items:start}
+.body .note{grid-column:1/-1}
+.stp{min-width:0}
+.chk{margin:0 0 6px;color:var(--mute);font-size:14px}
+.chk b{color:var(--ink);font-weight:600}
+.howbar{display:flex;align-items:center;gap:14px;margin-top:18px;padding:14px 18px;border-radius:18px;background:var(--soft);border:1px solid var(--line);text-decoration:none}
+.howbar .hi{flex:none;display:grid;place-items:center;width:32px;height:32px;border-radius:50%;border:2px solid var(--brand);color:var(--brand);font-weight:800;font-family:var(--disp)}
+.howbar b{display:block;font-family:var(--disp);font-weight:800;font-size:16px}
+.howbar small{display:block;color:var(--mute);font-size:14px}
+.howbar .go{margin-left:auto;color:var(--brand);font-weight:600;white-space:nowrap}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]) .bd{background:#5a4510;color:#ffe3a3}
+  :root:not([data-theme="light"]) .is-d .bd{background:#12875a;color:#fff}
+  :root:not([data-theme="light"]) .opt.is-d{background:#0f2c21}
+  :root:not([data-theme="light"]) .nc{background:#12392b;color:#7be0b0}
+  :root:not([data-theme="light"]) .opt.is-d .leg h4{color:#7be0b0;background:#12392b}
+}
+@media (max-width:760px){
+  details.opt>summary{grid-template-columns:minmax(0,1fr);padding:14px 16px;gap:12px}
+  .oc-side{border-left:0;padding:10px 12px;border-radius:16px;background:var(--soft);justify-content:space-between;flex-wrap:wrap}
+  .opt.is-d .oc-side{background:transparent;padding:0;justify-content:flex-end}
+  .nc{display:none}
+  .oc .pt time{font-size:clamp(28px,8.5vw,36px)}
+  .howbar{flex-wrap:wrap}
+}

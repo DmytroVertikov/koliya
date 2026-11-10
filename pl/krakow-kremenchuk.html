@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- build 2026-11-10T08:47:53.047Z vmwag69pl direct=false x=Перемышль -->
+<!-- build 2026-11-10T09:30:12.493Z vmwahop58 direct=false x=Перемышль -->
 <html lang="pl">
 <head>
     <meta charset="utf-8">
@@ -24,7 +24,7 @@
 
         .cols {
             display: grid;
-            grid-template-columns:repeat(2, minmax(0, 1fr));
+            grid-template-columns:minmax(0, 1fr);
             gap: 18px
         }
 
@@ -34,12 +34,11 @@
 
         /* один вариант: карточка и заголовок по центру */
         .cols.one {
-            grid-template-columns: minmax(0, 640px);
-            justify-content: center
+            grid-template-columns: minmax(0, 1fr)
         }
 
         h2.sub.c {
-            text-align: center
+            text-align: left
         }
 
         .cols .board, .direct .board {
@@ -256,6 +255,7 @@
         <p id="lead">Rozkład pociągów Kraków — Krzemieńczuk: warianty z przesiadką w Przemyślu. Czas podróży, postoje i informacje o zakupie biletów.</p></div>
 </header>
 <main class="wrap"><a class="back" href="./">← Strona główna</a> <a class="back" href="./#pl-ua">Wszystkie trasy: Polska — Ukraina</a> <a class="back" href="kremenchuk-krakow.html">🔄 Krzemieńczuk → Kraków</a>
+    <p class="chk">📅 <b>{{d.checked}}</b></p>
     <div id="app"><p>Ładowanie…</p></div>
     <div id="more"></div>
 </main>
@@ -269,7 +269,7 @@
     const SPLIT = []; /* [станция пересадки, заголовок, пограничный контроль]: страница делится на группы по пересадке */
     const FROM = "Краков", TO = "Кременчуг", BACK = "ua-pl"; // FROM/TO: русские названия, как в шапке карточки в админке
     
-    const BUY = `<section class="panel"><h2>Jak kupić bilety</h2>
+    const BUY = `<section class="panel" id="buy"><h2>Jak kupić bilety</h2>
 <div class="buy one">
 
 <!--T--><div><h3>Z przesiadką w Przemyślu</h3><ol class="steps">
@@ -285,6 +285,7 @@
 </div>
 <p class="buy-note">Rozkłady jazdy mogą ulec zmianie. Aktualne informacje znajdziesz w aplikacji UZ i na stronie PKP Intercity.</p></section>`;
     const app = document.getElementById("app");
+    const HOWBAR = `<a class="howbar" href="#buy"><span class="hi" aria-hidden="true">i</span><span><b>{{d.howq}}</b><small>{{d.hows}}</small></span><span class="go">{{d.how}} →</span></a>`;
     const norm = s => String(s || "").trim().toLowerCase();
     fetch(U + "/rest/v1/options?order=sort", {headers: {apikey: K, Authorization: "Bearer " + K}}).then(r => {
         if (!r.ok) throw 0;
@@ -333,7 +334,7 @@
             const used = new Set();
             const parts = SPLIT.map(s => { const g = transfer.filter(x => !used.has(x) && at(x).startsWith(norm(s[0])) && (!s[3] || x.p.legs.length === s[3])); g.forEach(x => used.add(x)); return block(g, esc(s[1]), s[2]) });
             return parts.join("") + block(transfer.filter(x => !used.has(x)), "Z przesiadką w Przemyślu")
-        })();
+        })() + HOWBAR;
         
         /*B*/document.querySelectorAll((SPLIT.length ? ".cols[data-b] " : "") + ".swap").forEach(s => s.insertAdjacentHTML("afterend", `<div class="swap border">🛂 Przed odjazdem z Przemyśla odbywa się kontrola graniczna</div>`));/*/B*/
     }).catch(() => {
