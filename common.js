@@ -105,8 +105,8 @@ const freqTxt = f => {
     f = String(f || "").trim();
     const x = f.toLowerCase().replace(/ё/g, "е");
     if (!f || /^ежедневно$/.test(x)) return t("d.daily");
-    if (/^по нечетным( дням)?$/.test(x)) return t("d.odd");
-    if (/^по четным( дням)?$/.test(x)) return t("d.even");
+    if (/^по нечетным( (дням|числам|датам))?$/.test(x)) return t("d.odd");
+    if (/^по четным( (дням|числам|датам))?$/.test(x)) return t("d.even");
     return f
 };
 
@@ -203,7 +203,11 @@ const trainBadges = n => Object.keys(TRAIN_BADGES).filter(k => TRAIN_BADGES[k].s
 const isDaily = f => !String(f || "").trim() || /^ежедневно$/.test(String(f).trim().toLowerCase());
 const oddEven = L => isDaily(L.freq) ? trainBadges(L.train).find(k => k === "odd" || k === "even") : "";
 const legFreq = L => { const k = oddEven(L); return k ? t(k) : freqTxt(L.freq) };
-const sumFreq = legs => { const k = isDaily(legs[0].freq) && legs.map(oddEven).find(Boolean); return k ? t(k) : freqTxt(legs[0].freq) };
+/* в сводке карточки — первая «особая» периодичность среди всех поездов маршрута (не только первого) */
+const sumFreq = legs => {
+    for (const L of legs) { if (!isDaily(L.freq)) return freqTxt(L.freq); const k = oddEven(L); if (k) return t(k) }
+    return freqTxt(legs[0].freq)
+};
 const badgesHtml = n => trainBadges(n).map(k => `<span class="tb ${k}">${ICON[k]} ${esc(t(k))}</span>`).join("");
 
 const hm = s => (String(s).match(/\d{1,2}:\d{2}/) || [""])[0];
