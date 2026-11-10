@@ -251,7 +251,7 @@
         <p id="lead">{{r_lead}}</p></div>
 </header>
 <main class="wrap"><a class="back" href="{{home}}">{{back.home}}</a> <a class="back" href="{{home}}#{{hash}}">{{r_all}}</a> <a class="back" href="{{rev}}">🔄 {{chipRev}}</a>
-    <p class="chk">📅 <b>{{d.checked}}</b></p>
+    <p class="chk" id="chk" hidden>📅 {{d.checked}} <b></b></p>
     <div id="app"><p>{{loading}}</p></div>
     <div id="more"></div>
 </main>
@@ -301,7 +301,16 @@
         const list = all.filter(o => o.active !== false).map(o => {
             const p = parseOption(o.dsl);
             return {o, p, h: p.head || deriveHead(p.legs)}
-        }).filter(x => x.p.legs.length && norm(x.h.from).startsWith(norm(FROM)) && norm(x.h.to).startsWith(norm(TO)));
+        }).filter(x => x.p.legs.length && norm(x.h.from).startsWith(norm(FROM)) && norm(x.h.to).startsWith(norm(TO)))
+            /* всегда по времени отправления; одинаковое время сохраняет порядок из базы */
+            .sort((a, b) => (m => m ? m[1] * 60 + +m[2] : 1e4)(String(a.h.ft).match(/(\d{1,2}):(\d{2})/)) - (m => m ? m[1] * 60 + +m[2] : 1e4)(String(b.h.ft).match(/(\d{1,2}):(\d{2})/)));
+        /* «Проверено»: самая свежая дата сохранения среди показанных вариантов (в админке есть кнопка «Подтвердить актуальность») */
+        const ck = list.map(x => Date.parse(x.o.updated_at)).filter(Boolean), ce = document.getElementById("chk");
+        if (ck.length && ce) {
+            const d = new Date(Math.max(...ck)), p2 = n => String(n).padStart(2, "0");
+            ce.querySelector("b").textContent = p2(d.getDate()) + "." + p2(d.getMonth() + 1) + "." + d.getFullYear();
+            ce.hidden = false
+        }
         const HAS_DIRECT = {{hasDirect}}; /* false: страница без прямого поезда, все варианты идут как «с пересадкой» */
         /* LEADX: если среди вариантов есть пересадка на этой станции, подзаголовок страницы берётся из LEADM (с этой станцией) */
         const LEADX = "{{leadx}}", LEADM = {{leadm}};

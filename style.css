@@ -796,3 +796,7 @@ details[open] .more .chev{transform:rotate(-135deg) translate(-2px,-2px)}
   .oc .pt time{font-size:clamp(28px,8.5vw,36px)}
   .howbar{flex-wrap:wrap}
 }
+
+/* периодичность курсирования */
+.oc-fq{font-size:13px;color:var(--mute);white-space:nowrap}
+.leg h4 .fq{display:inline-block;margin-left:8px;font-weight:500;font-size:13px;color:var(--mute)}

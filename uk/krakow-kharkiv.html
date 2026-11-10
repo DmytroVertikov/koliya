@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- build 2026-11-10T09:44:34.007Z vmwai75wq direct=false x=Перемышль -->
+<!-- build 2026-11-10T09:46:55.858Z vmwaia7dl direct=false x=Перемышль -->
 <html lang="uk">
 <head>
     <meta charset="utf-8">
@@ -255,7 +255,7 @@
         <p id="lead">Розклад поїздів Краків — Харків: варіанти з пересадкою у Перемишлі. Час у дорозі, зупинки та інформація про купівлю квитків.</p></div>
 </header>
 <main class="wrap"><a class="back" href="./">← Головна</a> <a class="back" href="./#pl-ua">Усі маршрути: Польща — Україна</a> <a class="back" href="kharkiv-krakow.html">🔄 Харків → Краків</a>
-    <p class="chk">📅 <b>Перевірено: 01.11.2026</b></p>
+    <p class="chk" id="chk" hidden>📅 Перевірено: <b></b></p>
     <div id="app"><p>Завантаження…</p></div>
     <div id="more"></div>
 </main>
@@ -294,7 +294,16 @@
         const list = all.filter(o => o.active !== false).map(o => {
             const p = parseOption(o.dsl);
             return {o, p, h: p.head || deriveHead(p.legs)}
-        }).filter(x => x.p.legs.length && norm(x.h.from).startsWith(norm(FROM)) && norm(x.h.to).startsWith(norm(TO)));
+        }).filter(x => x.p.legs.length && norm(x.h.from).startsWith(norm(FROM)) && norm(x.h.to).startsWith(norm(TO)))
+            /* всегда по времени отправления; одинаковое время сохраняет порядок из базы */
+            .sort((a, b) => (m => m ? m[1] * 60 + +m[2] : 1e4)(String(a.h.ft).match(/(\d{1,2}):(\d{2})/)) - (m => m ? m[1] * 60 + +m[2] : 1e4)(String(b.h.ft).match(/(\d{1,2}):(\d{2})/)));
+        /* «Проверено»: самая свежая дата сохранения среди показанных вариантов (в админке есть кнопка «Подтвердить актуальность») */
+        const ck = list.map(x => Date.parse(x.o.updated_at)).filter(Boolean), ce = document.getElementById("chk");
+        if (ck.length && ce) {
+            const d = new Date(Math.max(...ck)), p2 = n => String(n).padStart(2, "0");
+            ce.querySelector("b").textContent = p2(d.getDate()) + "." + p2(d.getMonth() + 1) + "." + d.getFullYear();
+            ce.hidden = false
+        }
         const HAS_DIRECT = false; /* false: страница без прямого поезда, все варианты идут как «с пересадкой» */
         /* LEADX: если среди вариантов есть пересадка на этой станции, подзаголовок страницы берётся из LEADM (с этой станцией) */
         const LEADX = "", LEADM = "";

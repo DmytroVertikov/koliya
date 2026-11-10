@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- build 2026-11-10T09:44:34.055Z vmwai75wq direct=false x=Чоп -->
+<!-- build 2026-11-10T09:46:55.904Z vmwaia7dl direct=false x=Чоп -->
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -255,7 +255,7 @@
         <p id="lead">Train timetable Kyiv — Košice: options with a transfer in Chop. Journey time, stops and ticket information.</p></div>
 </header>
 <main class="wrap"><a class="back" href="./">← Home</a> <a class="back" href="./#ua-sk">All routes: Ukraine — Slovakia</a> <a class="back" href="kosice-kyiv.html">🔄 Košice → Kyiv</a>
-    <p class="chk">📅 <b>Checked: 01.11.2026</b></p>
+    <p class="chk" id="chk" hidden>📅 Checked: <b></b></p>
     <div id="app"><p>Loading…</p></div>
     <div id="more"></div>
 </main>
@@ -294,7 +294,16 @@
         const list = all.filter(o => o.active !== false).map(o => {
             const p = parseOption(o.dsl);
             return {o, p, h: p.head || deriveHead(p.legs)}
-        }).filter(x => x.p.legs.length && norm(x.h.from).startsWith(norm(FROM)) && norm(x.h.to).startsWith(norm(TO)));
+        }).filter(x => x.p.legs.length && norm(x.h.from).startsWith(norm(FROM)) && norm(x.h.to).startsWith(norm(TO)))
+            /* всегда по времени отправления; одинаковое время сохраняет порядок из базы */
+            .sort((a, b) => (m => m ? m[1] * 60 + +m[2] : 1e4)(String(a.h.ft).match(/(\d{1,2}):(\d{2})/)) - (m => m ? m[1] * 60 + +m[2] : 1e4)(String(b.h.ft).match(/(\d{1,2}):(\d{2})/)));
+        /* «Проверено»: самая свежая дата сохранения среди показанных вариантов (в админке есть кнопка «Подтвердить актуальность») */
+        const ck = list.map(x => Date.parse(x.o.updated_at)).filter(Boolean), ce = document.getElementById("chk");
+        if (ck.length && ce) {
+            const d = new Date(Math.max(...ck)), p2 = n => String(n).padStart(2, "0");
+            ce.querySelector("b").textContent = p2(d.getDate()) + "." + p2(d.getMonth() + 1) + "." + d.getFullYear();
+            ce.hidden = false
+        }
         const HAS_DIRECT = false; /* false: страница без прямого поезда, все варианты идут как «с пересадкой» */
         /* LEADX: если среди вариантов есть пересадка на этой станции, подзаголовок страницы берётся из LEADM (с этой станцией) */
         const LEADX = "Мукачево", LEADM = "Train timetable Kyiv — Košice: options with a transfer in Chop and Mukachevo. Journey time, stops and ticket information.";
