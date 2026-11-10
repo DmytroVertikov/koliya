@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- build 2026-11-09T12:42:42.431Z vmw994eh2 direct=false x=Хелм -->
+<!-- build 2026-11-10T07:53:53.690Z vmwae8u6k direct=false x=Хелм -->
 <html lang="pl">
 <head>
     <meta charset="utf-8">
@@ -274,21 +274,23 @@
 
 <!--T--><div><h3>Z przesiadką w Warszawie i Chełmie</h3><ol class="steps">
 <li>Otwórz aplikację Ukrzaliznytsia, wybierz trasę Chełm → Kijów i datę podróży. Sprzedaż biletów rusza na 20 dni przed odjazdem o 9:00 czasu kijowskiego. Wybierz odpowiedni pociąg i opłać bilet.</li>
-<li>Bilet na pociąg Berlin → Chełm kup osobno u polskiego przewoźnika PKP Intercity — na stronie intercity.pl lub w aplikacji PKP Intercity. Można go też kupić na koleo.pl lub w aplikacji KOLEO.</li>
-<!--T3--><li>Wybierając pociąg Berlin → Chełm, kieruj się wariantami i rozkładem podanymi wyżej na tej stronie. Uwzględnij godzinę odjazdu pociągu Chełm → Kijów i czas przesiadki.</li><!--/T3-->
+<li>Bilety na odcinek Warszawa → Chełm kupisz na polskiej stronie PKP Intercity (intercity.pl), a na odcinek Berlin → Warszawa — na niemieckiej stronie bahn.de lub w aplikacji DB Navigator.</li>
+
 <li>Po zakupie zapisz oba e-bilety w telefonie. Przed podróżą sprawdź daty, godziny odjazdu i stacje docelowe.</li></ol>
 <a class="btn pri" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Kup w aplikacji UZ bilet Chełm → Kijów</a>
-<a class="btn" href="https://www.intercity.pl/" target="_blank" rel="noopener">Kup na stronie PKP Intercity bilet Berlin → Chełm</a></div><!--/T-->
+<a class="btn" href="https://www.intercity.pl/" target="_blank" rel="noopener">Kup na stronie PKP Intercity bilet Warszawa → Chełm</a>
+<a class="btn" href="https://www.bahn.de/" target="_blank" rel="noopener">Kup na stronie DB bilet Berlin → Warszawa</a></div><!--/T-->
 <!--H--><div><h3>Z przesiadką w Przemyślu</h3><ol class="steps">
 <li>Otwórz aplikację Ukrzaliznytsia, wybierz trasę Przemyśl → Kijów i datę podróży. Sprzedaż biletów rusza na 20 dni przed odjazdem o 9:00 czasu kijowskiego. Wybierz odpowiedni pociąg i opłać bilet.</li>
-<li>Bilet na pociąg Berlin → Przemyśl kup osobno u polskiego przewoźnika PKP Intercity — na stronie intercity.pl lub w aplikacji PKP Intercity. Można go też kupić na koleo.pl lub w aplikacji KOLEO.</li>
+<li>Bilety na odcinek Berlin → Przemyśl kupisz na polskiej stronie PKP Intercity (intercity.pl; z wyjątkiem pociągu nocnego) oraz na niemieckiej stronie bahn.de lub w aplikacji DB Navigator.</li>
 <li>Po zakupie zapisz oba e-bilety w telefonie. Przed podróżą sprawdź daty, godziny odjazdu i stacje docelowe.</li></ol>
 <a class="btn pri" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Kup w aplikacji UZ bilet Przemyśl → Kijów</a>
-<a class="btn" href="https://www.intercity.pl/" target="_blank" rel="noopener">Kup na stronie PKP Intercity bilet Berlin → Przemyśl</a></div><!--/H-->
+<a class="btn" href="https://www.intercity.pl/" target="_blank" rel="noopener">Kup na stronie PKP Intercity bilet Berlin → Przemyśl</a>
+<a class="btn" href="https://www.bahn.de/" target="_blank" rel="noopener">Kup na stronie DB bilet Berlin → Przemyśl</a></div><!--/H-->
 
 
 </div>
-<p class="buy-note">Rozkłady jazdy mogą ulec zmianie. Aktualne informacje znajdziesz w aplikacji UZ i na stronie PKP Intercity.</p></section>`;
+<p class="buy-note">Rozkłady jazdy mogą ulec zmianie. Aktualne informacje znajdziesz w aplikacji UZ oraz na stronach PKP Intercity i DB.</p></section>`;
     const app = document.getElementById("app");
     const norm = s => String(s || "").trim().toLowerCase();
     fetch(U + "/rest/v1/options?order=sort", {headers: {apikey: K, Authorization: "Bearer " + K}}).then(r => {

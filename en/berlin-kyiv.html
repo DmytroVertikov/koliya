@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- build 2026-11-09T12:42:42.431Z vmw994eh2 direct=false x=Хелм -->
+<!-- build 2026-11-10T07:53:53.689Z vmwae8u6k direct=false x=Хелм -->
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -274,21 +274,23 @@
 
 <!--T--><div><h3>With a transfer in Warsaw and Chełm</h3><ol class="steps">
 <li>Open the Ukrzaliznytsia app, choose the route Chełm → Kyiv and the travel date. Sales open 20 days before departure at 09:00 Kyiv time. Choose a suitable train and pay for the ticket.</li>
-<li>Buy the Berlin → Chełm ticket separately from the Polish carrier PKP Intercity, on intercity.pl or in the PKP Intercity app. You can also buy it on koleo.pl or in the KOLEO app.</li>
-<!--T3--><li>When choosing the Berlin → Chełm train, use the options and timetable shown above on this page. Allow for the departure time of the Chełm → Kyiv train and the length of the transfer.</li><!--/T3-->
+<li>Tickets for Warsaw → Chełm can be bought on the Polish PKP Intercity website (intercity.pl), and for Berlin → Warsaw on the German website bahn.de or in the DB Navigator app.</li>
+
 <li>After buying, save both e-tickets on your phone. Before you travel, check the dates, departure times and arrival stations.</li></ol>
 <a class="btn pri" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Buy the Chełm → Kyiv ticket in the UZ app</a>
-<a class="btn" href="https://www.intercity.pl/" target="_blank" rel="noopener">Buy the Berlin → Chełm ticket on PKP Intercity</a></div><!--/T-->
+<a class="btn" href="https://www.intercity.pl/" target="_blank" rel="noopener">Buy the Warsaw → Chełm ticket on PKP Intercity</a>
+<a class="btn" href="https://www.bahn.de/" target="_blank" rel="noopener">Buy the Berlin → Warsaw ticket on DB</a></div><!--/T-->
 <!--H--><div><h3>With a transfer in Przemyśl</h3><ol class="steps">
 <li>Open the Ukrzaliznytsia app, choose the route Przemyśl → Kyiv and the travel date. Sales open 20 days before departure at 09:00 Kyiv time. Choose a suitable train and pay for the ticket.</li>
-<li>Buy the Berlin → Przemyśl ticket separately from the Polish carrier PKP Intercity, on intercity.pl or in the PKP Intercity app. You can also buy it on koleo.pl or in the KOLEO app.</li>
+<li>Tickets for Berlin → Przemyśl can be bought on the Polish PKP Intercity website (intercity.pl; except the night train) and on the German website bahn.de or in the DB Navigator app.</li>
 <li>After buying, save both e-tickets on your phone. Before you travel, check the dates, departure times and arrival stations.</li></ol>
 <a class="btn pri" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Buy the Przemyśl → Kyiv ticket in the UZ app</a>
-<a class="btn" href="https://www.intercity.pl/" target="_blank" rel="noopener">Buy the Berlin → Przemyśl ticket on PKP Intercity</a></div><!--/H-->
+<a class="btn" href="https://www.intercity.pl/" target="_blank" rel="noopener">Buy the Berlin → Przemyśl ticket on PKP Intercity</a>
+<a class="btn" href="https://www.bahn.de/" target="_blank" rel="noopener">Buy the Berlin → Przemyśl ticket on DB</a></div><!--/H-->
 
 
 </div>
-<p class="buy-note">Train schedules may change. Check the latest information in the UZ app and on the PKP Intercity website.</p></section>`;
+<p class="buy-note">Train schedules may change. Check the latest information in the UZ app, on the PKP Intercity website and on the DB website.</p></section>`;
     const app = document.getElementById("app");
     const norm = s => String(s || "").trim().toLowerCase();
     fetch(U + "/rest/v1/options?order=sort", {headers: {apikey: K, Authorization: "Bearer " + K}}).then(r => {

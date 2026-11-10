@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- build 2026-11-09T07:36:34.334Z vmw8y6pkr direct=false x=Перемышль -->
+<!-- build 2026-11-10T07:53:53.658Z vmwae8u6k direct=false x=Перемышль -->
 <html lang="uk">
 <head>
     <meta charset="utf-8">
@@ -275,7 +275,7 @@
 <!--T--><div><h3>З пересадкою у Перемишлі</h3><ol class="steps">
 <li>Відкрийте застосунок «Укрзалізниця», оберіть маршрут Львів → Перемишль і вкажіть дату поїздки. Продаж квитків відкривається за 20 діб до відправлення, о 09:00 за київським часом. Оберіть потрібний поїзд і сплатіть квиток.</li>
 <li>Квиток на поїзд Перемишль → Краків придбайте окремо в польського перевізника PKP Intercity — на офіційному сайті intercity.pl або в застосунку PKP Intercity. Також квитки можна купити на сайті koleo.pl або в застосунку KOLEO.</li>
-<!--T3--><li>Обираючи поїзд Перемишль → Краків, орієнтуйтеся на варіанти та розклад, наведені вище на цій сторінці. Зважайте на час прибуття поїзда Львів → Перемишль і тривалість пересадки.</li><!--/T3-->
+
 <li>Після купівлі збережіть обидва електронні квитки в телефоні. Перед поїздкою перевірте дати, час відправлення та станції прибуття.</li></ol>
 <a class="btn pri" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Купити в застосунку УЗ квиток Львів → Перемишль</a>
 <a class="btn" href="https://www.intercity.pl/" target="_blank" rel="noopener">Купити на сайті PKP Intercity квиток Перемишль → Краків</a></div><!--/T-->
@@ -331,7 +331,7 @@
             if (!SPLIT.length) return block(transfer, "З пересадкою у Перемишлі");
             const at = x => { const s = x.p.legs[0].stops; return norm(s[s.length - 1].name) }; /* станция первой пересадки */
             const used = new Set();
-            const parts = SPLIT.map(s => { const g = transfer.filter(x => at(x).startsWith(norm(s[0]))); g.forEach(x => used.add(x)); return block(g, esc(s[1]), s[2]) });
+            const parts = SPLIT.map(s => { const g = transfer.filter(x => !used.has(x) && at(x).startsWith(norm(s[0])) && (!s[3] || x.p.legs.length === s[3])); g.forEach(x => used.add(x)); return block(g, esc(s[1]), s[2]) });
             return parts.join("") + block(transfer.filter(x => !used.has(x)), "З пересадкою у Перемишлі")
         })();
         

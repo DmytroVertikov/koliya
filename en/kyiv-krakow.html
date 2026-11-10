@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- build 2026-11-09T07:36:34.307Z vmw8y6pkr direct=false x=Перемышль -->
+<!-- build 2026-11-10T07:53:53.620Z vmwae8u6k direct=false x=Перемышль -->
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -275,7 +275,7 @@
 <!--T--><div><h3>With a transfer in Przemyśl</h3><ol class="steps">
 <li>Open the Ukrzaliznytsia app, choose the route Kyiv → Przemyśl and the travel date. Sales open 20 days before departure at 09:00 Kyiv time. Choose a suitable train and pay for the ticket.</li>
 <li>Buy the Przemyśl → Kraków ticket separately from the Polish carrier PKP Intercity, on intercity.pl or in the PKP Intercity app. You can also buy it on koleo.pl or in the KOLEO app.</li>
-<!--T3--><li>When choosing the Przemyśl → Kraków train, use the options and timetable shown above on this page. Allow for the arrival time of the Kyiv → Przemyśl train and the length of the transfer.</li><!--/T3-->
+
 <li>After buying, save both e-tickets on your phone. Before you travel, check the dates, departure times and arrival stations.</li></ol>
 <a class="btn pri" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Buy the Kyiv → Przemyśl ticket in the UZ app</a>
 <a class="btn" href="https://www.intercity.pl/" target="_blank" rel="noopener">Buy the Przemyśl → Kraków ticket on PKP Intercity</a></div><!--/T-->
@@ -331,7 +331,7 @@
             if (!SPLIT.length) return block(transfer, "With a transfer in Przemyśl");
             const at = x => { const s = x.p.legs[0].stops; return norm(s[s.length - 1].name) }; /* станция первой пересадки */
             const used = new Set();
-            const parts = SPLIT.map(s => { const g = transfer.filter(x => at(x).startsWith(norm(s[0]))); g.forEach(x => used.add(x)); return block(g, esc(s[1]), s[2]) });
+            const parts = SPLIT.map(s => { const g = transfer.filter(x => !used.has(x) && at(x).startsWith(norm(s[0])) && (!s[3] || x.p.legs.length === s[3])); g.forEach(x => used.add(x)); return block(g, esc(s[1]), s[2]) });
             return parts.join("") + block(transfer.filter(x => !used.has(x)), "With a transfer in Przemyśl")
         })();
         

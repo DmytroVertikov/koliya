@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- build 2026-11-09T07:36:34.335Z vmw8y6pkr direct=false x=Перемышль -->
+<!-- build 2026-11-10T07:53:53.660Z vmwae8u6k direct=false x=Перемышль -->
 <html lang="ru">
 <head>
     <meta charset="utf-8">
@@ -275,7 +275,7 @@
 <!--T--><div><h3>С пересадкой в Перемышле</h3><ol class="steps">
 <li>Откройте приложение «Укрзалізниця», выберите маршрут Перемышль → Львов и укажите дату поездки. Продажа билетов открывается за 20 суток до отправления, в 09:00 по киевскому времени. Выберите подходящий поезд и оплатите билет.</li>
 <li>Билет на поезд Краков → Перемышль приобретите отдельно у польского перевозчика PKP Intercity — на официальном сайте intercity.pl или в приложении PKP Intercity. Также билеты можно приобрести на сайте koleo.pl или в приложении KOLEO.</li>
-<!--T3--><li>При выборе поезда Краков → Перемышль ориентируйтесь на варианты и расписание, представленные выше на этой странице. Учитывайте время отправления поезда Перемышль → Львов и продолжительность пересадки.</li><!--/T3-->
+
 <li>После покупки сохраните оба электронных билета в телефоне. Перед поездкой проверьте даты, время отправления и станции прибытия.</li></ol>
 <a class="btn pri" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Купить в приложении УЗ билет Перемышль → Львов</a>
 <a class="btn" href="https://www.intercity.pl/" target="_blank" rel="noopener">Купить на сайте PKP Intercity билет Краков → Перемышль</a></div><!--/T-->
@@ -331,7 +331,7 @@
             if (!SPLIT.length) return block(transfer, "С пересадкой в Перемышле");
             const at = x => { const s = x.p.legs[0].stops; return norm(s[s.length - 1].name) }; /* станция первой пересадки */
             const used = new Set();
-            const parts = SPLIT.map(s => { const g = transfer.filter(x => at(x).startsWith(norm(s[0]))); g.forEach(x => used.add(x)); return block(g, esc(s[1]), s[2]) });
+            const parts = SPLIT.map(s => { const g = transfer.filter(x => !used.has(x) && at(x).startsWith(norm(s[0])) && (!s[3] || x.p.legs.length === s[3])); g.forEach(x => used.add(x)); return block(g, esc(s[1]), s[2]) });
             return parts.join("") + block(transfer.filter(x => !used.has(x)), "С пересадкой в Перемышле")
         })();
         

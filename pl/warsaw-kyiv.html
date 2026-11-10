@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- build 2026-11-09T07:36:34.306Z vmw8y6pkr direct=true x=Хелм -->
+<!-- build 2026-11-10T07:53:53.619Z vmwae8u6k direct=true x=Хелм -->
 <html lang="pl">
 <head>
     <meta charset="utf-8">
@@ -278,7 +278,7 @@
 <!--T--><div><h3>Z przesiadką w Chełmie</h3><ol class="steps">
 <li>Otwórz aplikację Ukrzaliznytsia, wybierz trasę Chełm → Kijów i datę podróży. Sprzedaż biletów rusza na 20 dni przed odjazdem o 9:00 czasu kijowskiego. Wybierz odpowiedni pociąg i opłać bilet.</li>
 <li>Bilet na pociąg Warszawa → Chełm kup osobno u polskiego przewoźnika PKP Intercity — na stronie intercity.pl lub w aplikacji PKP Intercity. Można go też kupić na koleo.pl lub w aplikacji KOLEO.</li>
-<!--T3--><li>Wybierając pociąg Warszawa → Chełm, kieruj się wariantami i rozkładem podanymi wyżej na tej stronie. Uwzględnij godzinę odjazdu pociągu Chełm → Kijów i czas przesiadki.</li><!--/T3-->
+
 <li>Po zakupie zapisz oba e-bilety w telefonie. Przed podróżą sprawdź daty, godziny odjazdu i stacje docelowe.</li></ol>
 <a class="btn pri" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Kup w aplikacji UZ bilet Chełm → Kijów</a>
 <a class="btn" href="https://www.intercity.pl/" target="_blank" rel="noopener">Kup na stronie PKP Intercity bilet Warszawa → Chełm</a></div><!--/T-->
@@ -335,7 +335,7 @@
             if (!SPLIT.length) return block(transfer, "Z wygodną przesiadką w Chełmie na jednym peronie");
             const at = x => { const s = x.p.legs[0].stops; return norm(s[s.length - 1].name) }; /* станция первой пересадки */
             const used = new Set();
-            const parts = SPLIT.map(s => { const g = transfer.filter(x => at(x).startsWith(norm(s[0]))); g.forEach(x => used.add(x)); return block(g, esc(s[1]), s[2]) });
+            const parts = SPLIT.map(s => { const g = transfer.filter(x => !used.has(x) && at(x).startsWith(norm(s[0])) && (!s[3] || x.p.legs.length === s[3])); g.forEach(x => used.add(x)); return block(g, esc(s[1]), s[2]) });
             return parts.join("") + block(transfer.filter(x => !used.has(x)), "Z wygodną przesiadką w Chełmie na jednym peronie")
         })();
         /*D*//*C*/document.querySelectorAll(".direct .body").forEach(b => {

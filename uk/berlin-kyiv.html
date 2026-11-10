@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- build 2026-11-09T12:42:42.431Z vmw994eh2 direct=false x=Хелм -->
+<!-- build 2026-11-10T07:53:53.689Z vmwae8u6k direct=false x=Хелм -->
 <html lang="uk">
 <head>
     <meta charset="utf-8">
@@ -274,21 +274,23 @@
 
 <!--T--><div><h3>З пересадкою у Варшаві та Хелмі</h3><ol class="steps">
 <li>Відкрийте застосунок «Укрзалізниця», оберіть маршрут Хелм → Київ і вкажіть дату поїздки. Продаж квитків відкривається за 20 діб до відправлення, о 09:00 за київським часом. Оберіть потрібний поїзд і сплатіть квиток.</li>
-<li>Квиток на поїзд Берлін → Хелм придбайте окремо в польського перевізника PKP Intercity — на офіційному сайті intercity.pl або в застосунку PKP Intercity. Також квитки можна купити на сайті koleo.pl або в застосунку KOLEO.</li>
-<!--T3--><li>Обираючи поїзд Берлін → Хелм, орієнтуйтеся на варіанти та розклад, наведені вище на цій сторінці. Зважайте на час відправлення поїзда Хелм → Київ і тривалість пересадки.</li><!--/T3-->
+<li>Квитки Варшава → Хелм можна купити на польському сайті PKP Intercity (intercity.pl), а Берлін → Варшава — на німецькому сайті bahn.de або в застосунку DB Navigator.</li>
+
 <li>Після купівлі збережіть обидва електронні квитки в телефоні. Перед поїздкою перевірте дати, час відправлення та станції прибуття.</li></ol>
 <a class="btn pri" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Купити в застосунку УЗ квиток Хелм → Київ</a>
-<a class="btn" href="https://www.intercity.pl/" target="_blank" rel="noopener">Купити на сайті PKP Intercity квиток Берлін → Хелм</a></div><!--/T-->
+<a class="btn" href="https://www.intercity.pl/" target="_blank" rel="noopener">Купити на сайті PKP Intercity квиток Варшава → Хелм</a>
+<a class="btn" href="https://www.bahn.de/" target="_blank" rel="noopener">Купити на сайті DB квиток Берлін → Варшава</a></div><!--/T-->
 <!--H--><div><h3>З пересадкою у Перемишлі</h3><ol class="steps">
 <li>Відкрийте застосунок «Укрзалізниця», оберіть маршрут Перемишль → Київ і вкажіть дату поїздки. Продаж квитків відкривається за 20 діб до відправлення, о 09:00 за київським часом. Оберіть потрібний поїзд і сплатіть квиток.</li>
-<li>Квиток на поїзд Берлін → Перемишль придбайте окремо в польського перевізника PKP Intercity — на офіційному сайті intercity.pl або в застосунку PKP Intercity. Також квитки можна купити на сайті koleo.pl або в застосунку KOLEO.</li>
+<li>Квитки Берлін → Перемишль можна купити на польському сайті PKP Intercity (intercity.pl; крім нічного поїзда) і на німецькому сайті bahn.de або в застосунку DB Navigator.</li>
 <li>Після купівлі збережіть обидва електронні квитки в телефоні. Перед поїздкою перевірте дати, час відправлення та станції прибуття.</li></ol>
 <a class="btn pri" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Купити в застосунку УЗ квиток Перемишль → Київ</a>
-<a class="btn" href="https://www.intercity.pl/" target="_blank" rel="noopener">Купити на сайті PKP Intercity квиток Берлін → Перемишль</a></div><!--/H-->
+<a class="btn" href="https://www.intercity.pl/" target="_blank" rel="noopener">Купити на сайті PKP Intercity квиток Берлін → Перемишль</a>
+<a class="btn" href="https://www.bahn.de/" target="_blank" rel="noopener">Купити на сайті DB квиток Берлін → Перемишль</a></div><!--/H-->
 
 
 </div>
-<p class="buy-note">Графіки руху поїздів можуть змінюватися, актуальну інформацію дивіться в застосунку УЗ та на сайті PKP Intercity.</p></section>`;
+<p class="buy-note">Графіки руху поїздів можуть змінитися, актуальну інформацію дивіться в застосунку УЗ, на сайті PKP Intercity та на сайті DB.</p></section>`;
     const app = document.getElementById("app");
     const norm = s => String(s || "").trim().toLowerCase();
     fetch(U + "/rest/v1/options?order=sort", {headers: {apikey: K, Authorization: "Bearer " + K}}).then(r => {

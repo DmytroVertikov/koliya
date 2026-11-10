@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- build 2026-11-09T07:36:34.305Z vmw8y6pkr direct=true x=Хелм -->
+<!-- build 2026-11-10T07:53:53.618Z vmwae8u6k direct=true x=Хелм -->
 <html lang="uk">
 <head>
     <meta charset="utf-8">
@@ -278,7 +278,7 @@
 <!--T--><div><h3>З пересадкою у Хелмі</h3><ol class="steps">
 <li>Відкрийте застосунок «Укрзалізниця», оберіть маршрут Хелм → Київ і вкажіть дату поїздки. Продаж квитків відкривається за 20 діб до відправлення, о 09:00 за київським часом. Оберіть потрібний поїзд і сплатіть квиток.</li>
 <li>Квиток на поїзд Варшава → Хелм придбайте окремо в польського перевізника PKP Intercity — на офіційному сайті intercity.pl або в застосунку PKP Intercity. Також квитки можна купити на сайті koleo.pl або в застосунку KOLEO.</li>
-<!--T3--><li>Обираючи поїзд Варшава → Хелм, орієнтуйтеся на варіанти та розклад, наведені вище на цій сторінці. Зважайте на час відправлення поїзда Хелм → Київ і тривалість пересадки.</li><!--/T3-->
+
 <li>Після купівлі збережіть обидва електронні квитки в телефоні. Перед поїздкою перевірте дати, час відправлення та станції прибуття.</li></ol>
 <a class="btn pri" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Купити в застосунку УЗ квиток Хелм → Київ</a>
 <a class="btn" href="https://www.intercity.pl/" target="_blank" rel="noopener">Купити на сайті PKP Intercity квиток Варшава → Хелм</a></div><!--/T-->
@@ -335,7 +335,7 @@
             if (!SPLIT.length) return block(transfer, "Зручна пересадка в Хелмі на одній платформі");
             const at = x => { const s = x.p.legs[0].stops; return norm(s[s.length - 1].name) }; /* станция первой пересадки */
             const used = new Set();
-            const parts = SPLIT.map(s => { const g = transfer.filter(x => at(x).startsWith(norm(s[0]))); g.forEach(x => used.add(x)); return block(g, esc(s[1]), s[2]) });
+            const parts = SPLIT.map(s => { const g = transfer.filter(x => !used.has(x) && at(x).startsWith(norm(s[0])) && (!s[3] || x.p.legs.length === s[3])); g.forEach(x => used.add(x)); return block(g, esc(s[1]), s[2]) });
             return parts.join("") + block(transfer.filter(x => !used.has(x)), "Зручна пересадка в Хелмі на одній платформі")
         })();
         /*D*//*C*/document.querySelectorAll(".direct .body").forEach(b => {
