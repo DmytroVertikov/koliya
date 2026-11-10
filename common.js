@@ -100,9 +100,15 @@ function deriveHead(legs) {
     return {from: f ? f.name : "", ft: f ? f.time : "", to: l ? l.name : "", tt: l ? l.time : "", dur: "", tag: ""}
 }
 
-const DAYS_ALL = "1234567";
-const parseDays = x => [...new Set(String(x || "").replace(/[^1-7]/g, "").split(""))].sort().join("") || DAYS_ALL;
-const daysTxt = d => d === DAYS_ALL ? t("d.daily") : d.split("").map(c => t("d.wd").split(",")[c - 1]).join(", ");
+/* периодичность — свободный текст (пусто = ежедневно); частые фразы переводятся, остальное показывается как введено */
+const freqTxt = f => {
+    f = String(f || "").trim();
+    const x = f.toLowerCase().replace(/ё/g, "е");
+    if (!f || /^ежедневно$/.test(x)) return t("d.daily");
+    if (/^по нечетным( дням)?$/.test(x)) return t("d.odd");
+    if (/^по четным( дням)?$/.test(x)) return t("d.even");
+    return f
+};
 
 function parseOption(dsl) {
     const parts = String(dsl || "").split("||").map(s => s.trim()).filter(Boolean);
@@ -116,7 +122,7 @@ function parseOption(dsl) {
         const m = p.match(/^([^>]*?):\s([\s\S]*)$/), stops = (m ? m[2] : p).split(">").map(splitStop);
         if (!head && !stops.some(s => s.hl)) stops.forEach((s, i) => s.hl = i === 0 || i === stops.length - 1);
         const tr = (m ? m[1] : "").split("~");
-        return {train: tr[0].trim(), days: parseDays(tr[1]), stops}
+        return {train: tr[0].trim(), freq: (tr[1] || "").trim(), stops}
     });
     return {head, legs}
 }
@@ -124,7 +130,7 @@ function parseOption(dsl) {
 function serializeOption(o) {
     const j = (n, t) => ((n || "").trim() + " " + (t || "").trim()).trim(), h = o.head || {};
     const hs = "@ " + j(h.from, h.ft) + " > " + j(h.to, h.tt) + ((h.dur || h.tag) ? " ; " + (h.dur || "").trim() : "") + (h.tag ? " ; " + h.tag.trim() : "");
-    return [hs].concat((o.legs || []).map(L => (L.train || "").trim() + (L.days && L.days !== DAYS_ALL ? " ~ " + L.days : "") + ": " + L.stops.map(s => (s.hl ? "*" : "") + j(s.name, s.time)).join(" > "))).join("||")
+    return [hs].concat((o.legs || []).map(L => (L.train || "").trim() + ((L.freq || "").trim() && !/^ежедневно$/i.test(L.freq.trim()) ? " ~ " + L.freq.trim() : "") + ": " + L.stops.map(s => (s.hl ? "*" : "") + j(s.name, s.time)).join(" > "))).join("||")
 }
 
 function validateOption(o) {
@@ -140,7 +146,7 @@ function validateOption(o) {
         const n = "Поезд " + (i + 1) + ": ";
         if (!(L.train || "").trim()) e.push(n + "укажите номер поезда");
         if (/[:>|*;~]/.test(L.train || "")) e.push(n + "в номере нельзя : > | * ; ~");
-        if (L.days === "") e.push(n + "отметьте хотя бы один день курсирования");
+        if (/[:>|*;~]/.test(L.freq || "")) e.push(n + "в периодичности нельзя : > | * ; ~");
         if (L.stops.length < 2) e.push(n + "нужно минимум 2 станции");
         L.stops.forEach((s, k) => {
             if (!s.name.trim()) e.push(n + "станция " + (k + 1) + " без названия");
@@ -219,14 +225,14 @@ function optHtml(o) {
     const trains = legs.map(L => trainName(L.train)).filter(Boolean).join(" + ");
     const badge = isD ? `<span class="bd">✓ ${esc(t("direct.h"))}</span>` : `<span class="bd">⇄ ${esc(tag)}</span>`;
     const xfs = swaps.filter(Boolean).map(s => `<div class="xf"><span class="xi" aria-hidden="true">⇄</span><div><b>${esc(s.where)}</b>${s.wait ? `<small>${esc(s.wait)}${s.t1 && s.t2 ? " (" + esc(s.t1) + " – " + esc(s.t2) + ")" : ""}</small>` : ""}</div></div>`).join("");
-    const head = `<summary class="oc"><div class="oc-main"><div class="oc-top">${badge}<span class="oc-tr">${esc(trains)}</span><span class="oc-fq">🗓 ${esc(daysTxt(legs[0].days || DAYS_ALL))}</span></div>` +
+    const head = `<summary class="oc"><div class="oc-main"><div class="oc-top">${badge}<span class="oc-tr">${esc(trains)}</span><span class="oc-fq">🗓 ${esc(freqTxt(legs[0].freq))}</span></div>` +
         `<div class="oc-row"><div class="pt"><time>${esc(h.ft)}</time><span>${esc(stn(h.from))}</span></div>` +
         `<div class="mid"><span class="line"></span>${dur ? `<span class="dur">${esc(dur)}</span>` : ""}<span class="loc">${esc(t("loc"))}</span></div>` +
         `<div class="pt end"><time>${esc(h.tt)}</time><span>${esc(stn(h.to))}</span></div></div></div>` +
         `<div class="oc-side">${isD ? `<span class="nc">✓ ${esc(t("d.nochg"))}</span>` : xfs}<span class="more"><span class="t-more">${esc(t("d.more"))}</span><span class="t-less">${esc(t("d.less"))}</span><i class="chev"></i></span></div></summary>`;
     const body = legs.map((L, i) => {
         const s = swaps[i + 1], sw = s ? `<div class="swap">🔁 ${esc(s.where)}${s.wait ? " · " + esc(s.wait) : ""}</div>` : "";
-        return `<div class="stp"><div class="leg"><h4>🚆 ${esc(t("train"))} ${esc(trainName(L.train))}${badgesHtml(L.train)}<small class="fq">🗓 ${esc(daysTxt(L.days || DAYS_ALL))}</small></h4><ul class="tl">${L.stops.map(s => `<li class="${s.hl ? "h" : "m"}"><span>${esc(stn(s.name))}</span><time>${esc(s.time)}</time></li>`).join("")}</ul></div>${sw}</div>`
+        return `<div class="stp"><div class="leg"><h4>🚆 ${esc(t("train"))} ${esc(trainName(L.train))}${badgesHtml(L.train)}<small class="fq">🗓 ${esc(freqTxt(L.freq))}</small></h4><ul class="tl">${L.stops.map(s => `<li class="${s.hl ? "h" : "m"}"><span>${esc(stn(s.name))}</span><time>${esc(s.time)}</time></li>`).join("")}</ul></div>${sw}</div>`
     }).join("");
     return `<details class="opt oc-card ${isD ? "is-d" : "is-x"}">${head}<div class="body">${body}${o.note ? `<div class="note">${esc(o.note)}</div>` : ""}</div></details>`
 }
