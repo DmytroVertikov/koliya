@@ -38,8 +38,8 @@ const ROUTES = [
   {id: "budapest_kyiv", file: "budapest-kyiv.html", FROM: "Будапешт", TO: "Киев", BACK: "ua-hu", hash: "hu-ua", rev: "kyiv-budapest.html", uz: ["Чоп","Киев"], pkp: ["Будапешт","Чоп"], t3: "buy.t3in", x: "Чоп", plat: false, car: "mav", s2: "buy.t.s2mi", s1: "buy.m.s1", ds2: "buy.d.s2v", ds3: "buy.d.s3z", coach: false},
   {id: "kyiv_chisinau", file: "kyiv-chisinau.html", FROM: "Киев", TO: "Кишинев", BACK: "md-ua", hash: "ua-md", rev: "chisinau-kyiv.html", dOnly: true, coach: false, ds2: "buy.d.s2z", ds3: "buy.d.s3z"},
   {id: "chisinau_kyiv", file: "chisinau-kyiv.html", FROM: "Кишинев", TO: "Киев", BACK: "ua-md", hash: "md-ua", rev: "kyiv-chisinau.html", dOnly: true, coach: false, ds2: "buy.d.s2z", ds3: "buy.d.s3z"},
-  {id: "kyiv_berlin", file: "kyiv-berlin.html", FROM: "Киев", TO: "Берлин", BACK: "de-ua", hash: "ua-de", rev: "berlin-kyiv.html", uz: ["Киев","Хелм"], pkp: ["Хелм","Берлин"], t3: "buy.t3out", x: "Хелм", direct: false, splitx: [{s: "Перемышль"}, {s: "Хелм", l: 3, h: ["Хелм","Варшава"]}, {s: "Хелм", l: 2}], border: "after", leadx: "Перемышль", hxs: ["Хелм","Варшава"], third: "Перемышль", uz3: ["Киев","Перемышль"], pkp3: ["Перемышль","Берлин"], hs1: "buy.t.s1", hs2: "buy.t.s2", hurl: "https://www.intercity.pl/", hb2k: "buy.t.b2", be: {T: {pl: ["Хелм","Варшава"], de: ["Варшава","Берлин"]}, H: {pl: ["Перемышль","Берлин"], de: ["Перемышль","Берлин"]}}},
-  {id: "berlin_kyiv", file: "berlin-kyiv.html", FROM: "Берлин", TO: "Киев", BACK: "ua-de", hash: "de-ua", rev: "kyiv-berlin.html", uz: ["Хелм","Киев"], pkp: ["Берлин","Хелм"], t3: "buy.t3in", x: "Хелм", direct: false, splitx: [{s: "Перемышль"}, {s: "Варшава", l: 3, h: ["Варшава","Хелм"]}, {s: "Хелм", l: 2}], border: "before", leadx: "Перемышль", hxs: ["Варшава","Хелм"], third: "Перемышль", uz3: ["Перемышль","Киев"], pkp3: ["Берлин","Перемышль"], hs1: "buy.t.s1", hs2: "buy.t.s2", hurl: "https://www.intercity.pl/", hb2k: "buy.t.b2", be: {T: {pl: ["Варшава","Хелм"], de: ["Берлин","Варшава"]}, H: {pl: ["Берлин","Перемышль"], de: ["Берлин","Перемышль"]}}},
+  {id: "kyiv_berlin", file: "kyiv-berlin.html", FROM: "Киев", TO: "Берлин", BACK: "de-ua", hash: "ua-de", rev: "berlin-kyiv.html", uz: ["Киев","Хелм"], pkp: ["Хелм","Берлин"], t3: "buy.t3out", x: "Хелм", direct: false, splitx: [{s: "Перемышль"}, {s: "Хелм", l: 3, h: ["Хелм","Варшава"]}, {s: "Хелм", l: 2}], border: "after", leadx: "Перемышль", hxs: ["Хелм","Варшава"], third: "Перемышль", uz3: ["Киев","Перемышль"], pkp3: ["Перемышль","Берлин"], hs1: "buy.t.s1", hs2: "buy.t.s2", hurl: "https://www.intercity.pl/", hb2k: "buy.t.b2", be: {T: {pl: ["Хелм","Варшава"], de: ["Варшава","Берлин"]}, C: {uz: ["Киев","Хелм"], de: ["Хелм","Берлин"]}, H: {pl: ["Перемышль","Берлин"], de: ["Перемышль","Берлин"]}}},
+  {id: "berlin_kyiv", file: "berlin-kyiv.html", FROM: "Берлин", TO: "Киев", BACK: "ua-de", hash: "de-ua", rev: "kyiv-berlin.html", uz: ["Хелм","Киев"], pkp: ["Берлин","Хелм"], t3: "buy.t3in", x: "Хелм", direct: false, splitx: [{s: "Перемышль"}, {s: "Варшава", l: 3, h: ["Варшава","Хелм"]}, {s: "Хелм", l: 2}], border: "before", leadx: "Перемышль", hxs: ["Варшава","Хелм"], third: "Перемышль", uz3: ["Перемышль","Киев"], pkp3: ["Берлин","Перемышль"], hs1: "buy.t.s1", hs2: "buy.t.s2", hurl: "https://www.intercity.pl/", hb2k: "buy.t.b2", be: {T: {pl: ["Варшава","Хелм"], de: ["Берлин","Варшава"]}, C: {uz: ["Хелм","Киев"], de: ["Берлин","Хелм"]}, H: {pl: ["Берлин","Перемышль"], de: ["Берлин","Перемышль"]}}},
   {id: "kyiv_kosice", file: "kyiv-kosice.html", FROM: "Киев", TO: "Кошице", BACK: "sk-ua", hash: "ua-sk", rev: "kosice-kyiv.html", uz: ["Киев","Чоп"], pkp: ["Чоп","Кошице"], t3: "buy.t3out", x: "Чоп", direct: false, plat: false, car: "zssk", split: ["Чоп","Мукачево"], xs: ["Чоп","Мукачево"], leadx: "Мукачево", xs2o: "buy.x.s2z", xs2i: "buy.x.s2z", xb2: "buy.x.b2z", s1: "buy.m.s1"},
   {id: "kosice_kyiv", file: "kosice-kyiv.html", FROM: "Кошице", TO: "Киев", BACK: "ua-sk", hash: "sk-ua", rev: "kyiv-kosice.html", uz: ["Мукачево","Киев"], pkp: ["Кошице","Мукачево"], t3: "buy.t3in", x: "Мукачево", direct: false, plat: false, car: "zssk", s1: "buy.m.s1"},
   {id: "kyiv_prague", file: "kyiv-prague.html", FROM: "Киев", TO: "Прага", BACK: "cz-ua", hash: "ua-cz", rev: "prague-kyiv.html", uz: ["Киев","Перемышль"], pkp: ["Перемышль","Прага"], t3: "buy.t3out", x: "Перемышль", direct: false, plat: false, car: "cd", split: ["Перемышль","Чоп"], border: "after", cols: [
@@ -110,13 +110,15 @@ for (const r of ROUTES) for (const l of LANGS) {
     }
   }
   /* be: Германия — польский сайт для польского участка, немецкий (bahn.de / DB Navigator) для немецкого; be.T — блок «Хелм и Варшава», be.H — блок «Перемышль» */
-  let dbBtnT = "";
+  let dbBtnT = "", cBlock = "";
   if (r.be) {
     const bb = (cls, href, label) => `<a class="btn${cls}" href="${href}" target="_blank" rel="noopener">${label}</a>`, DB = "https://www.bahn.de/", T = r.be.T, H = r.be.H;
     v["buy.t.s2"] = fill(d["buy.be.sT"], {pl: pair(T.pl), de: pair(T.de)}); v["buy.t.b2"] = fill(d["buy.t.b2"], {pkp: pair(T.pl)}); dbBtnT = bb("", DB, fill(d["buy.be.bd"], {de: pair(T.de)}));
     v["buy.h.s2"] = fill(d["buy.be.sH"], {pl: pair(H.pl), de: pair(H.de)});
     v["buy.h.btns"] = bb(" pri", "https://app.uz.gov.ua/start", fill(d["buy.t.b1"], {uz: pair(r.uz3 || r.uz)})) + "\n" + bb("", "https://www.intercity.pl/", fill(d["buy.t.b2"], {pkp: pair(H.pl)})) + "\n" + bb("", DB, fill(d["buy.be.bd"], {de: pair(H.de)}));
-    v["buy.notex"] = d["buy.note.be"]
+    v["buy.notex"] = d["buy.note.be"];
+    const C = r.be.C, cv = {uz: pair(C.uz), de: pair(C.de)}; /* третий блок: «С пересадкой в Хелме» (Хелм ↔ Берлин одним поездом), немецкий сайт */
+    cBlock = `<!--C--><div><h3>${fill(d["transfer.h2"], {xin: xin("Хелм", l)})}</h3><ol class="steps">\n<li>${fill(d["buy.t.s1"], cv)}</li>\n<li>${fill(d["buy.be.sC"], cv)}</li>\n<li>${d["buy.t.s4"]}</li></ol>\n${bb(" pri", "https://app.uz.gov.ua/start", fill(d["buy.t.b1"], cv))}\n${bb("", DB, fill(d["buy.be.bd"], cv))}</div><!--/C-->`
   }
   /* gen: варианты с разными пересадочными станциями (Чоп, Будапешт…): общие заголовок и шаги вместо «в Чопе» */
   if (r.gen) { v["transfer.h"] = v["buy.t.h"] = fill(d["transfer.h3"], v); v["buy.t.s1x"] = fill(d["buy.t.s1v"], v); v["buy.t.s2"] = fill(d["buy.t.s2v"], v); v["buy.t.b1"] = fill(d["buy.t.b1v"], v); v["buy.t.b2"] = fill(d["buy.t.b2v"], v) }
@@ -143,6 +145,9 @@ for (const r of ROUTES) for (const l of LANGS) {
     tplC0 = r.coach === false ? tplF.replace(/\/\*C\*\/[\s\S]*?\/\*\/C\*\//g, "") : tplF,
     tplC = r.cols ? tplC0.replace(/<!--(T|H|A)-->[\s\S]*?<!--\/\1-->/g, "") : tplC0;
   let out = tplC.replace(/\{\{([\w.]+)\}\}/g, (m, k) => k in v ? v[k] : k in d ? fill(d[k], v) : (console.warn("нет ключа", k), m));
+  if (cBlock) out = out.replace("<!--/H-->", "<!--/H-->\n" + cBlock).replace('class="buy two"', 'class="buy three"');
+  /* одинаковая высота кнопок покупки: текст по центру, переносы не меняют высоту */
+  out = out.replace("</head>", "<style>.buy .btn{display:flex;align-items:center;justify-content:center;text-align:center;box-sizing:border-box;min-height:5.6rem}</style>\n</head>");
   if (dbBtnT) out = out.replace("</div><!--/T-->", "\n" + dbBtnT + "</div><!--/T-->");
   if (l !== "ru") fs.mkdirSync(l, {recursive: true});
   fs.writeFileSync(path(l, r.file), out);
