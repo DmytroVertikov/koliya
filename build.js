@@ -195,7 +195,7 @@ for (const l of LANGS) {
     const top = POP[c[0]] ? all.filter(p => POP[c[0]].includes(p.href)) : all, rest = all.filter(p => !top.includes(p));
     return `<div class="pg"><h3>${flag(c, 21, 16)}${hx(names[c[0]])}</h3><div class="rts">${top.map(chip).join("")}</div>${rest.length ? `<details><summary>${hx(fill(d["ix.more"], {n: rest.length}))}</summary><div class="rts">${rest.map(chip).join("")}</div></details>` : ""}</div>`
   }).filter(Boolean).join("\n");
-  v.info = `<div><h3>${hx(d["ix.help.h"])}</h3><p><a href="tel:0444653344"><b>044 465 33 44</b></a> · <a href="tel:0800503111"><b>0 800 503 111</b></a></p><p>${hx(d["ix.help.p"])}</p><p class="lk"><a href="https://uz-vezemo.uz.gov.ua/ticketoffices">${hx(d["ix.help.b1"])}</a><a href="https://uz-vezemo.uz.gov.ua/delayform">${hx(d["ix.help.b2"])}</a></p></div>
+  v.info = `<div><h3>${hx(d["ix.help.h"])}</h3><p><a href="tel:0800503111"><b>0 800 503 111</b></a> · <a href="tel:0444653344"><b>044 465 33 44</b></a></p><p>${hx(d["ix.help.p"])}</p></div>
 <div><h3>${hx(d["ix.buy.h"])}</h3><p class="lk"><a href="https://app.uz.gov.ua/start">${hx(d["ix.buy.b1"])}</a><a href="https://uz.gov.ua/">${hx(d["ix.buy.b2"])}</a></p></div>
 <div><h3>${hx(d["ix.fly.h"])}</h3><p>${hx(d["ix.fly.p"])}</p><p class="lk">${AIR.map(a => `<a href="${a[1]}" target="_blank" rel="noopener">${hx(st(a[0], l))}</a>`).join("")}</p></div>`;
   /* подвал — тот же состав, что в FOOTER_HTML (common.js); скрипт потом перерисует его так же */
