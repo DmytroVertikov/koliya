@@ -154,13 +154,52 @@ for (const r of ROUTES) for (const l of LANGS) {
   urls.push(SITE + path(l, r.file));
   if (l === "ru") console.log("  " + r.file + ": " + (direct ? "есть прямой поезд" : "БЕЗ прямого поезда") + ", пересадка: " + X);
 }
-/* главная и страницы направлений (одна страница, направление в #hash) */
+/* главная: страны, популярные маршруты, полезные ссылки и подвал собираются здесь в статический HTML (без запросов к базе и без JS); скрипт на странице отвечает только за интерактив и страницы направлений по #хэшу */
+const hx = s => String(s == null ? "" : s).replace(/[&<>"']/g, c => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"}[c]));
+const PGS = new Function("window", fs.readFileSync("config.js", "utf8") + "\n;return window.CFG.PAGES")({});
+/* [код, название, «в …» (вин.), «из …» (род.), флаг-эмодзи]; порядок — как на главной; для uk/en/pl названия берутся из I18N.CN */
+const CTRY = [["pl", "Польша", "Польшу", "Польши", "🇵🇱"], ["cz", "Чехия", "Чехию", "Чехии", "🇨🇿"], ["hu", "Венгрия", "Венгрию", "Венгрии", "🇭🇺"], ["at", "Австрия", "Австрию", "Австрии", "🇦🇹"], ["sk", "Словакия", "Словакию", "Словакии", "🇸🇰"], ["md", "Молдова", "Молдову", "Молдовы", "🇲🇩"], ["ro", "Румыния", "Румынию", "Румынии", "🇷🇴"], ["de", "Германия", "Германию", "Германии", "🇩🇪"]];
+/* страницы, которые показываются сразу; остальные маршруты страны лежат в раскрывающемся списке (в HTML они есть). Страна не указана — все маршруты сразу */
+const POP = {pl: ["kyiv-warsaw.html", "kyiv-krakow.html", "dnipro-warsaw.html", "odesa-warsaw.html", "lviv-warsaw.html", "warsaw-kyiv.html", "krakow-kyiv.html"]};
+const AIR = [["Варшава", "https://www.lotnisko-chopina.pl/en/index.html"], ["Будапешт", "https://www.bud.hu/en"], ["Вена", "https://www.viennaairport.com/"], ["Краков", "https://www.krakowairport.pl/en/"], ["Жешув", "https://www.rzeszowairport.pl/ua"], ["Кошице", "https://www.airportkosice.sk/en"], ["Кишинёв", "https://airport.md/"], ["Яссы", "https://www.aeroport-iasi.ro"]];
+const OGL = {ru: "ru_RU", uk: "uk_UA", en: "en_US", pl: "pl_PL"};
+const ctryOf = p => p.route.replace(/^ua-|-ua$/, "");
+for (const p of PGS) { /* проверки: ссылки главной ведут только на существующие страницы и страны */
+  if (!CTRY.some(c => c[0] === ctryOf(p))) throw new Error("build.js: страница " + p.href + " (route " + p.route + ") — страны нет в CTRY");
+  if (!ROUTES.some(r => r.file === p.href)) console.warn("ВНИМАНИЕ: " + p.href + " есть в config.js PAGES, но нет в ROUTES build.js (страница не будет собрана)");
+}
+for (const h of [].concat(...Object.values(POP))) if (!PGS.some(p => p.href === h)) throw new Error("build.js: POP ссылается на отсутствующую страницу " + h);
+for (const r of ROUTES) if (!PGS.some(p => p.href === r.file)) console.warn("ВНИМАНИЕ: " + r.file + " собирается, но не указана в config.js PAGES — на главной ссылки не будет");
 const ix = fs.readFileSync("index.src.html", "utf8");
 for (const l of LANGS) {
   const d = I[l], pre = l === "ru" ? "" : "../";
-  const v = {ver: VER, stamp: new Date().toISOString() + " v" + VER, lang: l, base: pre, canon: SITE + path(l, "")};
+  const v = {ver: VER, stamp: new Date().toISOString() + " v" + VER, lang: l, base: pre, canon: SITE + path(l, ""), ogloc: OGL[l]};
   v.alts = LANGS.map(x => `    <link rel="alternate" hreflang="${x}" href="${SITE + path(x, "")}">`).join("\n") + `\n    <link rel="alternate" hreflang="x-default" href="${SITE}">`;
   v.langs = LANGS.map(x => `<a href="${pre + path(x, "index.html")}" hreflang="${x}" lang="${x}"${x === l ? ' class="on"' : ""}>${x.toUpperCase()}</a>`).join("");
+  v.jsonld = JSON.stringify({"@context": "https://schema.org", "@type": "WebSite", name: "Колія", url: SITE + path(l, ""), inLanguage: l, description: d["ix.lead"]}).replace(/</g, "\\u003c");
+  /* названия стран: ru — из CTRY, остальные — из словаря CN; заголовки направлений берутся из тех же ключей ix.rtOut / ix.rtIn, что и раньше */
+  const names = {}, dirs = {};
+  for (const c of CTRY) {
+    const f = l === "ru" ? {nom: c[2], gen: c[3], name: c[1]} : (f0 => ({nom: f0[0], gen: f0[1] || f0[0], name: f0[0]}))((I.CN[c[0]] || {})[l] || [c[1]]);
+    names[c[0]] = f.name;
+    dirs["ua-" + c[0]] = fill(d["ix.rtOut"], f); dirs[c[0] + "-ua"] = fill(d["ix.rtIn"], f)
+  }
+  v.dirjson = JSON.stringify(dirs).replace(/</g, "\\u003c");
+  const flag = (c, w, h) => `<img src="https://flagcdn.com/w40/${c[0]}.png" srcset="https://flagcdn.com/w80/${c[0]}.png 2x" width="${w}" height="${h}" alt="" onerror="this.replaceWith(document.createTextNode('${c[4]}'))">`;
+  const has = s => PGS.some(p => p.route === s);
+  v.countries = CTRY.map(c => `<li class="cc"><div class="ch">${flag(c, 29, 22)}<h3>${hx(names[c[0]])}</h3></div>${has("ua-" + c[0]) ? `<a class="btn pri d-o" href="#ua-${c[0]}">${hx(d["ix.fromUa"])}</a>` : ""}${has(c[0] + "-ua") ? `<a class="btn d-i" href="#${c[0]}-ua">${hx(d["ix.toUa"])}</a>` : ""}</li>`).join("\n");
+  const chip = p => `<a class="rt ${/^ua-/.test(p.route) ? "d-o" : "d-i"}" href="${hx(p.href)}">${hx(p.title.split(" → ").map(n => st(n, l)).join(" → "))}</a>`;
+  v.popular = CTRY.map(c => {
+    const all = PGS.filter(p => ctryOf(p) === c[0]);
+    if (!all.length) return "";
+    const top = POP[c[0]] ? all.filter(p => POP[c[0]].includes(p.href)) : all, rest = all.filter(p => !top.includes(p));
+    return `<div class="pg"><h3>${flag(c, 21, 16)}${hx(names[c[0]])}</h3><div class="rts">${top.map(chip).join("")}</div>${rest.length ? `<details><summary>${hx(fill(d["ix.more"], {n: rest.length}))}</summary><div class="rts">${rest.map(chip).join("")}</div></details>` : ""}</div>`
+  }).filter(Boolean).join("\n");
+  v.info = `<div><h3>${hx(d["ix.help.h"])}</h3><p><a href="tel:0444653344"><b>044 465 33 44</b></a> · <a href="tel:0800503111"><b>0 800 503 111</b></a></p><p>${hx(d["ix.help.p"])}</p><p class="lk"><a href="https://uz-vezemo.uz.gov.ua/ticketoffices">${hx(d["ix.help.b1"])}</a><a href="https://uz-vezemo.uz.gov.ua/delayform">${hx(d["ix.help.b2"])}</a></p></div>
+<div><h3>${hx(d["ix.buy.h"])}</h3><p class="lk"><a href="https://app.uz.gov.ua/start">${hx(d["ix.buy.b1"])}</a><a href="https://uz.gov.ua/">${hx(d["ix.buy.b2"])}</a></p></div>
+<div><h3>${hx(d["ix.fly.h"])}</h3><p>${hx(d["ix.fly.p"])}</p><p class="lk">${AIR.map(a => `<a href="${a[1]}" target="_blank" rel="noopener">${hx(st(a[0], l))}</a>`).join("")}</p></div>`;
+  /* подвал — тот же состав, что в FOOTER_HTML (common.js); скрипт потом перерисует его так же */
+  v.footer = `<div class="fcols">\n<div><b>🚆 Колія</b><p>${d.f1}</p></div>\n<div><b>${d.f2h}</b>\n<p>${d.f2a}</p>\n<p>${d.f2b}</p>\n<p>${d.f2c}</p></div>\n<div><b>${d.f3h}</b><p>${d.f3}</p></div></div>\n<p class="fine">${d.fsrc} <a href="https://uz.gov.ua/">uz.gov.ua</a> · <a href="https://intercity.pl/">intercity.pl</a> · © ${new Date().getFullYear()} Колія</p>`;
   const out = ix.replace(/\{\{([\w.]+)\}\}/g, (m, k) => k in v ? v[k] : k in d ? fill(d[k], v) : (console.warn("нет ключа", k), m));
   if (l !== "ru") fs.mkdirSync(l, {recursive: true});
   fs.writeFileSync(path(l, "index.html"), out);

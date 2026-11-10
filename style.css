@@ -693,3 +693,42 @@ header .wrap{position:relative}
 .chip{display:inline-block;padding:8px 16px;border-radius:99px;background:var(--brand);color:var(--card);font-size:14.5px;font-weight:600;line-height:1.3;text-decoration:none;transition:filter .15s}
 .chip:hover{filter:brightness(.92)}
 .chip .ar{opacity:.7;margin-right:2px}
+
+/* ===== Главная: фильтр направлений, страны, популярные маршруты, полезная информация ===== */
+[hidden]{display:none!important}
+.dirnav{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.dirnav a{padding:9px 18px;border-radius:99px;background:rgba(255,255,255,.14);color:#fff;font-weight:700;font-size:15px;text-decoration:none;transition:background .15s}
+.dirnav a:hover{background:rgba(255,255,255,.24)}
+.dirnav a[aria-pressed="true"]{background:var(--acc);color:var(--accink)}
+#countries{scroll-margin-top:12px}
+#home[data-dir="out"] .d-i,#home[data-dir="in"] .d-o{display:none}
+.cgrid{list-style:none;margin:14px 0 0;padding:0;display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.cc{padding:14px;border-radius:16px;background:var(--bg);border:1px solid var(--line)}
+.cc .ch{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.cc .ch img{display:block;height:22px;width:auto;border-radius:4px;box-shadow:0 0 0 1px rgba(0,0,0,.12)}
+.cc h3{margin:0;font-family:var(--disp);font-weight:800;font-size:17px;line-height:1.2}
+.cc .btn{padding:9px 8px;font-size:14px;border-radius:12px;margin-top:6px}
+.pop,.how{margin-top:40px}
+.pop h2,.how h2{margin:0 0 14px;font-family:var(--disp);font-weight:800;font-size:20px}
+.pgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:26px 32px}
+.pg h3{display:flex;align-items:center;gap:8px;margin:0 0 10px;font-family:var(--disp);font-weight:800;font-size:16px}
+.pg h3 img{display:block;height:16px;width:auto;border-radius:3px;box-shadow:0 0 0 1px rgba(0,0,0,.12)}
+.rts{display:flex;flex-wrap:wrap;gap:8px}
+.rt{display:inline-block;padding:7px 13px;border-radius:99px;background:var(--card);border:1px solid var(--line);color:var(--brand);font-size:14.5px;font-weight:600;line-height:1.3;text-decoration:none;transition:background .15s}
+.rt:hover{background:var(--soft)}
+.pg details{margin-top:10px}
+.pg summary{display:inline-block;cursor:pointer;list-style:none;padding:6px 2px;color:var(--mute);font-size:14px;font-weight:600;text-decoration:underline;text-underline-offset:3px}
+.pg summary::-webkit-details-marker{display:none}
+.pg summary:focus-visible{outline:3px solid var(--acc);outline-offset:2px;border-radius:6px}
+.pg details[open] summary{margin-bottom:8px}
+.how .steps{grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px 24px}
+.info{margin-top:48px;padding-top:22px;border-top:1px solid var(--line);color:var(--mute);font-size:14px}
+.info h2{margin:0 0 14px;font-family:var(--disp);font-weight:700;font-size:15px;color:var(--mute)}
+.igrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px 28px}
+.info h3{margin:0 0 6px;font-size:14px;font-weight:700;color:var(--ink)}
+.info p{margin:4px 0}
+.info a{color:var(--brand);text-underline-offset:3px}
+.info .lk{display:flex;flex-wrap:wrap;gap:4px 14px}
+.dir-group h2.dg{margin:0 0 10px;font-family:var(--disp);font-weight:800;font-size:17px}
+@media (min-width:640px){.cgrid{grid-template-columns:repeat(4,1fr)}}
+@media (max-width:480px){.panel{padding:16px}.cc{padding:12px}}
