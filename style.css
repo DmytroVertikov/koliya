@@ -806,13 +806,20 @@ details[open] .more .chev{transform:rotate(-135deg) translate(-2px,-2px)}
 .xfs{display:flex;flex-direction:column;gap:10px;min-width:0}
 @media (min-width:761px){
 .oc-row{grid-template-columns:118px minmax(70px,1fr) 118px}
-.oc-side{width:416px;box-sizing:border-box;flex:none}
+.oc-side{width:432px;box-sizing:border-box;flex:none}
 .oc-side .xfs{width:240px;flex:none}
 .oc-side .nc{width:240px;box-sizing:border-box;justify-content:center}
-.oc-side .more{width:132px;flex:none;box-sizing:border-box;justify-content:center;margin-left:auto}
+.oc-side .more{width:150px;flex:none;box-sizing:border-box;justify-content:center;margin-left:auto}
 }
 @media (max-width:760px){
 .oc-side .xfs{flex:1 1 150px;gap:8px}
 .oc-side .more{margin-left:auto}
 .oc .pt.end{align-items:flex-end;text-align:right}
+}
+
+/* 2+ пересадки: приглушённый сиреневый, отличается от жёлтого (1 пересадка) и зелёного (прямой) */
+.is-x2 .bd{background:#e6dffa;color:#43307d}
+.more .chev{flex:none}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]) .is-x2 .bd{background:#3b3166;color:#ddd5fa}
 }
