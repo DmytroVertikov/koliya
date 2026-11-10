@@ -147,7 +147,7 @@ for (const r of ROUTES) for (const l of LANGS) {
   let out = tplC.replace(/\{\{([\w.]+)\}\}/g, (m, k) => k in v ? v[k] : k in d ? fill(d[k], v) : (console.warn("нет ключа", k), m));
   if (cBlock) out = out.replace("<!--/H-->", "<!--/H-->\n" + cBlock).replace('class="buy two"', 'class="buy three"');
   /* одинаковая высота кнопок покупки: текст по центру, переносы не меняют высоту */
-  out = out.replace("</head>", "<style>.buy .btn{display:flex;align-items:center;justify-content:center;text-align:center;box-sizing:border-box;min-height:5.6rem}</style>\n</head>");
+  if (r.be) out = out.replace("</head>", "<style>.buy .btn{display:flex;align-items:center;justify-content:center;text-align:center;box-sizing:border-box;min-height:5.6rem}</style>\n</head>");
   if (dbBtnT) out = out.replace("</div><!--/T-->", "\n" + dbBtnT + "</div><!--/T-->");
   if (l !== "ru") fs.mkdirSync(l, {recursive: true});
   fs.writeFileSync(path(l, r.file), out);
