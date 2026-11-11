@@ -49,14 +49,15 @@ const ROUTES = [
   {id: "prague_kyiv", file: "prague-kyiv.html", FROM: "Прага", TO: "Киев", BACK: "ua-cz", hash: "cz-ua", rev: "kyiv-prague.html", uz: ["Перемышль","Киев"], pkp: ["Прага","Перемышль"], t3: "buy.t3in", x: "Перемышль", direct: false, plat: false, car: "cd", split: ["Перемышль","Чоп"], border: "before", cols: [
     {x: "Перемышль", open: "09:00", car: "cd", train: "052Л", uz: ["Перемышль","Киев"], pkp: ["Прага","Перемышль"]},
     {x: "Перемышль", open: "09:00", car: "rj", train: "716Л", uz: ["Перемышль","Киев"], pkp: ["Прага","Перемышль"]},
-    {x: "Чоп", car: "rj", train: "060Л", uz: ["Чоп","Киев"], pkp: ["Прага","Чоп"]}]},
+    {x: "Чоп", car: "rj", train: "060Л", uz: ["Чоп","Киев"], pkp: ["Прага","Чоп"]}]},
+
   /* страницы без своих записей в базе: поезда вырезаются из вариантов (участок «откуда → куда» по остановкам поезда), slice: true */
-  {id: "kyiv_khelm", file: "kyiv-khelm.html", FROM: "Киев", TO: "Хелм", BACK: "pl-ua", hash: "ua-pl", rev: "khelm-kyiv.html", dOnly: true, coach: false, slice: true, like: "kw", ds2: "buy.d.s2z", ds3: "buy.d.s3z"},
-  {id: "khelm_kyiv", file: "khelm-kyiv.html", FROM: "Хелм", TO: "Киев", BACK: "ua-pl", hash: "pl-ua", rev: "kyiv-khelm.html", dOnly: true, coach: false, slice: true, like: "wk", ds2: "buy.d.s2z", ds3: "buy.d.s3z"},
-  {id: "dnipro_khelm", file: "dnipro-khelm.html", FROM: "Днепр", TO: "Хелм", BACK: "pl-ua", hash: "ua-pl", rev: "khelm-dnipro.html", dOnly: true, coach: false, slice: true, like: "kw", ds2: "buy.d.s2z", ds3: "buy.d.s3z"},
-  {id: "khelm_dnipro", file: "khelm-dnipro.html", FROM: "Хелм", TO: "Днепр", BACK: "ua-pl", hash: "pl-ua", rev: "dnipro-khelm.html", dOnly: true, coach: false, slice: true, like: "wk", ds2: "buy.d.s2z", ds3: "buy.d.s3z"},
-  {id: "kharkiv_khelm", file: "kharkiv-khelm.html", FROM: "Харьков", TO: "Хелм", BACK: "pl-ua", hash: "ua-pl", rev: "khelm-kharkiv.html", dOnly: true, coach: false, slice: true, like: "kw", ds2: "buy.d.s2z", ds3: "buy.d.s3z"},
-  {id: "khelm_kharkiv", file: "khelm-kharkiv.html", FROM: "Хелм", TO: "Харьков", BACK: "ua-pl", hash: "pl-ua", rev: "kharkiv-khelm.html", dOnly: true, coach: false, slice: true, like: "wk", ds2: "buy.d.s2z", ds3: "buy.d.s3z"},
+  {id: "kyiv_khelm", file: "kyiv-khelm.html", FROM: "Киев", TO: "Хелм", BACK: "pl-ua", hash: "ua-pl", rev: "khelm-kyiv.html", dOnly: true, coach: false, slice: true, like: "kw"},
+  {id: "khelm_kyiv", file: "khelm-kyiv.html", FROM: "Хелм", TO: "Киев", BACK: "ua-pl", hash: "pl-ua", rev: "kyiv-khelm.html", dOnly: true, coach: false, slice: true, like: "wk"},
+  {id: "dnipro_khelm", file: "dnipro-khelm.html", FROM: "Днепр", TO: "Хелм", BACK: "pl-ua", hash: "ua-pl", rev: "khelm-dnipro.html", dOnly: true, coach: false, slice: true, like: "kw"},
+  {id: "khelm_dnipro", file: "khelm-dnipro.html", FROM: "Хелм", TO: "Днепр", BACK: "ua-pl", hash: "pl-ua", rev: "dnipro-khelm.html", dOnly: true, coach: false, slice: true, like: "wk"},
+  {id: "kharkiv_khelm", file: "kharkiv-khelm.html", FROM: "Харьков", TO: "Хелм", BACK: "pl-ua", hash: "ua-pl", rev: "khelm-kharkiv.html", dOnly: true, coach: false, slice: true, like: "kw"},
+  {id: "khelm_kharkiv", file: "khelm-kharkiv.html", FROM: "Хелм", TO: "Харьков", BACK: "ua-pl", hash: "pl-ua", rev: "kharkiv-khelm.html", dOnly: true, coach: false, slice: true, like: "wk"},
 ];
 /* проверки: повторы в ROUTES и повторяющиеся ключи в i18n.js (при повторе побеждает ПОСЛЕДНИЙ, из-за этого старые тексты могут «возвращаться») */
 {
