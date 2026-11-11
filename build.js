@@ -49,7 +49,14 @@ const ROUTES = [
   {id: "prague_kyiv", file: "prague-kyiv.html", FROM: "Прага", TO: "Киев", BACK: "ua-cz", hash: "cz-ua", rev: "kyiv-prague.html", uz: ["Перемышль","Киев"], pkp: ["Прага","Перемышль"], t3: "buy.t3in", x: "Перемышль", direct: false, plat: false, car: "cd", split: ["Перемышль","Чоп"], border: "before", cols: [
     {x: "Перемышль", open: "09:00", car: "cd", train: "052Л", uz: ["Перемышль","Киев"], pkp: ["Прага","Перемышль"]},
     {x: "Перемышль", open: "09:00", car: "rj", train: "716Л", uz: ["Перемышль","Киев"], pkp: ["Прага","Перемышль"]},
-    {x: "Чоп", car: "rj", train: "060Л", uz: ["Чоп","Киев"], pkp: ["Прага","Чоп"]}]},
+    {x: "Чоп", car: "rj", train: "060Л", uz: ["Чоп","Киев"], pkp: ["Прага","Чоп"]}]},
+  /* страницы без своих записей в базе: поезда вырезаются из вариантов (участок «откуда → куда» по остановкам поезда), slice: true */
+  {id: "kyiv_khelm", file: "kyiv-khelm.html", FROM: "Киев", TO: "Хелм", BACK: "pl-ua", hash: "ua-pl", rev: "khelm-kyiv.html", dOnly: true, coach: false, slice: true, like: "kw", ds2: "buy.d.s2z", ds3: "buy.d.s3z"},
+  {id: "khelm_kyiv", file: "khelm-kyiv.html", FROM: "Хелм", TO: "Киев", BACK: "ua-pl", hash: "pl-ua", rev: "kyiv-khelm.html", dOnly: true, coach: false, slice: true, like: "wk", ds2: "buy.d.s2z", ds3: "buy.d.s3z"},
+  {id: "dnipro_khelm", file: "dnipro-khelm.html", FROM: "Днепр", TO: "Хелм", BACK: "pl-ua", hash: "ua-pl", rev: "khelm-dnipro.html", dOnly: true, coach: false, slice: true, like: "kw", ds2: "buy.d.s2z", ds3: "buy.d.s3z"},
+  {id: "khelm_dnipro", file: "khelm-dnipro.html", FROM: "Хелм", TO: "Днепр", BACK: "ua-pl", hash: "pl-ua", rev: "dnipro-khelm.html", dOnly: true, coach: false, slice: true, like: "wk", ds2: "buy.d.s2z", ds3: "buy.d.s3z"},
+  {id: "kharkiv_khelm", file: "kharkiv-khelm.html", FROM: "Харьков", TO: "Хелм", BACK: "pl-ua", hash: "ua-pl", rev: "khelm-kharkiv.html", dOnly: true, coach: false, slice: true, like: "kw", ds2: "buy.d.s2z", ds3: "buy.d.s3z"},
+  {id: "khelm_kharkiv", file: "khelm-kharkiv.html", FROM: "Хелм", TO: "Харьков", BACK: "ua-pl", hash: "pl-ua", rev: "kharkiv-khelm.html", dOnly: true, coach: false, slice: true, like: "wk", ds2: "buy.d.s2z", ds3: "buy.d.s3z"},
 ];
 /* проверки: повторы в ROUTES и повторяющиеся ключи в i18n.js (при повторе побеждает ПОСЛЕДНИЙ, из-за этого старые тексты могут «возвращаться») */
 {
@@ -71,12 +78,20 @@ const st = (n, l) => { const s = I.ST[n], i = {uk: 0, en: 1, pl: 2}[l]; return s
 const fill = (s, v) => s.replace(/\{(\w+)\}/g, (m, k) => k in v ? v[k] : m);
 const path = (l, f) => (l === "ru" ? "" : l + "/") + f;
 const VER = Date.now().toString(36), urls = [SITE];
+/* тексты страниц slice-маршрутов (Киев → Хелм и т.п.) собираются здесь, в i18n.js их добавлять не нужно */
+const SLICE_TXT = {
+  ru: (a, b) => ({title: `${a} → ${b} поездом | Колія`, desc: `Поезда ${a} — ${b} без пересадок: время, станции, длительность.`, h1: `Поездом: ${a} → ${b}`, lead: `Расписание поездов ${a} — ${b}: прямые поезда без пересадок. Время в пути, остановки и информация о покупке билетов.`}),
+  uk: (a, b) => ({title: `${a} → ${b} потягом | Колія`, desc: `Поїзди ${a} — ${b} без пересадок: час, станції, тривалість.`, h1: `Потягом: ${a} → ${b}`, lead: `Розклад поїздів ${a} — ${b}: прямі поїзди без пересадок. Час у дорозі, зупинки та інформація про купівлю квитків.`}),
+  en: (a, b) => ({title: `${a} → ${b} by train | Koliya`, desc: `Trains ${a} — ${b}, no transfers: times, stations, duration.`, h1: `By train: ${a} → ${b}`, lead: `Train timetable ${a} — ${b}: direct trains with no transfers. Journey time, stops and ticket information.`}),
+  pl: (a, b) => ({title: `${a} → ${b} pociągiem | Koliya`, desc: `Pociągi ${a} — ${b} bez przesiadek: godziny, stacje, czas podróży.`, h1: `Pociągiem: ${a} → ${b}`, lead: `Rozkład pociągów ${a} — ${b}: pociągi bezpośrednie bez przesiadek. Czas podróży, postoje i informacje o zakupie biletów.`})
+};
 for (const r of ROUTES) for (const l of LANGS) {
   const d = I[l], pair = a => st(a[0], l) + " → " + st(a[1], l), pre = l === "ru" ? "" : "../";
   const v = {ver: VER, lang: l, base: pre, home: "./", FROM: r.FROM, TO: r.TO, BACK: r.BACK, hash: r.hash, rev: r.rev,
     chipRev: pair([r.TO, r.FROM]), dir: pair([r.FROM, r.TO]), uz: pair(r.uz || [r.FROM, r.TO]), pkp: pair(r.pkp || [r.FROM, r.TO]), canon: SITE + path(l, r.file)};
   v.alts = LANGS.map(x => `    <link rel="alternate" hreflang="${x}" href="${SITE + path(x, r.file)}">`).join("\n") + `\n    <link rel="alternate" hreflang="x-default" href="${SITE + r.file}">`;
   v.langs = LANGS.map(x => `<a href="${pre + path(x, r.file)}" hreflang="${x}" lang="${x}"${x === l ? ' class="on"' : ""}>${x.toUpperCase()}</a>`).join("");
+  if (r.slice) { const tx = SLICE_TXT[l](st(r.FROM, l), st(r.TO, l)); for (const k in tx) if (!d[r.id + "." + k]) d[r.id + "." + k] = tx[k]; for (const k of ["all", "more"]) if (!d[r.id + "." + k]) d[r.id + "." + k] = d[r.like + "." + k] }
   for (const k of ["title", "desc", "h1", "lead", "all", "more"]) v["r_" + k] = fill(d[r.id + "." + k], v);
   v["buy.t3"] = fill(d[r.t3 || "buy.t3out"], v); v["buy.t.s1x"] = fill(d[r.s1 || (r.one ? "buy.t.s1one" : "buy.t.s1")], v);
   const X = r.x || "Хелм", direct = r.direct !== false, plat = r.plat !== undefined ? r.plat : X === "Хелм";
@@ -85,7 +100,7 @@ for (const r of ROUTES) for (const l of LANGS) {
   const CARS = {zssk: {url: "https://www.zssk.sk/ideme-vlakom/", s2: "buy.t.s2z", b2: "buy.t.b2z", note: "buy.note.z"}, cfr: {url: "https://bilete.cfrcalatori.ro/", s2: "buy.t.s2c", b2: "buy.t.b2c", note: "buy.note.c"}, cd: {url: "https://www.cd.cz/spojeni-a-jizdenka/", s2: "buy.t.s2cd", b2: "buy.t.b2cd", note: "buy.note.cz"}, oebb: {url: "https://tickets.oebb.at/", s2: "buy.t.s2o", b2: "buy.t.b2o", note: "buy.note.o"}, mav: {url: "https://jegy.mav.hu/", s2: "buy.t.s2m", b2: "buy.t.b2m", note: "buy.note.m"}}, cr = CARS[r.car];
   v["buy.t.url"] = cr ? cr.url : "https://www.intercity.pl/";
   v["buy.t.s2"] = fill(d[r.s2 || (cr ? cr.s2 : "buy.t.s2")], v); v["buy.t.b2"] = fill(d[cr ? cr.b2 : "buy.t.b2"], v);
-  v.border = r.border ? fill(d["border." + r.border], v) : ""; v["buy.notex"] = fill(d[r.app || r.dOnly ? "buy.note.a" : cr ? cr.note : "buy.note"], v); v.xin = xin(X, l); v.hasDirect = String(direct); v.buyone = r.cols ? " three" : r.third && !direct && !r.dOnly ? " two" : (direct && !r.dOnly ? "" : " one") + (r.third ? " three" : "");
+  v.border = r.border ? fill(d["border." + r.border], v) : ""; v["buy.notex"] = fill(d[r.app || r.dOnly ? "buy.note.a" : cr ? cr.note : "buy.note"], v); v.xin = xin(X, l); v.hasDirect = String(direct); v.slice = String(!!r.slice); v.buyone = r.cols ? " three" : r.third && !direct && !r.dOnly ? " two" : (direct && !r.dOnly ? "" : " one") + (r.third ? " three" : "");
   v["transfer.h"] = fill(d[plat ? "transfer.h" : "transfer.h2"], v);
   const JJ = {ru: " и ", uk: " та ", en: " and ", pl: " i "}[l], hdr = a => xin(a[0], l) + a.slice(1).map(n => JJ + (l === "en" ? st(n, l) : xin(n, l).replace(/^\S+\s+/, ""))).join(""); /* hdr: «в Хелме и Варшаве» */
   /* splitx: группы {s: станция первой пересадки, l: число поездов (0 = любое), h: станции для заголовка}; split: короткая запись только со станциями */

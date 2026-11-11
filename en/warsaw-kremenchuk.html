@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- build 2026-11-10T21:54:23.573Z vmwb89q5l direct=false x=Перемышль -->
+<!-- build 2026-11-11T08:44:41.100Z vmwbvi08k direct=false x=Перемышль -->
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -267,6 +267,7 @@
 <script src="../common.js"></script>
 <script>
     const SPLIT = []; /* [станция пересадки, заголовок, пограничный контроль]: страница делится на группы по пересадке */
+    const SLICE = false; /* true: варианты собираются из поездов других вариантов (страницы вроде Киев → Хелм) */
     const FROM = "Варшава", TO = "Кременчуг", BACK = "ua-pl"; // FROM/TO: русские названия, как в шапке карточки в админке
     
     const BUY = `<section class="panel" id="buy"><h2>How to buy tickets</h2>
@@ -291,10 +292,30 @@
         if (!r.ok) throw 0;
         return r.json()
     }).then(all => {
-        const list = all.filter(o => o.active !== false).map(o => {
+        const rows = all.filter(o => o.active !== false).map(o => {
             const p = parseOption(o.dsl);
             return {o, p, h: p.head || deriveHead(p.legs)}
-        }).filter(x => x.p.legs.length && norm(x.h.from).startsWith(norm(FROM)) && norm(x.h.to).startsWith(norm(TO)))
+        }).filter(x => x.p.legs.length);
+        /* SLICE: страница «A → B» без своих вариантов в базе: поезда берутся из поездов других вариантов (участок от A до B по остановкам поезда) */
+        const hm = s => (String(s).match(/\d{1,2}:\d{2}/) || [""])[0];
+        const sliced = () => {
+            const seen = new Set(), out = [];
+            rows.forEach(x => x.p.legs.forEach(L => {
+                const st = L.stops, a = st.findIndex(s => norm(s.name).startsWith(norm(FROM)));
+                if (a < 0) return;
+                const b = st.findIndex((s, i) => i > a && norm(s.name).startsWith(norm(TO)));
+                if (b < 0) return;
+                const key = norm(L.train) + "|" + hm(st[a].time) + ">" + hm(st[b].time);
+                if (seen.has(key)) return;
+                seen.add(key);
+                const part = st.slice(a, b + 1), fq = L.freq && !/^ежедневно$/i.test(L.freq.trim()) ? " ~ " + L.freq.trim() : "",
+                    dsl = L.train.trim() + fq + ": " + part.map((s, i) => (i === 0 || i === part.length - 1 ? "*" : "") + (s.name + " " + s.time).trim()).join(" > "),
+                    o = {dsl, updated_at: x.o.updated_at, active: true}, p = parseOption(dsl);
+                out.push({o, p, h: deriveHead(p.legs)})
+            }));
+            return out
+        };
+        const list = (SLICE ? sliced() : rows.filter(x => norm(x.h.from).startsWith(norm(FROM)) && norm(x.h.to).startsWith(norm(TO))))
             /* всегда по времени отправления; одинаковое время сохраняет порядок из базы */
             .sort((a, b) => (m => m ? m[1] * 60 + +m[2] : 1e4)(String(a.h.ft).match(/(\d{1,2}):(\d{2})/)) - (m => m ? m[1] * 60 + +m[2] : 1e4)(String(b.h.ft).match(/(\d{1,2}):(\d{2})/)));
         /* «Проверено»: самая свежая дата сохранения среди показанных вариантов (в админке есть кнопка «Подтвердить актуальность») */
