@@ -365,10 +365,56 @@
         return norm(o.head.from).startsWith(norm(a)) && norm(o.head.to).startsWith(norm(b))
     };
 
+    /* список страниц: группы по направлению (ua-pl, pl-ua …), внутри — порядок config.js: город, затем Варшава, Краков, Хелм, Перемышль.
+       Страницы с slice: true (Хелм, Перемышль) не имеют своих вариантов: поезда берутся из вариантов других страниц */
+    const pageOpts = cur => {
+        const g = new Map();
+        PAGES().forEach(p => {
+            if (!g.has(p.route)) g.set(p.route, []);
+            g.get(p.route).push(p)
+        });
+        return [...g].map(([rt, list]) => `<optgroup label="${esc((RT.find(r => r.slug === rt) || {}).title || rt)}">${list.map(p => `<option value="${esc(p.href)}" ${p.href === cur ? "selected" : ""}>${esc(p.title)}${p.slice ? " · из других вариантов" : ""} (${esc(p.href)})</option>`).join("")}</optgroup>`).join("")
+    };
+    /* та же логика, что в route.src.html (SLICE): участок поезда «откуда → куда» по его остановкам; повторы (тот же поезд и время) убираются */
+    const sliceOpts = (all, pg) => {
+        const [FROM, TO] = ends(pg), hm = s => (String(s).match(/\d{1,2}:\d{2}/) || [""])[0], seen = new Set(), out = [];
+        all.filter(o => o.active !== false).forEach(src => src.legs.forEach(L => {
+            const st = L.stops, a = st.findIndex(s => norm(s.name).startsWith(norm(FROM)));
+            if (a < 0) return;
+            const b = st.findIndex((s, i) => i > a && norm(s.name).startsWith(norm(TO)));
+            if (b < 0) return;
+            const key = norm(L.train) + "|" + hm(st[a].time) + ">" + hm(st[b].time);
+            if (seen.has(key)) return;
+            seen.add(key);
+            const part = st.slice(a, b + 1), fq = L.freq && !/^ежедневно$/i.test(L.freq.trim()) ? " ~ " + L.freq.trim() : "",
+                dsl = L.train.trim() + fq + ": " + part.map((s, i) => (i === 0 || i === part.length - 1 ? "*" : "") + (s.name + " " + s.time).trim()).join(" > "),
+                p = parseOption(dsl), o = {dsl, updated_at: src.updated_at, active: true, src};
+            o.legs = p.legs;
+            o.head = deriveHead(p.legs);
+            out.push(o)
+        }));
+        return out.sort((x, y) => tkey(x) - tkey(y)) /* всегда по времени отправления, как на сайте */
+    };
+    function editSlice(pg, all) {
+        const ed = $("#ed"), pages = PAGES(), list = sliceOpts(all, pg), ck = list.map(o => Date.parse(o.updated_at)).filter(Boolean);
+        ed.innerHTML = `<section class="panel"><div class="bar"><h2 style="margin:0">${esc(pg.title)}</h2></div>
+<p class="legend">Страница: <a href="../${esc(pg.href)}" target="_blank" rel="noopener">${esc(pg.href)}</a>. Своих вариантов у неё нет: сайт сам вырезает участок «${esc(ends(pg).join(" → "))}» из поездов вариантов других страниц (по остановкам поезда), порядок — по времени отправления. Чтобы изменить время или добавить поезд, правьте исходный вариант (кнопка «Открыть исходный вариант»).</p>
+<p class="legend">${ck.length ? "Дата «Проверено» на сайте: " + fmtD(Math.max(...ck)) + " (самое свежее сохранение среди исходных вариантов)." : ""}</p></section>
+${list.map((o, i) => {
+            const sp = pages.find(p => !p.slice && onPage(o.src, p));
+            return `<section class="panel eopt"><div class="bar"><b>${esc(o.head.ft)} → ${esc(o.head.tt)}</b><span class="legend">из варианта «${esc(o.src.head.from)} → ${esc(o.src.head.to)}»${sp ? ` <button class="sm go" data-i="${i}" data-h="${esc(sp.href)}">Открыть исходный вариант</button>` : ""}</span></div>${optHtml({dsl: o.dsl, note: ""})}</section>`
+        }).join("") || '<section class="panel"><p>Подходящих поездов в базе пока нет: ни у одного варианта нет поезда, который проходит обе станции.</p></section>'}`;
+        ed.querySelectorAll("button.go").forEach(b => b.onclick = () => {
+            $("#sel").value = b.dataset.h;
+            editPage(pages.find(p => p.href === b.dataset.h));
+            $("#ed").scrollIntoView({behavior: "smooth"})
+        })
+    }
+
     function home(cur) {
         const app = $("#app");
         app.innerHTML = `<section class="panel" style="margin-top:0"><h2 style="margin:0">Страницы маршрутов</h2>
-<label>Выберите страницу</label><select id="sel"><option value="">—</option>${PAGES().map(p => `<option value="${esc(p.href)}" ${p.href === cur ? "selected" : ""}>${esc(p.title)} (${esc(p.href)})</option>`).join("")}<option value="__orph" ${cur === "__orph" ? "selected" : ""}>⚠ Варианты без страницы (проверка)</option></select>
+<label>Выберите страницу</label><select id="sel"><option value="">—</option>${pageOpts(cur)}<option value="__orph" ${cur === "__orph" ? "selected" : ""}>⚠ Варианты без страницы (проверка)</option></select>
 <p class="legend">Новая страница маршрута: добавьте её в <b>config.js</b> (PAGES), <b>build.js</b> (ROUTES) и <b>i18n.js</b> (тексты), затем выполните <b>node build.js</b>. После этого она появится в этом списке.</p></section>
 <section class="panel"><details><summary><b>Страны и направления для главной</b></summary><div id="cs"></div><div id="rts"></div></details></section><div id="ed"></div>`;
         $("#sel").onchange = e => {
@@ -467,6 +513,7 @@
     async function editPage(pg) {
         const ed = $("#ed"), isNew = false, r = {slug: pg.route};
         const all = (await db("GET", "options?order=sort")).map(parseO), pages = PAGES();
+        if (pg.slice) return editSlice(pg, all);
         const opts = pg.orph ? all.filter(o => !pages.some(p => onPage(o, p))) : all.filter(o => onPage(o, pg));
         const [fa, fb] = pg.orph ? ["", ""] : ends(pg);
         ed.innerHTML = `<section class="panel"><div class="bar"><h2 style="margin:0">${esc(pg.title)}</h2>${pg.orph ? "" : '<span><button id="cf" class="sm" title="Обновляет дату «Проверено» на странице, не меняя вариантов">✓ Подтвердить актуальность</button> <button id="no">+ Добавить вариант</button></span>'}</div>
