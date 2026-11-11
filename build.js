@@ -52,12 +52,12 @@ const ROUTES = [
     {x: "Чоп", car: "rj", train: "060Л", uz: ["Чоп","Киев"], pkp: ["Прага","Чоп"]}]},
 
   /* страницы без своих записей в базе: поезда вырезаются из вариантов (участок «откуда → куда» по остановкам поезда), slice: true */
-  {id: "kyiv_khelm", file: "kyiv-khelm.html", FROM: "Киев", TO: "Хелм", BACK: "pl-ua", hash: "ua-pl", rev: "khelm-kyiv.html", dOnly: true, coach: false, slice: true, like: "kw"},
-  {id: "khelm_kyiv", file: "khelm-kyiv.html", FROM: "Хелм", TO: "Киев", BACK: "ua-pl", hash: "pl-ua", rev: "kyiv-khelm.html", dOnly: true, coach: false, slice: true, like: "wk"},
-  {id: "dnipro_khelm", file: "dnipro-khelm.html", FROM: "Днепр", TO: "Хелм", BACK: "pl-ua", hash: "ua-pl", rev: "khelm-dnipro.html", dOnly: true, coach: false, slice: true, like: "kw"},
-  {id: "khelm_dnipro", file: "khelm-dnipro.html", FROM: "Хелм", TO: "Днепр", BACK: "ua-pl", hash: "pl-ua", rev: "dnipro-khelm.html", dOnly: true, coach: false, slice: true, like: "wk"},
-  {id: "kharkiv_khelm", file: "kharkiv-khelm.html", FROM: "Харьков", TO: "Хелм", BACK: "pl-ua", hash: "ua-pl", rev: "khelm-kharkiv.html", dOnly: true, coach: false, slice: true, like: "kw"},
-  {id: "khelm_kharkiv", file: "khelm-kharkiv.html", FROM: "Хелм", TO: "Харьков", BACK: "ua-pl", hash: "pl-ua", rev: "kharkiv-khelm.html", dOnly: true, coach: false, slice: true, like: "wk"},
+  {id: "kyiv_khelm", file: "kyiv-khelm.html", FROM: "Киев", TO: "Хелм", BACK: "pl-ua", hash: "ua-pl", rev: "khelm-kyiv.html", dOnly: true, coach: false, slice: true, ds3: "buy.d.s3t", like: "kw"},
+  {id: "khelm_kyiv", file: "khelm-kyiv.html", FROM: "Хелм", TO: "Киев", BACK: "ua-pl", hash: "pl-ua", rev: "kyiv-khelm.html", dOnly: true, coach: false, slice: true, ds3: "buy.d.s3t", like: "wk"},
+  {id: "dnipro_khelm", file: "dnipro-khelm.html", FROM: "Днепр", TO: "Хелм", BACK: "pl-ua", hash: "ua-pl", rev: "khelm-dnipro.html", dOnly: true, coach: false, slice: true, ds3: "buy.d.s3z", like: "kw"},
+  {id: "khelm_dnipro", file: "khelm-dnipro.html", FROM: "Хелм", TO: "Днепр", BACK: "ua-pl", hash: "pl-ua", rev: "dnipro-khelm.html", dOnly: true, coach: false, slice: true, ds3: "buy.d.s3z", like: "wk"},
+  {id: "kharkiv_khelm", file: "kharkiv-khelm.html", FROM: "Харьков", TO: "Хелм", BACK: "pl-ua", hash: "ua-pl", rev: "khelm-kharkiv.html", dOnly: true, coach: false, slice: true, ds3: "buy.d.s3z", like: "kw"},
+  {id: "khelm_kharkiv", file: "khelm-kharkiv.html", FROM: "Хелм", TO: "Харьков", BACK: "ua-pl", hash: "pl-ua", rev: "kharkiv-khelm.html", dOnly: true, coach: false, slice: true, ds3: "buy.d.s3z", like: "wk"},
 ];
 /* проверки: повторы в ROUTES и повторяющиеся ключи в i18n.js (при повторе побеждает ПОСЛЕДНИЙ, из-за этого старые тексты могут «возвращаться») */
 {
@@ -79,6 +79,7 @@ const st = (n, l) => { const s = I.ST[n], i = {uk: 0, en: 1, pl: 2}[l]; return s
 const fill = (s, v) => s.replace(/\{(\w+)\}/g, (m, k) => k in v ? v[k] : m);
 const path = (l, f) => (l === "ru" ? "" : l + "/") + f;
 const VER = Date.now().toString(36), urls = [SITE];
+const S3T = {ru: "Выберите подходящий поезд и оплатите билет банковской картой. Электронный билет появится в приложении. При посадке предъявите его вместе с паспортом.", uk: "Оберіть відповідний поїзд і сплатіть квиток банківською карткою. Електронний квиток з’явиться в застосунку. Під час посадки пред’явіть його разом із паспортом.", en: "Choose a suitable train and pay by bank card. The e-ticket will appear in the app. Show it with your passport when boarding.", pl: "Wybierz odpowiedni pociąg i zapłać kartą. E-bilet pojawi się w aplikacji. Przy wsiadaniu okaż go razem z paszportem."}; /* шаг 2 покупки для Киев ↔ Хелм: там несколько поездов, на Днепр / Харьков ↔ Хелм поезд один, у них «Выберите место» (buy.d.s3z) */
 /* тексты страниц slice-маршрутов (Киев → Хелм и т.п.) собираются здесь, в i18n.js их добавлять не нужно */
 const SLICE_TXT = {
   ru: (a, b) => ({title: `${a} → ${b} поездом | Колія`, desc: `Поезда ${a} — ${b} без пересадок: время, станции, длительность.`, h1: `Поездом: ${a} → ${b}`, lead: `Расписание поездов ${a} — ${b}: прямые поезда без пересадок. Время в пути, остановки и информация о покупке билетов.`}),
@@ -92,6 +93,7 @@ for (const r of ROUTES) for (const l of LANGS) {
     chipRev: pair([r.TO, r.FROM]), dir: pair([r.FROM, r.TO]), uz: pair(r.uz || [r.FROM, r.TO]), pkp: pair(r.pkp || [r.FROM, r.TO]), canon: SITE + path(l, r.file)};
   v.alts = LANGS.map(x => `    <link rel="alternate" hreflang="${x}" href="${SITE + path(x, r.file)}">`).join("\n") + `\n    <link rel="alternate" hreflang="x-default" href="${SITE + r.file}">`;
   v.langs = LANGS.map(x => `<a href="${pre + path(x, r.file)}" hreflang="${x}" lang="${x}"${x === l ? ' class="on"' : ""}>${x.toUpperCase()}</a>`).join("");
+  d["buy.d.s3t"] = S3T[l];
   if (r.slice) { const tx = SLICE_TXT[l](st(r.FROM, l), st(r.TO, l)); for (const k in tx) if (!d[r.id + "." + k]) d[r.id + "." + k] = tx[k]; for (const k of ["all", "more"]) if (!d[r.id + "." + k]) d[r.id + "." + k] = d[r.like + "." + k] }
   for (const k of ["title", "desc", "h1", "lead", "all", "more"]) v["r_" + k] = fill(d[r.id + "." + k], v);
   v["buy.t3"] = fill(d[r.t3 || "buy.t3out"], v); v["buy.t.s1x"] = fill(d[r.s1 || (r.one ? "buy.t.s1one" : "buy.t.s1")], v);
