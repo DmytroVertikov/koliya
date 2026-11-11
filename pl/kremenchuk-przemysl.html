@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<!-- build 2026-11-11T09:11:43.571Z vmwbwgs2b direct=true x=Хелм -->
+<html lang="pl">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>Krzemieńczuk → Przemyśl pociągiem | Koliya</title>
+    <meta name="description" content="Pociągi Krzemieńczuk — Przemyśl bez przesiadek: godziny, stacje, czas podróży.">
+    <meta name="theme-color" content="#12145c">
+    <link rel="canonical" href="https://dmytrovertikov.github.io/koliya/pl/kremenchuk-przemysl.html">
+    <link rel="alternate" hreflang="ru" href="https://dmytrovertikov.github.io/koliya/kremenchuk-przemysl.html">
+    <link rel="alternate" hreflang="uk" href="https://dmytrovertikov.github.io/koliya/uk/kremenchuk-przemysl.html">
+    <link rel="alternate" hreflang="en" href="https://dmytrovertikov.github.io/koliya/en/kremenchuk-przemysl.html">
+    <link rel="alternate" hreflang="pl" href="https://dmytrovertikov.github.io/koliya/pl/kremenchuk-przemysl.html">
+    <link rel="alternate" hreflang="x-default" href="https://dmytrovertikov.github.io/koliya/kremenchuk-przemysl.html">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap">
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        .wrap {
+            max-width: 1080px
+        }
+
+        .cols {
+            display: grid;
+            grid-template-columns:minmax(0, 1fr);
+            gap: 18px
+        }
+
+        .cols .opt {
+            margin-top: 0
+        }
+
+        /* один вариант: карточка и заголовок по центру */
+        .cols.one {
+            grid-template-columns: minmax(0, 1fr)
+        }
+
+        h2.sub.c {
+            text-align: left
+        }
+
+        .cols .board, .direct .board {
+            --t: clamp(32px, 4vw, 46px)
+        }
+
+        .direct .opt {
+            margin-top: 0
+        }
+
+        /* прямой поезд: зелёный цвет вместо синего */
+        .direct .board {
+            background: linear-gradient(160deg, #12875a, #0a4d34)
+        }
+
+        .direct .opt {
+            border-color: #12875a;
+            box-shadow: 0 14px 36px -14px rgba(18, 135, 90, .55)
+        }
+
+        .direct .tl {
+            --rail: #12875a
+        }
+
+        .direct .leg h4 {
+            color: #0a6b46;
+            background: #dcf5e9
+        }
+
+        .direct .tag {
+            background: var(--acc);
+            color: var(--accink)
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .direct .leg h4 {
+                color: #7be0b0;
+                background: #12392b
+            }
+        }
+
+        .direct .body.two {
+            display: grid;
+            grid-template-columns:minmax(0, 1fr) minmax(0, 1fr);
+            gap: 0 28px;
+            align-items: start
+        }
+
+        .direct .body.two .note {
+            grid-column: 1/-1
+        }
+
+        .coach {
+            grid-column: 2;
+            grid-row: 1;
+            margin-top: 16px;
+            padding: 18px 20px;
+            border-radius: 18px;
+            background: #dcf5e9;
+            color: #0a4d34;
+            border: 1px solid rgba(18, 135, 90, .25)
+        }
+
+        .coach h4 {
+            margin: 0 0 8px;
+            font-family: var(--disp);
+            font-weight: 800;
+            font-size: 17px
+        }
+
+        .coach p {
+            margin: 0;
+            font-size: 15.5px;
+            line-height: 1.6
+        }
+
+        .coach p + p {
+            margin-top: 8px
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .coach {
+                background: #12392b;
+                color: #bff0d8;
+                border-color: rgba(123, 224, 176, .25)
+            }
+        }
+
+        .buy {
+            display: grid;
+            grid-template-columns:repeat(2, minmax(0, 1fr));
+            gap: 18px;
+            margin-top: 14px
+        }
+
+        .buy > div {
+            background: var(--soft);
+            border-radius: 18px;
+            padding: 18px 20px
+        }
+
+        .buy > div.d {
+            background: #dcf5e9;
+            color: #0a4d34
+        }
+
+        .buy > div.d .steps li:before {
+            background: #12875a;
+            color: #fff
+        }
+
+        .buy h3 {
+            margin: 0 0 2px;
+            font-family: var(--disp);
+            font-weight: 800;
+            font-size: 17px
+        }
+
+        .buy .steps {
+            margin-top: 12px
+        }
+
+        .buy .btn {
+            margin-top: 14px
+        }
+
+        .buy .btn:not(.pri) {
+            box-shadow: inset 0 0 0 2px var(--brand)
+        }
+
+        .buy > div.d .btn {
+            background: #fff;
+            color: #0a6b46;
+            box-shadow: inset 0 0 0 2px #12875a
+        }
+
+        .buy > div:not(.d) .btn:not(.pri) {
+            background: var(--brand);
+            color: var(--card);
+            box-shadow: none
+        }
+
+        .buy.one {
+            grid-template-columns: minmax(0, 1fr)
+        }
+
+        .buy.three {
+            grid-template-columns:repeat(3, minmax(0, 1fr))
+        }
+
+        .buy.two {
+            grid-template-columns:repeat(2, minmax(0, 1fr))
+        }
+
+        @media (max-width: 980px) {
+            .buy.two, .buy.three {
+                grid-template-columns: minmax(0, 1fr)
+            }
+        }
+
+        .buy-note {
+            margin-top: 16px !important;
+            font-size: 14px
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .buy > div.d {
+                background: #12392b;
+                color: #bff0d8
+            }
+
+            .buy > div.d .btn {
+                background: #0f2c21;
+                color: #7be0b0
+            }
+        }
+
+        h2.sub small {
+            font-family: var(--body);
+            font-weight: 600;
+            font-size: 14px;
+            color: var(--mute);
+            margin-left: 8px
+        }
+
+        .direct-wrap {
+            display: grid;
+            gap: 18px
+        }
+
+        @media (max-width: 760px) {
+            .buy {
+                grid-template-columns:1fr
+            }
+
+            .direct .body.two {
+                display: block
+            }
+
+            .cols {
+                grid-template-columns:1fr
+            }
+
+            .cols .board, .direct .board {
+                --t: clamp(34px, 10vw, 60px)
+            }
+        }
+    </style>
+</head>
+<body>
+<header>
+    <div class="wrap"><nav class="lang"><a href="../kremenchuk-przemysl.html" hreflang="ru" lang="ru">RU</a><a href="../uk/kremenchuk-przemysl.html" hreflang="uk" lang="uk">UK</a><a href="../en/kremenchuk-przemysl.html" hreflang="en" lang="en">EN</a><a href="../pl/kremenchuk-przemysl.html" hreflang="pl" lang="pl" class="on">PL</a></nav><a class="logo" href="./"><span class="rails">🚆</span> КОЛІЯ</a>
+        <h1>Pociągiem: Krzemieńczuk → Przemyśl</h1>
+        <p id="lead">Rozkład pociągów Krzemieńczuk — Przemyśl: pociągi bezpośrednie bez przesiadek. Czas podróży, postoje i informacje o zakupie biletów.</p></div>
+</header>
+<main class="wrap"><a class="back" href="./">← Strona główna</a> <a class="back" href="./#ua-pl">Wszystkie trasy: Ukraina — Polska</a> <a class="back" href="przemysl-kremenchuk.html">🔄 Przemyśl → Krzemieńczuk</a>
+    <p class="chk" id="chk" hidden>📅 Sprawdzono: <b></b></p>
+    <div id="app"><p>Ładowanie…</p></div>
+    <div id="more"></div>
+</main>
+<div class="wrap"><aside class="ad wide" data-slot="bottom" hidden></aside></div>
+<footer class="wrap" id="site-footer"></footer>
+<script>window.LANG = "pl";</script>
+<script src="../config.js"></script>
+<script src="../i18n.js"></script>
+<script src="../common.js"></script>
+<script>
+    const SPLIT = []; /* [станция пересадки, заголовок, пограничный контроль]: страница делится на группы по пересадке */
+    const SLICE = true; /* true: варианты собираются из поездов других вариантов (страницы вроде Киев → Хелм) */
+    const FROM = "Кременчуг", TO = "Перемышль", BACK = "pl-ua"; // FROM/TO: русские названия, как в шапке карточки в админке
+    /*D*//*/D*/
+    const BUY = `<section class="panel" id="buy"><h2>Jak kupić bilety</h2>
+<div class="buy one">
+<!--D--><div class="d"><h3>Pociąg bezpośredni</h3><ol class="steps">
+<li>Otwórz aplikację Ukrzaliznytsia, wybierz trasę Krzemieńczuk → Przemyśl i datę podróży. Sprzedaż biletów rusza na 20 dni przed odjazdem o 9:00 czasu kijowskiego.</li>
+<li>Wybierz miejsce i zapłać kartą. E-bilet pojawi się w aplikacji. Przy wsiadaniu okaż go razem z paszportem.</li></ol>
+<a class="btn" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Kup w aplikacji UZ bilet Krzemieńczuk → Przemyśl</a></div><!--/D-->
+
+
+
+
+</div>
+<p class="buy-note">Rozkłady jazdy mogą ulec zmianie. Aktualne informacje znajdziesz w aplikacji UZ.</p></section>`;
+    const app = document.getElementById("app");
+    const HOWBAR = `<a class="howbar" href="#buy"><span class="hi" aria-hidden="true">i</span><span><b>Jak kupić bilety?</b><small>Szczegółowa instrukcja dla każdego wariantu trasy.</small></span><span class="go">Instrukcja →</span></a>`;
+    const norm = s => String(s || "").trim().toLowerCase();
+    fetch(U + "/rest/v1/options?order=sort", {headers: {apikey: K, Authorization: "Bearer " + K}}).then(r => {
+        if (!r.ok) throw 0;
+        return r.json()
+    }).then(all => {
+        const rows = all.filter(o => o.active !== false).map(o => {
+            const p = parseOption(o.dsl);
+            return {o, p, h: p.head || deriveHead(p.legs)}
+        }).filter(x => x.p.legs.length);
+        /* SLICE: страница «A → B» без своих вариантов в базе: поезда берутся из поездов других вариантов (участок от A до B по остановкам поезда) */
+        const hm = s => (String(s).match(/\d{1,2}:\d{2}/) || [""])[0];
+        const sliced = () => {
+            const seen = new Set(), out = [];
+            rows.forEach(x => x.p.legs.forEach(L => {
+                const st = L.stops, a = st.findIndex(s => norm(s.name).startsWith(norm(FROM)));
+                if (a < 0) return;
+                const b = st.findIndex((s, i) => i > a && norm(s.name).startsWith(norm(TO)));
+                if (b < 0) return;
+                const key = norm(L.train) + "|" + hm(st[a].time) + ">" + hm(st[b].time);
+                if (seen.has(key)) return;
+                seen.add(key);
+                const part = st.slice(a, b + 1), fq = L.freq && !/^ежедневно$/i.test(L.freq.trim()) ? " ~ " + L.freq.trim() : "",
+                    dsl = L.train.trim() + fq + ": " + part.map((s, i) => (i === 0 || i === part.length - 1 ? "*" : "") + (s.name + " " + s.time).trim()).join(" > "),
+                    o = {dsl, updated_at: x.o.updated_at, active: true}, p = parseOption(dsl);
+                out.push({o, p, h: deriveHead(p.legs)})
+            }));
+            return out
+        };
+        const list = (SLICE ? sliced() : rows.filter(x => norm(x.h.from).startsWith(norm(FROM)) && norm(x.h.to).startsWith(norm(TO))))
+            /* всегда по времени отправления; одинаковое время сохраняет порядок из базы */
+            .sort((a, b) => (m => m ? m[1] * 60 + +m[2] : 1e4)(String(a.h.ft).match(/(\d{1,2}):(\d{2})/)) - (m => m ? m[1] * 60 + +m[2] : 1e4)(String(b.h.ft).match(/(\d{1,2}):(\d{2})/)));
+        /* «Проверено»: самая свежая дата сохранения среди показанных вариантов (в админке есть кнопка «Подтвердить актуальность») */
+        const ck = list.map(x => Date.parse(x.o.updated_at)).filter(Boolean), ce = document.getElementById("chk");
+        if (ck.length && ce) {
+            const d = new Date(Math.max(...ck)), p2 = n => String(n).padStart(2, "0");
+            ce.querySelector("b").textContent = p2(d.getDate()) + "." + p2(d.getMonth() + 1) + "." + d.getFullYear();
+            ce.hidden = false
+        }
+        const HAS_DIRECT = true; /* false: страница без прямого поезда, все варианты идут как «с пересадкой» */
+        /* LEADX: если среди вариантов есть пересадка на этой станции, подзаголовок страницы берётся из LEADM (с этой станцией) */
+        const LEADX = "", LEADM = "";
+        if (LEADX && LEADM && list.some(x => x.p.legs.length > 1 && (s => norm(s[s.length - 1].name).startsWith(norm(LEADX)))(x.p.legs[0].stops))) document.getElementById("lead").textContent = LEADM;
+        const direct = HAS_DIRECT ? list.filter(x => x.p.legs.length === 1) : [], transfer = HAS_DIRECT ? list.filter(x => x.p.legs.length > 1) : list;
+        /* блоки покупки: вариант ищем по перевозчику чешского поезда (EC/IC = ČD, RJ = RegioJet) и станции пересадки;
+           время и номер поезда УЗ берём из остановок варианта, а не из шапки, чтобы не зависеть от ручных правок */
+        const tm = s => (String(s).match(/\d{1,2}:\d{2}/) || [""])[0], isUz = L => !/^[A-Za-z]/.test(String(L.train).trim());
+        const carOf = L => /^(EC|IC)\b/i.test(L.train.trim()) ? "cd" : /^RJ\b/i.test(L.train.trim()) ? "rj" : "";
+        const blocks = [];
+        document.querySelectorAll("#more h3[data-car]").forEach(h => {
+            const x = list.find(x => {
+                const L = x.p.legs, cz = L.find(l => !isUz(l)), s = L[0].stops;
+                return L.length > 1 && cz && carOf(cz) === h.dataset.car && norm(s[s.length - 1].name).startsWith(norm(h.dataset.x))
+            });
+            if (!x) { blocks.push({blk: h.parentNode, k: [9, 0]}); return }
+            const L = x.p.legs, last = L[L.length - 1].stops, ft = tm(L[0].stops[0].time) || x.h.ft, tt = tm(last[last.length - 1].time) || x.h.tt, u = L.find(isUz);
+            h.insertAdjacentText("beforeend", " (" + h.dataset.dt.replace("{t1}", ft).replace("{t2}", tt) + ")");
+            if (u) h.parentNode.querySelectorAll(".utr").forEach(e => e.textContent = String(u.train).trim().replace(/^№\s*/, "").toUpperCase());
+            blocks.push({blk: h.parentNode, k: [0, list.indexOf(x)]})
+        });
+        /* блоки покупки идут в том же порядке, что и варианты на странице: в порядке списка вариантов */
+        if (blocks.length) {
+            const box = blocks[0].blk.parentNode;
+            blocks.map((b, i) => Object.assign({i}, b)).sort((a, b) => a.k[0] - b.k[0] || a.k[1] - b.k[1] || a.i - b.i).forEach(b => box.appendChild(b.blk))
+        }
+        if (!list.length) {
+            app.innerHTML = `<div class="panel"><h2>Brak połączeń</h2><p>Dodaj je w panelu administratora.</p></div>`;
+            return
+        }
+        app.innerHTML = ""/*D*/ + (direct.length ? `<h2 class="sub" style="margin-top:6px">Pociąg bezpośredni <small>bez przesiadek</small></h2><div class="direct direct-wrap" style="margin-top:16px">${direct.map(x => optHtml(x.o)).join("")}</div>` : "")
+            + (direct.length && transfer.length ? `<aside class="ad wide" data-slot="mid" hidden></aside>` : "")/*/D*/
+            + (() => {
+            /* все варианты с пересадкой — одним списком (по времени отправления), без подзаголовков по станциям */
+            if (!transfer.length) return "";
+            const at = x => { const s = x.p.legs[0].stops; return norm(s[s.length - 1].name) }; /* станция первой пересадки */
+            const bf = x => !SPLIT.length || SPLIT.some(s => s[2] && at(x).startsWith(norm(s[0]))); /* пограничный контроль — по карточке */
+            const cards = transfer.map(x => { const c = optHtml(x.o); return bf(x) ? c.replace("<details ", '<details data-b="1" ') : c }).join("");
+            const head = direct.length ? `<h2 class="sub">Z przesiadką</h2>` : ""; /* заголовок только чтобы отделить от блока прямого поезда */
+            return head + `<div class="cols${transfer.length === 1 ? " one" : ""}" style="margin-top:${head ? 16 : 6}px">${cards}</div>`
+        })() + HOWBAR;
+        /*D*//*/D*/
+        
+    }).catch(() => {
+        app.innerHTML = `<div class="panel"><h2>Nie udało się załadować danych</h2><p>Odśwież stronę później.</p></div>`
+    });
+    const here = location.pathname.split("/").pop() || "index.html",
+        others = ((window.CFG && CFG.PAGES) || []).filter(p => p.href !== here);
+    document.getElementById("more").innerHTML = BUY + `<section class="panel"><h2>Inne trasy</h2><div class="grid" style="margin-top:12px"><a class="btn" href="./#${BACK}">← Z Polski na Ukrainę</a>${others.map(p => `<a class="btn" href="${esc(p.href)}">${esc(trRoute(p.title))}</a>`).join("")}<a class="btn" href="./">Wszystkie kraje</a></div></section>`;
+</script>
+</body>
+</html>

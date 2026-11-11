@@ -58,6 +58,18 @@ const ROUTES = [
   {id: "khelm_dnipro", file: "khelm-dnipro.html", FROM: "Хелм", TO: "Днепр", BACK: "ua-pl", hash: "pl-ua", rev: "dnipro-khelm.html", dOnly: true, coach: false, slice: true, ds3: "buy.d.s3z", like: "wk"},
   {id: "kharkiv_khelm", file: "kharkiv-khelm.html", FROM: "Харьков", TO: "Хелм", BACK: "pl-ua", hash: "ua-pl", rev: "khelm-kharkiv.html", dOnly: true, coach: false, slice: true, ds3: "buy.d.s3z", like: "kw"},
   {id: "khelm_kharkiv", file: "khelm-kharkiv.html", FROM: "Хелм", TO: "Харьков", BACK: "ua-pl", hash: "pl-ua", rev: "kharkiv-khelm.html", dOnly: true, coach: false, slice: true, ds3: "buy.d.s3z", like: "wk"},
+  {id: "kyiv_przemysl", file: "kyiv-przemysl.html", FROM: "Киев", TO: "Перемышль", BACK: "pl-ua", hash: "ua-pl", rev: "przemysl-kyiv.html", dOnly: true, coach: false, slice: true, ds3: "buy.d.s3t", like: "kw"},
+  {id: "przemysl_kyiv", file: "przemysl-kyiv.html", FROM: "Перемышль", TO: "Киев", BACK: "ua-pl", hash: "pl-ua", rev: "kyiv-przemysl.html", dOnly: true, coach: false, slice: true, ds3: "buy.d.s3t", like: "wk"},
+  {id: "dnipro_przemysl", file: "dnipro-przemysl.html", FROM: "Днепр", TO: "Перемышль", BACK: "pl-ua", hash: "ua-pl", rev: "przemysl-dnipro.html", dOnly: true, coach: false, slice: true, ds3: "buy.d.s3z", like: "kw"},
+  {id: "przemysl_dnipro", file: "przemysl-dnipro.html", FROM: "Перемышль", TO: "Днепр", BACK: "ua-pl", hash: "pl-ua", rev: "dnipro-przemysl.html", dOnly: true, coach: false, slice: true, ds3: "buy.d.s3z", like: "wk"},
+  {id: "kharkiv_przemysl", file: "kharkiv-przemysl.html", FROM: "Харьков", TO: "Перемышль", BACK: "pl-ua", hash: "ua-pl", rev: "przemysl-kharkiv.html", dOnly: true, coach: false, slice: true, ds3: "buy.d.s3z", like: "kw"},
+  {id: "przemysl_kharkiv", file: "przemysl-kharkiv.html", FROM: "Перемышль", TO: "Харьков", BACK: "ua-pl", hash: "pl-ua", rev: "kharkiv-przemysl.html", dOnly: true, coach: false, slice: true, ds3: "buy.d.s3z", like: "wk"},
+  {id: "odesa_przemysl", file: "odesa-przemysl.html", FROM: "Одесса", TO: "Перемышль", BACK: "pl-ua", hash: "ua-pl", rev: "przemysl-odesa.html", dOnly: true, coach: false, slice: true, ds3: "buy.d.s3z", like: "kw"},
+  {id: "przemysl_odesa", file: "przemysl-odesa.html", FROM: "Перемышль", TO: "Одесса", BACK: "ua-pl", hash: "pl-ua", rev: "odesa-przemysl.html", dOnly: true, coach: false, slice: true, ds3: "buy.d.s3z", like: "wk"},
+  {id: "lviv_przemysl", file: "lviv-przemysl.html", FROM: "Львов", TO: "Перемышль", BACK: "pl-ua", hash: "ua-pl", rev: "przemysl-lviv.html", dOnly: true, coach: false, slice: true, ds3: "buy.d.s3t", like: "kw"},
+  {id: "przemysl_lviv", file: "przemysl-lviv.html", FROM: "Перемышль", TO: "Львов", BACK: "ua-pl", hash: "pl-ua", rev: "lviv-przemysl.html", dOnly: true, coach: false, slice: true, ds3: "buy.d.s3t", like: "wk"},
+  {id: "kremenchuk_przemysl", file: "kremenchuk-przemysl.html", FROM: "Кременчуг", TO: "Перемышль", BACK: "pl-ua", hash: "ua-pl", rev: "przemysl-kremenchuk.html", dOnly: true, coach: false, slice: true, ds3: "buy.d.s3z", like: "kw"},
+  {id: "przemysl_kremenchuk", file: "przemysl-kremenchuk.html", FROM: "Перемышль", TO: "Кременчуг", BACK: "ua-pl", hash: "pl-ua", rev: "kremenchuk-przemysl.html", dOnly: true, coach: false, slice: true, ds3: "buy.d.s3z", like: "wk"},
 ];
 /* проверки: повторы в ROUTES и повторяющиеся ключи в i18n.js (при повторе побеждает ПОСЛЕДНИЙ, из-за этого старые тексты могут «возвращаться») */
 {

@@ -1,18 +1,22 @@
 <!DOCTYPE html>
-<!-- build {{stamp}} -->
-<html lang="{{lang}}">
+<!-- build 2026-11-11T09:11:43.544Z vmwbwgs2b direct=true x=Хелм -->
+<html lang="ru">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-    <title>{{r_title}}</title>
-    <meta name="description" content="{{r_desc}}">
+    <title>Харьков → Перемышль поездом | Колія</title>
+    <meta name="description" content="Поезда Харьков — Перемышль без пересадок: время, станции, длительность.">
     <meta name="theme-color" content="#12145c">
-    <link rel="canonical" href="{{canon}}">
-{{alts}}
+    <link rel="canonical" href="https://dmytrovertikov.github.io/koliya/kharkiv-przemysl.html">
+    <link rel="alternate" hreflang="ru" href="https://dmytrovertikov.github.io/koliya/kharkiv-przemysl.html">
+    <link rel="alternate" hreflang="uk" href="https://dmytrovertikov.github.io/koliya/uk/kharkiv-przemysl.html">
+    <link rel="alternate" hreflang="en" href="https://dmytrovertikov.github.io/koliya/en/kharkiv-przemysl.html">
+    <link rel="alternate" hreflang="pl" href="https://dmytrovertikov.github.io/koliya/pl/kharkiv-przemysl.html">
+    <link rel="alternate" hreflang="x-default" href="https://dmytrovertikov.github.io/koliya/kharkiv-przemysl.html">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap">
-    <link rel="stylesheet" href="{{base}}style.css">
+    <link rel="stylesheet" href="style.css">
     <style>
         .wrap {
             max-width: 1080px
@@ -246,62 +250,69 @@
 </head>
 <body>
 <header>
-    <div class="wrap"><nav class="lang">{{langs}}</nav><a class="logo" href="{{home}}"><span class="rails">🚆</span> КОЛІЯ</a>
-        <h1>{{r_h1}}</h1>
-        <p id="lead">{{r_lead}}</p></div>
+    <div class="wrap"><nav class="lang"><a href="kharkiv-przemysl.html" hreflang="ru" lang="ru" class="on">RU</a><a href="uk/kharkiv-przemysl.html" hreflang="uk" lang="uk">UK</a><a href="en/kharkiv-przemysl.html" hreflang="en" lang="en">EN</a><a href="pl/kharkiv-przemysl.html" hreflang="pl" lang="pl">PL</a></nav><a class="logo" href="./"><span class="rails">🚆</span> КОЛІЯ</a>
+        <h1>Поездом: Харьков → Перемышль</h1>
+        <p id="lead">Расписание поездов Харьков — Перемышль: прямые поезда без пересадок. Время в пути, остановки и информация о покупке билетов.</p></div>
 </header>
-<main class="wrap"><a class="back" href="{{home}}">{{back.home}}</a> <a class="back" href="{{home}}#{{hash}}">{{r_all}}</a> <a class="back" href="{{rev}}">🔄 {{chipRev}}</a>
-    <p class="chk" id="chk" hidden>📅 {{d.checked}} <b></b></p>
-    <div id="app"><p>{{loading}}</p></div>
+<main class="wrap"><a class="back" href="./">← Главная</a> <a class="back" href="./#ua-pl">Все маршруты: Украина — Польша</a> <a class="back" href="przemysl-kharkiv.html">🔄 Перемышль → Харьков</a>
+    <p class="chk" id="chk" hidden>📅 Проверено: <b></b></p>
+    <div id="app"><p>Загрузка…</p></div>
     <div id="more"></div>
 </main>
 <div class="wrap"><aside class="ad wide" data-slot="bottom" hidden></aside></div>
 <footer class="wrap" id="site-footer"></footer>
-<script>window.LANG = "{{lang}}";</script>
-<script src="{{base}}config.js"></script>
-<script src="{{base}}i18n.js"></script>
-<script src="{{base}}common.js"></script>
+<script>window.LANG = "ru";</script>
+<script src="config.js"></script>
+<script src="i18n.js"></script>
+<script src="common.js"></script>
 <script>
-    const SPLIT = {{split}}; /* [станция пересадки, заголовок, пограничный контроль]: страница делится на группы по пересадке */
-    const FROM = "{{FROM}}", TO = "{{TO}}", BACK = "{{BACK}}"; // FROM/TO: русские названия, как в шапке карточки в админке
-    /*D*//*C*/const COACH = `<aside class="coach"><p>{{coach}}</p></aside>`;/*/C*//*/D*/
-    const BUY = `<section class="panel" id="buy"><h2>{{buy.h}}</h2>
-<div class="buy{{buyone}}">
-<!--D--><div class="d"><h3>{{buy.d.h}}</h3><ol class="steps">
-<li>{{buy.d.s2}}</li>
-<li>{{buy.d.s3}}</li></ol>
-<a class="btn" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">{{buy.d.btn}}</a></div><!--/D-->
-<!--T--><div><h3>{{buy.t.h}}</h3><ol class="steps">
-<li>{{buy.t.s1x}}</li>
-<li>{{buy.t.s2}}</li>
-<!--T3--><li>{{buy.t3}}</li><!--/T3-->
-<li>{{buy.t.s4}}</li></ol>
-<a class="btn pri" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">{{buy.t.b1}}</a>
-<a class="btn" href="{{buy.t.url}}" target="_blank" rel="noopener">{{buy.t.b2}}</a></div><!--/T-->
-<!--H--><div><h3>{{buy.h3}}</h3><ol class="steps">
-<li>{{buy.h.s1}}</li>
-<li>{{buy.h.s2}}</li>
-<li>{{buy.t.s4}}</li></ol>
-{{buy.h.btns}}</div><!--/H-->
-<!--A--><div><h3>{{buy.t.h}}</h3><ol class="steps">
-<li>{{buy.a.s1}}</li>
-<li>{{buy.a.s2}}</li>
-<li>{{buy.a.s3}}</li></ol>
-<a class="btn pri" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">{{buy.a.btn}}</a></div><!--/A-->
-{{buycols}}
+    const SPLIT = []; /* [станция пересадки, заголовок, пограничный контроль]: страница делится на группы по пересадке */
+    const SLICE = true; /* true: варианты собираются из поездов других вариантов (страницы вроде Киев → Хелм) */
+    const FROM = "Харьков", TO = "Перемышль", BACK = "pl-ua"; // FROM/TO: русские названия, как в шапке карточки в админке
+    /*D*//*/D*/
+    const BUY = `<section class="panel" id="buy"><h2>Как купить билеты</h2>
+<div class="buy one">
+<!--D--><div class="d"><h3>Прямой поезд</h3><ol class="steps">
+<li>Откройте приложение «Укрзалізниця», выберите маршрут Харьков → Перемышль и укажите дату поездки. Продажа билетов открывается за 20 суток до отправления, в 09:00 по киевскому времени.</li>
+<li>Выберите место и оплатите билет банковской картой. Электронный билет появится в приложении. При посадке предъявите его вместе с паспортом.</li></ol>
+<a class="btn" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Купить в приложении УЗ билет Харьков → Перемышль</a></div><!--/D-->
+
+
+
+
 </div>
-<p class="buy-note">{{buy.notex}}</p></section>`;
+<p class="buy-note">Графики движения поездов могут измениться, актуальную информацию смотрите в приложении УЗ.</p></section>`;
     const app = document.getElementById("app");
-    const HOWBAR = `<a class="howbar" href="#buy"><span class="hi" aria-hidden="true">i</span><span><b>{{d.howq}}</b><small>{{d.hows}}</small></span><span class="go">{{d.how}} →</span></a>`;
+    const HOWBAR = `<a class="howbar" href="#buy"><span class="hi" aria-hidden="true">i</span><span><b>Как купить билеты?</b><small>Подробная инструкция для каждого варианта маршрута.</small></span><span class="go">Инструкция →</span></a>`;
     const norm = s => String(s || "").trim().toLowerCase();
     fetch(U + "/rest/v1/options?order=sort", {headers: {apikey: K, Authorization: "Bearer " + K}}).then(r => {
         if (!r.ok) throw 0;
         return r.json()
     }).then(all => {
-        const list = all.filter(o => o.active !== false).map(o => {
+        const rows = all.filter(o => o.active !== false).map(o => {
             const p = parseOption(o.dsl);
             return {o, p, h: p.head || deriveHead(p.legs)}
-        }).filter(x => x.p.legs.length && norm(x.h.from).startsWith(norm(FROM)) && norm(x.h.to).startsWith(norm(TO)))
+        }).filter(x => x.p.legs.length);
+        /* SLICE: страница «A → B» без своих вариантов в базе: поезда берутся из поездов других вариантов (участок от A до B по остановкам поезда) */
+        const hm = s => (String(s).match(/\d{1,2}:\d{2}/) || [""])[0];
+        const sliced = () => {
+            const seen = new Set(), out = [];
+            rows.forEach(x => x.p.legs.forEach(L => {
+                const st = L.stops, a = st.findIndex(s => norm(s.name).startsWith(norm(FROM)));
+                if (a < 0) return;
+                const b = st.findIndex((s, i) => i > a && norm(s.name).startsWith(norm(TO)));
+                if (b < 0) return;
+                const key = norm(L.train) + "|" + hm(st[a].time) + ">" + hm(st[b].time);
+                if (seen.has(key)) return;
+                seen.add(key);
+                const part = st.slice(a, b + 1), fq = L.freq && !/^ежедневно$/i.test(L.freq.trim()) ? " ~ " + L.freq.trim() : "",
+                    dsl = L.train.trim() + fq + ": " + part.map((s, i) => (i === 0 || i === part.length - 1 ? "*" : "") + (s.name + " " + s.time).trim()).join(" > "),
+                    o = {dsl, updated_at: x.o.updated_at, active: true}, p = parseOption(dsl);
+                out.push({o, p, h: deriveHead(p.legs)})
+            }));
+            return out
+        };
+        const list = (SLICE ? sliced() : rows.filter(x => norm(x.h.from).startsWith(norm(FROM)) && norm(x.h.to).startsWith(norm(TO))))
             /* всегда по времени отправления; одинаковое время сохраняет порядок из базы */
             .sort((a, b) => (m => m ? m[1] * 60 + +m[2] : 1e4)(String(a.h.ft).match(/(\d{1,2}):(\d{2})/)) - (m => m ? m[1] * 60 + +m[2] : 1e4)(String(b.h.ft).match(/(\d{1,2}):(\d{2})/)));
         /* «Проверено»: самая свежая дата сохранения среди показанных вариантов (в админке есть кнопка «Подтвердить актуальность») */
@@ -311,9 +322,9 @@
             ce.querySelector("b").textContent = p2(d.getDate()) + "." + p2(d.getMonth() + 1) + "." + d.getFullYear();
             ce.hidden = false
         }
-        const HAS_DIRECT = {{hasDirect}}; /* false: страница без прямого поезда, все варианты идут как «с пересадкой» */
+        const HAS_DIRECT = true; /* false: страница без прямого поезда, все варианты идут как «с пересадкой» */
         /* LEADX: если среди вариантов есть пересадка на этой станции, подзаголовок страницы берётся из LEADM (с этой станцией) */
-        const LEADX = "{{leadx}}", LEADM = {{leadm}};
+        const LEADX = "", LEADM = "";
         if (LEADX && LEADM && list.some(x => x.p.legs.length > 1 && (s => norm(s[s.length - 1].name).startsWith(norm(LEADX)))(x.p.legs[0].stops))) document.getElementById("lead").textContent = LEADM;
         const direct = HAS_DIRECT ? list.filter(x => x.p.legs.length === 1) : [], transfer = HAS_DIRECT ? list.filter(x => x.p.legs.length > 1) : list;
         /* блоки покупки: вариант ищем по перевозчику чешского поезда (EC/IC = ČD, RJ = RegioJet) и станции пересадки;
@@ -338,10 +349,10 @@
             blocks.map((b, i) => Object.assign({i}, b)).sort((a, b) => a.k[0] - b.k[0] || a.k[1] - b.k[1] || a.i - b.i).forEach(b => box.appendChild(b.blk))
         }
         if (!list.length) {
-            app.innerHTML = `<div class="panel"><h2>{{noopts.h}}</h2><p>{{noopts.p}}</p></div>`;
+            app.innerHTML = `<div class="panel"><h2>Пока нет вариантов</h2><p>Добавьте их в админке.</p></div>`;
             return
         }
-        app.innerHTML = ""/*D*/ + (direct.length ? `<h2 class="sub" style="margin-top:6px">{{direct.h}} <small>{{direct.s}}</small></h2><div class="direct direct-wrap" style="margin-top:16px">${direct.map(x => optHtml(x.o)).join("")}</div>` : "")
+        app.innerHTML = ""/*D*/ + (direct.length ? `<h2 class="sub" style="margin-top:6px">Прямой поезд <small>без пересадок</small></h2><div class="direct direct-wrap" style="margin-top:16px">${direct.map(x => optHtml(x.o)).join("")}</div>` : "")
             + (direct.length && transfer.length ? `<aside class="ad wide" data-slot="mid" hidden></aside>` : "")/*/D*/
             + (() => {
             /* все варианты с пересадкой — одним списком (по времени отправления), без подзаголовков по станциям */
@@ -349,20 +360,17 @@
             const at = x => { const s = x.p.legs[0].stops; return norm(s[s.length - 1].name) }; /* станция первой пересадки */
             const bf = x => !SPLIT.length || SPLIT.some(s => s[2] && at(x).startsWith(norm(s[0]))); /* пограничный контроль — по карточке */
             const cards = transfer.map(x => { const c = optHtml(x.o); return bf(x) ? c.replace("<details ", '<details data-b="1" ') : c }).join("");
-            const head = direct.length ? `<h2 class="sub">{{transfer.hx}}</h2>` : ""; /* заголовок только чтобы отделить от блока прямого поезда */
+            const head = direct.length ? `<h2 class="sub">С пересадкой</h2>` : ""; /* заголовок только чтобы отделить от блока прямого поезда */
             return head + `<div class="cols${transfer.length === 1 ? " one" : ""}" style="margin-top:${head ? 16 : 6}px">${cards}</div>`
         })() + HOWBAR;
-        /*D*//*C*/document.querySelectorAll(".direct .body").forEach(b => {
-            b.classList.add("two");
-            b.insertAdjacentHTML("beforeend", COACH)
-        });/*/C*//*/D*/
-        /*B*/document.querySelectorAll(".opt[data-b"+"] .swap").forEach(s => s.insertAdjacentHTML("afterend", `<div class="swap border">🛂 {{border}}</div>`));/*/B*/
+        /*D*//*/D*/
+        
     }).catch(() => {
-        app.innerHTML = `<div class="panel"><h2>{{err.h}}</h2><p>{{err.p}}</p></div>`
+        app.innerHTML = `<div class="panel"><h2>Не удалось загрузить данные</h2><p>Обновите страницу позже.</p></div>`
     });
     const here = location.pathname.split("/").pop() || "index.html",
         others = ((window.CFG && CFG.PAGES) || []).filter(p => p.href !== here);
-    document.getElementById("more").innerHTML = BUY + `<section class="panel"><h2>{{more.h}}</h2><div class="grid" style="margin-top:12px"><a class="btn" href="{{home}}#${BACK}">{{r_more}}</a>${others.map(p => `<a class="btn" href="${esc(p.href)}">${esc(trRoute(p.title))}</a>`).join("")}<a class="btn" href="{{home}}">{{more.all}}</a></div></section>`;
+    document.getElementById("more").innerHTML = BUY + `<section class="panel"><h2>Ещё маршруты</h2><div class="grid" style="margin-top:12px"><a class="btn" href="./#${BACK}">← Из Польши в Украину</a>${others.map(p => `<a class="btn" href="${esc(p.href)}">${esc(trRoute(p.title))}</a>`).join("")}<a class="btn" href="./">Все страны</a></div></section>`;
 </script>
 </body>
 </html>
