@@ -139,7 +139,7 @@ for (const r of ROUTES) for (const l of LANGS) {
   /* gen: варианты с разными пересадочными станциями (Чоп, Будапешт…): общие заголовок и шаги вместо «в Чопе» */
   if (r.gen) { v["transfer.h"] = v["buy.t.h"] = fill(d["transfer.h3"], v); v["buy.t.s1x"] = fill(d["buy.t.s1v"], v); v["buy.t.s2"] = fill(d["buy.t.s2v"], v); v["buy.t.b1"] = fill(d["buy.t.b1v"], v); v["buy.t.b2"] = fill(d["buy.t.b2v"], v) }
   v.leadx = r.leadx || ""; v.leadm = JSON.stringify(r.leadx && d[r.id + ".leadm"] ? fill(d[r.id + ".leadm"], v) : ""); /* leadx: станция; если на странице есть пересадка на ней, подзаголовок заменяется на <id>.leadm */
-  v["buy.d.s2"] = fill(d[r.ds2 || "buy.d.s2"], v); v["buy.d.s3"] = fill(d[r.ds3 || "buy.d.s3"], v); /* dOnly: страница только с прямым поездом (одна колонка покупки УЗ), coach: false: без описания купе */
+  { const k2 = r.ds2 || "buy.d.s2", s2 = fill(d[k2], v); v["buy.d.s2"] = r.id === "kw" || !/^buy\.d\.s2v?$/.test(k2) ? s2 : s2.replace(/\s*[^.]*\.\s*$/, ""); } /* фраза про высокий спрос на прямой поезд (последнее предложение) — только на странице Киев → Варшава */ v["buy.d.s3"] = fill(d[r.ds3 || "buy.d.s3"], v); /* dOnly: страница только с прямым поездом (одна колонка покупки УЗ), coach: false: без описания купе */
   const tpl0b = r.third ? tpl0 : tpl0.replace(/<!--H-->[\s\S]*?<!--\/H-->/g, ""); /* third: третий столбец покупки «С пересадкой в …» (вторая пересадочная станция) */
   /* cols: любое число блоков покупки «С пересадкой … · УЗ + перевозчик»; train — номер поезда УЗ, который нужно выбрать */
   const CARRIER = {cd: {n: "ČD", url: "https://www.cd.cz/spojeni-a-jizdenka/", s2: "buy.t.s2cd", b2: "buy.t.b2cd"}, rj: {n: "RegioJet", url: "https://regiojet.cz/", s2: "buy.t.s2rj", b2: "buy.t.b2rj"}};
