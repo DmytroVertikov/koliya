@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="../style.css">
     <style>
         :root { --bl: #1d4ed8; --bl2: #eff4ff; --bl3: #b2ccff; --gr: #067647; --gr2: #ecfdf3; --gr3: #a6f4c5; --am: #b54708; --am2: #fffaeb; --am3: #fec84b; --rd: #b42318; --rd2: #fef3f2; --pu: #6941c6; --pu2: #f4f3ff; --bd: #d0d5dd; --mu: #667085 }
+        header .wrap, main#app.wrap { max-width: min(1680px, 100%); box-sizing: border-box }
         main#app { font-size: 16px }
         main#app input[type=text], main#app select { font-size: 16px; border: 1.5px solid var(--bd); border-radius: 8px; padding: 8px 10px; background: #fff; box-sizing: border-box }
         main#app input[type=text]:focus, main#app select:focus { outline: 3px solid var(--bl3); border-color: var(--bl) }
@@ -31,8 +32,10 @@
         main#app .tabs button.on { background: var(--bl); color: #fff; border-color: var(--bl); box-shadow: 0 2px 6px rgba(29, 78, 216, .35) }
         @media (max-width: 560px) { .tabs { width: 100% } main#app .tabs button { flex: 1; padding: 10px 8px; font-size: 16px } header .bar > b { font-size: 18px } }
         .two > * { min-width: 0 }
-        .two { display: grid; grid-template-columns: 270px minmax(0, 1fr); gap: 16px; align-items: start }
+        .two { display: grid; grid-template-columns: 300px minmax(0, 1fr); gap: 16px; align-items: start }
         @media (max-width: 900px) { .two { grid-template-columns: 1fr } }
+        @media (max-width: 1300px) { #te { overflow-x: auto } }
+        #te { min-width: 0 }
         .list { max-height: 72vh; overflow: auto; border: 1.5px solid var(--bd); border-radius: 10px; background: #fff }
         .list div { padding: 9px 12px; border-bottom: 1px solid #eef0f3; cursor: pointer; font-size: 17px; font-weight: 600; border-left: 5px solid transparent }
         .list div:hover { background: var(--bl2) }
@@ -64,10 +67,10 @@
         table.g td.td input.tm { color: var(--gr); border-color: var(--gr3) }
         table.g input.tm:disabled { background: #f2f4f7; border-color: #eaecf0; color: #98a2b3 }
         table.g input.bad { outline: 3px solid #f97066; background: var(--rd2) }
-        table.g td.st input { font-weight: 600; min-width: 140px; width: 100% }
+        table.g td.st { min-width: 280px; width: 36% } table.g td.st input { font-weight: 600; min-width: 260px; width: 100% }
         table.g tr.chk td { background: var(--am2) !important }
         table.g tr.chk td.n { box-shadow: inset 5px 0 0 var(--am3) }
-        table.g td.x { white-space: nowrap }
+        table.g td.x { white-space: nowrap; width: 1% } table.g td.n { white-space: nowrap } table.g td[data-dw] { white-space: nowrap }
         table.g td.x button { padding: 6px 8px !important; margin-right: 1px; min-width: 32px }
         .muted { color: var(--mu); font-size: 14px }
         .errbox { background: var(--rd2); color: var(--rd); border: 1.5px solid #fecdca; border-radius: 10px; padding: 10px 12px; margin: 10px 0; font-size: 15px; white-space: pre-wrap }
@@ -80,7 +83,7 @@
         .leg h3 { margin: 0 0 6px; font-size: 17px }
         .leg .dot { display: inline-block; width: 11px; height: 11px; border-radius: 6px; margin-right: 5px }
         .dot.b { background: var(--gr) } .dot.a { background: var(--rd) }
-        .leg select { min-width: 320px; max-width: 100% }
+        .leg select { min-width: 420px; max-width: 100% } @media (max-width: 560px) { .leg select { min-width: 0; width: 100% } }
         .xfer { margin: 2px 0; padding: 9px 14px; font-size: 16px; font-weight: 600; color: var(--bl); background: var(--bl2); border: 1.5px dashed var(--bl3); border-radius: 10px; text-align: center }
         .xfer.warn { background: var(--am2); color: var(--am); border-color: var(--am3) }
         .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px }
@@ -378,10 +381,10 @@ function trainEditor() {
     const el = $("#te"), T = TD.t;
     el.innerHTML = `<h2>${TSEL === "new" ? "Новый поезд" : esc(T.number)}</h2>
         <div class="frow">
-            <div><label>Номер</label><input type="text" id="tnum" value="${esc(T.number)}" placeholder="019К или IC 12010" style="width:150px"></div>
-            <div><label>Периодичность (пусто = ежедневно)</label><input type="text" id="tfr" value="${esc(T.freq)}" style="width:210px"></div>
+            <div><label>Номер</label><input type="text" id="tnum" value="${esc(T.number)}" placeholder="019К или IC 12010" style="width:180px"></div>
+            <div><label>Периодичность (пусто = ежедневно)</label><input type="text" id="tfr" value="${esc(T.freq)}" style="width:260px"></div>
             <div><label>Пометка</label><select id="tbd"><option value="">нет</option><option value="seat" ${T.badge === "seat" ? "selected" : ""}>сидячий</option></select></div>
-            <div><label>Перевозчик / заметка</label><input type="text" id="tnt" value="${esc(T.note)}" style="width:200px"></div>
+            <div><label>Перевозчик / заметка</label><input type="text" id="tnt" value="${esc(T.note)}" style="width:280px"></div>
         </div>
         <p class="muted">Для каждой станции укажите время <b style="color:var(--bl)">прибытия</b> и <b style="color:var(--gr)">отправления</b> (местное). У первой станции есть только отправление, у последней — только прибытие. Вводите только цифры («1906» → 19:06): курсор сам перейдёт к следующему полю. Сутки считаются сами: если время «перескочило» назад, значит прошла полночь.</p>
         <div class="sumbar" id="sum"></div>
@@ -588,7 +591,7 @@ function legCard(L, i) {
     const cur = L.train_id ? trById.get(L.train_id) : null;
     const alights = stops.filter(s => { const b = stops.find(x => x.id === L.board); return b && s.seq > b.seq });
     return `<div class="leg l${Math.min(i + 1, 3)}" data-i="${i}"><h3><span class="chip ${["bl", "gr", "am"][Math.min(i, 2)]}">Поезд ${i + 1}</span> ${cur ? esc(cur.number) : ""}</h3><div class="frow">
-        <div><label>Выберите поезд</label><input type="text" data-l="train" list="trl${i}" value="${cur ? esc(trainLabel(cur)) : ""}" placeholder="номер или город" style="width:min(560px, 100%)"><datalist id="trl${i}">${trains.map(t => `<option value="${esc(trainLabel(t))}" label="${waits.get(t.id) != null ? "ожидание " + durTxt(waits.get(t.id)) : ""}">`).join("")}</datalist></div>
+        <div><label>Выберите поезд</label><input type="text" data-l="train" list="trl${i}" value="${cur ? esc(trainLabel(cur)) : ""}" placeholder="номер или город" style="width:min(820px, 100%)"><datalist id="trl${i}">${trains.map(t => `<option value="${esc(trainLabel(t))}" label="${waits.get(t.id) != null ? "ожидание " + durTxt(waits.get(t.id)) : ""}">`).join("")}</datalist></div>
         ${i > 0 ? `<label style="align-self:center"><input type="checkbox" data-l="any" ${L.any ? "checked" : ""}> любые поезда (не только со станции пересадки)</label>` : ""}
         ${E.legs.length > 1 ? '<button data-l="rm" style="margin-left:auto">Убрать поезд</button>' : ""}</div>
         ${L.train_id ? `<div class="frow"><div><label><span class="dot b"></span>Садимся</label><select data-l="board">${stops.slice(0, -1).map(s => stopOpt(s, L.board)).join("")}</select></div>
