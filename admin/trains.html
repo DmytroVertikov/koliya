@@ -126,13 +126,20 @@ const toM = s => { const m = String(s || "").match(/^(\d{1,2}):(\d{2})/); return
 const fmtM = m => String(Math.floor(m / 60)).padStart(2, "0") + ":" + String(m % 60).padStart(2, "0");
 const durTxt = m => m == null ? "" : (m >= 60 ? Math.floor(m / 60) + " ч " : "") + (m % 60 ? m % 60 + " мин" : (m >= 60 ? "" : "0 мин"));
 
-/* Сутки считаются сами: если время «прыгнуло назад» относительно предыдущего, значит прошла полночь */
+/* Сутки считаются сами: время «прыгнуло назад» — значит прошла полночь. Станции в разных часовых поясах (r.tz) сравниваются по общей шкале
+   (местное − пояс), поэтому переход границы (Чоп 01:02 → Захонь 00:20) полночью не считается. Без r.tz — сравнение по местным часам. */
 function calcDays(rows) {
-    let prev = null, day = 0;
+    let prevU = null;
+    const put = (L, tz) => {
+        const u = L - tz * 60;
+        const a = prevU == null ? u : u + Math.ceil((prevU - u) / 1440) * 1440;
+        prevU = a;
+        return a + tz * 60 /* местное «абсолютное» время: сутки * 1440 + часы:минуты */
+    };
     return rows.map(r => {
-        const a = toM(r.arr), d = toM(r.dep), o = {ad: 0, dd: 0, aAbs: null, dAbs: null};
-        if (a != null) { if (prev != null && a < prev % 1440) day++; o.ad = day; o.aAbs = day * 1440 + a; prev = o.aAbs }
-        if (d != null) { if (prev != null && d < prev % 1440) day++; o.dd = day; o.dAbs = day * 1440 + d; prev = o.dAbs }
+        const a = toM(r.arr), d = toM(r.dep), tz = +r.tz || 0, o = {ad: 0, dd: 0, aAbs: null, dAbs: null};
+        if (a != null) { o.aAbs = put(a, tz); o.ad = Math.floor(o.aAbs / 1440) }
+        if (d != null) { o.dAbs = put(d, tz); o.dd = Math.floor(o.dAbs / 1440) }
         return o
     })
 }
@@ -186,7 +193,7 @@ function dslOf(C, legs, ctx) { /* ctx: {train(id), stops(train_id), station(id)}
 }
 /* реальная длительность участка в минутах с учётом часовых поясов станций (tz_hours) */
 function legMinutes(L, ctx) {
-    const st = ctx.stops(L.train_id), rows = st.map(s => ({arr: hm(s.arr_time), dep: hm(s.dep_time)})), dd = calcDays(rows);
+    const st = ctx.stops(L.train_id), rows = st.map(s => ({arr: hm(s.arr_time), dep: hm(s.dep_time), tz: ctx.station(s.station_id).tz_hours})), dd = calcDays(rows);
     const bi = st.findIndex(s => s.id === L.board_stop_id), ai = st.findIndex(s => s.id === L.alight_stop_id);
     if (bi < 0 || ai < 0 || dd[bi].dAbs == null || dd[ai].aAbs == null) return null;
     const tzB = ctx.station(st[bi].station_id).tz_hours, tzA = ctx.station(st[ai].station_id).tz_hours;
@@ -461,12 +468,11 @@ document.addEventListener("click", e => {
     if (b.id === "unkall") addStations(u); else if (u[+b.dataset.i]) addStations([u[+b.dataset.i]])
 });
 function computed() {
-    const rows = TD.rows.map((r, i) => ({arr: i === 0 ? "" : r.arr, dep: i === TD.rows.length - 1 ? "" : r.dep})), dd = calcDays(rows);
+    const rows = TD.rows.map((r, i) => ({arr: i === 0 ? "" : r.arr, dep: i === TD.rows.length - 1 ? "" : r.dep, tz: (findStation(r.name) || {}).tz_hours})), dd = calcDays(rows);
     document.querySelectorAll("#rows tr").forEach((tr, i) => {
         const r = rows[i], a = toM(r.arr), d = toM(r.dep);
         const dw = a != null && d != null ? dd[i].dAbs - dd[i].aAbs : null;
-        const dy = Math.max(dd[i].dd, dd[i].ad);
-        tr.querySelector("[data-dw]").innerHTML = (dw == null ? "" : `<span class="chip ${dw === 0 ? "" : dw > 720 ? "rd" : dw > 60 ? "bl" : "gr"}">${dw === 0 ? "без стоянки" : durTxt(dw)}</span>`) + (dy > 0 ? ` <span class="chip pu">+${dy} сут.</span>` : "")
+        tr.querySelector("[data-dw]").innerHTML = (dw == null ? "" : `<span class="chip ${dw === 0 ? "" : dw > 720 ? "rd" : dw > 60 ? "bl" : "gr"}">${dw === 0 ? "без стоянки" : durTxt(dw)}</span>`)
     });
     const sm = $("#sum");
     if (sm) {
@@ -502,7 +508,7 @@ document.addEventListener("click", e => {
 });
 async function saveTrain() {
     const box = $("#terr"), T = TD.t, R = TD.rows; box.innerHTML = "";
-    const rows = R.map((r, i) => ({name: r.name.trim(), arr: i === 0 ? "" : r.arr, dep: i === R.length - 1 ? "" : r.dep}));
+    const rows = R.map((r, i) => ({name: r.name.trim(), arr: i === 0 ? "" : r.arr, dep: i === R.length - 1 ? "" : r.dep, tz: (findStation(r.name.trim()) || {}).tz_hours}));
     const errs = [];
     if (!T.number) errs.push("Укажите номер поезда");
     if (/[:>|*;~]/.test(T.number + T.freq)) errs.push("В номере и периодичности нельзя использовать символы : > | * ; ~");
