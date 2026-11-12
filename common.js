@@ -34,6 +34,11 @@ const toMin = t => {
     return m ? (+m[1]) * 60 + (+m[2]) : null
 };
 
+/* в строке времени станции может быть одно время или два («прибытие – отправление») */
+const timesOf = raw => String(raw || "").match(/\d{1,2}:\d{2}/g) || [];
+const arrOf = raw => timesOf(raw)[0] || "";
+const depOf = raw => { const a = timesOf(raw); return a[a.length - 1] || "" };
+
 const fmtDur = d => {
     const h = Math.floor(d / 60), m = d % 60;
     return (h ? h + " " + t("h") : "") + (h && m ? " " : "") + (m ? m + " " + t("min") : "") || "0 " + t("min")
@@ -56,10 +61,14 @@ const tzOf = n => CET_STATIONS.some(p => String(n || "").trim().toLowerCase().st
    Предполагается, что между соседними станциями проходит меньше суток. */
 function legsDur(legs, head) {
     const st = [];
-    (legs || []).forEach((L, li) => L.stops.forEach(s => {
-        const m = toMin(s.time);
-        if (m != null) st.push({m, name: s.name, li})
-    }));
+    (legs || []).forEach((L, li) => {
+        let nh = 0; /* у первой выделенной станции поезда (посадка) считаем отправление, у остальных — прибытие */
+        L.stops.forEach(s => {
+            const m = toMin(s.hl && nh === 0 ? depOf(s.time) : arrOf(s.time));
+            if (s.hl) nh++;
+            if (m != null) st.push({m, name: s.name, li})
+        })
+    });
     if (st.length < 2) return "";
     const last = legs.length - 1, nm = v => String(v || "").trim().toLowerCase();
     /* первая и последняя станции из шапки: поезд может начинаться раньше и идти дальше, их остановки не считаются */
@@ -97,7 +106,7 @@ function splitStop(x) {
 function deriveHead(legs) {
     const f = legs[0] && legs[0].stops[0],
         l = legs.length && legs[legs.length - 1].stops[legs[legs.length - 1].stops.length - 1];
-    return {from: f ? f.name : "", ft: f ? f.time : "", to: l ? l.name : "", tt: l ? l.time : "", dur: "", tag: ""}
+    return {from: f ? f.name : "", ft: f ? depOf(f.time) : "", to: l ? l.name : "", tt: l ? arrOf(l.time) : "", dur: "", tag: ""}
 }
 
 /* периодичность — свободный текст (пусто = ежедневно); частые фразы переводятся, остальное показывается как введено */
@@ -222,8 +231,12 @@ const TL_LBL = {
 };
 const tlLbl = () => TL_LBL[LG] || TL_LBL.ru;
 const tlTimes = raw => {
-    const m = String(raw || "").match(/\d{1,2}:\d{2}/g) || [];
-    return m.length >= 2 && m[0] !== m[1] ? {a: m[0], d: m[1]} : null
+    const m = timesOf(raw);
+    return m.length >= 2 && m[0] !== m[m.length - 1] ? {a: m[0], d: m[m.length - 1]} : null
+};
+const TL_KEY = {
+    ru: "Время: сверху — прибытие, снизу — отправление", uk: "Час: зверху — прибуття, знизу — відправлення",
+    en: "Times: arrival on top, departure below", pl: "Godziny: u góry przyjazd, niżej odjazd"
 };
 const tlStop = s => {
     const x = tlTimes(s.time), cls = s.hl ? "h" : "m";
@@ -234,8 +247,7 @@ const tlStop = s => {
 };
 const tlKey = stops => {
     if (!stops.some(s => tlTimes(s.time))) return "";
-    const L = tlLbl();
-    return `<p class="tl-key"><span class="k-a">${esc(L[0])}</span><span class="k-d">${esc(L[1])}</span></p>`
+    return `<p class="tl-key">${esc(TL_KEY[LG] || TL_KEY.ru)}</p>`
 };
 
 /* Карточка варианта: сворачиваемая (<details>), в сводке — время, длительность, пересадки; в раскрытой части — поезда и станции */
@@ -255,7 +267,7 @@ function optHtml(o) {
         if (!i) return null;
         const pa = legs[i - 1].stops[legs[i - 1].stops.length - 1], a = pa.name, b = L.stops[0].name;
         const where = b && b !== a ? t("swapArr", {a: stn(a), b: stn(b)}) : (inCity(a) ? t("swapIn", {c: inCity(a)}) : t("swap", {a: stn(a)}));
-        return {where, wait: autoDur(pa.time, L.stops[0].time), t1: hm(pa.time), t2: hm(L.stops[0].time)}
+        return {where, wait: autoDur(arrOf(pa.time), depOf(L.stops[0].time)), t1: arrOf(pa.time), t2: depOf(L.stops[0].time)}
     });
     const trains = legs.map(L => trainName(L.train)).filter(Boolean).join(" + ");
     const badge = isD ? `<span class="bd">✓ ${esc(t("direct.h"))}</span>` : `<span class="bd">⇄ ${esc(tag)}</span>`;

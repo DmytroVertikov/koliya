@@ -168,8 +168,10 @@ function dslOf(C, legs, ctx) { /* ctx: {train(id), stops(train_id), station(id)}
     const parts = legs.map(L => {
         const tr = ctx.train(L.train_id), stops = ctx.stops(L.train_id);
         const txt = legStops(L, stops).map(s => {
-            const t = s.id === L.board_stop_id ? hm(s.dep_time) : s.id === L.alight_stop_id ? hm(s.arr_time)
-                : s.arr_time && s.dep_time && hm(s.arr_time) !== hm(s.dep_time) ? hm(s.arr_time) + " – " + hm(s.dep_time) : hm(s.arr_time || s.dep_time);
+            const pair = s.arr_time && s.dep_time && hm(s.arr_time) !== hm(s.dep_time) ? hm(s.arr_time) + " – " + hm(s.dep_time) : null;
+            /* посадка и выход тоже показываются с двумя временами, если у поезда там есть и прибытие, и отправление */
+            const t = s.id === L.board_stop_id ? (pair || hm(s.dep_time)) : s.id === L.alight_stop_id ? (pair || hm(s.arr_time))
+                : pair || hm(s.arr_time || s.dep_time);
             return (s.id === L.board_stop_id || s.id === L.alight_stop_id ? "*" : "") + ctx.station(s.station_id).name_ru + " " + t
         }).join(" > ");
         return tr.number + (tr.freq ? " ~ " + tr.freq : "") + ": " + txt
