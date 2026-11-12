@@ -214,6 +214,30 @@ const badgesHtml = n => trainBadges(n).map(k => `<span class="tb ${k}">${ICON[k]
 
 const hm = s => (String(s).match(/\d{1,2}:\d{2}/) || [""])[0];
 
+/* Остановка в маршруте: если в строке времени два разных значения («00:20 – 00:23»), это прибытие и отправление —
+   показываем их двумя строками и считаем стоянку. Одно время (или оба одинаковые) — как раньше, одной строкой. */
+const TL_LBL = {
+    ru: ["прибытие", "отправление"], uk: ["прибуття", "відправлення"],
+    en: ["arrival", "departure"], pl: ["przyjazd", "odjazd"]
+};
+const tlLbl = () => TL_LBL[LG] || TL_LBL.ru;
+const tlTimes = raw => {
+    const m = String(raw || "").match(/\d{1,2}:\d{2}/g) || [];
+    return m.length >= 2 && m[0] !== m[1] ? {a: m[0], d: m[1]} : null
+};
+const tlStop = s => {
+    const x = tlTimes(s.time), cls = s.hl ? "h" : "m";
+    if (!x) return `<li class="${cls}"><span>${esc(stn(s.name))}</span><time>${esc(s.time)}</time></li>`;
+    const ma = toMin(x.a), md = toMin(x.d), dw = ma != null && md != null ? ((md - ma) % 1440 + 1440) % 1440 : 0, L = tlLbl();
+    return `<li class="${cls} two"><span>${esc(stn(s.name))}${dw ? `<small class="dw">${esc(fmtDur(dw))}</small>` : ""}</span>` +
+        `<time><b class="ta" title="${esc(L[0])}">${esc(x.a)}</b><b class="td" title="${esc(L[1])}">${esc(x.d)}</b></time></li>`
+};
+const tlKey = stops => {
+    if (!stops.some(s => tlTimes(s.time))) return "";
+    const L = tlLbl();
+    return `<p class="tl-key"><span class="k-a">${esc(L[0])}</span><span class="k-d">${esc(L[1])}</span></p>`
+};
+
 /* Карточка варианта: сворачиваемая (<details>), в сводке — время, длительность, пересадки; в раскрытой части — поезда и станции */
 function optHtml(o) {
     let p;
@@ -243,7 +267,7 @@ function optHtml(o) {
         `<div class="oc-side">${isD ? `<span class="nc">✓ ${esc(t("d.nochg"))}</span>` : `<div class="xfs">${xfs}</div>`}<span class="more"><span class="t-more">${esc(t("d.more"))}</span><span class="t-less">${esc(t("d.less"))}</span><i class="chev"></i></span></div></summary>`;
     const body = legs.map((L, i) => {
         const s = swaps[i + 1], sw = s ? `<div class="swap">🔁 ${esc(s.where)}${s.wait ? " · " + esc(s.wait) : ""}</div>` : "";
-        return `<div class="stp"><div class="leg"><h4>🚆 ${esc(t("train"))} ${esc(trainName(L.train))}${badgesHtml(L.train)}${hideFq(L) ? "" : `<small class="fq">🗓 ${esc(freqTxt(L.freq))}</small>`}</h4><ul class="tl">${L.stops.map(s => `<li class="${s.hl ? "h" : "m"}"><span>${esc(stn(s.name))}</span><time>${esc(s.time)}</time></li>`).join("")}</ul></div>${sw}</div>`
+        return `<div class="stp"><div class="leg"><h4>🚆 ${esc(t("train"))} ${esc(trainName(L.train))}${badgesHtml(L.train)}${hideFq(L) ? "" : `<small class="fq">🗓 ${esc(freqTxt(L.freq))}</small>`}</h4>${tlKey(L.stops)}<ul class="tl">${L.stops.map(tlStop).join("")}</ul></div>${sw}</div>`
     }).join("");
     return `<details class="opt oc-card ${isD ? "is-d" : "is-x"}${n > 1 ? " is-x2" : ""}">${head}<div class="body">${body}${o.note ? `<div class="note">${esc(o.note)}</div>` : ""}</div></details>`
 }
