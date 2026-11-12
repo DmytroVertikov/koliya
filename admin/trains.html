@@ -73,6 +73,13 @@
         table.g td.x { white-space: nowrap; width: 1% } table.g td.n { white-space: nowrap } table.g td[data-dw] { white-space: nowrap }
         table.g td.x button { padding: 6px 8px !important; margin-right: 1px; min-width: 32px }
         .muted { color: var(--mu); font-size: 14px }
+        .unk { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 16px; background: #fffaeb; border: 1.5px solid #fedf89; border-radius: 12px; padding: 12px 14px; margin: 12px 0; font-size: 15px }
+        .unk .unkl { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; flex: 1 1 320px }
+        .unk .unkl > b { color: #b54708 }
+        .unk .unkl button { font-size: 15px; padding: 5px 12px; border-radius: 999px; border: 1.5px solid #fec84b; background: #fff; color: #b54708; font-weight: 600; cursor: pointer }
+        .unk .unkl button:hover { background: #fef0c7 }
+        .unk .unka { display: flex; align-items: center; gap: 10px; flex-wrap: wrap }
+        .unk .unka label { margin: 0; display: inline-flex; align-items: center; gap: 6px; font-weight: 600 }
         .errbox { background: var(--rd2); color: var(--rd); border: 1.5px solid #fecdca; border-radius: 10px; padding: 10px 12px; margin: 10px 0; font-size: 15px; white-space: pre-wrap }
         .frow { display: flex; gap: 12px; flex-wrap: wrap; align-items: end; margin: 8px 0 }
         .frow label { display: block; font-size: 13px; color: var(--mu); font-weight: 600; margin-bottom: 3px }
@@ -390,6 +397,7 @@ function trainEditor() {
         <div class="sumbar" id="sum"></div>
         <table class="g"><thead><tr><th>№</th><th>Станция</th><th class="ha">⬇ Прибытие</th><th class="hd">⬆ Отправление</th><th>Стоянка</th><th title="Время перенесено из старых данных и не проверено. Снимите галочку, когда убедитесь, что время верное">Проверить</th><th></th></tr></thead><tbody id="rows"></tbody></table>
         <p><button id="addrow">+ Станция в конец</button></p>
+        <div id="unk"></div>
         <div id="terr"></div>
         <div class="bar2"><button id="tsave" class="pri big">Сохранить поезд</button>${TSEL !== "new" ? '<button id="tdel">Удалить поезд</button>' : ""}<span class="chip am" id="dirty" style="display:none">● есть несохранённые изменения</span></div>`;
     TD.dirty = false;
@@ -416,8 +424,40 @@ function drawRows() {
         <td><input type="checkbox" data-f="chk" ${r.chk ? "checked" : ""}></td>
         <td class="x"><button data-a="up" title="Выше">↑</button><button data-a="dn" title="Ниже">↓</button><button data-a="ins" title="Вставить станцию ниже">+</button><button data-a="rm" title="Убрать">✕</button></td></tr>`
     }).join("");
-    computed()
+    computed(); drawUnk()
 }
+/* станции из таблицы, которых нет в справочнике (без повторов) */
+function unknownNames() {
+    const seen = new Set(), out = [];
+    TD.rows.forEach(r => { const n = (r.name || "").trim(), k = n.toLowerCase(); if (n && !findStation(n) && !seen.has(k)) { seen.add(k); out.push(n) } });
+    return out
+}
+let UNKTZ = "1";
+function drawUnk() {
+    const box = $("#unk"); if (!box) return;
+    const u = unknownNames();
+    if (!u.length) { box.innerHTML = ""; return }
+    box.innerHTML = `<div class="unk"><div class="unkl"><b>Нет в справочнике:</b>${u.map((n, i) => `<button data-i="${i}" title="Добавить «${esc(n)}» в справочник">+ ${esc(n)}</button>`).join("")}</div>
+        <div class="unka"><label>Часовой пояс <select id="unktz"><option value="1" ${UNKTZ === "1" ? "selected" : ""}>UTC+1</option><option value="2" ${UNKTZ === "2" ? "selected" : ""}>UTC+2</option></select></label>
+        <button id="unkall" class="pri">+ Добавить в справочник${u.length > 1 ? " все (" + u.length + ")" : ""}</button></div></div>`
+}
+async function addStations(names) {
+    const box = $("#terr");
+    try {
+        await db("POST", "stations", names.map(n => ({name_ru: n, tz_hours: +UNKTZ})));
+        await load();
+        const dl = $("#stl"); if (dl) dl.innerHTML = ST.map(s => `<option value="${esc(s.name_ru)}">`).join("");
+        if (box) box.innerHTML = "";
+        drawRows();
+        toast(names.length > 1 ? "Добавлено станций: " + names.length : "Станция добавлена")
+    } catch (e) { showErr(box, e) }
+}
+document.addEventListener("change", e => { if (e.target.id === "unktz") UNKTZ = e.target.value });
+document.addEventListener("click", e => {
+    const b = e.target.closest && e.target.closest("#unk button"); if (!b) return;
+    const u = unknownNames();
+    if (b.id === "unkall") addStations(u); else if (u[+b.dataset.i]) addStations([u[+b.dataset.i]])
+});
 function computed() {
     const rows = TD.rows.map((r, i) => ({arr: i === 0 ? "" : r.arr, dep: i === TD.rows.length - 1 ? "" : r.dep})), dd = calcDays(rows);
     document.querySelectorAll("#rows tr").forEach((tr, i) => {
@@ -439,7 +479,7 @@ document.addEventListener("input", e => {
     const t = e.target, tr = t.closest && t.closest("#rows tr"); if (!tr) return;
     const r = TD.rows[+tr.dataset.i], f = t.dataset.f;
     if (f === "chk") { r.chk = t.checked; tr.classList.toggle("chk", t.checked) }
-    else if (f) { r[f] = t.value; if (f === "name") t.classList.toggle("bad", !!t.value && !findStation(t.value)) }
+    else if (f) { r[f] = t.value; if (f === "name") { t.classList.toggle("bad", !!t.value && !findStation(t.value)); drawUnk() } }
     markDirty(); computed();
     /* набрали время целиком — сразу следующее поле */
     if ((f === "arr" || f === "dep") && e.inputType === "insertText" && t.value.length === 5 && toM(t.value) != null) nextField(t, "#rows input.tm:not([disabled])")
