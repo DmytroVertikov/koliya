@@ -58,6 +58,7 @@
 <script src="../i18n.js"></script>
 <script src="../common.js"></script>
 <script>
+(function () { /* своя область видимости: имена hm, LG и др. уже заняты в common.js */
 /* ================= чистая логика (без DOM) ================= */
 /*PURE*/
 const hm = t => t ? String(t).slice(0, 5) : "";
@@ -577,6 +578,7 @@ async function saveConn() {
 }
 
 if (S) start(); else showLogin();
+})();
 </script>
 </body>
 </html>
