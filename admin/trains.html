@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="robots" content="noindex">
+    <title>Колія: поезда и варианты</title>
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        .tabs { display: flex; gap: 6px; margin: 0 0 14px; flex-wrap: wrap }
+        .tabs button.on { background: #1d4ed8; color: #fff }
+        .two { display: grid; grid-template-columns: 260px 1fr; gap: 14px; align-items: start }
+        @media (max-width: 800px) { .two { grid-template-columns: 1fr } }
+        .list { max-height: 70vh; overflow: auto; border: 1px solid #d0d5dd; border-radius: 8px; background: #fff }
+        .list div { padding: 7px 10px; border-bottom: 1px solid #eef0f3; cursor: pointer; font-size: 14px }
+        .list div:hover { background: #f3f6ff }
+        .list div.on { background: #dbe6ff; font-weight: 600 }
+        .list small { color: #667085; display: block; font-weight: 400 }
+        .list .warn { color: #b54708 }
+        table.g { border-collapse: collapse; width: 100%; font-size: 14px }
+        table.g th, table.g td { padding: 3px 4px; border-bottom: 1px solid #eef0f3; text-align: left; vertical-align: middle }
+        table.g th { font-size: 12px; color: #667085; font-weight: 600 }
+        table.g input[type=text], table.g select { width: 100%; box-sizing: border-box; padding: 5px 6px }
+        table.g input.tm { width: 66px; text-align: center }
+        table.g td.n { color: #98a2b3; width: 26px }
+        table.g td.x { white-space: nowrap }
+        table.g tr.chk td { background: #fffaeb }
+        table.g input.bad { outline: 2px solid #f04438 }
+        table.g input:disabled { background: #f2f4f7; border-color: #eaecf0 }
+        .muted { color: #667085; font-size: 13px }
+        .errbox { background: #fef3f2; color: #b42318; border: 1px solid #fecdca; border-radius: 8px; padding: 8px 10px; margin: 8px 0; font-size: 14px; white-space: pre-wrap }
+        .okbox { background: #ecfdf3; color: #067647; border: 1px solid #abefc6; border-radius: 8px; padding: 8px 10px; margin: 8px 0; font-size: 14px }
+        .frow { display: flex; gap: 8px; flex-wrap: wrap; align-items: end; margin: 6px 0 }
+        .frow label { display: block; font-size: 12px; color: #667085 }
+        .frow input[type=text], .frow select { padding: 6px 8px; box-sizing: border-box }
+        .leg { border: 1px solid #d0d5dd; border-radius: 10px; padding: 10px; margin: 10px 0; background: #fcfcfd }
+        .xfer { margin: -2px 0; padding: 4px 10px; font-size: 13px; color: #344054; background: #eff4ff; border-radius: 8px; text-align: center }
+        .xfer.warn { background: #fffaeb; color: #b54708 }
+        .chips { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 6px }
+        .chips label { display: inline-flex; align-items: center; gap: 3px; border: 1px solid #d0d5dd; border-radius: 14px; padding: 2px 8px; font-size: 12px; background: #fff; cursor: pointer }
+        .chips label.fix { background: #dbe6ff; border-color: #84adff }
+        .conn { display: flex; gap: 8px; align-items: center; padding: 7px 10px; border-bottom: 1px solid #eef0f3; font-size: 14px }
+        .conn .t { flex: 1; min-width: 0 }
+        .conn.off { opacity: .55 }
+        .conn small { color: #667085; display: block }
+        #toast { position: fixed; left: 50%; bottom: 20px; transform: translateX(-50%); background: #101828; color: #fff; padding: 8px 16px; border-radius: 8px; display: none; z-index: 9 }
+        .pvw { border: 1px dashed #98a2b3; border-radius: 10px; padding: 8px; margin: 10px 0; background: #fff }
+    </style>
+</head>
+<body>
+<header style="padding-bottom:44px">
+    <div class="wrap bar"><b>🚆 Колія: поезда и варианты</b><span><a href="../" style="color:#fff">На сайт</a>
+        <button id="out" style="display:none;margin-left:8px">Выйти</button></span></div>
+</header>
+<main class="wrap" id="app"></main>
+<div id="toast"></div>
+<script src="../config.js"></script>
+<script src="../i18n.js"></script>
+<script src="../common.js"></script>
+<script>
+/* ================= чистая логика (без DOM) ================= */
+/*PURE*/
+const hm = t => t ? String(t).slice(0, 5) : "";
+const toM = s => { const m = String(s || "").match(/^(\d{1,2}):(\d{2})/); return m ? +m[1] * 60 + +m[2] : null };
+const fmtM = m => String(Math.floor(m / 60)).padStart(2, "0") + ":" + String(m % 60).padStart(2, "0");
+const durTxt = m => m == null ? "" : (m >= 60 ? Math.floor(m / 60) + " ч " : "") + (m % 60 ? m % 60 + " мин" : (m >= 60 ? "" : "0 мин"));
+
+/* Сутки считаются сами: если время «прыгнуло назад» относительно предыдущего, значит прошла полночь */
+function calcDays(rows) {
+    let prev = null, day = 0;
+    return rows.map(r => {
+        const a = toM(r.arr), d = toM(r.dep), o = {ad: 0, dd: 0, aAbs: null, dAbs: null};
+        if (a != null) { if (prev != null && a < prev % 1440) day++; o.ad = day; o.aAbs = day * 1440 + a; prev = o.aAbs }
+        if (d != null) { if (prev != null && d < prev % 1440) day++; o.dd = day; o.dAbs = day * 1440 + d; prev = o.dAbs }
+        return o
+    })
+}
+/* те же правила, что check_train_stops в базе */
+function validateStops(rows, stationOk) {
+    const err = [], n = rows.length;
+    if (n < 2) return ["Нужно минимум 2 станции"];
+    const dd = calcDays(rows);
+    let prev = null;
+    rows.forEach((r, i) => {
+        const w = (i + 1) + ". " + (r.name || "без станции") + ": ";
+        if (!stationOk(r)) err.push(w + "такой станции нет в справочнике");
+        const first = i === 0, last = i === n - 1;
+        if (first && toM(r.dep) == null) err.push(w + "укажите время отправления");
+        if (last && toM(r.arr) == null) err.push(w + "укажите время прибытия");
+        if (!first && !last && (toM(r.arr) == null || toM(r.dep) == null)) err.push(w + "нужны и прибытие, и отправление");
+        const a = dd[i].aAbs, d = dd[i].dAbs;
+        if (a != null && d != null && d < a) err.push(w + "отправление раньше прибытия");
+        prev = d != null ? d : a != null ? a : prev
+    });
+    return err
+}
+
+/* текстовый формат варианта — то же, что делает представление options_v2 */
+function legStops(L, stops) { /* stops — все остановки поезда по порядку */
+    const b = stops.find(s => s.id === L.board_stop_id), a = stops.find(s => s.id === L.alight_stop_id);
+    const f = stops.find(s => s.id === L.show_from_stop_id), e = stops.find(s => s.id === L.show_to_stop_id);
+    const lo = Math.min(f ? f.seq : b.seq, b.seq), hi = Math.max(e ? e.seq : a.seq, a.seq), hid = L.hidden_stop_ids || [];
+    return stops.filter(s => s.seq >= lo && s.seq <= hi && (s.id === b.id || s.id === a.id || !hid.includes(s.id)))
+}
+function dslOf(C, legs, ctx) { /* ctx: {train(id), stops(train_id), station(id)} */
+    const parts = legs.map(L => {
+        const tr = ctx.train(L.train_id), stops = ctx.stops(L.train_id);
+        const txt = legStops(L, stops).map(s => {
+            const t = s.id === L.board_stop_id ? hm(s.dep_time) : s.id === L.alight_stop_id ? hm(s.arr_time)
+                : s.arr_time && s.dep_time && hm(s.arr_time) !== hm(s.dep_time) ? hm(s.arr_time) + " – " + hm(s.dep_time) : hm(s.arr_time || s.dep_time);
+            return (s.id === L.board_stop_id || s.id === L.alight_stop_id ? "*" : "") + ctx.station(s.station_id).name_ru + " " + t
+        }).join(" > ");
+        return tr.number + (tr.freq ? " ~ " + tr.freq : "") + ": " + txt
+    });
+    const f = legs[0], l = legs[legs.length - 1], fs = ctx.stops(f.train_id), ls = ctx.stops(l.train_id);
+    const bs = fs.find(s => s.id === f.board_stop_id), as = ls.find(s => s.id === l.alight_stop_id);
+    const nz = v => (v == null ? "" : String(v)).trim();
+    let head = "@ " + (nz(C.head_from) || ctx.station(bs.station_id).name_ru) + " " + hm(C.head_dep_time || bs.dep_time)
+        + " > " + (nz(C.head_to) || ctx.station(as.station_id).name_ru) + " " + hm(C.head_arr_time || as.arr_time);
+    if (nz(C.head_dur) || nz(C.head_tag)) head += " ; " + nz(C.head_dur) + (nz(C.head_tag) ? " ; " + nz(C.head_tag) : "");
+    return head + "||" + parts.join("||")
+}
+/* реальная длительность участка в минутах с учётом часовых поясов станций (tz_hours) */
+function legMinutes(L, ctx) {
+    const st = ctx.stops(L.train_id), rows = st.map(s => ({arr: hm(s.arr_time), dep: hm(s.dep_time)})), dd = calcDays(rows);
+    const bi = st.findIndex(s => s.id === L.board_stop_id), ai = st.findIndex(s => s.id === L.alight_stop_id);
+    if (bi < 0 || ai < 0 || dd[bi].dAbs == null || dd[ai].aAbs == null) return null;
+    const tzB = ctx.station(st[bi].station_id).tz_hours, tzA = ctx.station(st[ai].station_id).tz_hours;
+    return (dd[ai].aAbs - tzA * 60) - (dd[bi].dAbs - tzB * 60)
+}
+/* ожидание на пересадке: прибытие поезда 1 → отправление поезда 2 (в минутах, 0..1439; без дат считаем ближайшую «следующую» отправку) */
+function waitMinutes(L1, L2, ctx) {
+    const a = ctx.stops(L1.train_id).find(s => s.id === L1.alight_stop_id), b = ctx.stops(L2.train_id).find(s => s.id === L2.board_stop_id);
+    if (!a || !b || !a.arr_time || !b.dep_time) return null;
+    const ta = ctx.station(a.station_id).tz_hours, tb = ctx.station(b.station_id).tz_hours;
+    return (((toM(hm(b.dep_time)) - tb * 60) - (toM(hm(a.arr_time)) - ta * 60)) % 1440 + 1440) % 1440
+}
+/* что сохранять в базу по выбранным «показывать станции» */
+function legPayload(pos, train_id, boardId, alightId, visIds, stops) {
+    const b = stops.find(s => s.id === boardId), a = stops.find(s => s.id === alightId);
+    const vis = stops.filter(s => visIds.has(s.id) || s.id === boardId || s.id === alightId);
+    const lo = Math.min(...vis.map(s => s.seq)), hi = Math.max(...vis.map(s => s.seq));
+    const from = lo < b.seq ? stops.find(s => s.seq === lo) : null, to = hi > a.seq ? stops.find(s => s.seq === hi) : null;
+    const hidden = stops.filter(s => s.seq >= Math.min(lo, b.seq) && s.seq <= Math.max(hi, a.seq) && !visIds.has(s.id) && s.id !== boardId && s.id !== alightId).map(s => s.id);
+    return {pos, train_id, board_stop_id: boardId, alight_stop_id: alightId, show_from_stop_id: from ? from.id : null, show_to_stop_id: to ? to.id : null, hidden_stop_ids: hidden}
+}
+function visFromLeg(L, stops) { return new Set(legStops(L, stops).map(s => s.id)) }
+function defaultVis(boardId, alightId, stops) {
+    const b = stops.find(s => s.id === boardId), a = stops.find(s => s.id === alightId);
+    return new Set(stops.filter(s => s.seq >= b.seq && s.seq <= a.seq).map(s => s.id))
+}
+/*ENDPURE*/
+
+/* ================= интерфейс ================= */
+const $ = s => document.querySelector(s);
+const toast = t => { const e = $("#toast"); e.textContent = t; e.style.display = "block"; setTimeout(() => e.style.display = "none", 2400) };
+
+/* авто-двоеточие в полях времени: вводите «1906» → «19:06» */
+const fmtTime = (raw, del) => {
+    let d = raw.replace(/\D/g, "");
+    if (d[0] > "2") d = "0" + d;
+    if (d[0] === "2" && d[1] > "3") d = "0" + d;
+    if (d.length >= 3 && d[2] > "5") d = d.slice(0, 2) + "0" + d.slice(2);
+    d = d.slice(0, 4);
+    return d.length < 2 ? d : d.length === 2 ? (del ? d : d + ":") : d.slice(0, 2) + ":" + d.slice(2)
+};
+document.addEventListener("input", e => {
+    const t = e.target;
+    if (!t.matches || !t.matches("input.tm") || /[^\d:]/.test(t.value)) return;
+    const v = fmtTime(t.value, /^delete/.test(e.inputType || ""));
+    if (v !== t.value) { t.value = v; t.setSelectionRange(v.length, v.length) }
+}, true);
+
+let S = JSON.parse(localStorage.getItem("sb") || "null");
+const auth = async (q, b) => {
+    const r = await fetch(U + "/auth/v1/token?grant_type=" + q, {method: "POST", headers: {apikey: K, "Content-Type": "application/json"}, body: JSON.stringify(b)});
+    const j = await r.json();
+    if (!r.ok) throw new Error(j.error_description || j.msg || "Ошибка входа");
+    S = {a: j.access_token, r: j.refresh_token};
+    localStorage.setItem("sb", JSON.stringify(S))
+};
+const logout = () => { S = null; localStorage.removeItem("sb"); showLogin() };
+const errText = t => { try { const j = JSON.parse(t); return j.message || j.hint || t } catch (e) { return t } };
+async function db(m, p, b, pref, retry = true) {
+    const r = await fetch(U + "/rest/v1/" + p, {
+        method: m,
+        headers: {apikey: K, Authorization: "Bearer " + S.a, "Content-Type": "application/json", Prefer: pref || "return=representation"},
+        body: b === undefined ? undefined : JSON.stringify(b)
+    });
+    if (r.status == 401 && retry) {
+        try { await auth("refresh_token", {refresh_token: S.r}) } catch (e) { logout(); throw e }
+        return db(m, p, b, pref, false)
+    }
+    const t = await r.text();
+    if (!r.ok) throw new Error(errText(t));
+    return t ? JSON.parse(t) : null
+}
+async function dbAll(path) { /* Supabase отдаёт максимум 1000 строк за запрос */
+    let out = [], off = 0;
+    for (;;) {
+        const part = await db("GET", path + (path.includes("?") ? "&" : "?") + "limit=1000&offset=" + off);
+        out = out.concat(part);
+        if (part.length < 1000) return out;
+        off += 1000
+    }
+}
+
+/* ---------- данные ---------- */
+let ST = [], TR = [], SP = [], CN = [], LG = [], RT = [];
+let stById, trById, spByTrain, legsByConn, usedBy;
+function index() {
+    stById = new Map(ST.map(s => [s.id, s]));
+    trById = new Map(TR.map(t => [t.id, t]));
+    spByTrain = new Map(TR.map(t => [t.id, []]));
+    SP.forEach(s => { (spByTrain.get(s.train_id) || []).push(s) });
+    spByTrain.forEach(a => a.sort((x, y) => x.seq - y.seq));
+    legsByConn = new Map();
+    LG.forEach(l => { if (!legsByConn.has(l.connection_id)) legsByConn.set(l.connection_id, []); legsByConn.get(l.connection_id).push(l) });
+    legsByConn.forEach(a => a.sort((x, y) => x.pos - y.pos));
+    usedBy = new Map();
+    LG.forEach(l => usedBy.set(l.train_id, (usedBy.get(l.train_id) || 0) + 1))
+}
+const CTX = {train: id => trById.get(id), stops: id => spByTrain.get(id) || [], station: id => stById.get(id)};
+async function load() {
+    [ST, TR, SP, CN, LG, RT] = await Promise.all([
+        dbAll("stations?order=name_ru"), dbAll("trains?order=number"), dbAll("train_stops?order=train_id,seq"),
+        dbAll("connections?order=route_slug,sort"), dbAll("connection_legs?order=connection_id,pos"), db("GET", "routes?order=sort")]);
+    index()
+}
+const findStation = name => {
+    const n = String(name || "").trim().toLowerCase();
+    return ST.find(s => s.name_ru.toLowerCase() === n) || ST.find(s => (s.aliases || []).some(a => a.toLowerCase() === n))
+};
+const trainLabel = t => { const st = spByTrain.get(t.id) || []; return t.number + (st.length ? " · " + stById.get(st[0].station_id).name_ru + " → " + stById.get(st[st.length - 1].station_id).name_ru : "") };
+const showErr = (el, e) => { el.innerHTML = '<div class="errbox">' + esc(e.message || e) + "</div>" };
+
+/* ---------- вход ---------- */
+function showLogin() {
+    $("#out").style.display = "none";
+    $("#app").innerHTML = `<section class="panel" style="max-width:380px;margin:0 auto"><h2>Вход</h2><label>Email</label><input id="em" type="email" autocomplete="username"><label>Пароль</label><input id="pw" type="password" autocomplete="current-password"><p><button id="go" class="pri">Войти</button></p><p id="le" class="err"></p></section>`;
+    $("#go").onclick = async () => { try { await auth("password", {email: $("#em").value, password: $("#pw").value}); start() } catch (e) { $("#le").textContent = e.message } }
+}
+let TAB = "trains";
+async function start() {
+    $("#out").style.display = ""; $("#out").onclick = logout;
+    try { await load() } catch (e) { return showLogin() }
+    shell()
+}
+function shell() {
+    $("#app").innerHTML = `<div class="tabs">${[["trains", "Поезда"], ["conns", "Варианты"], ["stations", "Станции"]].map(([k, v]) => `<button data-t="${k}" class="${TAB === k ? "on" : ""}">${v}</button>`).join("")}</div><div id="view"></div>`;
+    document.querySelectorAll(".tabs button").forEach(b => b.onclick = () => { TAB = b.dataset.t; shell() });
+    ({trains: viewTrains, conns: viewConns, stations: viewStations})[TAB]()
+}
+
+/* ================= станции ================= */
+function viewStations() {
+    const v = $("#view");
+    const row = s => `<tr data-id="${s.id || ""}">
+        <td><input type="text" data-f="name_ru" value="${esc(s.name_ru)}"></td>
+        <td><input type="text" data-f="name_uk" value="${esc(s.name_uk)}"></td>
+        <td><input type="text" data-f="name_en" value="${esc(s.name_en)}"></td>
+        <td><input type="text" data-f="name_pl" value="${esc(s.name_pl)}"></td>
+        <td><select data-f="tz_hours"><option value="1" ${s.tz_hours == 1 ? "selected" : ""}>UTC+1</option><option value="2" ${s.tz_hours == 2 ? "selected" : ""}>UTC+2</option></select></td>
+        <td class="x"><button data-a="save">Сохранить</button> ${s.id ? '<button data-a="del">✕</button>' : ""}</td></tr>`;
+    v.innerHTML = `<section class="panel"><h2>Станции <span class="muted">(${ST.length})</span></h2>
+        <p class="muted">Названия на других языках сейчас берутся из i18n.js; если поле пустое, сайт покажет русское название. «в Хелме» и подобные формы пока остаются в i18n.js.</p>
+        <div class="frow"><input type="text" id="sf" placeholder="Поиск станции" style="width:240px"><label><input type="checkbox" id="nt"> без перевода</label></div>
+        <div id="se"></div>
+        <table class="g"><thead><tr><th>Русское</th><th>Українська</th><th>English</th><th>Polski</th><th>Пояс</th><th></th></tr></thead><tbody id="stb"></tbody></table></section>`;
+    const draw = () => {
+        const q = $("#sf").value.trim().toLowerCase(), nt = $("#nt").checked;
+        const list = ST.filter(s => (!q || s.name_ru.toLowerCase().includes(q)) && (!nt || !s.name_uk || !s.name_en || !s.name_pl));
+        $("#stb").innerHTML = row({name_ru: "", tz_hours: 1}) + list.map(row).join("")
+    };
+    draw(); $("#sf").oninput = draw; $("#nt").onchange = draw;
+    $("#stb").onclick = async e => {
+        const b = e.target.closest("button"); if (!b) return;
+        const tr = b.closest("tr"), id = tr.dataset.id, g = f => tr.querySelector(`[data-f=${f}]`).value.trim() || null;
+        const body = {name_ru: g("name_ru"), name_uk: g("name_uk"), name_en: g("name_en"), name_pl: g("name_pl"), tz_hours: +g("tz_hours")};
+        $("#se").innerHTML = "";
+        try {
+            if (b.dataset.a === "save") {
+                if (!body.name_ru) throw new Error("Укажите русское название");
+                if (id) await db("PATCH", "stations?id=eq." + id, body); else await db("POST", "stations", body)
+            } else {
+                if (!confirm("Удалить станцию?")) return;
+                await db("DELETE", "stations?id=eq." + id)
+            }
+            await load(); toast("Готово"); viewStations()
+        } catch (er) { showErr($("#se"), er.message.includes("violates foreign key") ? "Станция используется в расписании поездов, сначала уберите её оттуда" : er) }
+    }
+}
+
+/* ================= поезда ================= */
+let TSEL = null, TD = null; /* TSEL — id поезда или "new"; TD — редактируемая копия {t, rows} */
+function openTrain(id) {
+    TSEL = id;
+    if (id === "new") TD = {t: {number: "", freq: "", badge: "", note: ""}, rows: [{name: "", arr: "", dep: "", chk: false}, {name: "", arr: "", dep: "", chk: false}]};
+    else {
+        const t = trById.get(id);
+        TD = {t: {...t, badge: t.badge || "", note: t.note || ""}, rows: (spByTrain.get(id) || []).map(s => ({id: s.id, name: stById.get(s.station_id).name_ru, arr: hm(s.arr_time), dep: hm(s.dep_time), chk: s.needs_check}))}
+    }
+}
+function viewTrains() {
+    const v = $("#view");
+    v.innerHTML = `<div class="two"><section class="panel"><h2>Поезда</h2>
+        <div class="frow"><input type="text" id="tf" placeholder="Поиск" style="width:100%"></div>
+        <label class="muted"><input type="checkbox" id="tc"> только с неподтверждённым временем</label>
+        <p><button id="tn" class="pri">+ Новый поезд</button></p><div class="list" id="tl"></div></section>
+        <section class="panel" id="te"></section></div>
+        <datalist id="stl">${ST.map(s => `<option value="${esc(s.name_ru)}">`).join("")}</datalist>`;
+    const draw = () => {
+        const q = $("#tf").value.trim().toLowerCase(), c = $("#tc").checked;
+        const chk = new Set(SP.filter(s => s.needs_check).map(s => s.train_id));
+        $("#tl").innerHTML = TR.filter(t => (!q || trainLabel(t).toLowerCase().includes(q)) && (!c || chk.has(t.id))).map(t =>
+            `<div data-id="${t.id}" class="${TSEL === t.id ? "on" : ""}">${esc(t.number)}<small>${esc(trainLabel(t).split(" · ")[1] || "нет станций")}${usedBy.get(t.id) ? " · в вариантах: " + usedBy.get(t.id) : ""}${chk.has(t.id) ? ' <span class="warn">· проверить время</span>' : ""}</small></div>`).join("")
+    };
+    draw();
+    $("#tf").oninput = draw; $("#tc").onchange = draw;
+    $("#tl").onclick = e => { const d = e.target.closest("div[data-id]"); if (!d) return; openTrain(+d.dataset.id); draw(); trainEditor() };
+    $("#tn").onclick = () => { openTrain("new"); draw(); trainEditor() };
+    if (TSEL != null && (TSEL === "new" || trById.has(TSEL))) trainEditor(); else $("#te").innerHTML = '<p class="muted">Выберите поезд слева или создайте новый.</p>'
+}
+function trainEditor() {
+    const el = $("#te"), T = TD.t;
+    el.innerHTML = `<h2>${TSEL === "new" ? "Новый поезд" : esc(T.number)}</h2>
+        <div class="frow">
+            <div><label>Номер</label><input type="text" id="tnum" value="${esc(T.number)}" placeholder="019К или IC 12010" style="width:150px"></div>
+            <div><label>Периодичность (пусто = ежедневно)</label><input type="text" id="tfr" value="${esc(T.freq)}" placeholder="По чётным числам" style="width:210px"></div>
+            <div><label>Пометка</label><select id="tbd"><option value="">нет</option><option value="seat" ${T.badge === "seat" ? "selected" : ""}>сидячий</option></select></div>
+            <div><label>Перевозчик / заметка</label><input type="text" id="tnt" value="${esc(T.note)}" style="width:200px"></div>
+        </div>
+        <p class="muted">Для каждой станции укажите время <b>прибытия</b> и <b>отправления</b> (местное). У первой станции есть только отправление, у последней — только прибытие. Сутки считаются сами: если время «перескочило» назад, значит прошла полночь.</p>
+        <table class="g"><thead><tr><th>№</th><th>Станция</th><th>Прибытие</th><th>Отправление</th><th>Стоянка</th><th>Сутки</th><th title="Время перенесено из старых данных и не проверено">Проверить</th><th></th></tr></thead><tbody id="rows"></tbody></table>
+        <p><button id="addrow">+ Станция в конец</button></p>
+        <div id="terr"></div>
+        <p><button id="tsave" class="pri">Сохранить поезд</button> ${TSEL !== "new" ? '<button id="tdel">Удалить поезд</button>' : ""}</p>`;
+    drawRows();
+    const sync = () => { T.number = $("#tnum").value.trim(); T.freq = $("#tfr").value.trim(); T.badge = $("#tbd").value; T.note = $("#tnt").value.trim() };
+    ["tnum", "tfr", "tbd", "tnt"].forEach(i => $("#" + i).oninput = sync);
+    $("#addrow").onclick = () => { TD.rows.push({name: "", arr: "", dep: "", chk: false}); drawRows() };
+    $("#tsave").onclick = saveTrain;
+    if ($("#tdel")) $("#tdel").onclick = async () => {
+        if (!confirm("Удалить поезд " + T.number + " вместе с расписанием?")) return;
+        try { await db("DELETE", "trains?id=eq." + TSEL); TSEL = null; await load(); toast("Удалён"); viewTrains() }
+        catch (e) { showErr($("#terr"), e.message.includes("foreign key") ? "Поезд используется в вариантах, сначала уберите его оттуда" : e) }
+    }
+}
+function drawRows() {
+    const rows = TD.rows, n = rows.length;
+    $("#rows").innerHTML = rows.map((r, i) => {
+        const first = i === 0, last = i === n - 1;
+        return `<tr data-i="${i}" class="${r.chk ? "chk" : ""}"><td class="n">${i + 1}</td>
+        <td><input type="text" list="stl" data-f="name" value="${esc(r.name)}" placeholder="Станция" class="${r.name && !findStation(r.name) ? "bad" : ""}"></td>
+        <td><input type="text" class="tm" data-f="arr" value="${esc(first ? "" : r.arr)}" maxlength="5" placeholder="${first ? "—" : "чч:мм"}" ${first ? "disabled" : ""}></td>
+        <td><input type="text" class="tm" data-f="dep" value="${esc(last ? "" : r.dep)}" maxlength="5" placeholder="${last ? "—" : "чч:мм"}" ${last ? "disabled" : ""}></td>
+        <td class="muted" data-dw></td><td class="muted" data-dy></td>
+        <td><input type="checkbox" data-f="chk" ${r.chk ? "checked" : ""}></td>
+        <td class="x"><button data-a="up" title="Выше">↑</button><button data-a="dn" title="Ниже">↓</button><button data-a="ins" title="Вставить станцию ниже">+</button><button data-a="rm" title="Убрать">✕</button></td></tr>`
+    }).join("");
+    computed()
+}
+function computed() {
+    const rows = TD.rows.map((r, i) => ({arr: i === 0 ? "" : r.arr, dep: i === TD.rows.length - 1 ? "" : r.dep})), dd = calcDays(rows);
+    document.querySelectorAll("#rows tr").forEach((tr, i) => {
+        const r = rows[i], a = toM(r.arr), d = toM(r.dep);
+        tr.querySelector("[data-dw]").textContent = a != null && d != null ? durTxt(dd[i].dAbs - dd[i].aAbs) : "";
+        tr.querySelector("[data-dy]").textContent = dd[i].dd > 0 || dd[i].ad > 0 ? "+" + Math.max(dd[i].dd, dd[i].ad) + " сут." : ""
+    })
+}
+document.addEventListener("input", e => {
+    const t = e.target, tr = t.closest && t.closest("#rows tr"); if (!tr) return;
+    const r = TD.rows[+tr.dataset.i], f = t.dataset.f;
+    if (f === "chk") { r.chk = t.checked; tr.classList.toggle("chk", t.checked) }
+    else if (f) { r[f] = t.value; if (f === "name") t.classList.toggle("bad", !!t.value && !findStation(t.value)) }
+    computed()
+});
+document.addEventListener("click", e => {
+    const b = e.target.closest && e.target.closest("#rows button"); if (!b) return;
+    const i = +b.closest("tr").dataset.i, R = TD.rows, a = b.dataset.a;
+    if (a === "up" && i > 0) [R[i - 1], R[i]] = [R[i], R[i - 1]];
+    if (a === "dn" && i < R.length - 1) [R[i + 1], R[i]] = [R[i], R[i + 1]];
+    if (a === "ins") R.splice(i + 1, 0, {name: "", arr: "", dep: "", chk: false});
+    if (a === "rm") R.splice(i, 1);
+    drawRows()
+});
+async function saveTrain() {
+    const box = $("#terr"), T = TD.t, R = TD.rows; box.innerHTML = "";
+    const rows = R.map((r, i) => ({name: r.name.trim(), arr: i === 0 ? "" : r.arr, dep: i === R.length - 1 ? "" : r.dep}));
+    const errs = [];
+    if (!T.number) errs.push("Укажите номер поезда");
+    if (/[:>|*;~]/.test(T.number + T.freq)) errs.push("В номере и периодичности нельзя использовать символы : > | * ; ~");
+    errs.push(...validateStops(rows, r => !!findStation(r.name)));
+    if (errs.length) return showErr(box, {message: errs.join("\n")});
+    const dd = calcDays(rows);
+    const stops = R.map((r, i) => ({
+        id: r.id || null, seq: i + 1, station_id: findStation(r.name).id,
+        arr_time: rows[i].arr || null, arr_day: rows[i].arr ? dd[i].ad : 0, dep_time: rows[i].dep || null, dep_day: rows[i].dep ? dd[i].dd : 0, needs_check: !!r.chk
+    }));
+    try {
+        let id = TSEL;
+        const meta = {number: T.number, freq: T.freq, badge: T.badge || null, note: T.note || null};
+        if (id === "new") { const c = await db("POST", "trains", meta); id = c[0].id } else await db("PATCH", "trains?id=eq." + id, meta);
+        await db("POST", "rpc/save_train_stops", {p_train: id, p_stops: stops});
+        await load(); TSEL = id; openTrain(id); toast("Поезд сохранён"); viewTrains()
+    } catch (e) { showErr(box, e) }
+}
+
+/* ================= варианты ================= */
+let E = null; /* редактируемый вариант: {id?, C:{...шапка}, legs:[{train_id, board, alight, vis:Set, any:boolean}]} */
+const pageRoute = (from, to) => {
+    const n = s => String(s || "").trim().toLowerCase(), pg = ((window.CFG && CFG.PAGES) || []).find(p => {
+        const [a, b] = String(p.title).split("→").map(x => x.trim()); return n(from).startsWith(n(a)) && n(to).startsWith(n(b))
+    });
+    return pg ? pg.route : null
+};
+const connDsl = id => {
+    const c = CN.find(x => x.id === id), legs = legsByConn.get(id) || [];
+    return legs.length ? dslOf(c, legs, CTX) : ""
+};
+function viewConns() {
+    const v = $("#view");
+    v.innerHTML = `<section class="panel"><h2>Варианты <span class="muted">(${CN.length})</span></h2>
+        <div class="frow"><button id="cn" class="pri">+ Новый вариант</button><input type="text" id="cf" placeholder="Поиск: город, поезд" style="width:240px">
+        <select id="cr"><option value="">все направления</option>${RT.map(r => `<option value="${esc(r.slug)}">${esc(r.title || r.slug)}</option>`).join("")}</select></div>
+        <div id="cl"></div></section><section class="panel" id="ce" style="display:none"></section>`;
+    const draw = () => {
+        const q = $("#cf").value.trim().toLowerCase(), r = $("#cr").value;
+        const list = CN.filter(c => (!r || c.route_slug === r)).map(c => {
+            const legs = legsByConn.get(c.id) || [], p = parseOption(connDsl(c.id)), h = p.head || deriveHead(p.legs);
+            return {c, legs, h, trains: legs.map(l => trById.get(l.train_id).number).join(" + ")}
+        }).filter(x => !q || (x.h.from + " " + x.h.to + " " + x.trains).toLowerCase().includes(q)).sort((a, b) => a.c.route_slug.localeCompare(b.c.route_slug) || a.c.sort - b.c.sort);
+        $("#cl").innerHTML = list.map(({c, h, trains, legs}) => `<div class="conn ${c.active ? "" : "off"}" data-id="${c.id}">
+            <div class="t"><b>${esc(h.from)} ${esc(h.ft)} → ${esc(h.to)} ${esc(h.tt)}</b><small>${esc(trains)} · ${legs.length > 1 ? legs.length - 1 + " пересадка" : "прямой"} · ${esc(c.route_slug)}${c.active ? "" : " · скрыт"}</small></div>
+            <button data-a="edit">Изменить</button><button data-a="dup">Копия</button><button data-a="del">✕</button></div>`).join("") || '<p class="muted">Ничего не найдено</p>'
+    };
+    draw(); $("#cf").oninput = draw; $("#cr").onchange = draw;
+    $("#cn").onclick = () => { newConn(); connEditor() };
+    $("#cl").onclick = async e => {
+        const b = e.target.closest("button"), d = e.target.closest(".conn"); if (!b || !d) return;
+        const id = d.dataset.id;
+        if (b.dataset.a === "edit") { editConn(id); connEditor() }
+        if (b.dataset.a === "dup") { editConn(id, true); connEditor() }
+        if (b.dataset.a === "del" && confirm("Удалить вариант?")) {
+            try { await db("DELETE", "connections?id=eq." + id); await load(); toast("Удалён"); viewConns() } catch (er) { toast(er.message) }
+        }
+    }
+}
+const emptyC = () => ({route_slug: "", head_from: "", head_to: "", head_dep_time: "", head_arr_time: "", head_dur: "", head_tag: "", note: "", active: true});
+function newConn() { E = {id: null, C: emptyC(), legs: [], routeTouched: false} }
+function editConn(id, copy) {
+    const c = CN.find(x => x.id === id);
+    E = {id: copy ? null : id, routeTouched: true, C: {...emptyC(), ...c, head_from: c.head_from || "", head_to: c.head_to || "", head_dep_time: hm(c.head_dep_time), head_arr_time: hm(c.head_arr_time), head_dur: c.head_dur || "", head_tag: c.head_tag || ""},
+        legs: (legsByConn.get(id) || []).map(l => ({train_id: l.train_id, board: l.board_stop_id, alight: l.alight_stop_id, vis: visFromLeg(l, CTX.stops(l.train_id)), any: false}))}
+}
+const stopOpt = (s, sel) => `<option value="${s.id}" ${s.id === sel ? "selected" : ""}>${s.seq}. ${esc(stById.get(s.station_id).name_ru)} (${hm(s.arr_time) || "—"} / ${hm(s.dep_time) || "—"})</option>`;
+function legPayloads() { return E.legs.map((L, i) => legPayload(i + 1, L.train_id, L.board, L.alight, L.vis, CTX.stops(L.train_id))) }
+function connEditor() {
+    const el = $("#ce"); el.style.display = ""; el.scrollIntoView({behavior: "smooth", block: "start"});
+    const C = E.C;
+    el.innerHTML = `<h2>${E.id ? "Редактирование варианта" : "Новый вариант"}</h2>
+        <div class="frow">
+            <div><label>Направление</label><select id="c_route"><option value="">выберите…</option>${RT.map(r => `<option value="${esc(r.slug)}" ${r.slug === C.route_slug ? "selected" : ""}>${esc(r.title || r.slug)} (${esc(r.slug)})</option>`).join("")}</select></div>
+            <label style="align-self:center"><input type="checkbox" id="c_act" ${C.active ? "checked" : ""}> показывать на сайте</label>
+        </div>
+        <div id="legs"></div>
+        <p><button id="addleg">+ Ещё поезд (пересадка)</button></p>
+        <details><summary>Шапка карточки (по умолчанию заполняется само)</summary>
+            <div class="frow">
+                <div><label>Откуда (город)</label><input type="text" data-c="head_from" value="${esc(C.head_from)}" placeholder="по станции посадки" list="cities"></div>
+                <div><label>Время отпр.</label><input type="text" class="tm" data-c="head_dep_time" value="${esc(C.head_dep_time)}" maxlength="5" style="width:70px"></div>
+                <div><label>Куда (город)</label><input type="text" data-c="head_to" value="${esc(C.head_to)}" placeholder="по станции высадки" list="cities"></div>
+                <div><label>Время приб.</label><input type="text" class="tm" data-c="head_arr_time" value="${esc(C.head_arr_time)}" maxlength="5" style="width:70px"></div>
+                <div><label>В пути</label><input type="text" data-c="head_dur" value="${esc(C.head_dur)}" placeholder="считается само" style="width:120px"></div>
+                <div><label>Плашка</label><input type="text" data-c="head_tag" value="${esc(C.head_tag)}" placeholder="авто" style="width:120px"></div>
+            </div>
+            <div class="frow"><div style="flex:1"><label>Примечание</label><input type="text" data-c="note" value="${esc(C.note)}" style="width:100%"></div></div>
+        </details>
+        <datalist id="cities">${[...new Set(((window.CFG && CFG.PAGES) || []).flatMap(p => String(p.title).split("→").map(x => x.trim())))].map(c => `<option value="${esc(c)}">`).join("")}</datalist>
+        <div class="pvw" id="pv"></div><div id="cerr"></div>
+        <p><button id="csave" class="pri">Сохранить вариант</button> <button id="ccancel">Закрыть</button></p>`;
+    drawLegs(); preview();
+    $("#c_route").onchange = e => { C.route_slug = e.target.value; E.routeTouched = true };
+    $("#c_act").onchange = e => C.active = e.target.checked;
+    el.querySelectorAll("[data-c]").forEach(i => i.oninput = () => { C[i.dataset.c] = i.value; autoRoute(); preview() });
+    $("#addleg").onclick = () => { E.legs.push({train_id: null, board: null, alight: null, vis: new Set(), any: false}); drawLegs(); preview() };
+    $("#ccancel").onclick = () => { el.style.display = "none"; E = null };
+    $("#csave").onclick = saveConn
+}
+function autoRoute() {
+    if (E.routeTouched || !E.legs.length || !E.legs.every(l => l.train_id)) return;
+    try {
+        const f = E.legs[0], l = E.legs[E.legs.length - 1];
+        const from = E.C.head_from || stById.get(CTX.stops(f.train_id).find(s => s.id === f.board).station_id).name_ru;
+        const to = E.C.head_to || stById.get(CTX.stops(l.train_id).find(s => s.id === l.alight).station_id).name_ru;
+        const r = pageRoute(from, to); if (r) { E.C.route_slug = r; const s = $("#c_route"); if (s) s.value = r }
+    } catch (e) { }
+}
+function legCard(L, i) {
+    const stops = L.train_id ? CTX.stops(L.train_id) : [], prev = i > 0 ? E.legs[i - 1] : null;
+    let trains = TR;
+    if (prev && prev.alight && !L.any) { /* поезда, которые останавливаются на станции пересадки */
+        const sid = CTX.stops(prev.train_id).find(s => s.id === prev.alight).station_id;
+        trains = TR.filter(t => CTX.stops(t.id).some(s => s.station_id === sid))
+    }
+    const cur = L.train_id ? trById.get(L.train_id) : null;
+    const alights = stops.filter(s => { const b = stops.find(x => x.id === L.board); return b && s.seq > b.seq });
+    return `<div class="leg" data-i="${i}"><div class="frow">
+        <div><label>Поезд ${i + 1}</label><input type="text" data-l="train" list="trl${i}" value="${cur ? esc(trainLabel(cur)) : ""}" placeholder="номер или город" style="width:300px"><datalist id="trl${i}">${trains.map(t => `<option value="${esc(trainLabel(t))}">`).join("")}</datalist></div>
+        ${i > 0 ? `<label style="align-self:center"><input type="checkbox" data-l="any" ${L.any ? "checked" : ""}> любые поезда (не только со станции пересадки)</label>` : ""}
+        ${E.legs.length > 1 ? '<button data-l="rm" style="margin-left:auto">Убрать поезд</button>' : ""}</div>
+        ${L.train_id ? `<div class="frow"><div><label>Садимся</label><select data-l="board">${stops.slice(0, -1).map(s => stopOpt(s, L.board)).join("")}</select></div>
+        <div><label>${i < E.legs.length - 1 ? "Выходим (станция пересадки)" : "Выходим"}</label><select data-l="alight">${alights.map(s => stopOpt(s, L.alight)).join("")}</select></div></div>
+        <details><summary class="muted">Какие станции показывать</summary><div class="chips">${stops.map(s => {
+            const fix = s.id === L.board || s.id === L.alight;
+            return `<label class="${fix ? "fix" : ""}"><input type="checkbox" data-l="vis" value="${s.id}" ${fix || L.vis.has(s.id) ? "checked" : ""} ${fix ? "disabled" : ""}> ${esc(stById.get(s.station_id).name_ru)}</label>`
+        }).join("")}</div></details>` : ""}</div>`
+}
+function xferInfo(i) {
+    const a = E.legs[i], b = E.legs[i + 1];
+    if (!a || !b || !a.alight || !b.board) return "";
+    const L1 = legPayloads()[i], L2 = legPayloads()[i + 1], w = waitMinutes(L1, L2, CTX);
+    const s1 = stById.get(CTX.stops(a.train_id).find(s => s.id === a.alight).station_id), s2 = stById.get(CTX.stops(b.train_id).find(s => s.id === b.board).station_id);
+    const diff = s1.id !== s2.id, bad = w == null || w < 20 || w > 720;
+    return `<div class="xfer ${bad || diff ? "warn" : ""}">Пересадка: ${esc(s1.name_ru)}${diff ? " → " + esc(s2.name_ru) + " (другая станция)" : ""} · ожидание ${w == null ? "?" : durTxt(w)}${w != null && w < 20 ? " — слишком мало" : ""}${w != null && w > 720 ? " — очень долго, проверьте расписание" : ""}</div>`
+}
+function drawLegs() {
+    $("#legs").innerHTML = E.legs.map((L, i) => legCard(L, i) + (i < E.legs.length - 1 ? `<div id="x${i}">${xferInfo(i)}</div>` : "")).join("") || '<p class="muted">Добавьте первый поезд.</p>';
+    if (!E.legs.length) { E.legs.push({train_id: null, board: null, alight: null, vis: new Set(), any: false}); drawLegs() }
+}
+document.addEventListener("change", e => {
+    const t = e.target, card = t.closest && t.closest(".leg"); if (!card || !E) return;
+    const i = +card.dataset.i, L = E.legs[i], k = t.dataset.l, stops = () => CTX.stops(L.train_id);
+    if (k === "train") {
+        const tr = TR.find(x => trainLabel(x) === t.value) || TR.find(x => x.number.toLowerCase() === t.value.trim().toLowerCase());
+        if (!tr) return;
+        L.train_id = tr.id; const st = CTX.stops(tr.id), prev = i > 0 ? E.legs[i - 1] : null;
+        let b = st[0];
+        if (prev && prev.alight) { const sid = CTX.stops(prev.train_id).find(s => s.id === prev.alight).station_id; b = st.find(s => s.station_id === sid && s !== st[st.length - 1]) || st[0] }
+        L.board = b.id; L.alight = st[st.length - 1].id; L.vis = defaultVis(L.board, L.alight, st)
+    } else if (k === "any") L.any = t.checked;
+    else if (k === "board") { L.board = +t.value; const st = stops(), b = st.find(s => s.id === L.board), a = st.find(s => s.id === L.alight); if (!a || a.seq <= b.seq) L.alight = st[st.length - 1].id; L.vis = defaultVis(L.board, L.alight, st) }
+    else if (k === "alight") { L.alight = +t.value; L.vis = defaultVis(L.board, L.alight, stops()) }
+    else if (k === "vis") { +t.value && (t.checked ? L.vis.add(+t.value) : L.vis.delete(+t.value)) }
+    else return;
+    if (k === "vis") return preview();
+    drawLegs(); autoRoute(); preview()
+});
+document.addEventListener("click", e => {
+    const b = e.target.closest && e.target.closest("button[data-l=rm]"); if (!b || !E) return;
+    E.legs.splice(+b.closest(".leg").dataset.i, 1); drawLegs(); preview()
+});
+function readyLegs() { return E.legs.length && E.legs.every(l => l.train_id && l.board && l.alight) }
+function preview() {
+    const pv = $("#pv"); if (!pv) return;
+    E.legs.forEach((l, i) => { const x = $("#x" + i); if (x) x.innerHTML = xferInfo(i) });
+    if (!readyLegs()) { pv.innerHTML = '<span class="muted">Выберите поезда, и здесь появится карточка варианта.</span>'; return }
+    try {
+        const legs = legPayloads(), dsl = dslOf(E.C, legs, CTX);
+        let total = 0, ok = true;
+        legs.forEach((l, i) => { const m = legMinutes(l, CTX); if (m == null) ok = false; else total += m; if (i > 0) { const w = waitMinutes(legs[i - 1], l, CTX); if (w == null) ok = false; else total += w } });
+        pv.innerHTML = '<div class="muted" style="margin-bottom:6px">Так карточка выглядит на сайте' + (ok ? " · общее время в пути по расписанию: <b>" + durTxt(total) + "</b>" : "") + ":</div>" + optHtml({dsl, note: E.C.note || ""})
+    } catch (e) { pv.innerHTML = '<div class="errbox">' + esc(e.message) + "</div>" }
+}
+async function saveConn() {
+    const box = $("#cerr"); box.innerHTML = "";
+    if (!E.C.route_slug) return showErr(box, "Выберите направление");
+    if (!readyLegs()) return showErr(box, "Заполните все поезда: поезд, где садимся и где выходим");
+    const legs = legPayloads(), first = CTX.stops(legs[0].train_id).find(s => s.id === legs[0].board_stop_id);
+    const dep = toM(E.C.head_dep_time || hm(first.dep_time)), C = E.C;
+    const body = {id: E.id, route_slug: C.route_slug, head_from: C.head_from, head_to: C.head_to, head_dep_time: C.head_dep_time || null, head_arr_time: C.head_arr_time || null,
+        head_dur: C.head_dur, head_tag: C.head_tag, note: C.note, sort: dep == null ? 0 : dep, active: C.active, legs};
+    try {
+        await db("POST", "rpc/save_connection", {p: body});
+        await load(); toast("Вариант сохранён"); E = null; viewConns()
+    } catch (e) { showErr(box, e) }
+}
+
+if (S) start(); else showLogin();
+</script>
+</body>
+</html>
