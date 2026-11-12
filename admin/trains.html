@@ -7,44 +7,81 @@
     <title>Колія: поезда и варианты</title>
     <link rel="stylesheet" href="../style.css">
     <style>
-        .tabs { display: flex; gap: 6px; margin: 0 0 14px; flex-wrap: wrap }
-        .tabs button.on { background: #1d4ed8; color: #fff }
-        .two { display: grid; grid-template-columns: 260px 1fr; gap: 14px; align-items: start }
-        @media (max-width: 800px) { .two { grid-template-columns: 1fr } }
-        .list { max-height: 70vh; overflow: auto; border: 1px solid #d0d5dd; border-radius: 8px; background: #fff }
-        .list div { padding: 7px 10px; border-bottom: 1px solid #eef0f3; cursor: pointer; font-size: 14px }
-        .list div:hover { background: #f3f6ff }
-        .list div.on { background: #dbe6ff; font-weight: 600 }
-        .list small { color: #667085; display: block; font-weight: 400 }
-        .list .warn { color: #b54708 }
-        table.g { border-collapse: collapse; width: 100%; font-size: 14px }
-        table.g th, table.g td { padding: 3px 4px; border-bottom: 1px solid #eef0f3; text-align: left; vertical-align: middle }
-        table.g th { font-size: 12px; color: #667085; font-weight: 600 }
-        table.g input[type=text], table.g select { width: 100%; box-sizing: border-box; padding: 5px 6px }
-        table.g input.tm { width: 66px; text-align: center }
-        table.g td.n { color: #98a2b3; width: 26px }
+        :root { --bl: #1d4ed8; --bl2: #eff4ff; --bl3: #b2ccff; --gr: #067647; --gr2: #ecfdf3; --gr3: #a6f4c5; --am: #b54708; --am2: #fffaeb; --am3: #fec84b; --rd: #b42318; --rd2: #fef3f2; --pu: #6941c6; --pu2: #f4f3ff; --bd: #d0d5dd; --mu: #667085 }
+        main#app { font-size: 16px }
+        main#app input[type=text], main#app select { font-size: 16px; border: 1.5px solid var(--bd); border-radius: 8px; padding: 8px 10px; background: #fff; box-sizing: border-box }
+        main#app input[type=text]:focus, main#app select:focus { outline: 3px solid var(--bl3); border-color: var(--bl) }
+        main#app input[type=checkbox] { width: 20px; height: 20px; accent-color: var(--bl); vertical-align: middle; cursor: pointer }
+        main#app button { font-size: 15px; padding: 8px 14px; border-radius: 8px; cursor: pointer }
+        button.big { font-size: 17px !important; padding: 12px 26px !important; font-weight: 700 }
+        .tabs { display: flex; gap: 8px; margin: 0 0 16px; flex-wrap: wrap }
+        .tabs button { font-size: 17px !important; padding: 10px 22px !important; font-weight: 600 }
+        .tabs button.on { background: var(--bl); color: #fff; border-color: var(--bl) }
+        .two > * { min-width: 0 }
+        .two { display: grid; grid-template-columns: 270px minmax(0, 1fr); gap: 16px; align-items: start }
+        @media (max-width: 900px) { .two { grid-template-columns: 1fr } }
+        .list { max-height: 72vh; overflow: auto; border: 1.5px solid var(--bd); border-radius: 10px; background: #fff }
+        .list div { padding: 9px 12px; border-bottom: 1px solid #eef0f3; cursor: pointer; font-size: 17px; font-weight: 600; border-left: 5px solid transparent }
+        .list div:hover { background: var(--bl2) }
+        .list div.on { background: #dbe6ff; border-left-color: var(--bl) }
+        .list div.ck { border-left-color: var(--am3) }
+        .list small { color: var(--mu); display: block; font-weight: 400; font-size: 13px; margin-top: 2px }
+        .chip { display: inline-block; border-radius: 12px; padding: 1px 9px; font-size: 13px; font-weight: 600; background: #f2f4f7; color: #344054; white-space: nowrap }
+        .chip.am { background: var(--am2); color: var(--am); box-shadow: inset 0 0 0 1px var(--am3) }
+        .chip.gr { background: var(--gr2); color: var(--gr) }
+        .chip.rd { background: var(--rd2); color: var(--rd) }
+        .chip.bl { background: var(--bl2); color: var(--bl) }
+        .chip.pu { background: var(--pu2); color: var(--pu) }
+        table.g { border-collapse: separate; border-spacing: 0; width: 100%; font-size: 16px }
+        table.g th, table.g td { padding: 5px 6px; border-bottom: 1px solid #eef0f3; text-align: left; vertical-align: middle }
+        table.g thead th { position: sticky; top: 0; z-index: 2; background: #fff; font-size: 13px; color: var(--mu); font-weight: 700; padding: 9px 6px; border-bottom: 2px solid var(--bd) }
+        table.g thead th.ha { color: var(--bl); background: var(--bl2) }
+        table.g thead th.hd { color: var(--gr); background: var(--gr2) }
+        table.g tbody tr:hover td { background: #f9fafb }
+        table.g td.ta { background: rgba(29, 78, 216, .045) }
+        table.g td.td { background: rgba(6, 118, 71, .055) }
+        table.g tbody tr:hover td.ta { background: rgba(29, 78, 216, .09) }
+        table.g tbody tr:hover td.td { background: rgba(6, 118, 71, .1) }
+        table.g td.n { width: 44px; text-align: center }
+        .num { display: inline-block; min-width: 28px; height: 28px; line-height: 28px; border-radius: 14px; background: #f2f4f7; color: var(--mu); font-weight: 700; font-size: 14px; text-align: center }
+        tr.first .num { background: var(--gr); color: #fff }
+        tr.last .num { background: var(--rd); color: #fff }
+        table.g input.tm { font: 700 22px/1.2 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-variant-numeric: tabular-nums; width: 100px; text-align: center; padding: 7px 4px }
+        table.g td.ta input.tm { color: var(--bl); border-color: var(--bl3) }
+        table.g td.td input.tm { color: var(--gr); border-color: var(--gr3) }
+        table.g input.tm:disabled { background: #f2f4f7; border-color: #eaecf0; color: #98a2b3 }
+        table.g input.bad { outline: 3px solid #f97066; background: var(--rd2) }
+        table.g td.st input { font-weight: 600; min-width: 140px; width: 100% }
+        table.g tr.chk td { background: var(--am2) !important }
+        table.g tr.chk td.n { box-shadow: inset 5px 0 0 var(--am3) }
         table.g td.x { white-space: nowrap }
-        table.g tr.chk td { background: #fffaeb }
-        table.g input.bad { outline: 2px solid #f04438 }
-        table.g input:disabled { background: #f2f4f7; border-color: #eaecf0 }
-        .muted { color: #667085; font-size: 13px }
-        .errbox { background: #fef3f2; color: #b42318; border: 1px solid #fecdca; border-radius: 8px; padding: 8px 10px; margin: 8px 0; font-size: 14px; white-space: pre-wrap }
-        .okbox { background: #ecfdf3; color: #067647; border: 1px solid #abefc6; border-radius: 8px; padding: 8px 10px; margin: 8px 0; font-size: 14px }
-        .frow { display: flex; gap: 8px; flex-wrap: wrap; align-items: end; margin: 6px 0 }
-        .frow label { display: block; font-size: 12px; color: #667085 }
-        .frow input[type=text], .frow select { padding: 6px 8px; box-sizing: border-box }
-        .leg { border: 1px solid #d0d5dd; border-radius: 10px; padding: 10px; margin: 10px 0; background: #fcfcfd }
-        .xfer { margin: -2px 0; padding: 4px 10px; font-size: 13px; color: #344054; background: #eff4ff; border-radius: 8px; text-align: center }
-        .xfer.warn { background: #fffaeb; color: #b54708 }
-        .chips { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 6px }
-        .chips label { display: inline-flex; align-items: center; gap: 3px; border: 1px solid #d0d5dd; border-radius: 14px; padding: 2px 8px; font-size: 12px; background: #fff; cursor: pointer }
-        .chips label.fix { background: #dbe6ff; border-color: #84adff }
-        .conn { display: flex; gap: 8px; align-items: center; padding: 7px 10px; border-bottom: 1px solid #eef0f3; font-size: 14px }
+        table.g td.x button { padding: 6px 8px !important; margin-right: 1px; min-width: 32px }
+        .muted { color: var(--mu); font-size: 14px }
+        .errbox { background: var(--rd2); color: var(--rd); border: 1.5px solid #fecdca; border-radius: 10px; padding: 10px 12px; margin: 10px 0; font-size: 15px; white-space: pre-wrap }
+        .frow { display: flex; gap: 12px; flex-wrap: wrap; align-items: end; margin: 8px 0 }
+        .frow label { display: block; font-size: 13px; color: var(--mu); font-weight: 600; margin-bottom: 3px }
+        .sumbar { display: flex; gap: 8px; flex-wrap: wrap; margin: 6px 0 10px }
+        .leg { border: 1.5px solid var(--bd); border-left: 7px solid var(--bl); border-radius: 12px; padding: 12px 14px; margin: 12px 0; background: #fcfcfd }
+        .leg.l2 { border-left-color: var(--gr) }
+        .leg.l3 { border-left-color: #dc6803 }
+        .leg h3 { margin: 0 0 6px; font-size: 17px }
+        .leg .dot { display: inline-block; width: 11px; height: 11px; border-radius: 6px; margin-right: 5px }
+        .dot.b { background: var(--gr) } .dot.a { background: var(--rd) }
+        .leg select { min-width: 320px; max-width: 100% }
+        .xfer { margin: 2px 0; padding: 9px 14px; font-size: 16px; font-weight: 600; color: var(--bl); background: var(--bl2); border: 1.5px dashed var(--bl3); border-radius: 10px; text-align: center }
+        .xfer.warn { background: var(--am2); color: var(--am); border-color: var(--am3) }
+        .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px }
+        .chips label { display: inline-flex; align-items: center; gap: 5px; border: 1.5px solid var(--bd); border-radius: 16px; padding: 3px 11px; font-size: 14px; background: #fff; cursor: pointer; margin: 0; color: #344054 }
+        .chips label.fix { background: #dbe6ff; border-color: #84adff; font-weight: 600 }
+        .conn { display: flex; gap: 10px; align-items: center; padding: 10px 12px; border: 1.5px solid #eaecf0; border-radius: 10px; margin: 6px 0; font-size: 16px; background: #fff }
+        .conn:hover { border-color: var(--bl3); background: #fbfcff }
         .conn .t { flex: 1; min-width: 0 }
-        .conn.off { opacity: .55 }
-        .conn small { color: #667085; display: block }
-        #toast { position: fixed; left: 50%; bottom: 20px; transform: translateX(-50%); background: #101828; color: #fff; padding: 8px 16px; border-radius: 8px; display: none; z-index: 9 }
-        .pvw { border: 1px dashed #98a2b3; border-radius: 10px; padding: 8px; margin: 10px 0; background: #fff }
+        .conn.off { opacity: .55; background: #f9fafb }
+        .conn small { color: var(--mu); display: block; margin-top: 3px; font-size: 13px }
+        .conn .ht { font: 700 19px/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; color: var(--bl) }
+        .bar2 { position: sticky; bottom: 0; z-index: 3; background: rgba(255, 255, 255, .96); border-top: 2px solid var(--bd); padding: 12px 0; margin-top: 14px; display: flex; gap: 12px; align-items: center; flex-wrap: wrap }
+        #toast { position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%); background: #101828; color: #fff; padding: 11px 22px; border-radius: 10px; font-size: 16px; display: none; z-index: 9 }
+        .pvw { border: 2px dashed #98a2b3; border-radius: 12px; padding: 10px; margin: 12px 0; background: #fff }
     </style>
 </head>
 <body>
@@ -91,6 +128,7 @@ function validateStops(rows, stationOk) {
         if (!first && !last && (toM(r.arr) == null || toM(r.dep) == null)) err.push(w + "нужны и прибытие, и отправление");
         const a = dd[i].aAbs, d = dd[i].dAbs;
         if (a != null && d != null && d < a) err.push(w + "отправление раньше прибытия");
+        if (a != null && d != null && d - a > 720) err.push(w + "стоянка больше 12 часов: скорее всего, опечатка во времени");
         prev = d != null ? d : a != null ? a : prev
     });
     return err
@@ -312,9 +350,10 @@ function viewTrains() {
         <datalist id="stl">${ST.map(s => `<option value="${esc(s.name_ru)}">`).join("")}</datalist>`;
     const draw = () => {
         const q = $("#tf").value.trim().toLowerCase(), c = $("#tc").checked;
-        const chk = new Set(SP.filter(s => s.needs_check).map(s => s.train_id));
+        const chk = new Map();
+        SP.forEach(s => { if (s.needs_check) chk.set(s.train_id, (chk.get(s.train_id) || 0) + 1) });
         $("#tl").innerHTML = TR.filter(t => (!q || trainLabel(t).toLowerCase().includes(q)) && (!c || chk.has(t.id))).map(t =>
-            `<div data-id="${t.id}" class="${TSEL === t.id ? "on" : ""}">${esc(t.number)}<small>${esc(trainLabel(t).split(" · ")[1] || "нет станций")}${usedBy.get(t.id) ? " · в вариантах: " + usedBy.get(t.id) : ""}${chk.has(t.id) ? ' <span class="warn">· проверить время</span>' : ""}</small></div>`).join("")
+            `<div data-id="${t.id}" class="${TSEL === t.id ? "on" : ""} ${chk.has(t.id) ? "ck" : ""}">${esc(t.number)} ${chk.has(t.id) ? `<span class="chip am" title="Станций с неподтверждённым временем">⚠ ${chk.get(t.id)}</span>` : ""}<small>${esc(trainLabel(t).split(" · ")[1] || "нет станций")}${usedBy.get(t.id) ? " · в вариантах: " + usedBy.get(t.id) : ""}</small></div>`).join("")
     };
     draw();
     $("#tf").oninput = draw; $("#tc").onchange = draw;
@@ -331,15 +370,17 @@ function trainEditor() {
             <div><label>Пометка</label><select id="tbd"><option value="">нет</option><option value="seat" ${T.badge === "seat" ? "selected" : ""}>сидячий</option></select></div>
             <div><label>Перевозчик / заметка</label><input type="text" id="tnt" value="${esc(T.note)}" style="width:200px"></div>
         </div>
-        <p class="muted">Для каждой станции укажите время <b>прибытия</b> и <b>отправления</b> (местное). У первой станции есть только отправление, у последней — только прибытие. Сутки считаются сами: если время «перескочило» назад, значит прошла полночь.</p>
-        <table class="g"><thead><tr><th>№</th><th>Станция</th><th>Прибытие</th><th>Отправление</th><th>Стоянка</th><th>Сутки</th><th title="Время перенесено из старых данных и не проверено">Проверить</th><th></th></tr></thead><tbody id="rows"></tbody></table>
+        <p class="muted">Для каждой станции укажите время <b style="color:var(--bl)">прибытия</b> и <b style="color:var(--gr)">отправления</b> (местное). У первой станции есть только отправление, у последней — только прибытие. Вводите только цифры («1906» → 19:06): курсор сам перейдёт к следующему полю. Сутки считаются сами: если время «перескочило» назад, значит прошла полночь.</p>
+        <div class="sumbar" id="sum"></div>
+        <table class="g"><thead><tr><th>№</th><th>Станция</th><th class="ha">⬇ Прибытие</th><th class="hd">⬆ Отправление</th><th>Стоянка</th><th title="Время перенесено из старых данных и не проверено. Снимите галочку, когда убедитесь, что время верное">Проверить</th><th></th></tr></thead><tbody id="rows"></tbody></table>
         <p><button id="addrow">+ Станция в конец</button></p>
         <div id="terr"></div>
-        <p><button id="tsave" class="pri">Сохранить поезд</button> ${TSEL !== "new" ? '<button id="tdel">Удалить поезд</button>' : ""}</p>`;
+        <div class="bar2"><button id="tsave" class="pri big">Сохранить поезд</button>${TSEL !== "new" ? '<button id="tdel">Удалить поезд</button>' : ""}<span class="chip am" id="dirty" style="display:none">● есть несохранённые изменения</span></div>`;
+    TD.dirty = false;
     drawRows();
-    const sync = () => { T.number = $("#tnum").value.trim(); T.freq = $("#tfr").value.trim(); T.badge = $("#tbd").value; T.note = $("#tnt").value.trim() };
+    const sync = () => { T.number = $("#tnum").value.trim(); T.freq = $("#tfr").value.trim(); T.badge = $("#tbd").value; T.note = $("#tnt").value.trim(); markDirty() };
     ["tnum", "tfr", "tbd", "tnt"].forEach(i => $("#" + i).oninput = sync);
-    $("#addrow").onclick = () => { TD.rows.push({name: "", arr: "", dep: "", chk: false}); drawRows() };
+    $("#addrow").onclick = () => { TD.rows.push({name: "", arr: "", dep: "", chk: false}); markDirty(); drawRows(); const l = document.querySelectorAll("#rows input[data-f=name]"); l[l.length - 1].focus() };
     $("#tsave").onclick = saveTrain;
     if ($("#tdel")) $("#tdel").onclick = async () => {
         if (!confirm("Удалить поезд " + T.number + " вместе с расписанием?")) return;
@@ -351,11 +392,11 @@ function drawRows() {
     const rows = TD.rows, n = rows.length;
     $("#rows").innerHTML = rows.map((r, i) => {
         const first = i === 0, last = i === n - 1;
-        return `<tr data-i="${i}" class="${r.chk ? "chk" : ""}"><td class="n">${i + 1}</td>
-        <td><input type="text" list="stl" data-f="name" value="${esc(r.name)}" placeholder="Станция" class="${r.name && !findStation(r.name) ? "bad" : ""}"></td>
-        <td><input type="text" class="tm" data-f="arr" value="${esc(first ? "" : r.arr)}" maxlength="5" placeholder="${first ? "—" : "чч:мм"}" ${first ? "disabled" : ""}></td>
-        <td><input type="text" class="tm" data-f="dep" value="${esc(last ? "" : r.dep)}" maxlength="5" placeholder="${last ? "—" : "чч:мм"}" ${last ? "disabled" : ""}></td>
-        <td class="muted" data-dw></td><td class="muted" data-dy></td>
+        return `<tr data-i="${i}" class="${r.chk ? "chk" : ""} ${first ? "first" : ""} ${last ? "last" : ""}"><td class="n"><span class="num">${i + 1}</span></td>
+        <td class="st"><input type="text" list="stl" data-f="name" value="${esc(r.name)}" placeholder="Станция" class="${r.name && !findStation(r.name) ? "bad" : ""}"></td>
+        <td class="ta"><input type="text" class="tm" inputmode="numeric" data-f="arr" value="${esc(first ? "" : r.arr)}" maxlength="5" placeholder="${first ? "—" : "чч:мм"}" ${first ? "disabled" : ""}></td>
+        <td class="td"><input type="text" class="tm" inputmode="numeric" data-f="dep" value="${esc(last ? "" : r.dep)}" maxlength="5" placeholder="${last ? "—" : "чч:мм"}" ${last ? "disabled" : ""}></td>
+        <td class="muted" data-dw></td>
         <td><input type="checkbox" data-f="chk" ${r.chk ? "checked" : ""}></td>
         <td class="x"><button data-a="up" title="Выше">↑</button><button data-a="dn" title="Ниже">↓</button><button data-a="ins" title="Вставить станцию ниже">+</button><button data-a="rm" title="Убрать">✕</button></td></tr>`
     }).join("");
@@ -365,16 +406,32 @@ function computed() {
     const rows = TD.rows.map((r, i) => ({arr: i === 0 ? "" : r.arr, dep: i === TD.rows.length - 1 ? "" : r.dep})), dd = calcDays(rows);
     document.querySelectorAll("#rows tr").forEach((tr, i) => {
         const r = rows[i], a = toM(r.arr), d = toM(r.dep);
-        tr.querySelector("[data-dw]").textContent = a != null && d != null ? durTxt(dd[i].dAbs - dd[i].aAbs) : "";
-        tr.querySelector("[data-dy]").textContent = dd[i].dd > 0 || dd[i].ad > 0 ? "+" + Math.max(dd[i].dd, dd[i].ad) + " сут." : ""
-    })
+        const dw = a != null && d != null ? dd[i].dAbs - dd[i].aAbs : null;
+        const dy = Math.max(dd[i].dd, dd[i].ad);
+        tr.querySelector("[data-dw]").innerHTML = (dw == null ? "" : `<span class="chip ${dw === 0 ? "" : dw > 720 ? "rd" : dw > 60 ? "bl" : "gr"}">${dw === 0 ? "без стоянки" : durTxt(dw)}</span>`) + (dy > 0 ? ` <span class="chip pu">+${dy} сут.</span>` : "")
+    });
+    const sm = $("#sum");
+    if (sm) {
+        const nChk = TD.rows.filter(r => r.chk).length, first = rows[0], last = rows[rows.length - 1], total = first && last && toM(first.dep) != null && toM(last.arr) != null ? dd[rows.length - 1].aAbs - dd[0].dAbs : null;
+        sm.innerHTML = `<span class="chip bl">станций: ${rows.length}</span>${total != null && total >= 0 ? `<span class="chip gr">в пути по расписанию: ${durTxt(total)}</span>` : ""}${nChk ? `<span class="chip am">⚠ нужно проверить: ${nChk}</span>` : '<span class="chip gr">✓ всё подтверждено</span>'}`
+    }
 }
+const markDirty = () => { if (TD) TD.dirty = true; const d = $("#dirty"); if (d) d.style.display = "" };
+window.addEventListener("beforeunload", e => { if (TD && TD.dirty) { e.preventDefault(); e.returnValue = "" } });
+const nextField = (t, sel) => { const all = [...document.querySelectorAll(sel)], n = all[all.indexOf(t) + 1]; if (n) { n.focus(); n.select && n.select(); return true } return false };
 document.addEventListener("input", e => {
     const t = e.target, tr = t.closest && t.closest("#rows tr"); if (!tr) return;
     const r = TD.rows[+tr.dataset.i], f = t.dataset.f;
     if (f === "chk") { r.chk = t.checked; tr.classList.toggle("chk", t.checked) }
     else if (f) { r[f] = t.value; if (f === "name") t.classList.toggle("bad", !!t.value && !findStation(t.value)) }
-    computed()
+    markDirty(); computed();
+    /* набрали время целиком — сразу следующее поле */
+    if ((f === "arr" || f === "dep") && e.inputType === "insertText" && t.value.length === 5 && toM(t.value) != null) nextField(t, "#rows input.tm:not([disabled])")
+});
+document.addEventListener("focusin", e => { if (e.target.matches && e.target.matches("#rows input.tm")) e.target.select() });
+document.addEventListener("keydown", e => {
+    if (e.key !== "Enter" || !e.target.matches || !e.target.matches("#rows input[type=text]")) return;
+    e.preventDefault(); nextField(e.target, "#rows input[type=text]:not([disabled])")
 });
 document.addEventListener("click", e => {
     const b = e.target.closest && e.target.closest("#rows button"); if (!b) return;
@@ -383,7 +440,7 @@ document.addEventListener("click", e => {
     if (a === "dn" && i < R.length - 1) [R[i + 1], R[i]] = [R[i], R[i + 1]];
     if (a === "ins") R.splice(i + 1, 0, {name: "", arr: "", dep: "", chk: false});
     if (a === "rm") R.splice(i, 1);
-    drawRows()
+    markDirty(); drawRows()
 });
 async function saveTrain() {
     const box = $("#terr"), T = TD.t, R = TD.rows; box.innerHTML = "";
@@ -431,8 +488,12 @@ function viewConns() {
             const legs = legsByConn.get(c.id) || [], p = parseOption(connDsl(c.id)), h = p.head || deriveHead(p.legs);
             return {c, legs, h, trains: legs.map(l => trById.get(l.train_id).number).join(" + ")}
         }).filter(x => !q || (x.h.from + " " + x.h.to + " " + x.trains).toLowerCase().includes(q)).sort((a, b) => a.c.route_slug.localeCompare(b.c.route_slug) || a.c.sort - b.c.sort);
+        const hue = s => [...s].reduce((a, ch) => a * 31 + ch.charCodeAt(0), 7) % 360;
         $("#cl").innerHTML = list.map(({c, h, trains, legs}) => `<div class="conn ${c.active ? "" : "off"}" data-id="${c.id}">
-            <div class="t"><b>${esc(h.from)} ${esc(h.ft)} → ${esc(h.to)} ${esc(h.tt)}</b><small>${esc(trains)} · ${legs.length > 1 ? legs.length - 1 + " пересадка" : "прямой"} · ${esc(c.route_slug)}${c.active ? "" : " · скрыт"}</small></div>
+            <div class="t"><span class="ht">${esc(h.ft)}</span> <b>${esc(h.from)}</b> → <span class="ht">${esc(h.tt)}</span> <b>${esc(h.to)}</b>
+            <small>${legs.length > 1 ? `<span class="chip ${legs.length > 2 ? "rd" : "am"}">${legs.length - 1} ${legs.length > 2 ? "пересадки" : "пересадка"}</span>` : '<span class="chip gr">прямой</span>'}
+            <span class="chip" style="background:hsl(${hue(c.route_slug)} 75% 94%);color:hsl(${hue(c.route_slug)} 60% 28%)">${esc(c.route_slug)}</span>
+            ${c.active ? "" : '<span class="chip rd">скрыт</span>'} ${esc(trains)}</small></div>
             <button data-a="edit">Изменить</button><button data-a="dup">Копия</button><button data-a="del">✕</button></div>`).join("") || '<p class="muted">Ничего не найдено</p>'
     };
     draw(); $("#cf").oninput = draw; $("#cr").onchange = draw;
@@ -465,7 +526,7 @@ function connEditor() {
             <label style="align-self:center"><input type="checkbox" id="c_act" ${C.active ? "checked" : ""}> показывать на сайте</label>
         </div>
         <div id="legs"></div>
-        <p><button id="addleg">+ Ещё поезд (пересадка)</button></p>
+        <p><button id="addleg" class="big">+ Ещё поезд (пересадка)</button></p>
         <details><summary>Шапка карточки (по умолчанию заполняется само)</summary>
             <div class="frow">
                 <div><label>Откуда (город)</label><input type="text" data-c="head_from" value="${esc(C.head_from)}" placeholder="по станции посадки" list="cities"></div>
@@ -479,7 +540,7 @@ function connEditor() {
         </details>
         <datalist id="cities">${[...new Set(((window.CFG && CFG.PAGES) || []).flatMap(p => String(p.title).split("→").map(x => x.trim())))].map(c => `<option value="${esc(c)}">`).join("")}</datalist>
         <div class="pvw" id="pv"></div><div id="cerr"></div>
-        <p><button id="csave" class="pri">Сохранить вариант</button> <button id="ccancel">Закрыть</button></p>`;
+        <div class="bar2"><button id="csave" class="pri big">Сохранить вариант</button> <button id="ccancel">Закрыть</button></div>`;
     drawLegs(); preview();
     $("#c_route").onchange = e => { C.route_slug = e.target.value; E.routeTouched = true };
     $("#c_act").onchange = e => C.active = e.target.checked;
@@ -499,19 +560,26 @@ function autoRoute() {
 }
 function legCard(L, i) {
     const stops = L.train_id ? CTX.stops(L.train_id) : [], prev = i > 0 ? E.legs[i - 1] : null;
-    let trains = TR;
-    if (prev && prev.alight && !L.any) { /* поезда, которые останавливаются на станции пересадки */
+    let trains = TR, waits = new Map();
+    if (prev && prev.alight && !L.any) { /* поезда, с которых можно сесть на станции пересадки (там они не конечная), ближайшие по времени — первыми */
         const sid = CTX.stops(prev.train_id).find(s => s.id === prev.alight).station_id;
-        trains = TR.filter(t => CTX.stops(t.id).some(s => s.station_id === sid))
+        const p1 = {train_id: prev.train_id, alight_stop_id: prev.alight};
+        const cand = TR.map(t => {
+            const st = CTX.stops(t.id), k = st.findIndex((s, j) => s.station_id === sid && j < st.length - 1);
+            return k < 0 ? null : {t, w: waitMinutes(p1, {train_id: t.id, board_stop_id: st[k].id}, CTX)}
+        }).filter(Boolean);
+        const key = c => c.w == null ? 1e6 : c.w < 20 ? 5000 + c.w : c.w;
+        cand.sort((a, b) => key(a) - key(b));
+        trains = cand.map(c => c.t); cand.forEach(c => waits.set(c.t.id, c.w))
     }
     const cur = L.train_id ? trById.get(L.train_id) : null;
     const alights = stops.filter(s => { const b = stops.find(x => x.id === L.board); return b && s.seq > b.seq });
-    return `<div class="leg" data-i="${i}"><div class="frow">
-        <div><label>Поезд ${i + 1}</label><input type="text" data-l="train" list="trl${i}" value="${cur ? esc(trainLabel(cur)) : ""}" placeholder="номер или город" style="width:300px"><datalist id="trl${i}">${trains.map(t => `<option value="${esc(trainLabel(t))}">`).join("")}</datalist></div>
+    return `<div class="leg l${Math.min(i + 1, 3)}" data-i="${i}"><h3><span class="chip ${["bl", "gr", "am"][Math.min(i, 2)]}">Поезд ${i + 1}</span> ${cur ? esc(cur.number) : ""}</h3><div class="frow">
+        <div><label>Выберите поезд</label><input type="text" data-l="train" list="trl${i}" value="${cur ? esc(trainLabel(cur)) : ""}" placeholder="номер или город" style="width:min(560px, 100%)"><datalist id="trl${i}">${trains.map(t => `<option value="${esc(trainLabel(t))}" label="${waits.get(t.id) != null ? "ожидание " + durTxt(waits.get(t.id)) : ""}">`).join("")}</datalist></div>
         ${i > 0 ? `<label style="align-self:center"><input type="checkbox" data-l="any" ${L.any ? "checked" : ""}> любые поезда (не только со станции пересадки)</label>` : ""}
         ${E.legs.length > 1 ? '<button data-l="rm" style="margin-left:auto">Убрать поезд</button>' : ""}</div>
-        ${L.train_id ? `<div class="frow"><div><label>Садимся</label><select data-l="board">${stops.slice(0, -1).map(s => stopOpt(s, L.board)).join("")}</select></div>
-        <div><label>${i < E.legs.length - 1 ? "Выходим (станция пересадки)" : "Выходим"}</label><select data-l="alight">${alights.map(s => stopOpt(s, L.alight)).join("")}</select></div></div>
+        ${L.train_id ? `<div class="frow"><div><label><span class="dot b"></span>Садимся</label><select data-l="board">${stops.slice(0, -1).map(s => stopOpt(s, L.board)).join("")}</select></div>
+        <div><label><span class="dot a"></span>${i < E.legs.length - 1 ? "Выходим (станция пересадки)" : "Выходим"}</label><select data-l="alight">${alights.map(s => stopOpt(s, L.alight)).join("")}</select></div></div>
         <details><summary class="muted">Какие станции показывать</summary><div class="chips">${stops.map(s => {
             const fix = s.id === L.board || s.id === L.alight;
             return `<label class="${fix ? "fix" : ""}"><input type="checkbox" data-l="vis" value="${s.id}" ${fix || L.vis.has(s.id) ? "checked" : ""} ${fix ? "disabled" : ""}> ${esc(stById.get(s.station_id).name_ru)}</label>`
