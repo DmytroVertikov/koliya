@@ -71,23 +71,33 @@ const ROUTES = [
   {id: "kremenchuk_przemysl", file: "kremenchuk-przemysl.html", FROM: "Кременчуг", TO: "Перемышль", BACK: "pl-ua", hash: "ua-pl", rev: "przemysl-kremenchuk.html", dOnly: true, coach: false, slice: true, ds3: "buy.d.s3z", like: "kw"},
   {id: "przemysl_kremenchuk", file: "przemysl-kremenchuk.html", FROM: "Перемышль", TO: "Кременчуг", BACK: "ua-pl", hash: "pl-ua", rev: "kremenchuk-przemysl.html", dOnly: true, coach: false, slice: true, ds3: "buy.d.s3z", like: "wk"},
 ];
-/* направления, добавленные в админке (вкладка «Направления»): node sync.js забирает их из базы в routes.db.json.
-   kind: slice — прямые поезда из других вариантов (как Киев → Хелм); direct — прямые поезда, варианты вносятся вручную;
-   transfer — с пересадкой на станции x. Любые поля ROUTES можно переопределить в extra. Переводы городов (names) добавляются в словарь станций, если там их нет. */
+/* направления из админки (вкладка «Направления»): node sync.js кладёт все записи таблицы route_pages в routes.db.json.
+   Запись с тем же id, что у направления в ROUTES выше, заменяет его (так встроенные страницы редактируются из админки); запись, выключенная
+   галочкой «показывать», убирает страницу из сборки. Остальные записи добавляются как новые страницы.
+   kind: custom — встроенная страница: все параметры ROUTES лежат в extra; slice — прямые поезда из других вариантов (как Киев → Хелм);
+   direct — прямые поезда, варианты вносятся вручную; transfer — с пересадкой на станции x. extra переопределяет любые поля ROUTES.
+   texts — свои тексты страницы по языкам {ru: {title, desc, h1, lead, all, more}, ...}, поверх i18n.js. names — переводы городов, если их нет в словаре станций. */
 const DBR = (() => { try { return JSON.parse(fs.readFileSync("routes.db.json", "utf8")) } catch (e) { return [] } })();
 for (const p of DBR) {
-  const out = /^ua-/.test(p.route), r = {id: p.id, file: p.file, FROM: p.from_name, TO: p.to_name, BACK: p.back, hash: p.route, rev: p.rev, like: p.like_id || (out ? "kw" : "wk"), autotxt: true};
-  if (p.kind === "slice") Object.assign(r, {dOnly: true, coach: false, slice: true, ds3: p.single ? "buy.d.s3z" : "buy.d.s3t"});
-  else if (p.kind === "direct") Object.assign(r, {dOnly: true, coach: false, ds2: "buy.d.s2z", ds3: p.single ? "buy.d.s3z" : "buy.d.s3t"});
-  else {
-    const x = p.x || "Хелм";
-    Object.assign(r, {uz: out ? [p.from_name, x] : [x, p.to_name], pkp: out ? [x, p.to_name] : [p.from_name, x], t3: out ? "buy.t3out" : "buy.t3in", x, direct: false, plat: x === "Хелм", xtxt: true});
-    if (p.border) r.border = p.border
+  const k = ROUTES.findIndex(x => x.id === p.id);
+  if (p.active === false) { if (k >= 0) ROUTES.splice(k, 1); continue }
+  const out = /^ua-/.test(p.route), r = {id: p.id, file: p.file, FROM: p.from_name, TO: p.to_name, BACK: p.back, hash: p.route, rev: p.rev};
+  if (p.kind !== "custom") {
+    Object.assign(r, {like: p.like_id || (out ? "kw" : "wk"), autotxt: true});
+    if (p.kind === "slice") Object.assign(r, {dOnly: true, coach: false, slice: true, ds3: p.single ? "buy.d.s3z" : "buy.d.s3t"});
+    else if (p.kind === "direct") Object.assign(r, {dOnly: true, coach: false, ds2: "buy.d.s2z", ds3: p.single ? "buy.d.s3z" : "buy.d.s3t"});
+    else {
+      const x = p.x || "Хелм";
+      Object.assign(r, {uz: out ? [p.from_name, x] : [x, p.to_name], pkp: out ? [x, p.to_name] : [p.from_name, x], t3: out ? "buy.t3out" : "buy.t3in", x, direct: false, plat: x === "Хелм", xtxt: true});
+      if (p.border) r.border = p.border
+    }
   }
   Object.assign(r, p.extra || {});
-  ROUTES.push(r);
+  if (p.texts && Object.keys(p.texts).length) r.texts = p.texts;
+  if (k >= 0) ROUTES[k] = r; else ROUTES.push(r);
   for (const [n, t] of Object.entries(p.names || {})) if (!I.ST[n]) I.ST[n] = [t.uk || "", t.en || "", t.pl || ""]
 }
+
 /* проверки: повторы в ROUTES и повторяющиеся ключи в i18n.js (при повторе побеждает ПОСЛЕДНИЙ, из-за этого старые тексты могут «возвращаться») */
 {
   const seen = {};
@@ -131,6 +141,7 @@ for (const r of ROUTES) for (const l of LANGS) {
   v.langs = LANGS.map(x => `<a href="${pre + path(x, r.file)}" hreflang="${x}" lang="${x}"${x === l ? ' class="on"' : ""}>${x.toUpperCase()}</a>`).join("");
   d["buy.d.s3t"] = S3T[l];
   if (r.slice || r.autotxt) { const tx = (r.xtxt ? TRANSFER_TXT : SLICE_TXT)[l](st(r.FROM, l), st(r.TO, l), r.x ? xin(r.x, l) : ""); for (const k in tx) if (!d[r.id + "." + k]) d[r.id + "." + k] = tx[k]; for (const k of ["all", "more"]) if (!d[r.id + "." + k]) d[r.id + "." + k] = d[r.like + "." + k] }
+  if (r.texts && r.texts[l]) for (const k in r.texts[l]) if (r.texts[l][k]) d[r.id + "." + k] = r.texts[l][k]; /* свои тексты из админки */
   for (const k of ["title", "desc", "h1", "lead", "all", "more"]) v["r_" + k] = fill(d[r.id + "." + k], v);
   v["buy.t3"] = fill(d[r.t3 || "buy.t3out"], v); v["buy.t.s1x"] = fill(d[r.s1 || (r.one ? "buy.t.s1one" : "buy.t.s1")], v);
   const X = r.x || "Хелм", direct = r.direct !== false, plat = r.plat !== undefined ? r.plat : X === "Хелм";
@@ -222,6 +233,9 @@ for (const p of PGS) { /* проверки: ссылки главной веду
   if (!CTRY.some(c => c[0] === ctryOf(p))) throw new Error("build.js: страница " + p.href + " (route " + p.route + ") — страны нет в CTRY");
   if (!ROUTES.some(r => r.file === p.href)) console.warn("ВНИМАНИЕ: " + p.href + " есть в config.js PAGES, но нет в ROUTES build.js (страница не будет собрана)");
 }
+/* страницы, выключенные в админке, пропадают и из списков «популярное» на главной */
+const OFF = new Set(DBR.filter(p => p.active === false).map(p => p.file));
+for (const k of Object.keys(POP)) POP[k] = POP[k].filter(h => !OFF.has(h));
 for (const h of [].concat(...Object.values(POP))) if (!PGS.some(p => p.href === h)) throw new Error("build.js: POP ссылается на отсутствующую страницу " + h);
 for (const r of ROUTES) if (!PGS.some(p => p.href === r.file)) console.warn("ВНИМАНИЕ: " + r.file + " собирается, но не указана в config.js PAGES — на главной ссылки не будет");
 const ix = fs.readFileSync("index.src.html", "utf8");

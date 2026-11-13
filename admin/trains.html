@@ -105,11 +105,6 @@
         .bar2 { position: sticky; bottom: 0; z-index: 3; background: rgba(255, 255, 255, .96); border-top: 2px solid var(--bd); padding: 12px 0; margin-top: 14px; display: flex; gap: 12px; align-items: center; flex-wrap: wrap }
         #toast { position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%); background: #101828; color: #fff; padding: 11px 22px; border-radius: 10px; font-size: 16px; display: none; z-index: 9 }
         .pvw { border: 2px dashed #98a2b3; border-radius: 12px; padding: 10px; margin: 12px 0; background: #fff }
-        #acbox { position: fixed; z-index: 50; display: none; background: #fff; border: 1.5px solid var(--bl3); border-radius: 10px; box-shadow: 0 10px 28px rgba(16, 24, 40, .22); max-height: 320px; overflow: auto }
-        #acbox div { padding: 8px 12px; font-size: 16px; font-weight: 600; cursor: pointer; display: flex; justify-content: space-between; align-items: baseline; gap: 12px; border-bottom: 1px solid #f2f4f7 }
-        #acbox div:last-child { border-bottom: 0 }
-        #acbox div.on { background: #dbe6ff }
-        #acbox small { color: var(--mu); font-weight: 400; font-size: 13px; white-space: nowrap }
     </style>
 </head>
 <body>
@@ -357,7 +352,22 @@ function shell() {
 /* ================= направления (страницы маршрутов сайта) ================= */
 const DIR_CTRY = [["pl", "Польша"], ["cz", "Чехия"], ["hu", "Венгрия"], ["at", "Австрия"], ["sk", "Словакия"], ["ro", "Румыния"], ["md", "Молдова"], ["de", "Германия"]];
 const DIR_KINDS = {slice: "Прямые поезда из существующих вариантов (как Киев → Хелм)", direct: "Прямые поезда, варианты добавляю вручную (как Киев → Кишинев)", transfer: "С пересадкой на станции (как Киев → Краков)"};
-let RP = [];
+const DIR_KIND_LBL = {custom: "встроенная", slice: "прямые из вариантов", direct: "прямые вручную", transfer: "с пересадкой"};
+/* параметры страницы (поля ROUTES из build.js): [ключ, тип, подпись, основной?]. Типы: text, pair (две станции), bool (не задано / да / нет), sel:значения */
+const DIR_P = [
+    ["x", "text", "Станция пересадки (пусто — Хелм)", 1], ["uz", "pair", "Покупка: Укрзалізниця (от — до)", 1], ["pkp", "pair", "Покупка: второй перевозчик (от — до)", 1],
+    ["car", "text", "Второй перевозчик: zssk, cfr, cd, oebb, mav (пусто — PKP Intercity)", 1], ["border", "sel:after,before", "Пограничный контроль на станции пересадки", 1],
+    ["direct", "bool", "Есть прямой поезд (по умолчанию да)", 1], ["t3", "text", "Текст шага 3: buy.t3out / buy.t3in", 1],
+    ["dOnly", "bool", "Только прямой поезд (одна колонка покупки)"], ["coach", "bool", "Описание купе (по умолчанию да)"], ["slice", "bool", "Поезда вырезаются из других вариантов"],
+    ["plat", "bool", "Платформа (по умолчанию да только для Хелма)"], ["one", "bool", "Один поезд на направлении"], ["app", "bool", "Покупка через приложение"], ["h", "bool", "Свои тексты третьей колонки (buy.h.*)"],
+    ["s1", "text", "Ключ текста шага 1"], ["s2", "text", "Ключ текста шага 2"], ["ds2", "text", "Прямой поезд: ключ шага 2"], ["ds3", "text", "Прямой поезд: ключ шага 3 (buy.d.s3t / buy.d.s3z)"],
+    ["third", "text", "Третий столбец: станция пересадки"], ["uz3", "pair", "Третий столбец: УЗ (от — до)"], ["pkp3", "pair", "Третий столбец: перевозчик (от — до)"],
+    ["split", "pair", "Разбивка вариантов по пересадке: две станции"], ["xs", "pair", "Один блок вариантов: две станции"], ["hxs", "pair", "Заголовок блока: две станции пересадки"],
+    ["hb1", "pair", "Заголовок блока 1 (от — до)"], ["hb2", "pair", "Заголовок блока 2 (от — до)"], ["leadx", "text", "Станция для подзаголовка при пересадке (leadx)"], ["hurl", "text", "Ссылка на сайт перевозчика"]
+];
+const DIR_TXT = [["title", "Заголовок (title)"], ["desc", "Описание (description)"], ["h1", "Заголовок H1"], ["lead", "Подзаголовок"], ["all", "Заголовок «все варианты»"], ["more", "Заголовок «ещё варианты»"]];
+const DIR_LANGS = [["ru", "Русский"], ["uk", "Українська"], ["en", "English"], ["pl", "Polski"]];
+let RP = [], EDIT = null, DQ = "";
 async function viewDirs() {
     const v = $("#view");
     v.innerHTML = '<section class="panel"><p class="muted">Загрузка…</p></section>';
@@ -365,13 +375,84 @@ async function viewDirs() {
         v.innerHTML = `<section class="panel"><h2>Направления</h2><div class="errbox">${esc(e.message)}</div><p>Похоже, таблица <b>route_pages</b> ещё не создана. Выполните файл <code>route_pages.sql</code> в Supabase → SQL Editor и обновите страницу.</p></section>`;
         return
     }
-    drawDirs()
+    EDIT = null; drawDirs()
+}
+const dirOk = (val, t) => val === undefined || (t === "pair" ? Array.isArray(val) && val.length === 2 && val.every(x => typeof x === "string") : t === "bool" ? typeof val === "boolean" : typeof val === "string");
+/* блок параметров: виджеты для известных ключей; всё остальное (и значения нестандартного вида) остаётся в JSON */
+function dirParamsHtml(extra, kind) {
+    const hide = k => kind !== "custom" && (k === "x" || k === "border"), one = ([k, t, l]) => {
+        const val = extra[k], tp = t.split(":")[0], id = `data-p="${k}"`;
+        if (tp === "pair") return `<div><label>${esc(l)}</label><span><input type="text" ${id} data-i="0" value="${esc((val || [])[0] || "")}" style="width:150px"> → <input type="text" ${id} data-i="1" value="${esc((val || [])[1] || "")}" style="width:150px"></span></div>`;
+        if (tp === "bool") return `<div><label>${esc(l)}</label><select ${id}><option value="">не задано</option><option value="true" ${val === true ? "selected" : ""}>да</option><option value="false" ${val === false ? "selected" : ""}>нет</option></select></div>`;
+        if (tp === "sel") return `<div><label>${esc(l)}</label><select ${id}><option value="">нет</option>${t.split(":")[1].split(",").map(o => `<option ${val === o ? "selected" : ""}>${o}</option>`).join("")}</select></div>`;
+        return `<div><label>${esc(l)}</label><input type="text" ${id} value="${esc(val || "")}" style="width:230px"></div>`
+    };
+    const ok = DIR_P.filter(p => !hide(p[0]) && dirOk(extra[p[0]], p[1].split(":")[0])), main = ok.filter(p => p[3]), rest = ok.filter(p => !p[3]);
+    return `<div class="frow">${main.map(one).join("")}</div><details><summary class="muted">Ещё параметры (${rest.length})</summary><div class="frow">${rest.map(one).join("")}</div></details>`
+}
+function dirParamsRead(root, kind) {
+    const out = {};
+    DIR_P.forEach(([k, t]) => {
+        const els = [...root.querySelectorAll(`[data-p="${k}"]`)]; if (!els.length) return;
+        const tp = t.split(":")[0];
+        if (tp === "pair") { const a = els.map(e => e.value.trim()); if (a[0] && a[1]) out[k] = a }
+        else if (tp === "bool") { if (els[0].value) out[k] = els[0].value === "true" }
+        else if (els[0].value.trim()) out[k] = els[0].value.trim()
+    });
+    return out
+}
+function dirEditorHtml(r) {
+    const ex = r.extra || {}, handled = new Set(DIR_P.filter(p => !(r.kind !== "custom" && (p[0] === "x" || p[0] === "border")) && dirOk(ex[p[0]], p[1].split(":")[0])).map(p => p[0]));
+    const rest = {}; Object.keys(ex).forEach(k => { if (!handled.has(k)) rest[k] = ex[k] });
+    const nm = r.names || {}, sf = n => findStation(n) || {}, nmv = (n, k, c) => (nm[n] || {})[k] || sf(n)[c] || "";
+    const tx = r.texts || {};
+    return `<section class="panel" id="d_edit" style="border:2px solid var(--bl)"><h2>Редактирование: ${esc(r.from_name)} → ${esc(r.to_name)} <span class="muted">(${esc(r.file)}, ${esc(DIR_KIND_LBL[r.kind] || r.kind)})</span></h2>
+        <div class="frow"><div><label>Откуда</label><input type="text" id="e_from" list="d_stl" value="${esc(r.from_name)}" style="width:210px"></div>
+        <div><label>Куда</label><input type="text" id="e_to" list="d_stl" value="${esc(r.to_name)}" style="width:210px"></div>
+        <div><label>Код направления</label><input type="text" id="e_route" value="${esc(r.route)}" style="width:90px"></div>
+        <div><label>Код обратного</label><input type="text" id="e_back" value="${esc(r.back)}" style="width:90px"></div>
+        <div><label>Порядок</label><input type="text" id="e_sort" value="${esc(r.sort)}" style="width:70px"></div>
+        <label style="align-self:end"><input type="checkbox" id="e_act" ${r.active ? "checked" : ""}> показывать на сайте</label></div>
+        ${r.kind === "custom" ? "" : `<div class="frow">${r.kind === "transfer" ? `<div><label>Станция пересадки</label><input type="text" id="e_x" list="d_stl" value="${esc(r.x || "")}" style="width:210px"></div><div><label>Пограничный контроль</label><select id="e_bd"><option value="">нет</option><option value="after" ${r.border === "after" ? "selected" : ""}>after</option><option value="before" ${r.border === "before" ? "selected" : ""}>before</option></select></div>` : `<label><input type="checkbox" id="e_one" ${r.single ? "checked" : ""}> на направлении один поезд</label>`}</div>`}
+        <h3 style="margin:14px 0 4px">Параметры страницы</h3>${dirParamsHtml(ex, r.kind)}
+        <div class="frow"><div style="flex:1 1 100%"><label>Прочие параметры (JSON; пусто, если не нужны)</label><textarea id="e_json" rows="${Object.keys(rest).length ? 4 : 2}" style="width:100%;font-family:monospace">${Object.keys(rest).length ? esc(JSON.stringify(rest, null, 1)) : ""}</textarea></div></div>
+        <details><summary class="muted">Переводы городов</summary>
+        ${[["from", r.from_name], ["to", r.to_name]].map(([w, n]) => `<div class="frow"><span class="muted" style="align-self:center;width:130px">${esc(n)}</span>${[["uk", "name_uk", "Українська"], ["en", "name_en", "English"], ["pl", "name_pl", "Polski"]].map(([k, c, ph]) => `<input type="text" data-nm="${w}.${k}" placeholder="${ph}" value="${esc(nmv(n, k, c))}" style="width:170px">`).join("")}</div>`).join("")}</details>
+        <details><summary class="muted">Тексты страницы (пусто — берётся из i18n.js или собирается автоматически; можно использовать {FROM} и {TO})</summary>
+        ${DIR_LANGS.map(([l, ln]) => `<details style="margin-left:14px"><summary class="muted">${ln}</summary>${DIR_TXT.map(([k, kl]) => `<div class="frow"><div style="flex:1 1 100%"><label>${esc(kl)}</label><textarea rows="${k === "lead" ? 3 : 1}" data-tx="${l}.${k}" style="width:100%">${esc((tx[l] || {})[k] || "")}</textarea></div></div>`).join("")}</details>`).join("")}</details>
+        <div id="e_err"></div>
+        <p><button class="pri" id="e_save">Сохранить</button> <button id="e_cancel">Отмена</button></p></section>`
+}
+function dirEditorBind(r) {
+    const root = $("#d_edit"), v = id => $("#" + id).value.trim();
+    $("#e_cancel").onclick = () => { EDIT = null; drawDirs() };
+    $("#e_save").onclick = async () => {
+        const box = $("#e_err"), errs = [];
+        if (!v("e_from") || !v("e_to")) errs.push("Укажите «откуда» и «куда»");
+        if (!/^[a-z]{2}-[a-z]{2}$/.test(v("e_route")) || !/^[a-z]{2}-[a-z]{2}$/.test(v("e_back"))) errs.push("Код направления — вида ua-pl / pl-ua");
+        if (!/^-?\d+$/.test(v("e_sort"))) errs.push("Порядок — целое число");
+        let extra = {};
+        try { const t = $("#e_json").value.trim(); if (t) { extra = JSON.parse(t); if (!extra || typeof extra !== "object" || Array.isArray(extra)) throw new Error("нужен объект {…}") } } catch (e) { errs.push("JSON параметров: " + e.message) }
+        const x = r.kind === "transfer" ? v("e_x") : null; if (r.kind === "transfer" && !x) errs.push("Укажите станцию пересадки");
+        if (errs.length) { box.innerHTML = '<div class="errbox">' + errs.map(esc).join("<br>") + "</div>"; return }
+        Object.assign(extra, dirParamsRead(root, r.kind));
+        const names = Object.assign({}, r.names || {});
+        [["from", v("e_from")], ["to", v("e_to")]].forEach(([w, n]) => { const o = {}; ["uk", "en", "pl"].forEach(k => { const t = root.querySelector(`[data-nm="${w}.${k}"]`).value.trim(); if (t) o[k] = t }); if (Object.keys(o).length) names[n] = o });
+        const texts = {}; root.querySelectorAll("[data-tx]").forEach(e => { const [l, k] = e.dataset.tx.split("."), t = e.value.trim(); if (t) (texts[l] = texts[l] || {})[k] = t });
+        const p = {from_name: v("e_from"), to_name: v("e_to"), route: v("e_route"), back: v("e_back"), sort: +v("e_sort"), active: $("#e_act").checked, names, extra, texts};
+        if (r.kind === "transfer") { p.x = x; p.border = v("e_bd") || null } else if (r.kind !== "custom") p.single = $("#e_one").checked;
+        try {
+            const res = await db("PATCH", "route_pages?id=eq." + encodeURIComponent(r.id), p, "return=representation");
+            RP[RP.findIndex(z => z.id === r.id)] = (res && res[0]) || Object.assign({}, r, p);
+            EDIT = null; drawDirs("Сохранено: " + p.from_name + " → " + p.to_name)
+        } catch (e) { showErr(box, e) }
+    }
 }
 function drawDirs(msg) {
-    const v = $("#view"), cn = n => n.toLowerCase();
-    const list = RP.map(r => `<tr data-id="${esc(r.id)}"><td><b>${esc(r.from_name)} → ${esc(r.to_name)}</b></td><td class="muted">${esc(r.file)}</td><td>${esc((DIR_KINDS[r.kind] || r.kind).replace(/ \(.*\)/, ""))}${r.x ? " · " + esc(r.x) : ""}</td><td class="muted">${esc(r.route)}</td>
-        <td><label><input type="checkbox" data-a="act" ${r.active ? "checked" : ""}> показывать</label></td><td class="x"><button data-a="del" title="Удалить">✕</button></td></tr>`).join("");
-    v.innerHTML = `<section class="panel"><h2>Новое направление</h2>
+    const v = $("#view"), er = EDIT && RP.find(r => r.id === EDIT);
+    const list = RP.map(r => `<tr data-id="${esc(r.id)}" ${r.active ? "" : 'style="opacity:.55"'}><td><b>${esc(r.from_name)} → ${esc(r.to_name)}</b></td><td class="muted">${esc(r.file)}</td><td>${esc(DIR_KIND_LBL[r.kind] || r.kind)}${r.x ? " · " + esc(r.x) : (r.extra || {}).x ? " · " + esc(r.extra.x) : ""}</td><td class="muted">${esc(r.route)}</td>
+        <td><label><input type="checkbox" data-a="act" ${r.active ? "checked" : ""}> показывать</label></td><td class="x"><button data-a="edit" title="Изменить">✎ Изменить</button> <button data-a="del" title="Удалить">✕</button></td></tr>`).join("");
+    v.innerHTML = (er ? dirEditorHtml(er) : "") + `<section class="panel"><h2>Новое направление</h2>
         <p class="muted">Создаются сразу две страницы: «A → B» и обратная «B → A», на русском, украинском, английском и польском. Города — как они называются в справочнике станций.</p>
         <div class="frow"><div><label>Украинский город (откуда)</label><input type="text" id="d_a" list="d_stl" placeholder="Запорожье" style="width:230px"></div>
         <div><label>Зарубежный город (куда)</label><input type="text" id="d_b" list="d_stl" placeholder="Лодзь" style="width:230px"></div>
@@ -388,9 +469,13 @@ function drawDirs(msg) {
         <div class="frow"><span id="d_nb_l" class="muted" style="align-self:center;width:130px"></span><input type="text" data-n="nb.uk" placeholder="Українська" style="width:170px"><input type="text" data-n="nb.en" placeholder="English" style="width:170px"><input type="text" data-n="nb.pl" placeholder="Polski" style="width:170px"></div></details>
         <div id="d_err"></div>
         <p><button class="pri" id="d_add">Создать направление</button> ${msg ? `<span class="chip gr">${esc(msg)}</span>` : ""}</p></section>
-        <section class="panel"><h2>Направления из админки <span class="muted">(${RP.length})</span></h2>
-        <p class="muted">Страницы появляются на сайте после пересборки: на компьютере с сайтом выполните <code>node sync.js</code> (вместо <code>node build.js</code>) и выложите изменения. Встроенные направления (из build.js) здесь не показываются.</p>
+        <section class="panel"><h2>Все направления сайта <span class="muted">(${RP.length})</span></h2>
+        <p class="muted">Изменения попадают на сайт после пересборки: на компьютере с сайтом выполните <code>node sync.js</code> (вместо <code>node build.js</code>) и выложите изменения. Если страницы в списке нет, её нужно один раз перенести из build.js: выполните <code>route_pages_seed.sql</code>.</p>
+        <p><input type="text" id="d_q" placeholder="Поиск по названию или файлу" value="${esc(DQ)}" style="width:280px"></p>
         ${RP.length ? `<table class="g"><thead><tr><th>Страница</th><th>Файл</th><th>Тип</th><th>Код</th><th></th><th></th></tr></thead><tbody id="d_tb">${list}</tbody></table>` : '<p class="muted">Пока ни одного.</p>'}</section>`;
+    if (er) { dirEditorBind(er); $("#d_edit").scrollIntoView({block: "start"}) }
+    const flt = () => { DQ = $("#d_q").value.toLowerCase(); document.querySelectorAll("#d_tb tr").forEach(tr => { const r = RP.find(z => z.id === tr.dataset.id); tr.style.display = !DQ || (r.from_name + " " + r.to_name + " " + r.file + " " + r.id).toLowerCase().includes(DQ) ? "" : "none" }) };
+    $("#d_q").oninput = flt; flt();
     const val = id => $("#" + id).value, form = () => ({a: val("d_a"), b: val("d_b"), cc: val("d_cc"), sa: val("d_sa"), sb: val("d_sb"), kind: val("d_kind"), x: val("d_x"), border: $("#d_bd").checked, single: $("#d_one").checked,
         na: {uk: $('[data-n="na.uk"]').value, en: $('[data-n="na.en"]').value, pl: $('[data-n="na.pl"]').value}, nb: {uk: $('[data-n="nb.uk"]').value, en: $('[data-n="nb.en"]').value, pl: $('[data-n="nb.pl"]').value}});
     const touched = {sa: false, sb: false};
@@ -427,7 +512,8 @@ function drawDirs(msg) {
     tb.onclick = async e => {
         const b = e.target.closest("button"); if (!b) return;
         const r = RP.find(x => x.id === b.closest("tr").dataset.id);
-        if (b.dataset.a === "del" && confirm("Удалить «" + r.from_name + " → " + r.to_name + "» из списка? Уже собранный файл " + r.file + " останется на сайте, пока вы не удалите его вручную.")) {
+        if (b.dataset.a === "edit") { EDIT = r.id; drawDirs(); return }
+        if (b.dataset.a === "del" && confirm("Удалить «" + r.from_name + " → " + r.to_name + "» из списка? Уже собранный файл " + r.file + " останется на сайте, пока вы не удалите его вручную. Если страница ещё есть и в ROUTES в build.js, она снова появится при сборке: чтобы её убрать, лучше выключите «показывать».")) {
             try { await db("DELETE", "route_pages?id=eq." + encodeURIComponent(r.id)); RP = RP.filter(x => x.id !== r.id); drawDirs("Удалено") } catch (er) { toast(er.message) }
         }
     };
@@ -493,7 +579,8 @@ function viewTrains() {
         <div class="frow"><input type="text" id="tf" placeholder="Поиск" style="width:100%"></div>
         <label class="muted"><input type="checkbox" id="tc"> только с неподтверждённым временем</label>
         <p><button id="tn" class="pri">+ Новый поезд</button></p><div class="list" id="tl"></div></section>
-        <section class="panel" id="te"></section></div>`;
+        <section class="panel" id="te"></section></div>
+        <datalist id="stl">${ST.map(s => `<option value="${esc(s.name_ru)}">`).join("")}</datalist>`;
     const draw = () => {
         const q = $("#tf").value.trim().toLowerCase(), c = $("#tc").checked;
         const chk = new Map();
@@ -540,7 +627,7 @@ function drawRows() {
     $("#rows").innerHTML = rows.map((r, i) => {
         const first = i === 0, last = i === n - 1;
         return `<tr data-i="${i}" class="${r.chk ? "chk" : ""} ${first ? "first" : ""} ${last ? "last" : ""}"><td class="n"><span class="num">${i + 1}</span></td>
-        <td class="st"><input type="text" data-ac="st" autocomplete="off" data-f="name" value="${esc(r.name)}" placeholder="Станция (начните вводить)" class="${r.name && !findStation(r.name) ? "bad" : ""}"></td>
+        <td class="st"><input type="text" list="stl" data-f="name" value="${esc(r.name)}" placeholder="Станция" class="${r.name && !findStation(r.name) ? "bad" : ""}"></td>
         <td class="ta"><input type="text" class="tm" inputmode="numeric" data-f="arr" value="${esc(first ? "" : r.arr)}" maxlength="5" placeholder="${first ? "—" : "чч:мм"}" ${first ? "disabled" : ""}></td>
         <td class="td"><input type="text" class="tm" inputmode="numeric" data-f="dep" value="${esc(last ? "" : r.dep)}" maxlength="5" placeholder="${last ? "—" : "чч:мм"}" ${last ? "disabled" : ""}></td>
         <td class="muted" data-dw></td>
@@ -590,7 +677,7 @@ function computed() {
     });
     const sm = $("#sum");
     if (sm) {
-        const nChk = TD.rows.filter(r => r.chk).length, first = rows[0], last = rows[rows.length - 1], tzOf = i => (findStation(TD.rows[i].name) || {}).tz_hours || 0, total = first && last && toM(first.dep) != null && toM(last.arr) != null ? (dd[rows.length - 1].aAbs - tzOf(rows.length - 1) * 60) - (dd[0].dAbs - tzOf(0) * 60) : null;
+        const nChk = TD.rows.filter(r => r.chk).length, first = rows[0], last = rows[rows.length - 1], total = first && last && toM(first.dep) != null && toM(last.arr) != null ? dd[rows.length - 1].aAbs - dd[0].dAbs : null;
         sm.innerHTML = `<span class="chip bl">станций: ${rows.length}</span>${total != null && total >= 0 ? `<span class="chip gr">в пути по расписанию: ${durTxt(total)}</span>` : ""}${nChk ? `<span class="chip am">⚠ нужно проверить: ${nChk}</span>` : '<span class="chip gr">✓ всё подтверждено</span>'}`
     }
 }
@@ -611,82 +698,6 @@ document.addEventListener("keydown", e => {
     if (e.key !== "Enter" || !e.target.matches || !e.target.matches("#rows input[type=text]")) return;
     e.preventDefault(); nextField(e.target, "#rows input[type=text]:not([disabled])")
 });
-
-/* ---------- автоподстановка станций: поиск по части названия, без точного ввода ---------- */
-/*AC*/
-const nrm = s => String(s || "").toLowerCase().replace(/ł/g, "l").normalize("NFD").replace(/\p{M}/gu, "").replace(/[^\p{L}\p{N}]+/gu, " ").trim(); /* регистр, ё/е, й/и, дефисы и знаки не важны */
-let ACI = null;
-const acIndex = () => {
-    if (!ACI || ACI.src !== ST) ACI = {src: ST, list: ST.map(s => ({s, n: nrm(s.name_ru), o: [...(s.aliases || []), s.name_uk, s.name_en, s.name_pl].filter(Boolean).map(t => ({t, n: nrm(t)}))}))};
-    return ACI.list
-};
-function acFind(query) {
-    const q = nrm(query); if (!q) return [];
-    const words = q.split(" ");
-    /* 0 точное, 1 начало названия, 2 начало слова, 3 внутри (или все слова); +4 — если совпало по другому имени (алиас, укр., англ., польск.) */
-    const test = (n, base) => n === q ? base : n.startsWith(q) ? base + 1 : n.includes(" " + q) ? base + 2 : n.includes(q) || words.every(w => n.includes(w)) ? base + 3 : 99;
-    const out = [];
-    acIndex().forEach(it => {
-        let r = test(it.n, 0), via = null;
-        if (r > 3) it.o.forEach(o => { const x = test(o.n, 4); if (x < r) { r = x; via = o.t } });
-        if (r < 99) out.push({s: it.s, r, via})
-    });
-    out.sort((a, b) => a.r - b.r || a.s.name_ru.length - b.s.name_ru.length || a.s.name_ru.localeCompare(b.s.name_ru, "ru"));
-    return out.slice(0, 12)
-}
-/*ENDAC*/
-const acBox = document.createElement("div"); acBox.id = "acbox"; document.body.appendChild(acBox);
-const AC = {inp: null, items: [], i: 0, off: false};
-const acOpen = () => acBox.style.display === "block" && AC.items.length > 0;
-function acHide() { acBox.style.display = "none"; AC.items = [] }
-function acPlace(inp) {
-    const r = inp.getBoundingClientRect();
-    if (r.bottom < 0 || r.top > innerHeight) return acHide();
-    acBox.style.display = "block";
-    acBox.style.left = r.left + "px"; acBox.style.width = Math.max(r.width, 300) + "px"; acBox.style.top = r.bottom + 2 + "px";
-    const h = acBox.offsetHeight;
-    if (r.bottom + 2 + h > innerHeight && r.top > h + 4) acBox.style.top = r.top - h - 2 + "px" /* не помещается снизу — показываем над полем */
-}
-function acShow(inp) {
-    AC.inp = inp;
-    if (AC.off) return acHide();
-    AC.items = acFind(inp.value); AC.i = 0;
-    if (!AC.items.length) return acHide();
-    acBox.innerHTML = AC.items.map((x, k) => `<div data-k="${k}" class="${k === 0 ? "on" : ""}"><span>${esc(x.s.name_ru)}${x.via ? ` <small>${esc(x.via)}</small>` : ""}</span><small>UTC+${x.s.tz_hours}</small></div>`).join("");
-    acBox.scrollTop = 0; acPlace(inp)
-}
-function acMove(d) {
-    AC.i = (AC.i + d + AC.items.length) % AC.items.length;
-    [...acBox.children].forEach((c, k) => c.classList.toggle("on", k === AC.i));
-    acBox.children[AC.i].scrollIntoView({block: "nearest"})
-}
-function acPick(k) {
-    const x = AC.items[k], inp = AC.inp; if (!x || !inp) return;
-    acHide();
-    if (inp.value !== x.s.name_ru) { inp.value = x.s.name_ru; inp.dispatchEvent(new Event("input", {bubbles: true})) } /* общий обработчик обновит строку, проверку и список «нет в справочнике» */
-}
-document.addEventListener("input", e => {
-    const t = e.target; if (!e.isTrusted || !t.matches || !t.matches("input[data-ac]")) return; /* isTrusted: свой же input после выбора не открывает список заново */
-    AC.off = false; acShow(t)
-});
-document.addEventListener("focusin", e => { const t = e.target; if (t.matches && t.matches("input[data-ac]") && t.value && !findStation(t.value)) { AC.off = false; acShow(t) } });
-document.addEventListener("focusout", e => { if (e.target === AC.inp) acHide() });
-acBox.addEventListener("mousedown", e => { e.preventDefault(); const d = e.target.closest("div[data-k]"); if (d) acPick(+d.dataset.k) });
-window.addEventListener("scroll", () => { if (acOpen() && AC.inp) acPlace(AC.inp) }, true);
-window.addEventListener("resize", () => { if (acOpen() && AC.inp) acPlace(AC.inp) });
-document.addEventListener("keydown", e => {
-    const t = e.target; if (!t.matches || !t.matches("input[data-ac]")) return;
-    const open = acOpen();
-    if (e.key === "ArrowDown" || e.key === "ArrowUp") {
-        e.preventDefault();
-        if (!open) { AC.off = false; acShow(t) } else acMove(e.key === "ArrowDown" ? 1 : -1)
-    } else if (e.key === "Escape") {
-        if (open) { e.preventDefault(); AC.off = true; acHide() } /* оставить как набрано, например для новой станции */
-    } else if ((e.key === "Enter" || e.key === "Tab") && open && !e.shiftKey && !e.ctrlKey && !e.altKey && !e.metaKey) {
-        acPick(AC.i);
-        if (e.key === "Enter") { e.preventDefault(); e.stopPropagation(); nextField(t, "#rows input[type=text]:not([disabled])") }
-    }
-}, true);
 document.addEventListener("click", e => {
     const b = e.target.closest && e.target.closest("#rows button"); if (!b) return;
     const i = +b.closest("tr").dataset.i, R = TD.rows, a = b.dataset.a;
