@@ -165,11 +165,9 @@ function validateStops(rows, stationOk) {
 }
 
 /* текстовый формат варианта — то же, что делает представление options_v2 */
-function legStops(L, stops) { /* stops — все остановки поезда по порядку */
-    const b = stops.find(s => s.id === L.board_stop_id), a = stops.find(s => s.id === L.alight_stop_id);
-    const f = stops.find(s => s.id === L.show_from_stop_id), e = stops.find(s => s.id === L.show_to_stop_id);
-    const lo = Math.min(f ? f.seq : b.seq, b.seq), hi = Math.max(e ? e.seq : a.seq, a.seq), hid = L.hidden_stop_ids || [];
-    return stops.filter(s => s.seq >= lo && s.seq <= hi && (s.id === b.id || s.id === a.id || !hid.includes(s.id)))
+function legStops(L, stops) { /* stops — все остановки поезда по порядку; показывается весь маршрут поезда, кроме скрытых станций */
+    const hid = L.hidden_stop_ids || [];
+    return stops.filter(s => s.id === L.board_stop_id || s.id === L.alight_stop_id || !hid.includes(s.id))
 }
 function dslOf(C, legs, ctx) { /* ctx: {train(id), stops(train_id), station(id)} */
     const parts = legs.map(L => {
@@ -209,16 +207,13 @@ function waitMinutes(L1, L2, ctx) {
 /* что сохранять в базу по выбранным «показывать станции» */
 function legPayload(pos, train_id, boardId, alightId, visIds, stops) {
     const b = stops.find(s => s.id === boardId), a = stops.find(s => s.id === alightId);
-    const vis = stops.filter(s => visIds.has(s.id) || s.id === boardId || s.id === alightId);
-    const lo = Math.min(...vis.map(s => s.seq)), hi = Math.max(...vis.map(s => s.seq));
-    const from = lo < b.seq ? stops.find(s => s.seq === lo) : null, to = hi > a.seq ? stops.find(s => s.seq === hi) : null;
-    const hidden = stops.filter(s => s.seq >= Math.min(lo, b.seq) && s.seq <= Math.max(hi, a.seq) && !visIds.has(s.id) && s.id !== boardId && s.id !== alightId).map(s => s.id);
-    return {pos, train_id, board_stop_id: boardId, alight_stop_id: alightId, show_from_stop_id: from ? from.id : null, show_to_stop_id: to ? to.id : null, hidden_stop_ids: hidden}
+    /* показывается весь маршрут поезда: границы «с какой / по какую» больше не нужны (null), скрытые — любые снятые галочки */
+    const hidden = stops.filter(s => !visIds.has(s.id) && s.id !== boardId && s.id !== alightId).map(s => s.id);
+    return {pos, train_id, board_stop_id: boardId, alight_stop_id: alightId, show_from_stop_id: null, show_to_stop_id: null, hidden_stop_ids: hidden}
 }
 function visFromLeg(L, stops) { return new Set(legStops(L, stops).map(s => s.id)) }
 function defaultVis(boardId, alightId, stops) {
-    const b = stops.find(s => s.id === boardId), a = stops.find(s => s.id === alightId);
-    return new Set(stops.filter(s => s.seq >= b.seq && s.seq <= a.seq).map(s => s.id))
+    return new Set(stops.map(s => s.id)) /* по умолчанию виден весь маршрут поезда */
 }
 /*ENDPURE*/
 

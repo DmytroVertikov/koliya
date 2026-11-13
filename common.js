@@ -125,8 +125,8 @@ function splitStop(x) {
 }
 
 function deriveHead(legs) {
-    const f = legs[0] && legs[0].stops[0],
-        l = legs.length && legs[legs.length - 1].stops[legs[legs.length - 1].stops.length - 1];
+    const f = legs[0] && legs[0].stops[legSpan(legs[0].stops).ib],
+        l = legs.length && legs[legs.length - 1].stops[legSpan(legs[legs.length - 1].stops).ie];
     return {from: f ? f.name : "", ft: f ? depOf(f.time) : "", to: l ? l.name : "", tt: l ? arrOf(l.time) : "", dur: "", tag: ""}
 }
 
@@ -259,16 +259,29 @@ const TL_KEY = {
     ru: "Время: сверху — прибытие, снизу — отправление", uk: "Час: зверху — прибуття, знизу — відправлення",
     en: "Times: arrival on top, departure below", pl: "Godziny: u góry przyjazd, niżej odjazd"
 };
-const tlStop = s => {
-    const x = tlTimes(s.time), cls = s.hl ? "h" : "m";
+/* поезд показывается весь, а «свой» участок (от посадки до выхода) — между первой и последней выделенной станцией */
+const legSpan = stops => {
+    const ih = stops.map((s, i) => s.hl ? i : -1).filter(i => i >= 0);
+    return ih.length ? {ib: ih[0], ie: ih[ih.length - 1]} : {ib: 0, ie: stops.length - 1}
+};
+const tlStop = (s, extra) => {
+    const x = tlTimes(s.time), cls = (s.hl ? "h" : "m") + (extra ? " " + extra : "");
     if (!x) return `<li class="${cls}"><span>${esc(stn(s.name))}</span><time>${esc(s.time)}</time></li>`;
     const ma = toMin(x.a), md = toMin(x.d), dw = ma != null && md != null ? ((md - ma) % 1440 + 1440) % 1440 : 0, L = tlLbl();
     return `<li class="${cls} two"><span>${esc(stn(s.name))}${dw ? `<small class="dw">${esc(fmtDur(dw))}</small>` : ""}</span>` +
         `<time><b class="ta" title="${esc(L[0])}">${esc(x.a)}</b><b class="td" title="${esc(L[1])}">${esc(x.d)}</b></time></li>`
 };
+const TL_OUT = {
+    ru: "серым — станции вне вашей поездки", uk: "сірим — станції поза вашою поїздкою",
+    en: "grey — stops outside your ride", pl: "szare — stacje poza Twoją podróżą"
+};
 const tlKey = stops => {
-    if (!stops.some(s => tlTimes(s.time))) return "";
-    return `<p class="tl-key">${esc(TL_KEY[LG] || TL_KEY.ru)}</p>`
+    const sp = legSpan(stops), out = sp.ib > 0 || sp.ie < stops.length - 1, two = stops.some(s => tlTimes(s.time));
+    if (!two && !out) return "";
+    const parts = [];
+    if (two) parts.push(TL_KEY[LG] || TL_KEY.ru);
+    if (out) parts.push(TL_OUT[LG] || TL_OUT.ru);
+    return `<p class="tl-key">${esc(parts.join(" · "))}</p>`
 };
 
 /* Карточка варианта: сворачиваемая (<details>), в сводке — время, длительность, пересадки; в раскрытой части — поезда и станции */
@@ -286,9 +299,9 @@ function optHtml(o) {
     /* swaps[i] — пересадка перед поездом i */
     const swaps = legs.map((L, i) => {
         if (!i) return null;
-        const pa = legs[i - 1].stops[legs[i - 1].stops.length - 1], a = pa.name, b = L.stops[0].name;
+        const ps = legs[i - 1].stops, pa = ps[legSpan(ps).ie], nb = L.stops[legSpan(L.stops).ib], a = pa.name, b = nb.name;
         const where = b && b !== a ? t("swapArr", {a: stn(a), b: stn(b)}) : (inCity(a) ? t("swapIn", {c: inCity(a)}) : t("swap", {a: stn(a)}));
-        return {where, wait: autoDur(arrOf(pa.time), depOf(L.stops[0].time)), t1: arrOf(pa.time), t2: depOf(L.stops[0].time)}
+        return {where, wait: autoDur(arrOf(pa.time), depOf(nb.time)), t1: arrOf(pa.time), t2: depOf(nb.time)}
     });
     const trains = legs.map(L => trainName(L.train)).filter(Boolean).join(" + ");
     const badge = isD ? `<span class="bd">✓ ${esc(t("direct.h"))}</span>` : `<span class="bd">⇄ ${esc(tag)}</span>`;
@@ -300,7 +313,7 @@ function optHtml(o) {
         `<div class="oc-side">${isD ? `<span class="nc">✓ ${esc(t("d.nochg"))}</span>` : `<div class="xfs">${xfs}</div>`}<span class="more"><span class="t-more">${esc(t("d.more"))}</span><span class="t-less">${esc(t("d.less"))}</span><i class="chev"></i></span></div></summary>`;
     const body = legs.map((L, i) => {
         const s = swaps[i + 1], sw = s ? `<div class="swap">🔁 ${esc(s.where)}${s.wait ? " · " + esc(s.wait) : ""}</div>` : "";
-        return `<div class="stp"><div class="leg"><h4>🚆 ${esc(t("train"))} ${esc(trainName(L.train))}${badgesHtml(L.train)}${hideFq(L) ? "" : `<small class="fq">🗓 ${esc(freqTxt(L.freq))}</small>`}</h4>${tlKey(L.stops)}<ul class="tl">${L.stops.map(tlStop).join("")}</ul></div>${sw}</div>`
+        return `<div class="stp"><div class="leg"><h4>🚆 ${esc(t("train"))} ${esc(trainName(L.train))}${badgesHtml(L.train)}${hideFq(L) ? "" : `<small class="fq">🗓 ${esc(freqTxt(L.freq))}</small>`}</h4>${tlKey(L.stops)}<ul class="tl">${(sp => L.stops.map((s, k) => tlStop(s, k < sp.ib || k > sp.ie ? "out" : k === sp.ie && k < L.stops.length - 1 ? "ie" : "")).join(""))(legSpan(L.stops))}</ul></div>${sw}</div>`
     }).join("");
     return `<details class="opt oc-card ${isD ? "is-d" : "is-x"}${n > 1 ? " is-x2" : ""}">${head}<div class="body">${body}${o.note ? `<div class="note">${esc(o.note)}</div>` : ""}</div></details>`
 }
