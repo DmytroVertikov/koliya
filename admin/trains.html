@@ -215,6 +215,37 @@ function visFromLeg(L, stops) { return new Set(legStops(L, stops).map(s => s.id)
 function defaultVis(boardId, alightId, stops) {
     return new Set(stops.map(s => s.id)) /* по умолчанию виден весь маршрут поезда */
 }
+/* ---------- направления сайта (страницы маршрутов): чистые функции ---------- */
+const DIR_SLUGS = {"Киев": "kyiv", "Днепр": "dnipro", "Харьков": "kharkiv", "Одесса": "odesa", "Львов": "lviv", "Кременчуг": "kremenchuk", "Запорожье": "zaporizhzhia", "Варшава": "warsaw", "Краков": "krakow", "Хелм": "khelm", "Перемышль": "przemysl", "Вена": "vienna", "Будапешт": "budapest", "Прага": "prague", "Берлин": "berlin", "Братислава": "bratislava", "Кошице": "kosice", "Бухарест": "bucharest", "Кишинев": "chisinau", "Лодзь": "lodz", "Вроцлав": "wroclaw", "Познань": "poznan", "Гданьск": "gdansk"};
+const DIR_TRL = {"а": "a", "б": "b", "в": "v", "г": "h", "ґ": "g", "д": "d", "е": "e", "ё": "e", "ж": "zh", "з": "z", "и": "y", "й": "y", "к": "k", "л": "l", "м": "m", "н": "n", "о": "o", "п": "p", "р": "r", "с": "s", "т": "t", "у": "u", "ф": "f", "х": "kh", "ц": "ts", "ч": "ch", "ш": "sh", "щ": "shch", "ы": "y", "э": "e", "ю": "yu", "я": "ya", "ь": "", "ъ": "", "і": "i", "ї": "i", "є": "ye"};
+const dirSlug = n => {
+    n = String(n || "").trim();
+    if (DIR_SLUGS[n]) return DIR_SLUGS[n];
+    return [...n.toLowerCase()].map(ch => DIR_TRL[ch] != null ? DIR_TRL[ch] : /[a-z0-9]/.test(ch) ? ch : /[\s-]/.test(ch) ? "-" : "").join("").replace(/-+/g, "-").replace(/^-|-$/g, "")
+};
+/* f: {a (украинский город), b (зарубежный), cc (код страны), sa, sb (части имён файлов), kind, x, border, single, na, nb: {uk, en, pl}} → две записи route_pages: a → b и обратная b → a */
+function dirRows(f) {
+    const a = f.a.trim(), b = f.b.trim(), sa = f.sa.trim(), sb = f.sb.trim(), tr = f.kind === "transfer", fa = sa + "-" + sb + ".html", fb = sb + "-" + sa + ".html", names = {};
+    [[a, f.na], [b, f.nb]].forEach(([n, t]) => { const o = {}; ["uk", "en", "pl"].forEach(k => { if (t && t[k] && t[k].trim()) o[k] = t[k].trim() }); if (Object.keys(o).length) names[n] = o });
+    const common = {kind: f.kind, x: tr ? (f.x || "").trim() : null, single: !!f.single && !tr, names, extra: {}, sort: 1000, active: true};
+    return [
+        Object.assign({id: sa + "_" + sb, file: fa, from_name: a, to_name: b, route: "ua-" + f.cc, back: f.cc + "-ua", rev: fb, like_id: "kw", border: tr && f.border ? "after" : null}, common),
+        Object.assign({id: sb + "_" + sa, file: fb, from_name: b, to_name: a, route: f.cc + "-ua", back: "ua-" + f.cc, rev: fa, like_id: "wk", border: tr && f.border ? "before" : null}, common)]
+}
+function dirErrors(f, existing) {
+    const e = [], ok = s => /^[a-z0-9]+(-[a-z0-9]+)*$/.test(s);
+    if (!f.a.trim()) e.push("Укажите украинский город (откуда)");
+    if (!f.b.trim()) e.push("Укажите зарубежный город (куда)");
+    if (f.a.trim() && f.a.trim().toLowerCase() === f.b.trim().toLowerCase()) e.push("Города совпадают");
+    if (!f.cc) e.push("Выберите страну");
+    if (!ok(f.sa.trim()) || !ok(f.sb.trim())) e.push("Имена файлов — только латинские буквы, цифры и дефис (например kyiv, lodz)");
+    if (f.kind === "transfer" && !(f.x || "").trim()) e.push("Укажите станцию пересадки");
+    if (!e.length) {
+        const have = new Set((existing || []).map(r => r.file));
+        dirRows(f).forEach(r => { if (have.has(r.file)) e.push("Страница " + r.file + " уже есть в списке") })
+    }
+    return e
+}
 /*ENDPURE*/
 
 /* ================= интерфейс ================= */
@@ -313,9 +344,93 @@ async function start() {
     shell()
 }
 function shell() {
-    $("#app").innerHTML = `<div class="tabs">${[["trains", "Поезда"], ["conns", "Варианты"], ["stations", "Станции"]].map(([k, v]) => `<button data-t="${k}" class="${TAB === k ? "on" : ""}">${v}</button>`).join("")}</div><div id="view"></div>`;
+    $("#app").innerHTML = `<div class="tabs">${[["trains", "Поезда"], ["conns", "Варианты"], ["dirs", "Направления"], ["stations", "Станции"]].map(([k, v]) => `<button data-t="${k}" class="${TAB === k ? "on" : ""}">${v}</button>`).join("")}</div><div id="view"></div>`;
     document.querySelectorAll(".tabs button").forEach(b => b.onclick = () => { TAB = b.dataset.t; shell() });
-    ({trains: viewTrains, conns: viewConns, stations: viewStations})[TAB]()
+    ({trains: viewTrains, conns: viewConns, dirs: viewDirs, stations: viewStations})[TAB]()
+}
+
+/* ================= направления (страницы маршрутов сайта) ================= */
+const DIR_CTRY = [["pl", "Польша"], ["cz", "Чехия"], ["hu", "Венгрия"], ["at", "Австрия"], ["sk", "Словакия"], ["ro", "Румыния"], ["md", "Молдова"], ["de", "Германия"]];
+const DIR_KINDS = {slice: "Прямые поезда из существующих вариантов (как Киев → Хелм)", direct: "Прямые поезда, варианты добавляю вручную (как Киев → Кишинев)", transfer: "С пересадкой на станции (как Киев → Краков)"};
+let RP = [];
+async function viewDirs() {
+    const v = $("#view");
+    v.innerHTML = '<section class="panel"><p class="muted">Загрузка…</p></section>';
+    try { RP = await db("GET", "route_pages?order=sort,id") } catch (e) {
+        v.innerHTML = `<section class="panel"><h2>Направления</h2><div class="errbox">${esc(e.message)}</div><p>Похоже, таблица <b>route_pages</b> ещё не создана. Выполните файл <code>route_pages.sql</code> в Supabase → SQL Editor и обновите страницу.</p></section>`;
+        return
+    }
+    drawDirs()
+}
+function drawDirs(msg) {
+    const v = $("#view"), cn = n => n.toLowerCase();
+    const list = RP.map(r => `<tr data-id="${esc(r.id)}"><td><b>${esc(r.from_name)} → ${esc(r.to_name)}</b></td><td class="muted">${esc(r.file)}</td><td>${esc((DIR_KINDS[r.kind] || r.kind).replace(/ \(.*\)/, ""))}${r.x ? " · " + esc(r.x) : ""}</td><td class="muted">${esc(r.route)}</td>
+        <td><label><input type="checkbox" data-a="act" ${r.active ? "checked" : ""}> показывать</label></td><td class="x"><button data-a="del" title="Удалить">✕</button></td></tr>`).join("");
+    v.innerHTML = `<section class="panel"><h2>Новое направление</h2>
+        <p class="muted">Создаются сразу две страницы: «A → B» и обратная «B → A», на русском, украинском, английском и польском. Города — как они называются в справочнике станций.</p>
+        <div class="frow"><div><label>Украинский город (откуда)</label><input type="text" id="d_a" list="d_stl" placeholder="Запорожье" style="width:230px"></div>
+        <div><label>Зарубежный город (куда)</label><input type="text" id="d_b" list="d_stl" placeholder="Лодзь" style="width:230px"></div>
+        <div><label>Страна</label><select id="d_cc">${DIR_CTRY.map(c => `<option value="${c[0]}">${c[1]}</option>`).join("")}</select></div></div>
+        <datalist id="d_stl">${ST.map(s => `<option value="${esc(s.name_ru)}">`).join("")}</datalist>
+        <div class="frow"><div><label>Тип страницы</label><select id="d_kind">${Object.entries(DIR_KINDS).map(([k, t]) => `<option value="${k}">${esc(t)}</option>`).join("")}</select></div></div>
+        <div class="frow" id="d_tr" style="display:none"><div><label>Станция пересадки</label><input type="text" id="d_x" list="d_stl" placeholder="Хелм" style="width:230px"></div>
+        <label style="align-self:center"><input type="checkbox" id="d_bd"> пограничный контроль на этой станции</label></div>
+        <div class="frow" id="d_sg"><label><input type="checkbox" id="d_one"> на направлении один поезд (в покупке «Выберите место», а не «Выберите поезд»)</label></div>
+        <div class="frow"><div><label>Имена файлов</label><span><input type="text" id="d_sa" style="width:150px"> – <input type="text" id="d_sb" style="width:150px"></span></div>
+        <div class="muted" id="d_files" style="align-self:end"></div></div>
+        <details><summary class="muted">Переводы городов (необязательно, иначе в украинской, английской и польской версиях будет русское название)</summary>
+        <div class="frow"><span id="d_na_l" class="muted" style="align-self:center;width:130px"></span><input type="text" data-n="na.uk" placeholder="Українська" style="width:170px"><input type="text" data-n="na.en" placeholder="English" style="width:170px"><input type="text" data-n="na.pl" placeholder="Polski" style="width:170px"></div>
+        <div class="frow"><span id="d_nb_l" class="muted" style="align-self:center;width:130px"></span><input type="text" data-n="nb.uk" placeholder="Українська" style="width:170px"><input type="text" data-n="nb.en" placeholder="English" style="width:170px"><input type="text" data-n="nb.pl" placeholder="Polski" style="width:170px"></div></details>
+        <div id="d_err"></div>
+        <p><button class="pri" id="d_add">Создать направление</button> ${msg ? `<span class="chip gr">${esc(msg)}</span>` : ""}</p></section>
+        <section class="panel"><h2>Направления из админки <span class="muted">(${RP.length})</span></h2>
+        <p class="muted">Страницы появляются на сайте после пересборки: на компьютере с сайтом выполните <code>node sync.js</code> (вместо <code>node build.js</code>) и выложите изменения. Встроенные направления (из build.js) здесь не показываются.</p>
+        ${RP.length ? `<table class="g"><thead><tr><th>Страница</th><th>Файл</th><th>Тип</th><th>Код</th><th></th><th></th></tr></thead><tbody id="d_tb">${list}</tbody></table>` : '<p class="muted">Пока ни одного.</p>'}</section>`;
+    const val = id => $("#" + id).value, form = () => ({a: val("d_a"), b: val("d_b"), cc: val("d_cc"), sa: val("d_sa"), sb: val("d_sb"), kind: val("d_kind"), x: val("d_x"), border: $("#d_bd").checked, single: $("#d_one").checked,
+        na: {uk: $('[data-n="na.uk"]').value, en: $('[data-n="na.en"]').value, pl: $('[data-n="na.pl"]').value}, nb: {uk: $('[data-n="nb.uk"]').value, en: $('[data-n="nb.en"]').value, pl: $('[data-n="nb.pl"]').value}});
+    const touched = {sa: false, sb: false};
+    const upd = () => {
+        const k = val("d_kind"); $("#d_tr").style.display = k === "transfer" ? "" : "none"; $("#d_sg").style.display = k === "transfer" ? "none" : "";
+        $("#d_na_l").textContent = val("d_a") || "Украинский город"; $("#d_nb_l").textContent = val("d_b") || "Зарубежный город";
+        $("#d_files").textContent = val("d_sa") && val("d_sb") ? val("d_sa") + "-" + val("d_sb") + ".html и " + val("d_sb") + "-" + val("d_sa") + ".html" : ""
+    };
+    const fillNames = (who, name) => { /* перевод подставляется из справочника станций, если город там уже есть */
+        const s = findStation(name); if (!s) return;
+        [["uk", "name_uk"], ["en", "name_en"], ["pl", "name_pl"]].forEach(([k, c]) => { const i = $(`[data-n="${who}.${k}"]`); if (i && !i.value && s[c]) i.value = s[c] })
+    };
+    $("#d_a").oninput = () => { if (!touched.sa) $("#d_sa").value = dirSlug(val("d_a")); fillNames("na", val("d_a")); upd() };
+    $("#d_b").oninput = () => { if (!touched.sb) $("#d_sb").value = dirSlug(val("d_b")); fillNames("nb", val("d_b")); upd() };
+    $("#d_sa").oninput = () => { touched.sa = true; upd() }; $("#d_sb").oninput = () => { touched.sb = true; upd() };
+    $("#d_kind").onchange = upd; upd();
+    $("#d_add").onclick = async () => {
+        const f = form(), box = $("#d_err"), errs = dirErrors(f, RP);
+        if (errs.length) { box.innerHTML = '<div class="errbox">' + errs.map(esc).join("<br>") + "</div>"; return }
+        box.innerHTML = "";
+        try {
+            await db("POST", "route_pages", dirRows(f));
+            /* справочник направлений для вариантов (вкладка «Варианты»): по возможности добавляем, чтобы к новой странице можно было сразу привязывать варианты */
+            let note = "";
+            try {
+                const rows = dirRows(f).map((r, i) => ({slug: r.file.replace(/\.html$/, ""), title: r.from_name + " → " + r.to_name, sort: 1000 + i}));
+                await db("POST", "routes", rows); RT = await db("GET", "routes?order=sort")
+            } catch (e2) { note = " (в список направлений вариантов добавьте вручную: " + e2.message + ")" }
+            RP = await db("GET", "route_pages?order=sort,id");
+            drawDirs("Создано: " + f.a.trim() + " ↔ " + f.b.trim() + note)
+        } catch (e) { showErr(box, e) }
+    };
+    const tb = $("#d_tb"); if (!tb) return;
+    tb.onclick = async e => {
+        const b = e.target.closest("button"); if (!b) return;
+        const r = RP.find(x => x.id === b.closest("tr").dataset.id);
+        if (b.dataset.a === "del" && confirm("Удалить «" + r.from_name + " → " + r.to_name + "» из списка? Уже собранный файл " + r.file + " останется на сайте, пока вы не удалите его вручную.")) {
+            try { await db("DELETE", "route_pages?id=eq." + encodeURIComponent(r.id)); RP = RP.filter(x => x.id !== r.id); drawDirs("Удалено") } catch (er) { toast(er.message) }
+        }
+    };
+    tb.onchange = async e => {
+        const c = e.target.closest('input[data-a="act"]'); if (!c) return;
+        const r = RP.find(x => x.id === c.closest("tr").dataset.id);
+        try { await db("PATCH", "route_pages?id=eq." + encodeURIComponent(r.id), {active: c.checked}); r.active = c.checked; toast(c.checked ? "Страница включена" : "Страница скрыта") } catch (er) { c.checked = !c.checked; toast(er.message) }
+    }
 }
 
 /* ================= станции ================= */
