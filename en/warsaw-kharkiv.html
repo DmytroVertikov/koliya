@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- build 2026-11-11T09:11:43.412Z vmwbwgs2b direct=false x=Хелм -->
+<!-- build 2026-11-13T07:40:55.003Z vmweo3pdu direct=false x=Хелм -->
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -308,8 +308,9 @@
                 const key = norm(L.train) + "|" + hm(st[a].time) + ">" + hm(st[b].time);
                 if (seen.has(key)) return;
                 seen.add(key);
-                const part = st.slice(a, b + 1), fq = L.freq && !/^ежедневно$/i.test(L.freq.trim()) ? " ~ " + L.freq.trim() : "",
-                    dsl = L.train.trim() + fq + ": " + part.map((s, i) => (i === 0 || i === part.length - 1 ? "*" : "") + (s.name + " " + s.time).trim()).join(" > "),
+                /* поезд показывается целиком (от начальной до конечной станции), выделены только «откуда» и «куда» страницы */
+                const fq = L.freq && !/^ежедневно$/i.test(L.freq.trim()) ? " ~ " + L.freq.trim() : "",
+                    dsl = L.train.trim() + fq + ": " + st.map((s, i) => (i === a || i === b ? "*" : "") + (s.name + " " + s.time).trim()).join(" > "),
                     o = {dsl, updated_at: x.o.updated_at, active: true}, p = parseOption(dsl);
                 out.push({o, p, h: deriveHead(p.legs)})
             }));
