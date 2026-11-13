@@ -28,37 +28,37 @@
     "active": true,
     "created_at": "2026-11-13T12:44:27.684265+00:00",
     "texts": {
-      "ru": {
-        "title": "Поездом из Киева в Варшаву | Колія",
-        "h1": "Из Киева в Варшаву поездом",
-        "desc": "Все поезда Киев — Варшава: прямой и с пересадкой в Хелме. Время, станции, длительность.",
-        "lead": "Расписание поездов Киев — Варшава: прямой поезд и варианты с пересадкой в Хелме. Время в пути, остановки и информация о покупке билетов.",
-        "all": "Все маршруты: Украина — Польша",
-        "more": "← Из Польши в Украину"
-      },
-      "uk": {
-        "title": "Потягом з Києва до Варшави | Колія",
-        "h1": "З Києва до Варшави потягом",
-        "desc": "Усі поїзди Київ — Варшава: прямий та з пересадкою в Хелмі. Час, станції, тривалість.",
-        "lead": "Розклад поїздів Київ — Варшава: прямий поїзд і варіанти з пересадкою в Хелмі. Час у дорозі, зупинки та інформація про купівлю квитків.",
-        "all": "Усі маршрути: Україна — Польща",
-        "more": "← З Польщі в Україну"
-      },
       "en": {
-        "title": "By train from Kyiv to Warsaw | Koliya",
         "h1": "From Kyiv to Warsaw by train",
+        "all": "All routes: Ukraine — Poland",
         "desc": "All trains from Kyiv to Warsaw: direct and with a transfer in Chełm. Times, stations, duration.",
         "lead": "Train timetable Kyiv — Warsaw: the direct train and options with a transfer in Chełm. Journey time, stops and ticket information.",
-        "all": "All routes: Ukraine — Poland",
-        "more": "← From Poland to Ukraine"
+        "more": "← From Poland to Ukraine",
+        "title": "By train from Kyiv to Warsaw | Koliya"
       },
       "pl": {
-        "title": "Pociągiem z Kijowa do Warszawy | Koliya",
         "h1": "Z Kijowa do Warszawy pociągiem",
+        "all": "Wszystkie trasy: Ukraina — Polska",
         "desc": "Wszystkie pociągi Kijów — Warszawa: bezpośredni i z przesiadką w Chełmie. Godziny, stacje, czas podróży.",
         "lead": "Rozkład pociągów Kijów — Warszawa: pociąg bezpośredni i warianty z przesiadką w Chełmie. Czas podróży, postoje i informacje o zakupie biletów.",
-        "all": "Wszystkie trasy: Ukraina — Polska",
-        "more": "← Z Polski na Ukrainę"
+        "more": "← Z Polski na Ukrainę",
+        "title": "Pociągiem z Kijowa do Warszawy | Koliya"
+      },
+      "ru": {
+        "h1": "Из Киева в Варшаву поездом",
+        "all": "Все маршруты: Украина — Польша",
+        "desc": "Все поезда Киев — Варшава: прямой и с пересадкой в Хелме. Время, станции, длительность.",
+        "lead": "Расписание поездов Киев — Варшава: прямой поезд и варианты с пересадкой в Хелме. Время в пути, остановки и информация о покупке билетов.",
+        "more": "← Из Польши в Украину",
+        "title": "Поездом из Киева в Варшаву | Колія"
+      },
+      "uk": {
+        "h1": "З Києва до Варшави потягом",
+        "all": "Усі маршрути: Україна — Польща",
+        "desc": "Усі поїзди Київ — Варшава: прямий та з пересадкою в Хелмі. Час, станції, тривалість.",
+        "lead": "Розклад поїздів Київ — Варшава: прямий поїзд і варіанти з пересадкою в Хелмі. Час у дорозі, зупинки та інформація про купівлю квитків.",
+        "more": "← З Польщі в Україну",
+        "title": "Потягом з Києва до Варшави | Колія"
       }
     }
   },
@@ -91,37 +91,37 @@
     "active": true,
     "created_at": "2026-11-13T12:44:27.684265+00:00",
     "texts": {
-      "ru": {
-        "title": "Поездом из Варшавы в Киев | Колія",
-        "h1": "Из Варшавы в Киев поездом",
-        "desc": "Все поезда Варшава — Киев: прямой и с пересадкой в Хелме. Время, станции, длительность.",
-        "lead": "Расписание поездов Варшава — Киев: прямой поезд и варианты с пересадкой в Хелме. Время в пути, остановки и информация о покупке билетов.",
-        "all": "Все маршруты: Польша — Украина",
-        "more": "← Из Украины в Польшу"
-      },
-      "uk": {
-        "title": "Потягом з Варшави до Києва | Колія",
-        "h1": "З Варшави до Києва потягом",
-        "desc": "Усі поїзди Варшава — Київ: прямий та з пересадкою в Хелмі. Час, станції, тривалість.",
-        "lead": "Розклад поїздів Варшава — Київ: прямий поїзд і варіанти з пересадкою в Хелмі. Час у дорозі, зупинки та інформація про купівлю квитків.",
-        "all": "Усі маршрути: Польща — Україна",
-        "more": "← З України до Польщі"
-      },
       "en": {
-        "title": "By train from Warsaw to Kyiv | Koliya",
         "h1": "From Warsaw to Kyiv by train",
+        "all": "All routes: Poland — Ukraine",
         "desc": "All trains from Warsaw to Kyiv: direct and with a transfer in Chełm. Times, stations, duration.",
         "lead": "Train timetable Warsaw — Kyiv: the direct train and options with a transfer in Chełm. Journey time, stops and ticket information.",
-        "all": "All routes: Poland — Ukraine",
-        "more": "← From Ukraine to Poland"
+        "more": "← From Ukraine to Poland",
+        "title": "By train from Warsaw to Kyiv | Koliya"
       },
       "pl": {
-        "title": "Pociągiem z Warszawy do Kijowa | Koliya",
         "h1": "Z Warszawy do Kijowa pociągiem",
+        "all": "Wszystkie trasy: Polska — Ukraina",
         "desc": "Wszystkie pociągi Warszawa — Kijów: bezpośredni i z przesiadką w Chełmie. Godziny, stacje, czas podróży.",
         "lead": "Rozkład pociągów Warszawa — Kijów: pociąg bezpośredni i warianty z przesiadką w Chełmie. Czas podróży, postoje i informacje o zakupie biletów.",
-        "all": "Wszystkie trasy: Polska — Ukraina",
-        "more": "← Z Ukrainy do Polski"
+        "more": "← Z Ukrainy do Polski",
+        "title": "Pociągiem z Warszawy do Kijowa | Koliya"
+      },
+      "ru": {
+        "h1": "Из Варшавы в Киев поездом",
+        "all": "Все маршруты: Польша — Украина",
+        "desc": "Все поезда Варшава — Киев: прямой и с пересадкой в Хелме. Время, станции, длительность.",
+        "lead": "Расписание поездов Варшава — Киев: прямой поезд и варианты с пересадкой в Хелме. Время в пути, остановки и информация о покупке билетов.",
+        "more": "← Из Украины в Польшу",
+        "title": "Поездом из Варшавы в Киев | Колія"
+      },
+      "uk": {
+        "h1": "З Варшави до Києва потягом",
+        "all": "Усі маршрути: Польща — Україна",
+        "desc": "Усі поїзди Варшава — Київ: прямий та з пересадкою в Хелмі. Час, станції, тривалість.",
+        "lead": "Розклад поїздів Варшава — Київ: прямий поїзд і варіанти з пересадкою в Хелмі. Час у дорозі, зупинки та інформація про купівлю квитків.",
+        "more": "← З України до Польщі",
+        "title": "Потягом з Варшави до Києва | Колія"
       }
     }
   },
@@ -157,37 +157,37 @@
     "active": true,
     "created_at": "2026-11-13T12:44:27.684265+00:00",
     "texts": {
-      "ru": {
-        "title": "Киев → Краков поездом | Колія",
-        "desc": "Поезда Киев — Краков с пересадкой: время, станции, длительность.",
-        "h1": "Поездом: Киев → Краков",
-        "lead": "Расписание поездов Киев — Краков: варианты с пересадкой в Перемышле. Время в пути, остановки и информация о покупке билетов.",
-        "all": "Все маршруты: Украина — Польша",
-        "more": "← Польша — Украина"
-      },
-      "uk": {
-        "title": "Київ → Краків потягом | Колія",
-        "desc": "Поїзди Київ — Краків з пересадкою: час, станції, тривалість.",
-        "h1": "Потягом: Київ → Краків",
-        "lead": "Розклад поїздів Київ — Краків: варіанти з пересадкою у Перемишлі. Час у дорозі, зупинки та інформація про купівлю квитків.",
-        "all": "Усі маршрути: Україна — Польща",
-        "more": "← Польща — Україна"
-      },
       "en": {
-        "title": "Kyiv → Kraków by train | Koliya",
-        "desc": "Trains Kyiv — Kraków with a transfer: times, stations, duration.",
         "h1": "By train: Kyiv → Kraków",
-        "lead": "Train timetable Kyiv — Kraków: options with a transfer in Przemyśl. Journey time, stops and ticket information.",
         "all": "All routes: Ukraine — Poland",
-        "more": "← Poland — Ukraine"
+        "desc": "Trains Kyiv — Kraków with a transfer: times, stations, duration.",
+        "lead": "Train timetable Kyiv — Kraków: options with a transfer in Przemyśl. Journey time, stops and ticket information.",
+        "more": "← Poland — Ukraine",
+        "title": "Kyiv → Kraków by train | Koliya"
       },
       "pl": {
-        "title": "Kijów → Kraków pociągiem | Koliya",
-        "desc": "Pociągi Kijów — Kraków z przesiadką: godziny, stacje, czas podróży.",
         "h1": "Pociągiem: Kijów → Kraków",
-        "lead": "Rozkład pociągów Kijów — Kraków: warianty z przesiadką w Przemyślu. Czas podróży, postoje i informacje o zakupie biletów.",
         "all": "Wszystkie trasy: Ukraina — Polska",
-        "more": "← Polska — Ukraina"
+        "desc": "Pociągi Kijów — Kraków z przesiadką: godziny, stacje, czas podróży.",
+        "lead": "Rozkład pociągów Kijów — Kraków: warianty z przesiadką w Przemyślu. Czas podróży, postoje i informacje o zakupie biletów.",
+        "more": "← Polska — Ukraina",
+        "title": "Kijów → Kraków pociągiem | Koliya"
+      },
+      "ru": {
+        "h1": "Поездом: Киев → Краков",
+        "all": "Все маршруты: Украина — Польша",
+        "desc": "Поезда Киев — Краков с пересадкой: время, станции, длительность.",
+        "lead": "Расписание поездов Киев — Краков: варианты с пересадкой в Перемышле. Время в пути, остановки и информация о покупке билетов.",
+        "more": "← Польша — Украина",
+        "title": "Киев → Краков поездом | Колія"
+      },
+      "uk": {
+        "h1": "Потягом: Київ → Краків",
+        "all": "Усі маршрути: Україна — Польща",
+        "desc": "Поїзди Київ — Краків з пересадкою: час, станції, тривалість.",
+        "lead": "Розклад поїздів Київ — Краків: варіанти з пересадкою у Перемишлі. Час у дорозі, зупинки та інформація про купівлю квитків.",
+        "more": "← Польща — Україна",
+        "title": "Київ → Краків потягом | Колія"
       }
     }
   },
@@ -223,37 +223,37 @@
     "active": true,
     "created_at": "2026-11-13T12:44:27.684265+00:00",
     "texts": {
-      "ru": {
-        "title": "Краков → Киев поездом | Колія",
-        "desc": "Поезда Краков — Киев с пересадкой: время, станции, длительность.",
-        "h1": "Поездом: Краков → Киев",
-        "lead": "Расписание поездов Краков — Киев: варианты с пересадкой в Перемышле. Время в пути, остановки и информация о покупке билетов.",
-        "all": "Все маршруты: Польша — Украина",
-        "more": "← Украина — Польша"
-      },
-      "uk": {
-        "title": "Краків → Київ потягом | Колія",
-        "desc": "Поїзди Краків — Київ з пересадкою: час, станції, тривалість.",
-        "h1": "Потягом: Краків → Київ",
-        "lead": "Розклад поїздів Краків — Київ: варіанти з пересадкою у Перемишлі. Час у дорозі, зупинки та інформація про купівлю квитків.",
-        "all": "Усі маршрути: Польща — Україна",
-        "more": "← Україна — Польща"
-      },
       "en": {
-        "title": "Kraków → Kyiv by train | Koliya",
-        "desc": "Trains Kraków — Kyiv with a transfer: times, stations, duration.",
         "h1": "By train: Kraków → Kyiv",
-        "lead": "Train timetable Kraków — Kyiv: options with a transfer in Przemyśl. Journey time, stops and ticket information.",
         "all": "All routes: Poland — Ukraine",
-        "more": "← Ukraine — Poland"
+        "desc": "Trains Kraków — Kyiv with a transfer: times, stations, duration.",
+        "lead": "Train timetable Kraków — Kyiv: options with a transfer in Przemyśl. Journey time, stops and ticket information.",
+        "more": "← Ukraine — Poland",
+        "title": "Kraków → Kyiv by train | Koliya"
       },
       "pl": {
-        "title": "Kraków → Kijów pociągiem | Koliya",
-        "desc": "Pociągi Kraków — Kijów z przesiadką: godziny, stacje, czas podróży.",
         "h1": "Pociągiem: Kraków → Kijów",
-        "lead": "Rozkład pociągów Kraków — Kijów: warianty z przesiadką w Przemyślu. Czas podróży, postoje i informacje o zakupie biletów.",
         "all": "Wszystkie trasy: Polska — Ukraina",
-        "more": "← Ukraina — Polska"
+        "desc": "Pociągi Kraków — Kijów z przesiadką: godziny, stacje, czas podróży.",
+        "lead": "Rozkład pociągów Kraków — Kijów: warianty z przesiadką w Przemyślu. Czas podróży, postoje i informacje o zakupie biletów.",
+        "more": "← Ukraina — Polska",
+        "title": "Kraków → Kijów pociągiem | Koliya"
+      },
+      "ru": {
+        "h1": "Поездом: Краков → Киев",
+        "all": "Все маршруты: Польша — Украина",
+        "desc": "Поезда Краков — Киев с пересадкой: время, станции, длительность.",
+        "lead": "Расписание поездов Краков — Киев: варианты с пересадкой в Перемышле. Время в пути, остановки и информация о покупке билетов.",
+        "more": "← Украина — Польша",
+        "title": "Краков → Киев поездом | Колія"
+      },
+      "uk": {
+        "h1": "Потягом: Краків → Київ",
+        "all": "Усі маршрути: Польща — Україна",
+        "desc": "Поїзди Краків — Київ з пересадкою: час, станції, тривалість.",
+        "lead": "Розклад поїздів Краків — Київ: варіанти з пересадкою у Перемишлі. Час у дорозі, зупинки та інформація про купівлю квитків.",
+        "more": "← Україна — Польща",
+        "title": "Краків → Київ потягом | Колія"
       }
     }
   },
@@ -394,37 +394,37 @@
     "active": true,
     "created_at": "2026-11-13T12:44:27.684265+00:00",
     "texts": {
-      "ru": {
-        "title": "Днепр → Варшава поездом | Колія",
-        "desc": "Поезда Днепр — Варшава с пересадкой: время, станции, длительность.",
-        "h1": "Поездом: Днепр → Варшава",
-        "lead": "Расписание поездов Днепр — Варшава: варианты с пересадкой в Хелме. Время в пути, остановки и информация о покупке билетов.",
-        "all": "Все маршруты: Украина — Польша",
-        "more": "← Польша — Украина"
-      },
-      "uk": {
-        "title": "Дніпро → Варшава потягом | Колія",
-        "desc": "Поїзди Дніпро — Варшава з пересадкою: час, станції, тривалість.",
-        "h1": "Потягом: Дніпро → Варшава",
-        "lead": "Розклад поїздів Дніпро — Варшава: варіанти з пересадкою у Хелмі. Час у дорозі, зупинки та інформація про купівлю квитків.",
-        "all": "Усі маршрути: Україна — Польща",
-        "more": "← Польща — Україна"
-      },
       "en": {
-        "title": "Dnipro → Warsaw by train | Koliya",
-        "desc": "Trains Dnipro — Warsaw with a transfer: times, stations, duration.",
         "h1": "By train: Dnipro → Warsaw",
-        "lead": "Train timetable Dnipro — Warsaw: options with a transfer in Chełm. Journey time, stops and ticket information.",
         "all": "All routes: Ukraine — Poland",
-        "more": "← Poland — Ukraine"
+        "desc": "Trains Dnipro — Warsaw with a transfer: times, stations, duration.",
+        "lead": "Train timetable Dnipro — Warsaw: options with a transfer in Chełm. Journey time, stops and ticket information.",
+        "more": "← Poland — Ukraine",
+        "title": "Dnipro → Warsaw by train | Koliya"
       },
       "pl": {
-        "title": "Dnipro → Warszawa pociągiem | Koliya",
-        "desc": "Pociągi Dnipro — Warszawa z przesiadką: godziny, stacje, czas podróży.",
         "h1": "Pociągiem: Dnipro → Warszawa",
-        "lead": "Rozkład pociągów Dnipro — Warszawa: warianty z przesiadką w Chełmie. Czas podróży, postoje i informacje o zakupie biletów.",
         "all": "Wszystkie trasy: Ukraina — Polska",
-        "more": "← Polska — Ukraina"
+        "desc": "Pociągi Dnipro — Warszawa z przesiadką: godziny, stacje, czas podróży.",
+        "lead": "Rozkład pociągów Dnipro — Warszawa: warianty z przesiadką w Chełmie. Czas podróży, postoje i informacje o zakupie biletów.",
+        "more": "← Polska — Ukraina",
+        "title": "Dnipro → Warszawa pociągiem | Koliya"
+      },
+      "ru": {
+        "h1": "Поездом: Днепр → Варшава",
+        "all": "Все маршруты: Украина — Польша",
+        "desc": "Поезда Днепр — Варшава с пересадкой: время, станции, длительность.",
+        "lead": "Расписание поездов Днепр — Варшава: варианты с пересадкой в Хелме. Время в пути, остановки и информация о покупке билетов.",
+        "more": "← Польша — Украина",
+        "title": "Днепр → Варшава поездом | Колія"
+      },
+      "uk": {
+        "h1": "Потягом: Дніпро → Варшава",
+        "all": "Усі маршрути: Україна — Польща",
+        "desc": "Поїзди Дніпро — Варшава з пересадкою: час, станції, тривалість.",
+        "lead": "Розклад поїздів Дніпро — Варшава: варіанти з пересадкою у Хелмі. Час у дорозі, зупинки та інформація про купівлю квитків.",
+        "more": "← Польща — Україна",
+        "title": "Дніпро → Варшава потягом | Колія"
       }
     }
   },
@@ -461,37 +461,37 @@
     "active": true,
     "created_at": "2026-11-13T12:44:27.684265+00:00",
     "texts": {
-      "ru": {
-        "title": "Варшава → Днепр поездом | Колія",
-        "desc": "Поезда Варшава — Днепр с пересадкой: время, станции, длительность.",
-        "h1": "Поездом: Варшава → Днепр",
-        "lead": "Расписание поездов Варшава — Днепр: варианты с пересадкой в Хелме. Время в пути, остановки и информация о покупке билетов.",
-        "all": "Все маршруты: Польша — Украина",
-        "more": "← Украина — Польша"
-      },
-      "uk": {
-        "title": "Варшава → Дніпро потягом | Колія",
-        "desc": "Поїзди Варшава — Дніпро з пересадкою: час, станції, тривалість.",
-        "h1": "Потягом: Варшава → Дніпро",
-        "lead": "Розклад поїздів Варшава — Дніпро: варіанти з пересадкою у Хелмі. Час у дорозі, зупинки та інформація про купівлю квитків.",
-        "all": "Усі маршрути: Польща — Україна",
-        "more": "← Україна — Польща"
-      },
       "en": {
-        "title": "Warsaw → Dnipro by train | Koliya",
-        "desc": "Trains Warsaw — Dnipro with a transfer: times, stations, duration.",
         "h1": "By train: Warsaw → Dnipro",
-        "lead": "Train timetable Warsaw — Dnipro: options with a transfer in Chełm. Journey time, stops and ticket information.",
         "all": "All routes: Poland — Ukraine",
-        "more": "← Ukraine — Poland"
+        "desc": "Trains Warsaw — Dnipro with a transfer: times, stations, duration.",
+        "lead": "Train timetable Warsaw — Dnipro: options with a transfer in Chełm. Journey time, stops and ticket information.",
+        "more": "← Ukraine — Poland",
+        "title": "Warsaw → Dnipro by train | Koliya"
       },
       "pl": {
-        "title": "Warszawa → Dnipro pociągiem | Koliya",
-        "desc": "Pociągi Warszawa — Dnipro z przesiadką: godziny, stacje, czas podróży.",
         "h1": "Pociągiem: Warszawa → Dnipro",
-        "lead": "Rozkład pociągów Warszawa — Dnipro: warianty z przesiadką w Chełmie. Czas podróży, postoje i informacje o zakupie biletów.",
         "all": "Wszystkie trasy: Polska — Ukraina",
-        "more": "← Ukraina — Polska"
+        "desc": "Pociągi Warszawa — Dnipro z przesiadką: godziny, stacje, czas podróży.",
+        "lead": "Rozkład pociągów Warszawa — Dnipro: warianty z przesiadką w Chełmie. Czas podróży, postoje i informacje o zakupie biletów.",
+        "more": "← Ukraina — Polska",
+        "title": "Warszawa → Dnipro pociągiem | Koliya"
+      },
+      "ru": {
+        "h1": "Поездом: Варшава → Днепр",
+        "all": "Все маршруты: Польша — Украина",
+        "desc": "Поезда Варшава — Днепр с пересадкой: время, станции, длительность.",
+        "lead": "Расписание поездов Варшава — Днепр: варианты с пересадкой в Хелме. Время в пути, остановки и информация о покупке билетов.",
+        "more": "← Украина — Польша",
+        "title": "Варшава → Днепр поездом | Колія"
+      },
+      "uk": {
+        "h1": "Потягом: Варшава → Дніпро",
+        "all": "Усі маршрути: Польща — Україна",
+        "desc": "Поїзди Варшава — Дніпро з пересадкою: час, станції, тривалість.",
+        "lead": "Розклад поїздів Варшава — Дніпро: варіанти з пересадкою у Хелмі. Час у дорозі, зупинки та інформація про купівлю квитків.",
+        "more": "← Україна — Польща",
+        "title": "Варшава → Дніпро потягом | Колія"
       }
     }
   },
@@ -528,37 +528,37 @@
     "active": true,
     "created_at": "2026-11-13T12:44:27.684265+00:00",
     "texts": {
-      "ru": {
-        "title": "Днепр → Краков поездом | Колія",
-        "desc": "Поезда Днепр — Краков с пересадкой: время, станции, длительность.",
-        "h1": "Поездом: Днепр → Краков",
-        "lead": "Расписание поездов Днепр — Краков: варианты с пересадкой в Перемышле. Время в пути, остановки и информация о покупке билетов.",
-        "all": "Все маршруты: Украина — Польша",
-        "more": "← Польша — Украина"
-      },
-      "uk": {
-        "title": "Дніпро → Краків потягом | Колія",
-        "desc": "Поїзди Дніпро — Краків з пересадкою: час, станції, тривалість.",
-        "h1": "Потягом: Дніпро → Краків",
-        "lead": "Розклад поїздів Дніпро — Краків: варіанти з пересадкою у Перемишлі. Час у дорозі, зупинки та інформація про купівлю квитків.",
-        "all": "Усі маршрути: Україна — Польща",
-        "more": "← Польща — Україна"
-      },
       "en": {
-        "title": "Dnipro → Kraków by train | Koliya",
-        "desc": "Trains Dnipro — Kraków with a transfer: times, stations, duration.",
         "h1": "By train: Dnipro → Kraków",
-        "lead": "Train timetable Dnipro — Kraków: options with a transfer in Przemyśl. Journey time, stops and ticket information.",
         "all": "All routes: Ukraine — Poland",
-        "more": "← Poland — Ukraine"
+        "desc": "Trains Dnipro — Kraków with a transfer: times, stations, duration.",
+        "lead": "Train timetable Dnipro — Kraków: options with a transfer in Przemyśl. Journey time, stops and ticket information.",
+        "more": "← Poland — Ukraine",
+        "title": "Dnipro → Kraków by train | Koliya"
       },
       "pl": {
-        "title": "Dnipro → Kraków pociągiem | Koliya",
-        "desc": "Pociągi Dnipro — Kraków z przesiadką: godziny, stacje, czas podróży.",
         "h1": "Pociągiem: Dnipro → Kraków",
-        "lead": "Rozkład pociągów Dnipro — Kraków: warianty z przesiadką w Przemyślu. Czas podróży, postoje i informacje o zakupie biletów.",
         "all": "Wszystkie trasy: Ukraina — Polska",
-        "more": "← Polska — Ukraina"
+        "desc": "Pociągi Dnipro — Kraków z przesiadką: godziny, stacje, czas podróży.",
+        "lead": "Rozkład pociągów Dnipro — Kraków: warianty z przesiadką w Przemyślu. Czas podróży, postoje i informacje o zakupie biletów.",
+        "more": "← Polska — Ukraina",
+        "title": "Dnipro → Kraków pociągiem | Koliya"
+      },
+      "ru": {
+        "h1": "Поездом: Днепр → Краков",
+        "all": "Все маршруты: Украина — Польша",
+        "desc": "Поезда Днепр — Краков с пересадкой: время, станции, длительность.",
+        "lead": "Расписание поездов Днепр — Краков: варианты с пересадкой в Перемышле. Время в пути, остановки и информация о покупке билетов.",
+        "more": "← Польша — Украина",
+        "title": "Днепр → Краков поездом | Колія"
+      },
+      "uk": {
+        "h1": "Потягом: Дніпро → Краків",
+        "all": "Усі маршрути: Україна — Польща",
+        "desc": "Поїзди Дніпро — Краків з пересадкою: час, станції, тривалість.",
+        "lead": "Розклад поїздів Дніпро — Краків: варіанти з пересадкою у Перемишлі. Час у дорозі, зупинки та інформація про купівлю квитків.",
+        "more": "← Польща — Україна",
+        "title": "Дніпро → Краків потягом | Колія"
       }
     }
   },
@@ -595,37 +595,37 @@
     "active": true,
     "created_at": "2026-11-13T12:44:27.684265+00:00",
     "texts": {
-      "ru": {
-        "title": "Краков → Днепр поездом | Колія",
-        "desc": "Поезда Краков — Днепр с пересадкой: время, станции, длительность.",
-        "h1": "Поездом: Краков → Днепр",
-        "lead": "Расписание поездов Краков — Днепр: варианты с пересадкой в Перемышле. Время в пути, остановки и информация о покупке билетов.",
-        "all": "Все маршруты: Польша — Украина",
-        "more": "← Украина — Польша"
-      },
-      "uk": {
-        "title": "Краків → Дніпро потягом | Колія",
-        "desc": "Поїзди Краків — Дніпро з пересадкою: час, станції, тривалість.",
-        "h1": "Потягом: Краків → Дніпро",
-        "lead": "Розклад поїздів Краків — Дніпро: варіанти з пересадкою у Перемишлі. Час у дорозі, зупинки та інформація про купівлю квитків.",
-        "all": "Усі маршрути: Польща — Україна",
-        "more": "← Україна — Польща"
-      },
       "en": {
-        "title": "Kraków → Dnipro by train | Koliya",
-        "desc": "Trains Kraków — Dnipro with a transfer: times, stations, duration.",
         "h1": "By train: Kraków → Dnipro",
-        "lead": "Train timetable Kraków — Dnipro: options with a transfer in Przemyśl. Journey time, stops and ticket information.",
         "all": "All routes: Poland — Ukraine",
-        "more": "← Ukraine — Poland"
+        "desc": "Trains Kraków — Dnipro with a transfer: times, stations, duration.",
+        "lead": "Train timetable Kraków — Dnipro: options with a transfer in Przemyśl. Journey time, stops and ticket information.",
+        "more": "← Ukraine — Poland",
+        "title": "Kraków → Dnipro by train | Koliya"
       },
       "pl": {
-        "title": "Kraków → Dnipro pociągiem | Koliya",
-        "desc": "Pociągi Kraków — Dnipro z przesiadką: godziny, stacje, czas podróży.",
         "h1": "Pociągiem: Kraków → Dnipro",
-        "lead": "Rozkład pociągów Kraków — Dnipro: warianty z przesiadką w Przemyślu. Czas podróży, postoje i informacje o zakupie biletów.",
         "all": "Wszystkie trasy: Polska — Ukraina",
-        "more": "← Ukraina — Polska"
+        "desc": "Pociągi Kraków — Dnipro z przesiadką: godziny, stacje, czas podróży.",
+        "lead": "Rozkład pociągów Kraków — Dnipro: warianty z przesiadką w Przemyślu. Czas podróży, postoje i informacje o zakupie biletów.",
+        "more": "← Ukraina — Polska",
+        "title": "Kraków → Dnipro pociągiem | Koliya"
+      },
+      "ru": {
+        "h1": "Поездом: Краков → Днепр",
+        "all": "Все маршруты: Польша — Украина",
+        "desc": "Поезда Краков — Днепр с пересадкой: время, станции, длительность.",
+        "lead": "Расписание поездов Краков — Днепр: варианты с пересадкой в Перемышле. Время в пути, остановки и информация о покупке билетов.",
+        "more": "← Украина — Польша",
+        "title": "Краков → Днепр поездом | Колія"
+      },
+      "uk": {
+        "h1": "Потягом: Краків → Дніпро",
+        "all": "Усі маршрути: Польща — Україна",
+        "desc": "Поїзди Краків — Дніпро з пересадкою: час, станції, тривалість.",
+        "lead": "Розклад поїздів Краків — Дніпро: варіанти з пересадкою у Перемишлі. Час у дорозі, зупинки та інформація про купівлю квитків.",
+        "more": "← Україна — Польща",
+        "title": "Краків → Дніпро потягом | Колія"
       }
     }
   },
@@ -766,37 +766,37 @@
     "active": true,
     "created_at": "2026-11-13T12:44:27.684265+00:00",
     "texts": {
-      "ru": {
-        "title": "Харьков → Варшава поездом | Колія",
-        "desc": "Поезда Харьков — Варшава с пересадкой: время, станции, длительность.",
-        "h1": "Поездом: Харьков → Варшава",
-        "lead": "Расписание поездов Харьков — Варшава: варианты с пересадкой в Хелме. Время в пути, остановки и информация о покупке билетов.",
-        "all": "Все маршруты: Украина — Польша",
-        "more": "← Польша — Украина"
-      },
-      "uk": {
-        "title": "Харків → Варшава потягом | Колія",
-        "desc": "Поїзди Харків — Варшава з пересадкою: час, станції, тривалість.",
-        "h1": "Потягом: Харків → Варшава",
-        "lead": "Розклад поїздів Харків — Варшава: варіанти з пересадкою у Хелмі. Час у дорозі, зупинки та інформація про купівлю квитків.",
-        "all": "Усі маршрути: Україна — Польща",
-        "more": "← Польща — Україна"
-      },
       "en": {
-        "title": "Kharkiv → Warsaw by train | Koliya",
-        "desc": "Trains Kharkiv — Warsaw with a transfer: times, stations, duration.",
         "h1": "By train: Kharkiv → Warsaw",
-        "lead": "Train timetable Kharkiv — Warsaw: options with a transfer in Chełm. Journey time, stops and ticket information.",
         "all": "All routes: Ukraine — Poland",
-        "more": "← Poland — Ukraine"
+        "desc": "Trains Kharkiv — Warsaw with a transfer: times, stations, duration.",
+        "lead": "Train timetable Kharkiv — Warsaw: options with a transfer in Chełm. Journey time, stops and ticket information.",
+        "more": "← Poland — Ukraine",
+        "title": "Kharkiv → Warsaw by train | Koliya"
       },
       "pl": {
-        "title": "Charków → Warszawa pociągiem | Koliya",
-        "desc": "Pociągi Charków — Warszawa z przesiadką: godziny, stacje, czas podróży.",
         "h1": "Pociągiem: Charków → Warszawa",
-        "lead": "Rozkład pociągów Charków — Warszawa: warianty z przesiadką w Chełmie. Czas podróży, postoje i informacje o zakupie biletów.",
         "all": "Wszystkie trasy: Ukraina — Polska",
-        "more": "← Polska — Ukraina"
+        "desc": "Pociągi Charków — Warszawa z przesiadką: godziny, stacje, czas podróży.",
+        "lead": "Rozkład pociągów Charków — Warszawa: warianty z przesiadką w Chełmie. Czas podróży, postoje i informacje o zakupie biletów.",
+        "more": "← Polska — Ukraina",
+        "title": "Charków → Warszawa pociągiem | Koliya"
+      },
+      "ru": {
+        "h1": "Поездом: Харьков → Варшава",
+        "all": "Все маршруты: Украина — Польша",
+        "desc": "Поезда Харьков — Варшава с пересадкой: время, станции, длительность.",
+        "lead": "Расписание поездов Харьков — Варшава: варианты с пересадкой в Хелме. Время в пути, остановки и информация о покупке билетов.",
+        "more": "← Польша — Украина",
+        "title": "Харьков → Варшава поездом | Колія"
+      },
+      "uk": {
+        "h1": "Потягом: Харків → Варшава",
+        "all": "Усі маршрути: Україна — Польща",
+        "desc": "Поїзди Харків — Варшава з пересадкою: час, станції, тривалість.",
+        "lead": "Розклад поїздів Харків — Варшава: варіанти з пересадкою у Хелмі. Час у дорозі, зупинки та інформація про купівлю квитків.",
+        "more": "← Польща — Україна",
+        "title": "Харків → Варшава потягом | Колія"
       }
     }
   },
@@ -833,37 +833,37 @@
     "active": true,
     "created_at": "2026-11-13T12:44:27.684265+00:00",
     "texts": {
-      "ru": {
-        "title": "Варшава → Харьков поездом | Колія",
-        "desc": "Поезда Варшава — Харьков с пересадкой: время, станции, длительность.",
-        "h1": "Поездом: Варшава → Харьков",
-        "lead": "Расписание поездов Варшава — Харьков: варианты с пересадкой в Хелме. Время в пути, остановки и информация о покупке билетов.",
-        "all": "Все маршруты: Польша — Украина",
-        "more": "← Украина — Польша"
-      },
-      "uk": {
-        "title": "Варшава → Харків потягом | Колія",
-        "desc": "Поїзди Варшава — Харків з пересадкою: час, станції, тривалість.",
-        "h1": "Потягом: Варшава → Харків",
-        "lead": "Розклад поїздів Варшава — Харків: варіанти з пересадкою у Хелмі. Час у дорозі, зупинки та інформація про купівлю квитків.",
-        "all": "Усі маршрути: Польща — Україна",
-        "more": "← Україна — Польща"
-      },
       "en": {
-        "title": "Warsaw → Kharkiv by train | Koliya",
-        "desc": "Trains Warsaw — Kharkiv with a transfer: times, stations, duration.",
         "h1": "By train: Warsaw → Kharkiv",
-        "lead": "Train timetable Warsaw — Kharkiv: options with a transfer in Chełm. Journey time, stops and ticket information.",
         "all": "All routes: Poland — Ukraine",
-        "more": "← Ukraine — Poland"
+        "desc": "Trains Warsaw — Kharkiv with a transfer: times, stations, duration.",
+        "lead": "Train timetable Warsaw — Kharkiv: options with a transfer in Chełm. Journey time, stops and ticket information.",
+        "more": "← Ukraine — Poland",
+        "title": "Warsaw → Kharkiv by train | Koliya"
       },
       "pl": {
-        "title": "Warszawa → Charków pociągiem | Koliya",
-        "desc": "Pociągi Warszawa — Charków z przesiadką: godziny, stacje, czas podróży.",
         "h1": "Pociągiem: Warszawa → Charków",
-        "lead": "Rozkład pociągów Warszawa — Charków: warianty z przesiadką w Chełmie. Czas podróży, postoje i informacje o zakupie biletów.",
         "all": "Wszystkie trasy: Polska — Ukraina",
-        "more": "← Ukraina — Polska"
+        "desc": "Pociągi Warszawa — Charków z przesiadką: godziny, stacje, czas podróży.",
+        "lead": "Rozkład pociągów Warszawa — Charków: warianty z przesiadką w Chełmie. Czas podróży, postoje i informacje o zakupie biletów.",
+        "more": "← Ukraina — Polska",
+        "title": "Warszawa → Charków pociągiem | Koliya"
+      },
+      "ru": {
+        "h1": "Поездом: Варшава → Харьков",
+        "all": "Все маршруты: Польша — Украина",
+        "desc": "Поезда Варшава — Харьков с пересадкой: время, станции, длительность.",
+        "lead": "Расписание поездов Варшава — Харьков: варианты с пересадкой в Хелме. Время в пути, остановки и информация о покупке билетов.",
+        "more": "← Украина — Польша",
+        "title": "Варшава → Харьков поездом | Колія"
+      },
+      "uk": {
+        "h1": "Потягом: Варшава → Харків",
+        "all": "Усі маршрути: Польща — Україна",
+        "desc": "Поїзди Варшава — Харків з пересадкою: час, станції, тривалість.",
+        "lead": "Розклад поїздів Варшава — Харків: варіанти з пересадкою у Хелмі. Час у дорозі, зупинки та інформація про купівлю квитків.",
+        "more": "← Україна — Польща",
+        "title": "Варшава → Харків потягом | Колія"
       }
     }
   },
@@ -900,37 +900,37 @@
     "active": true,
     "created_at": "2026-11-13T12:44:27.684265+00:00",
     "texts": {
-      "ru": {
-        "title": "Харьков → Краков поездом | Колія",
-        "desc": "Поезда Харьков — Краков с пересадкой: время, станции, длительность.",
-        "h1": "Поездом: Харьков → Краков",
-        "lead": "Расписание поездов Харьков — Краков: варианты с пересадкой в Перемышле. Время в пути, остановки и информация о покупке билетов.",
-        "all": "Все маршруты: Украина — Польша",
-        "more": "← Польша — Украина"
-      },
-      "uk": {
-        "title": "Харків → Краків потягом | Колія",
-        "desc": "Поїзди Харків — Краків з пересадкою: час, станції, тривалість.",
-        "h1": "Потягом: Харків → Краків",
-        "lead": "Розклад поїздів Харків — Краків: варіанти з пересадкою у Перемишлі. Час у дорозі, зупинки та інформація про купівлю квитків.",
-        "all": "Усі маршрути: Україна — Польща",
-        "more": "← Польща — Україна"
-      },
       "en": {
-        "title": "Kharkiv → Kraków by train | Koliya",
-        "desc": "Trains Kharkiv — Kraków with a transfer: times, stations, duration.",
         "h1": "By train: Kharkiv → Kraków",
-        "lead": "Train timetable Kharkiv — Kraków: options with a transfer in Przemyśl. Journey time, stops and ticket information.",
         "all": "All routes: Ukraine — Poland",
-        "more": "← Poland — Ukraine"
+        "desc": "Trains Kharkiv — Kraków with a transfer: times, stations, duration.",
+        "lead": "Train timetable Kharkiv — Kraków: options with a transfer in Przemyśl. Journey time, stops and ticket information.",
+        "more": "← Poland — Ukraine",
+        "title": "Kharkiv → Kraków by train | Koliya"
       },
       "pl": {
-        "title": "Charków → Kraków pociągiem | Koliya",
-        "desc": "Pociągi Charków — Kraków z przesiadką: godziny, stacje, czas podróży.",
         "h1": "Pociągiem: Charków → Kraków",
-        "lead": "Rozkład pociągów Charków — Kraków: warianty z przesiadką w Przemyślu. Czas podróży, postoje i informacje o zakupie biletów.",
         "all": "Wszystkie trasy: Ukraina — Polska",
-        "more": "← Polska — Ukraina"
+        "desc": "Pociągi Charków — Kraków z przesiadką: godziny, stacje, czas podróży.",
+        "lead": "Rozkład pociągów Charków — Kraków: warianty z przesiadką w Przemyślu. Czas podróży, postoje i informacje o zakupie biletów.",
+        "more": "← Polska — Ukraina",
+        "title": "Charków → Kraków pociągiem | Koliya"
+      },
+      "ru": {
+        "h1": "Поездом: Харьков → Краков",
+        "all": "Все маршруты: Украина — Польша",
+        "desc": "Поезда Харьков — Краков с пересадкой: время, станции, длительность.",
+        "lead": "Расписание поездов Харьков — Краков: варианты с пересадкой в Перемышле. Время в пути, остановки и информация о покупке билетов.",
+        "more": "← Польша — Украина",
+        "title": "Харьков → Краков поездом | Колія"
+      },
+      "uk": {
+        "h1": "Потягом: Харків → Краків",
+        "all": "Усі маршрути: Україна — Польща",
+        "desc": "Поїзди Харків — Краків з пересадкою: час, станції, тривалість.",
+        "lead": "Розклад поїздів Харків — Краків: варіанти з пересадкою у Перемишлі. Час у дорозі, зупинки та інформація про купівлю квитків.",
+        "more": "← Польща — Україна",
+        "title": "Харків → Краків потягом | Колія"
       }
     }
   },
@@ -967,37 +967,37 @@
     "active": true,
     "created_at": "2026-11-13T12:44:27.684265+00:00",
     "texts": {
-      "ru": {
-        "title": "Краков → Харьков поездом | Колія",
-        "desc": "Поезда Краков — Харьков с пересадкой: время, станции, длительность.",
-        "h1": "Поездом: Краков → Харьков",
-        "lead": "Расписание поездов Краков — Харьков: варианты с пересадкой в Перемышле. Время в пути, остановки и информация о покупке билетов.",
-        "all": "Все маршруты: Польша — Украина",
-        "more": "← Украина — Польша"
-      },
-      "uk": {
-        "title": "Краків → Харків потягом | Колія",
-        "desc": "Поїзди Краків — Харків з пересадкою: час, станції, тривалість.",
-        "h1": "Потягом: Краків → Харків",
-        "lead": "Розклад поїздів Краків — Харків: варіанти з пересадкою у Перемишлі. Час у дорозі, зупинки та інформація про купівлю квитків.",
-        "all": "Усі маршрути: Польща — Україна",
-        "more": "← Україна — Польща"
-      },
       "en": {
-        "title": "Kraków → Kharkiv by train | Koliya",
-        "desc": "Trains Kraków — Kharkiv with a transfer: times, stations, duration.",
         "h1": "By train: Kraków → Kharkiv",
-        "lead": "Train timetable Kraków — Kharkiv: options with a transfer in Przemyśl. Journey time, stops and ticket information.",
         "all": "All routes: Poland — Ukraine",
-        "more": "← Ukraine — Poland"
+        "desc": "Trains Kraków — Kharkiv with a transfer: times, stations, duration.",
+        "lead": "Train timetable Kraków — Kharkiv: options with a transfer in Przemyśl. Journey time, stops and ticket information.",
+        "more": "← Ukraine — Poland",
+        "title": "Kraków → Kharkiv by train | Koliya"
       },
       "pl": {
-        "title": "Kraków → Charków pociągiem | Koliya",
-        "desc": "Pociągi Kraków — Charków z przesiadką: godziny, stacje, czas podróży.",
         "h1": "Pociągiem: Kraków → Charków",
-        "lead": "Rozkład pociągów Kraków — Charków: warianty z przesiadką w Przemyślu. Czas podróży, postoje i informacje o zakupie biletów.",
         "all": "Wszystkie trasy: Polska — Ukraina",
-        "more": "← Ukraina — Polska"
+        "desc": "Pociągi Kraków — Charków z przesiadką: godziny, stacje, czas podróży.",
+        "lead": "Rozkład pociągów Kraków — Charków: warianty z przesiadką w Przemyślu. Czas podróży, postoje i informacje o zakupie biletów.",
+        "more": "← Ukraina — Polska",
+        "title": "Kraków → Charków pociągiem | Koliya"
+      },
+      "ru": {
+        "h1": "Поездом: Краков → Харьков",
+        "all": "Все маршруты: Польша — Украина",
+        "desc": "Поезда Краков — Харьков с пересадкой: время, станции, длительность.",
+        "lead": "Расписание поездов Краков — Харьков: варианты с пересадкой в Перемышле. Время в пути, остановки и информация о покупке билетов.",
+        "more": "← Украина — Польша",
+        "title": "Краков → Харьков поездом | Колія"
+      },
+      "uk": {
+        "h1": "Потягом: Краків → Харків",
+        "all": "Усі маршрути: Польща — Україна",
+        "desc": "Поїзди Краків — Харків з пересадкою: час, станції, тривалість.",
+        "lead": "Розклад поїздів Краків — Харків: варіанти з пересадкою у Перемишлі. Час у дорозі, зупинки та інформація про купівлю квитків.",
+        "more": "← Україна — Польща",
+        "title": "Краків → Харків потягом | Колія"
       }
     }
   },
@@ -1139,37 +1139,37 @@
     "active": true,
     "created_at": "2026-11-13T12:44:27.684265+00:00",
     "texts": {
-      "ru": {
-        "title": "Одесса → Варшава поездом | Колія",
-        "desc": "Поезда Одесса — Варшава с пересадкой: время, станции, длительность.",
-        "h1": "Поездом: Одесса → Варшава",
-        "lead": "Расписание поездов Одесса — Варшава: варианты с пересадкой в Перемышле. Время в пути, остановки и информация о покупке билетов.",
-        "all": "Все маршруты: Украина — Польша",
-        "more": "← Польша — Украина"
-      },
-      "uk": {
-        "title": "Одеса → Варшава потягом | Колія",
-        "desc": "Поїзди Одеса — Варшава з пересадкою: час, станції, тривалість.",
-        "h1": "Потягом: Одеса → Варшава",
-        "lead": "Розклад поїздів Одеса — Варшава: варіанти з пересадкою у Перемишлі. Час у дорозі, зупинки та інформація про купівлю квитків.",
-        "all": "Усі маршрути: Україна — Польща",
-        "more": "← Польща — Україна"
-      },
       "en": {
-        "title": "Odesa → Warsaw by train | Koliya",
-        "desc": "Trains Odesa — Warsaw with a transfer: times, stations, duration.",
         "h1": "By train: Odesa → Warsaw",
-        "lead": "Train timetable Odesa — Warsaw: options with a transfer in Przemyśl. Journey time, stops and ticket information.",
         "all": "All routes: Ukraine — Poland",
-        "more": "← Poland — Ukraine"
+        "desc": "Trains Odesa — Warsaw with a transfer: times, stations, duration.",
+        "lead": "Train timetable Odesa — Warsaw: options with a transfer in Przemyśl. Journey time, stops and ticket information.",
+        "more": "← Poland — Ukraine",
+        "title": "Odesa → Warsaw by train | Koliya"
       },
       "pl": {
-        "title": "Odessa → Warszawa pociągiem | Koliya",
-        "desc": "Pociągi Odessa — Warszawa z przesiadką: godziny, stacje, czas podróży.",
         "h1": "Pociągiem: Odessa → Warszawa",
-        "lead": "Rozkład pociągów Odessa — Warszawa: warianty z przesiadką w Przemyślu. Czas podróży, postoje i informacje o zakupie biletów.",
         "all": "Wszystkie trasy: Ukraina — Polska",
-        "more": "← Polska — Ukraina"
+        "desc": "Pociągi Odessa — Warszawa z przesiadką: godziny, stacje, czas podróży.",
+        "lead": "Rozkład pociągów Odessa — Warszawa: warianty z przesiadką w Przemyślu. Czas podróży, postoje i informacje o zakupie biletów.",
+        "more": "← Polska — Ukraina",
+        "title": "Odessa → Warszawa pociągiem | Koliya"
+      },
+      "ru": {
+        "h1": "Поездом: Одесса → Варшава",
+        "all": "Все маршруты: Украина — Польша",
+        "desc": "Поезда Одесса — Варшава с пересадкой: время, станции, длительность.",
+        "lead": "Расписание поездов Одесса — Варшава: варианты с пересадкой в Перемышле. Время в пути, остановки и информация о покупке билетов.",
+        "more": "← Польша — Украина",
+        "title": "Одесса → Варшава поездом | Колія"
+      },
+      "uk": {
+        "h1": "Потягом: Одеса → Варшава",
+        "all": "Усі маршрути: Україна — Польща",
+        "desc": "Поїзди Одеса — Варшава з пересадкою: час, станції, тривалість.",
+        "lead": "Розклад поїздів Одеса — Варшава: варіанти з пересадкою у Перемишлі. Час у дорозі, зупинки та інформація про купівлю квитків.",
+        "more": "← Польща — Україна",
+        "title": "Одеса → Варшава потягом | Колія"
       }
     }
   },
@@ -1207,37 +1207,37 @@
     "active": true,
     "created_at": "2026-11-13T12:44:27.684265+00:00",
     "texts": {
-      "ru": {
-        "title": "Варшава → Одесса поездом | Колія",
-        "desc": "Поезда Варшава — Одесса с пересадкой: время, станции, длительность.",
-        "h1": "Поездом: Варшава → Одесса",
-        "lead": "Расписание поездов Варшава — Одесса: варианты с пересадкой в Перемышле. Время в пути, остановки и информация о покупке билетов.",
-        "all": "Все маршруты: Польша — Украина",
-        "more": "← Украина — Польша"
-      },
-      "uk": {
-        "title": "Варшава → Одеса потягом | Колія",
-        "desc": "Поїзди Варшава — Одеса з пересадкою: час, станції, тривалість.",
-        "h1": "Потягом: Варшава → Одеса",
-        "lead": "Розклад поїздів Варшава — Одеса: варіанти з пересадкою у Перемишлі. Час у дорозі, зупинки та інформація про купівлю квитків.",
-        "all": "Усі маршрути: Польща — Україна",
-        "more": "← Україна — Польща"
-      },
       "en": {
-        "title": "Warsaw → Odesa by train | Koliya",
-        "desc": "Trains Warsaw — Odesa with a transfer: times, stations, duration.",
         "h1": "By train: Warsaw → Odesa",
-        "lead": "Train timetable Warsaw — Odesa: options with a transfer in Przemyśl. Journey time, stops and ticket information.",
         "all": "All routes: Poland — Ukraine",
-        "more": "← Ukraine — Poland"
+        "desc": "Trains Warsaw — Odesa with a transfer: times, stations, duration.",
+        "lead": "Train timetable Warsaw — Odesa: options with a transfer in Przemyśl. Journey time, stops and ticket information.",
+        "more": "← Ukraine — Poland",
+        "title": "Warsaw → Odesa by train | Koliya"
       },
       "pl": {
-        "title": "Warszawa → Odessa pociągiem | Koliya",
-        "desc": "Pociągi Warszawa — Odessa z przesiadką: godziny, stacje, czas podróży.",
         "h1": "Pociągiem: Warszawa → Odessa",
-        "lead": "Rozkład pociągów Warszawa — Odessa: warianty z przesiadką w Przemyślu. Czas podróży, postoje i informacje o zakupie biletów.",
         "all": "Wszystkie trasy: Polska — Ukraina",
-        "more": "← Ukraina — Polska"
+        "desc": "Pociągi Warszawa — Odessa z przesiadką: godziny, stacje, czas podróży.",
+        "lead": "Rozkład pociągów Warszawa — Odessa: warianty z przesiadką w Przemyślu. Czas podróży, postoje i informacje o zakupie biletów.",
+        "more": "← Ukraina — Polska",
+        "title": "Warszawa → Odessa pociągiem | Koliya"
+      },
+      "ru": {
+        "h1": "Поездом: Варшава → Одесса",
+        "all": "Все маршруты: Польша — Украина",
+        "desc": "Поезда Варшава — Одесса с пересадкой: время, станции, длительность.",
+        "lead": "Расписание поездов Варшава — Одесса: варианты с пересадкой в Перемышле. Время в пути, остановки и информация о покупке билетов.",
+        "more": "← Украина — Польша",
+        "title": "Варшава → Одесса поездом | Колія"
+      },
+      "uk": {
+        "h1": "Потягом: Варшава → Одеса",
+        "all": "Усі маршрути: Польща — Україна",
+        "desc": "Поїзди Варшава — Одеса з пересадкою: час, станції, тривалість.",
+        "lead": "Розклад поїздів Варшава — Одеса: варіанти з пересадкою у Перемишлі. Час у дорозі, зупинки та інформація про купівлю квитків.",
+        "more": "← Україна — Польща",
+        "title": "Варшава → Одеса потягом | Колія"
       }
     }
   },
@@ -1274,37 +1274,37 @@
     "active": true,
     "created_at": "2026-11-13T12:44:27.684265+00:00",
     "texts": {
-      "ru": {
-        "title": "Одесса → Краков поездом | Колія",
-        "desc": "Поезда Одесса — Краков с пересадкой: время, станции, длительность.",
-        "h1": "Поездом: Одесса → Краков",
-        "lead": "Расписание поездов Одесса — Краков: варианты с пересадкой в Перемышле. Время в пути, остановки и информация о покупке билетов.",
-        "all": "Все маршруты: Украина — Польша",
-        "more": "← Польша — Украина"
-      },
-      "uk": {
-        "title": "Одеса → Краків потягом | Колія",
-        "desc": "Поїзди Одеса — Краків з пересадкою: час, станції, тривалість.",
-        "h1": "Потягом: Одеса → Краків",
-        "lead": "Розклад поїздів Одеса — Краків: варіанти з пересадкою у Перемишлі. Час у дорозі, зупинки та інформація про купівлю квитків.",
-        "all": "Усі маршрути: Україна — Польща",
-        "more": "← Польща — Україна"
-      },
       "en": {
-        "title": "Odesa → Kraków by train | Koliya",
-        "desc": "Trains Odesa — Kraków with a transfer: times, stations, duration.",
         "h1": "By train: Odesa → Kraków",
-        "lead": "Train timetable Odesa — Kraków: options with a transfer in Przemyśl. Journey time, stops and ticket information.",
         "all": "All routes: Ukraine — Poland",
-        "more": "← Poland — Ukraine"
+        "desc": "Trains Odesa — Kraków with a transfer: times, stations, duration.",
+        "lead": "Train timetable Odesa — Kraków: options with a transfer in Przemyśl. Journey time, stops and ticket information.",
+        "more": "← Poland — Ukraine",
+        "title": "Odesa → Kraków by train | Koliya"
       },
       "pl": {
-        "title": "Odessa → Kraków pociągiem | Koliya",
-        "desc": "Pociągi Odessa — Kraków z przesiadką: godziny, stacje, czas podróży.",
         "h1": "Pociągiem: Odessa → Kraków",
-        "lead": "Rozkład pociągów Odessa — Kraków: warianty z przesiadką w Przemyślu. Czas podróży, postoje i informacje o zakupie biletów.",
         "all": "Wszystkie trasy: Ukraina — Polska",
-        "more": "← Polska — Ukraina"
+        "desc": "Pociągi Odessa — Kraków z przesiadką: godziny, stacje, czas podróży.",
+        "lead": "Rozkład pociągów Odessa — Kraków: warianty z przesiadką w Przemyślu. Czas podróży, postoje i informacje o zakupie biletów.",
+        "more": "← Polska — Ukraina",
+        "title": "Odessa → Kraków pociągiem | Koliya"
+      },
+      "ru": {
+        "h1": "Поездом: Одесса → Краков",
+        "all": "Все маршруты: Украина — Польша",
+        "desc": "Поезда Одесса — Краков с пересадкой: время, станции, длительность.",
+        "lead": "Расписание поездов Одесса — Краков: варианты с пересадкой в Перемышле. Время в пути, остановки и информация о покупке билетов.",
+        "more": "← Польша — Украина",
+        "title": "Одесса → Краков поездом | Колія"
+      },
+      "uk": {
+        "h1": "Потягом: Одеса → Краків",
+        "all": "Усі маршрути: Україна — Польща",
+        "desc": "Поїзди Одеса — Краків з пересадкою: час, станції, тривалість.",
+        "lead": "Розклад поїздів Одеса — Краків: варіанти з пересадкою у Перемишлі. Час у дорозі, зупинки та інформація про купівлю квитків.",
+        "more": "← Польща — Україна",
+        "title": "Одеса → Краків потягом | Колія"
       }
     }
   },
@@ -1341,37 +1341,37 @@
     "active": true,
     "created_at": "2026-11-13T12:44:27.684265+00:00",
     "texts": {
-      "ru": {
-        "title": "Краков → Одесса поездом | Колія",
-        "desc": "Поезда Краков — Одесса с пересадкой: время, станции, длительность.",
-        "h1": "Поездом: Краков → Одесса",
-        "lead": "Расписание поездов Краков — Одесса: варианты с пересадкой в Перемышле. Время в пути, остановки и информация о покупке билетов.",
-        "all": "Все маршруты: Польша — Украина",
-        "more": "← Украина — Польша"
-      },
-      "uk": {
-        "title": "Краків → Одеса потягом | Колія",
-        "desc": "Поїзди Краків — Одеса з пересадкою: час, станції, тривалість.",
-        "h1": "Потягом: Краків → Одеса",
-        "lead": "Розклад поїздів Краків — Одеса: варіанти з пересадкою у Перемишлі. Час у дорозі, зупинки та інформація про купівлю квитків.",
-        "all": "Усі маршрути: Польща — Україна",
-        "more": "← Україна — Польща"
-      },
       "en": {
-        "title": "Kraków → Odesa by train | Koliya",
-        "desc": "Trains Kraków — Odesa with a transfer: times, stations, duration.",
         "h1": "By train: Kraków → Odesa",
-        "lead": "Train timetable Kraków — Odesa: options with a transfer in Przemyśl. Journey time, stops and ticket information.",
         "all": "All routes: Poland — Ukraine",
-        "more": "← Ukraine — Poland"
+        "desc": "Trains Kraków — Odesa with a transfer: times, stations, duration.",
+        "lead": "Train timetable Kraków — Odesa: options with a transfer in Przemyśl. Journey time, stops and ticket information.",
+        "more": "← Ukraine — Poland",
+        "title": "Kraków → Odesa by train | Koliya"
       },
       "pl": {
-        "title": "Kraków → Odessa pociągiem | Koliya",
-        "desc": "Pociągi Kraków — Odessa z przesiadką: godziny, stacje, czas podróży.",
         "h1": "Pociągiem: Kraków → Odessa",
-        "lead": "Rozkład pociągów Kraków — Odessa: warianty z przesiadką w Przemyślu. Czas podróży, postoje i informacje o zakupie biletów.",
         "all": "Wszystkie trasy: Polska — Ukraina",
-        "more": "← Ukraina — Polska"
+        "desc": "Pociągi Kraków — Odessa z przesiadką: godziny, stacje, czas podróży.",
+        "lead": "Rozkład pociągów Kraków — Odessa: warianty z przesiadką w Przemyślu. Czas podróży, postoje i informacje o zakupie biletów.",
+        "more": "← Ukraina — Polska",
+        "title": "Kraków → Odessa pociągiem | Koliya"
+      },
+      "ru": {
+        "h1": "Поездом: Краков → Одесса",
+        "all": "Все маршруты: Польша — Украина",
+        "desc": "Поезда Краков — Одесса с пересадкой: время, станции, длительность.",
+        "lead": "Расписание поездов Краков — Одесса: варианты с пересадкой в Перемышле. Время в пути, остановки и информация о покупке билетов.",
+        "more": "← Украина — Польша",
+        "title": "Краков → Одесса поездом | Колія"
+      },
+      "uk": {
+        "h1": "Потягом: Краків → Одеса",
+        "all": "Усі маршрути: Польща — Україна",
+        "desc": "Поїзди Краків — Одеса з пересадкою: час, станції, тривалість.",
+        "lead": "Розклад поїздів Краків — Одеса: варіанти з пересадкою у Перемишлі. Час у дорозі, зупинки та інформація про купівлю квитків.",
+        "more": "← Україна — Польща",
+        "title": "Краків → Одеса потягом | Колія"
       }
     }
   },
@@ -1460,37 +1460,37 @@
     "active": true,
     "created_at": "2026-11-13T12:44:27.684265+00:00",
     "texts": {
-      "ru": {
-        "title": "Львов → Варшава поездом | Колія",
-        "desc": "Поезда Львов — Варшава с пересадкой: время, станции, длительность.",
-        "h1": "Поездом: Львов → Варшава",
-        "lead": "Расписание поездов Львов — Варшава: варианты с пересадкой в Раве-Русской. Время в пути, остановки и информация о покупке билетов.",
-        "all": "Все маршруты: Украина — Польша",
-        "more": "← Польша — Украина"
-      },
-      "uk": {
-        "title": "Львів → Варшава потягом | Колія",
-        "desc": "Поїзди Львів — Варшава з пересадкою: час, станції, тривалість.",
-        "h1": "Потягом: Львів → Варшава",
-        "lead": "Розклад поїздів Львів — Варшава: варіанти з пересадкою у Раві-Руській. Час у дорозі, зупинки та інформація про купівлю квитків.",
-        "all": "Усі маршрути: Україна — Польща",
-        "more": "← Польща — Україна"
-      },
       "en": {
-        "title": "Lviv → Warsaw by train | Koliya",
-        "desc": "Trains Lviv — Warsaw with a transfer: times, stations, duration.",
         "h1": "By train: Lviv → Warsaw",
-        "lead": "Train timetable Lviv — Warsaw: options with a transfer in Rava-Ruska. Journey time, stops and ticket information.",
         "all": "All routes: Ukraine — Poland",
-        "more": "← Poland — Ukraine"
+        "desc": "Trains Lviv — Warsaw with a transfer: times, stations, duration.",
+        "lead": "Train timetable Lviv — Warsaw: options with a transfer in Rava-Ruska. Journey time, stops and ticket information.",
+        "more": "← Poland — Ukraine",
+        "title": "Lviv → Warsaw by train | Koliya"
       },
       "pl": {
-        "title": "Lwów → Warszawa pociągiem | Koliya",
-        "desc": "Pociągi Lwów — Warszawa z przesiadką: godziny, stacje, czas podróży.",
         "h1": "Pociągiem: Lwów → Warszawa",
-        "lead": "Rozkład pociągów Lwów — Warszawa: warianty z przesiadką w Rawie Ruskiej. Czas podróży, postoje i informacje o zakupie biletów.",
         "all": "Wszystkie trasy: Ukraina — Polska",
-        "more": "← Polska — Ukraina"
+        "desc": "Pociągi Lwów — Warszawa z przesiadką: godziny, stacje, czas podróży.",
+        "lead": "Rozkład pociągów Lwów — Warszawa: warianty z przesiadką w Rawie Ruskiej. Czas podróży, postoje i informacje o zakupie biletów.",
+        "more": "← Polska — Ukraina",
+        "title": "Lwów → Warszawa pociągiem | Koliya"
+      },
+      "ru": {
+        "h1": "Поездом: Львов → Варшава",
+        "all": "Все маршруты: Украина — Польша",
+        "desc": "Поезда Львов — Варшава с пересадкой: время, станции, длительность.",
+        "lead": "Расписание поездов Львов — Варшава: варианты с пересадкой в Раве-Русской. Время в пути, остановки и информация о покупке билетов.",
+        "more": "← Польша — Украина",
+        "title": "Львов → Варшава поездом | Колія"
+      },
+      "uk": {
+        "h1": "Потягом: Львів → Варшава",
+        "all": "Усі маршрути: Україна — Польща",
+        "desc": "Поїзди Львів — Варшава з пересадкою: час, станції, тривалість.",
+        "lead": "Розклад поїздів Львів — Варшава: варіанти з пересадкою у Раві-Руській. Час у дорозі, зупинки та інформація про купівлю квитків.",
+        "more": "← Польща — Україна",
+        "title": "Львів → Варшава потягом | Колія"
       }
     }
   },
@@ -1527,37 +1527,37 @@
     "active": true,
     "created_at": "2026-11-13T12:44:27.684265+00:00",
     "texts": {
-      "ru": {
-        "title": "Варшава → Львов поездом | Колія",
-        "desc": "Поезда Варшава — Львов с пересадкой: время, станции, длительность.",
-        "h1": "Поездом: Варшава → Львов",
-        "lead": "Расписание поездов Варшава — Львов: варианты с пересадкой в Раве-Русской. Время в пути, остановки и информация о покупке билетов.",
-        "all": "Все маршруты: Польша — Украина",
-        "more": "← Украина — Польша"
-      },
-      "uk": {
-        "title": "Варшава → Львів потягом | Колія",
-        "desc": "Поїзди Варшава — Львів з пересадкою: час, станції, тривалість.",
-        "h1": "Потягом: Варшава → Львів",
-        "lead": "Розклад поїздів Варшава — Львів: варіанти з пересадкою у Раві-Руській. Час у дорозі, зупинки та інформація про купівлю квитків.",
-        "all": "Усі маршрути: Польща — Україна",
-        "more": "← Україна — Польща"
-      },
       "en": {
-        "title": "Warsaw → Lviv by train | Koliya",
-        "desc": "Trains Warsaw — Lviv with a transfer: times, stations, duration.",
         "h1": "By train: Warsaw → Lviv",
-        "lead": "Train timetable Warsaw — Lviv: options with a transfer in Rava-Ruska. Journey time, stops and ticket information.",
         "all": "All routes: Poland — Ukraine",
-        "more": "← Ukraine — Poland"
+        "desc": "Trains Warsaw — Lviv with a transfer: times, stations, duration.",
+        "lead": "Train timetable Warsaw — Lviv: options with a transfer in Rava-Ruska. Journey time, stops and ticket information.",
+        "more": "← Ukraine — Poland",
+        "title": "Warsaw → Lviv by train | Koliya"
       },
       "pl": {
-        "title": "Warszawa → Lwów pociągiem | Koliya",
-        "desc": "Pociągi Warszawa — Lwów z przesiadką: godziny, stacje, czas podróży.",
         "h1": "Pociągiem: Warszawa → Lwów",
-        "lead": "Rozkład pociągów Warszawa — Lwów: warianty z przesiadką w Rawie Ruskiej. Czas podróży, postoje i informacje o zakupie biletów.",
         "all": "Wszystkie trasy: Polska — Ukraina",
-        "more": "← Ukraina — Polska"
+        "desc": "Pociągi Warszawa — Lwów z przesiadką: godziny, stacje, czas podróży.",
+        "lead": "Rozkład pociągów Warszawa — Lwów: warianty z przesiadką w Rawie Ruskiej. Czas podróży, postoje i informacje o zakupie biletów.",
+        "more": "← Ukraina — Polska",
+        "title": "Warszawa → Lwów pociągiem | Koliya"
+      },
+      "ru": {
+        "h1": "Поездом: Варшава → Львов",
+        "all": "Все маршруты: Польша — Украина",
+        "desc": "Поезда Варшава — Львов с пересадкой: время, станции, длительность.",
+        "lead": "Расписание поездов Варшава — Львов: варианты с пересадкой в Раве-Русской. Время в пути, остановки и информация о покупке билетов.",
+        "more": "← Украина — Польша",
+        "title": "Варшава → Львов поездом | Колія"
+      },
+      "uk": {
+        "h1": "Потягом: Варшава → Львів",
+        "all": "Усі маршрути: Польща — Україна",
+        "desc": "Поїзди Варшава — Львів з пересадкою: час, станції, тривалість.",
+        "lead": "Розклад поїздів Варшава — Львів: варіанти з пересадкою у Раві-Руській. Час у дорозі, зупинки та інформація про купівлю квитків.",
+        "more": "← Україна — Польща",
+        "title": "Варшава → Львів потягом | Колія"
       }
     }
   },
@@ -1593,37 +1593,37 @@
     "active": true,
     "created_at": "2026-11-13T12:44:27.684265+00:00",
     "texts": {
-      "ru": {
-        "title": "Львов → Краков поездом | Колія",
-        "desc": "Поезда Львов — Краков с пересадкой: время, станции, длительность.",
-        "h1": "Поездом: Львов → Краков",
-        "lead": "Расписание поездов Львов — Краков: варианты с пересадкой в Перемышле. Время в пути, остановки и информация о покупке билетов.",
-        "all": "Все маршруты: Украина — Польша",
-        "more": "← Польша — Украина"
-      },
-      "uk": {
-        "title": "Львів → Краків потягом | Колія",
-        "desc": "Поїзди Львів — Краків з пересадкою: час, станції, тривалість.",
-        "h1": "Потягом: Львів → Краків",
-        "lead": "Розклад поїздів Львів — Краків: варіанти з пересадкою у Перемишлі. Час у дорозі, зупинки та інформація про купівлю квитків.",
-        "all": "Усі маршрути: Україна — Польща",
-        "more": "← Польща — Україна"
-      },
       "en": {
-        "title": "Lviv → Kraków by train | Koliya",
-        "desc": "Trains Lviv — Kraków with a transfer: times, stations, duration.",
         "h1": "By train: Lviv → Kraków",
-        "lead": "Train timetable Lviv — Kraków: options with a transfer in Przemyśl. Journey time, stops and ticket information.",
         "all": "All routes: Ukraine — Poland",
-        "more": "← Poland — Ukraine"
+        "desc": "Trains Lviv — Kraków with a transfer: times, stations, duration.",
+        "lead": "Train timetable Lviv — Kraków: options with a transfer in Przemyśl. Journey time, stops and ticket information.",
+        "more": "← Poland — Ukraine",
+        "title": "Lviv → Kraków by train | Koliya"
       },
       "pl": {
-        "title": "Lwów → Kraków pociągiem | Koliya",
-        "desc": "Pociągi Lwów — Kraków z przesiadką: godziny, stacje, czas podróży.",
         "h1": "Pociągiem: Lwów → Kraków",
-        "lead": "Rozkład pociągów Lwów — Kraków: warianty z przesiadką w Przemyślu. Czas podróży, postoje i informacje o zakupie biletów.",
         "all": "Wszystkie trasy: Ukraina — Polska",
-        "more": "← Polska — Ukraina"
+        "desc": "Pociągi Lwów — Kraków z przesiadką: godziny, stacje, czas podróży.",
+        "lead": "Rozkład pociągów Lwów — Kraków: warianty z przesiadką w Przemyślu. Czas podróży, postoje i informacje o zakupie biletów.",
+        "more": "← Polska — Ukraina",
+        "title": "Lwów → Kraków pociągiem | Koliya"
+      },
+      "ru": {
+        "h1": "Поездом: Львов → Краков",
+        "all": "Все маршруты: Украина — Польша",
+        "desc": "Поезда Львов — Краков с пересадкой: время, станции, длительность.",
+        "lead": "Расписание поездов Львов — Краков: варианты с пересадкой в Перемышле. Время в пути, остановки и информация о покупке билетов.",
+        "more": "← Польша — Украина",
+        "title": "Львов → Краков поездом | Колія"
+      },
+      "uk": {
+        "h1": "Потягом: Львів → Краків",
+        "all": "Усі маршрути: Україна — Польща",
+        "desc": "Поїзди Львів — Краків з пересадкою: час, станції, тривалість.",
+        "lead": "Розклад поїздів Львів — Краків: варіанти з пересадкою у Перемишлі. Час у дорозі, зупинки та інформація про купівлю квитків.",
+        "more": "← Польща — Україна",
+        "title": "Львів → Краків потягом | Колія"
       }
     }
   },
@@ -1659,37 +1659,37 @@
     "active": true,
     "created_at": "2026-11-13T12:44:27.684265+00:00",
     "texts": {
-      "ru": {
-        "title": "Краков → Львов поездом | Колія",
-        "desc": "Поезда Краков — Львов с пересадкой: время, станции, длительность.",
-        "h1": "Поездом: Краков → Львов",
-        "lead": "Расписание поездов Краков — Львов: варианты с пересадкой в Перемышле. Время в пути, остановки и информация о покупке билетов.",
-        "all": "Все маршруты: Польша — Украина",
-        "more": "← Украина — Польша"
-      },
-      "uk": {
-        "title": "Краків → Львів потягом | Колія",
-        "desc": "Поїзди Краків — Львів з пересадкою: час, станції, тривалість.",
-        "h1": "Потягом: Краків → Львів",
-        "lead": "Розклад поїздів Краків — Львів: варіанти з пересадкою у Перемишлі. Час у дорозі, зупинки та інформація про купівлю квитків.",
-        "all": "Усі маршрути: Польща — Україна",
-        "more": "← Україна — Польща"
-      },
       "en": {
-        "title": "Kraków → Lviv by train | Koliya",
-        "desc": "Trains Kraków — Lviv with a transfer: times, stations, duration.",
         "h1": "By train: Kraków → Lviv",
-        "lead": "Train timetable Kraków — Lviv: options with a transfer in Przemyśl. Journey time, stops and ticket information.",
         "all": "All routes: Poland — Ukraine",
-        "more": "← Ukraine — Poland"
+        "desc": "Trains Kraków — Lviv with a transfer: times, stations, duration.",
+        "lead": "Train timetable Kraków — Lviv: options with a transfer in Przemyśl. Journey time, stops and ticket information.",
+        "more": "← Ukraine — Poland",
+        "title": "Kraków → Lviv by train | Koliya"
       },
       "pl": {
-        "title": "Kraków → Lwów pociągiem | Koliya",
-        "desc": "Pociągi Kraków — Lwów z przesiadką: godziny, stacje, czas podróży.",
         "h1": "Pociągiem: Kraków → Lwów",
-        "lead": "Rozkład pociągów Kraków — Lwów: warianty z przesiadką w Przemyślu. Czas podróży, postoje i informacje o zakupie biletów.",
         "all": "Wszystkie trasy: Polska — Ukraina",
-        "more": "← Ukraina — Polska"
+        "desc": "Pociągi Kraków — Lwów z przesiadką: godziny, stacje, czas podróży.",
+        "lead": "Rozkład pociągów Kraków — Lwów: warianty z przesiadką w Przemyślu. Czas podróży, postoje i informacje o zakupie biletów.",
+        "more": "← Ukraina — Polska",
+        "title": "Kraków → Lwów pociągiem | Koliya"
+      },
+      "ru": {
+        "h1": "Поездом: Краков → Львов",
+        "all": "Все маршруты: Польша — Украина",
+        "desc": "Поезда Краков — Львов с пересадкой: время, станции, длительность.",
+        "lead": "Расписание поездов Краков — Львов: варианты с пересадкой в Перемышле. Время в пути, остановки и информация о покупке билетов.",
+        "more": "← Украина — Польша",
+        "title": "Краков → Львов поездом | Колія"
+      },
+      "uk": {
+        "h1": "Потягом: Краків → Львів",
+        "all": "Усі маршрути: Польща — Україна",
+        "desc": "Поїзди Краків — Львів з пересадкою: час, станції, тривалість.",
+        "lead": "Розклад поїздів Краків — Львів: варіанти з пересадкою у Перемишлі. Час у дорозі, зупинки та інформація про купівлю квитків.",
+        "more": "← Україна — Польща",
+        "title": "Краків → Львів потягом | Колія"
       }
     }
   },
@@ -1779,37 +1779,37 @@
     "active": true,
     "created_at": "2026-11-13T12:44:27.684265+00:00",
     "texts": {
-      "ru": {
-        "title": "Кременчуг → Варшава поездом | Колія",
-        "desc": "Поезда Кременчуг — Варшава с пересадкой: время, станции, длительность.",
-        "h1": "Поездом: Кременчуг → Варшава",
-        "lead": "Расписание поездов Кременчуг — Варшава: варианты с пересадкой в Перемышле. Время в пути, остановки и информация о покупке билетов.",
-        "all": "Все маршруты: Украина — Польша",
-        "more": "← Польша — Украина"
-      },
-      "uk": {
-        "title": "Кременчук → Варшава потягом | Колія",
-        "desc": "Поїзди Кременчук — Варшава з пересадкою: час, станції, тривалість.",
-        "h1": "Потягом: Кременчук → Варшава",
-        "lead": "Розклад поїздів Кременчук — Варшава: варіанти з пересадкою у Перемишлі. Час у дорозі, зупинки та інформація про купівлю квитків.",
-        "all": "Усі маршрути: Україна — Польща",
-        "more": "← Польща — Україна"
-      },
       "en": {
-        "title": "Kremenchuk → Warsaw by train | Koliya",
-        "desc": "Trains Kremenchuk — Warsaw with a transfer: times, stations, duration.",
         "h1": "By train: Kremenchuk → Warsaw",
-        "lead": "Train timetable Kremenchuk — Warsaw: options with a transfer in Przemyśl. Journey time, stops and ticket information.",
         "all": "All routes: Ukraine — Poland",
-        "more": "← Poland — Ukraine"
+        "desc": "Trains Kremenchuk — Warsaw with a transfer: times, stations, duration.",
+        "lead": "Train timetable Kremenchuk — Warsaw: options with a transfer in Przemyśl. Journey time, stops and ticket information.",
+        "more": "← Poland — Ukraine",
+        "title": "Kremenchuk → Warsaw by train | Koliya"
       },
       "pl": {
-        "title": "Krzemieńczuk → Warszawa pociągiem | Koliya",
-        "desc": "Pociągi Krzemieńczuk — Warszawa z przesiadką: godziny, stacje, czas podróży.",
         "h1": "Pociągiem: Krzemieńczuk → Warszawa",
-        "lead": "Rozkład pociągów Krzemieńczuk — Warszawa: warianty z przesiadką w Przemyślu. Czas podróży, postoje i informacje o zakupie biletów.",
         "all": "Wszystkie trasy: Ukraina — Polska",
-        "more": "← Polska — Ukraina"
+        "desc": "Pociągi Krzemieńczuk — Warszawa z przesiadką: godziny, stacje, czas podróży.",
+        "lead": "Rozkład pociągów Krzemieńczuk — Warszawa: warianty z przesiadką w Przemyślu. Czas podróży, postoje i informacje o zakupie biletów.",
+        "more": "← Polska — Ukraina",
+        "title": "Krzemieńczuk → Warszawa pociągiem | Koliya"
+      },
+      "ru": {
+        "h1": "Поездом: Кременчуг → Варшава",
+        "all": "Все маршруты: Украина — Польша",
+        "desc": "Поезда Кременчуг — Варшава с пересадкой: время, станции, длительность.",
+        "lead": "Расписание поездов Кременчуг — Варшава: варианты с пересадкой в Перемышле. Время в пути, остановки и информация о покупке билетов.",
+        "more": "← Польша — Украина",
+        "title": "Кременчуг → Варшава поездом | Колія"
+      },
+      "uk": {
+        "h1": "Потягом: Кременчук → Варшава",
+        "all": "Усі маршрути: Україна — Польща",
+        "desc": "Поїзди Кременчук — Варшава з пересадкою: час, станції, тривалість.",
+        "lead": "Розклад поїздів Кременчук — Варшава: варіанти з пересадкою у Перемишлі. Час у дорозі, зупинки та інформація про купівлю квитків.",
+        "more": "← Польща — Україна",
+        "title": "Кременчук → Варшава потягом | Колія"
       }
     }
   },
@@ -1847,37 +1847,37 @@
     "active": true,
     "created_at": "2026-11-13T12:44:27.684265+00:00",
     "texts": {
-      "ru": {
-        "title": "Варшава → Кременчуг поездом | Колія",
-        "desc": "Поезда Варшава — Кременчуг с пересадкой: время, станции, длительность.",
-        "h1": "Поездом: Варшава → Кременчуг",
-        "lead": "Расписание поездов Варшава — Кременчуг: варианты с пересадкой в Перемышле. Время в пути, остановки и информация о покупке билетов.",
-        "all": "Все маршруты: Польша — Украина",
-        "more": "← Украина — Польша"
-      },
-      "uk": {
-        "title": "Варшава → Кременчук потягом | Колія",
-        "desc": "Поїзди Варшава — Кременчук з пересадкою: час, станції, тривалість.",
-        "h1": "Потягом: Варшава → Кременчук",
-        "lead": "Розклад поїздів Варшава — Кременчук: варіанти з пересадкою у Перемишлі. Час у дорозі, зупинки та інформація про купівлю квитків.",
-        "all": "Усі маршрути: Польща — Україна",
-        "more": "← Україна — Польща"
-      },
       "en": {
-        "title": "Warsaw → Kremenchuk by train | Koliya",
-        "desc": "Trains Warsaw — Kremenchuk with a transfer: times, stations, duration.",
         "h1": "By train: Warsaw → Kremenchuk",
-        "lead": "Train timetable Warsaw — Kremenchuk: options with a transfer in Przemyśl. Journey time, stops and ticket information.",
         "all": "All routes: Poland — Ukraine",
-        "more": "← Ukraine — Poland"
+        "desc": "Trains Warsaw — Kremenchuk with a transfer: times, stations, duration.",
+        "lead": "Train timetable Warsaw — Kremenchuk: options with a transfer in Przemyśl. Journey time, stops and ticket information.",
+        "more": "← Ukraine — Poland",
+        "title": "Warsaw → Kremenchuk by train | Koliya"
       },
       "pl": {
-        "title": "Warszawa → Krzemieńczuk pociągiem | Koliya",
-        "desc": "Pociągi Warszawa — Krzemieńczuk z przesiadką: godziny, stacje, czas podróży.",
         "h1": "Pociągiem: Warszawa → Krzemieńczuk",
-        "lead": "Rozkład pociągów Warszawa — Krzemieńczuk: warianty z przesiadką w Przemyślu. Czas podróży, postoje i informacje o zakupie biletów.",
         "all": "Wszystkie trasy: Polska — Ukraina",
-        "more": "← Ukraina — Polska"
+        "desc": "Pociągi Warszawa — Krzemieńczuk z przesiadką: godziny, stacje, czas podróży.",
+        "lead": "Rozkład pociągów Warszawa — Krzemieńczuk: warianty z przesiadką w Przemyślu. Czas podróży, postoje i informacje o zakupie biletów.",
+        "more": "← Ukraina — Polska",
+        "title": "Warszawa → Krzemieńczuk pociągiem | Koliya"
+      },
+      "ru": {
+        "h1": "Поездом: Варшава → Кременчуг",
+        "all": "Все маршруты: Польша — Украина",
+        "desc": "Поезда Варшава — Кременчуг с пересадкой: время, станции, длительность.",
+        "lead": "Расписание поездов Варшава — Кременчуг: варианты с пересадкой в Перемышле. Время в пути, остановки и информация о покупке билетов.",
+        "more": "← Украина — Польша",
+        "title": "Варшава → Кременчуг поездом | Колія"
+      },
+      "uk": {
+        "h1": "Потягом: Варшава → Кременчук",
+        "all": "Усі маршрути: Польща — Україна",
+        "desc": "Поїзди Варшава — Кременчук з пересадкою: час, станції, тривалість.",
+        "lead": "Розклад поїздів Варшава — Кременчук: варіанти з пересадкою у Перемишлі. Час у дорозі, зупинки та інформація про купівлю квитків.",
+        "more": "← Україна — Польща",
+        "title": "Варшава → Кременчук потягом | Колія"
       }
     }
   },
@@ -1914,37 +1914,37 @@
     "active": true,
     "created_at": "2026-11-13T12:44:27.684265+00:00",
     "texts": {
-      "ru": {
-        "title": "Кременчуг → Краков поездом | Колія",
-        "desc": "Поезда Кременчуг — Краков с пересадкой: время, станции, длительность.",
-        "h1": "Поездом: Кременчуг → Краков",
-        "lead": "Расписание поездов Кременчуг — Краков: варианты с пересадкой в Перемышле. Время в пути, остановки и информация о покупке билетов.",
-        "all": "Все маршруты: Украина — Польша",
-        "more": "← Польша — Украина"
-      },
-      "uk": {
-        "title": "Кременчук → Краків потягом | Колія",
-        "desc": "Поїзди Кременчук — Краків з пересадкою: час, станції, тривалість.",
-        "h1": "Потягом: Кременчук → Краків",
-        "lead": "Розклад поїздів Кременчук — Краків: варіанти з пересадкою у Перемишлі. Час у дорозі, зупинки та інформація про купівлю квитків.",
-        "all": "Усі маршрути: Україна — Польща",
-        "more": "← Польща — Україна"
-      },
       "en": {
-        "title": "Kremenchuk → Kraków by train | Koliya",
-        "desc": "Trains Kremenchuk — Kraków with a transfer: times, stations, duration.",
         "h1": "By train: Kremenchuk → Kraków",
-        "lead": "Train timetable Kremenchuk — Kraków: options with a transfer in Przemyśl. Journey time, stops and ticket information.",
         "all": "All routes: Ukraine — Poland",
-        "more": "← Poland — Ukraine"
+        "desc": "Trains Kremenchuk — Kraków with a transfer: times, stations, duration.",
+        "lead": "Train timetable Kremenchuk — Kraków: options with a transfer in Przemyśl. Journey time, stops and ticket information.",
+        "more": "← Poland — Ukraine",
+        "title": "Kremenchuk → Kraków by train | Koliya"
       },
       "pl": {
-        "title": "Krzemieńczuk → Kraków pociągiem | Koliya",
-        "desc": "Pociągi Krzemieńczuk — Kraków z przesiadką: godziny, stacje, czas podróży.",
         "h1": "Pociągiem: Krzemieńczuk → Kraków",
-        "lead": "Rozkład pociągów Krzemieńczuk — Kraków: warianty z przesiadką w Przemyślu. Czas podróży, postoje i informacje o zakupie biletów.",
         "all": "Wszystkie trasy: Ukraina — Polska",
-        "more": "← Polska — Ukraina"
+        "desc": "Pociągi Krzemieńczuk — Kraków z przesiadką: godziny, stacje, czas podróży.",
+        "lead": "Rozkład pociągów Krzemieńczuk — Kraków: warianty z przesiadką w Przemyślu. Czas podróży, postoje i informacje o zakupie biletów.",
+        "more": "← Polska — Ukraina",
+        "title": "Krzemieńczuk → Kraków pociągiem | Koliya"
+      },
+      "ru": {
+        "h1": "Поездом: Кременчуг → Краков",
+        "all": "Все маршруты: Украина — Польша",
+        "desc": "Поезда Кременчуг — Краков с пересадкой: время, станции, длительность.",
+        "lead": "Расписание поездов Кременчуг — Краков: варианты с пересадкой в Перемышле. Время в пути, остановки и информация о покупке билетов.",
+        "more": "← Польша — Украина",
+        "title": "Кременчуг → Краков поездом | Колія"
+      },
+      "uk": {
+        "h1": "Потягом: Кременчук → Краків",
+        "all": "Усі маршрути: Україна — Польща",
+        "desc": "Поїзди Кременчук — Краків з пересадкою: час, станції, тривалість.",
+        "lead": "Розклад поїздів Кременчук — Краків: варіанти з пересадкою у Перемишлі. Час у дорозі, зупинки та інформація про купівлю квитків.",
+        "more": "← Польща — Україна",
+        "title": "Кременчук → Краків потягом | Колія"
       }
     }
   },
@@ -1981,37 +1981,37 @@
     "active": true,
     "created_at": "2026-11-13T12:44:27.684265+00:00",
     "texts": {
-      "ru": {
-        "title": "Краков → Кременчуг поездом | Колія",
-        "desc": "Поезда Краков — Кременчуг с пересадкой: время, станции, длительность.",
-        "h1": "Поездом: Краков → Кременчуг",
-        "lead": "Расписание поездов Краков — Кременчуг: варианты с пересадкой в Перемышле. Время в пути, остановки и информация о покупке билетов.",
-        "all": "Все маршруты: Польша — Украина",
-        "more": "← Украина — Польша"
-      },
-      "uk": {
-        "title": "Краків → Кременчук потягом | Колія",
-        "desc": "Поїзди Краків — Кременчук з пересадкою: час, станції, тривалість.",
-        "h1": "Потягом: Краків → Кременчук",
-        "lead": "Розклад поїздів Краків — Кременчук: варіанти з пересадкою у Перемишлі. Час у дорозі, зупинки та інформація про купівлю квитків.",
-        "all": "Усі маршрути: Польща — Україна",
-        "more": "← Україна — Польща"
-      },
       "en": {
-        "title": "Kraków → Kremenchuk by train | Koliya",
-        "desc": "Trains Kraków — Kremenchuk with a transfer: times, stations, duration.",
         "h1": "By train: Kraków → Kremenchuk",
-        "lead": "Train timetable Kraków — Kremenchuk: options with a transfer in Przemyśl. Journey time, stops and ticket information.",
         "all": "All routes: Poland — Ukraine",
-        "more": "← Ukraine — Poland"
+        "desc": "Trains Kraków — Kremenchuk with a transfer: times, stations, duration.",
+        "lead": "Train timetable Kraków — Kremenchuk: options with a transfer in Przemyśl. Journey time, stops and ticket information.",
+        "more": "← Ukraine — Poland",
+        "title": "Kraków → Kremenchuk by train | Koliya"
       },
       "pl": {
-        "title": "Kraków → Krzemieńczuk pociągiem | Koliya",
-        "desc": "Pociągi Kraków — Krzemieńczuk z przesiadką: godziny, stacje, czas podróży.",
         "h1": "Pociągiem: Kraków → Krzemieńczuk",
-        "lead": "Rozkład pociągów Kraków — Krzemieńczuk: warianty z przesiadką w Przemyślu. Czas podróży, postoje i informacje o zakupie biletów.",
         "all": "Wszystkie trasy: Polska — Ukraina",
-        "more": "← Ukraina — Polska"
+        "desc": "Pociągi Kraków — Krzemieńczuk z przesiadką: godziny, stacje, czas podróży.",
+        "lead": "Rozkład pociągów Kraków — Krzemieńczuk: warianty z przesiadką w Przemyślu. Czas podróży, postoje i informacje o zakupie biletów.",
+        "more": "← Ukraina — Polska",
+        "title": "Kraków → Krzemieńczuk pociągiem | Koliya"
+      },
+      "ru": {
+        "h1": "Поездом: Краков → Кременчуг",
+        "all": "Все маршруты: Польша — Украина",
+        "desc": "Поезда Краков — Кременчуг с пересадкой: время, станции, длительность.",
+        "lead": "Расписание поездов Краков — Кременчуг: варианты с пересадкой в Перемышле. Время в пути, остановки и информация о покупке билетов.",
+        "more": "← Украина — Польша",
+        "title": "Краков → Кременчуг поездом | Колія"
+      },
+      "uk": {
+        "h1": "Потягом: Краків → Кременчук",
+        "all": "Усі маршрути: Польща — Україна",
+        "desc": "Поїзди Краків — Кременчук з пересадкою: час, станції, тривалість.",
+        "lead": "Розклад поїздів Краків — Кременчук: варіанти з пересадкою у Перемишлі. Час у дорозі, зупинки та інформація про купівлю квитків.",
+        "more": "← Україна — Польща",
+        "title": "Краків → Кременчук потягом | Колія"
       }
     }
   },
@@ -2102,37 +2102,37 @@
     "active": true,
     "created_at": "2026-11-13T12:44:27.684265+00:00",
     "texts": {
-      "ru": {
-        "title": "Киев → Братислава поездом | Колія",
-        "desc": "Поезда Киев — Братислава с пересадкой: время, станции, длительность.",
-        "h1": "Поездом: Киев → Братислава",
-        "lead": "Расписание поездов Киев — Братислава: варианты с пересадкой в Чопе. Время в пути, остановки и информация о покупке билетов.",
-        "all": "Все маршруты: Украина — Словакия",
-        "more": "← Словакия — Украина"
-      },
-      "uk": {
-        "title": "Київ → Братислава потягом | Колія",
-        "desc": "Поїзди Київ — Братислава з пересадкою: час, станції, тривалість.",
-        "h1": "Потягом: Київ → Братислава",
-        "lead": "Розклад поїздів Київ — Братислава: варіанти з пересадкою в Чопі. Час у дорозі, зупинки та інформація про купівлю квитків.",
-        "all": "Усі маршрути: Україна — Словаччина",
-        "more": "← Словаччина — Україна"
-      },
       "en": {
-        "title": "Kyiv → Bratislava by train | Koliya",
-        "desc": "Trains Kyiv — Bratislava with a transfer: times, stations, duration.",
         "h1": "By train: Kyiv → Bratislava",
-        "lead": "Train timetable Kyiv — Bratislava: options with a transfer in Chop. Journey time, stops and ticket information.",
         "all": "All routes: Ukraine — Slovakia",
-        "more": "← Slovakia — Ukraine"
+        "desc": "Trains Kyiv — Bratislava with a transfer: times, stations, duration.",
+        "lead": "Train timetable Kyiv — Bratislava: options with a transfer in Chop. Journey time, stops and ticket information.",
+        "more": "← Slovakia — Ukraine",
+        "title": "Kyiv → Bratislava by train | Koliya"
       },
       "pl": {
-        "title": "Kijów → Bratysława pociągiem | Koliya",
-        "desc": "Pociągi Kijów — Bratysława z przesiadką: godziny, stacje, czas podróży.",
         "h1": "Pociągiem: Kijów → Bratysława",
-        "lead": "Rozkład pociągów Kijów — Bratysława: warianty z przesiadką w Czopie. Czas podróży, postoje i informacje o zakupie biletów.",
         "all": "Wszystkie trasy: Ukraina — Słowacja",
-        "more": "← Słowacja — Ukraina"
+        "desc": "Pociągi Kijów — Bratysława z przesiadką: godziny, stacje, czas podróży.",
+        "lead": "Rozkład pociągów Kijów — Bratysława: warianty z przesiadką w Czopie. Czas podróży, postoje i informacje o zakupie biletów.",
+        "more": "← Słowacja — Ukraina",
+        "title": "Kijów → Bratysława pociągiem | Koliya"
+      },
+      "ru": {
+        "h1": "Поездом: Киев → Братислава",
+        "all": "Все маршруты: Украина — Словакия",
+        "desc": "Поезда Киев — Братислава с пересадкой: время, станции, длительность.",
+        "lead": "Расписание поездов Киев — Братислава: варианты с пересадкой в Чопе. Время в пути, остановки и информация о покупке билетов.",
+        "more": "← Словакия — Украина",
+        "title": "Киев → Братислава поездом | Колія"
+      },
+      "uk": {
+        "h1": "Потягом: Київ → Братислава",
+        "all": "Усі маршрути: Україна — Словаччина",
+        "desc": "Поїзди Київ — Братислава з пересадкою: час, станції, тривалість.",
+        "lead": "Розклад поїздів Київ — Братислава: варіанти з пересадкою в Чопі. Час у дорозі, зупинки та інформація про купівлю квитків.",
+        "more": "← Словаччина — Україна",
+        "title": "Київ → Братислава потягом | Колія"
       }
     }
   },
@@ -2170,37 +2170,37 @@
     "active": true,
     "created_at": "2026-11-13T12:44:27.684265+00:00",
     "texts": {
-      "ru": {
-        "title": "Братислава → Киев поездом | Колія",
-        "desc": "Поезда Братислава — Киев с пересадкой: время, станции, длительность.",
-        "h1": "Поездом: Братислава → Киев",
-        "lead": "Расписание поездов Братислава — Киев: варианты с пересадкой в Чопе. Время в пути, остановки и информация о покупке билетов.",
-        "all": "Все маршруты: Словакия — Украина",
-        "more": "← Украина — Словакия"
-      },
-      "uk": {
-        "title": "Братислава → Київ потягом | Колія",
-        "desc": "Поїзди Братислава — Київ з пересадкою: час, станції, тривалість.",
-        "h1": "Потягом: Братислава → Київ",
-        "lead": "Розклад поїздів Братислава — Київ: варіанти з пересадкою в Чопі. Час у дорозі, зупинки та інформація про купівлю квитків.",
-        "all": "Усі маршрути: Словаччина — Україна",
-        "more": "← Україна — Словаччина"
-      },
       "en": {
-        "title": "Bratislava → Kyiv by train | Koliya",
-        "desc": "Trains Bratislava — Kyiv with a transfer: times, stations, duration.",
         "h1": "By train: Bratislava → Kyiv",
-        "lead": "Train timetable Bratislava — Kyiv: options with a transfer in Chop. Journey time, stops and ticket information.",
         "all": "All routes: Slovakia — Ukraine",
-        "more": "← Ukraine — Slovakia"
+        "desc": "Trains Bratislava — Kyiv with a transfer: times, stations, duration.",
+        "lead": "Train timetable Bratislava — Kyiv: options with a transfer in Chop. Journey time, stops and ticket information.",
+        "more": "← Ukraine — Slovakia",
+        "title": "Bratislava → Kyiv by train | Koliya"
       },
       "pl": {
-        "title": "Bratysława → Kijów pociągiem | Koliya",
-        "desc": "Pociągi Bratysława — Kijów z przesiadką: godziny, stacje, czas podróży.",
         "h1": "Pociągiem: Bratysława → Kijów",
-        "lead": "Rozkład pociągów Bratysława — Kijów: warianty z przesiadką w Czopie. Czas podróży, postoje i informacje o zakupie biletów.",
         "all": "Wszystkie trasy: Słowacja — Ukraina",
-        "more": "← Ukraina — Słowacja"
+        "desc": "Pociągi Bratysława — Kijów z przesiadką: godziny, stacje, czas podróży.",
+        "lead": "Rozkład pociągów Bratysława — Kijów: warianty z przesiadką w Czopie. Czas podróży, postoje i informacje o zakupie biletów.",
+        "more": "← Ukraina — Słowacja",
+        "title": "Bratysława → Kijów pociągiem | Koliya"
+      },
+      "ru": {
+        "h1": "Поездом: Братислава → Киев",
+        "all": "Все маршруты: Словакия — Украина",
+        "desc": "Поезда Братислава — Киев с пересадкой: время, станции, длительность.",
+        "lead": "Расписание поездов Братислава — Киев: варианты с пересадкой в Чопе. Время в пути, остановки и информация о покупке билетов.",
+        "more": "← Украина — Словакия",
+        "title": "Братислава → Киев поездом | Колія"
+      },
+      "uk": {
+        "h1": "Потягом: Братислава → Київ",
+        "all": "Усі маршрути: Словаччина — Україна",
+        "desc": "Поїзди Братислава — Київ з пересадкою: час, станції, тривалість.",
+        "lead": "Розклад поїздів Братислава — Київ: варіанти з пересадкою в Чопі. Час у дорозі, зупинки та інформація про купівлю квитків.",
+        "more": "← Україна — Словаччина",
+        "title": "Братислава → Київ потягом | Колія"
       }
     }
   },
@@ -2228,37 +2228,37 @@
     "active": true,
     "created_at": "2026-11-13T12:44:27.684265+00:00",
     "texts": {
-      "ru": {
-        "title": "Киев → Бухарест поездом | Колія",
-        "desc": "Поезд Киев — Бухарест без пересадок: время, станции, длительность.",
-        "h1": "Поездом: Киев → Бухарест",
-        "lead": "Расписание поездов Киев — Бухарест: прямой поезд без пересадок. Время в пути, остановки и информация о покупке билетов.",
-        "all": "Все маршруты: Украина — Румыния",
-        "more": "← Румыния — Украина"
-      },
-      "uk": {
-        "title": "Київ → Бухарест потягом | Колія",
-        "desc": "Поїзд Київ — Бухарест без пересадок: час, станції, тривалість.",
-        "h1": "Потягом: Київ → Бухарест",
-        "lead": "Розклад поїздів Київ — Бухарест: прямий поїзд без пересадок. Час у дорозі, зупинки та інформація про купівлю квитків.",
-        "all": "Усі маршрути: Україна — Румунія",
-        "more": "← Румунія — Україна"
-      },
       "en": {
-        "title": "Kyiv → Bucharest by train | Koliya",
-        "desc": "Direct train Kyiv — Bucharest, no transfers: times, stations, duration.",
         "h1": "By train: Kyiv → Bucharest",
-        "lead": "Train timetable Kyiv — Bucharest: a direct train with no transfers. Journey time, stops and ticket information.",
         "all": "All routes: Ukraine — Romania",
-        "more": "← Romania — Ukraine"
+        "desc": "Direct train Kyiv — Bucharest, no transfers: times, stations, duration.",
+        "lead": "Train timetable Kyiv — Bucharest: a direct train with no transfers. Journey time, stops and ticket information.",
+        "more": "← Romania — Ukraine",
+        "title": "Kyiv → Bucharest by train | Koliya"
       },
       "pl": {
-        "title": "Kijów → Bukareszt pociągiem | Koliya",
-        "desc": "Pociąg Kijów — Bukareszt bez przesiadek: godziny, stacje, czas podróży.",
         "h1": "Pociągiem: Kijów → Bukareszt",
-        "lead": "Rozkład pociągów Kijów — Bukareszt: pociąg bezpośredni bez przesiadek. Czas podróży, postoje i informacje o zakupie biletów.",
         "all": "Wszystkie trasy: Ukraina — Rumunia",
-        "more": "← Rumunia — Ukraina"
+        "desc": "Pociąg Kijów — Bukareszt bez przesiadek: godziny, stacje, czas podróży.",
+        "lead": "Rozkład pociągów Kijów — Bukareszt: pociąg bezpośredni bez przesiadek. Czas podróży, postoje i informacje o zakupie biletów.",
+        "more": "← Rumunia — Ukraina",
+        "title": "Kijów → Bukareszt pociągiem | Koliya"
+      },
+      "ru": {
+        "h1": "Поездом: Киев → Бухарест",
+        "all": "Все маршруты: Украина — Румыния",
+        "desc": "Поезд Киев — Бухарест без пересадок: время, станции, длительность.",
+        "lead": "Расписание поездов Киев — Бухарест: прямой поезд без пересадок. Время в пути, остановки и информация о покупке билетов.",
+        "more": "← Румыния — Украина",
+        "title": "Киев → Бухарест поездом | Колія"
+      },
+      "uk": {
+        "h1": "Потягом: Київ → Бухарест",
+        "all": "Усі маршрути: Україна — Румунія",
+        "desc": "Поїзд Київ — Бухарест без пересадок: час, станції, тривалість.",
+        "lead": "Розклад поїздів Київ — Бухарест: прямий поїзд без пересадок. Час у дорозі, зупинки та інформація про купівлю квитків.",
+        "more": "← Румунія — Україна",
+        "title": "Київ → Бухарест потягом | Колія"
       }
     }
   },
@@ -2286,37 +2286,37 @@
     "active": true,
     "created_at": "2026-11-13T12:44:27.684265+00:00",
     "texts": {
-      "ru": {
-        "title": "Бухарест → Киев поездом | Колія",
-        "desc": "Поезд Бухарест — Киев без пересадок: время, станции, длительность.",
-        "h1": "Поездом: Бухарест → Киев",
-        "lead": "Расписание поездов Бухарест — Киев: прямой поезд без пересадок. Время в пути, остановки и информация о покупке билетов.",
-        "all": "Все маршруты: Румыния — Украина",
-        "more": "← Украина — Румыния"
-      },
-      "uk": {
-        "title": "Бухарест → Київ потягом | Колія",
-        "desc": "Поїзд Бухарест — Київ без пересадок: час, станції, тривалість.",
-        "h1": "Потягом: Бухарест → Київ",
-        "lead": "Розклад поїздів Бухарест — Київ: прямий поїзд без пересадок. Час у дорозі, зупинки та інформація про купівлю квитків.",
-        "all": "Усі маршрути: Румунія — Україна",
-        "more": "← Україна — Румунія"
-      },
       "en": {
-        "title": "Bucharest → Kyiv by train | Koliya",
-        "desc": "Direct train Bucharest — Kyiv, no transfers: times, stations, duration.",
         "h1": "By train: Bucharest → Kyiv",
-        "lead": "Train timetable Bucharest — Kyiv: a direct train with no transfers. Journey time, stops and ticket information.",
         "all": "All routes: Romania — Ukraine",
-        "more": "← Ukraine — Romania"
+        "desc": "Direct train Bucharest — Kyiv, no transfers: times, stations, duration.",
+        "lead": "Train timetable Bucharest — Kyiv: a direct train with no transfers. Journey time, stops and ticket information.",
+        "more": "← Ukraine — Romania",
+        "title": "Bucharest → Kyiv by train | Koliya"
       },
       "pl": {
-        "title": "Bukareszt → Kijów pociągiem | Koliya",
-        "desc": "Pociąg Bukareszt — Kijów bez przesiadek: godziny, stacje, czas podróży.",
         "h1": "Pociągiem: Bukareszt → Kijów",
-        "lead": "Rozkład pociągów Bukareszt — Kijów: pociąg bezpośredni bez przesiadek. Czas podróży, postoje i informacje o zakupie biletów.",
         "all": "Wszystkie trasy: Rumunia — Ukraina",
-        "more": "← Ukraina — Rumunia"
+        "desc": "Pociąg Bukareszt — Kijów bez przesiadek: godziny, stacje, czas podróży.",
+        "lead": "Rozkład pociągów Bukareszt — Kijów: pociąg bezpośredni bez przesiadek. Czas podróży, postoje i informacje o zakupie biletów.",
+        "more": "← Ukraina — Rumunia",
+        "title": "Bukareszt → Kijów pociągiem | Koliya"
+      },
+      "ru": {
+        "h1": "Поездом: Бухарест → Киев",
+        "all": "Все маршруты: Румыния — Украина",
+        "desc": "Поезд Бухарест — Киев без пересадок: время, станции, длительность.",
+        "lead": "Расписание поездов Бухарест — Киев: прямой поезд без пересадок. Время в пути, остановки и информация о покупке билетов.",
+        "more": "← Украина — Румыния",
+        "title": "Бухарест → Киев поездом | Колія"
+      },
+      "uk": {
+        "h1": "Потягом: Бухарест → Київ",
+        "all": "Усі маршрути: Румунія — Україна",
+        "desc": "Поїзд Бухарест — Київ без пересадок: час, станції, тривалість.",
+        "lead": "Розклад поїздів Бухарест — Київ: прямий поїзд без пересадок. Час у дорозі, зупинки та інформація про купівлю квитків.",
+        "more": "← Україна — Румунія",
+        "title": "Бухарест → Київ потягом | Колія"
       }
     }
   },
@@ -2357,37 +2357,37 @@
     "active": true,
     "created_at": "2026-11-13T12:44:27.684265+00:00",
     "texts": {
-      "ru": {
-        "title": "Киев → Вена поездом | Колія",
-        "desc": "Поезда Киев — Вена с пересадкой: время, станции, длительность.",
-        "h1": "Поездом: Киев → Вена",
-        "lead": "Расписание поездов Киев — Вена: варианты с пересадкой в Чопе. Время в пути, остановки и информация о покупке билетов.",
-        "all": "Все маршруты: Украина — Австрия",
-        "more": "← Австрия — Украина"
-      },
-      "uk": {
-        "title": "Київ → Відень потягом | Колія",
-        "desc": "Поїзди Київ — Відень з пересадкою: час, станції, тривалість.",
-        "h1": "Потягом: Київ → Відень",
-        "lead": "Розклад поїздів Київ — Відень: варіанти з пересадкою в Чопі. Час у дорозі, зупинки та інформація про купівлю квитків.",
-        "all": "Усі маршрути: Україна — Австрія",
-        "more": "← Австрія — Україна"
-      },
       "en": {
-        "title": "Kyiv → Vienna by train | Koliya",
-        "desc": "Trains Kyiv — Vienna with a transfer: times, stations, duration.",
         "h1": "By train: Kyiv → Vienna",
-        "lead": "Train timetable Kyiv — Vienna: options with a transfer in Chop. Journey time, stops and ticket information.",
         "all": "All routes: Ukraine — Austria",
-        "more": "← Austria — Ukraine"
+        "desc": "Trains Kyiv — Vienna with a transfer: times, stations, duration.",
+        "lead": "Train timetable Kyiv — Vienna: options with a transfer in Chop. Journey time, stops and ticket information.",
+        "more": "← Austria — Ukraine",
+        "title": "Kyiv → Vienna by train | Koliya"
       },
       "pl": {
-        "title": "Kijów → Wiedeń pociągiem | Koliya",
-        "desc": "Pociągi Kijów — Wiedeń z przesiadką: godziny, stacje, czas podróży.",
         "h1": "Pociągiem: Kijów → Wiedeń",
-        "lead": "Rozkład pociągów Kijów — Wiedeń: warianty z przesiadką w Czopie. Czas podróży, postoje i informacje o zakupie biletów.",
         "all": "Wszystkie trasy: Ukraina — Austria",
-        "more": "← Austria — Ukraina"
+        "desc": "Pociągi Kijów — Wiedeń z przesiadką: godziny, stacje, czas podróży.",
+        "lead": "Rozkład pociągów Kijów — Wiedeń: warianty z przesiadką w Czopie. Czas podróży, postoje i informacje o zakupie biletów.",
+        "more": "← Austria — Ukraina",
+        "title": "Kijów → Wiedeń pociągiem | Koliya"
+      },
+      "ru": {
+        "h1": "Поездом: Киев → Вена",
+        "all": "Все маршруты: Украина — Австрия",
+        "desc": "Поезда Киев — Вена с пересадкой: время, станции, длительность.",
+        "lead": "Расписание поездов Киев — Вена: варианты с пересадкой в Чопе. Время в пути, остановки и информация о покупке билетов.",
+        "more": "← Австрия — Украина",
+        "title": "Киев → Вена поездом | Колія"
+      },
+      "uk": {
+        "h1": "Потягом: Київ → Відень",
+        "all": "Усі маршрути: Україна — Австрія",
+        "desc": "Поїзди Київ — Відень з пересадкою: час, станції, тривалість.",
+        "lead": "Розклад поїздів Київ — Відень: варіанти з пересадкою в Чопі. Час у дорозі, зупинки та інформація про купівлю квитків.",
+        "more": "← Австрія — Україна",
+        "title": "Київ → Відень потягом | Колія"
       }
     }
   },
@@ -2436,37 +2436,37 @@
     "active": true,
     "created_at": "2026-11-13T12:44:27.684265+00:00",
     "texts": {
-      "ru": {
-        "title": "Вена → Киев поездом | Колія",
-        "desc": "Поезда Вена — Киев с пересадкой: время, станции, длительность.",
-        "h1": "Поездом: Вена → Киев",
-        "lead": "Расписание поездов Вена — Киев: варианты с пересадкой в Чопе. Время в пути, остановки и информация о покупке билетов.",
-        "all": "Все маршруты: Австрия — Украина",
-        "more": "← Украина — Австрия"
-      },
-      "uk": {
-        "title": "Відень → Київ потягом | Колія",
-        "desc": "Поїзди Відень — Київ з пересадкою: час, станції, тривалість.",
-        "h1": "Потягом: Відень → Київ",
-        "lead": "Розклад поїздів Відень — Київ: варіанти з пересадкою в Чопі. Час у дорозі, зупинки та інформація про купівлю квитків.",
-        "all": "Усі маршрути: Австрія — Україна",
-        "more": "← Україна — Австрія"
-      },
       "en": {
-        "title": "Vienna → Kyiv by train | Koliya",
-        "desc": "Trains Vienna — Kyiv with a transfer: times, stations, duration.",
         "h1": "By train: Vienna → Kyiv",
-        "lead": "Train timetable Vienna — Kyiv: options with a transfer in Chop. Journey time, stops and ticket information.",
         "all": "All routes: Austria — Ukraine",
-        "more": "← Ukraine — Austria"
+        "desc": "Trains Vienna — Kyiv with a transfer: times, stations, duration.",
+        "lead": "Train timetable Vienna — Kyiv: options with a transfer in Chop. Journey time, stops and ticket information.",
+        "more": "← Ukraine — Austria",
+        "title": "Vienna → Kyiv by train | Koliya"
       },
       "pl": {
-        "title": "Wiedeń → Kijów pociągiem | Koliya",
-        "desc": "Pociągi Wiedeń — Kijów z przesiadką: godziny, stacje, czas podróży.",
         "h1": "Pociągiem: Wiedeń → Kijów",
-        "lead": "Rozkład pociągów Wiedeń — Kijów: warianty z przesiadką w Czopie. Czas podróży, postoje i informacje o zakupie biletów.",
         "all": "Wszystkie trasy: Austria — Ukraina",
-        "more": "← Ukraina — Austria"
+        "desc": "Pociągi Wiedeń — Kijów z przesiadką: godziny, stacje, czas podróży.",
+        "lead": "Rozkład pociągów Wiedeń — Kijów: warianty z przesiadką w Czopie. Czas podróży, postoje i informacje o zakupie biletów.",
+        "more": "← Ukraina — Austria",
+        "title": "Wiedeń → Kijów pociągiem | Koliya"
+      },
+      "ru": {
+        "h1": "Поездом: Вена → Киев",
+        "all": "Все маршруты: Австрия — Украина",
+        "desc": "Поезда Вена — Киев с пересадкой: время, станции, длительность.",
+        "lead": "Расписание поездов Вена — Киев: варианты с пересадкой в Чопе. Время в пути, остановки и информация о покупке билетов.",
+        "more": "← Украина — Австрия",
+        "title": "Вена → Киев поездом | Колія"
+      },
+      "uk": {
+        "h1": "Потягом: Відень → Київ",
+        "all": "Усі маршрути: Австрія — Україна",
+        "desc": "Поїзди Відень — Київ з пересадкою: час, станції, тривалість.",
+        "lead": "Розклад поїздів Відень — Київ: варіанти з пересадкою в Чопі. Час у дорозі, зупинки та інформація про купівлю квитків.",
+        "more": "← Україна — Австрія",
+        "title": "Відень → Київ потягом | Колія"
       }
     }
   },
@@ -2494,37 +2494,37 @@
     "active": true,
     "created_at": "2026-11-13T12:44:27.684265+00:00",
     "texts": {
-      "ru": {
-        "title": "Киев → Кишинев поездом | Колія",
-        "desc": "Поезд Киев — Кишинев без пересадок: время, станции, длительность.",
-        "h1": "Поездом: Киев → Кишинев",
-        "lead": "Расписание поездов Киев — Кишинев: прямой поезд без пересадок. Время в пути, остановки и информация о покупке билетов.",
-        "all": "Все маршруты: Украина — Молдова",
-        "more": "← Молдова — Украина"
-      },
-      "uk": {
-        "title": "Київ → Кишинів потягом | Колія",
-        "desc": "Поїзд Київ — Кишинів без пересадок: час, станції, тривалість.",
-        "h1": "Потягом: Київ → Кишинів",
-        "lead": "Розклад поїздів Київ — Кишинів: прямий поїзд без пересадок. Час у дорозі, зупинки та інформація про купівлю квитків.",
-        "all": "Усі маршрути: Україна — Молдова",
-        "more": "← Молдова — Україна"
-      },
       "en": {
-        "title": "Kyiv → Chișinău by train | Koliya",
-        "desc": "Direct train Kyiv — Chișinău, no transfers: times, stations, duration.",
         "h1": "By train: Kyiv → Chișinău",
-        "lead": "Train timetable Kyiv — Chișinău: a direct train with no transfers. Journey time, stops and ticket information.",
         "all": "All routes: Ukraine — Moldova",
-        "more": "← Moldova — Ukraine"
+        "desc": "Direct train Kyiv — Chișinău, no transfers: times, stations, duration.",
+        "lead": "Train timetable Kyiv — Chișinău: a direct train with no transfers. Journey time, stops and ticket information.",
+        "more": "← Moldova — Ukraine",
+        "title": "Kyiv → Chișinău by train | Koliya"
       },
       "pl": {
-        "title": "Kijów → Kiszyniów pociągiem | Koliya",
-        "desc": "Pociąg Kijów — Kiszyniów bez przesiadek: godziny, stacje, czas podróży.",
         "h1": "Pociągiem: Kijów → Kiszyniów",
-        "lead": "Rozkład pociągów Kijów — Kiszyniów: pociąg bezpośredni bez przesiadek. Czas podróży, postoje i informacje o zakupie biletów.",
         "all": "Wszystkie trasy: Ukraina — Mołdawia",
-        "more": "← Mołdawia — Ukraina"
+        "desc": "Pociąg Kijów — Kiszyniów bez przesiadek: godziny, stacje, czas podróży.",
+        "lead": "Rozkład pociągów Kijów — Kiszyniów: pociąg bezpośredni bez przesiadek. Czas podróży, postoje i informacje o zakupie biletów.",
+        "more": "← Mołdawia — Ukraina",
+        "title": "Kijów → Kiszyniów pociągiem | Koliya"
+      },
+      "ru": {
+        "h1": "Поездом: Киев → Кишинев",
+        "all": "Все маршруты: Украина — Молдова",
+        "desc": "Поезд Киев — Кишинев без пересадок: время, станции, длительность.",
+        "lead": "Расписание поездов Киев — Кишинев: прямой поезд без пересадок. Время в пути, остановки и информация о покупке билетов.",
+        "more": "← Молдова — Украина",
+        "title": "Киев → Кишинев поездом | Колія"
+      },
+      "uk": {
+        "h1": "Потягом: Київ → Кишинів",
+        "all": "Усі маршрути: Україна — Молдова",
+        "desc": "Поїзд Київ — Кишинів без пересадок: час, станції, тривалість.",
+        "lead": "Розклад поїздів Київ — Кишинів: прямий поїзд без пересадок. Час у дорозі, зупинки та інформація про купівлю квитків.",
+        "more": "← Молдова — Україна",
+        "title": "Київ → Кишинів потягом | Колія"
       }
     }
   },
@@ -2552,37 +2552,37 @@
     "active": true,
     "created_at": "2026-11-13T12:44:27.684265+00:00",
     "texts": {
-      "ru": {
-        "title": "Кишинев → Киев поездом | Колія",
-        "desc": "Поезд Кишинев — Киев без пересадок: время, станции, длительность.",
-        "h1": "Поездом: Кишинев → Киев",
-        "lead": "Расписание поездов Кишинев — Киев: прямой поезд без пересадок. Время в пути, остановки и информация о покупке билетов.",
-        "all": "Все маршруты: Молдова — Украина",
-        "more": "← Украина — Молдова"
-      },
-      "uk": {
-        "title": "Кишинів → Київ потягом | Колія",
-        "desc": "Поїзд Кишинів — Київ без пересадок: час, станції, тривалість.",
-        "h1": "Потягом: Кишинів → Київ",
-        "lead": "Розклад поїздів Кишинів — Київ: прямий поїзд без пересадок. Час у дорозі, зупинки та інформація про купівлю квитків.",
-        "all": "Усі маршрути: Молдова — Україна",
-        "more": "← Україна — Молдова"
-      },
       "en": {
-        "title": "Chișinău → Kyiv by train | Koliya",
-        "desc": "Direct train Chișinău — Kyiv, no transfers: times, stations, duration.",
         "h1": "By train: Chișinău → Kyiv",
-        "lead": "Train timetable Chișinău — Kyiv: a direct train with no transfers. Journey time, stops and ticket information.",
         "all": "All routes: Moldova — Ukraine",
-        "more": "← Ukraine — Moldova"
+        "desc": "Direct train Chișinău — Kyiv, no transfers: times, stations, duration.",
+        "lead": "Train timetable Chișinău — Kyiv: a direct train with no transfers. Journey time, stops and ticket information.",
+        "more": "← Ukraine — Moldova",
+        "title": "Chișinău → Kyiv by train | Koliya"
       },
       "pl": {
-        "title": "Kiszyniów → Kijów pociągiem | Koliya",
-        "desc": "Pociąg Kiszyniów — Kijów bez przesiadek: godziny, stacje, czas podróży.",
         "h1": "Pociągiem: Kiszyniów → Kijów",
-        "lead": "Rozkład pociągów Kiszyniów — Kijów: pociąg bezpośredni bez przesiadek. Czas podróży, postoje i informacje o zakupie biletów.",
         "all": "Wszystkie trasy: Mołdawia — Ukraina",
-        "more": "← Ukraina — Mołdawia"
+        "desc": "Pociąg Kiszyniów — Kijów bez przesiadek: godziny, stacje, czas podróży.",
+        "lead": "Rozkład pociągów Kiszyniów — Kijów: pociąg bezpośredni bez przesiadek. Czas podróży, postoje i informacje o zakupie biletów.",
+        "more": "← Ukraina — Mołdawia",
+        "title": "Kiszyniów → Kijów pociągiem | Koliya"
+      },
+      "ru": {
+        "h1": "Поездом: Кишинев → Киев",
+        "all": "Все маршруты: Молдова — Украина",
+        "desc": "Поезд Кишинев — Киев без пересадок: время, станции, длительность.",
+        "lead": "Расписание поездов Кишинев — Киев: прямой поезд без пересадок. Время в пути, остановки и информация о покупке билетов.",
+        "more": "← Украина — Молдова",
+        "title": "Кишинев → Киев поездом | Колія"
+      },
+      "uk": {
+        "h1": "Потягом: Кишинів → Київ",
+        "all": "Усі маршрути: Молдова — Україна",
+        "desc": "Поїзд Кишинів — Київ без пересадок: час, станції, тривалість.",
+        "lead": "Розклад поїздів Кишинів — Київ: прямий поїзд без пересадок. Час у дорозі, зупинки та інформація про купівлю квитків.",
+        "more": "← Україна — Молдова",
+        "title": "Кишинів → Київ потягом | Колія"
       }
     }
   },
@@ -2685,41 +2685,41 @@
     "active": true,
     "created_at": "2026-11-13T12:44:27.684265+00:00",
     "texts": {
-      "ru": {
-        "title": "Киев → Берлин поездом | Колія",
-        "desc": "Поезда Киев — Берлин с пересадкой: время, станции, длительность.",
-        "h1": "Поездом: Киев → Берлин",
-        "lead": "Расписание поездов Киев — Берлин: варианты с пересадкой в Хелме и Варшаве. Время в пути, остановки и информация о покупке билетов.",
-        "leadm": "Расписание поездов Киев — Берлин: варианты с пересадкой в Перемышле, Хелме и Варшаве. Время в пути, остановки и информация о покупке билетов.",
-        "all": "Все маршруты: Украина — Германия",
-        "more": "← Германия — Украина"
-      },
-      "uk": {
-        "title": "Київ → Берлін потягом | Колія",
-        "desc": "Поїзди Київ — Берлін з пересадкою: час, станції, тривалість.",
-        "h1": "Потягом: Київ → Берлін",
-        "lead": "Розклад поїздів Київ — Берлін: варіанти з пересадкою у Хелмі та Варшаві. Час у дорозі, зупинки та інформація про купівлю квитків.",
-        "leadm": "Розклад поїздів Київ — Берлін: варіанти з пересадкою у Перемишлі, Хелмі та Варшаві. Час у дорозі, зупинки та інформація про купівлю квитків.",
-        "all": "Усі маршрути: Україна — Німеччина",
-        "more": "← Німеччина — Україна"
-      },
       "en": {
-        "title": "Kyiv → Berlin by train | Koliya",
-        "desc": "Trains Kyiv — Berlin with a transfer: times, stations, duration.",
         "h1": "By train: Kyiv → Berlin",
-        "lead": "Train timetable Kyiv — Berlin: options with a transfer in Chełm and Warsaw. Journey time, stops and ticket information.",
-        "leadm": "Train timetable Kyiv — Berlin: options with a transfer in Przemyśl, Chełm and Warsaw. Journey time, stops and ticket information.",
         "all": "All routes: Ukraine — Germany",
-        "more": "← Germany — Ukraine"
+        "desc": "Trains Kyiv — Berlin with a transfer: times, stations, duration.",
+        "lead": "Train timetable Kyiv — Berlin: options with a transfer in Chełm and Warsaw. Journey time, stops and ticket information.",
+        "more": "← Germany — Ukraine",
+        "leadm": "Train timetable Kyiv — Berlin: options with a transfer in Przemyśl, Chełm and Warsaw. Journey time, stops and ticket information.",
+        "title": "Kyiv → Berlin by train | Koliya"
       },
       "pl": {
-        "title": "Kijów → Berlin pociągiem | Koliya",
-        "desc": "Pociągi Kijów — Berlin z przesiadką: godziny, stacje, czas podróży.",
         "h1": "Pociągiem: Kijów → Berlin",
-        "lead": "Rozkład pociągów Kijów — Berlin: warianty z przesiadką w Chełmie i Warszawie. Czas podróży, postoje i informacje o zakupie biletów.",
-        "leadm": "Rozkład pociągów Kijów — Berlin: warianty z przesiadką w Przemyślu, Chełmie i Warszawie. Czas podróży, postoje i informacje o zakupie biletów.",
         "all": "Wszystkie trasy: Ukraina — Niemcy",
-        "more": "← Niemcy — Ukraina"
+        "desc": "Pociągi Kijów — Berlin z przesiadką: godziny, stacje, czas podróży.",
+        "lead": "Rozkład pociągów Kijów — Berlin: warianty z przesiadką w Chełmie i Warszawie. Czas podróży, postoje i informacje o zakupie biletów.",
+        "more": "← Niemcy — Ukraina",
+        "leadm": "Rozkład pociągów Kijów — Berlin: warianty z przesiadką w Przemyślu, Chełmie i Warszawie. Czas podróży, postoje i informacje o zakupie biletów.",
+        "title": "Kijów → Berlin pociągiem | Koliya"
+      },
+      "ru": {
+        "h1": "Поездом: Киев → Берлин",
+        "all": "Все маршруты: Украина — Германия",
+        "desc": "Поезда Киев — Берлин с пересадкой: время, станции, длительность.",
+        "lead": "Расписание поездов Киев — Берлин: варианты с пересадкой в Хелме и Варшаве. Время в пути, остановки и информация о покупке билетов.",
+        "more": "← Германия — Украина",
+        "leadm": "Расписание поездов Киев — Берлин: варианты с пересадкой в Перемышле, Хелме и Варшаве. Время в пути, остановки и информация о покупке билетов.",
+        "title": "Киев → Берлин поездом | Колія"
+      },
+      "uk": {
+        "h1": "Потягом: Київ → Берлін",
+        "all": "Усі маршрути: Україна — Німеччина",
+        "desc": "Поїзди Київ — Берлін з пересадкою: час, станції, тривалість.",
+        "lead": "Розклад поїздів Київ — Берлін: варіанти з пересадкою у Хелмі та Варшаві. Час у дорозі, зупинки та інформація про купівлю квитків.",
+        "more": "← Німеччина — Україна",
+        "leadm": "Розклад поїздів Київ — Берлін: варіанти з пересадкою у Перемишлі, Хелмі та Варшаві. Час у дорозі, зупинки та інформація про купівлю квитків.",
+        "title": "Київ → Берлін потягом | Колія"
       }
     }
   },
@@ -2822,41 +2822,41 @@
     "active": true,
     "created_at": "2026-11-13T12:44:27.684265+00:00",
     "texts": {
-      "ru": {
-        "title": "Берлин → Киев поездом | Колія",
-        "desc": "Поезда Берлин — Киев с пересадкой: время, станции, длительность.",
-        "h1": "Поездом: Берлин → Киев",
-        "lead": "Расписание поездов Берлин — Киев: варианты с пересадкой в Варшаве и Хелме. Время в пути, остановки и информация о покупке билетов.",
-        "leadm": "Расписание поездов Берлин — Киев: варианты с пересадкой в Перемышле, Варшаве и Хелме. Время в пути, остановки и информация о покупке билетов.",
-        "all": "Все маршруты: Германия — Украина",
-        "more": "← Украина — Германия"
-      },
-      "uk": {
-        "title": "Берлін → Київ потягом | Колія",
-        "desc": "Поїзди Берлін — Київ з пересадкою: час, станції, тривалість.",
-        "h1": "Потягом: Берлін → Київ",
-        "lead": "Розклад поїздів Берлін — Київ: варіанти з пересадкою у Варшаві та Хелмі. Час у дорозі, зупинки та інформація про купівлю квитків.",
-        "leadm": "Розклад поїздів Берлін — Київ: варіанти з пересадкою у Перемишлі, Варшаві та Хелмі. Час у дорозі, зупинки та інформація про купівлю квитків.",
-        "all": "Усі маршрути: Німеччина — Україна",
-        "more": "← Україна — Німеччина"
-      },
       "en": {
-        "title": "Berlin → Kyiv by train | Koliya",
-        "desc": "Trains Berlin — Kyiv with a transfer: times, stations, duration.",
         "h1": "By train: Berlin → Kyiv",
-        "lead": "Train timetable Berlin — Kyiv: options with a transfer in Warsaw and Chełm. Journey time, stops and ticket information.",
-        "leadm": "Train timetable Berlin — Kyiv: options with a transfer in Przemyśl, Warsaw and Chełm. Journey time, stops and ticket information.",
         "all": "All routes: Germany — Ukraine",
-        "more": "← Ukraine — Germany"
+        "desc": "Trains Berlin — Kyiv with a transfer: times, stations, duration.",
+        "lead": "Train timetable Berlin — Kyiv: options with a transfer in Warsaw and Chełm. Journey time, stops and ticket information.",
+        "more": "← Ukraine — Germany",
+        "leadm": "Train timetable Berlin — Kyiv: options with a transfer in Przemyśl, Warsaw and Chełm. Journey time, stops and ticket information.",
+        "title": "Berlin → Kyiv by train | Koliya"
       },
       "pl": {
-        "title": "Berlin → Kijów pociągiem | Koliya",
-        "desc": "Pociągi Berlin — Kijów z przesiadką: godziny, stacje, czas podróży.",
         "h1": "Pociągiem: Berlin → Kijów",
-        "lead": "Rozkład pociągów Berlin — Kijów: warianty z przesiadką w Warszawie i Chełmie. Czas podróży, postoje i informacje o zakupie biletów.",
-        "leadm": "Rozkład pociągów Berlin — Kijów: warianty z przesiadką w Przemyślu, Warszawie i Chełmie. Czas podróży, postoje i informacje o zakupie biletów.",
         "all": "Wszystkie trasy: Niemcy — Ukraina",
-        "more": "← Ukraina — Niemcy"
+        "desc": "Pociągi Berlin — Kijów z przesiadką: godziny, stacje, czas podróży.",
+        "lead": "Rozkład pociągów Berlin — Kijów: warianty z przesiadką w Warszawie i Chełmie. Czas podróży, postoje i informacje o zakupie biletów.",
+        "more": "← Ukraina — Niemcy",
+        "leadm": "Rozkład pociągów Berlin — Kijów: warianty z przesiadką w Przemyślu, Warszawie i Chełmie. Czas podróży, postoje i informacje o zakupie biletów.",
+        "title": "Berlin → Kijów pociągiem | Koliya"
+      },
+      "ru": {
+        "h1": "Поездом: Берлин → Киев",
+        "all": "Все маршруты: Германия — Украина",
+        "desc": "Поезда Берлин — Киев с пересадкой: время, станции, длительность.",
+        "lead": "Расписание поездов Берлин — Киев: варианты с пересадкой в Варшаве и Хелме. Время в пути, остановки и информация о покупке билетов.",
+        "more": "← Украина — Германия",
+        "leadm": "Расписание поездов Берлин — Киев: варианты с пересадкой в Перемышле, Варшаве и Хелме. Время в пути, остановки и информация о покупке билетов.",
+        "title": "Берлин → Киев поездом | Колія"
+      },
+      "uk": {
+        "h1": "Потягом: Берлін → Київ",
+        "all": "Усі маршрути: Німеччина — Україна",
+        "desc": "Поїзди Берлін — Київ з пересадкою: час, станції, тривалість.",
+        "lead": "Розклад поїздів Берлін — Київ: варіанти з пересадкою у Варшаві та Хелмі. Час у дорозі, зупинки та інформація про купівлю квитків.",
+        "more": "← Україна — Німеччина",
+        "leadm": "Розклад поїздів Берлін — Київ: варіанти з пересадкою у Перемишлі, Варшаві та Хелмі. Час у дорозі, зупинки та інформація про купівлю квитків.",
+        "title": "Берлін → Київ потягом | Колія"
       }
     }
   },
@@ -2906,41 +2906,41 @@
     "active": true,
     "created_at": "2026-11-13T12:44:27.684265+00:00",
     "texts": {
-      "ru": {
-        "title": "Киев → Кошице поездом | Колія",
-        "desc": "Поезда Киев — Кошице с пересадкой: время, станции, длительность.",
-        "h1": "Поездом: Киев → Кошице",
-        "lead": "Расписание поездов Киев — Кошице: варианты с пересадкой в Чопе. Время в пути, остановки и информация о покупке билетов.",
-        "leadm": "Расписание поездов Киев — Кошице: варианты с пересадкой в Чопе и Мукачево. Время в пути, остановки и информация о покупке билетов.",
-        "all": "Все маршруты: Украина — Словакия",
-        "more": "← Словакия — Украина"
-      },
-      "uk": {
-        "title": "Київ → Кошице потягом | Колія",
-        "desc": "Поїзди Київ — Кошице з пересадкою: час, станції, тривалість.",
-        "h1": "Потягом: Київ → Кошице",
-        "lead": "Розклад поїздів Київ — Кошице: варіанти з пересадкою в Чопі. Час у дорозі, зупинки та інформація про купівлю квитків.",
-        "leadm": "Розклад поїздів Київ — Кошице: варіанти з пересадкою в Чопі та Мукачеві. Час у дорозі, зупинки та інформація про купівлю квитків.",
-        "all": "Усі маршрути: Україна — Словаччина",
-        "more": "← Словаччина — Україна"
-      },
       "en": {
-        "title": "Kyiv → Košice by train | Koliya",
-        "desc": "Trains Kyiv — Košice with a transfer: times, stations, duration.",
         "h1": "By train: Kyiv → Košice",
-        "lead": "Train timetable Kyiv — Košice: options with a transfer in Chop. Journey time, stops and ticket information.",
-        "leadm": "Train timetable Kyiv — Košice: options with a transfer in Chop and Mukachevo. Journey time, stops and ticket information.",
         "all": "All routes: Ukraine — Slovakia",
-        "more": "← Slovakia — Ukraine"
+        "desc": "Trains Kyiv — Košice with a transfer: times, stations, duration.",
+        "lead": "Train timetable Kyiv — Košice: options with a transfer in Chop. Journey time, stops and ticket information.",
+        "more": "← Slovakia — Ukraine",
+        "leadm": "Train timetable Kyiv — Košice: options with a transfer in Chop and Mukachevo. Journey time, stops and ticket information.",
+        "title": "Kyiv → Košice by train | Koliya"
       },
       "pl": {
-        "title": "Kijów → Koszyce pociągiem | Koliya",
-        "desc": "Pociągi Kijów — Koszyce z przesiadką: godziny, stacje, czas podróży.",
         "h1": "Pociągiem: Kijów → Koszyce",
-        "lead": "Rozkład pociągów Kijów — Koszyce: warianty z przesiadką w Czopie. Czas podróży, postoje i informacje o zakupie biletów.",
-        "leadm": "Rozkład pociągów Kijów — Koszyce: warianty z przesiadką w Czopie i Mukaczewie. Czas podróży, postoje i informacje o zakupie biletów.",
         "all": "Wszystkie trasy: Ukraina — Słowacja",
-        "more": "← Słowacja — Ukraina"
+        "desc": "Pociągi Kijów — Koszyce z przesiadką: godziny, stacje, czas podróży.",
+        "lead": "Rozkład pociągów Kijów — Koszyce: warianty z przesiadką w Czopie. Czas podróży, postoje i informacje o zakupie biletów.",
+        "more": "← Słowacja — Ukraina",
+        "leadm": "Rozkład pociągów Kijów — Koszyce: warianty z przesiadką w Czopie i Mukaczewie. Czas podróży, postoje i informacje o zakupie biletów.",
+        "title": "Kijów → Koszyce pociągiem | Koliya"
+      },
+      "ru": {
+        "h1": "Поездом: Киев → Кошице",
+        "all": "Все маршруты: Украина — Словакия",
+        "desc": "Поезда Киев — Кошице с пересадкой: время, станции, длительность.",
+        "lead": "Расписание поездов Киев — Кошице: варианты с пересадкой в Чопе. Время в пути, остановки и информация о покупке билетов.",
+        "more": "← Словакия — Украина",
+        "leadm": "Расписание поездов Киев — Кошице: варианты с пересадкой в Чопе и Мукачево. Время в пути, остановки и информация о покупке билетов.",
+        "title": "Киев → Кошице поездом | Колія"
+      },
+      "uk": {
+        "h1": "Потягом: Київ → Кошице",
+        "all": "Усі маршрути: Україна — Словаччина",
+        "desc": "Поїзди Київ — Кошице з пересадкою: час, станції, тривалість.",
+        "lead": "Розклад поїздів Київ — Кошице: варіанти з пересадкою в Чопі. Час у дорозі, зупинки та інформація про купівлю квитків.",
+        "more": "← Словаччина — Україна",
+        "leadm": "Розклад поїздів Київ — Кошице: варіанти з пересадкою в Чопі та Мукачеві. Час у дорозі, зупинки та інформація про купівлю квитків.",
+        "title": "Київ → Кошице потягом | Колія"
       }
     }
   },
@@ -2978,37 +2978,37 @@
     "active": true,
     "created_at": "2026-11-13T12:44:27.684265+00:00",
     "texts": {
-      "ru": {
-        "title": "Кошице → Киев поездом | Колія",
-        "desc": "Поезда Кошице — Киев с пересадкой: время, станции, длительность.",
-        "h1": "Поездом: Кошице → Киев",
-        "lead": "Расписание поездов Кошице — Киев: варианты с пересадкой в Мукачево. Время в пути, остановки и информация о покупке билетов.",
-        "all": "Все маршруты: Словакия — Украина",
-        "more": "← Украина — Словакия"
-      },
-      "uk": {
-        "title": "Кошице → Київ потягом | Колія",
-        "desc": "Поїзди Кошице — Київ з пересадкою: час, станції, тривалість.",
-        "h1": "Потягом: Кошице → Київ",
-        "lead": "Розклад поїздів Кошице — Київ: варіанти з пересадкою у Мукачеві. Час у дорозі, зупинки та інформація про купівлю квитків.",
-        "all": "Усі маршрути: Словаччина — Україна",
-        "more": "← Україна — Словаччина"
-      },
       "en": {
-        "title": "Košice → Kyiv by train | Koliya",
-        "desc": "Trains Košice — Kyiv with a transfer: times, stations, duration.",
         "h1": "By train: Košice → Kyiv",
-        "lead": "Train timetable Košice — Kyiv: options with a transfer in Mukachevo. Journey time, stops and ticket information.",
         "all": "All routes: Slovakia — Ukraine",
-        "more": "← Ukraine — Slovakia"
+        "desc": "Trains Košice — Kyiv with a transfer: times, stations, duration.",
+        "lead": "Train timetable Košice — Kyiv: options with a transfer in Mukachevo. Journey time, stops and ticket information.",
+        "more": "← Ukraine — Slovakia",
+        "title": "Košice → Kyiv by train | Koliya"
       },
       "pl": {
-        "title": "Koszyce → Kijów pociągiem | Koliya",
-        "desc": "Pociągi Koszyce — Kijów z przesiadką: godziny, stacje, czas podróży.",
         "h1": "Pociągiem: Koszyce → Kijów",
-        "lead": "Rozkład pociągów Koszyce — Kijów: warianty z przesiadką w Mukaczewie. Czas podróży, postoje i informacje o zakupie biletów.",
         "all": "Wszystkie trasy: Słowacja — Ukraina",
-        "more": "← Ukraina — Słowacja"
+        "desc": "Pociągi Koszyce — Kijów z przesiadką: godziny, stacje, czas podróży.",
+        "lead": "Rozkład pociągów Koszyce — Kijów: warianty z przesiadką w Mukaczewie. Czas podróży, postoje i informacje o zakupie biletów.",
+        "more": "← Ukraina — Słowacja",
+        "title": "Koszyce → Kijów pociągiem | Koliya"
+      },
+      "ru": {
+        "h1": "Поездом: Кошице → Киев",
+        "all": "Все маршруты: Словакия — Украина",
+        "desc": "Поезда Кошице — Киев с пересадкой: время, станции, длительность.",
+        "lead": "Расписание поездов Кошице — Киев: варианты с пересадкой в Мукачево. Время в пути, остановки и информация о покупке билетов.",
+        "more": "← Украина — Словакия",
+        "title": "Кошице → Киев поездом | Колія"
+      },
+      "uk": {
+        "h1": "Потягом: Кошице → Київ",
+        "all": "Усі маршрути: Словаччина — Україна",
+        "desc": "Поїзди Кошице — Київ з пересадкою: час, станції, тривалість.",
+        "lead": "Розклад поїздів Кошице — Київ: варіанти з пересадкою у Мукачеві. Час у дорозі, зупинки та інформація про купівлю квитків.",
+        "more": "← Україна — Словаччина",
+        "title": "Кошице → Київ потягом | Колія"
       }
     }
   },
@@ -3093,37 +3093,37 @@
     "active": true,
     "created_at": "2026-11-13T12:44:27.684265+00:00",
     "texts": {
-      "ru": {
-        "title": "Киев → Прага поездом | Колія",
-        "desc": "Поезда Киев — Прага с пересадкой: время, станции, длительность.",
-        "h1": "Поездом: Киев → Прага",
-        "lead": "Расписание поездов Киев — Прага: варианты с пересадкой в Перемышле и Чопе. Время в пути, остановки и информация о покупке билетов.",
-        "all": "Все маршруты: Украина — Чехия",
-        "more": "← Чехия — Украина"
-      },
-      "uk": {
-        "title": "Київ → Прага потягом | Колія",
-        "desc": "Поїзди Київ — Прага з пересадкою: час, станції, тривалість.",
-        "h1": "Потягом: Київ → Прага",
-        "lead": "Розклад поїздів Київ — Прага: варіанти з пересадкою у Перемишлі та Чопі. Час у дорозі, зупинки та інформація про купівлю квитків.",
-        "all": "Усі маршрути: Україна — Чехія",
-        "more": "← Чехія — Україна"
-      },
       "en": {
-        "title": "Kyiv → Prague by train | Koliya",
-        "desc": "Trains Kyiv — Prague with a transfer: times, stations, duration.",
         "h1": "By train: Kyiv → Prague",
-        "lead": "Train timetable Kyiv — Prague: options with a transfer in Przemyśl and Chop. Journey time, stops and ticket information.",
         "all": "All routes: Ukraine — Czechia",
-        "more": "← Czechia — Ukraine"
+        "desc": "Trains Kyiv — Prague with a transfer: times, stations, duration.",
+        "lead": "Train timetable Kyiv — Prague: options with a transfer in Przemyśl and Chop. Journey time, stops and ticket information.",
+        "more": "← Czechia — Ukraine",
+        "title": "Kyiv → Prague by train | Koliya"
       },
       "pl": {
-        "title": "Kijów → Praga pociągiem | Koliya",
-        "desc": "Pociągi Kijów — Praga z przesiadką: godziny, stacje, czas podróży.",
         "h1": "Pociągiem: Kijów → Praga",
-        "lead": "Rozkład pociągów Kijów — Praga: warianty z przesiadką w Przemyślu i Czopie. Czas podróży, postoje i informacje o zakupie biletów.",
         "all": "Wszystkie trasy: Ukraina — Czechy",
-        "more": "← Czechy — Ukraina"
+        "desc": "Pociągi Kijów — Praga z przesiadką: godziny, stacje, czas podróży.",
+        "lead": "Rozkład pociągów Kijów — Praga: warianty z przesiadką w Przemyślu i Czopie. Czas podróży, postoje i informacje o zakupie biletów.",
+        "more": "← Czechy — Ukraina",
+        "title": "Kijów → Praga pociągiem | Koliya"
+      },
+      "ru": {
+        "h1": "Поездом: Киев → Прага",
+        "all": "Все маршруты: Украина — Чехия",
+        "desc": "Поезда Киев — Прага с пересадкой: время, станции, длительность.",
+        "lead": "Расписание поездов Киев — Прага: варианты с пересадкой в Перемышле и Чопе. Время в пути, остановки и информация о покупке билетов.",
+        "more": "← Чехия — Украина",
+        "title": "Киев → Прага поездом | Колія"
+      },
+      "uk": {
+        "h1": "Потягом: Київ → Прага",
+        "all": "Усі маршрути: Україна — Чехія",
+        "desc": "Поїзди Київ — Прага з пересадкою: час, станції, тривалість.",
+        "lead": "Розклад поїздів Київ — Прага: варіанти з пересадкою у Перемишлі та Чопі. Час у дорозі, зупинки та інформація про купівлю квитків.",
+        "more": "← Чехія — Україна",
+        "title": "Київ → Прага потягом | Колія"
       }
     }
   },
@@ -3173,41 +3173,41 @@
     "active": true,
     "created_at": "2026-11-13T12:44:27.684265+00:00",
     "texts": {
-      "ru": {
-        "title": "Киев → Будапешт поездом | Колія",
-        "desc": "Поезда Киев — Будапешт: время, станции, длительность.",
-        "h1": "Поездом: Киев → Будапешт",
-        "lead": "Расписание поездов Киев — Будапешт: прямой поезд и варианты с пересадкой в Чопе. Время в пути, остановки и информация о покупке билетов.",
-        "leadm": "Расписание поездов Киев — Будапешт: прямой поезд и варианты с пересадкой в Чопе и Мукачево. Время в пути, остановки и информация о покупке билетов.",
-        "all": "Все маршруты: Украина — Венгрия",
-        "more": "← Венгрия — Украина"
-      },
-      "uk": {
-        "title": "Київ → Будапешт потягом | Колія",
-        "desc": "Поїзди Київ — Будапешт: час, станції, тривалість.",
-        "h1": "Потягом: Київ → Будапешт",
-        "lead": "Розклад поїздів Київ — Будапешт: прямий поїзд і варіанти з пересадкою в Чопі. Час у дорозі, зупинки та інформація про купівлю квитків.",
-        "leadm": "Розклад поїздів Київ — Будапешт: прямий поїзд і варіанти з пересадкою в Чопі та Мукачеві. Час у дорозі, зупинки та інформація про купівлю квитків.",
-        "all": "Усі маршрути: Україна — Угорщина",
-        "more": "← Угорщина — Україна"
-      },
       "en": {
-        "title": "Kyiv → Budapest by train | Koliya",
-        "desc": "Trains Kyiv — Budapest: times, stations, duration.",
         "h1": "By train: Kyiv → Budapest",
-        "lead": "Train timetable Kyiv — Budapest: the direct train and options with a transfer in Chop. Journey time, stops and ticket information.",
-        "leadm": "Train timetable Kyiv — Budapest: the direct train and options with a transfer in Chop and Mukachevo. Journey time, stops and ticket information.",
         "all": "All routes: Ukraine — Hungary",
-        "more": "← Hungary — Ukraine"
+        "desc": "Trains Kyiv — Budapest: times, stations, duration.",
+        "lead": "Train timetable Kyiv — Budapest: the direct train and options with a transfer in Chop. Journey time, stops and ticket information.",
+        "more": "← Hungary — Ukraine",
+        "leadm": "Train timetable Kyiv — Budapest: the direct train and options with a transfer in Chop and Mukachevo. Journey time, stops and ticket information.",
+        "title": "Kyiv → Budapest by train | Koliya"
       },
       "pl": {
-        "title": "Kijów → Budapeszt pociągiem | Koliya",
-        "desc": "Pociągi Kijów — Budapeszt: godziny, stacje, czas podróży.",
         "h1": "Pociągiem: Kijów → Budapeszt",
-        "lead": "Rozkład pociągów Kijów — Budapeszt: pociąg bezpośredni i warianty z przesiadką w Czopie. Czas podróży, postoje i informacje o zakupie biletów.",
-        "leadm": "Rozkład pociągów Kijów — Budapeszt: pociąg bezpośredni i warianty z przesiadką w Czopie i Mukaczewie. Czas podróży, postoje i informacje o zakupie biletów.",
         "all": "Wszystkie trasy: Ukraina — Węgry",
-        "more": "← Węgry — Ukraina"
+        "desc": "Pociągi Kijów — Budapeszt: godziny, stacje, czas podróży.",
+        "lead": "Rozkład pociągów Kijów — Budapeszt: pociąg bezpośredni i warianty z przesiadką w Czopie. Czas podróży, postoje i informacje o zakupie biletów.",
+        "more": "← Węgry — Ukraina",
+        "leadm": "Rozkład pociągów Kijów — Budapeszt: pociąg bezpośredni i warianty z przesiadką w Czopie i Mukaczewie. Czas podróży, postoje i informacje o zakupie biletów.",
+        "title": "Kijów → Budapeszt pociągiem | Koliya"
+      },
+      "ru": {
+        "h1": "Поездом: Киев → Будапешт",
+        "all": "Все маршруты: Украина — Венгрия",
+        "desc": "Поезда Киев — Будапешт: время, станции, длительность.",
+        "lead": "Расписание поездов Киев — Будапешт: прямой поезд и варианты с пересадкой в Чопе. Время в пути, остановки и информация о покупке билетов.",
+        "more": "← Венгрия — Украина",
+        "leadm": "Расписание поездов Киев — Будапешт: прямой поезд и варианты с пересадкой в Чопе и Мукачево. Время в пути, остановки и информация о покупке билетов.",
+        "title": "Киев → Будапешт поездом | Колія"
+      },
+      "uk": {
+        "h1": "Потягом: Київ → Будапешт",
+        "all": "Усі маршрути: Україна — Угорщина",
+        "desc": "Поїзди Київ — Будапешт: час, станції, тривалість.",
+        "lead": "Розклад поїздів Київ — Будапешт: прямий поїзд і варіанти з пересадкою в Чопі. Час у дорозі, зупинки та інформація про купівлю квитків.",
+        "more": "← Угорщина — Україна",
+        "leadm": "Розклад поїздів Київ — Будапешт: прямий поїзд і варіанти з пересадкою в Чопі та Мукачеві. Час у дорозі, зупинки та інформація про купівлю квитків.",
+        "title": "Київ → Будапешт потягом | Колія"
       }
     }
   },
@@ -3248,41 +3248,41 @@
     "active": true,
     "created_at": "2026-11-13T12:44:27.684265+00:00",
     "texts": {
-      "ru": {
-        "title": "Будапешт → Киев поездом | Колія",
-        "desc": "Поезда Будапешт — Киев: время, станции, длительность.",
-        "h1": "Поездом: Будапешт → Киев",
-        "lead": "Расписание поездов Будапешт — Киев: прямой поезд и варианты с пересадкой в Чопе. Время в пути, остановки и информация о покупке билетов.",
-        "leadm": "Расписание поездов Будапешт — Киев: прямой поезд и варианты с пересадкой в Чопе и Мукачево. Время в пути, остановки и информация о покупке билетов.",
-        "all": "Все маршруты: Венгрия — Украина",
-        "more": "← Украина — Венгрия"
-      },
-      "uk": {
-        "title": "Будапешт → Київ потягом | Колія",
-        "desc": "Поїзди Будапешт — Київ: час, станції, тривалість.",
-        "h1": "Потягом: Будапешт → Київ",
-        "lead": "Розклад поїздів Будапешт — Київ: прямий поїзд і варіанти з пересадкою в Чопі. Час у дорозі, зупинки та інформація про купівлю квитків.",
-        "leadm": "Розклад поїздів Будапешт — Київ: прямий поїзд і варіанти з пересадкою в Чопі та Мукачеві. Час у дорозі, зупинки та інформація про купівлю квитків.",
-        "all": "Усі маршрути: Угорщина — Україна",
-        "more": "← Україна — Угорщина"
-      },
       "en": {
-        "title": "Budapest → Kyiv by train | Koliya",
-        "desc": "Trains Budapest — Kyiv: times, stations, duration.",
         "h1": "By train: Budapest → Kyiv",
-        "lead": "Train timetable Budapest — Kyiv: the direct train and options with a transfer in Chop. Journey time, stops and ticket information.",
-        "leadm": "Train timetable Budapest — Kyiv: the direct train and options with a transfer in Chop and Mukachevo. Journey time, stops and ticket information.",
         "all": "All routes: Hungary — Ukraine",
-        "more": "← Ukraine — Hungary"
+        "desc": "Trains Budapest — Kyiv: times, stations, duration.",
+        "lead": "Train timetable Budapest — Kyiv: the direct train and options with a transfer in Chop. Journey time, stops and ticket information.",
+        "more": "← Ukraine — Hungary",
+        "leadm": "Train timetable Budapest — Kyiv: the direct train and options with a transfer in Chop and Mukachevo. Journey time, stops and ticket information.",
+        "title": "Budapest → Kyiv by train | Koliya"
       },
       "pl": {
-        "title": "Budapeszt → Kijów pociągiem | Koliya",
-        "desc": "Pociągi Budapeszt — Kijów: godziny, stacje, czas podróży.",
         "h1": "Pociągiem: Budapeszt → Kijów",
-        "lead": "Rozkład pociągów Budapeszt — Kijów: pociąg bezpośredni i warianty z przesiadką w Czopie. Czas podróży, postoje i informacje o zakupie biletów.",
-        "leadm": "Rozkład pociągów Budapeszt — Kijów: pociąg bezpośredni i warianty z przesiadką w Czopie i Mukaczewie. Czas podróży, postoje i informacje o zakupie biletów.",
         "all": "Wszystkie trasy: Węgry — Ukraina",
-        "more": "← Ukraina — Węgry"
+        "desc": "Pociągi Budapeszt — Kijów: godziny, stacje, czas podróży.",
+        "lead": "Rozkład pociągów Budapeszt — Kijów: pociąg bezpośredni i warianty z przesiadką w Czopie. Czas podróży, postoje i informacje o zakupie biletów.",
+        "more": "← Ukraina — Węgry",
+        "leadm": "Rozkład pociągów Budapeszt — Kijów: pociąg bezpośredni i warianty z przesiadką w Czopie i Mukaczewie. Czas podróży, postoje i informacje o zakupie biletów.",
+        "title": "Budapeszt → Kijów pociągiem | Koliya"
+      },
+      "ru": {
+        "h1": "Поездом: Будапешт → Киев",
+        "all": "Все маршруты: Венгрия — Украина",
+        "desc": "Поезда Будапешт — Киев: время, станции, длительность.",
+        "lead": "Расписание поездов Будапешт — Киев: прямой поезд и варианты с пересадкой в Чопе. Время в пути, остановки и информация о покупке билетов.",
+        "more": "← Украина — Венгрия",
+        "leadm": "Расписание поездов Будапешт — Киев: прямой поезд и варианты с пересадкой в Чопе и Мукачево. Время в пути, остановки и информация о покупке билетов.",
+        "title": "Будапешт → Киев поездом | Колія"
+      },
+      "uk": {
+        "h1": "Потягом: Будапешт → Київ",
+        "all": "Усі маршрути: Угорщина — Україна",
+        "desc": "Поїзди Будапешт — Київ: час, станції, тривалість.",
+        "lead": "Розклад поїздів Будапешт — Київ: прямий поїзд і варіанти з пересадкою в Чопі. Час у дорозі, зупинки та інформація про купівлю квитків.",
+        "more": "← Україна — Угорщина",
+        "leadm": "Розклад поїздів Будапешт — Київ: прямий поїзд і варіанти з пересадкою в Чопі та Мукачеві. Час у дорозі, зупинки та інформація про купівлю квитків.",
+        "title": "Будапешт → Київ потягом | Колія"
       }
     }
   },
@@ -3367,37 +3367,37 @@
     "active": true,
     "created_at": "2026-11-13T12:44:27.684265+00:00",
     "texts": {
-      "ru": {
-        "title": "Прага → Киев поездом | Колія",
-        "desc": "Поезда Прага — Киев с пересадкой: время, станции, длительность.",
-        "h1": "Поездом: Прага → Киев",
-        "lead": "Расписание поездов Прага — Киев: варианты с пересадкой в Перемышле и Чопе. Время в пути, остановки и информация о покупке билетов.",
-        "all": "Все маршруты: Чехия — Украина",
-        "more": "← Украина — Чехия"
-      },
-      "uk": {
-        "title": "Прага → Київ потягом | Колія",
-        "desc": "Поїзди Прага — Київ з пересадкою: час, станції, тривалість.",
-        "h1": "Потягом: Прага → Київ",
-        "lead": "Розклад поїздів Прага — Київ: варіанти з пересадкою у Перемишлі та Чопі. Час у дорозі, зупинки та інформація про купівлю квитків.",
-        "all": "Усі маршрути: Чехія — Україна",
-        "more": "← Україна — Чехія"
-      },
       "en": {
-        "title": "Prague → Kyiv by train | Koliya",
-        "desc": "Trains Prague — Kyiv with a transfer: times, stations, duration.",
         "h1": "By train: Prague → Kyiv",
-        "lead": "Train timetable Prague — Kyiv: options with a transfer in Przemyśl and Chop. Journey time, stops and ticket information.",
         "all": "All routes: Czechia — Ukraine",
-        "more": "← Ukraine — Czechia"
+        "desc": "Trains Prague — Kyiv with a transfer: times, stations, duration.",
+        "lead": "Train timetable Prague — Kyiv: options with a transfer in Przemyśl and Chop. Journey time, stops and ticket information.",
+        "more": "← Ukraine — Czechia",
+        "title": "Prague → Kyiv by train | Koliya"
       },
       "pl": {
-        "title": "Praga → Kijów pociągiem | Koliya",
-        "desc": "Pociągi Praga — Kijów z przesiadką: godziny, stacje, czas podróży.",
         "h1": "Pociągiem: Praga → Kijów",
-        "lead": "Rozkład pociągów Praga — Kijów: warianty z przesiadką w Przemyślu i Czopie. Czas podróży, postoje i informacje o zakupie biletów.",
         "all": "Wszystkie trasy: Czechy — Ukraina",
-        "more": "← Ukraina — Czechy"
+        "desc": "Pociągi Praga — Kijów z przesiadką: godziny, stacje, czas podróży.",
+        "lead": "Rozkład pociągów Praga — Kijów: warianty z przesiadką w Przemyślu i Czopie. Czas podróży, postoje i informacje o zakupie biletów.",
+        "more": "← Ukraina — Czechy",
+        "title": "Praga → Kijów pociągiem | Koliya"
+      },
+      "ru": {
+        "h1": "Поездом: Прага → Киев",
+        "all": "Все маршруты: Чехия — Украина",
+        "desc": "Поезда Прага — Киев с пересадкой: время, станции, длительность.",
+        "lead": "Расписание поездов Прага — Киев: варианты с пересадкой в Перемышле и Чопе. Время в пути, остановки и информация о покупке билетов.",
+        "more": "← Украина — Чехия",
+        "title": "Прага → Киев поездом | Колія"
+      },
+      "uk": {
+        "h1": "Потягом: Прага → Київ",
+        "all": "Усі маршрути: Чехія — Україна",
+        "desc": "Поїзди Прага — Київ з пересадкою: час, станції, тривалість.",
+        "lead": "Розклад поїздів Прага — Київ: варіанти з пересадкою у Перемишлі та Чопі. Час у дорозі, зупинки та інформація про купівлю квитків.",
+        "more": "← Україна — Чехія",
+        "title": "Прага → Київ потягом | Колія"
       }
     }
   }

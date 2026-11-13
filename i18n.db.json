@@ -1,167 +1,6 @@
 {
  "ui": [
   {
-   "key": "h",
-   "ru": "ч",
-   "uk": "год",
-   "en": "h",
-   "pl": "godz."
-  },
-  {
-   "key": "min",
-   "ru": "мин",
-   "uk": "хв",
-   "en": "min",
-   "pl": "min"
-  },
-  {
-   "key": "tag0",
-   "ru": "без пересадок",
-   "uk": "без пересадок",
-   "en": "direct",
-   "pl": "bez przesiadek"
-  },
-  {
-   "key": "tag1",
-   "ru": "1 пересадка",
-   "uk": "1 пересадка",
-   "en": "1 transfer",
-   "pl": "1 przesiadka"
-  },
-  {
-   "key": "tag2",
-   "ru": "{n} пересадки",
-   "uk": "{n} пересадки",
-   "en": "{n} transfers",
-   "pl": "{n} przesiadki"
-  },
-  {
-   "key": "tag5",
-   "ru": "{n} пересадок",
-   "uk": "{n} пересадок",
-   "en": "{n} transfers",
-   "pl": "{n} przesiadek"
-  },
-  {
-   "key": "loc",
-   "ru": "Время местное",
-   "uk": "Час місцевий",
-   "en": "Local time",
-   "pl": "Czas lokalny"
-  },
-  {
-   "key": "seat",
-   "ru": "Сидячий интерсити",
-   "uk": "Сидячий інтерсіті",
-   "en": "Seated InterCity",
-   "pl": "InterCity, miejsca siedzące"
-  },
-  {
-   "key": "odd",
-   "ru": "Ходит по нечётным числам",
-   "uk": "Курсує за непарними числами",
-   "en": "Runs on odd-numbered dates",
-   "pl": "Kursuje w nieparzyste dni"
-  },
-  {
-   "key": "even",
-   "ru": "Ходит по чётным числам",
-   "uk": "Курсує за парними числами",
-   "en": "Runs on even-numbered dates",
-   "pl": "Kursuje w parzyste dni"
-  },
-  {
-   "key": "train",
-   "ru": "Поезд",
-   "uk": "Поїзд",
-   "en": "Train",
-   "pl": "Pociąg"
-  },
-  {
-   "key": "no",
-   "ru": "№",
-   "uk": "№",
-   "en": "No. ",
-   "pl": "nr "
-  },
-  {
-   "key": "swap",
-   "ru": "Пересадка: {a}",
-   "uk": "Пересадка: {a}",
-   "en": "Transfer: {a}",
-   "pl": "Przesiadka: {a}"
-  },
-  {
-   "key": "swapIn",
-   "ru": "Пересадка {c}",
-   "uk": "Пересадка {c}",
-   "en": "Transfer {c}",
-   "pl": "Przesiadka {c}"
-  },
-  {
-   "key": "swapArr",
-   "ru": "Пересадка: {a} → {b}",
-   "uk": "Пересадка: {a} → {b}",
-   "en": "Transfer: {a} → {b}",
-   "pl": "Przesiadka: {a} → {b}"
-  },
-  {
-   "key": "f1",
-   "ru": "Справочник железнодорожных маршрутов из Украины и в Украину. Расписания, станции, пересадки и полезная информация для пассажиров.",
-   "uk": "Довідник залізничних маршрутів з України та в Україну. Розклади, станції, пересадки та корисна інформація для пасажирів.",
-   "en": "A guide to rail routes from and to Ukraine: timetables, stations, transfers and useful information for passengers.",
-   "pl": "Przewodnik po trasach kolejowych z Ukrainy i do Ukrainy: rozkłady jazdy, stacje, przesiadki i przydatne informacje dla pasażerów."
-  },
-  {
-   "key": "f2h",
-   "ru": "Актуальность информации",
-   "uk": "Актуальність інформації",
-   "en": "Keeping information up to date",
-   "pl": "Aktualność informacji"
-  },
-  {
-   "key": "f2a",
-   "ru": "Расписание поездов, время отправления и прибытия могут изменяться. Перед поездкой проверяйте актуальную информацию на сайтах перевозчиков.",
-   "uk": "Розклад поїздів, час відправлення та прибуття можуть змінюватися. Перед поїздкою перевіряйте актуальну інформацію на сайтах перевізників.",
-   "en": "Train timetables and departure and arrival times may change. Before you travel, check current information on the carriers’ websites.",
-   "pl": "Rozkłady jazdy oraz godziny odjazdów i przyjazdów mogą ulec zmianie. Przed podróżą sprawdź aktualne informacje na stronach przewoźników."
-  },
-  {
-   "key": "f2b",
-   "ru": "Информация на странице обновлена: 01.11.2026.",
-   "uk": "Інформацію на сторінці оновлено: 01.11.2026.",
-   "en": "Page last updated: 01.11.2026.",
-   "pl": "Informacje na stronie zaktualizowano: 01.11.2026."
-  },
-  {
-   "key": "f2c",
-   "ru": "«Колія» — независимый информационный проект, не связанный с АО «Укрзализныця».",
-   "uk": "«Колія» — незалежний інформаційний проєкт, не пов’язаний з АТ «Укрзалізниця».",
-   "en": "Koliya is an independent information project and is not affiliated with JSC Ukrzaliznytsia.",
-   "pl": "„Koliya” to niezależny projekt informacyjny, niezwiązany z JSC Ukrzaliznytsia."
-  },
-  {
-   "key": "f3h",
-   "ru": "Справочная служба Укрзализныци",
-   "uk": "Довідкова служба Укрзалізниці",
-   "en": "Ukrzaliznytsia information line",
-   "pl": "Infolinia Ukrzaliznyci"
-  },
-  {
-   "key": "f3",
-   "ru": "0 800 503 111 · 044 465 33 44<br>Звонки на номер 0 800 бесплатны с украинских номеров.",
-   "uk": "0 800 503 111 · 044 465 33 44<br>Дзвінки на номер 0 800 безкоштовні з українських номерів.",
-   "en": "0 800 503 111 · 044 465 33 44<br>Calls to 0 800 are free from Ukrainian numbers.",
-   "pl": "0 800 503 111 · 044 465 33 44<br>Połączenia na numer 0 800 są bezpłatne z numerów ukraińskich."
-  },
-  {
-   "key": "fsrc",
-   "ru": "Источник данных о поездах:",
-   "uk": "Джерело даних про поїзди:",
-   "en": "Train data sources:",
-   "pl": "Źródła danych o pociągach:"
-  },
-  {
    "key": "back.home",
    "ru": "← Главная",
    "uk": "← Головна",
@@ -169,459 +8,25 @@
    "pl": "← Strona główna"
   },
   {
-   "key": "direct.h",
-   "ru": "Прямой поезд",
-   "uk": "Прямий поїзд",
-   "en": "Direct train",
-   "pl": "Pociąg bezpośredni"
-  },
-  {
-   "key": "direct.s",
-   "ru": "без пересадок",
-   "uk": "без пересадок",
-   "en": "no transfers",
-   "pl": "bez przesiadek"
-  },
-  {
-   "key": "transfer.h",
-   "ru": "С удобной пересадкой в Хелме на одной платформе",
-   "uk": "Зручна пересадка в Хелмі на одній платформі",
-   "en": "With a convenient same-platform transfer in Chełm",
-   "pl": "Z wygodną przesiadką w Chełmie na jednym peronie"
-  },
-  {
-   "key": "coach",
-   "ru": "В купе предусмотрены три спальных места, расположенные одно над другим. Если средняя полка приведена в спальное положение, пользоваться нижней полкой для сидения нельзя. Для подъёма на верхнюю полку предусмотрена лестница.",
-   "uk": "У купе передбачено три спальні місця, розташовані одне над одним. Якщо середню полицю переведено у спальне положення, сидіти на нижній полиці не можна. Для підйому на верхню полицю передбачено драбину.",
-   "en": "Each compartment has three berths, one above another. When the middle berth is folded down for sleeping, the lower berth cannot be used for sitting. A ladder is provided for climbing to the upper berth.",
-   "pl": "W przedziale są trzy miejsca do spania, jedno nad drugim. Gdy środkowa półka jest rozłożona do spania, nie wolno siedzieć na dolnej. Na górną półkę prowadzi drabinka."
-  },
-  {
-   "key": "noopts.h",
-   "ru": "Пока нет вариантов",
-   "uk": "Поки що немає варіантів",
-   "en": "No options yet",
-   "pl": "Brak połączeń"
-  },
-  {
-   "key": "noopts.p",
-   "ru": "Добавьте их в админке.",
-   "uk": "Додайте їх в адмінці.",
-   "en": "Add them in the admin panel.",
-   "pl": "Dodaj je w panelu administratora."
-  },
-  {
-   "key": "err.h",
-   "ru": "Не удалось загрузить данные",
-   "uk": "Не вдалося завантажити дані",
-   "en": "Could not load the data",
-   "pl": "Nie udało się załadować danych"
-  },
-  {
-   "key": "err.p",
-   "ru": "Обновите страницу позже.",
-   "uk": "Оновіть сторінку пізніше.",
-   "en": "Please refresh the page later.",
-   "pl": "Odśwież stronę później."
-  },
-  {
-   "key": "loading",
-   "ru": "Загрузка…",
-   "uk": "Завантаження…",
-   "en": "Loading…",
-   "pl": "Ładowanie…"
-  },
-  {
-   "key": "d.more",
-   "ru": "Подробнее",
-   "uk": "Докладніше",
-   "en": "Details",
-   "pl": "Szczegóły"
-  },
-  {
-   "key": "d.less",
-   "ru": "Свернуть",
-   "uk": "Згорнути",
-   "en": "Collapse",
-   "pl": "Zwiń"
-  },
-  {
-   "key": "d.nochg",
-   "ru": "Без пересадок",
-   "uk": "Без пересадок",
-   "en": "No transfers",
-   "pl": "Bez przesiadek"
-  },
-  {
-   "key": "d.checked",
-   "ru": "Проверено:",
-   "uk": "Перевірено:",
-   "en": "Checked:",
-   "pl": "Sprawdzono:"
-  },
-  {
-   "key": "d.daily",
-   "ru": "Ежедневно",
-   "uk": "Щодня",
-   "en": "Daily",
-   "pl": "Codziennie"
-  },
-  {
-   "key": "d.odd",
-   "ru": "По нечётным дням",
-   "uk": "По непарних днях",
-   "en": "On odd dates",
-   "pl": "W dni nieparzyste"
-  },
-  {
-   "key": "d.even",
-   "ru": "По чётным дням",
-   "uk": "По парних днях",
-   "en": "On even dates",
-   "pl": "W dni parzyste"
-  },
-  {
-   "key": "d.howq",
-   "ru": "Как купить билеты?",
-   "uk": "Як купити квитки?",
-   "en": "How to buy tickets?",
-   "pl": "Jak kupić bilety?"
-  },
-  {
-   "key": "d.hows",
-   "ru": "Подробная инструкция для каждого варианта маршрута.",
-   "uk": "Докладна інструкція для кожного варіанта маршруту.",
-   "en": "Step-by-step instructions for each route option.",
-   "pl": "Szczegółowa instrukcja dla każdego wariantu trasy."
-  },
-  {
-   "key": "d.how",
-   "ru": "Инструкция",
-   "uk": "Інструкція",
-   "en": "Instructions",
-   "pl": "Instrukcja"
-  },
-  {
-   "key": "more.h",
-   "ru": "Ещё маршруты",
-   "uk": "Інші маршрути",
-   "en": "More routes",
-   "pl": "Inne trasy"
-  },
-  {
-   "key": "more.all",
-   "ru": "Все страны",
-   "uk": "Усі країни",
-   "en": "All countries",
-   "pl": "Wszystkie kraje"
-  },
-  {
-   "key": "buy.h",
-   "ru": "Как купить билеты",
-   "uk": "Як купити квитки",
-   "en": "How to buy tickets",
-   "pl": "Jak kupić bilety"
-  },
-  {
-   "key": "buy.d.h",
-   "ru": "Прямой поезд",
-   "uk": "Прямий поїзд",
-   "en": "Direct train",
-   "pl": "Pociąg bezpośredni"
-  },
-  {
-   "key": "buy.s1",
-   "ru": "Откройте приложение «Укрзалізниця» и войдите в свою учётную запись.",
-   "uk": "Відкрийте застосунок «Укрзалізниця» та увійдіть у свій обліковий запис.",
-   "en": "Open the Ukrzaliznytsia app and sign in to your account.",
-   "pl": "Otwórz aplikację Ukrzaliznytsia i zaloguj się na swoje konto."
-  },
-  {
-   "key": "buy.d.s2",
-   "ru": "Откройте приложение «Укрзалізниця», выберите маршрут {dir} и укажите дату поездки. Продажа билетов открывается за 20 суток до отправления, в 09:00 по киевскому времени. Билеты на прямой поезд пользуются высоким спросом, поэтому рекомендуем покупать их сразу после начала продаж.",
-   "uk": "Відкрийте застосунок «Укрзалізниця», оберіть маршрут {dir} і вкажіть дату поїздки. Продаж квитків відкривається за 20 діб до відправлення, о 09:00 за київським часом. На прямий поїзд квитки користуються великим попитом, тому радимо купувати їх одразу після початку продажу.",
-   "en": "Open the Ukrzaliznytsia app, choose the route {dir} and the travel date. Sales open 20 days before departure at 09:00 Kyiv time. Tickets for the direct train are in high demand, so we recommend buying them as soon as sales open.",
-   "pl": "Otwórz aplikację Ukrzaliznytsia, wybierz trasę {dir} i datę podróży. Sprzedaż biletów rusza na 20 dni przed odjazdem o 9:00 czasu kijowskiego. Bilety na pociąg bezpośredni cieszą się dużym popytem, dlatego warto kupić je zaraz po otwarciu sprzedaży."
-  },
-  {
-   "key": "buy.d.s3",
-   "ru": "Выберите место в купейном вагоне стандарта RIC и оплатите билет банковской картой. Электронный билет появится в приложении. При посадке предъявите его вместе с паспортом.",
-   "uk": "Оберіть місце в купейному вагоні стандарту RIC і сплатіть квиток банківською карткою. Електронний квиток з’явиться в застосунку. Під час посадки пред’явіть його разом із паспортом.",
-   "en": "Pick a berth in an RIC-standard compartment car and pay by bank card. The e-ticket will appear in the app. Show it with your passport when boarding.",
-   "pl": "Wybierz miejsce w wagonie z przedziałami standardu RIC i zapłać kartą. E-bilet pojawi się w aplikacji. Przy wsiadaniu okaż go razem z paszportem."
-  },
-  {
-   "key": "buy.d.btn",
-   "ru": "Купить в приложении УЗ билет {dir}",
-   "uk": "Купити в застосунку УЗ квиток {dir}",
-   "en": "Buy the {dir} ticket in the UZ app",
-   "pl": "Kup w aplikacji UZ bilet {dir}"
-  },
-  {
-   "key": "buy.t.h",
-   "ru": "С пересадкой {xin}",
-   "uk": "З пересадкою {xin}",
-   "en": "With a transfer {xin}",
-   "pl": "Z przesiadką {xin}"
-  },
-  {
-   "key": "buy.t.s1",
-   "ru": "Откройте приложение «Укрзалізниця», выберите маршрут {uz} и укажите дату поездки. Продажа билетов открывается за 20 суток до отправления, в 09:00 по киевскому времени. Выберите подходящий поезд и оплатите билет.",
-   "uk": "Відкрийте застосунок «Укрзалізниця», оберіть маршрут {uz} і вкажіть дату поїздки. Продаж квитків відкривається за 20 діб до відправлення, о 09:00 за київським часом. Оберіть потрібний поїзд і сплатіть квиток.",
-   "en": "Open the Ukrzaliznytsia app, choose the route {uz} and the travel date. Sales open 20 days before departure at 09:00 Kyiv time. Choose a suitable train and pay for the ticket.",
-   "pl": "Otwórz aplikację Ukrzaliznytsia, wybierz trasę {uz} i datę podróży. Sprzedaż biletów rusza na 20 dni przed odjazdem o 9:00 czasu kijowskiego. Wybierz odpowiedni pociąg i opłać bilet."
-  },
-  {
-   "key": "buy.t.s1one",
-   "ru": "Откройте приложение «Укрзалізниця», выберите маршрут {uz} и укажите дату поездки. Продажа билетов открывается за 20 суток до отправления, в 09:00 по киевскому времени. Выберите поезд и оплатите билет.",
-   "uk": "Відкрийте застосунок «Укрзалізниця», оберіть маршрут {uz} і вкажіть дату поїздки. Продаж квитків відкривається за 20 діб до відправлення, о 09:00 за київським часом. Оберіть поїзд і сплатіть квиток.",
-   "en": "Open the Ukrzaliznytsia app, choose the route {uz} and the travel date. Sales open 20 days before departure at 09:00 Kyiv time. Choose the train and pay for the ticket.",
-   "pl": "Otwórz aplikację Ukrzaliznytsia, wybierz trasę {uz} i datę podróży. Sprzedaż biletów rusza na 20 dni przed odjazdem o 9:00 czasu kijowskiego. Wybierz pociąg i opłać bilet."
-  },
-  {
-   "key": "buy.t.s2",
-   "ru": "Билет на поезд {pkp} приобретите отдельно у польского перевозчика PKP Intercity — на официальном сайте intercity.pl или в приложении PKP Intercity. Также билеты можно приобрести на сайте koleo.pl или в приложении KOLEO.",
-   "uk": "Квиток на поїзд {pkp} придбайте окремо в польського перевізника PKP Intercity — на офіційному сайті intercity.pl або в застосунку PKP Intercity. Також квитки можна купити на сайті koleo.pl або в застосунку KOLEO.",
-   "en": "Buy the {pkp} ticket separately from the Polish carrier PKP Intercity, on intercity.pl or in the PKP Intercity app. You can also buy it on koleo.pl or in the KOLEO app.",
-   "pl": "Bilet na pociąg {pkp} kup osobno u polskiego przewoźnika PKP Intercity — na stronie intercity.pl lub w aplikacji PKP Intercity. Można go też kupić na koleo.pl lub w aplikacji KOLEO."
-  },
-  {
-   "key": "buy.t3out",
-   "ru": "При выборе поезда {pkp} ориентируйтесь на варианты и расписание, представленные выше на этой странице. Учитывайте время прибытия поезда {uz} и продолжительность пересадки.",
-   "uk": "Обираючи поїзд {pkp}, орієнтуйтеся на варіанти та розклад, наведені вище на цій сторінці. Зважайте на час прибуття поїзда {uz} і тривалість пересадки.",
-   "en": "When choosing the {pkp} train, use the options and timetable shown above on this page. Allow for the arrival time of the {uz} train and the length of the transfer.",
-   "pl": "Wybierając pociąg {pkp}, kieruj się wariantami i rozkładem podanymi wyżej na tej stronie. Uwzględnij godzinę przyjazdu pociągu {uz} i czas przesiadki."
-  },
-  {
-   "key": "buy.t3in",
-   "ru": "При выборе поезда {pkp} ориентируйтесь на варианты и расписание, представленные выше на этой странице. Учитывайте время отправления поезда {uz} и продолжительность пересадки.",
-   "uk": "Обираючи поїзд {pkp}, орієнтуйтеся на варіанти та розклад, наведені вище на цій сторінці. Зважайте на час відправлення поїзда {uz} і тривалість пересадки.",
-   "en": "When choosing the {pkp} train, use the options and timetable shown above on this page. Allow for the departure time of the {uz} train and the length of the transfer.",
-   "pl": "Wybierając pociąg {pkp}, kieruj się wariantami i rozkładem podanymi wyżej na tej stronie. Uwzględnij godzinę odjazdu pociągu {uz} i czas przesiadki."
-  },
-  {
-   "key": "buy.t.s4",
-   "ru": "После покупки сохраните оба электронных билета в телефоне. Перед поездкой проверьте даты, время отправления и станции прибытия.",
-   "uk": "Після купівлі збережіть обидва електронні квитки в телефоні. Перед поїздкою перевірте дати, час відправлення та станції прибуття.",
-   "en": "After buying, save both e-tickets on your phone. Before you travel, check the dates, departure times and arrival stations.",
-   "pl": "Po zakupie zapisz oba e-bilety w telefonie. Przed podróżą sprawdź daty, godziny odjazdu i stacje docelowe."
-  },
-  {
-   "key": "buy.t.b1",
-   "ru": "Купить в приложении УЗ билет {uz}",
-   "uk": "Купити в застосунку УЗ квиток {uz}",
-   "en": "Buy the {uz} ticket in the UZ app",
-   "pl": "Kup w aplikacji UZ bilet {uz}"
-  },
-  {
-   "key": "buy.t.b2",
-   "ru": "Купить на сайте PKP Intercity билет {pkp}",
-   "uk": "Купити на сайті PKP Intercity квиток {pkp}",
-   "en": "Buy the {pkp} ticket on PKP Intercity",
-   "pl": "Kup na stronie PKP Intercity bilet {pkp}"
-  },
-  {
-   "key": "buy.note",
-   "ru": "Графики движения поездов могут измениться, актуальную информацию смотрите в приложении УЗ и на сайте PKP Intercity.",
-   "uk": "Графіки руху поїздів можуть змінюватися, актуальну інформацію дивіться в застосунку УЗ та на сайті PKP Intercity.",
-   "en": "Train schedules may change. Check the latest information in the UZ app and on the PKP Intercity website.",
-   "pl": "Rozkłady jazdy mogą ulec zmianie. Aktualne informacje znajdziesz w aplikacji UZ i na stronie PKP Intercity."
-  },
-  {
-   "key": "buy.t.s1z",
-   "ru": "Откройте приложение «Укрзалізниця», выберите маршрут {uz} и укажите дату поездки. Продажа билетов открывается за 20 суток до отправления, в 08:00 по киевскому времени. Выберите подходящий поезд и оплатите билет.",
-   "uk": "Відкрийте застосунок «Укрзалізниця», оберіть маршрут {uz} і вкажіть дату поїздки. Продаж квитків відкривається за 20 діб до відправлення, о 08:00 за київським часом. Оберіть потрібний поїзд і сплатіть квиток.",
-   "en": "Open the Ukrzaliznytsia app, choose the route {uz} and the travel date. Sales open 20 days before departure at 08:00 Kyiv time. Choose a suitable train and pay for the ticket.",
-   "pl": "Otwórz aplikację Ukrzaliznytsia, wybierz trasę {uz} i datę podróży. Sprzedaż biletów rusza na 20 dni przed odjazdem o 08:00 czasu kijowskiego. Wybierz odpowiedni pociąg i opłać bilet."
-  },
-  {
-   "key": "buy.t.s2zk",
-   "ru": "Поезд {pkp} отправляется на следующие сутки, поэтому продажа билетов на него в приложении «Укрзалізниця» открывается на следующий день. Если хотите приобрести билет заранее, его можно отдельно купить в приложении словацкого перевозчика ZSSK. Как правило, билеты у ZSSK дешевле.",
-   "uk": "Поїзд {pkp} відправляється наступної доби, тому продаж квитків на нього в застосунку «Укрзалізниця» відкривається наступного дня. Якщо хочете придбати квиток заздалегідь, його можна окремо купити в застосунку словацького перевізника ZSSK. Зазвичай квитки в ZSSK дешевші.",
-   "en": "The {pkp} train departs the next day, so ticket sales for it in the Ukrzaliznytsia app open the following day. If you want to buy a ticket in advance, you can buy it separately in the app of the Slovak carrier ZSSK. ZSSK tickets are usually cheaper.",
-   "pl": "Pociąg {pkp} odjeżdża następnej doby, dlatego sprzedaż biletów na niego w aplikacji Ukrzaliznytsia rusza dzień później. Jeśli chcesz kupić bilet wcześniej, możesz kupić go osobno w aplikacji słowackiego przewoźnika ZSSK. Zwykle bilety ZSSK są tańsze."
-  },
-  {
-   "key": "buy.d.s3z",
-   "ru": "Выберите место и оплатите билет банковской картой. Электронный билет появится в приложении. При посадке предъявите его вместе с паспортом.",
-   "uk": "Оберіть місце і сплатіть квиток банківською карткою. Електронний квиток з’явиться в застосунку. Під час посадки пред’явіть його разом із паспортом.",
-   "en": "Pick a seat and pay by bank card. The e-ticket will appear in the app. Show it with your passport when boarding.",
-   "pl": "Wybierz miejsce i zapłać kartą. E-bilet pojawi się w aplikacji. Przy wsiadaniu okaż go razem z paszportem."
-  },
-  {
-   "key": "buy.d.s2v",
-   "ru": "Откройте приложение «Укрзалізниця», выберите маршрут {dir} и укажите дату поездки. Продажа билетов открывается за 20 суток до отправления, в 08:00 по киевскому времени. Билеты на прямой поезд пользуются высоким спросом, поэтому рекомендуем покупать их сразу после начала продаж.",
-   "uk": "Відкрийте застосунок «Укрзалізниця», оберіть маршрут {dir} і вкажіть дату поїздки. Продаж квитків відкривається за 20 діб до відправлення, о 08:00 за київським часом. На прямий поїзд квитки користуються великим попитом, тому радимо купувати їх одразу після початку продажу.",
-   "en": "Open the Ukrzaliznytsia app, choose the route {dir} and the travel date. Sales open 20 days before departure at 08:00 Kyiv time. Tickets for the direct train are in high demand, so we recommend buying them as soon as sales open.",
-   "pl": "Otwórz aplikację Ukrzaliznytsia, wybierz trasę {dir} i datę podróży. Sprzedaż biletów rusza na 20 dni przed odjazdem o 08:00 czasu kijowskiego. Bilety na pociąg bezpośredni cieszą się dużym popytem, dlatego warto kupić je zaraz po otwarciu sprzedaży."
-  },
-  {
-   "key": "buy.d.s2z",
-   "ru": "Откройте приложение «Укрзалізниця», выберите маршрут {dir} и укажите дату поездки. Продажа билетов открывается за 20 суток до отправления, в 08:00 по киевскому времени.",
-   "uk": "Відкрийте застосунок «Укрзалізниця», оберіть маршрут {dir} і вкажіть дату поїздки. Продаж квитків відкривається за 20 діб до відправлення, о 08:00 за київським часом.",
-   "en": "Open the Ukrzaliznytsia app, choose the route {dir} and the travel date. Sales open 20 days before departure at 08:00 Kyiv time.",
-   "pl": "Otwórz aplikację Ukrzaliznytsia, wybierz trasę {dir} i datę podróży. Sprzedaż biletów rusza na 20 dni przed odjazdem o 08:00 czasu kijowskiego."
-  },
-  {
-   "key": "buy.t.s2c",
-   "ru": "Билет на поезд {pkp} приобретите отдельно у румынского перевозчика CFR Călători — на официальном сайте bilete.cfrcalatori.ro.",
-   "uk": "Квиток на поїзд {pkp} придбайте окремо в румунського перевізника CFR Călători — на офіційному сайті bilete.cfrcalatori.ro.",
-   "en": "Buy the {pkp} ticket separately from the Romanian carrier CFR Călători, on bilete.cfrcalatori.ro.",
-   "pl": "Bilet na pociąg {pkp} kup osobno u rumuńskiego przewoźnika CFR Călători — na stronie bilete.cfrcalatori.ro."
-  },
-  {
-   "key": "buy.t.b2c",
-   "ru": "Купить на сайте CFR билет {pkp}",
-   "uk": "Купити на сайті CFR квиток {pkp}",
-   "en": "Buy the {pkp} ticket on CFR",
-   "pl": "Kup na stronie CFR bilet {pkp}"
-  },
-  {
-   "key": "buy.note.c",
-   "ru": "Графики движения поездов могут измениться, актуальную информацию смотрите в приложении УЗ и на сайте CFR Călători.",
-   "uk": "Графіки руху поїздів можуть змінюватися, актуальну інформацію дивіться в застосунку УЗ та на сайті CFR Călători.",
-   "en": "Train schedules may change. Check the latest information in the UZ app and on the CFR Călători website.",
-   "pl": "Rozkłady jazdy mogą ulec zmianie. Aktualne informacje znajdziesz w aplikacji UZ i na stronie CFR Călători."
-  },
-  {
-   "key": "transfer.h3",
-   "ru": "С пересадкой",
-   "uk": "З пересадкою",
-   "en": "With a transfer",
-   "pl": "Z przesiadką"
-  },
-  {
-   "key": "buy.t.s1v",
-   "ru": "Откройте приложение «Укрзалізниця», выберите нужный поезд на украинском участке маршрута и укажите дату поездки. Продажа билетов открывается за 20 суток до отправления, в 08:00 по киевскому времени. Оплатите билет.",
-   "uk": "Відкрийте застосунок «Укрзалізниця», оберіть потрібний поїзд на українській ділянці маршруту та вкажіть дату поїздки. Продаж квитків відкривається за 20 діб до відправлення, о 08:00 за київським часом. Сплатіть квиток.",
-   "en": "Open the Ukrzaliznytsia app, choose the train you need on the Ukrainian part of the route and set the travel date. Sales open 20 days before departure, at 08:00 Kyiv time. Pay for the ticket.",
-   "pl": "Otwórz aplikację Ukrzaliznytsia, wybierz odpowiedni pociąg na ukraińskim odcinku trasy i datę podróży. Sprzedaż biletów rusza na 20 dni przed odjazdem o 08:00 czasu kijowskiego. Opłać bilet."
-  },
-  {
-   "key": "buy.t.s2v",
-   "ru": "Билет на остальную часть пути приобретите отдельно, например у австрийского перевозчика ÖBB — на tickets.oebb.at или в приложении ÖBB Tickets.",
-   "uk": "Квиток на решту шляху придбайте окремо, наприклад в австрійського перевізника ÖBB — на tickets.oebb.at або в застосунку ÖBB Tickets.",
-   "en": "Buy the ticket for the rest of the journey separately, for example from the Austrian carrier ÖBB, on tickets.oebb.at or in the ÖBB Tickets app.",
-   "pl": "Bilet na resztę trasy kup osobno, na przykład u austriackiego przewoźnika ÖBB — na tickets.oebb.at lub w aplikacji ÖBB Tickets."
-  },
-  {
-   "key": "buy.t.b1v",
-   "ru": "Купить билет в приложении УЗ",
-   "uk": "Купити квиток у застосунку УЗ",
-   "en": "Buy a ticket in the UZ app",
-   "pl": "Kup bilet w aplikacji UZ"
-  },
-  {
-   "key": "buy.t.b2v",
-   "ru": "Купить билет на сайте ÖBB",
-   "uk": "Купити квиток на сайті ÖBB",
-   "en": "Buy a ticket on ÖBB",
-   "pl": "Kup bilet na stronie ÖBB"
-  },
-  {
-   "key": "buy.h.s1",
-   "ru": "Откройте приложение «Укрзалізниця», выберите маршрут {bud1} и укажите дату поездки. Продажа билетов открывается за 20 суток до отправления, в 08:00 по киевскому времени. Выберите поезд и оплатите билет.",
-   "uk": "Відкрийте застосунок «Укрзалізниця», оберіть маршрут {bud1} і вкажіть дату поїздки. Продаж квитків відкривається за 20 діб до відправлення, о 08:00 за київським часом. Оберіть поїзд і сплатіть квиток.",
-   "en": "Open the Ukrzaliznytsia app, choose the route {bud1} and the travel date. Sales open 20 days before departure, at 08:00 Kyiv time. Choose a train and pay for the ticket.",
-   "pl": "Otwórz aplikację Ukrzaliznytsia, wybierz trasę {bud1} i datę podróży. Sprzedaż biletów rusza na 20 dni przed odjazdem o 08:00 czasu kijowskiego. Wybierz pociąg i opłać bilet."
-  },
-  {
-   "key": "buy.h.s2",
-   "ru": "Билет {bud2} можно приобрести у венгерского перевозчика MÁV — на jegy.mav.hu или в приложении MÁVPlusz, либо у австрийского перевозчика ÖBB — на tickets.oebb.at или в приложении ÖBB Tickets.",
-   "uk": "Квиток {bud2} можна придбати в угорського перевізника MÁV — на jegy.mav.hu або в застосунку MÁVPlusz, чи в австрійського перевізника ÖBB — на tickets.oebb.at або в застосунку ÖBB Tickets.",
-   "en": "You can buy the {bud2} ticket from the Hungarian carrier MÁV, on jegy.mav.hu or in the MÁVPlusz app, or from the Austrian carrier ÖBB, on tickets.oebb.at or in the ÖBB Tickets app.",
-   "pl": "Bilet {bud2} można kupić u węgierskiego przewoźnika MÁV — na jegy.mav.hu lub w aplikacji MÁVPlusz, albo u austriackiego przewoźnika ÖBB — na tickets.oebb.at lub w aplikacji ÖBB Tickets."
-  },
-  {
-   "key": "buy.h.b1",
-   "ru": "Купить в приложении УЗ билет {bud1}",
-   "uk": "Купити в застосунку УЗ квиток {bud1}",
-   "en": "Buy the {bud1} ticket in the UZ app",
-   "pl": "Kup w aplikacji UZ bilet {bud1}"
-  },
-  {
-   "key": "buy.h.b2",
-   "ru": "Купить на сайте MÁV билет {bud2}",
-   "uk": "Купити на сайті MÁV квиток {bud2}",
-   "en": "Buy the {bud2} ticket on MÁV",
-   "pl": "Kup na stronie MÁV bilet {bud2}"
-  },
-  {
-   "key": "buy.h.b3",
-   "ru": "Купить на сайте ÖBB билет {bud2}",
-   "uk": "Купити на сайті ÖBB квиток {bud2}",
-   "en": "Buy the {bud2} ticket on ÖBB",
-   "pl": "Kup na stronie ÖBB bilet {bud2}"
-  },
-  {
-   "key": "buy.t.s1vk",
-   "ru": "Откройте приложение «Укрзалізниця», выберите маршрут {uz} и укажите дату поездки. Продажа билетов открывается за 20 суток до отправления, в 08:00 по киевскому времени. Выберите поезд 028Л и оплатите билет.",
-   "uk": "Відкрийте застосунок «Укрзалізниця», оберіть маршрут {uz} і вкажіть дату поїздки. Продаж квитків відкривається за 20 діб до відправлення, о 08:00 за київським часом. Оберіть поїзд 028Л і сплатіть квиток.",
-   "en": "Open the Ukrzaliznytsia app, choose the route {uz} and the travel date. Sales open 20 days before departure at 08:00 Kyiv time. Choose train 028Л and pay for the ticket.",
-   "pl": "Otwórz aplikację Ukrzaliznytsia, wybierz trasę {uz} i datę podróży. Sprzedaż biletów rusza na 20 dni przed odjazdem o 08:00 czasu kijowskiego. Wybierz pociąg 028Л i opłać bilet."
-  },
-  {
-   "key": "buy.t.s2vk",
-   "ru": "Купите билет на поезд {pkp} в приложении «Укрзалізниця». Также билет можно приобрести заранее у австрийского перевозчика ÖBB — на tickets.oebb.at или в приложении ÖBB Tickets. Но в таком случае он будет существенно дороже, чем в приложении «Укрзалізниця».",
-   "uk": "Придбайте квиток на поїзд {pkp} у застосунку «Укрзалізниця». Також квиток можна придбати заздалегідь в австрійського перевізника ÖBB — на tickets.oebb.at або в застосунку ÖBB Tickets. Але в такому разі він буде суттєво дорожчим, ніж у застосунку «Укрзалізниця».",
-   "en": "Buy the ticket for the {pkp} train in the Ukrzaliznytsia app. You can also buy a ticket in advance from the Austrian carrier ÖBB, on tickets.oebb.at or in the ÖBB Tickets app. In that case it will be considerably more expensive than in the Ukrzaliznytsia app.",
-   "pl": "Kup bilet na pociąg {pkp} w aplikacji Ukrzaliznytsia. Bilet można też kupić wcześniej u austriackiego przewoźnika ÖBB — na tickets.oebb.at lub w aplikacji ÖBB Tickets. W takim przypadku będzie jednak znacznie droższy niż w aplikacji Ukrzaliznytsia."
-  },
-  {
-   "key": "buy.t.s1kv",
-   "ru": "Откройте приложение «Укрзалізниця», выберите маршрут {uz} и укажите дату поездки. Продажа билетов открывается за 20 суток до отправления, в 08:00 по киевскому времени. Выберите поезд 027К и оплатите билет.",
-   "uk": "Відкрийте застосунок «Укрзалізниця», оберіть маршрут {uz} і вкажіть дату поїздки. Продаж квитків відкривається за 20 діб до відправлення, о 08:00 за київським часом. Оберіть поїзд 027К і сплатіть квиток.",
-   "en": "Open the Ukrzaliznytsia app, choose the route {uz} and the travel date. Sales open 20 days before departure at 08:00 Kyiv time. Choose train 027К and pay for the ticket.",
-   "pl": "Otwórz aplikację Ukrzaliznytsia, wybierz trasę {uz} i datę podróży. Sprzedaż biletów rusza na 20 dni przed odjazdem o 08:00 czasu kijowskiego. Wybierz pociąg 027К i opłać bilet."
-  },
-  {
-   "key": "buy.t.s2ov",
-   "ru": "Поезда {pkp} отправляются на следующие сутки, поэтому продажа билетов на них в приложении «Укрзалізниця» открывается на следующий день. Также билет можно приобрести заранее у австрийского перевозчика ÖBB — на tickets.oebb.at или в приложении ÖBB Tickets. Но в таком случае он будет существенно дороже, чем в приложении «Укрзалізниця».",
-   "uk": "Поїзди {pkp} відправляються наступної доби, тому продаж квитків на них у застосунку «Укрзалізниця» відкривається наступного дня. Також квиток можна придбати заздалегідь в австрійського перевізника ÖBB — на tickets.oebb.at або в застосунку ÖBB Tickets. Але в такому разі він буде суттєво дорожчим, ніж у застосунку «Укрзалізниця».",
-   "en": "The {pkp} trains depart the next day, so ticket sales for them in the Ukrzaliznytsia app open the following day. You can also buy a ticket in advance from the Austrian carrier ÖBB, on tickets.oebb.at or in the ÖBB Tickets app. In that case it will be considerably more expensive than in the Ukrzaliznytsia app.",
-   "pl": "Pociągi {pkp} odjeżdżają następnej doby, dlatego sprzedaż biletów na nie w aplikacji Ukrzaliznytsia rusza dzień później. Bilet można też kupić wcześniej u austriackiego przewoźnika ÖBB — na tickets.oebb.at lub w aplikacji ÖBB Tickets. W takim przypadku będzie jednak znacznie droższy niż w aplikacji Ukrzaliznytsia."
-  },
-  {
-   "key": "buy.t.s2o",
-   "ru": "Билет на поезд {pkp} приобретите отдельно у австрийского перевозчика ÖBB — на официальном сайте tickets.oebb.at или в приложении ÖBB Tickets.",
-   "uk": "Квиток на поїзд {pkp} придбайте окремо в австрійського перевізника ÖBB — на офіційному сайті tickets.oebb.at або в застосунку ÖBB Tickets.",
-   "en": "Buy the {pkp} ticket separately from the Austrian carrier ÖBB, on tickets.oebb.at or in the ÖBB Tickets app.",
-   "pl": "Bilet na pociąg {pkp} kup osobno u austriackiego przewoźnika ÖBB — na stronie tickets.oebb.at lub w aplikacji ÖBB Tickets."
-  },
-  {
-   "key": "buy.t.b2o",
-   "ru": "Купить на сайте ÖBB билет {pkp}",
-   "uk": "Купити на сайті ÖBB квиток {pkp}",
-   "en": "Buy the {pkp} ticket on ÖBB",
-   "pl": "Kup na stronie ÖBB bilet {pkp}"
-  },
-  {
-   "key": "buy.note.o",
-   "ru": "Графики движения поездов могут измениться, актуальную информацию смотрите в приложении УЗ и на сайте ÖBB.",
-   "uk": "Графіки руху поїздів можуть змінюватися, актуальну інформацію дивіться в застосунку УЗ та на сайті ÖBB.",
-   "en": "Train schedules may change. Check the latest information in the UZ app and on the ÖBB website.",
-   "pl": "Rozkłady jazdy mogą ulec zmianie. Aktualne informacje znajdziesz w aplikacji UZ i na stronie ÖBB."
-  },
-  {
-   "key": "buy.t.s2z",
-   "ru": "Билет на поезд {pkp} можно купить в приложении «Укрзалізниця» или отдельно у словацкого перевозчика ZSSK в его приложении. Обычно у ZSSK билеты дешевле.",
-   "uk": "Квиток на поїзд {pkp} можна купити в застосунку «Укрзалізниця» або окремо в словацького перевізника ZSSK у його застосунку. Зазвичай у ZSSK квитки дешевші.",
-   "en": "You can buy the {pkp} ticket in the Ukrzaliznytsia app or separately from the Slovak carrier ZSSK in its app. Tickets from ZSSK are usually cheaper.",
-   "pl": "Bilet na pociąg {pkp} możesz kupić w aplikacji Ukrzaliznytsia lub osobno u słowackiego przewoźnika ZSSK w jego aplikacji. Zwykle u ZSSK bilety są tańsze."
-  },
-  {
-   "key": "buy.t.b2z",
-   "ru": "Купить в приложении ZSSK билет {pkp}",
-   "uk": "Купити в застосунку ZSSK квиток {pkp}",
-   "en": "Buy the {pkp} ticket in the ZSSK app",
-   "pl": "Kup w aplikacji ZSSK bilet {pkp}"
-  },
-  {
-   "key": "buy.note.z",
-   "ru": "Графики движения поездов могут измениться, актуальную информацию смотрите в приложении УЗ и в приложении ZSSK.",
-   "uk": "Графіки руху поїздів можуть змінюватися, актуальну інформацію дивіться в застосунку УЗ та в застосунку ZSSK.",
-   "en": "Train schedules may change. Check the latest information in the UZ app and in the ZSSK app.",
-   "pl": "Rozkłady jazdy mogą ulec zmianie. Aktualne informacje znajdziesz w aplikacji UZ i w aplikacji ZSSK."
+   "key": "border.after",
+   "ru": "После прибытия в Перемышль происходит пограничный контроль",
+   "uk": "Після прибуття до Перемишля відбувається прикордонний контроль",
+   "en": "Border control takes place in Przemyśl after arrival",
+   "pl": "Po przyjeździe do Przemyśla odbywa się kontrola graniczna"
+  },
+  {
+   "key": "border.before",
+   "ru": "Перед отправлением из Перемышля происходит пограничный контроль",
+   "uk": "Перед відправленням із Перемишля відбувається прикордонний контроль",
+   "en": "Border control takes place in Przemyśl before departure",
+   "pl": "Przed odjazdem z Przemyśla odbywa się kontrola graniczna"
+  },
+  {
+   "key": "buy.a.btn",
+   "ru": "Купить в приложении УЗ билеты {dir}",
+   "uk": "Купити в застосунку УЗ квитки {dir}",
+   "en": "Buy the {dir} tickets in the UZ app",
+   "pl": "Kup w aplikacji UZ bilety {dir}"
   },
   {
    "key": "buy.a.s1",
@@ -645,18 +50,11 @@
    "pl": "Po zakupie zapisz e-bilety w telefonie. Przed podróżą sprawdź daty, godziny odjazdu i stacje docelowe."
   },
   {
-   "key": "buy.a.btn",
-   "ru": "Купить в приложении УЗ билеты {dir}",
-   "uk": "Купити в застосунку УЗ квитки {dir}",
-   "en": "Buy the {dir} tickets in the UZ app",
-   "pl": "Kup w aplikacji UZ bilety {dir}"
-  },
-  {
-   "key": "buy.note.a",
-   "ru": "Графики движения поездов могут измениться, актуальную информацию смотрите в приложении УЗ.",
-   "uk": "Графіки руху поїздів можуть змінюватися, актуальну інформацію дивіться в застосунку УЗ.",
-   "en": "Train schedules may change. Check the latest information in the UZ app.",
-   "pl": "Rozkłady jazdy mogą ulec zmianie. Aktualne informacje znajdziesz w aplikacji UZ."
+   "key": "buy.be.bd",
+   "ru": "Купить на сайте DB билет {de}",
+   "uk": "Купити на сайті DB квиток {de}",
+   "en": "Buy the {de} ticket on DB",
+   "pl": "Kup na stronie DB bilet {de}"
   },
   {
    "key": "buy.be.sC",
@@ -666,13 +64,6 @@
    "pl": "Bilety na odcinek {de} kupisz na niemieckiej stronie bahn.de lub w aplikacji DB Navigator."
   },
   {
-   "key": "buy.be.sT",
-   "ru": "Билеты {pl} можно купить на польском сайте PKP Intercity (intercity.pl), а {de} — на немецком сайте bahn.de или в приложении DB Navigator.",
-   "uk": "Квитки {pl} можна купити на польському сайті PKP Intercity (intercity.pl), а {de} — на німецькому сайті bahn.de або в застосунку DB Navigator.",
-   "en": "Tickets for {pl} can be bought on the Polish PKP Intercity website (intercity.pl), and for {de} on the German website bahn.de or in the DB Navigator app.",
-   "pl": "Bilety na odcinek {pl} kupisz na polskiej stronie PKP Intercity (intercity.pl), a na odcinek {de} — na niemieckiej stronie bahn.de lub w aplikacji DB Navigator."
-  },
-  {
    "key": "buy.be.sH",
    "ru": "Билеты {pl} можно купить на польском сайте PKP Intercity (intercity.pl; кроме ночного поезда) и на немецком сайте bahn.de или в приложении DB Navigator.",
    "uk": "Квитки {pl} можна купити на польському сайті PKP Intercity (intercity.pl; крім нічного поїзда) і на німецькому сайті bahn.de або в застосунку DB Navigator.",
@@ -680,375 +71,18 @@
    "pl": "Bilety na odcinek {pl} kupisz na polskiej stronie PKP Intercity (intercity.pl; z wyjątkiem pociągu nocnego) oraz na niemieckiej stronie bahn.de lub w aplikacji DB Navigator."
   },
   {
-   "key": "buy.be.bd",
-   "ru": "Купить на сайте DB билет {de}",
-   "uk": "Купити на сайті DB квиток {de}",
-   "en": "Buy the {de} ticket on DB",
-   "pl": "Kup na stronie DB bilet {de}"
+   "key": "buy.be.sT",
+   "ru": "Билеты {pl} можно купить на польском сайте PKP Intercity (intercity.pl), а {de} — на немецком сайте bahn.de или в приложении DB Navigator.",
+   "uk": "Квитки {pl} можна купити на польському сайті PKP Intercity (intercity.pl), а {de} — на німецькому сайті bahn.de або в застосунку DB Navigator.",
+   "en": "Tickets for {pl} can be bought on the Polish PKP Intercity website (intercity.pl), and for {de} on the German website bahn.de or in the DB Navigator app.",
+   "pl": "Bilety na odcinek {pl} kupisz na polskiej stronie PKP Intercity (intercity.pl), a na odcinek {de} — na niemieckiej stronie bahn.de lub w aplikacji DB Navigator."
   },
   {
-   "key": "buy.note.be",
-   "ru": "Графики движения поездов могут измениться, актуальную информацию смотрите в приложении УЗ, на сайте PKP Intercity и на сайте DB.",
-   "uk": "Графіки руху поїздів можуть змінитися, актуальну інформацію дивіться в застосунку УЗ, на сайті PKP Intercity та на сайті DB.",
-   "en": "Train schedules may change. Check the latest information in the UZ app, on the PKP Intercity website and on the DB website.",
-   "pl": "Rozkłady jazdy mogą ulec zmianie. Aktualne informacje znajdziesz w aplikacji UZ oraz na stronach PKP Intercity i DB."
-  },
-  {
-   "key": "ix.title",
-   "ru": "Колія: поездом из Украины и в Украину",
-   "uk": "Колія: потягом з України та в Україну",
-   "en": "Koliya: by train from and to Ukraine",
-   "pl": "Koliya: pociągiem z Ukrainy i na Ukrainę"
-  },
-  {
-   "key": "ix.h1",
-   "ru": "Поездом в Украину и из Украины",
-   "uk": "Потягом в Україну та з України",
-   "en": "By train to and from Ukraine",
-   "pl": "Pociągiem na Ukrainę i z Ukrainy"
-  },
-  {
-   "key": "ix.lead",
-   "ru": "Маршруты, расписания, пересадки и покупка билетов в европейские страны.",
-   "uk": "Маршрути, розклади, пересадки та купівля квитків у європейські країни.",
-   "en": "Routes, timetables, transfers and ticket buying for European countries.",
-   "pl": "Trasy, rozkłady jazdy, przesiadki i zakup biletów do krajów europejskich."
-  },
-  {
-   "key": "ix.fromUa",
-   "ru": "Из Украины →",
-   "uk": "З України →",
-   "en": "From Ukraine →",
-   "pl": "Z Ukrainy →"
-  },
-  {
-   "key": "ix.toUa",
-   "ru": "← В Украину",
-   "uk": "← В Україну",
-   "en": "← To Ukraine",
-   "pl": "← Na Ukrainę"
-  },
-  {
-   "key": "ix.popular",
-   "ru": "Популярные маршруты",
-   "uk": "Популярні маршрути",
-   "en": "Popular routes",
-   "pl": "Popularne trasy"
-  },
-  {
-   "key": "ix.how.h",
-   "ru": "Как пользоваться сайтом",
-   "uk": "Як користуватися сайтом",
-   "en": "How to use the site",
-   "pl": "Jak korzystać z serwisu"
-  },
-  {
-   "key": "ix.how1",
-   "ru": "Выберите направление и найдите подходящий маршрут.",
-   "uk": "Оберіть напрям і знайдіть відповідний маршрут.",
-   "en": "Choose a direction and find a suitable route.",
-   "pl": "Wybierz kierunek i znajdź odpowiednią trasę."
-  },
-  {
-   "key": "ix.how2",
-   "ru": "Ознакомьтесь с расписанием, пересадками и временем в пути.",
-   "uk": "Ознайомтеся з розкладом, пересадками та часом у дорозі.",
-   "en": "Check the timetable, transfers and travel time.",
-   "pl": "Sprawdź rozkład jazdy, przesiadki i czas podróży."
-  },
-  {
-   "key": "ix.how3",
-   "ru": "Узнайте, где купить билеты на каждый участок маршрута.",
-   "uk": "Дізнайтеся, де купити квитки на кожну ділянку маршруту.",
-   "en": "Find out where to buy tickets for each part of the journey.",
-   "pl": "Dowiedz się, gdzie kupić bilety na każdy odcinek trasy."
-  },
-  {
-   "key": "ix.help.h",
-   "ru": "Справочная Укрзализныци",
-   "uk": "Довідкова Укрзалізниці",
-   "en": "Ukrzaliznytsia information line",
-   "pl": "Infolinia Ukrzaliznyci"
-  },
-  {
-   "key": "ix.help.p",
-   "ru": "Бесплатно с украинских номеров.",
-   "uk": "Безкоштовно з українських номерів.",
-   "en": "Free from Ukrainian numbers.",
-   "pl": "Bezpłatnie z numerów ukraińskich."
-  },
-  {
-   "key": "ix.help.b1",
-   "ru": "График работы касс",
-   "uk": "Графік роботи кас",
-   "en": "Ticket office hours",
-   "pl": "Godziny pracy kas"
-  },
-  {
-   "key": "ix.help.b2",
-   "ru": "Список задерживающихся рейсов",
-   "uk": "Список поїздів, що затримуються",
-   "en": "List of delayed trains",
-   "pl": "Lista opóźnionych pociągów"
-  },
-  {
-   "key": "ix.fly.h",
-   "ru": "Прилететь самолётом ✈️",
-   "uk": "Прилетіти літаком ✈️",
-   "en": "Arrive by air ✈️",
-   "pl": "Przylot samolotem ✈️"
-  },
-  {
-   "key": "ix.fly.p",
-   "ru": "В Украину можно добраться из любой страны. Выберите рейс до одного из аэропортов, откуда удобные пересадки на наши поезда.",
-   "uk": "В Україну можна дістатися з будь-якої країни. Оберіть рейс до одного з аеропортів, звідки зручні пересадки на наші поїзди.",
-   "en": "You can reach Ukraine from any country. Pick a flight to one of the airports with convenient connections to our trains.",
-   "pl": "Na Ukrainę można dotrzeć z każdego kraju. Wybierz lot do jednego z lotnisk, skąd są wygodne przesiadki na nasze pociągi."
-  },
-  {
-   "key": "ix.buy.h",
-   "ru": "Купить билеты на УЗ",
-   "uk": "Купити квитки на УЗ",
-   "en": "Buy UZ tickets",
-   "pl": "Kup bilety UZ"
-  },
-  {
-   "key": "ix.buy.b1",
-   "ru": "Приложение Укрзализныци",
-   "uk": "Застосунок Укрзалізниці",
-   "en": "Ukrzaliznytsia app",
-   "pl": "Aplikacja Ukrzaliznyci"
-  },
-  {
-   "key": "ix.buy.b2",
-   "ru": "Сайт УЗ",
-   "uk": "Сайт УЗ",
-   "en": "UZ website",
-   "pl": "Strona UZ"
-  },
-  {
-   "key": "ix.all",
-   "ru": "← Все направления",
-   "uk": "← Усі напрями",
-   "en": "← All directions",
-   "pl": "← Wszystkie kierunki"
-  },
-  {
-   "key": "ix.soon",
-   "ru": "Маршруты для этого направления скоро появятся.",
-   "uk": "Маршрути для цього напряму скоро з’являться.",
-   "en": "Routes for this direction are coming soon.",
-   "pl": "Trasy dla tego kierunku pojawią się wkrótce."
-  },
-  {
-   "key": "ix.one",
-   "ru": "⚡ {t} →",
-   "uk": "⚡ {t} →",
-   "en": "⚡ {t} →",
-   "pl": "⚡ {t} →"
-  },
-  {
-   "key": "ix.dirTitle",
-   "ru": "{t} поездом | Колія",
-   "uk": "{t} потягом | Колія",
-   "en": "{t} by train | Koliya",
-   "pl": "{t} pociągiem | Koliya"
-  },
-  {
-   "key": "ix.rtOut",
-   "ru": "Из Украины в {nom}",
-   "uk": "З України до {gen}",
-   "en": "From Ukraine to {nom}",
-   "pl": "Z Ukrainy do {gen}"
-  },
-  {
-   "key": "ix.rtIn",
-   "ru": "Из {gen} в Украину",
-   "uk": "З {gen} в Україну",
-   "en": "From {nom} to Ukraine",
-   "pl": "Z {gen} na Ukrainę"
-  },
-  {
-   "key": "ix.leadDir",
-   "ru": "Прямые поезда и варианты с пересадкой",
-   "uk": "Прямі поїзди та варіанти з пересадкою",
-   "en": "Direct trains and options with a transfer",
-   "pl": "Pociągi bezpośrednie i połączenia z przesiadką"
-  },
-  {
-   "key": "ix.nav",
-   "ru": "Направление",
-   "uk": "Напрям",
-   "en": "Direction",
-   "pl": "Kierunek"
-  },
-  {
-   "key": "ix.countries.h",
-   "ru": "Выберите страну",
-   "uk": "Оберіть країну",
-   "en": "Choose a country",
-   "pl": "Wybierz kraj"
-  },
-  {
-   "key": "ix.info.h",
-   "ru": "Полезная информация",
-   "uk": "Корисна інформація",
-   "en": "Useful information",
-   "pl": "Przydatne informacje"
-  },
-  {
-   "key": "ix.more",
-   "ru": "Ещё маршруты ({n})",
-   "uk": "Ще маршрути ({n})",
-   "en": "More routes ({n})",
-   "pl": "Więcej tras ({n})"
-  },
-  {
-   "key": "transfer.h2",
-   "ru": "С пересадкой {xin}",
-   "uk": "З пересадкою {xin}",
-   "en": "With a transfer {xin}",
-   "pl": "Z przesiadką {xin}"
-  },
-  {
-   "key": "border.after",
-   "ru": "После прибытия в Перемышль происходит пограничный контроль",
-   "uk": "Після прибуття до Перемишля відбувається прикордонний контроль",
-   "en": "Border control takes place in Przemyśl after arrival",
-   "pl": "Po przyjeździe do Przemyśla odbywa się kontrola graniczna"
-  },
-  {
-   "key": "border.before",
-   "ru": "Перед отправлением из Перемышля происходит пограничный контроль",
-   "uk": "Перед відправленням із Перемишля відбувається прикордонний контроль",
-   "en": "Border control takes place in Przemyśl before departure",
-   "pl": "Przed odjazdem z Przemyśla odbywa się kontrola graniczna"
-  },
-  {
-   "key": "buy.t.s2m",
-   "ru": "Билет на поезд {pkp} приобретите отдельно у венгерского перевозчика MÁV — на официальном сайте jegy.mav.hu или в приложении MÁVPlusz.",
-   "uk": "Квиток на поїзд {pkp} придбайте окремо в угорського перевізника MÁV — на офіційному сайті jegy.mav.hu або в застосунку MÁVPlusz.",
-   "en": "Buy the {pkp} ticket separately from the Hungarian carrier MÁV, on jegy.mav.hu or in the MÁVPlusz app.",
-   "pl": "Bilet na pociąg {pkp} kup osobno u węgierskiego przewoźnika MÁV — na stronie jegy.mav.hu lub w aplikacji MÁVPlusz."
-  },
-  {
-   "key": "buy.t.b2m",
-   "ru": "Купить на сайте MÁV билет {pkp}",
-   "uk": "Купити на сайті MÁV квиток {pkp}",
-   "en": "Buy the {pkp} ticket on MÁV",
-   "pl": "Kup na stronie MÁV bilet {pkp}"
-  },
-  {
-   "key": "buy.note.m",
-   "ru": "Графики движения поездов могут измениться, актуальную информацию смотрите в приложении УЗ и на сайте MÁV.",
-   "uk": "Графіки руху поїздів можуть змінюватися, актуальну інформацію дивіться в застосунку УЗ та на сайті MÁV.",
-   "en": "Train schedules may change. Check the latest information in the UZ app and on the MÁV website.",
-   "pl": "Rozkłady jazdy mogą ulec zmianie. Aktualne informacje znajdziesz w aplikacji UZ i na stronie MÁV."
-  },
-  {
-   "key": "buy.t.s2mo",
-   "ru": "Поезда {pkp} отправляются на следующие сутки, поэтому продажа билетов на них в приложении «Укрзалізниця» открывается на следующий день. Также билет можно приобрести заранее у венгерского перевозчика MÁV — на jegy.mav.hu или в приложении MÁVPlusz. Как правило, билеты у MÁV дешевле.",
-   "uk": "Поїзди {pkp} відправляються наступної доби, тому продаж квитків на них у застосунку «Укрзалізниця» відкривається наступного дня. Також квиток можна придбати заздалегідь в угорського перевізника MÁV — на jegy.mav.hu або в застосунку MÁVPlusz. Як правило, квитки в MÁV дешевші.",
-   "en": "Trains {pkp} depart the next day, so ticket sales for them in the Ukrzaliznytsia app open the following day. You can also buy the ticket in advance from the Hungarian carrier MÁV, on jegy.mav.hu or in the MÁVPlusz app. MÁV tickets are usually cheaper.",
-   "pl": "Pociągi {pkp} odjeżdżają następnego dnia, dlatego sprzedaż biletów na nie w aplikacji Ukrzaliznytsia rusza dzień później. Bilet można też kupić wcześniej u węgierskiego przewoźnika MÁV — na jegy.mav.hu lub w aplikacji MÁVPlusz. Zazwyczaj bilety MÁV są tańsze."
-  },
-  {
-   "key": "buy.t.s2mi",
-   "ru": "Купите билет на поезд {pkp} в приложении «Укрзалізниця». Также билет можно приобрести заранее у венгерского перевозчика MÁV — на официальном сайте jegy.mav.hu или в приложении MÁVPlusz. Как правило, билеты у MÁV дешевле.",
-   "uk": "Придбайте квиток на поїзд {pkp} у застосунку «Укрзалізниця». Також квиток можна придбати заздалегідь в угорського перевізника MÁV — на офіційному сайті jegy.mav.hu або в застосунку MÁVPlusz. Як правило, квитки в MÁV дешевші.",
-   "en": "Buy the {pkp} ticket in the Ukrzaliznytsia app. You can also buy the ticket in advance from the Hungarian carrier MÁV, on the official site jegy.mav.hu or in the MÁVPlusz app. MÁV tickets are usually cheaper.",
-   "pl": "Kup bilet na pociąg {pkp} w aplikacji Ukrzaliznytsia. Bilet można też kupić wcześniej u węgierskiego przewoźnika MÁV — na oficjalnej stronie jegy.mav.hu lub w aplikacji MÁVPlusz. Zazwyczaj bilety MÁV są tańsze."
-  },
-  {
-   "key": "buy.x.s1",
-   "ru": "Откройте приложение «Укрзалізниця», выберите нужный поезд на украинском участке маршрута ({xu}) и укажите дату поездки. Продажа билетов открывается за 20 суток до отправления, в 08:00 по киевскому времени. Оплатите билет.",
-   "uk": "Відкрийте застосунок «Укрзалізниця», оберіть потрібний поїзд на українській ділянці маршруту ({xu}) та вкажіть дату поїздки. Продаж квитків відкривається за 20 діб до відправлення, о 08:00 за київським часом. Сплатіть квиток.",
-   "en": "Open the Ukrzaliznytsia app, choose the train you need on the Ukrainian part of the route ({xu}) and set the travel date. Sales open 20 days before departure, at 08:00 Kyiv time. Pay for the ticket.",
-   "pl": "Otwórz aplikację Ukrzaliznytsia, wybierz odpowiedni pociąg na ukraińskim odcinku trasy ({xu}) i datę podróży. Sprzedaż biletów rusza na 20 dni przed odjazdem o 08:00 czasu kijowskiego. Opłać bilet."
-  },
-  {
-   "key": "buy.x.s2o",
-   "ru": "Поезда на венгерском участке ({xp}) отправляются на следующие сутки, поэтому продажа билетов на них в приложении «Укрзалізниця» открывается на следующий день. Также билет можно приобрести заранее у венгерского перевозчика MÁV — на jegy.mav.hu или в приложении MÁVPlusz. Как правило, билеты у MÁV дешевле.",
-   "uk": "Поїзди на угорській ділянці ({xp}) відправляються наступної доби, тому продаж квитків на них у застосунку «Укрзалізниця» відкривається наступного дня. Також квиток можна придбати заздалегідь в угорського перевізника MÁV — на jegy.mav.hu або в застосунку MÁVPlusz. Як правило, квитки в MÁV дешевші.",
-   "en": "Trains on the Hungarian section ({xp}) depart the next day, so ticket sales for them in the Ukrzaliznytsia app open the following day. You can also buy the ticket in advance from the Hungarian carrier MÁV, on jegy.mav.hu or in the MÁVPlusz app. MÁV tickets are usually cheaper.",
-   "pl": "Pociągi na odcinku węgierskim ({xp}) odjeżdżają następnego dnia, dlatego sprzedaż biletów na nie w aplikacji Ukrzaliznytsia rusza dzień później. Bilet można też kupić wcześniej u węgierskiego przewoźnika MÁV — na jegy.mav.hu lub w aplikacji MÁVPlusz. Zazwyczaj bilety MÁV są tańsze."
-  },
-  {
-   "key": "buy.x.s2i",
-   "ru": "Купите билеты на поезда {xp} в приложении «Укрзалізниця». Также билет можно приобрести заранее у венгерского перевозчика MÁV — на официальном сайте jegy.mav.hu или в приложении MÁVPlusz. Как правило, билеты у MÁV дешевле.",
-   "uk": "Придбайте квитки на поїзди {xp} у застосунку «Укрзалізниця». Також квиток можна придбати заздалегідь в угорського перевізника MÁV — на офіційному сайті jegy.mav.hu або в застосунку MÁVPlusz. Як правило, квитки в MÁV дешевші.",
-   "en": "Buy the tickets for the trains {xp} in the Ukrzaliznytsia app. You can also buy the ticket in advance from the Hungarian carrier MÁV, on the official site jegy.mav.hu or in the MÁVPlusz app. MÁV tickets are usually cheaper.",
-   "pl": "Kup bilety na pociągi {xp} w aplikacji Ukrzaliznytsia. Bilet można też kupić wcześniej u węgierskiego przewoźnika MÁV — na oficjalnej stronie jegy.mav.hu lub w aplikacji MÁVPlusz. Zazwyczaj bilety MÁV są tańsze."
-  },
-  {
-   "key": "buy.x.b1",
-   "ru": "Купить билеты в приложении УЗ",
-   "uk": "Купити квитки в застосунку УЗ",
-   "en": "Buy tickets in the UZ app",
-   "pl": "Kup bilety w aplikacji UZ"
-  },
-  {
-   "key": "buy.x.b2",
-   "ru": "Купить билеты на сайте MÁV",
-   "uk": "Купити квитки на сайті MÁV",
-   "en": "Buy tickets on MÁV",
-   "pl": "Kup bilety na stronie MÁV"
-  },
-  {
-   "key": "buy.x.s2z",
-   "ru": "Билеты на поезда {xp} можно купить в приложении «Укрзалізниця» или отдельно у словацкого перевозчика ZSSK в его приложении. Обычно у ZSSK билеты дешевле.",
-   "uk": "Квитки на поїзди {xp} можна купити в застосунку «Укрзалізниця» або окремо в словацького перевізника ZSSK у його застосунку. Зазвичай у ZSSK квитки дешевші.",
-   "en": "You can buy tickets for the trains {xp} in the Ukrzaliznytsia app or separately from the Slovak carrier ZSSK in its app. Tickets from ZSSK are usually cheaper.",
-   "pl": "Bilety na pociągi {xp} możesz kupić w aplikacji Ukrzaliznytsia lub osobno u słowackiego przewoźnika ZSSK w jego aplikacji. Zwykle u ZSSK bilety są tańsze."
-  },
-  {
-   "key": "buy.x.b2z",
-   "ru": "Купить билеты в приложении ZSSK",
-   "uk": "Купити квитки в застосунку ZSSK",
-   "en": "Buy tickets in the ZSSK app",
-   "pl": "Kup bilety w aplikacji ZSSK"
-  },
-  {
-   "key": "buy.m.s1",
-   "ru": "Откройте приложение «Укрзалізниця», выберите маршрут {uz} и укажите дату поездки. Продажа билетов открывается за 20 суток до отправления, в 08:00 по киевскому времени. Выберите нужный поезд и оплатите билет.",
-   "uk": "Відкрийте застосунок «Укрзалізниця», оберіть маршрут {uz} і вкажіть дату поїздки. Продаж квитків відкривається за 20 діб до відправлення, о 08:00 за київським часом. Оберіть потрібний поїзд і сплатіть квиток.",
-   "en": "Open the Ukrzaliznytsia app, choose the route {uz} and the travel date. Sales open 20 days before departure at 08:00 Kyiv time. Choose the train you need and pay for the ticket.",
-   "pl": "Otwórz aplikację Ukrzaliznytsia, wybierz trasę {uz} i datę podróży. Sprzedaż biletów rusza na 20 dni przed odjazdem o 08:00 czasu kijowskiego. Wybierz odpowiedni pociąg i opłać bilet."
-  },
-  {
-   "key": "buy.t.s2cd",
-   "ru": "Билет {pkp} на поезда EC и IC приобретите отдельно у чешского перевозчика České dráhy (ČD) — на cd.cz или в приложении ČD My Train (Můj vlak).",
-   "uk": "Квиток {pkp} на поїзди EC та IC придбайте окремо в чеського перевізника České dráhy (ČD) — на cd.cz або в застосунку ČD My Train (Můj vlak).",
-   "en": "Buy the {pkp} ticket for EC and IC trains separately from the Czech carrier České dráhy (ČD), on cd.cz or in the ČD My Train (Můj vlak) app.",
-   "pl": "Bilet {pkp} na pociągi EC i IC kup osobno u czeskiego przewoźnika České dráhy (ČD) — na cd.cz lub w aplikacji ČD My Train (Můj vlak)."
-  },
-  {
-   "key": "buy.t.b2cd",
-   "ru": "Купить на сайте ČD билет {pkp}",
-   "uk": "Купити на сайті ČD квиток {pkp}",
-   "en": "Buy the {pkp} ticket on ČD",
-   "pl": "Kup bilet {pkp} na stronie ČD"
-  },
-  {
-   "key": "buy.note.cz",
-   "ru": "Графики движения поездов могут измениться, актуальную информацию смотрите в приложении УЗ, в приложении ČD My Train и на сайте RegioJet.",
-   "uk": "Графіки руху поїздів можуть змінитися, актуальну інформацію дивіться в застосунку УЗ, у застосунку ČD My Train та на сайті RegioJet.",
-   "en": "Train schedules may change. Check the latest information in the UZ app, in the ČD My Train app and on the RegioJet website.",
-   "pl": "Rozkłady jazdy mogą się zmienić, aktualne informacje sprawdź w aplikacji UZ, w aplikacji ČD My Train i na stronie RegioJet."
-  },
-  {
-   "key": "buy.t.s2rj",
-   "ru": "Билет {pkp} на поезд RJ приобретите отдельно у чешского перевозчика RegioJet — на официальном сайте regiojet.cz или в приложении RegioJet.",
-   "uk": "Квиток {pkp} на поїзд RJ придбайте окремо в чеського перевізника RegioJet — на офіційному сайті regiojet.cz або в застосунку RegioJet.",
-   "en": "Buy the {pkp} ticket for the RJ train separately from the Czech carrier RegioJet, on regiojet.cz or in the RegioJet app.",
-   "pl": "Bilet {pkp} na pociąg RJ kup osobno u czeskiego przewoźnika RegioJet — na stronie regiojet.cz lub w aplikacji RegioJet."
-  },
-  {
-   "key": "buy.t.b2rj",
-   "ru": "Купить на сайте RegioJet билет {pkp}",
-   "uk": "Купити на сайті RegioJet квиток {pkp}",
-   "en": "Buy the {pkp} ticket on RegioJet",
-   "pl": "Kup bilet {pkp} na stronie RegioJet"
+   "key": "buy.c.dt",
+   "ru": "отправление из {a} {t1}, прибытие в {b} {t2}",
+   "uk": "відправлення з {a} {t1}, прибуття до {b} {t2}",
+   "en": "departure from {a} {t1}, arrival in {b} {t2}",
+   "pl": "odjazd z {a} {t1}, przyjazd do {b} {t2}"
   },
   {
    "key": "buy.c.h",
@@ -1065,81 +99,445 @@
    "pl": "Otwórz aplikację Ukrzaliznytsia, wybierz trasę {uz} i datę podróży. Sprzedaż biletów rusza na 20 dni przed odjazdem o {open} czasu kijowskiego. Wybierz pociąg {train} i opłać bilet."
   },
   {
-   "key": "buy.c.dt",
-   "ru": "отправление из {a} {t1}, прибытие в {b} {t2}",
-   "uk": "відправлення з {a} {t1}, прибуття до {b} {t2}",
-   "en": "departure from {a} {t1}, arrival in {b} {t2}",
-   "pl": "odjazd z {a} {t1}, przyjazd do {b} {t2}"
+   "key": "buy.d.btn",
+   "ru": "Купить в приложении УЗ билет {dir}",
+   "uk": "Купити в застосунку УЗ квиток {dir}",
+   "en": "Buy the {dir} ticket in the UZ app",
+   "pl": "Kup w aplikacji UZ bilet {dir}"
   },
   {
-   "key": "cn.pl",
-   "ru": "",
-   "uk": "Польща",
-   "en": "Poland",
-   "pl": "Polska"
+   "key": "buy.d.h",
+   "ru": "Прямой поезд",
+   "uk": "Прямий поїзд",
+   "en": "Direct train",
+   "pl": "Pociąg bezpośredni"
   },
   {
-   "key": "cn.pl.gen",
-   "ru": "",
-   "uk": "Польщі",
-   "en": "",
-   "pl": "Polski"
+   "key": "buy.d.s2",
+   "ru": "Откройте приложение «Укрзалізниця», выберите маршрут {dir} и укажите дату поездки. Продажа билетов открывается за 20 суток до отправления, в 09:00 по киевскому времени. Билеты на прямой поезд пользуются высоким спросом, поэтому рекомендуем покупать их сразу после начала продаж.",
+   "uk": "Відкрийте застосунок «Укрзалізниця», оберіть маршрут {dir} і вкажіть дату поїздки. Продаж квитків відкривається за 20 діб до відправлення, о 09:00 за київським часом. На прямий поїзд квитки користуються великим попитом, тому радимо купувати їх одразу після початку продажу.",
+   "en": "Open the Ukrzaliznytsia app, choose the route {dir} and the travel date. Sales open 20 days before departure at 09:00 Kyiv time. Tickets for the direct train are in high demand, so we recommend buying them as soon as sales open.",
+   "pl": "Otwórz aplikację Ukrzaliznytsia, wybierz trasę {dir} i datę podróży. Sprzedaż biletów rusza na 20 dni przed odjazdem o 9:00 czasu kijowskiego. Bilety na pociąg bezpośredni cieszą się dużym popytem, dlatego warto kupić je zaraz po otwarciu sprzedaży."
   },
   {
-   "key": "cn.sk",
-   "ru": "",
-   "uk": "Словаччина",
-   "en": "Slovakia",
-   "pl": "Słowacja"
+   "key": "buy.d.s2v",
+   "ru": "Откройте приложение «Укрзалізниця», выберите маршрут {dir} и укажите дату поездки. Продажа билетов открывается за 20 суток до отправления, в 08:00 по киевскому времени. Билеты на прямой поезд пользуются высоким спросом, поэтому рекомендуем покупать их сразу после начала продаж.",
+   "uk": "Відкрийте застосунок «Укрзалізниця», оберіть маршрут {dir} і вкажіть дату поїздки. Продаж квитків відкривається за 20 діб до відправлення, о 08:00 за київським часом. На прямий поїзд квитки користуються великим попитом, тому радимо купувати їх одразу після початку продажу.",
+   "en": "Open the Ukrzaliznytsia app, choose the route {dir} and the travel date. Sales open 20 days before departure at 08:00 Kyiv time. Tickets for the direct train are in high demand, so we recommend buying them as soon as sales open.",
+   "pl": "Otwórz aplikację Ukrzaliznytsia, wybierz trasę {dir} i datę podróży. Sprzedaż biletów rusza na 20 dni przed odjazdem o 08:00 czasu kijowskiego. Bilety na pociąg bezpośredni cieszą się dużym popytem, dlatego warto kupić je zaraz po otwarciu sprzedaży."
   },
   {
-   "key": "cn.sk.gen",
-   "ru": "",
-   "uk": "Словаччини",
-   "en": "",
-   "pl": "Słowacji"
+   "key": "buy.d.s2z",
+   "ru": "Откройте приложение «Укрзалізниця», выберите маршрут {dir} и укажите дату поездки. Продажа билетов открывается за 20 суток до отправления, в 08:00 по киевскому времени.",
+   "uk": "Відкрийте застосунок «Укрзалізниця», оберіть маршрут {dir} і вкажіть дату поїздки. Продаж квитків відкривається за 20 діб до відправлення, о 08:00 за київським часом.",
+   "en": "Open the Ukrzaliznytsia app, choose the route {dir} and the travel date. Sales open 20 days before departure at 08:00 Kyiv time.",
+   "pl": "Otwórz aplikację Ukrzaliznytsia, wybierz trasę {dir} i datę podróży. Sprzedaż biletów rusza na 20 dni przed odjazdem o 08:00 czasu kijowskiego."
   },
   {
-   "key": "cn.hu",
-   "ru": "",
-   "uk": "Угорщина",
-   "en": "Hungary",
-   "pl": "Węgry"
+   "key": "buy.d.s3",
+   "ru": "Выберите место в купейном вагоне стандарта RIC и оплатите билет банковской картой. Электронный билет появится в приложении. При посадке предъявите его вместе с паспортом.",
+   "uk": "Оберіть місце в купейному вагоні стандарту RIC і сплатіть квиток банківською карткою. Електронний квиток з’явиться в застосунку. Під час посадки пред’явіть його разом із паспортом.",
+   "en": "Pick a berth in an RIC-standard compartment car and pay by bank card. The e-ticket will appear in the app. Show it with your passport when boarding.",
+   "pl": "Wybierz miejsce w wagonie z przedziałami standardu RIC i zapłać kartą. E-bilet pojawi się w aplikacji. Przy wsiadaniu okaż go razem z paszportem."
   },
   {
-   "key": "cn.hu.gen",
-   "ru": "",
-   "uk": "Угорщини",
-   "en": "",
-   "pl": "Węgier"
+   "key": "buy.d.s3z",
+   "ru": "Выберите место и оплатите билет банковской картой. Электронный билет появится в приложении. При посадке предъявите его вместе с паспортом.",
+   "uk": "Оберіть місце і сплатіть квиток банківською карткою. Електронний квиток з’явиться в застосунку. Під час посадки пред’явіть його разом із паспортом.",
+   "en": "Pick a seat and pay by bank card. The e-ticket will appear in the app. Show it with your passport when boarding.",
+   "pl": "Wybierz miejsce i zapłać kartą. E-bilet pojawi się w aplikacji. Przy wsiadaniu okaż go razem z paszportem."
   },
   {
-   "key": "cn.ro",
-   "ru": "",
-   "uk": "Румунія",
-   "en": "Romania",
-   "pl": "Rumunia"
+   "key": "buy.h",
+   "ru": "Как купить билеты",
+   "uk": "Як купити квитки",
+   "en": "How to buy tickets",
+   "pl": "Jak kupić bilety"
   },
   {
-   "key": "cn.ro.gen",
-   "ru": "",
-   "uk": "Румунії",
-   "en": "",
-   "pl": "Rumunii"
+   "key": "buy.h.b1",
+   "ru": "Купить в приложении УЗ билет {bud1}",
+   "uk": "Купити в застосунку УЗ квиток {bud1}",
+   "en": "Buy the {bud1} ticket in the UZ app",
+   "pl": "Kup w aplikacji UZ bilet {bud1}"
   },
   {
-   "key": "cn.md",
-   "ru": "",
-   "uk": "Молдова",
-   "en": "Moldova",
-   "pl": "Mołdawia"
+   "key": "buy.h.b2",
+   "ru": "Купить на сайте MÁV билет {bud2}",
+   "uk": "Купити на сайті MÁV квиток {bud2}",
+   "en": "Buy the {bud2} ticket on MÁV",
+   "pl": "Kup na stronie MÁV bilet {bud2}"
   },
   {
-   "key": "cn.md.gen",
-   "ru": "",
-   "uk": "Молдови",
-   "en": "",
-   "pl": "Mołdawii"
+   "key": "buy.h.b3",
+   "ru": "Купить на сайте ÖBB билет {bud2}",
+   "uk": "Купити на сайті ÖBB квиток {bud2}",
+   "en": "Buy the {bud2} ticket on ÖBB",
+   "pl": "Kup na stronie ÖBB bilet {bud2}"
+  },
+  {
+   "key": "buy.h.s1",
+   "ru": "Откройте приложение «Укрзалізниця», выберите маршрут {bud1} и укажите дату поездки. Продажа билетов открывается за 20 суток до отправления, в 08:00 по киевскому времени. Выберите поезд и оплатите билет.",
+   "uk": "Відкрийте застосунок «Укрзалізниця», оберіть маршрут {bud1} і вкажіть дату поїздки. Продаж квитків відкривається за 20 діб до відправлення, о 08:00 за київським часом. Оберіть поїзд і сплатіть квиток.",
+   "en": "Open the Ukrzaliznytsia app, choose the route {bud1} and the travel date. Sales open 20 days before departure, at 08:00 Kyiv time. Choose a train and pay for the ticket.",
+   "pl": "Otwórz aplikację Ukrzaliznytsia, wybierz trasę {bud1} i datę podróży. Sprzedaż biletów rusza na 20 dni przed odjazdem o 08:00 czasu kijowskiego. Wybierz pociąg i opłać bilet."
+  },
+  {
+   "key": "buy.h.s2",
+   "ru": "Билет {bud2} можно приобрести у венгерского перевозчика MÁV — на jegy.mav.hu или в приложении MÁVPlusz, либо у австрийского перевозчика ÖBB — на tickets.oebb.at или в приложении ÖBB Tickets.",
+   "uk": "Квиток {bud2} можна придбати в угорського перевізника MÁV — на jegy.mav.hu або в застосунку MÁVPlusz, чи в австрійського перевізника ÖBB — на tickets.oebb.at або в застосунку ÖBB Tickets.",
+   "en": "You can buy the {bud2} ticket from the Hungarian carrier MÁV, on jegy.mav.hu or in the MÁVPlusz app, or from the Austrian carrier ÖBB, on tickets.oebb.at or in the ÖBB Tickets app.",
+   "pl": "Bilet {bud2} można kupić u węgierskiego przewoźnika MÁV — na jegy.mav.hu lub w aplikacji MÁVPlusz, albo u austriackiego przewoźnika ÖBB — na tickets.oebb.at lub w aplikacji ÖBB Tickets."
+  },
+  {
+   "key": "buy.m.s1",
+   "ru": "Откройте приложение «Укрзалізниця», выберите маршрут {uz} и укажите дату поездки. Продажа билетов открывается за 20 суток до отправления, в 08:00 по киевскому времени. Выберите нужный поезд и оплатите билет.",
+   "uk": "Відкрийте застосунок «Укрзалізниця», оберіть маршрут {uz} і вкажіть дату поїздки. Продаж квитків відкривається за 20 діб до відправлення, о 08:00 за київським часом. Оберіть потрібний поїзд і сплатіть квиток.",
+   "en": "Open the Ukrzaliznytsia app, choose the route {uz} and the travel date. Sales open 20 days before departure at 08:00 Kyiv time. Choose the train you need and pay for the ticket.",
+   "pl": "Otwórz aplikację Ukrzaliznytsia, wybierz trasę {uz} i datę podróży. Sprzedaż biletów rusza na 20 dni przed odjazdem o 08:00 czasu kijowskiego. Wybierz odpowiedni pociąg i opłać bilet."
+  },
+  {
+   "key": "buy.note",
+   "ru": "Графики движения поездов могут измениться, актуальную информацию смотрите в приложении УЗ и на сайте PKP Intercity.",
+   "uk": "Графіки руху поїздів можуть змінюватися, актуальну інформацію дивіться в застосунку УЗ та на сайті PKP Intercity.",
+   "en": "Train schedules may change. Check the latest information in the UZ app and on the PKP Intercity website.",
+   "pl": "Rozkłady jazdy mogą ulec zmianie. Aktualne informacje znajdziesz w aplikacji UZ i na stronie PKP Intercity."
+  },
+  {
+   "key": "buy.note.a",
+   "ru": "Графики движения поездов могут измениться, актуальную информацию смотрите в приложении УЗ.",
+   "uk": "Графіки руху поїздів можуть змінюватися, актуальну інформацію дивіться в застосунку УЗ.",
+   "en": "Train schedules may change. Check the latest information in the UZ app.",
+   "pl": "Rozkłady jazdy mogą ulec zmianie. Aktualne informacje znajdziesz w aplikacji UZ."
+  },
+  {
+   "key": "buy.note.be",
+   "ru": "Графики движения поездов могут измениться, актуальную информацию смотрите в приложении УЗ, на сайте PKP Intercity и на сайте DB.",
+   "uk": "Графіки руху поїздів можуть змінитися, актуальну інформацію дивіться в застосунку УЗ, на сайті PKP Intercity та на сайті DB.",
+   "en": "Train schedules may change. Check the latest information in the UZ app, on the PKP Intercity website and on the DB website.",
+   "pl": "Rozkłady jazdy mogą ulec zmianie. Aktualne informacje znajdziesz w aplikacji UZ oraz na stronach PKP Intercity i DB."
+  },
+  {
+   "key": "buy.note.c",
+   "ru": "Графики движения поездов могут измениться, актуальную информацию смотрите в приложении УЗ и на сайте CFR Călători.",
+   "uk": "Графіки руху поїздів можуть змінюватися, актуальну інформацію дивіться в застосунку УЗ та на сайті CFR Călători.",
+   "en": "Train schedules may change. Check the latest information in the UZ app and on the CFR Călători website.",
+   "pl": "Rozkłady jazdy mogą ulec zmianie. Aktualne informacje znajdziesz w aplikacji UZ i na stronie CFR Călători."
+  },
+  {
+   "key": "buy.note.cz",
+   "ru": "Графики движения поездов могут измениться, актуальную информацию смотрите в приложении УЗ, в приложении ČD My Train и на сайте RegioJet.",
+   "uk": "Графіки руху поїздів можуть змінитися, актуальну інформацію дивіться в застосунку УЗ, у застосунку ČD My Train та на сайті RegioJet.",
+   "en": "Train schedules may change. Check the latest information in the UZ app, in the ČD My Train app and on the RegioJet website.",
+   "pl": "Rozkłady jazdy mogą się zmienić, aktualne informacje sprawdź w aplikacji UZ, w aplikacji ČD My Train i na stronie RegioJet."
+  },
+  {
+   "key": "buy.note.m",
+   "ru": "Графики движения поездов могут измениться, актуальную информацию смотрите в приложении УЗ и на сайте MÁV.",
+   "uk": "Графіки руху поїздів можуть змінюватися, актуальну інформацію дивіться в застосунку УЗ та на сайті MÁV.",
+   "en": "Train schedules may change. Check the latest information in the UZ app and on the MÁV website.",
+   "pl": "Rozkłady jazdy mogą ulec zmianie. Aktualne informacje znajdziesz w aplikacji UZ i na stronie MÁV."
+  },
+  {
+   "key": "buy.note.o",
+   "ru": "Графики движения поездов могут измениться, актуальную информацию смотрите в приложении УЗ и на сайте ÖBB.",
+   "uk": "Графіки руху поїздів можуть змінюватися, актуальну інформацію дивіться в застосунку УЗ та на сайті ÖBB.",
+   "en": "Train schedules may change. Check the latest information in the UZ app and on the ÖBB website.",
+   "pl": "Rozkłady jazdy mogą ulec zmianie. Aktualne informacje znajdziesz w aplikacji UZ i na stronie ÖBB."
+  },
+  {
+   "key": "buy.note.z",
+   "ru": "Графики движения поездов могут измениться, актуальную информацию смотрите в приложении УЗ и в приложении ZSSK.",
+   "uk": "Графіки руху поїздів можуть змінюватися, актуальну інформацію дивіться в застосунку УЗ та в застосунку ZSSK.",
+   "en": "Train schedules may change. Check the latest information in the UZ app and in the ZSSK app.",
+   "pl": "Rozkłady jazdy mogą ulec zmianie. Aktualne informacje znajdziesz w aplikacji UZ i w aplikacji ZSSK."
+  },
+  {
+   "key": "buy.s1",
+   "ru": "Откройте приложение «Укрзалізниця» и войдите в свою учётную запись.",
+   "uk": "Відкрийте застосунок «Укрзалізниця» та увійдіть у свій обліковий запис.",
+   "en": "Open the Ukrzaliznytsia app and sign in to your account.",
+   "pl": "Otwórz aplikację Ukrzaliznytsia i zaloguj się na swoje konto."
+  },
+  {
+   "key": "buy.t.b1",
+   "ru": "Купить в приложении УЗ билет {uz}",
+   "uk": "Купити в застосунку УЗ квиток {uz}",
+   "en": "Buy the {uz} ticket in the UZ app",
+   "pl": "Kup w aplikacji UZ bilet {uz}"
+  },
+  {
+   "key": "buy.t.b1v",
+   "ru": "Купить билет в приложении УЗ",
+   "uk": "Купити квиток у застосунку УЗ",
+   "en": "Buy a ticket in the UZ app",
+   "pl": "Kup bilet w aplikacji UZ"
+  },
+  {
+   "key": "buy.t.b2",
+   "ru": "Купить на сайте PKP Intercity билет {pkp}",
+   "uk": "Купити на сайті PKP Intercity квиток {pkp}",
+   "en": "Buy the {pkp} ticket on PKP Intercity",
+   "pl": "Kup na stronie PKP Intercity bilet {pkp}"
+  },
+  {
+   "key": "buy.t.b2c",
+   "ru": "Купить на сайте CFR билет {pkp}",
+   "uk": "Купити на сайті CFR квиток {pkp}",
+   "en": "Buy the {pkp} ticket on CFR",
+   "pl": "Kup na stronie CFR bilet {pkp}"
+  },
+  {
+   "key": "buy.t.b2cd",
+   "ru": "Купить на сайте ČD билет {pkp}",
+   "uk": "Купити на сайті ČD квиток {pkp}",
+   "en": "Buy the {pkp} ticket on ČD",
+   "pl": "Kup bilet {pkp} na stronie ČD"
+  },
+  {
+   "key": "buy.t.b2m",
+   "ru": "Купить на сайте MÁV билет {pkp}",
+   "uk": "Купити на сайті MÁV квиток {pkp}",
+   "en": "Buy the {pkp} ticket on MÁV",
+   "pl": "Kup na stronie MÁV bilet {pkp}"
+  },
+  {
+   "key": "buy.t.b2o",
+   "ru": "Купить на сайте ÖBB билет {pkp}",
+   "uk": "Купити на сайті ÖBB квиток {pkp}",
+   "en": "Buy the {pkp} ticket on ÖBB",
+   "pl": "Kup na stronie ÖBB bilet {pkp}"
+  },
+  {
+   "key": "buy.t.b2rj",
+   "ru": "Купить на сайте RegioJet билет {pkp}",
+   "uk": "Купити на сайті RegioJet квиток {pkp}",
+   "en": "Buy the {pkp} ticket on RegioJet",
+   "pl": "Kup bilet {pkp} na stronie RegioJet"
+  },
+  {
+   "key": "buy.t.b2v",
+   "ru": "Купить билет на сайте ÖBB",
+   "uk": "Купити квиток на сайті ÖBB",
+   "en": "Buy a ticket on ÖBB",
+   "pl": "Kup bilet na stronie ÖBB"
+  },
+  {
+   "key": "buy.t.b2z",
+   "ru": "Купить в приложении ZSSK билет {pkp}",
+   "uk": "Купити в застосунку ZSSK квиток {pkp}",
+   "en": "Buy the {pkp} ticket in the ZSSK app",
+   "pl": "Kup w aplikacji ZSSK bilet {pkp}"
+  },
+  {
+   "key": "buy.t.h",
+   "ru": "С пересадкой {xin}",
+   "uk": "З пересадкою {xin}",
+   "en": "With a transfer {xin}",
+   "pl": "Z przesiadką {xin}"
+  },
+  {
+   "key": "buy.t.s1",
+   "ru": "Откройте приложение «Укрзалізниця», выберите маршрут {uz} и укажите дату поездки. Продажа билетов открывается за 20 суток до отправления, в 09:00 по киевскому времени. Выберите подходящий поезд и оплатите билет.",
+   "uk": "Відкрийте застосунок «Укрзалізниця», оберіть маршрут {uz} і вкажіть дату поїздки. Продаж квитків відкривається за 20 діб до відправлення, о 09:00 за київським часом. Оберіть потрібний поїзд і сплатіть квиток.",
+   "en": "Open the Ukrzaliznytsia app, choose the route {uz} and the travel date. Sales open 20 days before departure at 09:00 Kyiv time. Choose a suitable train and pay for the ticket.",
+   "pl": "Otwórz aplikację Ukrzaliznytsia, wybierz trasę {uz} i datę podróży. Sprzedaż biletów rusza na 20 dni przed odjazdem o 9:00 czasu kijowskiego. Wybierz odpowiedni pociąg i opłać bilet."
+  },
+  {
+   "key": "buy.t.s1kv",
+   "ru": "Откройте приложение «Укрзалізниця», выберите маршрут {uz} и укажите дату поездки. Продажа билетов открывается за 20 суток до отправления, в 08:00 по киевскому времени. Выберите поезд 027К и оплатите билет.",
+   "uk": "Відкрийте застосунок «Укрзалізниця», оберіть маршрут {uz} і вкажіть дату поїздки. Продаж квитків відкривається за 20 діб до відправлення, о 08:00 за київським часом. Оберіть поїзд 027К і сплатіть квиток.",
+   "en": "Open the Ukrzaliznytsia app, choose the route {uz} and the travel date. Sales open 20 days before departure at 08:00 Kyiv time. Choose train 027К and pay for the ticket.",
+   "pl": "Otwórz aplikację Ukrzaliznytsia, wybierz trasę {uz} i datę podróży. Sprzedaż biletów rusza na 20 dni przed odjazdem o 08:00 czasu kijowskiego. Wybierz pociąg 027К i opłać bilet."
+  },
+  {
+   "key": "buy.t.s1one",
+   "ru": "Откройте приложение «Укрзалізниця», выберите маршрут {uz} и укажите дату поездки. Продажа билетов открывается за 20 суток до отправления, в 09:00 по киевскому времени. Выберите поезд и оплатите билет.",
+   "uk": "Відкрийте застосунок «Укрзалізниця», оберіть маршрут {uz} і вкажіть дату поїздки. Продаж квитків відкривається за 20 діб до відправлення, о 09:00 за київським часом. Оберіть поїзд і сплатіть квиток.",
+   "en": "Open the Ukrzaliznytsia app, choose the route {uz} and the travel date. Sales open 20 days before departure at 09:00 Kyiv time. Choose the train and pay for the ticket.",
+   "pl": "Otwórz aplikację Ukrzaliznytsia, wybierz trasę {uz} i datę podróży. Sprzedaż biletów rusza na 20 dni przed odjazdem o 9:00 czasu kijowskiego. Wybierz pociąg i opłać bilet."
+  },
+  {
+   "key": "buy.t.s1v",
+   "ru": "Откройте приложение «Укрзалізниця», выберите нужный поезд на украинском участке маршрута и укажите дату поездки. Продажа билетов открывается за 20 суток до отправления, в 08:00 по киевскому времени. Оплатите билет.",
+   "uk": "Відкрийте застосунок «Укрзалізниця», оберіть потрібний поїзд на українській ділянці маршруту та вкажіть дату поїздки. Продаж квитків відкривається за 20 діб до відправлення, о 08:00 за київським часом. Сплатіть квиток.",
+   "en": "Open the Ukrzaliznytsia app, choose the train you need on the Ukrainian part of the route and set the travel date. Sales open 20 days before departure, at 08:00 Kyiv time. Pay for the ticket.",
+   "pl": "Otwórz aplikację Ukrzaliznytsia, wybierz odpowiedni pociąg na ukraińskim odcinku trasy i datę podróży. Sprzedaż biletów rusza na 20 dni przed odjazdem o 08:00 czasu kijowskiego. Opłać bilet."
+  },
+  {
+   "key": "buy.t.s1vk",
+   "ru": "Откройте приложение «Укрзалізниця», выберите маршрут {uz} и укажите дату поездки. Продажа билетов открывается за 20 суток до отправления, в 08:00 по киевскому времени. Выберите поезд 028Л и оплатите билет.",
+   "uk": "Відкрийте застосунок «Укрзалізниця», оберіть маршрут {uz} і вкажіть дату поїздки. Продаж квитків відкривається за 20 діб до відправлення, о 08:00 за київським часом. Оберіть поїзд 028Л і сплатіть квиток.",
+   "en": "Open the Ukrzaliznytsia app, choose the route {uz} and the travel date. Sales open 20 days before departure at 08:00 Kyiv time. Choose train 028Л and pay for the ticket.",
+   "pl": "Otwórz aplikację Ukrzaliznytsia, wybierz trasę {uz} i datę podróży. Sprzedaż biletów rusza na 20 dni przed odjazdem o 08:00 czasu kijowskiego. Wybierz pociąg 028Л i opłać bilet."
+  },
+  {
+   "key": "buy.t.s1z",
+   "ru": "Откройте приложение «Укрзалізниця», выберите маршрут {uz} и укажите дату поездки. Продажа билетов открывается за 20 суток до отправления, в 08:00 по киевскому времени. Выберите подходящий поезд и оплатите билет.",
+   "uk": "Відкрийте застосунок «Укрзалізниця», оберіть маршрут {uz} і вкажіть дату поїздки. Продаж квитків відкривається за 20 діб до відправлення, о 08:00 за київським часом. Оберіть потрібний поїзд і сплатіть квиток.",
+   "en": "Open the Ukrzaliznytsia app, choose the route {uz} and the travel date. Sales open 20 days before departure at 08:00 Kyiv time. Choose a suitable train and pay for the ticket.",
+   "pl": "Otwórz aplikację Ukrzaliznytsia, wybierz trasę {uz} i datę podróży. Sprzedaż biletów rusza na 20 dni przed odjazdem o 08:00 czasu kijowskiego. Wybierz odpowiedni pociąg i opłać bilet."
+  },
+  {
+   "key": "buy.t.s2",
+   "ru": "Билет на поезд {pkp} приобретите отдельно у польского перевозчика PKP Intercity — на официальном сайте intercity.pl или в приложении PKP Intercity. Также билеты можно приобрести на сайте koleo.pl или в приложении KOLEO.",
+   "uk": "Квиток на поїзд {pkp} придбайте окремо в польського перевізника PKP Intercity — на офіційному сайті intercity.pl або в застосунку PKP Intercity. Також квитки можна купити на сайті koleo.pl або в застосунку KOLEO.",
+   "en": "Buy the {pkp} ticket separately from the Polish carrier PKP Intercity, on intercity.pl or in the PKP Intercity app. You can also buy it on koleo.pl or in the KOLEO app.",
+   "pl": "Bilet na pociąg {pkp} kup osobno u polskiego przewoźnika PKP Intercity — na stronie intercity.pl lub w aplikacji PKP Intercity. Można go też kupić na koleo.pl lub w aplikacji KOLEO."
+  },
+  {
+   "key": "buy.t.s2c",
+   "ru": "Билет на поезд {pkp} приобретите отдельно у румынского перевозчика CFR Călători — на официальном сайте bilete.cfrcalatori.ro.",
+   "uk": "Квиток на поїзд {pkp} придбайте окремо в румунського перевізника CFR Călători — на офіційному сайті bilete.cfrcalatori.ro.",
+   "en": "Buy the {pkp} ticket separately from the Romanian carrier CFR Călători, on bilete.cfrcalatori.ro.",
+   "pl": "Bilet na pociąg {pkp} kup osobno u rumuńskiego przewoźnika CFR Călători — na stronie bilete.cfrcalatori.ro."
+  },
+  {
+   "key": "buy.t.s2cd",
+   "ru": "Билет {pkp} на поезда EC и IC приобретите отдельно у чешского перевозчика České dráhy (ČD) — на cd.cz или в приложении ČD My Train (Můj vlak).",
+   "uk": "Квиток {pkp} на поїзди EC та IC придбайте окремо в чеського перевізника České dráhy (ČD) — на cd.cz або в застосунку ČD My Train (Můj vlak).",
+   "en": "Buy the {pkp} ticket for EC and IC trains separately from the Czech carrier České dráhy (ČD), on cd.cz or in the ČD My Train (Můj vlak) app.",
+   "pl": "Bilet {pkp} na pociągi EC i IC kup osobno u czeskiego przewoźnika České dráhy (ČD) — na cd.cz lub w aplikacji ČD My Train (Můj vlak)."
+  },
+  {
+   "key": "buy.t.s2m",
+   "ru": "Билет на поезд {pkp} приобретите отдельно у венгерского перевозчика MÁV — на официальном сайте jegy.mav.hu или в приложении MÁVPlusz.",
+   "uk": "Квиток на поїзд {pkp} придбайте окремо в угорського перевізника MÁV — на офіційному сайті jegy.mav.hu або в застосунку MÁVPlusz.",
+   "en": "Buy the {pkp} ticket separately from the Hungarian carrier MÁV, on jegy.mav.hu or in the MÁVPlusz app.",
+   "pl": "Bilet na pociąg {pkp} kup osobno u węgierskiego przewoźnika MÁV — na stronie jegy.mav.hu lub w aplikacji MÁVPlusz."
+  },
+  {
+   "key": "buy.t.s2mi",
+   "ru": "Купите билет на поезд {pkp} в приложении «Укрзалізниця». Также билет можно приобрести заранее у венгерского перевозчика MÁV — на официальном сайте jegy.mav.hu или в приложении MÁVPlusz. Как правило, билеты у MÁV дешевле.",
+   "uk": "Придбайте квиток на поїзд {pkp} у застосунку «Укрзалізниця». Також квиток можна придбати заздалегідь в угорського перевізника MÁV — на офіційному сайті jegy.mav.hu або в застосунку MÁVPlusz. Як правило, квитки в MÁV дешевші.",
+   "en": "Buy the {pkp} ticket in the Ukrzaliznytsia app. You can also buy the ticket in advance from the Hungarian carrier MÁV, on the official site jegy.mav.hu or in the MÁVPlusz app. MÁV tickets are usually cheaper.",
+   "pl": "Kup bilet na pociąg {pkp} w aplikacji Ukrzaliznytsia. Bilet można też kupić wcześniej u węgierskiego przewoźnika MÁV — na oficjalnej stronie jegy.mav.hu lub w aplikacji MÁVPlusz. Zazwyczaj bilety MÁV są tańsze."
+  },
+  {
+   "key": "buy.t.s2mo",
+   "ru": "Поезда {pkp} отправляются на следующие сутки, поэтому продажа билетов на них в приложении «Укрзалізниця» открывается на следующий день. Также билет можно приобрести заранее у венгерского перевозчика MÁV — на jegy.mav.hu или в приложении MÁVPlusz. Как правило, билеты у MÁV дешевле.",
+   "uk": "Поїзди {pkp} відправляються наступної доби, тому продаж квитків на них у застосунку «Укрзалізниця» відкривається наступного дня. Також квиток можна придбати заздалегідь в угорського перевізника MÁV — на jegy.mav.hu або в застосунку MÁVPlusz. Як правило, квитки в MÁV дешевші.",
+   "en": "Trains {pkp} depart the next day, so ticket sales for them in the Ukrzaliznytsia app open the following day. You can also buy the ticket in advance from the Hungarian carrier MÁV, on jegy.mav.hu or in the MÁVPlusz app. MÁV tickets are usually cheaper.",
+   "pl": "Pociągi {pkp} odjeżdżają następnego dnia, dlatego sprzedaż biletów na nie w aplikacji Ukrzaliznytsia rusza dzień później. Bilet można też kupić wcześniej u węgierskiego przewoźnika MÁV — na jegy.mav.hu lub w aplikacji MÁVPlusz. Zazwyczaj bilety MÁV są tańsze."
+  },
+  {
+   "key": "buy.t.s2o",
+   "ru": "Билет на поезд {pkp} приобретите отдельно у австрийского перевозчика ÖBB — на официальном сайте tickets.oebb.at или в приложении ÖBB Tickets.",
+   "uk": "Квиток на поїзд {pkp} придбайте окремо в австрійського перевізника ÖBB — на офіційному сайті tickets.oebb.at або в застосунку ÖBB Tickets.",
+   "en": "Buy the {pkp} ticket separately from the Austrian carrier ÖBB, on tickets.oebb.at or in the ÖBB Tickets app.",
+   "pl": "Bilet na pociąg {pkp} kup osobno u austriackiego przewoźnika ÖBB — na stronie tickets.oebb.at lub w aplikacji ÖBB Tickets."
+  },
+  {
+   "key": "buy.t.s2ov",
+   "ru": "Поезда {pkp} отправляются на следующие сутки, поэтому продажа билетов на них в приложении «Укрзалізниця» открывается на следующий день. Также билет можно приобрести заранее у австрийского перевозчика ÖBB — на tickets.oebb.at или в приложении ÖBB Tickets. Но в таком случае он будет существенно дороже, чем в приложении «Укрзалізниця».",
+   "uk": "Поїзди {pkp} відправляються наступної доби, тому продаж квитків на них у застосунку «Укрзалізниця» відкривається наступного дня. Також квиток можна придбати заздалегідь в австрійського перевізника ÖBB — на tickets.oebb.at або в застосунку ÖBB Tickets. Але в такому разі він буде суттєво дорожчим, ніж у застосунку «Укрзалізниця».",
+   "en": "The {pkp} trains depart the next day, so ticket sales for them in the Ukrzaliznytsia app open the following day. You can also buy a ticket in advance from the Austrian carrier ÖBB, on tickets.oebb.at or in the ÖBB Tickets app. In that case it will be considerably more expensive than in the Ukrzaliznytsia app.",
+   "pl": "Pociągi {pkp} odjeżdżają następnej doby, dlatego sprzedaż biletów na nie w aplikacji Ukrzaliznytsia rusza dzień później. Bilet można też kupić wcześniej u austriackiego przewoźnika ÖBB — na tickets.oebb.at lub w aplikacji ÖBB Tickets. W takim przypadku będzie jednak znacznie droższy niż w aplikacji Ukrzaliznytsia."
+  },
+  {
+   "key": "buy.t.s2rj",
+   "ru": "Билет {pkp} на поезд RJ приобретите отдельно у чешского перевозчика RegioJet — на официальном сайте regiojet.cz или в приложении RegioJet.",
+   "uk": "Квиток {pkp} на поїзд RJ придбайте окремо в чеського перевізника RegioJet — на офіційному сайті regiojet.cz або в застосунку RegioJet.",
+   "en": "Buy the {pkp} ticket for the RJ train separately from the Czech carrier RegioJet, on regiojet.cz or in the RegioJet app.",
+   "pl": "Bilet {pkp} na pociąg RJ kup osobno u czeskiego przewoźnika RegioJet — na stronie regiojet.cz lub w aplikacji RegioJet."
+  },
+  {
+   "key": "buy.t.s2v",
+   "ru": "Билет на остальную часть пути приобретите отдельно, например у австрийского перевозчика ÖBB — на tickets.oebb.at или в приложении ÖBB Tickets.",
+   "uk": "Квиток на решту шляху придбайте окремо, наприклад в австрійського перевізника ÖBB — на tickets.oebb.at або в застосунку ÖBB Tickets.",
+   "en": "Buy the ticket for the rest of the journey separately, for example from the Austrian carrier ÖBB, on tickets.oebb.at or in the ÖBB Tickets app.",
+   "pl": "Bilet na resztę trasy kup osobno, na przykład u austriackiego przewoźnika ÖBB — na tickets.oebb.at lub w aplikacji ÖBB Tickets."
+  },
+  {
+   "key": "buy.t.s2vk",
+   "ru": "Купите билет на поезд {pkp} в приложении «Укрзалізниця». Также билет можно приобрести заранее у австрийского перевозчика ÖBB — на tickets.oebb.at или в приложении ÖBB Tickets. Но в таком случае он будет существенно дороже, чем в приложении «Укрзалізниця».",
+   "uk": "Придбайте квиток на поїзд {pkp} у застосунку «Укрзалізниця». Також квиток можна придбати заздалегідь в австрійського перевізника ÖBB — на tickets.oebb.at або в застосунку ÖBB Tickets. Але в такому разі він буде суттєво дорожчим, ніж у застосунку «Укрзалізниця».",
+   "en": "Buy the ticket for the {pkp} train in the Ukrzaliznytsia app. You can also buy a ticket in advance from the Austrian carrier ÖBB, on tickets.oebb.at or in the ÖBB Tickets app. In that case it will be considerably more expensive than in the Ukrzaliznytsia app.",
+   "pl": "Kup bilet na pociąg {pkp} w aplikacji Ukrzaliznytsia. Bilet można też kupić wcześniej u austriackiego przewoźnika ÖBB — na tickets.oebb.at lub w aplikacji ÖBB Tickets. W takim przypadku będzie jednak znacznie droższy niż w aplikacji Ukrzaliznytsia."
+  },
+  {
+   "key": "buy.t.s2z",
+   "ru": "Билет на поезд {pkp} можно купить в приложении «Укрзалізниця» или отдельно у словацкого перевозчика ZSSK в его приложении. Обычно у ZSSK билеты дешевле.",
+   "uk": "Квиток на поїзд {pkp} можна купити в застосунку «Укрзалізниця» або окремо в словацького перевізника ZSSK у його застосунку. Зазвичай у ZSSK квитки дешевші.",
+   "en": "You can buy the {pkp} ticket in the Ukrzaliznytsia app or separately from the Slovak carrier ZSSK in its app. Tickets from ZSSK are usually cheaper.",
+   "pl": "Bilet na pociąg {pkp} możesz kupić w aplikacji Ukrzaliznytsia lub osobno u słowackiego przewoźnika ZSSK w jego aplikacji. Zwykle u ZSSK bilety są tańsze."
+  },
+  {
+   "key": "buy.t.s2zk",
+   "ru": "Поезд {pkp} отправляется на следующие сутки, поэтому продажа билетов на него в приложении «Укрзалізниця» открывается на следующий день. Если хотите приобрести билет заранее, его можно отдельно купить в приложении словацкого перевозчика ZSSK. Как правило, билеты у ZSSK дешевле.",
+   "uk": "Поїзд {pkp} відправляється наступної доби, тому продаж квитків на нього в застосунку «Укрзалізниця» відкривається наступного дня. Якщо хочете придбати квиток заздалегідь, його можна окремо купити в застосунку словацького перевізника ZSSK. Зазвичай квитки в ZSSK дешевші.",
+   "en": "The {pkp} train departs the next day, so ticket sales for it in the Ukrzaliznytsia app open the following day. If you want to buy a ticket in advance, you can buy it separately in the app of the Slovak carrier ZSSK. ZSSK tickets are usually cheaper.",
+   "pl": "Pociąg {pkp} odjeżdża następnej doby, dlatego sprzedaż biletów na niego w aplikacji Ukrzaliznytsia rusza dzień później. Jeśli chcesz kupić bilet wcześniej, możesz kupić go osobno w aplikacji słowackiego przewoźnika ZSSK. Zwykle bilety ZSSK są tańsze."
+  },
+  {
+   "key": "buy.t.s4",
+   "ru": "После покупки сохраните оба электронных билета в телефоне. Перед поездкой проверьте даты, время отправления и станции прибытия.",
+   "uk": "Після купівлі збережіть обидва електронні квитки в телефоні. Перед поїздкою перевірте дати, час відправлення та станції прибуття.",
+   "en": "After buying, save both e-tickets on your phone. Before you travel, check the dates, departure times and arrival stations.",
+   "pl": "Po zakupie zapisz oba e-bilety w telefonie. Przed podróżą sprawdź daty, godziny odjazdu i stacje docelowe."
+  },
+  {
+   "key": "buy.t3in",
+   "ru": "При выборе поезда {pkp} ориентируйтесь на варианты и расписание, представленные выше на этой странице. Учитывайте время отправления поезда {uz} и продолжительность пересадки.",
+   "uk": "Обираючи поїзд {pkp}, орієнтуйтеся на варіанти та розклад, наведені вище на цій сторінці. Зважайте на час відправлення поїзда {uz} і тривалість пересадки.",
+   "en": "When choosing the {pkp} train, use the options and timetable shown above on this page. Allow for the departure time of the {uz} train and the length of the transfer.",
+   "pl": "Wybierając pociąg {pkp}, kieruj się wariantami i rozkładem podanymi wyżej na tej stronie. Uwzględnij godzinę odjazdu pociągu {uz} i czas przesiadki."
+  },
+  {
+   "key": "buy.t3out",
+   "ru": "При выборе поезда {pkp} ориентируйтесь на варианты и расписание, представленные выше на этой странице. Учитывайте время прибытия поезда {uz} и продолжительность пересадки.",
+   "uk": "Обираючи поїзд {pkp}, орієнтуйтеся на варіанти та розклад, наведені вище на цій сторінці. Зважайте на час прибуття поїзда {uz} і тривалість пересадки.",
+   "en": "When choosing the {pkp} train, use the options and timetable shown above on this page. Allow for the arrival time of the {uz} train and the length of the transfer.",
+   "pl": "Wybierając pociąg {pkp}, kieruj się wariantami i rozkładem podanymi wyżej na tej stronie. Uwzględnij godzinę przyjazdu pociągu {uz} i czas przesiadki."
+  },
+  {
+   "key": "buy.x.b1",
+   "ru": "Купить билеты в приложении УЗ",
+   "uk": "Купити квитки в застосунку УЗ",
+   "en": "Buy tickets in the UZ app",
+   "pl": "Kup bilety w aplikacji UZ"
+  },
+  {
+   "key": "buy.x.b2",
+   "ru": "Купить билеты на сайте MÁV",
+   "uk": "Купити квитки на сайті MÁV",
+   "en": "Buy tickets on MÁV",
+   "pl": "Kup bilety na stronie MÁV"
+  },
+  {
+   "key": "buy.x.b2z",
+   "ru": "Купить билеты в приложении ZSSK",
+   "uk": "Купити квитки в застосунку ZSSK",
+   "en": "Buy tickets in the ZSSK app",
+   "pl": "Kup bilety w aplikacji ZSSK"
+  },
+  {
+   "key": "buy.x.s1",
+   "ru": "Откройте приложение «Укрзалізниця», выберите нужный поезд на украинском участке маршрута ({xu}) и укажите дату поездки. Продажа билетов открывается за 20 суток до отправления, в 08:00 по киевскому времени. Оплатите билет.",
+   "uk": "Відкрийте застосунок «Укрзалізниця», оберіть потрібний поїзд на українській ділянці маршруту ({xu}) та вкажіть дату поїздки. Продаж квитків відкривається за 20 діб до відправлення, о 08:00 за київським часом. Сплатіть квиток.",
+   "en": "Open the Ukrzaliznytsia app, choose the train you need on the Ukrainian part of the route ({xu}) and set the travel date. Sales open 20 days before departure, at 08:00 Kyiv time. Pay for the ticket.",
+   "pl": "Otwórz aplikację Ukrzaliznytsia, wybierz odpowiedni pociąg na ukraińskim odcinku trasy ({xu}) i datę podróży. Sprzedaż biletów rusza na 20 dni przed odjazdem o 08:00 czasu kijowskiego. Opłać bilet."
+  },
+  {
+   "key": "buy.x.s2i",
+   "ru": "Купите билеты на поезда {xp} в приложении «Укрзалізниця». Также билет можно приобрести заранее у венгерского перевозчика MÁV — на официальном сайте jegy.mav.hu или в приложении MÁVPlusz. Как правило, билеты у MÁV дешевле.",
+   "uk": "Придбайте квитки на поїзди {xp} у застосунку «Укрзалізниця». Також квиток можна придбати заздалегідь в угорського перевізника MÁV — на офіційному сайті jegy.mav.hu або в застосунку MÁVPlusz. Як правило, квитки в MÁV дешевші.",
+   "en": "Buy the tickets for the trains {xp} in the Ukrzaliznytsia app. You can also buy the ticket in advance from the Hungarian carrier MÁV, on the official site jegy.mav.hu or in the MÁVPlusz app. MÁV tickets are usually cheaper.",
+   "pl": "Kup bilety na pociągi {xp} w aplikacji Ukrzaliznytsia. Bilet można też kupić wcześniej u węgierskiego przewoźnika MÁV — na oficjalnej stronie jegy.mav.hu lub w aplikacji MÁVPlusz. Zazwyczaj bilety MÁV są tańsze."
+  },
+  {
+   "key": "buy.x.s2o",
+   "ru": "Поезда на венгерском участке ({xp}) отправляются на следующие сутки, поэтому продажа билетов на них в приложении «Укрзалізниця» открывается на следующий день. Также билет можно приобрести заранее у венгерского перевозчика MÁV — на jegy.mav.hu или в приложении MÁVPlusz. Как правило, билеты у MÁV дешевле.",
+   "uk": "Поїзди на угорській ділянці ({xp}) відправляються наступної доби, тому продаж квитків на них у застосунку «Укрзалізниця» відкривається наступного дня. Також квиток можна придбати заздалегідь в угорського перевізника MÁV — на jegy.mav.hu або в застосунку MÁVPlusz. Як правило, квитки в MÁV дешевші.",
+   "en": "Trains on the Hungarian section ({xp}) depart the next day, so ticket sales for them in the Ukrzaliznytsia app open the following day. You can also buy the ticket in advance from the Hungarian carrier MÁV, on jegy.mav.hu or in the MÁVPlusz app. MÁV tickets are usually cheaper.",
+   "pl": "Pociągi na odcinku węgierskim ({xp}) odjeżdżają następnego dnia, dlatego sprzedaż biletów na nie w aplikacji Ukrzaliznytsia rusza dzień później. Bilet można też kupić wcześniej u węgierskiego przewoźnika MÁV — na jegy.mav.hu lub w aplikacji MÁVPlusz. Zazwyczaj bilety MÁV są tańsze."
+  },
+  {
+   "key": "buy.x.s2z",
+   "ru": "Билеты на поезда {xp} можно купить в приложении «Укрзалізниця» или отдельно у словацкого перевозчика ZSSK в его приложении. Обычно у ZSSK билеты дешевле.",
+   "uk": "Квитки на поїзди {xp} можна купити в застосунку «Укрзалізниця» або окремо в словацького перевізника ZSSK у його застосунку. Зазвичай у ZSSK квитки дешевші.",
+   "en": "You can buy tickets for the trains {xp} in the Ukrzaliznytsia app or separately from the Slovak carrier ZSSK in its app. Tickets from ZSSK are usually cheaper.",
+   "pl": "Bilety na pociągi {xp} możesz kupić w aplikacji Ukrzaliznytsia lub osobno u słowackiego przewoźnika ZSSK w jego aplikacji. Zwykle u ZSSK bilety są tańsze."
   },
   {
    "key": "cn.at",
@@ -1182,24 +580,868 @@
    "uk": "Німеччини",
    "en": "",
    "pl": "Niemiec"
+  },
+  {
+   "key": "cn.hu",
+   "ru": "",
+   "uk": "Угорщина",
+   "en": "Hungary",
+   "pl": "Węgry"
+  },
+  {
+   "key": "cn.hu.gen",
+   "ru": "",
+   "uk": "Угорщини",
+   "en": "",
+   "pl": "Węgier"
+  },
+  {
+   "key": "cn.md",
+   "ru": "",
+   "uk": "Молдова",
+   "en": "Moldova",
+   "pl": "Mołdawia"
+  },
+  {
+   "key": "cn.md.gen",
+   "ru": "",
+   "uk": "Молдови",
+   "en": "",
+   "pl": "Mołdawii"
+  },
+  {
+   "key": "cn.pl",
+   "ru": "",
+   "uk": "Польща",
+   "en": "Poland",
+   "pl": "Polska"
+  },
+  {
+   "key": "cn.pl.gen",
+   "ru": "",
+   "uk": "Польщі",
+   "en": "",
+   "pl": "Polski"
+  },
+  {
+   "key": "cn.ro",
+   "ru": "",
+   "uk": "Румунія",
+   "en": "Romania",
+   "pl": "Rumunia"
+  },
+  {
+   "key": "cn.ro.gen",
+   "ru": "",
+   "uk": "Румунії",
+   "en": "",
+   "pl": "Rumunii"
+  },
+  {
+   "key": "cn.sk",
+   "ru": "",
+   "uk": "Словаччина",
+   "en": "Slovakia",
+   "pl": "Słowacja"
+  },
+  {
+   "key": "cn.sk.gen",
+   "ru": "",
+   "uk": "Словаччини",
+   "en": "",
+   "pl": "Słowacji"
+  },
+  {
+   "key": "coach",
+   "ru": "В купе предусмотрены три спальных места, расположенные одно над другим. Если средняя полка приведена в спальное положение, пользоваться нижней полкой для сидения нельзя. Для подъёма на верхнюю полку предусмотрена лестница.",
+   "uk": "У купе передбачено три спальні місця, розташовані одне над одним. Якщо середню полицю переведено у спальне положення, сидіти на нижній полиці не можна. Для підйому на верхню полицю передбачено драбину.",
+   "en": "Each compartment has three berths, one above another. When the middle berth is folded down for sleeping, the lower berth cannot be used for sitting. A ladder is provided for climbing to the upper berth.",
+   "pl": "W przedziale są trzy miejsca do spania, jedno nad drugim. Gdy środkowa półka jest rozłożona do spania, nie wolno siedzieć na dolnej. Na górną półkę prowadzi drabinka."
+  },
+  {
+   "key": "d.checked",
+   "ru": "Проверено:",
+   "uk": "Перевірено:",
+   "en": "Checked:",
+   "pl": "Sprawdzono:"
+  },
+  {
+   "key": "d.daily",
+   "ru": "Ежедневно",
+   "uk": "Щодня",
+   "en": "Daily",
+   "pl": "Codziennie"
+  },
+  {
+   "key": "d.even",
+   "ru": "По чётным дням",
+   "uk": "По парних днях",
+   "en": "On even dates",
+   "pl": "W dni parzyste"
+  },
+  {
+   "key": "d.how",
+   "ru": "Инструкция",
+   "uk": "Інструкція",
+   "en": "Instructions",
+   "pl": "Instrukcja"
+  },
+  {
+   "key": "d.howq",
+   "ru": "Как купить билеты?",
+   "uk": "Як купити квитки?",
+   "en": "How to buy tickets?",
+   "pl": "Jak kupić bilety?"
+  },
+  {
+   "key": "d.hows",
+   "ru": "Подробная инструкция для каждого варианта маршрута.",
+   "uk": "Докладна інструкція для кожного варіанта маршруту.",
+   "en": "Step-by-step instructions for each route option.",
+   "pl": "Szczegółowa instrukcja dla każdego wariantu trasy."
+  },
+  {
+   "key": "d.less",
+   "ru": "Свернуть",
+   "uk": "Згорнути",
+   "en": "Collapse",
+   "pl": "Zwiń"
+  },
+  {
+   "key": "d.more",
+   "ru": "Подробнее",
+   "uk": "Докладніше",
+   "en": "Details",
+   "pl": "Szczegóły"
+  },
+  {
+   "key": "d.nochg",
+   "ru": "Без пересадок",
+   "uk": "Без пересадок",
+   "en": "No transfers",
+   "pl": "Bez przesiadek"
+  },
+  {
+   "key": "d.odd",
+   "ru": "По нечётным дням",
+   "uk": "По непарних днях",
+   "en": "On odd dates",
+   "pl": "W dni nieparzyste"
+  },
+  {
+   "key": "direct.h",
+   "ru": "Прямой поезд",
+   "uk": "Прямий поїзд",
+   "en": "Direct train",
+   "pl": "Pociąg bezpośredni"
+  },
+  {
+   "key": "direct.s",
+   "ru": "без пересадок",
+   "uk": "без пересадок",
+   "en": "no transfers",
+   "pl": "bez przesiadek"
+  },
+  {
+   "key": "err.h",
+   "ru": "Не удалось загрузить данные",
+   "uk": "Не вдалося завантажити дані",
+   "en": "Could not load the data",
+   "pl": "Nie udało się załadować danych"
+  },
+  {
+   "key": "err.p",
+   "ru": "Обновите страницу позже.",
+   "uk": "Оновіть сторінку пізніше.",
+   "en": "Please refresh the page later.",
+   "pl": "Odśwież stronę później."
+  },
+  {
+   "key": "even",
+   "ru": "Ходит по чётным числам",
+   "uk": "Курсує за парними числами",
+   "en": "Runs on even-numbered dates",
+   "pl": "Kursuje w parzyste dni"
+  },
+  {
+   "key": "f1",
+   "ru": "Справочник железнодорожных маршрутов из Украины и в Украину. Расписания, станции, пересадки и полезная информация для пассажиров.",
+   "uk": "Довідник залізничних маршрутів з України та в Україну. Розклади, станції, пересадки та корисна інформація для пасажирів.",
+   "en": "A guide to rail routes from and to Ukraine: timetables, stations, transfers and useful information for passengers.",
+   "pl": "Przewodnik po trasach kolejowych z Ukrainy i do Ukrainy: rozkłady jazdy, stacje, przesiadki i przydatne informacje dla pasażerów."
+  },
+  {
+   "key": "f2a",
+   "ru": "Расписание поездов, время отправления и прибытия могут изменяться. Перед поездкой проверяйте актуальную информацию на сайтах перевозчиков.",
+   "uk": "Розклад поїздів, час відправлення та прибуття можуть змінюватися. Перед поїздкою перевіряйте актуальну інформацію на сайтах перевізників.",
+   "en": "Train timetables and departure and arrival times may change. Before you travel, check current information on the carriers’ websites.",
+   "pl": "Rozkłady jazdy oraz godziny odjazdów i przyjazdów mogą ulec zmianie. Przed podróżą sprawdź aktualne informacje na stronach przewoźników."
+  },
+  {
+   "key": "f2b",
+   "ru": "Информация на странице обновлена: 01.11.2026.",
+   "uk": "Інформацію на сторінці оновлено: 01.11.2026.",
+   "en": "Page last updated: 01.11.2026.",
+   "pl": "Informacje na stronie zaktualizowano: 01.11.2026."
+  },
+  {
+   "key": "f2c",
+   "ru": "«Колія» — независимый информационный проект, не связанный с АО «Укрзализныця».",
+   "uk": "«Колія» — незалежний інформаційний проєкт, не пов’язаний з АТ «Укрзалізниця».",
+   "en": "Koliya is an independent information project and is not affiliated with JSC Ukrzaliznytsia.",
+   "pl": "„Koliya” to niezależny projekt informacyjny, niezwiązany z JSC Ukrzaliznytsia."
+  },
+  {
+   "key": "f2h",
+   "ru": "Актуальность информации",
+   "uk": "Актуальність інформації",
+   "en": "Keeping information up to date",
+   "pl": "Aktualność informacji"
+  },
+  {
+   "key": "f3",
+   "ru": "0 800 503 111 · 044 465 33 44<br>Звонки на номер 0 800 бесплатны с украинских номеров.",
+   "uk": "0 800 503 111 · 044 465 33 44<br>Дзвінки на номер 0 800 безкоштовні з українських номерів.",
+   "en": "0 800 503 111 · 044 465 33 44<br>Calls to 0 800 are free from Ukrainian numbers.",
+   "pl": "0 800 503 111 · 044 465 33 44<br>Połączenia na numer 0 800 są bezpłatne z numerów ukraińskich."
+  },
+  {
+   "key": "f3h",
+   "ru": "Справочная служба Укрзализныци",
+   "uk": "Довідкова служба Укрзалізниці",
+   "en": "Ukrzaliznytsia information line",
+   "pl": "Infolinia Ukrzaliznyci"
+  },
+  {
+   "key": "fsrc",
+   "ru": "Источник данных о поездах:",
+   "uk": "Джерело даних про поїзди:",
+   "en": "Train data sources:",
+   "pl": "Źródła danych o pociągach:"
+  },
+  {
+   "key": "h",
+   "ru": "ч",
+   "uk": "год",
+   "en": "h",
+   "pl": "godz."
+  },
+  {
+   "key": "ix.all",
+   "ru": "← Все направления",
+   "uk": "← Усі напрями",
+   "en": "← All directions",
+   "pl": "← Wszystkie kierunki"
+  },
+  {
+   "key": "ix.buy.b1",
+   "ru": "Приложение Укрзализныци",
+   "uk": "Застосунок Укрзалізниці",
+   "en": "Ukrzaliznytsia app",
+   "pl": "Aplikacja Ukrzaliznyci"
+  },
+  {
+   "key": "ix.buy.b2",
+   "ru": "Сайт УЗ",
+   "uk": "Сайт УЗ",
+   "en": "UZ website",
+   "pl": "Strona UZ"
+  },
+  {
+   "key": "ix.buy.h",
+   "ru": "Купить билеты на УЗ",
+   "uk": "Купити квитки на УЗ",
+   "en": "Buy UZ tickets",
+   "pl": "Kup bilety UZ"
+  },
+  {
+   "key": "ix.countries.h",
+   "ru": "Выберите страну",
+   "uk": "Оберіть країну",
+   "en": "Choose a country",
+   "pl": "Wybierz kraj"
+  },
+  {
+   "key": "ix.dirTitle",
+   "ru": "{t} поездом | Колія",
+   "uk": "{t} потягом | Колія",
+   "en": "{t} by train | Koliya",
+   "pl": "{t} pociągiem | Koliya"
+  },
+  {
+   "key": "ix.fly.h",
+   "ru": "Прилететь самолётом ✈️",
+   "uk": "Прилетіти літаком ✈️",
+   "en": "Arrive by air ✈️",
+   "pl": "Przylot samolotem ✈️"
+  },
+  {
+   "key": "ix.fly.p",
+   "ru": "В Украину можно добраться из любой страны. Выберите рейс до одного из аэропортов, откуда удобные пересадки на наши поезда.",
+   "uk": "В Україну можна дістатися з будь-якої країни. Оберіть рейс до одного з аеропортів, звідки зручні пересадки на наші поїзди.",
+   "en": "You can reach Ukraine from any country. Pick a flight to one of the airports with convenient connections to our trains.",
+   "pl": "Na Ukrainę można dotrzeć z każdego kraju. Wybierz lot do jednego z lotnisk, skąd są wygodne przesiadki na nasze pociągi."
+  },
+  {
+   "key": "ix.fromUa",
+   "ru": "Из Украины →",
+   "uk": "З України →",
+   "en": "From Ukraine →",
+   "pl": "Z Ukrainy →"
+  },
+  {
+   "key": "ix.h1",
+   "ru": "Поездом в Украину и из Украины",
+   "uk": "Потягом в Україну та з України",
+   "en": "By train to and from Ukraine",
+   "pl": "Pociągiem na Ukrainę i z Ukrainy"
+  },
+  {
+   "key": "ix.help.b1",
+   "ru": "График работы касс",
+   "uk": "Графік роботи кас",
+   "en": "Ticket office hours",
+   "pl": "Godziny pracy kas"
+  },
+  {
+   "key": "ix.help.b2",
+   "ru": "Список задерживающихся рейсов",
+   "uk": "Список поїздів, що затримуються",
+   "en": "List of delayed trains",
+   "pl": "Lista opóźnionych pociągów"
+  },
+  {
+   "key": "ix.help.h",
+   "ru": "Справочная Укрзализныци",
+   "uk": "Довідкова Укрзалізниці",
+   "en": "Ukrzaliznytsia information line",
+   "pl": "Infolinia Ukrzaliznyci"
+  },
+  {
+   "key": "ix.help.p",
+   "ru": "Бесплатно с украинских номеров.",
+   "uk": "Безкоштовно з українських номерів.",
+   "en": "Free from Ukrainian numbers.",
+   "pl": "Bezpłatnie z numerów ukraińskich."
+  },
+  {
+   "key": "ix.how.h",
+   "ru": "Как пользоваться сайтом",
+   "uk": "Як користуватися сайтом",
+   "en": "How to use the site",
+   "pl": "Jak korzystać z serwisu"
+  },
+  {
+   "key": "ix.how1",
+   "ru": "Выберите направление и найдите подходящий маршрут.",
+   "uk": "Оберіть напрям і знайдіть відповідний маршрут.",
+   "en": "Choose a direction and find a suitable route.",
+   "pl": "Wybierz kierunek i znajdź odpowiednią trasę."
+  },
+  {
+   "key": "ix.how2",
+   "ru": "Ознакомьтесь с расписанием, пересадками и временем в пути.",
+   "uk": "Ознайомтеся з розкладом, пересадками та часом у дорозі.",
+   "en": "Check the timetable, transfers and travel time.",
+   "pl": "Sprawdź rozkład jazdy, przesiadki i czas podróży."
+  },
+  {
+   "key": "ix.how3",
+   "ru": "Узнайте, где купить билеты на каждый участок маршрута.",
+   "uk": "Дізнайтеся, де купити квитки на кожну ділянку маршруту.",
+   "en": "Find out where to buy tickets for each part of the journey.",
+   "pl": "Dowiedz się, gdzie kupić bilety na każdy odcinek trasy."
+  },
+  {
+   "key": "ix.info.h",
+   "ru": "Полезная информация",
+   "uk": "Корисна інформація",
+   "en": "Useful information",
+   "pl": "Przydatne informacje"
+  },
+  {
+   "key": "ix.lead",
+   "ru": "Маршруты, расписания, пересадки и покупка билетов в европейские страны.",
+   "uk": "Маршрути, розклади, пересадки та купівля квитків у європейські країни.",
+   "en": "Routes, timetables, transfers and ticket buying for European countries.",
+   "pl": "Trasy, rozkłady jazdy, przesiadki i zakup biletów do krajów europejskich."
+  },
+  {
+   "key": "ix.leadDir",
+   "ru": "Прямые поезда и варианты с пересадкой",
+   "uk": "Прямі поїзди та варіанти з пересадкою",
+   "en": "Direct trains and options with a transfer",
+   "pl": "Pociągi bezpośrednie i połączenia z przesiadką"
+  },
+  {
+   "key": "ix.more",
+   "ru": "Ещё маршруты ({n})",
+   "uk": "Ще маршрути ({n})",
+   "en": "More routes ({n})",
+   "pl": "Więcej tras ({n})"
+  },
+  {
+   "key": "ix.nav",
+   "ru": "Направление",
+   "uk": "Напрям",
+   "en": "Direction",
+   "pl": "Kierunek"
+  },
+  {
+   "key": "ix.one",
+   "ru": "⚡ {t} →",
+   "uk": "⚡ {t} →",
+   "en": "⚡ {t} →",
+   "pl": "⚡ {t} →"
+  },
+  {
+   "key": "ix.popular",
+   "ru": "Популярные маршруты",
+   "uk": "Популярні маршрути",
+   "en": "Popular routes",
+   "pl": "Popularne trasy"
+  },
+  {
+   "key": "ix.rtIn",
+   "ru": "Из {gen} в Украину",
+   "uk": "З {gen} в Україну",
+   "en": "From {nom} to Ukraine",
+   "pl": "Z {gen} na Ukrainę"
+  },
+  {
+   "key": "ix.rtOut",
+   "ru": "Из Украины в {nom}",
+   "uk": "З України до {gen}",
+   "en": "From Ukraine to {nom}",
+   "pl": "Z Ukrainy do {gen}"
+  },
+  {
+   "key": "ix.soon",
+   "ru": "Маршруты для этого направления скоро появятся.",
+   "uk": "Маршрути для цього напряму скоро з’являться.",
+   "en": "Routes for this direction are coming soon.",
+   "pl": "Trasy dla tego kierunku pojawią się wkrótce."
+  },
+  {
+   "key": "ix.title",
+   "ru": "Колія: поездом из Украины и в Украину",
+   "uk": "Колія: потягом з України та в Україну",
+   "en": "Koliya: by train from and to Ukraine",
+   "pl": "Koliya: pociągiem z Ukrainy i na Ukrainę"
+  },
+  {
+   "key": "ix.toUa",
+   "ru": "← В Украину",
+   "uk": "← В Україну",
+   "en": "← To Ukraine",
+   "pl": "← Na Ukrainę"
+  },
+  {
+   "key": "loading",
+   "ru": "Загрузка…",
+   "uk": "Завантаження…",
+   "en": "Loading…",
+   "pl": "Ładowanie…"
+  },
+  {
+   "key": "loc",
+   "ru": "Время местное",
+   "uk": "Час місцевий",
+   "en": "Local time",
+   "pl": "Czas lokalny"
+  },
+  {
+   "key": "min",
+   "ru": "мин",
+   "uk": "хв",
+   "en": "min",
+   "pl": "min"
+  },
+  {
+   "key": "more.all",
+   "ru": "Все страны",
+   "uk": "Усі країни",
+   "en": "All countries",
+   "pl": "Wszystkie kraje"
+  },
+  {
+   "key": "more.h",
+   "ru": "Ещё маршруты",
+   "uk": "Інші маршрути",
+   "en": "More routes",
+   "pl": "Inne trasy"
+  },
+  {
+   "key": "no",
+   "ru": "№",
+   "uk": "№",
+   "en": "No. ",
+   "pl": "nr "
+  },
+  {
+   "key": "noopts.h",
+   "ru": "Пока нет вариантов",
+   "uk": "Поки що немає варіантів",
+   "en": "No options yet",
+   "pl": "Brak połączeń"
+  },
+  {
+   "key": "noopts.p",
+   "ru": "Добавьте их в админке.",
+   "uk": "Додайте їх в адмінці.",
+   "en": "Add them in the admin panel.",
+   "pl": "Dodaj je w panelu administratora."
+  },
+  {
+   "key": "odd",
+   "ru": "Ходит по нечётным числам",
+   "uk": "Курсує за непарними числами",
+   "en": "Runs on odd-numbered dates",
+   "pl": "Kursuje w nieparzyste dni"
+  },
+  {
+   "key": "seat",
+   "ru": "Сидячий интерсити",
+   "uk": "Сидячий інтерсіті",
+   "en": "Seated InterCity",
+   "pl": "InterCity, miejsca siedzące"
+  },
+  {
+   "key": "swap",
+   "ru": "Пересадка: {a}",
+   "uk": "Пересадка: {a}",
+   "en": "Transfer: {a}",
+   "pl": "Przesiadka: {a}"
+  },
+  {
+   "key": "swapArr",
+   "ru": "Пересадка: {a} → {b}",
+   "uk": "Пересадка: {a} → {b}",
+   "en": "Transfer: {a} → {b}",
+   "pl": "Przesiadka: {a} → {b}"
+  },
+  {
+   "key": "swapIn",
+   "ru": "Пересадка {c}",
+   "uk": "Пересадка {c}",
+   "en": "Transfer {c}",
+   "pl": "Przesiadka {c}"
+  },
+  {
+   "key": "tag0",
+   "ru": "без пересадок",
+   "uk": "без пересадок",
+   "en": "direct",
+   "pl": "bez przesiadek"
+  },
+  {
+   "key": "tag1",
+   "ru": "1 пересадка",
+   "uk": "1 пересадка",
+   "en": "1 transfer",
+   "pl": "1 przesiadka"
+  },
+  {
+   "key": "tag2",
+   "ru": "{n} пересадки",
+   "uk": "{n} пересадки",
+   "en": "{n} transfers",
+   "pl": "{n} przesiadki"
+  },
+  {
+   "key": "tag5",
+   "ru": "{n} пересадок",
+   "uk": "{n} пересадок",
+   "en": "{n} transfers",
+   "pl": "{n} przesiadek"
+  },
+  {
+   "key": "train",
+   "ru": "Поезд",
+   "uk": "Поїзд",
+   "en": "Train",
+   "pl": "Pociąg"
+  },
+  {
+   "key": "transfer.h",
+   "ru": "С удобной пересадкой в Хелме на одной платформе",
+   "uk": "Зручна пересадка в Хелмі на одній платформі",
+   "en": "With a convenient same-platform transfer in Chełm",
+   "pl": "Z wygodną przesiadką w Chełmie na jednym peronie"
+  },
+  {
+   "key": "transfer.h2",
+   "ru": "С пересадкой {xin}",
+   "uk": "З пересадкою {xin}",
+   "en": "With a transfer {xin}",
+   "pl": "Z przesiadką {xin}"
+  },
+  {
+   "key": "transfer.h3",
+   "ru": "С пересадкой",
+   "uk": "З пересадкою",
+   "en": "With a transfer",
+   "pl": "Z przesiadką"
   }
  ],
  "stations": [
   {
-   "name_ru": "Киев",
-   "name_uk": "Київ",
-   "name_en": "Kyiv",
-   "name_pl": "Kijów",
-   "in_ru": "в Киеве",
-   "in_uk": "у Києві",
-   "in_pl": "w Kijowie",
+   "name_ru": "Аджуд",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
    "aliases": []
   },
   {
-   "name_ru": "Киев-Пассажирский",
-   "name_uk": "Київ-Пасажирський",
-   "name_en": "Kyiv-Pasazhyrskyi",
-   "name_pl": "Kijów Pasażerski",
+   "name_ru": "Александрия",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Бакэу",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Бар",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Белая Церковь",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Бердичев",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Берлин",
+   "name_uk": "Берлін",
+   "name_en": "Berlin",
+   "name_pl": "Berlin",
+   "in_ru": "в Берлине",
+   "in_uk": "у Берліні",
+   "in_pl": "w Berlinie",
+   "aliases": []
+  },
+  {
+   "name_ru": "Берлин Гезундбруннен",
+   "name_uk": "Берлін Гезундбруннен",
+   "name_en": "Berlin Gesundbrunnen",
+   "name_pl": "Berlin Gesundbrunnen",
+   "in_ru": "в Берлине",
+   "in_uk": "у Берліні",
+   "in_pl": "w Berlinie",
+   "aliases": []
+  },
+  {
+   "name_ru": "Берлин Главный",
+   "name_uk": "Берлін-Головний",
+   "name_en": "Berlin Hbf",
+   "name_pl": "Berlin Hbf",
+   "in_ru": "в Берлине",
+   "in_uk": "у Берліні",
+   "in_pl": "w Berlinie",
+   "aliases": []
+  },
+  {
+   "name_ru": "Берлин-Главный",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Берлин-Лихтенберг",
+   "name_uk": "Берлін-Ліхтенберг",
+   "name_en": "Berlin-Lichtenberg",
+   "name_pl": "Berlin-Lichtenberg",
+   "in_ru": "в Берлине",
+   "in_uk": "у Берліні",
+   "in_pl": "w Berlinie",
+   "aliases": []
+  },
+  {
+   "name_ru": "Богумин",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Бохня",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Братислава",
+   "name_uk": "Братислава",
+   "name_en": "Bratislava",
+   "name_pl": "Bratysława",
+   "in_ru": "в Братиславе",
+   "in_uk": "у Братиславі",
+   "in_pl": "w Bratysławie",
+   "aliases": []
+  },
+  {
+   "name_ru": "Братислава Главная",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Братислава-Винограды",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Брюховичи",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Будапешт",
+   "name_uk": "Будапешт",
+   "name_en": "Budapest",
+   "name_pl": "Budapeszt",
+   "in_ru": "в Будапеште",
+   "in_uk": "у Будапешті",
+   "in_pl": "w Budapeszcie",
+   "aliases": []
+  },
+  {
+   "name_ru": "Будапешт Келети",
+   "name_uk": "Будапешт-Келеті",
+   "name_en": "Budapest Keleti",
+   "name_pl": "Budapest Keleti",
+   "in_ru": "в Будапеште",
+   "in_uk": "у Будапешті",
+   "in_pl": "w Budapeszcie",
+   "aliases": []
+  },
+  {
+   "name_ru": "Будапешт Ньюгати",
+   "name_uk": "Будапешт-Ньюгаті",
+   "name_en": "Budapest Nyugati",
+   "name_pl": "Budapest Nyugati",
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": [
+    "Будапешт Нюгати"
+   ]
+  },
+  {
+   "name_ru": "Будапешт-Келенфельд",
+   "name_uk": "Будапешт-Келенфельд",
+   "name_en": "Budapest-Kelenföld",
+   "name_pl": "Budapest-Kelenföld",
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Бузэу",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Бухарест",
+   "name_uk": "Бухарест",
+   "name_en": "Bucharest",
+   "name_pl": "Bukareszt",
+   "in_ru": "в Бухаресте",
+   "in_uk": "у Бухаресті",
+   "in_pl": "w Bukareszcie",
+   "aliases": []
+  },
+  {
+   "name_ru": "Бухарест Норд",
+   "name_uk": "Бухарест-Норд",
+   "name_en": "Bucharest Nord",
+   "name_pl": "Bukareszt Nord",
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Бэлць-Ораш",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Вапнярка",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
@@ -1216,17 +1458,17 @@
    "aliases": []
   },
   {
-   "name_ru": "Варшава Центральная",
-   "name_uk": "Варшава Центральна",
-   "name_en": "Warszawa Centralna",
-   "name_pl": "Warszawa Centralna",
+   "name_ru": "Варшава Восточная",
+   "name_uk": "Варшава Східна",
+   "name_en": "Warszawa Wschodnia",
+   "name_pl": "Warszawa Wschodnia",
    "in_ru": "в Варшаве",
    "in_uk": "у Варшаві",
    "in_pl": "w Warszawie",
    "aliases": []
   },
   {
-   "name_ru": "Варшава Восточная",
+   "name_ru": "Варшава Всходня",
    "name_uk": "Варшава Східна",
    "name_en": "Warszawa Wschodnia",
    "name_pl": "Warszawa Wschodnia",
@@ -1256,16 +1498,6 @@
    "aliases": []
   },
   {
-   "name_ru": "Варшава Всходня",
-   "name_uk": "Варшава Східна",
-   "name_en": "Warszawa Wschodnia",
-   "name_pl": "Warszawa Wschodnia",
-   "in_ru": "в Варшаве",
-   "in_uk": "у Варшаві",
-   "in_pl": "w Warszawie",
-   "aliases": []
-  },
-  {
    "name_ru": "Варшава Центральна",
    "name_uk": "Варшава Центральна",
    "name_en": "Warszawa Centralna",
@@ -1276,113 +1508,233 @@
    "aliases": []
   },
   {
-   "name_ru": "Хелм",
-   "name_uk": "Хелм",
-   "name_en": "Chełm",
-   "name_pl": "Chełm",
-   "in_ru": "в Хелме",
-   "in_uk": "у Хелмі",
-   "in_pl": "w Chełmie",
+   "name_ru": "Варшава Центральная",
+   "name_uk": "Варшава Центральна",
+   "name_en": "Warszawa Centralna",
+   "name_pl": "Warszawa Centralna",
+   "in_ru": "в Варшаве",
+   "in_uk": "у Варшаві",
+   "in_pl": "w Warszawie",
    "aliases": []
   },
   {
-   "name_ru": "Люблин",
-   "name_uk": "Люблін",
-   "name_en": "Lublin",
-   "name_pl": "Lublin",
-   "in_ru": "в Люблине",
-   "in_uk": "у Любліні",
-   "in_pl": "w Lublinie",
+   "name_ru": "Великий Березный",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
    "aliases": []
   },
   {
-   "name_ru": "Перемышль",
-   "name_uk": "Перемишль",
-   "name_en": "Przemyśl",
-   "name_pl": "Przemyśl",
-   "in_ru": "в Перемышле",
-   "in_uk": "у Перемишлі",
-   "in_pl": "w Przemyślu",
+   "name_ru": "Вена",
+   "name_uk": "Відень",
+   "name_en": "Vienna",
+   "name_pl": "Wiedeń",
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
    "aliases": []
   },
   {
-   "name_ru": "Жешув",
-   "name_uk": "Жешув",
-   "name_en": "Rzeszów",
-   "name_pl": "Rzeszów",
-   "in_ru": "в Жешуве",
-   "in_uk": "у Жешуві",
-   "in_pl": "w Rzeszowie",
+   "name_ru": "Вена Главная",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
    "aliases": []
   },
   {
-   "name_ru": "Краков",
-   "name_uk": "Краків",
-   "name_en": "Kraków",
-   "name_pl": "Kraków",
-   "in_ru": "в Кракове",
-   "in_uk": "у Кракові",
-   "in_pl": "w Krakowie",
+   "name_ru": "Вена Западная",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
    "aliases": []
   },
   {
-   "name_ru": "Львов",
-   "name_uk": "Львів",
-   "name_en": "Lviv",
-   "name_pl": "Lwów",
-   "in_ru": "во Львове",
-   "in_uk": "у Львові",
-   "in_pl": "we Lwowie",
+   "name_ru": "Вена Майдлинг",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
    "aliases": []
   },
   {
-   "name_ru": "Ковель",
-   "name_uk": "Ковель",
-   "name_en": "Kovel",
-   "name_pl": "Kowel",
-   "in_ru": "в Ковеле",
-   "in_uk": "у Ковелі",
-   "in_pl": "w Kowlu",
+   "name_ru": "Вендичаны",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
    "aliases": []
   },
   {
-   "name_ru": "Ягодин",
-   "name_uk": "Ягодин",
-   "name_en": "Yahodyn",
-   "name_pl": "Jagodzin",
-   "in_ru": "в Ягодине",
-   "in_uk": "в Ягодині",
-   "in_pl": "w Jagodzinie",
+   "name_ru": "Веселый Подол",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
    "aliases": []
   },
   {
-   "name_ru": "Дорогуск",
-   "name_uk": "Дорогуськ",
-   "name_en": "Dorohusk",
-   "name_pl": "Dorohusk",
-   "in_ru": "в Дорогуске",
-   "in_uk": "у Дорогуську",
-   "in_pl": "w Dorohusku",
+   "name_ru": "Винница",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
    "aliases": []
   },
   {
-   "name_ru": "Чоп",
-   "name_uk": "Чоп",
-   "name_en": "Chop",
-   "name_pl": "Czop",
-   "in_ru": "в Чопе",
-   "in_uk": "у Чопі",
-   "in_pl": "w Czopie",
+   "name_ru": "Воловец",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
    "aliases": []
   },
   {
-   "name_ru": "Мукачево",
-   "name_uk": "Мукачево",
-   "name_en": "Mukachevo",
-   "name_pl": "Mukaczewo",
-   "in_ru": "в Мукачево",
-   "in_uk": "у Мукачеві",
-   "in_pl": "w Mukaczewie",
+   "name_ru": "Волосянка-Закарпатская",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Волочиск",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Вольногорск",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Вронки",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Вроцлав",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Врутки",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Высока Каменьска",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Вэлчинец",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Глобино",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Голенюв",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Границе-на-Мораве",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Гребенка",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Дарница",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
    "aliases": []
   },
   {
@@ -1396,103 +1748,23 @@
    "aliases": []
   },
   {
-   "name_ru": "Будапешт-Келенфельд",
-   "name_uk": "Будапешт-Келенфельд",
-   "name_en": "Budapest-Kelenföld",
-   "name_pl": "Budapest-Kelenföld",
+   "name_ru": "Дембица",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
    "aliases": []
   },
   {
-   "name_ru": "Будапешт Ньюгати",
-   "name_uk": "Будапешт-Ньюгаті",
-   "name_en": "Budapest Nyugati",
-   "name_pl": "Budapest Nyugati",
+   "name_ru": "Демблин",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
-   "aliases": []
-  },
-  {
-   "name_ru": "Щецин",
-   "name_uk": "Щецін",
-   "name_en": "Szczecin",
-   "name_pl": "Szczecin",
-   "in_ru": "в Щецине",
-   "in_uk": "у Щецині",
-   "in_pl": "w Szczecinie",
-   "aliases": []
-  },
-  {
-   "name_ru": "Познань",
-   "name_uk": "Познань",
-   "name_en": "Poznań",
-   "name_pl": "Poznań",
-   "in_ru": "в Познани",
-   "in_uk": "у Познані",
-   "in_pl": "w Poznaniu",
-   "aliases": []
-  },
-  {
-   "name_ru": "Зелена-Гура",
-   "name_uk": "Зелена-Гура",
-   "name_en": "Zielona Góra",
-   "name_pl": "Zielona Góra",
-   "in_ru": null,
-   "in_uk": null,
-   "in_pl": "w Zielonej Górze",
-   "aliases": []
-  },
-  {
-   "name_ru": "Харьков",
-   "name_uk": "Харків",
-   "name_en": "Kharkiv",
-   "name_pl": "Charków",
-   "in_ru": "в Харькове",
-   "in_uk": "у Харкові",
-   "in_pl": "w Charkowie",
-   "aliases": []
-  },
-  {
-   "name_ru": "Одесса",
-   "name_uk": "Одеса",
-   "name_en": "Odesa",
-   "name_pl": "Odessa",
-   "in_ru": "в Одессе",
-   "in_uk": "в Одесі",
-   "in_pl": "w Odessie",
-   "aliases": []
-  },
-  {
-   "name_ru": "Кременчуг",
-   "name_uk": "Кременчук",
-   "name_en": "Kremenchuk",
-   "name_pl": "Krzemieńczuk",
-   "in_ru": "в Кременчуге",
-   "in_uk": "у Кременчуці",
-   "in_pl": "w Krzemieńczuku",
-   "aliases": []
-  },
-  {
-   "name_ru": "Рава-Русская",
-   "name_uk": "Рава-Руська",
-   "name_en": "Rava-Ruska",
-   "name_pl": "Rawa Ruska",
-   "in_ru": "в Раве-Русской",
-   "in_uk": "у Раві-Руській",
-   "in_pl": "w Rawie Ruskiej",
-   "aliases": []
-  },
-  {
-   "name_ru": "Свиноуйсьце",
-   "name_uk": "Свіноуйсьце",
-   "name_en": "Świnoujście",
-   "name_pl": "Świnoujście",
-   "in_ru": null,
-   "in_uk": null,
-   "in_pl": "w Świnoujściu",
    "aliases": []
   },
   {
@@ -1506,30 +1778,1100 @@
    "aliases": []
   },
   {
-   "name_ru": "Будапешт",
-   "name_uk": "Будапешт",
-   "name_en": "Budapest",
-   "name_pl": "Budapeszt",
-   "in_ru": "в Будапеште",
-   "in_uk": "у Будапешті",
-   "in_pl": "w Budapeszcie",
+   "name_ru": "Днепр-Главный",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": "в Днепре",
+   "in_uk": "у Дніпрі",
+   "in_pl": "w Dnipro",
+   "aliases": [
+    "Днепр-Главный"
+   ]
+  },
+  {
+   "name_ru": "Добегнев",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
    "aliases": []
   },
   {
-   "name_ru": "Будапешт Келети",
-   "name_uk": "Будапешт-Келеті",
-   "name_en": "Budapest Keleti",
-   "name_pl": "Budapest Keleti",
-   "in_ru": "в Будапеште",
-   "in_uk": "у Будапешті",
-   "in_pl": "w Budapeszcie",
+   "name_ru": "Дорогуск",
+   "name_uk": "Дорогуськ",
+   "name_en": "Dorohusk",
+   "name_pl": "Dorohusk",
+   "in_ru": "в Дорогуске",
+   "in_uk": "у Дорогуську",
+   "in_pl": "w Dorohusku",
    "aliases": []
   },
   {
-   "name_ru": "Вена",
-   "name_uk": "Відень",
-   "name_en": "Vienna",
-   "name_pl": "Wiedeń",
+   "name_ru": "Дорохуск",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Дьёр",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Жепин",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Жешув",
+   "name_uk": "Жешув",
+   "name_en": "Rzeszów",
+   "name_pl": "Rzeszów",
+   "in_ru": "в Жешуве",
+   "in_uk": "у Жешуві",
+   "in_pl": "w Rzeszowie",
+   "aliases": []
+  },
+  {
+   "name_ru": "Жешув Главный",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Жилина",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Жирардув",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Жмеринка",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Жовква",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Забржег-на-Мораве",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Залещики",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Зальцбург",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Запорожье",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Захонь",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Збоншинек",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Зборов",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Здуньская Воля",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Зебжидовице",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Зелена-Гура",
+   "name_uk": "Зелена-Гура",
+   "name_en": "Zielona Góra",
+   "name_pl": "Zielona Góra",
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": "w Zielonej Górze",
+   "aliases": []
+  },
+  {
+   "name_ru": "Знаменка-Пасс.",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": [
+    "Знаменка-Пасс."
+   ]
+  },
+  {
+   "name_ru": "Золочев",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Зугло",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Им. Тараса Шевченко",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Казатин 1",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Калиш",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Каменское-Пасс.",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": [
+    "Каменское-Пасс."
+   ]
+  },
+  {
+   "name_ru": "Карпаты",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Карцаг",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Катовице",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Кёбанья-Кишпешт",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Киверцы",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Киев",
+   "name_uk": "Київ",
+   "name_en": "Kyiv",
+   "name_pl": "Kijów",
+   "in_ru": "в Киеве",
+   "in_uk": "у Києві",
+   "in_pl": "w Kijowie",
+   "aliases": []
+  },
+  {
+   "name_ru": "Киев-Пасс.",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": "в Киеве",
+   "in_uk": "у Києві",
+   "in_pl": "w Kijowie",
+   "aliases": [
+    "Киев-Пасс."
+   ]
+  },
+  {
+   "name_ru": "Киев-Пассажирский",
+   "name_uk": "Київ-Пасажирський",
+   "name_en": "Kyiv-Pasazhyrskyi",
+   "name_pl": "Kijów Pasażerski",
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Кисак",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Кишварда",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Кишинев",
+   "name_uk": "Кишинів",
+   "name_en": "Chișinău",
+   "name_pl": "Kiszyniów",
+   "in_ru": "в Кишиневе",
+   "in_uk": "у Кишиневі",
+   "in_pl": "w Kiszyniowie",
+   "aliases": []
+  },
+  {
+   "name_ru": "Кишинёв",
+   "name_uk": "Кишинів",
+   "name_en": "Chișinău",
+   "name_pl": "Kiszyniów",
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Кишуйсалаш",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Ковель",
+   "name_uk": "Ковель",
+   "name_en": "Kovel",
+   "name_pl": "Kowel",
+   "in_ru": "в Ковеле",
+   "in_uk": "у Ковелі",
+   "in_pl": "w Kowlu",
+   "aliases": []
+  },
+  {
+   "name_ru": "Кодыма",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Колин",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Коломыя",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Колюшки",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Конин",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Копычинцы",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Кострижевка",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Кострино",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Кошице",
+   "name_uk": "Кошице",
+   "name_en": "Košice",
+   "name_pl": "Koszyce",
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Краков",
+   "name_uk": "Краків",
+   "name_en": "Kraków",
+   "name_pl": "Kraków",
+   "in_ru": "в Кракове",
+   "in_uk": "у Кракові",
+   "in_pl": "w Krakowie",
+   "aliases": []
+  },
+  {
+   "name_ru": "Краков Главный",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": "в Кракове",
+   "in_uk": "у Кракові",
+   "in_pl": "w Krakowie",
+   "aliases": []
+  },
+  {
+   "name_ru": "Краков Плашув",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Кралеваны",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Красне",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Кременчуг",
+   "name_uk": "Кременчук",
+   "name_en": "Kremenchuk",
+   "name_pl": "Krzemieńczuk",
+   "in_ru": "в Кременчуге",
+   "in_uk": "у Кременчуці",
+   "in_pl": "w Krzemieńczuku",
+   "aliases": [
+    "Кременчук"
+   ]
+  },
+  {
+   "name_ru": "Кутно",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Кшешовице",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Кшиж",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Ланьцут",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Ласк",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Лейпциг",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Линц",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Липтовски-Микулаш",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Лодзь Видзев",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Лодзь Хойны",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Лубны",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Львов",
+   "name_uk": "Львів",
+   "name_en": "Lviv",
+   "name_pl": "Lwów",
+   "in_ru": "во Львове",
+   "in_uk": "у Львові",
+   "in_pl": "we Lwowie",
+   "aliases": []
+  },
+  {
+   "name_ru": "Люблин",
+   "name_uk": "Люблін",
+   "name_en": "Lublin",
+   "name_pl": "Lublin",
+   "in_ru": "в Люблине",
+   "in_uk": "у Любліні",
+   "in_pl": "w Lublinie",
+   "aliases": []
+  },
+  {
+   "name_ru": "Люблин-Главный",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Люблин-Западный",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Люботин",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Маргецаны",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Мендзыздрое",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Мизил",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Миргород",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Могилев-Подольский",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Мошонмадьяровар",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Мукачево",
+   "name_uk": "Мукачево",
+   "name_en": "Mukachevo",
+   "name_pl": "Mukaczewo",
+   "in_ru": "в Мукачево",
+   "in_uk": "у Мукачеві",
+   "in_pl": "w Mukaczewie",
+   "aliases": []
+  },
+  {
+   "name_ru": "Мэрэшешты",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Мюнхен",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Наленчув",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Николина",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Ньиредьхаза",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Одесса",
+   "name_uk": "Одеса",
+   "name_en": "Odesa",
+   "name_pl": "Odessa",
+   "in_ru": "в Одессе",
+   "in_uk": "в Одесі",
+   "in_pl": "w Odessie",
+   "aliases": []
+  },
+  {
+   "name_ru": "Оломоуц Главный",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Освенцим",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Острава",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Острава Главная",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Острава-Свинов",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Пабьянице",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Пардубице",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Пардубице Главный",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Перемышль",
+   "name_uk": "Перемишль",
+   "name_en": "Przemyśl",
+   "name_pl": "Przemyśl",
+   "in_ru": "в Перемышле",
+   "in_uk": "у Перемишлі",
+   "in_pl": "w Przemyślu",
+   "aliases": []
+  },
+  {
+   "name_ru": "Перемышль Главный",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": "в Перемышле",
+   "in_uk": "у Перемишлі",
+   "in_pl": "w Przemyślu",
+   "aliases": []
+  },
+  {
+   "name_ru": "Перемышль Засане",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Перечин",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Пилава",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Плешев",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Плоешти",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Поважска-Бистрица",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Подзамче",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Подольск",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Познань",
+   "name_uk": "Познань",
+   "name_en": "Poznań",
+   "name_pl": "Poznań",
+   "in_ru": "в Познани",
+   "in_uk": "у Познані",
+   "in_pl": "w Poznaniu",
+   "aliases": []
+  },
+  {
+   "name_ru": "Познань Главный",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": "в Познани",
+   "in_uk": "у Познані",
+   "in_pl": "w Poznaniu",
+   "aliases": []
+  },
+  {
+   "name_ru": "Полтава-Киевская",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Попрад-Татры",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
@@ -1546,33 +2888,333 @@
    "aliases": []
   },
   {
-   "name_ru": "Кошице",
-   "name_uk": "Кошице",
-   "name_en": "Košice",
-   "name_pl": "Koszyce",
+   "name_ru": "Прага Главная",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": "в Праге",
+   "in_uk": "у Празі",
+   "in_pl": "w Pradze",
+   "aliases": []
+  },
+  {
+   "name_ru": "Прага-Либень",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
    "aliases": []
   },
   {
-   "name_ru": "Бухарест Норд",
-   "name_uk": "Бухарест-Норд",
-   "name_en": "Bucharest Nord",
-   "name_pl": "Bukareszt Nord",
+   "name_ru": "Пулавы Място",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
    "aliases": []
   },
   {
-   "name_ru": "Бухарест",
-   "name_uk": "Бухарест",
-   "name_en": "Bucharest",
-   "name_pl": "Bukareszt",
-   "in_ru": "в Бухаресте",
-   "in_uk": "у Бухаресті",
-   "in_pl": "w Bukareszcie",
+   "name_ru": "Пухов",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Пшеворск",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Пюшпёкладань",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Пятихатки",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Рава-Русская",
+   "name_uk": "Рава-Руська",
+   "name_en": "Rava-Ruska",
+   "name_pl": "Rawa Ruska",
+   "in_ru": "в Раве-Русской",
+   "in_uk": "у Раві-Руській",
+   "in_pl": "w Rawie Ruskiej",
+   "aliases": []
+  },
+  {
+   "name_ru": "Раздельная 1",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Ревака",
+   "name_uk": "Ревака",
+   "name_en": "Revaca",
+   "name_pl": "Revaca",
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Реёвец",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Ровно",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Роман",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Ромодан",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Рудница",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Ружомберок",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Рымнику-Сэрат",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Самбор",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Свалява",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Свебодзин",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Свидник Място",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Свиноуйсьце",
+   "name_uk": "Свіноуйсьце",
+   "name_en": "Świnoujście",
+   "name_pl": "Świnoujście",
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": "w Świnoujściu",
+   "aliases": []
+  },
+  {
+   "name_ru": "Серадз",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Скерневице",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Сколе",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Славское",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Славута 1",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Сольнок",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Спишска-Нова-Вес",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Старгард",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Старый Самбор",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Стрелки",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Стрый",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
    "aliases": []
   },
   {
@@ -1586,80 +3228,420 @@
    "aliases": []
   },
   {
-   "name_ru": "Братислава",
-   "name_uk": "Братислава",
-   "name_en": "Bratislava",
-   "name_pl": "Bratysława",
-   "in_ru": "в Братиславе",
-   "in_uk": "у Братиславі",
-   "in_pl": "w Bratysławie",
-   "aliases": []
-  },
-  {
-   "name_ru": "Кишинёв",
-   "name_uk": "Кишинів",
-   "name_en": "Chișinău",
-   "name_pl": "Kiszyniów",
+   "name_ru": "Сьрода Велькопольска",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
    "aliases": []
   },
   {
-   "name_ru": "Берлин-Лихтенберг",
-   "name_uk": "Берлін-Ліхтенберг",
-   "name_en": "Berlin-Lichtenberg",
-   "name_pl": "Berlin-Lichtenberg",
-   "in_ru": "в Берлине",
-   "in_uk": "у Берліні",
-   "in_pl": "w Berlinie",
+   "name_ru": "Сянки",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
    "aliases": []
   },
   {
-   "name_ru": "Берлин Гезундбруннен",
-   "name_uk": "Берлін Гезундбруннен",
-   "name_en": "Berlin Gesundbrunnen",
-   "name_pl": "Berlin Gesundbrunnen",
-   "in_ru": "в Берлине",
-   "in_uk": "у Берліні",
-   "in_pl": "w Berlinie",
+   "name_ru": "Тарнув",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
    "aliases": []
   },
   {
-   "name_ru": "Берлин",
-   "name_uk": "Берлін",
-   "name_en": "Berlin",
-   "name_pl": "Berlin",
-   "in_ru": "в Берлине",
-   "in_uk": "у Берліні",
-   "in_pl": "w Berlinie",
+   "name_ru": "Татабанья",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
    "aliases": []
   },
   {
-   "name_ru": "Берлин Главный",
-   "name_uk": "Берлін-Головний",
-   "name_en": "Berlin Hbf",
-   "name_pl": "Berlin Hbf",
-   "in_ru": "в Берлине",
-   "in_uk": "у Берліні",
-   "in_pl": "w Berlinie",
+   "name_ru": "Теребовля",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
    "aliases": []
   },
   {
-   "name_ru": "Кишинев",
-   "name_uk": "Кишинів",
-   "name_en": "Chișinău",
-   "name_pl": "Kiszyniów",
-   "in_ru": "в Кишиневе",
-   "in_uk": "у Кишиневі",
-   "in_pl": "w Kiszyniowie",
+   "name_ru": "Тёрёксентмиклош",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
    "aliases": []
   },
   {
-   "name_ru": "Ревака",
-   "name_uk": "Ревака",
-   "name_en": "Revaca",
-   "name_pl": "Revaca",
+   "name_ru": "Тернополь",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Толстое",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Тренчин",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Трнава",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Турка",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Тшебиня",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Тыргу-Фрумос",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Ужгород",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Устка",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Ферихедь",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Фокшани",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Франкфурт-на-Одере",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Хайдусобосло",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Харьков",
+   "name_uk": "Харків",
+   "name_en": "Kharkiv",
+   "name_pl": "Charków",
+   "in_ru": "в Харькове",
+   "in_uk": "у Харкові",
+   "in_pl": "w Charkowie",
+   "aliases": []
+  },
+  {
+   "name_ru": "Хедьешхалом",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Хелм",
+   "name_uk": "Хелм",
+   "name_en": "Chełm",
+   "name_pl": "Chełm",
+   "in_ru": "в Хелме",
+   "in_uk": "у Хелмі",
+   "in_pl": "w Chełmie",
+   "aliases": []
+  },
+  {
+   "name_ru": "Хелм Място",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Хмельницкий",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Хорол",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Хоростков",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Хощно",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Хшанув Средместье",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Цеглед",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Черновцы",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Ческа-Тршебова",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Чеховице-Дзедзице",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Чоп",
+   "name_uk": "Чоп",
+   "name_en": "Chop",
+   "name_pl": "Czop",
+   "in_ru": "в Чопе",
+   "in_uk": "у Чопі",
+   "in_pl": "w Czopie",
+   "aliases": []
+  },
+  {
+   "name_ru": "Чортков",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Шамотулы",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Штрба",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Щецин",
+   "name_uk": "Щецін",
+   "name_en": "Szczecin",
+   "name_pl": "Szczecin",
+   "in_ru": "в Щецине",
+   "in_uk": "у Щецині",
+   "in_pl": "w Szczecinie",
+   "aliases": []
+  },
+  {
+   "name_ru": "Щецин Домбе",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Щецин-Главный",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Ягодин",
+   "name_uk": "Ягодин",
+   "name_en": "Yahodyn",
+   "name_pl": "Jagodzin",
+   "in_ru": "в Ягодине",
+   "in_uk": "в Ягодині",
+   "in_pl": "w Jagodzinie",
+   "aliases": []
+  },
+  {
+   "name_ru": "Ярослав",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Яроцин",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
