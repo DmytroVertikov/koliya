@@ -171,7 +171,10 @@ for (const r of ROUTES) for (const l of LANGS) {
 }
 /* главная: страны, популярные маршруты, полезные ссылки и подвал собираются здесь в статический HTML (без запросов к базе и без JS); скрипт на странице отвечает только за интерактив и страницы направлений по #хэшу */
 const hx = s => String(s == null ? "" : s).replace(/[&<>"']/g, c => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"}[c]));
-const PGS = new Function("window", fs.readFileSync("config.js", "utf8") + "\n;return window.CFG.PAGES")({});
+const CFG = new Function("window", fs.readFileSync("config.js", "utf8") + "\n;return window.CFG")({});
+const PGS = CFG.pagesFromRows(DBR); /* порядок — по полю sort, как в базе (sync.js забирает записи уже отсортированными) */
+/* pages.js: тот же список для браузера (главная, блок «Другие направления», админка) */
+fs.writeFileSync("pages.js", "/* создаётся сборкой (node sync.js) из таблицы route_pages, руками не править */\nwindow.CFG.PAGES = " + JSON.stringify(PGS) + ";\n");
 /* [код, название, «в …» (вин.), «из …» (род.), флаг-эмодзи]; порядок — как на главной; для uk/en/pl названия берутся из I18N.CN */
 const CTRY = [["pl", "Польша", "Польшу", "Польши", "🇵🇱"], ["cz", "Чехия", "Чехию", "Чехии", "🇨🇿"], ["hu", "Венгрия", "Венгрию", "Венгрии", "🇭🇺"], ["at", "Австрия", "Австрию", "Австрии", "🇦🇹"], ["sk", "Словакия", "Словакию", "Словакии", "🇸🇰"], ["md", "Молдова", "Молдову", "Молдовы", "🇲🇩"], ["ro", "Румыния", "Румынию", "Румынии", "🇷🇴"], ["de", "Германия", "Германию", "Германии", "🇩🇪"]];
 /* страницы, которые показываются сразу; остальные маршруты страны лежат в раскрывающемся списке (в HTML они есть). Страна не указана — все маршруты сразу */
@@ -181,13 +184,11 @@ const OGL = {ru: "ru_RU", uk: "uk_UA", en: "en_US", pl: "pl_PL"};
 const ctryOf = p => p.route.replace(/^ua-|-ua$/, "");
 for (const p of PGS) { /* проверки: ссылки главной ведут только на существующие страницы и страны */
   if (!CTRY.some(c => c[0] === ctryOf(p))) throw new Error("build.js: страница " + p.href + " (route " + p.route + ") — страны нет в CTRY");
-  if (!ROUTES.some(r => r.file === p.href)) console.warn("ВНИМАНИЕ: " + p.href + " есть в config.js PAGES, но нет в ROUTES build.js (страница не будет собрана)");
 }
 /* страницы, выключенные в админке, пропадают и из списков «популярное» на главной */
 const OFF = new Set(DBR.filter(p => p.active === false).map(p => p.file));
 for (const k of Object.keys(POP)) POP[k] = POP[k].filter(h => !OFF.has(h));
 for (const h of [].concat(...Object.values(POP))) if (!PGS.some(p => p.href === h)) throw new Error("build.js: POP ссылается на отсутствующую страницу " + h);
-for (const r of ROUTES) if (!PGS.some(p => p.href === r.file)) console.warn("ВНИМАНИЕ: " + r.file + " собирается, но не указана в config.js PAGES — на главной ссылки не будет");
 const ix = fs.readFileSync("index.src.html", "utf8");
 for (const l of LANGS) {
   const d = I[l], pre = l === "ru" ? "" : "../";

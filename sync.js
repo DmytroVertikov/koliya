@@ -1,16 +1,11 @@
 /* Колія: node sync.js
    1) забирает из админки (Supabase): направления (таблица route_pages, все записи, включая выключенные, вместе с их текстами) → routes.db.json;
       тексты интерфейса (ui_texts) и станции с переводами (stations) → i18n.db.json
-   2) обновляет в config.js блок DB-PAGES: список страниц для главной и страниц направлений берётся из базы (записи базы заменяют одноимённые страницы
-      из PAGES, выключенные убираются, новые добавляются; порядок — по полю sort)
-   3) запускает сборку build.js
+   2) запускает сборку build.js
    Вместо прежнего «node build.js» теперь запускать «node sync.js». Если база недоступна, берётся прежний routes.db.json.
    Нужен Node 18+ (встроенный fetch). */
 const fs = require("fs");
-const BEGIN = "/*DB-PAGES:BEGIN", END = "/*DB-PAGES:END*/";
-const cfgSrc = fs.readFileSync("config.js", "utf8"), eol = cfgSrc.includes("\r\n") ? "\r\n" : "\n";
-const CFG = new Function("window", cfgSrc + "\n;return window.CFG")({});
-const esc = t => t.replace(/[*/]/g, "\\$&");
+const CFG = new Function("window", fs.readFileSync("config.js", "utf8") + "\n;return window.CFG")({});
 (async () => {
   let rows = null;
   try {
@@ -41,12 +36,6 @@ const esc = t => t.replace(/[*/]/g, "\\$&");
   } catch (e) {
     console.warn("sync.js: не удалось получить переводы из базы (" + e.message + "). Берётся прежний i18n.db.json.")
   }
-  const base = cfgSrc.replace(new RegExp("\\r?\\n?" + esc(BEGIN) + "[\\s\\S]*?" + esc(END) + "\\r?\\n?"), eol);
-  const act = rows.filter(p => p.active !== false), all = rows.map(p => p.file);
-  const pages = act.map(p => `    {href: ${JSON.stringify(p.file)}, title: ${JSON.stringify(p.from_name + " → " + p.to_name)}, route: ${JSON.stringify(p.route)}${(p.kind === "slice" || (p.extra || {}).slice) ? ", slice: true" : ""}}`);
-  const blk = BEGIN + " (создаётся командой node sync.js из админки, руками не править)*/" + eol +
-    (rows.length ? "window.CFG.PAGES = window.CFG.PAGES.filter(function (p) { return " + JSON.stringify(all) + ".indexOf(p.href) < 0 }).concat([" + eol + pages.join("," + eol) + eol + "]);" : "/* пока пусто */") + eol + END + eol;
-  fs.writeFileSync("config.js", base.replace(/\s*$/, eol) + blk);
-  console.log("sync.js: записей в базе: " + rows.length + ", показывается страниц: " + act.length);
+  console.log("sync.js: записей в базе: " + rows.length + ", показывается страниц: " + rows.filter(p => p.active !== false).length);
   require("./build.js")
 })();

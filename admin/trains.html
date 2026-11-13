@@ -322,6 +322,7 @@ async function load() {
     [ST, TR, SP, CN, LG, RT] = await Promise.all([
         dbAll("stations?order=name_ru"), dbAll("trains?order=number"), dbAll("train_stops?order=train_id,seq"),
         dbAll("connections?order=route_slug,sort"), dbAll("connection_legs?order=connection_id,pos"), db("GET", "routes?order=sort")]);
+    CFG.PAGES = CFG.pagesFromRows(await db("GET", "route_pages?order=sort,id").catch(() => [])); /* страницы маршрутов — из базы */
     index()
 }
 const findStation = name => {
