@@ -239,7 +239,7 @@
 <main class="wrap" id="app"></main>
 <div id="toast"></div>
 <script src="../config.js"></script>
-<script src="../i18n.js"></script>
+<script src="../dict/ru.js"></script>
 <script src="../common.js"></script>
 <script>
     const $ = s => document.querySelector(s);
@@ -415,7 +415,7 @@ ${list.map((o, i) => {
         const app = $("#app");
         app.innerHTML = `<section class="panel" style="margin-top:0"><h2 style="margin:0">Страницы маршрутов</h2>
 <label>Выберите страницу</label><select id="sel"><option value="">—</option>${pageOpts(cur)}<option value="__orph" ${cur === "__orph" ? "selected" : ""}>⚠ Варианты без страницы (проверка)</option></select>
-<p class="legend">Новая страница маршрута: добавьте её в <b>config.js</b> (PAGES), <b>build.js</b> (ROUTES) и <b>i18n.js</b> (тексты), затем выполните <b>node build.js</b>. После этого она появится в этом списке.</p></section>
+<p class="legend">Новая страница маршрута: добавьте её в <b>config.js</b> (PAGES), <b>build.js</b> (ROUTES), а тексты страницы введите во вкладке «Направления» админки поездов, затем выполните <b>node sync.js</b>. После этого она появится в этом списке.</p></section>
 <section class="panel"><details><summary><b>Страны и направления для главной</b></summary><div id="cs"></div><div id="rts"></div></details></section><div id="ed"></div>`;
         $("#sel").onchange = e => {
             const v = e.target.value;

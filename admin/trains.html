@@ -115,7 +115,7 @@
 <main class="wrap" id="app"></main>
 <div id="toast"></div>
 <script src="../config.js"></script>
-<script src="../i18n.js"></script>
+<script src="../dict/ru.js"></script>
 <script src="../common.js"></script>
 <script>
 (function () { /* своя область видимости: имена hm, LG и др. уже заняты в common.js */
@@ -344,9 +344,9 @@ async function start() {
     shell()
 }
 function shell() {
-    $("#app").innerHTML = `<div class="tabs">${[["trains", "Поезда"], ["conns", "Варианты"], ["dirs", "Направления"], ["stations", "Станции"]].map(([k, v]) => `<button data-t="${k}" class="${TAB === k ? "on" : ""}">${v}</button>`).join("")}</div><div id="view"></div>`;
+    $("#app").innerHTML = `<div class="tabs">${[["trains", "Поезда"], ["conns", "Варианты"], ["dirs", "Направления"], ["stations", "Станции"], ["texts", "Тексты"]].map(([k, v]) => `<button data-t="${k}" class="${TAB === k ? "on" : ""}">${v}</button>`).join("")}</div><div id="view"></div>`;
     document.querySelectorAll(".tabs button").forEach(b => b.onclick = () => { TAB = b.dataset.t; shell() });
-    ({trains: viewTrains, conns: viewConns, dirs: viewDirs, stations: viewStations})[TAB]()
+    ({trains: viewTrains, conns: viewConns, dirs: viewDirs, stations: viewStations, texts: viewTexts})[TAB]()
 }
 
 /* ================= направления (страницы маршрутов сайта) ================= */
@@ -365,7 +365,7 @@ const DIR_P = [
     ["split", "pair", "Разбивка вариантов по пересадке: две станции"], ["xs", "pair", "Один блок вариантов: две станции"], ["hxs", "pair", "Заголовок блока: две станции пересадки"],
     ["hb1", "pair", "Заголовок блока 1 (от — до)"], ["hb2", "pair", "Заголовок блока 2 (от — до)"], ["leadx", "text", "Станция для подзаголовка при пересадке (leadx)"], ["hurl", "text", "Ссылка на сайт перевозчика"]
 ];
-const DIR_TXT = [["title", "Заголовок (title)"], ["desc", "Описание (description)"], ["h1", "Заголовок H1"], ["lead", "Подзаголовок"], ["all", "Заголовок «все варианты»"], ["more", "Заголовок «ещё варианты»"]];
+const DIR_TXT = [["title", "Заголовок (title)"], ["desc", "Описание (description)"], ["h1", "Заголовок H1"], ["lead", "Подзаголовок"], ["all", "Заголовок «все варианты»"], ["more", "Заголовок «ещё варианты»"], ["leadm", "Подзаголовок при пересадке на станции (leadm)"]];
 const DIR_LANGS = [["ru", "Русский"], ["uk", "Українська"], ["en", "English"], ["pl", "Polski"]];
 let RP = [], EDIT = null, DQ = "";
 async function viewDirs() {
@@ -418,7 +418,7 @@ function dirEditorHtml(r) {
         <div class="frow"><div style="flex:1 1 100%"><label>Прочие параметры (JSON; пусто, если не нужны)</label><textarea id="e_json" rows="${Object.keys(rest).length ? 4 : 2}" style="width:100%;font-family:monospace">${Object.keys(rest).length ? esc(JSON.stringify(rest, null, 1)) : ""}</textarea></div></div>
         <details><summary class="muted">Переводы городов</summary>
         ${[["from", r.from_name], ["to", r.to_name]].map(([w, n]) => `<div class="frow"><span class="muted" style="align-self:center;width:130px">${esc(n)}</span>${[["uk", "name_uk", "Українська"], ["en", "name_en", "English"], ["pl", "name_pl", "Polski"]].map(([k, c, ph]) => `<input type="text" data-nm="${w}.${k}" placeholder="${ph}" value="${esc(nmv(n, k, c))}" style="width:170px">`).join("")}</div>`).join("")}</details>
-        <details><summary class="muted">Тексты страницы (пусто — берётся из i18n.js или собирается автоматически; можно использовать {FROM} и {TO})</summary>
+        <details><summary class="muted">Тексты страницы (пусто — для новых страниц собирается автоматически; можно использовать {FROM} и {TO})</summary>
         ${DIR_LANGS.map(([l, ln]) => `<details style="margin-left:14px"><summary class="muted">${ln}</summary>${DIR_TXT.map(([k, kl]) => `<div class="frow"><div style="flex:1 1 100%"><label>${esc(kl)}</label><textarea rows="${k === "lead" ? 3 : 1}" data-tx="${l}.${k}" style="width:100%">${esc((tx[l] || {})[k] || "")}</textarea></div></div>`).join("")}</details>`).join("")}</details>
         <div id="e_err"></div>
         <p><button class="pri" id="e_save">Сохранить</button> <button id="e_cancel">Отмена</button></p></section>`
@@ -532,13 +532,16 @@ function viewStations() {
         <td><input type="text" data-f="name_uk" value="${esc(s.name_uk)}"></td>
         <td><input type="text" data-f="name_en" value="${esc(s.name_en)}"></td>
         <td><input type="text" data-f="name_pl" value="${esc(s.name_pl)}"></td>
+        <td><input type="text" data-f="in_ru" value="${esc(s.in_ru)}" placeholder="в Хелме"></td>
+        <td><input type="text" data-f="in_uk" value="${esc(s.in_uk)}" placeholder="у Хелмі"></td>
+        <td><input type="text" data-f="in_pl" value="${esc(s.in_pl)}" placeholder="w Chełmie"></td>
         <td><select data-f="tz_hours"><option value="1" ${s.tz_hours == 1 ? "selected" : ""}>UTC+1</option><option value="2" ${s.tz_hours == 2 ? "selected" : ""}>UTC+2</option></select></td>
         <td class="x"><button data-a="save">Сохранить</button> ${s.id ? '<button data-a="del">✕</button>' : ""}</td></tr>`;
     v.innerHTML = `<section class="panel"><h2>Станции <span class="muted">(${ST.length})</span></h2>
-        <p class="muted">Названия на других языках сейчас берутся из i18n.js; если поле пустое, сайт покажет русское название. «в Хелме» и подобные формы пока остаются в i18n.js.</p>
+        <p class="muted">Названия на других языках и формы «в Хелме» / «у Хелмі» / «w Chełmie» (нужны для заголовков вроде «С пересадкой в Хелме»). Если поле пустое, сайт покажет русское название. Изменения попадают на сайт после <b>node sync.js</b>.</p>
         <div class="frow"><input type="text" id="sf" placeholder="Поиск станции" style="width:240px"><label><input type="checkbox" id="nt"> без перевода</label></div>
         <div id="se"></div>
-        <table class="g"><thead><tr><th>Русское</th><th>Українська</th><th>English</th><th>Polski</th><th>Пояс</th><th></th></tr></thead><tbody id="stb"></tbody></table></section>`;
+        <table class="g"><thead><tr><th>Русское</th><th>Українська</th><th>English</th><th>Polski</th><th>в … (ru)</th><th>у … (uk)</th><th>w … (pl)</th><th>Пояс</th><th></th></tr></thead><tbody id="stb"></tbody></table></section>`;
     const draw = () => {
         const q = $("#sf").value.trim().toLowerCase(), nt = $("#nt").checked;
         const list = ST.filter(s => (!q || s.name_ru.toLowerCase().includes(q)) && (!nt || !s.name_uk || !s.name_en || !s.name_pl));
@@ -548,7 +551,7 @@ function viewStations() {
     $("#stb").onclick = async e => {
         const b = e.target.closest("button"); if (!b) return;
         const tr = b.closest("tr"), id = tr.dataset.id, g = f => tr.querySelector(`[data-f=${f}]`).value.trim() || null;
-        const body = {name_ru: g("name_ru"), name_uk: g("name_uk"), name_en: g("name_en"), name_pl: g("name_pl"), tz_hours: +g("tz_hours")};
+        const body = {name_ru: g("name_ru"), name_uk: g("name_uk"), name_en: g("name_en"), name_pl: g("name_pl"), in_ru: g("in_ru"), in_uk: g("in_uk"), in_pl: g("in_pl"), tz_hours: +g("tz_hours")};
         $("#se").innerHTML = "";
         try {
             if (b.dataset.a === "save") {
@@ -560,6 +563,53 @@ function viewStations() {
             }
             await load(); toast("Готово"); viewStations()
         } catch (er) { showErr($("#se"), er.message.includes("violates foreign key") ? "Станция используется в расписании поездов, сначала уберите её оттуда" : er) }
+    }
+}
+
+/* ================= тексты интерфейса (таблица ui_texts) ================= */
+let TX = [];
+async function viewTexts() {
+    const v = $("#view");
+    v.innerHTML = '<section class="panel"><p class="muted">Загрузка…</p></section>';
+    try { TX = await dbAll("ui_texts?order=key") } catch (e) {
+        v.innerHTML = `<section class="panel"><h2>Тексты</h2><div class="errbox">${esc(e.message)}</div><p>Похоже, таблица <b>ui_texts</b> ещё не создана. Выполните файл <code>i18n.sql</code> в Supabase → SQL Editor и обновите страницу.</p></section>`;
+        return
+    }
+    const grp = k => k.split(".")[0], groups = [...new Set(TX.map(x => grp(x.key)))].sort();
+    const row = x => `<tr data-key="${esc(x.key || "")}">
+        <td><input type="text" data-f="key" value="${esc(x.key)}" ${x.key ? "readonly" : 'placeholder="новый.ключ"'} style="width:150px"></td>
+        ${["ru", "uk", "en", "pl"].map(l => `<td><textarea data-f="${l}" rows="${Math.min(6, Math.max(1, Math.ceil(String(x[l] || "").length / 34)))}" style="width:100%;min-width:190px">${esc(x[l])}</textarea></td>`).join("")}
+        <td class="x"><button data-a="save">Сохранить</button> ${x.key ? '<button data-a="del">✕</button>' : ""}</td></tr>`;
+    v.innerHTML = `<section class="panel"><h2>Тексты сайта <span class="muted">(${TX.length})</span></h2>
+        <p class="muted">Подписи, подсказки, шаги покупки и подвал на всех языках. Русский — основной: если другой язык пустой, на сайте будет русский текст. В текстах работают подстановки вида <code>{n}</code>, <code>{FROM}</code>, <code>{uz}</code> и HTML-теги, как в исходных. Ключи <code>cn.xx</code> и <code>cn.xx.gen</code> — названия стран (<code>.gen</code> — родительный падеж). Тексты страниц маршрутов лежат во вкладке «Направления», названия станций — во вкладке «Станции». Изменения попадают на сайт после <b>node sync.js</b>.</p>
+        <div class="frow"><input type="text" id="txf" placeholder="Поиск по ключу или тексту" style="width:260px">
+        <select id="txg"><option value="">все группы</option>${groups.map(g => `<option>${esc(g)}</option>`).join("")}</select>
+        <label><input type="checkbox" id="txn"> без перевода</label></div>
+        <div id="txe"></div>
+        <table class="g"><thead><tr><th>Ключ</th><th>Русский</th><th>Українська</th><th>English</th><th>Polski</th><th></th></tr></thead><tbody id="txb"></tbody></table></section>`;
+    const draw = () => {
+        const q = $("#txf").value.trim().toLowerCase(), g = $("#txg").value, nt = $("#txn").checked;
+        const list = TX.filter(x => (!g || grp(x.key) === g) && (!nt || !x.uk || !x.en || !x.pl) && (!q || [x.key, x.ru, x.uk, x.en, x.pl].some(t => String(t || "").toLowerCase().includes(q))));
+        $("#txb").innerHTML = row({key: "", ru: "", uk: "", en: "", pl: ""}) + list.map(row).join("")
+    };
+    draw(); $("#txf").oninput = draw; $("#txg").onchange = draw; $("#txn").onchange = draw;
+    $("#txb").onclick = async e => {
+        const b = e.target.closest("button"); if (!b) return;
+        const tr = b.closest("tr"), g = f => tr.querySelector(`[data-f=${f}]`).value.trim(), key = g("key");
+        $("#txe").innerHTML = "";
+        try {
+            if (!key) throw new Error("Укажите ключ");
+            if (b.dataset.a === "save") {
+                if (!tr.dataset.key && TX.some(x => x.key === key)) throw new Error("Такой ключ уже есть");
+                if (!g("ru")) throw new Error("Заполните русский текст");
+                await db("POST", "ui_texts?on_conflict=key", {key, ru: g("ru"), uk: g("uk"), en: g("en"), pl: g("pl"), updated_at: new Date().toISOString()}, "resolution=merge-duplicates,return=minimal")
+            } else {
+                if (!confirm("Удалить текст «" + key + "»? Если сайт его использует, на странице появится сам ключ.")) return;
+                await db("DELETE", "ui_texts?key=eq." + encodeURIComponent(key))
+            }
+            TX = await dbAll("ui_texts?order=key"); toast("Готово"); const st = {q: $("#txf").value, g: $("#txg").value, n: $("#txn").checked};
+            viewTexts().then(() => { $("#txf").value = st.q; $("#txg").value = st.g; $("#txn").checked = st.n; $("#txf").dispatchEvent(new Event("input")) })
+        } catch (er) { showErr($("#txe"), er) }
     }
 }
 

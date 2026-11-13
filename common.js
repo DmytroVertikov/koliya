@@ -17,7 +17,7 @@ const safeUrl = u => {
     return /^https?:\/\//i.test(u) ? u : "#"
 };
 
-/* i18n: язык страницы задаёт window.LANG (ru по умолчанию), словари лежат в i18n.js (подключать до common.js) */
+/* i18n: язык страницы задаёт window.LANG (ru по умолчанию), словари лежат в dict/<язык>.js, их создаёт build.js из базы (подключать до common.js) */
 const LG = window.LANG || "ru", TR = (window.I18N && I18N[LG]) || {};
 const t = (k, v) => String(TR[k] != null ? TR[k] : (window.I18N && I18N.ru && I18N.ru[k] != null ? I18N.ru[k] : k)).replace(/\{(\w+)\}/g, (m, x) => v && v[x] != null ? v[x] : m);
 const stn = n => {

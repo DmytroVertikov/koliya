@@ -1,8 +1,32 @@
-/* Сборка языковых версий: node build.js
-   route.src.html + i18n.js → kyiv-warsaw.html, warsaw-kyiv.html (ru, в корне) и uk/ en/ pl/ + sitemap.xml
-   Тексты правятся только в i18n.js и route.src.html; готовые .html руками не править. */
-const fs = require("fs"), I = require("./i18n.js");
+/* Сборка языковых версий: node build.js (обычно через node sync.js, который сначала обновляет данные из базы)
+   route.src.html + переводы из базы → kyiv-warsaw.html, warsaw-kyiv.html (ru, в корне) и uk/ en/ pl/ + sitemap.xml + dict/<язык>.js
+   Переводы правятся в админке (вкладки «Тексты», «Станции», «Направления»); готовые .html руками не править.
+   Данные из базы лежат в снимках i18n.db.json (тексты интерфейса, станции) и routes.db.json (направления и их тексты). */
+const fs = require("fs");
 const SITE = "https://dmytrovertikov.github.io/koliya/", LANGS = ["ru", "uk", "en", "pl"];
+/* переводы: I.ru/uk/en/pl — тексты интерфейса, I.ST — станции [uk, en, pl, «в…» ru, «у…» uk, «w…» pl], I.CN — страны. Собираются из снимка базы */
+const I = (() => {
+  let db; try { db = JSON.parse(fs.readFileSync("i18n.db.json", "utf8")) } catch (e) { throw new Error("build.js: нет i18n.db.json. Выполните node sync.js (или i18n.sql в Supabase, потом node sync.js).") }
+  const I = {ST: {}, CN: {}};
+  for (const l of LANGS) I[l] = {};
+  for (const r of db.ui || []) {
+    const c = r.key.match(/^cn\.([a-z]{2})(\.gen)?$/);
+    for (const l of LANGS) {
+      if (!r[l]) continue; /* пустой перевод: сайт покажет русский текст */
+      if (c) { if (l === "ru") continue; const o = (I.CN[c[1]] = I.CN[c[1]] || {}); (o[l] = o[l] || [])[c[2] ? 1 : 0] = r[l] }
+      else I[l][r.key] = r[l]
+    }
+  }
+  for (const s of db.stations || []) {
+    const a = [s.name_uk || "", s.name_en || "", s.name_pl || "", s.in_ru || "", s.in_uk || "", s.in_pl || ""];
+    for (const n of [s.name_ru].concat(s.aliases || [])) if (!(n in I.ST)) I.ST[n] = a
+  }
+  return I
+})();
+/* что нужно браузеру: тексты интерфейса и станции (без текстов страниц маршрутов) */
+const CLIENT = JSON.parse(JSON.stringify(I));
+/* нет перевода — подставляется русский текст */
+for (const l of LANGS.slice(1)) { const miss = Object.keys(I.ru).filter(k => !I[l][k]); for (const k of miss) I[l][k] = I.ru[k]; if (miss.length) console.warn("ВНИМАНИЕ: " + l + ": нет перевода для " + miss.length + " ключей (показан русский): " + miss.slice(0, 8).join(", ") + (miss.length > 8 ? "…" : "")) }
 const ROUTES = [
   {id: "kw", file: "kyiv-warsaw.html", FROM: "Киев", TO: "Варшава", BACK: "pl-ua", hash: "ua-pl", rev: "warsaw-kyiv.html", uz: ["Киев", "Хелм"], pkp: ["Хелм", "Варшава"], t3: "buy.t3out"},
   {id: "wk", file: "warsaw-kyiv.html", FROM: "Варшава", TO: "Киев", BACK: "ua-pl", hash: "pl-ua", rev: "kyiv-warsaw.html", uz: ["Хелм", "Киев"], pkp: ["Варшава", "Хелм"], t3: "buy.t3in"},
@@ -76,8 +100,10 @@ const ROUTES = [
    галочкой «показывать», убирает страницу из сборки. Остальные записи добавляются как новые страницы.
    kind: custom — встроенная страница: все параметры ROUTES лежат в extra; slice — прямые поезда из других вариантов (как Киев → Хелм);
    direct — прямые поезда, варианты вносятся вручную; transfer — с пересадкой на станции x. extra переопределяет любые поля ROUTES.
-   texts — свои тексты страницы по языкам {ru: {title, desc, h1, lead, all, more}, ...}, поверх i18n.js. names — переводы городов, если их нет в словаре станций. */
+   texts — тексты страницы по языкам {ru: {title, desc, h1, lead, all, more, leadm}, ...}. names — переводы городов, если их нет в словаре станций. */
 const DBR = (() => { try { return JSON.parse(fs.readFileSync("routes.db.json", "utf8")) } catch (e) { return [] } })();
+/* тексты страниц лежат в route_pages.texts; кладём их в словари под ключами <id>.title, <id>.lead… (на них ссылаются и страницы вида «Киев → Хелм» через like) */
+for (const p of DBR) for (const l of LANGS) for (const [k, v] of Object.entries((p.texts || {})[l] || {})) if (v) I[l][p.id + "." + k] = v;
 for (const p of DBR) {
   const k = ROUTES.findIndex(x => x.id === p.id);
   if (p.active === false) { if (k >= 0) ROUTES.splice(k, 1); continue }
@@ -98,17 +124,10 @@ for (const p of DBR) {
   for (const [n, t] of Object.entries(p.names || {})) if (!I.ST[n]) I.ST[n] = [t.uk || "", t.en || "", t.pl || ""]
 }
 
-/* проверки: повторы в ROUTES и повторяющиеся ключи в i18n.js (при повторе побеждает ПОСЛЕДНИЙ, из-за этого старые тексты могут «возвращаться») */
+/* проверка: повторы в ROUTES */
 {
   const seen = {};
   for (const r of ROUTES) for (const k of ["id", "file"]) { if (seen[k + r[k]]) throw new Error("build.js: в ROUTES повтор " + k + " = " + r[k] + ". Оставьте одну запись."); seen[k + r[k]] = 1 }
-  const src = fs.readFileSync("i18n.js", "utf8");
-  for (const l of LANGS) {
-    const m = src.match(new RegExp("\\n" + l + ":\\{([\\s\\S]*?)\\n\\}")), cnt = {};
-    for (const k of (m ? m[1].match(/"[^"\n]+"(?=:)/g) || [] : [])) cnt[k] = (cnt[k] || 0) + 1;
-    const dup = Object.keys(cnt).filter(k => cnt[k] > 1);
-    if (dup.length) console.warn("ВНИМАНИЕ i18n.js, блок " + l + ": повторяющиеся ключи (действует последний): " + dup.join(", "));
-  }
 }
 const tpl0 = fs.readFileSync("route.src.html", "utf8");
 const VIA = {ru: "через", uk: "через", en: "via", pl: "przez"};
@@ -119,7 +138,7 @@ const fill = (s, v) => s.replace(/\{(\w+)\}/g, (m, k) => k in v ? v[k] : m);
 const path = (l, f) => (l === "ru" ? "" : l + "/") + f;
 const VER = Date.now().toString(36), urls = [SITE];
 const S3T = {ru: "Выберите подходящий поезд и оплатите билет банковской картой. Электронный билет появится в приложении. При посадке предъявите его вместе с паспортом.", uk: "Оберіть відповідний поїзд і сплатіть квиток банківською карткою. Електронний квиток з’явиться в застосунку. Під час посадки пред’явіть його разом із паспортом.", en: "Choose a suitable train and pay by bank card. The e-ticket will appear in the app. Show it with your passport when boarding.", pl: "Wybierz odpowiedni pociąg i zapłać kartą. E-bilet pojawi się w aplikacji. Przy wsiadaniu okaż go razem z paszportem."}; /* шаг 2 покупки для Киев ↔ Хелм: там несколько поездов, на Днепр / Харьков ↔ Хелм поезд один, у них «Выберите место» (buy.d.s3z) */
-/* тексты страниц slice-маршрутов (Киев → Хелм и т.п.) собираются здесь, в i18n.js их добавлять не нужно */
+/* тексты страниц slice-маршрутов (Киев → Хелм и т.п.) собираются здесь, отдельно вносить их в админке не нужно */
 const SLICE_TXT = {
   ru: (a, b) => ({title: `${a} → ${b} поездом | Колія`, desc: `Поезда ${a} — ${b} без пересадок: время, станции, длительность.`, h1: `Поездом: ${a} → ${b}`, lead: `Расписание поездов ${a} — ${b}: прямые поезда без пересадок. Время в пути, остановки и информация о покупке билетов.`}),
   uk: (a, b) => ({title: `${a} → ${b} потягом | Колія`, desc: `Поїзди ${a} — ${b} без пересадок: час, станції, тривалість.`, h1: `Потягом: ${a} → ${b}`, lead: `Розклад поїздів ${a} — ${b}: прямі поїзди без пересадок. Час у дорозі, зупинки та інформація про купівлю квитків.`}),
@@ -141,7 +160,6 @@ for (const r of ROUTES) for (const l of LANGS) {
   v.langs = LANGS.map(x => `<a href="${pre + path(x, r.file)}" hreflang="${x}" lang="${x}"${x === l ? ' class="on"' : ""}>${x.toUpperCase()}</a>`).join("");
   d["buy.d.s3t"] = S3T[l];
   if (r.slice || r.autotxt) { const tx = (r.xtxt ? TRANSFER_TXT : SLICE_TXT)[l](st(r.FROM, l), st(r.TO, l), r.x ? xin(r.x, l) : ""); for (const k in tx) if (!d[r.id + "." + k]) d[r.id + "." + k] = tx[k]; for (const k of ["all", "more"]) if (!d[r.id + "." + k]) d[r.id + "." + k] = d[r.like + "." + k] }
-  if (r.texts && r.texts[l]) for (const k in r.texts[l]) if (r.texts[l][k]) d[r.id + "." + k] = r.texts[l][k]; /* свои тексты из админки */
   for (const k of ["title", "desc", "h1", "lead", "all", "more"]) v["r_" + k] = fill(d[r.id + "." + k], v);
   v["buy.t3"] = fill(d[r.t3 || "buy.t3out"], v); v["buy.t.s1x"] = fill(d[r.s1 || (r.one ? "buy.t.s1one" : "buy.t.s1")], v);
   const X = r.x || "Хелм", direct = r.direct !== false, plat = r.plat !== undefined ? r.plat : X === "Хелм";
@@ -272,6 +290,13 @@ for (const l of LANGS) {
   if (l !== "ru") fs.mkdirSync(l, {recursive: true});
   fs.writeFileSync(path(l, "index.html"), out);
   if (l !== "ru") urls.push(SITE + path(l, ""));
+}
+/* словари для браузера: dict/<язык>.js = русский (запасной) + язык страницы + станции + страны */
+fs.mkdirSync("dict", {recursive: true});
+for (const l of LANGS) {
+  const d = {ru: CLIENT.ru}; if (l !== "ru") d[l] = CLIENT[l];
+  d.ST = CLIENT.ST; d.CN = CLIENT.CN;
+  fs.writeFileSync("dict/" + l + ".js", "/* создаётся командой node sync.js (build.js) из базы, руками не править */\nvar I18N = " + JSON.stringify(d) + ";\n")
 }
 fs.writeFileSync("sitemap.xml", `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map(u => `<url><loc>${u}</loc></url>`).join("\n")}\n</urlset>\n`);
 console.log("Готово:", urls.length - 1, "страниц (+ главные)");
