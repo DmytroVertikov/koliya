@@ -1,0 +1,2064 @@
+[
+  {
+    "id": "kw",
+    "file": "kyiv-warsaw.html",
+    "from_name": "Киев",
+    "to_name": "Варшава",
+    "route": "ua-pl",
+    "back": "pl-ua",
+    "rev": "warsaw-kyiv.html",
+    "kind": "custom",
+    "x": null,
+    "border": null,
+    "like_id": "kw",
+    "single": false,
+    "names": {},
+    "extra": {
+      "t3": "buy.t3out",
+      "uz": [
+        "Киев",
+        "Хелм"
+      ],
+      "pkp": [
+        "Хелм",
+        "Варшава"
+      ]
+    },
+    "sort": 0,
+    "active": true,
+    "created_at": "2026-11-13T12:44:27.684265+00:00",
+    "texts": {}
+  },
+  {
+    "id": "wk",
+    "file": "warsaw-kyiv.html",
+    "from_name": "Варшава",
+    "to_name": "Киев",
+    "route": "pl-ua",
+    "back": "ua-pl",
+    "rev": "kyiv-warsaw.html",
+    "kind": "custom",
+    "x": null,
+    "border": null,
+    "like_id": "wk",
+    "single": false,
+    "names": {},
+    "extra": {
+      "t3": "buy.t3in",
+      "uz": [
+        "Хелм",
+        "Киев"
+      ],
+      "pkp": [
+        "Варшава",
+        "Хелм"
+      ]
+    },
+    "sort": 10,
+    "active": true,
+    "created_at": "2026-11-13T12:44:27.684265+00:00",
+    "texts": {}
+  },
+  {
+    "id": "kyiv_krakow",
+    "file": "kyiv-krakow.html",
+    "from_name": "Киев",
+    "to_name": "Краков",
+    "route": "ua-pl",
+    "back": "pl-ua",
+    "rev": "krakow-kyiv.html",
+    "kind": "custom",
+    "x": null,
+    "border": null,
+    "like_id": "kw",
+    "single": false,
+    "names": {},
+    "extra": {
+      "x": "Перемышль",
+      "t3": "buy.t3out",
+      "uz": [
+        "Киев",
+        "Перемышль"
+      ],
+      "pkp": [
+        "Перемышль",
+        "Краков"
+      ],
+      "border": "after",
+      "direct": false
+    },
+    "sort": 20,
+    "active": true,
+    "created_at": "2026-11-13T12:44:27.684265+00:00",
+    "texts": {}
+  },
+  {
+    "id": "krakow_kyiv",
+    "file": "krakow-kyiv.html",
+    "from_name": "Краков",
+    "to_name": "Киев",
+    "route": "pl-ua",
+    "back": "ua-pl",
+    "rev": "kyiv-krakow.html",
+    "kind": "custom",
+    "x": null,
+    "border": null,
+    "like_id": "wk",
+    "single": false,
+    "names": {},
+    "extra": {
+      "x": "Перемышль",
+      "t3": "buy.t3in",
+      "uz": [
+        "Перемышль",
+        "Киев"
+      ],
+      "pkp": [
+        "Краков",
+        "Перемышль"
+      ],
+      "border": "before",
+      "direct": false
+    },
+    "sort": 30,
+    "active": true,
+    "created_at": "2026-11-13T12:44:27.684265+00:00",
+    "texts": {}
+  },
+  {
+    "id": "kyiv_khelm",
+    "file": "kyiv-khelm.html",
+    "from_name": "Киев",
+    "to_name": "Хелм",
+    "route": "ua-pl",
+    "back": "pl-ua",
+    "rev": "khelm-kyiv.html",
+    "kind": "custom",
+    "x": null,
+    "border": null,
+    "like_id": "kw",
+    "single": false,
+    "names": {},
+    "extra": {
+      "ds3": "buy.d.s3t",
+      "like": "kw",
+      "coach": false,
+      "dOnly": true,
+      "slice": true
+    },
+    "sort": 40,
+    "active": true,
+    "created_at": "2026-11-13T12:44:27.684265+00:00",
+    "texts": {}
+  },
+  {
+    "id": "khelm_kyiv",
+    "file": "khelm-kyiv.html",
+    "from_name": "Хелм",
+    "to_name": "Киев",
+    "route": "pl-ua",
+    "back": "ua-pl",
+    "rev": "kyiv-khelm.html",
+    "kind": "custom",
+    "x": null,
+    "border": null,
+    "like_id": "wk",
+    "single": false,
+    "names": {},
+    "extra": {
+      "ds3": "buy.d.s3t",
+      "like": "wk",
+      "coach": false,
+      "dOnly": true,
+      "slice": true
+    },
+    "sort": 50,
+    "active": true,
+    "created_at": "2026-11-13T12:44:27.684265+00:00",
+    "texts": {}
+  },
+  {
+    "id": "kyiv_przemysl",
+    "file": "kyiv-przemysl.html",
+    "from_name": "Киев",
+    "to_name": "Перемышль",
+    "route": "ua-pl",
+    "back": "pl-ua",
+    "rev": "przemysl-kyiv.html",
+    "kind": "custom",
+    "x": null,
+    "border": null,
+    "like_id": "kw",
+    "single": false,
+    "names": {},
+    "extra": {
+      "ds3": "buy.d.s3t",
+      "like": "kw",
+      "coach": false,
+      "dOnly": true,
+      "slice": true
+    },
+    "sort": 60,
+    "active": true,
+    "created_at": "2026-11-13T12:44:27.684265+00:00",
+    "texts": {}
+  },
+  {
+    "id": "przemysl_kyiv",
+    "file": "przemysl-kyiv.html",
+    "from_name": "Перемышль",
+    "to_name": "Киев",
+    "route": "pl-ua",
+    "back": "ua-pl",
+    "rev": "kyiv-przemysl.html",
+    "kind": "custom",
+    "x": null,
+    "border": null,
+    "like_id": "wk",
+    "single": false,
+    "names": {},
+    "extra": {
+      "ds3": "buy.d.s3t",
+      "like": "wk",
+      "coach": false,
+      "dOnly": true,
+      "slice": true
+    },
+    "sort": 70,
+    "active": true,
+    "created_at": "2026-11-13T12:44:27.684265+00:00",
+    "texts": {}
+  },
+  {
+    "id": "dnipro_warsaw",
+    "file": "dnipro-warsaw.html",
+    "from_name": "Днепр",
+    "to_name": "Варшава",
+    "route": "ua-pl",
+    "back": "pl-ua",
+    "rev": "warsaw-dnipro.html",
+    "kind": "custom",
+    "x": null,
+    "border": null,
+    "like_id": "kw",
+    "single": false,
+    "names": {},
+    "extra": {
+      "x": "Хелм",
+      "t3": "buy.t3out",
+      "uz": [
+        "Днепр",
+        "Хелм"
+      ],
+      "one": true,
+      "pkp": [
+        "Хелм",
+        "Варшава"
+      ],
+      "plat": false,
+      "direct": false
+    },
+    "sort": 80,
+    "active": true,
+    "created_at": "2026-11-13T12:44:27.684265+00:00",
+    "texts": {}
+  },
+  {
+    "id": "warsaw_dnipro",
+    "file": "warsaw-dnipro.html",
+    "from_name": "Варшава",
+    "to_name": "Днепр",
+    "route": "pl-ua",
+    "back": "ua-pl",
+    "rev": "dnipro-warsaw.html",
+    "kind": "custom",
+    "x": null,
+    "border": null,
+    "like_id": "wk",
+    "single": false,
+    "names": {},
+    "extra": {
+      "x": "Хелм",
+      "t3": "buy.t3in",
+      "uz": [
+        "Хелм",
+        "Днепр"
+      ],
+      "one": true,
+      "pkp": [
+        "Варшава",
+        "Хелм"
+      ],
+      "plat": false,
+      "direct": false
+    },
+    "sort": 90,
+    "active": true,
+    "created_at": "2026-11-13T12:44:27.684265+00:00",
+    "texts": {}
+  },
+  {
+    "id": "dnipro_krakow",
+    "file": "dnipro-krakow.html",
+    "from_name": "Днепр",
+    "to_name": "Краков",
+    "route": "ua-pl",
+    "back": "pl-ua",
+    "rev": "krakow-dnipro.html",
+    "kind": "custom",
+    "x": null,
+    "border": null,
+    "like_id": "kw",
+    "single": false,
+    "names": {},
+    "extra": {
+      "x": "Перемышль",
+      "t3": "buy.t3out",
+      "uz": [
+        "Днепр",
+        "Перемышль"
+      ],
+      "one": true,
+      "pkp": [
+        "Перемышль",
+        "Краков"
+      ],
+      "border": "after",
+      "direct": false
+    },
+    "sort": 100,
+    "active": true,
+    "created_at": "2026-11-13T12:44:27.684265+00:00",
+    "texts": {}
+  },
+  {
+    "id": "krakow_dnipro",
+    "file": "krakow-dnipro.html",
+    "from_name": "Краков",
+    "to_name": "Днепр",
+    "route": "pl-ua",
+    "back": "ua-pl",
+    "rev": "dnipro-krakow.html",
+    "kind": "custom",
+    "x": null,
+    "border": null,
+    "like_id": "wk",
+    "single": false,
+    "names": {},
+    "extra": {
+      "x": "Перемышль",
+      "t3": "buy.t3in",
+      "uz": [
+        "Перемышль",
+        "Днепр"
+      ],
+      "one": true,
+      "pkp": [
+        "Краков",
+        "Перемышль"
+      ],
+      "border": "before",
+      "direct": false
+    },
+    "sort": 110,
+    "active": true,
+    "created_at": "2026-11-13T12:44:27.684265+00:00",
+    "texts": {}
+  },
+  {
+    "id": "dnipro_khelm",
+    "file": "dnipro-khelm.html",
+    "from_name": "Днепр",
+    "to_name": "Хелм",
+    "route": "ua-pl",
+    "back": "pl-ua",
+    "rev": "khelm-dnipro.html",
+    "kind": "custom",
+    "x": null,
+    "border": null,
+    "like_id": "kw",
+    "single": false,
+    "names": {},
+    "extra": {
+      "ds3": "buy.d.s3z",
+      "like": "kw",
+      "coach": false,
+      "dOnly": true,
+      "slice": true
+    },
+    "sort": 120,
+    "active": true,
+    "created_at": "2026-11-13T12:44:27.684265+00:00",
+    "texts": {}
+  },
+  {
+    "id": "khelm_dnipro",
+    "file": "khelm-dnipro.html",
+    "from_name": "Хелм",
+    "to_name": "Днепр",
+    "route": "pl-ua",
+    "back": "ua-pl",
+    "rev": "dnipro-khelm.html",
+    "kind": "custom",
+    "x": null,
+    "border": null,
+    "like_id": "wk",
+    "single": false,
+    "names": {},
+    "extra": {
+      "ds3": "buy.d.s3z",
+      "like": "wk",
+      "coach": false,
+      "dOnly": true,
+      "slice": true
+    },
+    "sort": 130,
+    "active": true,
+    "created_at": "2026-11-13T12:44:27.684265+00:00",
+    "texts": {}
+  },
+  {
+    "id": "dnipro_przemysl",
+    "file": "dnipro-przemysl.html",
+    "from_name": "Днепр",
+    "to_name": "Перемышль",
+    "route": "ua-pl",
+    "back": "pl-ua",
+    "rev": "przemysl-dnipro.html",
+    "kind": "custom",
+    "x": null,
+    "border": null,
+    "like_id": "kw",
+    "single": false,
+    "names": {},
+    "extra": {
+      "ds3": "buy.d.s3z",
+      "like": "kw",
+      "coach": false,
+      "dOnly": true,
+      "slice": true
+    },
+    "sort": 140,
+    "active": true,
+    "created_at": "2026-11-13T12:44:27.684265+00:00",
+    "texts": {}
+  },
+  {
+    "id": "przemysl_dnipro",
+    "file": "przemysl-dnipro.html",
+    "from_name": "Перемышль",
+    "to_name": "Днепр",
+    "route": "pl-ua",
+    "back": "ua-pl",
+    "rev": "dnipro-przemysl.html",
+    "kind": "custom",
+    "x": null,
+    "border": null,
+    "like_id": "wk",
+    "single": false,
+    "names": {},
+    "extra": {
+      "ds3": "buy.d.s3z",
+      "like": "wk",
+      "coach": false,
+      "dOnly": true,
+      "slice": true
+    },
+    "sort": 150,
+    "active": true,
+    "created_at": "2026-11-13T12:44:27.684265+00:00",
+    "texts": {}
+  },
+  {
+    "id": "kharkiv_warsaw",
+    "file": "kharkiv-warsaw.html",
+    "from_name": "Харьков",
+    "to_name": "Варшава",
+    "route": "ua-pl",
+    "back": "pl-ua",
+    "rev": "warsaw-kharkiv.html",
+    "kind": "custom",
+    "x": null,
+    "border": null,
+    "like_id": "kw",
+    "single": false,
+    "names": {},
+    "extra": {
+      "x": "Хелм",
+      "t3": "buy.t3out",
+      "uz": [
+        "Харьков",
+        "Хелм"
+      ],
+      "one": true,
+      "pkp": [
+        "Хелм",
+        "Варшава"
+      ],
+      "plat": false,
+      "direct": false
+    },
+    "sort": 160,
+    "active": true,
+    "created_at": "2026-11-13T12:44:27.684265+00:00",
+    "texts": {}
+  },
+  {
+    "id": "warsaw_kharkiv",
+    "file": "warsaw-kharkiv.html",
+    "from_name": "Варшава",
+    "to_name": "Харьков",
+    "route": "pl-ua",
+    "back": "ua-pl",
+    "rev": "kharkiv-warsaw.html",
+    "kind": "custom",
+    "x": null,
+    "border": null,
+    "like_id": "wk",
+    "single": false,
+    "names": {},
+    "extra": {
+      "x": "Хелм",
+      "t3": "buy.t3in",
+      "uz": [
+        "Хелм",
+        "Харьков"
+      ],
+      "one": true,
+      "pkp": [
+        "Варшава",
+        "Хелм"
+      ],
+      "plat": false,
+      "direct": false
+    },
+    "sort": 170,
+    "active": true,
+    "created_at": "2026-11-13T12:44:27.684265+00:00",
+    "texts": {}
+  },
+  {
+    "id": "kharkiv_krakow",
+    "file": "kharkiv-krakow.html",
+    "from_name": "Харьков",
+    "to_name": "Краков",
+    "route": "ua-pl",
+    "back": "pl-ua",
+    "rev": "krakow-kharkiv.html",
+    "kind": "custom",
+    "x": null,
+    "border": null,
+    "like_id": "kw",
+    "single": false,
+    "names": {},
+    "extra": {
+      "x": "Перемышль",
+      "t3": "buy.t3out",
+      "uz": [
+        "Харьков",
+        "Перемышль"
+      ],
+      "one": true,
+      "pkp": [
+        "Перемышль",
+        "Краков"
+      ],
+      "border": "after",
+      "direct": false
+    },
+    "sort": 180,
+    "active": true,
+    "created_at": "2026-11-13T12:44:27.684265+00:00",
+    "texts": {}
+  },
+  {
+    "id": "krakow_kharkiv",
+    "file": "krakow-kharkiv.html",
+    "from_name": "Краков",
+    "to_name": "Харьков",
+    "route": "pl-ua",
+    "back": "ua-pl",
+    "rev": "kharkiv-krakow.html",
+    "kind": "custom",
+    "x": null,
+    "border": null,
+    "like_id": "wk",
+    "single": false,
+    "names": {},
+    "extra": {
+      "x": "Перемышль",
+      "t3": "buy.t3in",
+      "uz": [
+        "Перемышль",
+        "Харьков"
+      ],
+      "one": true,
+      "pkp": [
+        "Краков",
+        "Перемышль"
+      ],
+      "border": "before",
+      "direct": false
+    },
+    "sort": 190,
+    "active": true,
+    "created_at": "2026-11-13T12:44:27.684265+00:00",
+    "texts": {}
+  },
+  {
+    "id": "kharkiv_khelm",
+    "file": "kharkiv-khelm.html",
+    "from_name": "Харьков",
+    "to_name": "Хелм",
+    "route": "ua-pl",
+    "back": "pl-ua",
+    "rev": "khelm-kharkiv.html",
+    "kind": "custom",
+    "x": null,
+    "border": null,
+    "like_id": "kw",
+    "single": false,
+    "names": {},
+    "extra": {
+      "ds3": "buy.d.s3z",
+      "like": "kw",
+      "coach": false,
+      "dOnly": true,
+      "slice": true
+    },
+    "sort": 200,
+    "active": true,
+    "created_at": "2026-11-13T12:44:27.684265+00:00",
+    "texts": {}
+  },
+  {
+    "id": "khelm_kharkiv",
+    "file": "khelm-kharkiv.html",
+    "from_name": "Хелм",
+    "to_name": "Харьков",
+    "route": "pl-ua",
+    "back": "ua-pl",
+    "rev": "kharkiv-khelm.html",
+    "kind": "custom",
+    "x": null,
+    "border": null,
+    "like_id": "wk",
+    "single": false,
+    "names": {},
+    "extra": {
+      "ds3": "buy.d.s3z",
+      "like": "wk",
+      "coach": false,
+      "dOnly": true,
+      "slice": true
+    },
+    "sort": 210,
+    "active": true,
+    "created_at": "2026-11-13T12:44:27.684265+00:00",
+    "texts": {}
+  },
+  {
+    "id": "kharkiv_przemysl",
+    "file": "kharkiv-przemysl.html",
+    "from_name": "Харьков",
+    "to_name": "Перемышль",
+    "route": "ua-pl",
+    "back": "pl-ua",
+    "rev": "przemysl-kharkiv.html",
+    "kind": "custom",
+    "x": null,
+    "border": null,
+    "like_id": "kw",
+    "single": false,
+    "names": {},
+    "extra": {
+      "ds3": "buy.d.s3z",
+      "like": "kw",
+      "coach": false,
+      "dOnly": true,
+      "slice": true
+    },
+    "sort": 220,
+    "active": true,
+    "created_at": "2026-11-13T12:44:27.684265+00:00",
+    "texts": {}
+  },
+  {
+    "id": "przemysl_kharkiv",
+    "file": "przemysl-kharkiv.html",
+    "from_name": "Перемышль",
+    "to_name": "Харьков",
+    "route": "pl-ua",
+    "back": "ua-pl",
+    "rev": "kharkiv-przemysl.html",
+    "kind": "custom",
+    "x": null,
+    "border": null,
+    "like_id": "wk",
+    "single": false,
+    "names": {},
+    "extra": {
+      "ds3": "buy.d.s3z",
+      "like": "wk",
+      "coach": false,
+      "dOnly": true,
+      "slice": true
+    },
+    "sort": 230,
+    "active": true,
+    "created_at": "2026-11-13T12:44:27.684265+00:00",
+    "texts": {}
+  },
+  {
+    "id": "odesa_warsaw",
+    "file": "odesa-warsaw.html",
+    "from_name": "Одесса",
+    "to_name": "Варшава",
+    "route": "ua-pl",
+    "back": "pl-ua",
+    "rev": "warsaw-odesa.html",
+    "kind": "custom",
+    "x": null,
+    "border": null,
+    "like_id": "kw",
+    "single": false,
+    "names": {},
+    "extra": {
+      "x": "Перемышль",
+      "t3": "buy.t3out",
+      "uz": [
+        "Одесса",
+        "Перемышль"
+      ],
+      "one": true,
+      "pkp": [
+        "Перемышль",
+        "Варшава"
+      ],
+      "plat": false,
+      "border": "after",
+      "direct": false
+    },
+    "sort": 240,
+    "active": true,
+    "created_at": "2026-11-13T12:44:27.684265+00:00",
+    "texts": {}
+  },
+  {
+    "id": "warsaw_odesa",
+    "file": "warsaw-odesa.html",
+    "from_name": "Варшава",
+    "to_name": "Одесса",
+    "route": "pl-ua",
+    "back": "ua-pl",
+    "rev": "odesa-warsaw.html",
+    "kind": "custom",
+    "x": null,
+    "border": null,
+    "like_id": "wk",
+    "single": false,
+    "names": {},
+    "extra": {
+      "x": "Перемышль",
+      "t3": "buy.t3in",
+      "uz": [
+        "Перемышль",
+        "Одесса"
+      ],
+      "one": true,
+      "pkp": [
+        "Варшава",
+        "Перемышль"
+      ],
+      "plat": false,
+      "border": "before",
+      "direct": false
+    },
+    "sort": 250,
+    "active": true,
+    "created_at": "2026-11-13T12:44:27.684265+00:00",
+    "texts": {}
+  },
+  {
+    "id": "odesa_krakow",
+    "file": "odesa-krakow.html",
+    "from_name": "Одесса",
+    "to_name": "Краков",
+    "route": "ua-pl",
+    "back": "pl-ua",
+    "rev": "krakow-odesa.html",
+    "kind": "custom",
+    "x": null,
+    "border": null,
+    "like_id": "kw",
+    "single": false,
+    "names": {},
+    "extra": {
+      "x": "Перемышль",
+      "t3": "buy.t3out",
+      "uz": [
+        "Одесса",
+        "Перемышль"
+      ],
+      "one": true,
+      "pkp": [
+        "Перемышль",
+        "Краков"
+      ],
+      "border": "after",
+      "direct": false
+    },
+    "sort": 260,
+    "active": true,
+    "created_at": "2026-11-13T12:44:27.684265+00:00",
+    "texts": {}
+  },
+  {
+    "id": "krakow_odesa",
+    "file": "krakow-odesa.html",
+    "from_name": "Краков",
+    "to_name": "Одесса",
+    "route": "pl-ua",
+    "back": "ua-pl",
+    "rev": "odesa-krakow.html",
+    "kind": "custom",
+    "x": null,
+    "border": null,
+    "like_id": "wk",
+    "single": false,
+    "names": {},
+    "extra": {
+      "x": "Перемышль",
+      "t3": "buy.t3in",
+      "uz": [
+        "Перемышль",
+        "Одесса"
+      ],
+      "one": true,
+      "pkp": [
+        "Краков",
+        "Перемышль"
+      ],
+      "border": "before",
+      "direct": false
+    },
+    "sort": 270,
+    "active": true,
+    "created_at": "2026-11-13T12:44:27.684265+00:00",
+    "texts": {}
+  },
+  {
+    "id": "odesa_przemysl",
+    "file": "odesa-przemysl.html",
+    "from_name": "Одесса",
+    "to_name": "Перемышль",
+    "route": "ua-pl",
+    "back": "pl-ua",
+    "rev": "przemysl-odesa.html",
+    "kind": "custom",
+    "x": null,
+    "border": null,
+    "like_id": "kw",
+    "single": false,
+    "names": {},
+    "extra": {
+      "ds3": "buy.d.s3z",
+      "like": "kw",
+      "coach": false,
+      "dOnly": true,
+      "slice": true
+    },
+    "sort": 280,
+    "active": true,
+    "created_at": "2026-11-13T12:44:27.684265+00:00",
+    "texts": {}
+  },
+  {
+    "id": "przemysl_odesa",
+    "file": "przemysl-odesa.html",
+    "from_name": "Перемышль",
+    "to_name": "Одесса",
+    "route": "pl-ua",
+    "back": "ua-pl",
+    "rev": "odesa-przemysl.html",
+    "kind": "custom",
+    "x": null,
+    "border": null,
+    "like_id": "wk",
+    "single": false,
+    "names": {},
+    "extra": {
+      "ds3": "buy.d.s3z",
+      "like": "wk",
+      "coach": false,
+      "dOnly": true,
+      "slice": true
+    },
+    "sort": 290,
+    "active": true,
+    "created_at": "2026-11-13T12:44:27.684265+00:00",
+    "texts": {}
+  },
+  {
+    "id": "lviv_warsaw",
+    "file": "lviv-warsaw.html",
+    "from_name": "Львов",
+    "to_name": "Варшава",
+    "route": "ua-pl",
+    "back": "pl-ua",
+    "rev": "warsaw-lviv.html",
+    "kind": "custom",
+    "x": null,
+    "border": null,
+    "like_id": "kw",
+    "single": false,
+    "names": {},
+    "extra": {
+      "x": "Рава-Русская",
+      "t3": "buy.t3out",
+      "uz": [
+        "Львов",
+        "Перемышль"
+      ],
+      "app": true,
+      "pkp": [
+        "Перемышль",
+        "Варшава"
+      ],
+      "plat": false,
+      "direct": false
+    },
+    "sort": 300,
+    "active": true,
+    "created_at": "2026-11-13T12:44:27.684265+00:00",
+    "texts": {}
+  },
+  {
+    "id": "warsaw_lviv",
+    "file": "warsaw-lviv.html",
+    "from_name": "Варшава",
+    "to_name": "Львов",
+    "route": "pl-ua",
+    "back": "ua-pl",
+    "rev": "lviv-warsaw.html",
+    "kind": "custom",
+    "x": null,
+    "border": null,
+    "like_id": "wk",
+    "single": false,
+    "names": {},
+    "extra": {
+      "x": "Рава-Русская",
+      "t3": "buy.t3in",
+      "uz": [
+        "Перемышль",
+        "Львов"
+      ],
+      "app": true,
+      "pkp": [
+        "Варшава",
+        "Перемышль"
+      ],
+      "plat": false,
+      "direct": false
+    },
+    "sort": 310,
+    "active": true,
+    "created_at": "2026-11-13T12:44:27.684265+00:00",
+    "texts": {}
+  },
+  {
+    "id": "lviv_krakow",
+    "file": "lviv-krakow.html",
+    "from_name": "Львов",
+    "to_name": "Краков",
+    "route": "ua-pl",
+    "back": "pl-ua",
+    "rev": "krakow-lviv.html",
+    "kind": "custom",
+    "x": null,
+    "border": null,
+    "like_id": "kw",
+    "single": false,
+    "names": {},
+    "extra": {
+      "x": "Перемышль",
+      "t3": "buy.t3out",
+      "uz": [
+        "Львов",
+        "Перемышль"
+      ],
+      "pkp": [
+        "Перемышль",
+        "Краков"
+      ],
+      "border": "after",
+      "direct": false
+    },
+    "sort": 320,
+    "active": true,
+    "created_at": "2026-11-13T12:44:27.684265+00:00",
+    "texts": {}
+  },
+  {
+    "id": "krakow_lviv",
+    "file": "krakow-lviv.html",
+    "from_name": "Краков",
+    "to_name": "Львов",
+    "route": "pl-ua",
+    "back": "ua-pl",
+    "rev": "lviv-krakow.html",
+    "kind": "custom",
+    "x": null,
+    "border": null,
+    "like_id": "wk",
+    "single": false,
+    "names": {},
+    "extra": {
+      "x": "Перемышль",
+      "t3": "buy.t3in",
+      "uz": [
+        "Перемышль",
+        "Львов"
+      ],
+      "pkp": [
+        "Краков",
+        "Перемышль"
+      ],
+      "border": "before",
+      "direct": false
+    },
+    "sort": 330,
+    "active": true,
+    "created_at": "2026-11-13T12:44:27.684265+00:00",
+    "texts": {}
+  },
+  {
+    "id": "lviv_przemysl",
+    "file": "lviv-przemysl.html",
+    "from_name": "Львов",
+    "to_name": "Перемышль",
+    "route": "ua-pl",
+    "back": "pl-ua",
+    "rev": "przemysl-lviv.html",
+    "kind": "custom",
+    "x": null,
+    "border": null,
+    "like_id": "kw",
+    "single": false,
+    "names": {},
+    "extra": {
+      "ds3": "buy.d.s3t",
+      "like": "kw",
+      "coach": false,
+      "dOnly": true,
+      "slice": true
+    },
+    "sort": 340,
+    "active": true,
+    "created_at": "2026-11-13T12:44:27.684265+00:00",
+    "texts": {}
+  },
+  {
+    "id": "przemysl_lviv",
+    "file": "przemysl-lviv.html",
+    "from_name": "Перемышль",
+    "to_name": "Львов",
+    "route": "pl-ua",
+    "back": "ua-pl",
+    "rev": "lviv-przemysl.html",
+    "kind": "custom",
+    "x": null,
+    "border": null,
+    "like_id": "wk",
+    "single": false,
+    "names": {},
+    "extra": {
+      "ds3": "buy.d.s3t",
+      "like": "wk",
+      "coach": false,
+      "dOnly": true,
+      "slice": true
+    },
+    "sort": 350,
+    "active": true,
+    "created_at": "2026-11-13T12:44:27.684265+00:00",
+    "texts": {}
+  },
+  {
+    "id": "kremenchuk_warsaw",
+    "file": "kremenchuk-warsaw.html",
+    "from_name": "Кременчуг",
+    "to_name": "Варшава",
+    "route": "ua-pl",
+    "back": "pl-ua",
+    "rev": "warsaw-kremenchuk.html",
+    "kind": "custom",
+    "x": null,
+    "border": null,
+    "like_id": "kw",
+    "single": false,
+    "names": {},
+    "extra": {
+      "x": "Перемышль",
+      "t3": "buy.t3out",
+      "uz": [
+        "Кременчуг",
+        "Перемышль"
+      ],
+      "one": true,
+      "pkp": [
+        "Перемышль",
+        "Варшава"
+      ],
+      "plat": false,
+      "border": "after",
+      "direct": false
+    },
+    "sort": 360,
+    "active": true,
+    "created_at": "2026-11-13T12:44:27.684265+00:00",
+    "texts": {}
+  },
+  {
+    "id": "warsaw_kremenchuk",
+    "file": "warsaw-kremenchuk.html",
+    "from_name": "Варшава",
+    "to_name": "Кременчуг",
+    "route": "pl-ua",
+    "back": "ua-pl",
+    "rev": "kremenchuk-warsaw.html",
+    "kind": "custom",
+    "x": null,
+    "border": null,
+    "like_id": "wk",
+    "single": false,
+    "names": {},
+    "extra": {
+      "x": "Перемышль",
+      "t3": "buy.t3in",
+      "uz": [
+        "Перемышль",
+        "Кременчуг"
+      ],
+      "one": true,
+      "pkp": [
+        "Варшава",
+        "Перемышль"
+      ],
+      "plat": false,
+      "border": "before",
+      "direct": false
+    },
+    "sort": 370,
+    "active": true,
+    "created_at": "2026-11-13T12:44:27.684265+00:00",
+    "texts": {}
+  },
+  {
+    "id": "kremenchuk_krakow",
+    "file": "kremenchuk-krakow.html",
+    "from_name": "Кременчуг",
+    "to_name": "Краков",
+    "route": "ua-pl",
+    "back": "pl-ua",
+    "rev": "krakow-kremenchuk.html",
+    "kind": "custom",
+    "x": null,
+    "border": null,
+    "like_id": "kw",
+    "single": false,
+    "names": {},
+    "extra": {
+      "x": "Перемышль",
+      "t3": "buy.t3out",
+      "uz": [
+        "Кременчуг",
+        "Перемышль"
+      ],
+      "one": true,
+      "pkp": [
+        "Перемышль",
+        "Краков"
+      ],
+      "border": "after",
+      "direct": false
+    },
+    "sort": 380,
+    "active": true,
+    "created_at": "2026-11-13T12:44:27.684265+00:00",
+    "texts": {}
+  },
+  {
+    "id": "krakow_kremenchuk",
+    "file": "krakow-kremenchuk.html",
+    "from_name": "Краков",
+    "to_name": "Кременчуг",
+    "route": "pl-ua",
+    "back": "ua-pl",
+    "rev": "kremenchuk-krakow.html",
+    "kind": "custom",
+    "x": null,
+    "border": null,
+    "like_id": "wk",
+    "single": false,
+    "names": {},
+    "extra": {
+      "x": "Перемышль",
+      "t3": "buy.t3in",
+      "uz": [
+        "Перемышль",
+        "Кременчуг"
+      ],
+      "one": true,
+      "pkp": [
+        "Краков",
+        "Перемышль"
+      ],
+      "border": "before",
+      "direct": false
+    },
+    "sort": 390,
+    "active": true,
+    "created_at": "2026-11-13T12:44:27.684265+00:00",
+    "texts": {}
+  },
+  {
+    "id": "kremenchuk_przemysl",
+    "file": "kremenchuk-przemysl.html",
+    "from_name": "Кременчуг",
+    "to_name": "Перемышль",
+    "route": "ua-pl",
+    "back": "pl-ua",
+    "rev": "przemysl-kremenchuk.html",
+    "kind": "custom",
+    "x": null,
+    "border": null,
+    "like_id": "kw",
+    "single": false,
+    "names": {},
+    "extra": {
+      "ds3": "buy.d.s3z",
+      "like": "kw",
+      "coach": false,
+      "dOnly": true,
+      "slice": true
+    },
+    "sort": 400,
+    "active": true,
+    "created_at": "2026-11-13T12:44:27.684265+00:00",
+    "texts": {}
+  },
+  {
+    "id": "przemysl_kremenchuk",
+    "file": "przemysl-kremenchuk.html",
+    "from_name": "Перемышль",
+    "to_name": "Кременчуг",
+    "route": "pl-ua",
+    "back": "ua-pl",
+    "rev": "kremenchuk-przemysl.html",
+    "kind": "custom",
+    "x": null,
+    "border": null,
+    "like_id": "wk",
+    "single": false,
+    "names": {},
+    "extra": {
+      "ds3": "buy.d.s3z",
+      "like": "wk",
+      "coach": false,
+      "dOnly": true,
+      "slice": true
+    },
+    "sort": 410,
+    "active": true,
+    "created_at": "2026-11-13T12:44:27.684265+00:00",
+    "texts": {}
+  },
+  {
+    "id": "kyiv_bratislava",
+    "file": "kyiv-bratislava.html",
+    "from_name": "Киев",
+    "to_name": "Братислава",
+    "route": "ua-sk",
+    "back": "sk-ua",
+    "rev": "bratislava-kyiv.html",
+    "kind": "custom",
+    "x": null,
+    "border": null,
+    "like_id": "kw",
+    "single": false,
+    "names": {},
+    "extra": {
+      "x": "Чоп",
+      "s1": "buy.t.s1kv",
+      "s2": "buy.t.s2zk",
+      "t3": "buy.t3out",
+      "uz": [
+        "Киев",
+        "Чоп"
+      ],
+      "car": "zssk",
+      "pkp": [
+        "Чоп",
+        "Братислава"
+      ],
+      "plat": false,
+      "direct": false
+    },
+    "sort": 420,
+    "active": true,
+    "created_at": "2026-11-13T12:44:27.684265+00:00",
+    "texts": {}
+  },
+  {
+    "id": "bratislava_kyiv",
+    "file": "bratislava-kyiv.html",
+    "from_name": "Братислава",
+    "to_name": "Киев",
+    "route": "sk-ua",
+    "back": "ua-sk",
+    "rev": "kyiv-bratislava.html",
+    "kind": "custom",
+    "x": null,
+    "border": null,
+    "like_id": "wk",
+    "single": false,
+    "names": {},
+    "extra": {
+      "x": "Чоп",
+      "s1": "buy.t.s1vk",
+      "t3": "buy.t3in",
+      "uz": [
+        "Чоп",
+        "Киев"
+      ],
+      "car": "zssk",
+      "pkp": [
+        "Братислава",
+        "Чоп"
+      ],
+      "plat": false,
+      "direct": false
+    },
+    "sort": 430,
+    "active": true,
+    "created_at": "2026-11-13T12:44:27.684265+00:00",
+    "texts": {}
+  },
+  {
+    "id": "kyiv_bucharest",
+    "file": "kyiv-bucharest.html",
+    "from_name": "Киев",
+    "to_name": "Бухарест",
+    "route": "ua-ro",
+    "back": "ro-ua",
+    "rev": "bucharest-kyiv.html",
+    "kind": "custom",
+    "x": null,
+    "border": null,
+    "like_id": "kw",
+    "single": false,
+    "names": {},
+    "extra": {
+      "ds2": "buy.d.s2z",
+      "ds3": "buy.d.s3z",
+      "coach": false,
+      "dOnly": true
+    },
+    "sort": 440,
+    "active": true,
+    "created_at": "2026-11-13T12:44:27.684265+00:00",
+    "texts": {}
+  },
+  {
+    "id": "bucharest_kyiv",
+    "file": "bucharest-kyiv.html",
+    "from_name": "Бухарест",
+    "to_name": "Киев",
+    "route": "ro-ua",
+    "back": "ua-ro",
+    "rev": "kyiv-bucharest.html",
+    "kind": "custom",
+    "x": null,
+    "border": null,
+    "like_id": "wk",
+    "single": false,
+    "names": {},
+    "extra": {
+      "ds2": "buy.d.s2z",
+      "ds3": "buy.d.s3z",
+      "coach": false,
+      "dOnly": true
+    },
+    "sort": 450,
+    "active": true,
+    "created_at": "2026-11-13T12:44:27.684265+00:00",
+    "texts": {}
+  },
+  {
+    "id": "kyiv_vienna",
+    "file": "kyiv-vienna.html",
+    "from_name": "Киев",
+    "to_name": "Вена",
+    "route": "ua-at",
+    "back": "at-ua",
+    "rev": "vienna-kyiv.html",
+    "kind": "custom",
+    "x": null,
+    "border": null,
+    "like_id": "kw",
+    "single": false,
+    "names": {},
+    "extra": {
+      "h": true,
+      "x": "Чоп",
+      "s1": "buy.t.s1kv",
+      "s2": "buy.t.s2ov",
+      "t3": "buy.t3out",
+      "uz": [
+        "Киев",
+        "Чоп"
+      ],
+      "car": "oebb",
+      "ds2": "buy.d.s2v",
+      "pkp": [
+        "Чоп",
+        "Вена"
+      ],
+      "plat": false,
+      "third": "Будапешт"
+    },
+    "sort": 460,
+    "active": true,
+    "created_at": "2026-11-13T12:44:27.684265+00:00",
+    "texts": {}
+  },
+  {
+    "id": "vienna_kyiv",
+    "file": "vienna-kyiv.html",
+    "from_name": "Вена",
+    "to_name": "Киев",
+    "route": "at-ua",
+    "back": "ua-at",
+    "rev": "kyiv-vienna.html",
+    "kind": "custom",
+    "x": null,
+    "border": null,
+    "like_id": "wk",
+    "single": false,
+    "names": {},
+    "extra": {
+      "h": true,
+      "x": "Чоп",
+      "s1": "buy.t.s1vk",
+      "s2": "buy.t.s2vk",
+      "t3": "buy.t3in",
+      "uz": [
+        "Чоп",
+        "Киев"
+      ],
+      "car": "oebb",
+      "ds2": "buy.d.s2v",
+      "hb1": [
+        "Будапешт",
+        "Киев"
+      ],
+      "hb2": [
+        "Вена",
+        "Будапешт"
+      ],
+      "pkp": [
+        "Вена",
+        "Чоп"
+      ],
+      "plat": false,
+      "third": "Будапешт"
+    },
+    "sort": 470,
+    "active": true,
+    "created_at": "2026-11-13T12:44:27.684265+00:00",
+    "texts": {}
+  },
+  {
+    "id": "kyiv_chisinau",
+    "file": "kyiv-chisinau.html",
+    "from_name": "Киев",
+    "to_name": "Кишинев",
+    "route": "ua-md",
+    "back": "md-ua",
+    "rev": "chisinau-kyiv.html",
+    "kind": "custom",
+    "x": null,
+    "border": null,
+    "like_id": "kw",
+    "single": false,
+    "names": {},
+    "extra": {
+      "ds2": "buy.d.s2z",
+      "ds3": "buy.d.s3z",
+      "coach": false,
+      "dOnly": true
+    },
+    "sort": 480,
+    "active": true,
+    "created_at": "2026-11-13T12:44:27.684265+00:00",
+    "texts": {}
+  },
+  {
+    "id": "chisinau_kyiv",
+    "file": "chisinau-kyiv.html",
+    "from_name": "Кишинев",
+    "to_name": "Киев",
+    "route": "md-ua",
+    "back": "ua-md",
+    "rev": "kyiv-chisinau.html",
+    "kind": "custom",
+    "x": null,
+    "border": null,
+    "like_id": "wk",
+    "single": false,
+    "names": {},
+    "extra": {
+      "ds2": "buy.d.s2z",
+      "ds3": "buy.d.s3z",
+      "coach": false,
+      "dOnly": true
+    },
+    "sort": 490,
+    "active": true,
+    "created_at": "2026-11-13T12:44:27.684265+00:00",
+    "texts": {}
+  },
+  {
+    "id": "kyiv_berlin",
+    "file": "kyiv-berlin.html",
+    "from_name": "Киев",
+    "to_name": "Берлин",
+    "route": "ua-de",
+    "back": "de-ua",
+    "rev": "berlin-kyiv.html",
+    "kind": "custom",
+    "x": null,
+    "border": null,
+    "like_id": "kw",
+    "single": false,
+    "names": {},
+    "extra": {
+      "x": "Хелм",
+      "be": {
+        "C": {
+          "de": [
+            "Хелм",
+            "Берлин"
+          ],
+          "uz": [
+            "Киев",
+            "Хелм"
+          ]
+        },
+        "H": {
+          "de": [
+            "Перемышль",
+            "Берлин"
+          ],
+          "pl": [
+            "Перемышль",
+            "Берлин"
+          ]
+        },
+        "T": {
+          "de": [
+            "Варшава",
+            "Берлин"
+          ],
+          "pl": [
+            "Хелм",
+            "Варшава"
+          ]
+        }
+      },
+      "t3": "buy.t3out",
+      "uz": [
+        "Киев",
+        "Хелм"
+      ],
+      "hs1": "buy.t.s1",
+      "hs2": "buy.t.s2",
+      "hxs": [
+        "Хелм",
+        "Варшава"
+      ],
+      "pkp": [
+        "Хелм",
+        "Берлин"
+      ],
+      "uz3": [
+        "Киев",
+        "Перемышль"
+      ],
+      "hb2k": "buy.t.b2",
+      "hurl": "https://www.intercity.pl/",
+      "pkp3": [
+        "Перемышль",
+        "Берлин"
+      ],
+      "leadx": "Перемышль",
+      "third": "Перемышль",
+      "border": "after",
+      "direct": false,
+      "splitx": [
+        {
+          "s": "Перемышль"
+        },
+        {
+          "h": [
+            "Хелм",
+            "Варшава"
+          ],
+          "l": 3,
+          "s": "Хелм"
+        },
+        {
+          "l": 2,
+          "s": "Хелм"
+        }
+      ]
+    },
+    "sort": 500,
+    "active": true,
+    "created_at": "2026-11-13T12:44:27.684265+00:00",
+    "texts": {}
+  },
+  {
+    "id": "berlin_kyiv",
+    "file": "berlin-kyiv.html",
+    "from_name": "Берлин",
+    "to_name": "Киев",
+    "route": "de-ua",
+    "back": "ua-de",
+    "rev": "kyiv-berlin.html",
+    "kind": "custom",
+    "x": null,
+    "border": null,
+    "like_id": "wk",
+    "single": false,
+    "names": {},
+    "extra": {
+      "x": "Хелм",
+      "be": {
+        "C": {
+          "de": [
+            "Берлин",
+            "Хелм"
+          ],
+          "uz": [
+            "Хелм",
+            "Киев"
+          ]
+        },
+        "H": {
+          "de": [
+            "Берлин",
+            "Перемышль"
+          ],
+          "pl": [
+            "Берлин",
+            "Перемышль"
+          ]
+        },
+        "T": {
+          "de": [
+            "Берлин",
+            "Варшава"
+          ],
+          "pl": [
+            "Варшава",
+            "Хелм"
+          ]
+        }
+      },
+      "t3": "buy.t3in",
+      "uz": [
+        "Хелм",
+        "Киев"
+      ],
+      "hs1": "buy.t.s1",
+      "hs2": "buy.t.s2",
+      "hxs": [
+        "Варшава",
+        "Хелм"
+      ],
+      "pkp": [
+        "Берлин",
+        "Хелм"
+      ],
+      "uz3": [
+        "Перемышль",
+        "Киев"
+      ],
+      "hb2k": "buy.t.b2",
+      "hurl": "https://www.intercity.pl/",
+      "pkp3": [
+        "Берлин",
+        "Перемышль"
+      ],
+      "leadx": "Перемышль",
+      "third": "Перемышль",
+      "border": "before",
+      "direct": false,
+      "splitx": [
+        {
+          "s": "Перемышль"
+        },
+        {
+          "h": [
+            "Варшава",
+            "Хелм"
+          ],
+          "l": 3,
+          "s": "Варшава"
+        },
+        {
+          "l": 2,
+          "s": "Хелм"
+        }
+      ]
+    },
+    "sort": 510,
+    "active": true,
+    "created_at": "2026-11-13T12:44:27.684265+00:00",
+    "texts": {}
+  },
+  {
+    "id": "kyiv_kosice",
+    "file": "kyiv-kosice.html",
+    "from_name": "Киев",
+    "to_name": "Кошице",
+    "route": "ua-sk",
+    "back": "sk-ua",
+    "rev": "kosice-kyiv.html",
+    "kind": "custom",
+    "x": null,
+    "border": null,
+    "like_id": "kw",
+    "single": false,
+    "names": {},
+    "extra": {
+      "x": "Чоп",
+      "s1": "buy.m.s1",
+      "t3": "buy.t3out",
+      "uz": [
+        "Киев",
+        "Чоп"
+      ],
+      "xs": [
+        "Чоп",
+        "Мукачево"
+      ],
+      "car": "zssk",
+      "pkp": [
+        "Чоп",
+        "Кошице"
+      ],
+      "xb2": "buy.x.b2z",
+      "plat": false,
+      "xs2i": "buy.x.s2z",
+      "xs2o": "buy.x.s2z",
+      "leadx": "Мукачево",
+      "split": [
+        "Чоп",
+        "Мукачево"
+      ],
+      "direct": false
+    },
+    "sort": 520,
+    "active": true,
+    "created_at": "2026-11-13T12:44:27.684265+00:00",
+    "texts": {}
+  },
+  {
+    "id": "kosice_kyiv",
+    "file": "kosice-kyiv.html",
+    "from_name": "Кошице",
+    "to_name": "Киев",
+    "route": "sk-ua",
+    "back": "ua-sk",
+    "rev": "kyiv-kosice.html",
+    "kind": "custom",
+    "x": null,
+    "border": null,
+    "like_id": "wk",
+    "single": false,
+    "names": {},
+    "extra": {
+      "x": "Мукачево",
+      "s1": "buy.m.s1",
+      "t3": "buy.t3in",
+      "uz": [
+        "Мукачево",
+        "Киев"
+      ],
+      "car": "zssk",
+      "pkp": [
+        "Кошице",
+        "Мукачево"
+      ],
+      "plat": false,
+      "direct": false
+    },
+    "sort": 530,
+    "active": true,
+    "created_at": "2026-11-13T12:44:27.684265+00:00",
+    "texts": {}
+  },
+  {
+    "id": "kyiv_prague",
+    "file": "kyiv-prague.html",
+    "from_name": "Киев",
+    "to_name": "Прага",
+    "route": "ua-cz",
+    "back": "cz-ua",
+    "rev": "prague-kyiv.html",
+    "kind": "custom",
+    "x": null,
+    "border": null,
+    "like_id": "kw",
+    "single": false,
+    "names": {},
+    "extra": {
+      "x": "Перемышль",
+      "t3": "buy.t3out",
+      "uz": [
+        "Киев",
+        "Перемышль"
+      ],
+      "car": "cd",
+      "pkp": [
+        "Перемышль",
+        "Прага"
+      ],
+      "cols": [
+        {
+          "x": "Перемышль",
+          "uz": [
+            "Киев",
+            "Перемышль"
+          ],
+          "car": "cd",
+          "pkp": [
+            "Перемышль",
+            "Прага"
+          ],
+          "open": "09:00",
+          "train": "051К"
+        },
+        {
+          "x": "Перемышль",
+          "uz": [
+            "Киев",
+            "Перемышль"
+          ],
+          "car": "rj",
+          "pkp": [
+            "Перемышль",
+            "Прага"
+          ],
+          "open": "09:00",
+          "train": "715К"
+        },
+        {
+          "x": "Чоп",
+          "uz": [
+            "Киев",
+            "Чоп"
+          ],
+          "car": "rj",
+          "pkp": [
+            "Чоп",
+            "Прага"
+          ],
+          "train": "059К"
+        }
+      ],
+      "plat": false,
+      "split": [
+        "Перемышль",
+        "Чоп"
+      ],
+      "border": "after",
+      "direct": false
+    },
+    "sort": 540,
+    "active": true,
+    "created_at": "2026-11-13T12:44:27.684265+00:00",
+    "texts": {}
+  },
+  {
+    "id": "kyiv_budapest",
+    "file": "kyiv-budapest.html",
+    "from_name": "Киев",
+    "to_name": "Будапешт",
+    "route": "ua-hu",
+    "back": "hu-ua",
+    "rev": "budapest-kyiv.html",
+    "kind": "custom",
+    "x": null,
+    "border": null,
+    "like_id": "kw",
+    "single": false,
+    "names": {},
+    "extra": {
+      "x": "Чоп",
+      "s1": "buy.m.s1",
+      "s2": "buy.t.s2mo",
+      "t3": "buy.t3out",
+      "uz": [
+        "Киев",
+        "Чоп"
+      ],
+      "xs": [
+        "Чоп",
+        "Мукачево"
+      ],
+      "car": "mav",
+      "ds2": "buy.d.s2v",
+      "ds3": "buy.d.s3z",
+      "pkp": [
+        "Чоп",
+        "Будапешт"
+      ],
+      "plat": false,
+      "coach": false,
+      "leadx": "Мукачево",
+      "split": [
+        "Чоп",
+        "Мукачево"
+      ]
+    },
+    "sort": 550,
+    "active": true,
+    "created_at": "2026-11-13T12:44:27.684265+00:00",
+    "texts": {}
+  },
+  {
+    "id": "budapest_kyiv",
+    "file": "budapest-kyiv.html",
+    "from_name": "Будапешт",
+    "to_name": "Киев",
+    "route": "hu-ua",
+    "back": "ua-hu",
+    "rev": "kyiv-budapest.html",
+    "kind": "custom",
+    "x": null,
+    "border": null,
+    "like_id": "wk",
+    "single": false,
+    "names": {},
+    "extra": {
+      "x": "Чоп",
+      "s1": "buy.m.s1",
+      "s2": "buy.t.s2mi",
+      "t3": "buy.t3in",
+      "uz": [
+        "Чоп",
+        "Киев"
+      ],
+      "car": "mav",
+      "ds2": "buy.d.s2v",
+      "ds3": "buy.d.s3z",
+      "pkp": [
+        "Будапешт",
+        "Чоп"
+      ],
+      "plat": false,
+      "coach": false
+    },
+    "sort": 560,
+    "active": true,
+    "created_at": "2026-11-13T12:44:27.684265+00:00",
+    "texts": {}
+  },
+  {
+    "id": "prague_kyiv",
+    "file": "prague-kyiv.html",
+    "from_name": "Прага",
+    "to_name": "Киев",
+    "route": "cz-ua",
+    "back": "ua-cz",
+    "rev": "kyiv-prague.html",
+    "kind": "custom",
+    "x": null,
+    "border": null,
+    "like_id": "wk",
+    "single": false,
+    "names": {},
+    "extra": {
+      "x": "Перемышль",
+      "t3": "buy.t3in",
+      "uz": [
+        "Перемышль",
+        "Киев"
+      ],
+      "car": "cd",
+      "pkp": [
+        "Прага",
+        "Перемышль"
+      ],
+      "cols": [
+        {
+          "x": "Перемышль",
+          "uz": [
+            "Перемышль",
+            "Киев"
+          ],
+          "car": "cd",
+          "pkp": [
+            "Прага",
+            "Перемышль"
+          ],
+          "open": "09:00",
+          "train": "052Л"
+        },
+        {
+          "x": "Перемышль",
+          "uz": [
+            "Перемышль",
+            "Киев"
+          ],
+          "car": "rj",
+          "pkp": [
+            "Прага",
+            "Перемышль"
+          ],
+          "open": "09:00",
+          "train": "716Л"
+        },
+        {
+          "x": "Чоп",
+          "uz": [
+            "Чоп",
+            "Киев"
+          ],
+          "car": "rj",
+          "pkp": [
+            "Прага",
+            "Чоп"
+          ],
+          "train": "060Л"
+        }
+      ],
+      "plat": false,
+      "split": [
+        "Перемышль",
+        "Чоп"
+      ],
+      "border": "before",
+      "direct": false
+    },
+    "sort": 570,
+    "active": true,
+    "created_at": "2026-11-13T12:44:27.684265+00:00",
+    "texts": {}
+  }
+]
