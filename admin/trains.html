@@ -110,6 +110,7 @@
 <body>
 <header style="padding-bottom:44px">
     <div class="wrap bar"><b>🚆 Колія: поезда и варианты</b><span><a href="../">На сайт</a>
+        <button id="rb" style="display:none" title="Запустить сборку сайта на GitHub">Пересобрать сайт</button>
         <button id="out" style="display:none">Выйти</button></span></div>
 </header>
 <main class="wrap" id="app"></main>
@@ -331,15 +332,34 @@ const findStation = name => {
 const trainLabel = t => { const st = spByTrain.get(t.id) || []; return t.number + (st.length ? " · " + stById.get(st[0].station_id).name_ru + " → " + stById.get(st[st.length - 1].station_id).name_ru : "") };
 const showErr = (el, e) => { el.innerHTML = '<div class="errbox">' + esc(e.message || e) + "</div>" };
 
+/* ---------- пересборка сайта (Supabase Edge Function rebuild-site запускает GitHub Actions) ---------- */
+async function rebuild() {
+    if (!confirm("Пересобрать сайт? Страницы обновятся примерно через 1–2 минуты.")) return;
+    const b = $("#rb"), old = b.textContent;
+    b.disabled = true; b.textContent = "Запускаю…";
+    try {
+        let r;
+        for (let i = 0; i < 2; i++) {
+            r = await fetch(U + "/functions/v1/rebuild-site", {method: "POST", headers: {apikey: K, Authorization: "Bearer " + S.a}});
+            if (r.status !== 401 || i) break;
+            await auth("refresh_token", {refresh_token: S.r})
+        }
+        const j = await r.json().catch(() => ({}));
+        if (!r.ok) throw new Error(r.status === 403 ? "Нет прав на пересборку" : j.error ? j.error + (j.status ? " (" + j.status + ")" : "") : "Ошибка " + r.status);
+        toast("Сборка запущена. Сайт обновится через 1–2 минуты")
+    } catch (e) { toast(e.message) } finally { b.disabled = false; b.textContent = old }
+}
+
 /* ---------- вход ---------- */
 function showLogin() {
-    $("#out").style.display = "none";
+    $("#out").style.display = "none"; $("#rb").style.display = "none";
     $("#app").innerHTML = `<section class="panel" style="max-width:380px;margin:0 auto"><h2>Вход</h2><label>Email</label><input id="em" type="email" autocomplete="username"><label>Пароль</label><input id="pw" type="password" autocomplete="current-password"><p><button id="go" class="pri">Войти</button></p><p id="le" class="err"></p></section>`;
     $("#go").onclick = async () => { try { await auth("password", {email: $("#em").value, password: $("#pw").value}); start() } catch (e) { $("#le").textContent = e.message } }
 }
 let TAB = "trains";
 async function start() {
     $("#out").style.display = ""; $("#out").onclick = logout;
+    $("#rb").style.display = ""; $("#rb").onclick = rebuild;
     try { await load() } catch (e) { return showLogin() }
     shell()
 }
@@ -470,7 +490,7 @@ function drawDirs(msg) {
         <div id="d_err"></div>
         <p><button class="pri" id="d_add">Создать направление</button> ${msg ? `<span class="chip gr">${esc(msg)}</span>` : ""}</p></section>
         <section class="panel"><h2>Все направления сайта <span class="muted">(${RP.length})</span></h2>
-        <p class="muted">Изменения попадают на сайт после пересборки: на компьютере с сайтом выполните <code>node sync.js</code> (вместо <code>node build.js</code>) и выложите изменения. Если страницы в списке нет, её нужно один раз перенести из build.js: выполните <code>route_pages_seed.sql</code>.</p>
+        <p class="muted">Изменения попадают на сайт после пересборки: на компьютере с сайтом выполните <code>node sync.js</code> (вместо <code>node build.js</code>) и выложите изменения, либо нажмите «Пересобрать сайт» вверху страницы. Если страницы в списке нет, её нужно один раз перенести из build.js: выполните <code>route_pages_seed.sql</code>.</p>
         <p><input type="text" id="d_q" placeholder="Поиск по названию или файлу" value="${esc(DQ)}" style="width:280px"></p>
         ${RP.length ? `<table class="g"><thead><tr><th>Страница</th><th>Файл</th><th>Тип</th><th>Код</th><th></th><th></th></tr></thead><tbody id="d_tb">${list}</tbody></table>` : '<p class="muted">Пока ни одного.</p>'}</section>`;
     if (er) { dirEditorBind(er); $("#d_edit").scrollIntoView({block: "start"}) }
@@ -538,7 +558,7 @@ function viewStations() {
         <td><select data-f="tz_hours"><option value="1" ${s.tz_hours == 1 ? "selected" : ""}>UTC+1</option><option value="2" ${s.tz_hours == 2 ? "selected" : ""}>UTC+2</option></select></td>
         <td class="x"><button data-a="save">Сохранить</button> ${s.id ? '<button data-a="del">✕</button>' : ""}</td></tr>`;
     v.innerHTML = `<section class="panel"><h2>Станции <span class="muted">(${ST.length})</span></h2>
-        <p class="muted">Названия на других языках и формы «в Хелме» / «у Хелмі» / «w Chełmie» (нужны для заголовков вроде «С пересадкой в Хелме»). Если поле пустое, сайт покажет русское название. Изменения попадают на сайт после <b>node sync.js</b>.</p>
+        <p class="muted">Названия на других языках и формы «в Хелме» / «у Хелмі» / «w Chełmie» (нужны для заголовков вроде «С пересадкой в Хелме»). Если поле пустое, сайт покажет русское название. Изменения попадают на сайт после <b>node sync.js</b> или кнопки «Пересобрать сайт» вверху страницы.</p>
         <div class="frow"><input type="text" id="sf" placeholder="Поиск станции" style="width:240px"><label><input type="checkbox" id="nt"> без перевода</label></div>
         <div id="se"></div>
         <table class="g"><thead><tr><th>Русское</th><th>Українська</th><th>English</th><th>Polski</th><th>в … (ru)</th><th>у … (uk)</th><th>w … (pl)</th><th>Пояс</th><th></th></tr></thead><tbody id="stb"></tbody></table></section>`;
@@ -581,7 +601,7 @@ async function viewTexts() {
         ${["ru", "uk", "en", "pl"].map(l => `<td><textarea data-f="${l}" rows="${Math.min(6, Math.max(1, Math.ceil(String(x[l] || "").length / 34)))}" style="width:100%;min-width:190px">${esc(x[l])}</textarea></td>`).join("")}
         <td class="x"><button data-a="save">Сохранить</button> ${x.key ? '<button data-a="del">✕</button>' : ""}</td></tr>`;
     v.innerHTML = `<section class="panel"><h2>Тексты сайта <span class="muted">(${TX.length})</span></h2>
-        <p class="muted">Подписи, подсказки, шаги покупки и подвал на всех языках. Русский — основной: если другой язык пустой, на сайте будет русский текст. В текстах работают подстановки вида <code>{n}</code>, <code>{FROM}</code>, <code>{uz}</code> и HTML-теги, как в исходных. Ключи <code>cn.xx</code> и <code>cn.xx.gen</code> — названия стран (<code>.gen</code> — родительный падеж). Тексты страниц маршрутов лежат во вкладке «Направления», названия станций — во вкладке «Станции». Изменения попадают на сайт после <b>node sync.js</b>.</p>
+        <p class="muted">Подписи, подсказки, шаги покупки и подвал на всех языках. Русский — основной: если другой язык пустой, на сайте будет русский текст. В текстах работают подстановки вида <code>{n}</code>, <code>{FROM}</code>, <code>{uz}</code> и HTML-теги, как в исходных. Ключи <code>cn.xx</code> и <code>cn.xx.gen</code> — названия стран (<code>.gen</code> — родительный падеж). Тексты страниц маршрутов лежат во вкладке «Направления», названия станций — во вкладке «Станции». Изменения попадают на сайт после <b>node sync.js</b> или кнопки «Пересобрать сайт» вверху страницы.</p>
         <div class="frow"><input type="text" id="txf" placeholder="Поиск по ключу или тексту" style="width:260px">
         <select id="txg"><option value="">все группы</option>${groups.map(g => `<option>${esc(g)}</option>`).join("")}</select>
         <label><input type="checkbox" id="txn"> без перевода</label></div>
