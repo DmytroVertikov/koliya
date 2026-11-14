@@ -86,5 +86,6 @@ node build.js
 - `style.css`: оформление;
 - `config.js`: ключи Supabase;
 - `index.html`, `uk/`, `en/`, `pl/`, `kyiv-warsaw.html` и другие страницы маршрутов, `sitemap.xml`: результат сборки;
+- `supabase/functions/rebuild-site/`: функция Supabase для кнопки «Пересобрать сайт» (код, секреты и развёртывание: README рядом);
 - `admin/trains.html`: админка (страны, направления, поезда, варианты, станции, тексты); `admin/index.html` только перенаправляет на неё;
 - `schema.sql`, `seed.sql`, `i18n.sql`: база.
