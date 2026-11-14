@@ -190,18 +190,16 @@ const CTRY = (() => {
     return [c.slug, c.name, o.acc || c.name, o.gen || c.name, c.flag || ""]
   })
 })();
-/* страницы, которые показываются сразу; остальные маршруты страны лежат в раскрывающемся списке (в HTML они есть). Страна не указана — все маршруты сразу */
-const POP = {pl: ["kyiv-warsaw.html", "kyiv-krakow.html", "dnipro-warsaw.html", "odesa-warsaw.html", "lviv-warsaw.html", "warsaw-kyiv.html", "krakow-kyiv.html"]};
 const AIR = [["Варшава", "https://www.lotnisko-chopina.pl/en/index.html"], ["Будапешт", "https://www.bud.hu/en"], ["Вена", "https://www.viennaairport.com/"], ["Краков", "https://www.krakowairport.pl/en/"], ["Жешув", "https://www.rzeszowairport.pl/ua"], ["Кошице", "https://www.airportkosice.sk/en"], ["Кишинёв", "https://airport.md/"], ["Яссы", "https://www.aeroport-iasi.ro"]];
 const OGL = {ru: "ru_RU", uk: "uk_UA", en: "en_US", pl: "pl_PL"};
 const ctryOf = p => p.route.replace(/^ua-|-ua$/, "");
+/* страницы, которые показываются на главной сразу, — отмечены галочкой «на главной» во вкладке «Направления» (route_pages.popular);
+   остальные маршруты страны лежат в раскрывающемся списке (в HTML они есть). Если у страны нет ни одной отмеченной страницы, показываются все её маршруты. */
+const POP = {};
+for (const p of DBR) if (p.popular && p.active !== false) (POP[ctryOf(p)] = POP[ctryOf(p)] || []).push(p.file);
 for (const p of PGS) { /* проверки: ссылки главной ведут только на существующие страницы и страны */
   if (!CTRY.some(c => c[0] === ctryOf(p))) throw new Error("build.js: страница " + p.href + " (route " + p.route + ") — страны нет в CTRY");
 }
-/* страницы, выключенные в админке, пропадают и из списков «популярное» на главной */
-const OFF = new Set(DBR.filter(p => p.active === false).map(p => p.file));
-for (const k of Object.keys(POP)) POP[k] = POP[k].filter(h => !OFF.has(h));
-for (const h of [].concat(...Object.values(POP))) if (!PGS.some(p => p.href === h)) throw new Error("build.js: POP ссылается на отсутствующую страницу " + h);
 const ix = fs.readFileSync("index.src.html", "utf8");
 for (const l of LANGS) {
   const d = I[l], pre = l === "ru" ? "" : "../";
