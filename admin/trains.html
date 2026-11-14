@@ -475,7 +475,7 @@ function dirEditorBind(r) {
 function drawDirs(msg) {
     const v = $("#view"), er = EDIT && RP.find(r => r.id === EDIT);
     const list = RP.map(r => `<tr data-id="${esc(r.id)}" ${r.active ? "" : 'style="opacity:.55"'}><td><b>${esc(r.from_name)} → ${esc(r.to_name)}</b></td><td class="muted">${esc(r.file)}</td><td>${esc(DIR_KIND_LBL[r.kind] || r.kind)}${r.x ? " · " + esc(r.x) : (r.extra || {}).x ? " · " + esc(r.extra.x) : ""}</td><td class="muted">${esc(r.route)}</td>
-        <td><label><input type="checkbox" data-a="act" ${r.active ? "checked" : ""}> показывать</label></td><td class="x"><button data-a="edit" title="Изменить">✎ Изменить</button> <button data-a="del" title="Удалить">✕</button></td></tr>`).join("");
+        <td><label><input type="checkbox" data-a="act" ${r.active ? "checked" : ""}> показывать</label></td><td><label title="Показывать на главной сразу, а не в раскрывающемся списке «Ещё маршруты»"><input type="checkbox" data-a="pop" ${r.popular ? "checked" : ""}> на главной</label></td><td class="x"><button data-a="edit" title="Изменить">✎ Изменить</button> <button data-a="del" title="Удалить">✕</button></td></tr>`).join("");
     v.innerHTML = (er ? dirEditorHtml(er) : "") + `<section class="panel"><h2>Новое направление</h2>
         <p class="muted">Создаются сразу две страницы: «A → B» и обратная «B → A», на русском, украинском, английском и польском. Города — как они называются в справочнике станций.</p>
         <div class="frow"><div><label>Украинский город (откуда)</label><input type="text" id="d_a" list="d_stl" placeholder="Запорожье" style="width:230px"></div>
@@ -496,7 +496,7 @@ function drawDirs(msg) {
         <section class="panel"><h2>Все направления сайта <span class="muted">(${RP.length})</span></h2>
         <p class="muted">Изменения попадают на сайт после нажатия «Пересобрать сайт» (кнопка вверху страницы), обновление занимает 1–2 минуты.</p>
         <p><input type="text" id="d_q" placeholder="Поиск по названию или файлу" value="${esc(DQ)}" style="width:280px"></p>
-        ${RP.length ? `<table class="g"><thead><tr><th>Страница</th><th>Файл</th><th>Тип</th><th>Код</th><th></th><th></th></tr></thead><tbody id="d_tb">${list}</tbody></table>` : '<p class="muted">Пока ни одного.</p>'}</section>`;
+        ${RP.length ? `<table class="g"><thead><tr><th>Страница</th><th>Файл</th><th>Тип</th><th>Код</th><th></th><th></th><th></th></tr></thead><tbody id="d_tb">${list}</tbody></table>` : '<p class="muted">Пока ни одного.</p>'}</section>`;
     if (er) { dirEditorBind(er); $("#d_edit").scrollIntoView({block: "start"}) }
     const flt = () => { DQ = $("#d_q").value.toLowerCase(); document.querySelectorAll("#d_tb tr").forEach(tr => { const r = RP.find(z => z.id === tr.dataset.id); tr.style.display = !DQ || (r.from_name + " " + r.to_name + " " + r.file + " " + r.id).toLowerCase().includes(DQ) ? "" : "none" }) };
     $("#d_q").oninput = flt; flt();
@@ -542,6 +542,12 @@ function drawDirs(msg) {
         }
     };
     tb.onchange = async e => {
+        const pc = e.target.closest('input[data-a="pop"]');
+        if (pc) {
+            const r = RP.find(x => x.id === pc.closest("tr").dataset.id);
+            try { await db("PATCH", "route_pages?id=eq." + encodeURIComponent(r.id), {popular: pc.checked}); r.popular = pc.checked; toast(pc.checked ? "Будет показываться на главной сразу (после «Пересобрать сайт»)" : "Уйдёт в раскрывающийся список (после «Пересобрать сайт»)") } catch (er) { pc.checked = !pc.checked; toast(er.message) }
+            return
+        }
         const c = e.target.closest('input[data-a="act"]'); if (!c) return;
         const r = RP.find(x => x.id === c.closest("tr").dataset.id);
         try { await db("PATCH", "route_pages?id=eq." + encodeURIComponent(r.id), {active: c.checked}); r.active = c.checked; toast(c.checked ? "Страница включена" : "Страница скрыта") } catch (er) { c.checked = !c.checked; toast(er.message) }
