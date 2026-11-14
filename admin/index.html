@@ -343,14 +343,15 @@
         $("#out").style.display = "";
         $("#out").onclick = logout;
         try {
-            [CT, RT] = await Promise.all([db("GET", "countries?order=sort"), db("GET", "routes?order=sort")])
+            [CT, RT] = await Promise.all([db("GET", "countries?order=sort"), db("GET", "routes?order=sort")]);
+            CFG.PAGES = CFG.pagesFromRows(await db("GET", "route_pages?order=sort,id"))
         } catch (e) {
             return showLogin()
         }
         home()
     }
 
-    /* Страницы маршрутов берутся из config.js (CFG.PAGES); варианты на странице = те, у кого шапка «откуда → куда» совпадает с названием страницы */
+    /* Страницы маршрутов берутся из базы (route_pages → CFG.PAGES); варианты на странице = те, у кого шапка «откуда → куда» совпадает с названием страницы */
     const PAGES = () => (window.CFG && CFG.PAGES) || [];
     const ends = p => String(p.title).split("→").map(x => x.trim());
     const norm = s => String(s || "").trim().toLowerCase();
@@ -365,7 +366,7 @@
         return norm(o.head.from).startsWith(norm(a)) && norm(o.head.to).startsWith(norm(b))
     };
 
-    /* список страниц: группы по направлению (ua-pl, pl-ua …), внутри — порядок config.js: город, затем Варшава, Краков, Хелм, Перемышль.
+    /* список страниц: группы по направлению (ua-pl, pl-ua …), внутри — порядок из вкладки «Направления»: город, затем Варшава, Краков, Хелм, Перемышль.
        Страницы с slice: true (Хелм, Перемышль) не имеют своих вариантов: поезда берутся из вариантов других страниц */
     const pageOpts = cur => {
         const g = new Map();
@@ -415,7 +416,7 @@ ${list.map((o, i) => {
         const app = $("#app");
         app.innerHTML = `<section class="panel" style="margin-top:0"><h2 style="margin:0">Страницы маршрутов</h2>
 <label>Выберите страницу</label><select id="sel"><option value="">—</option>${pageOpts(cur)}<option value="__orph" ${cur === "__orph" ? "selected" : ""}>⚠ Варианты без страницы (проверка)</option></select>
-<p class="legend">Новая страница маршрута: добавьте её в <b>config.js</b> (PAGES), <b>build.js</b> (ROUTES), а тексты страницы введите во вкладке «Направления» админки поездов, затем выполните <b>node sync.js</b>. После этого она появится в этом списке.</p></section>
+<p class="legend">Новая страница маршрута создаётся во вкладке «Направления» админки поездов и сразу появляется в этом списке.</p></section>
 <section class="panel"><details><summary><b>Страны и направления для главной</b></summary><div id="cs"></div><div id="rts"></div></details></section><div id="ed"></div>`;
         $("#sel").onchange = e => {
             const v = e.target.value;
@@ -517,7 +518,7 @@ ${list.map((o, i) => {
         const opts = pg.orph ? all.filter(o => !pages.some(p => onPage(o, p))) : all.filter(o => onPage(o, pg));
         const [fa, fb] = pg.orph ? ["", ""] : ends(pg);
         ed.innerHTML = `<section class="panel"><div class="bar"><h2 style="margin:0">${esc(pg.title)}</h2>${pg.orph ? "" : '<span><button id="cf" class="sm" title="Обновляет дату «Проверено» на странице, не меняя вариантов">✓ Подтвердить актуальность</button> <button id="no">+ Добавить вариант</button></span>'}</div>
-<p class="legend">${pg.orph ? "Варианты, шапка которых не совпадает ни с одной страницей из config.js: на сайте они нигде не показываются. Поправьте шапку или удалите вариант." : `Страница: <a href="../${esc(pg.href)}" target="_blank" rel="noopener">${esc(pg.href)}</a>. Сюда попадают варианты, у которых шапка «${esc(fa)} → ${esc(fb)}». Новые варианты сохраняются с направлением ${esc(pg.route)}.`}</p>
+<p class="legend">${pg.orph ? "Варианты, шапка которых не совпадает ни с одной страницей из списка направлений: на сайте они нигде не показываются. Поправьте шапку или удалите вариант." : `Страница: <a href="../${esc(pg.href)}" target="_blank" rel="noopener">${esc(pg.href)}</a>. Сюда попадают варианты, у которых шапка «${esc(fa)} → ${esc(fb)}». Новые варианты сохраняются с направлением ${esc(pg.route)}.`}</p>
 ${pg.orph ? "" : '<p class="legend" id="lu"></p>'}
 <p>Вариант состоит из <b>шапки</b> (крупно сверху: откуда и куда, вы задаёте её сами) и <b>поездов</b> с таблицами станций. Галочка <b>«Выд.»</b> = станция выделяется крупным шрифтом, остальные показываются мельче и бледнее. Пересадка между поездами добавляется автоматически. Периодичность у каждого поезда по умолчанию «ежедневно»; если поезд ходит иначе, впишите в поле, например «по нечётным дням», «по чётным дням» или «пн, ср, пт». Варианты на сайте всегда идут по времени отправления. Название станции пишите по-русски: на других языках сайт переведёт его по словарю.</p><div id="ol"></div></section>`;
         const lastUpd = () => {
