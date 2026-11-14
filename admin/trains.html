@@ -323,6 +323,7 @@ async function load() {
     [ST, TR, SP, CN, LG, RT] = await Promise.all([
         dbAll("stations?order=name_ru"), dbAll("trains?order=number"), dbAll("train_stops?order=train_id,seq"),
         dbAll("connections?order=route_slug,sort"), dbAll("connection_legs?order=connection_id,pos"), db("GET", "routes?order=sort")]);
+    CFG.PAGES = CFG.pagesFromRows(await db("GET", "route_pages?order=sort,id").catch(() => [])); /* страницы маршрутов — из базы */
     index()
 }
 const findStation = name => {
@@ -373,7 +374,7 @@ function shell() {
 const DIR_CTRY = [["pl", "Польша"], ["cz", "Чехия"], ["hu", "Венгрия"], ["at", "Австрия"], ["sk", "Словакия"], ["ro", "Румыния"], ["md", "Молдова"], ["de", "Германия"]];
 const DIR_KINDS = {slice: "Прямые поезда из существующих вариантов (как Киев → Хелм)", direct: "Прямые поезда, варианты добавляю вручную (как Киев → Кишинев)", transfer: "С пересадкой на станции (как Киев → Краков)"};
 const DIR_KIND_LBL = {custom: "встроенная", slice: "прямые из вариантов", direct: "прямые вручную", transfer: "с пересадкой"};
-/* параметры страницы (поля ROUTES из build.js): [ключ, тип, подпись, основной?]. Типы: text, pair (две станции), bool (не задано / да / нет), sel:значения */
+/* параметры страницы (поля страницы в route_pages.extra): [ключ, тип, подпись, основной?]. Типы: text, pair (две станции), bool (не задано / да / нет), sel:значения */
 const DIR_P = [
     ["x", "text", "Станция пересадки (пусто — Хелм)", 1], ["uz", "pair", "Покупка: Укрзалізниця (от — до)", 1], ["pkp", "pair", "Покупка: второй перевозчик (от — до)", 1],
     ["car", "text", "Второй перевозчик: zssk, cfr, cd, oebb, mav (пусто — PKP Intercity)", 1], ["border", "sel:after,before", "Пограничный контроль на станции пересадки", 1],
@@ -490,7 +491,7 @@ function drawDirs(msg) {
         <div id="d_err"></div>
         <p><button class="pri" id="d_add">Создать направление</button> ${msg ? `<span class="chip gr">${esc(msg)}</span>` : ""}</p></section>
         <section class="panel"><h2>Все направления сайта <span class="muted">(${RP.length})</span></h2>
-        <p class="muted">Изменения попадают на сайт после пересборки: на компьютере с сайтом выполните <code>node sync.js</code> (вместо <code>node build.js</code>) и выложите изменения, либо нажмите «Пересобрать сайт» вверху страницы. Если страницы в списке нет, её нужно один раз перенести из build.js: выполните <code>route_pages_seed.sql</code>.</p>
+        <p class="muted">Изменения попадают на сайт после нажатия «Пересобрать сайт» (кнопка вверху страницы), обновление занимает 1–2 минуты.</p>
         <p><input type="text" id="d_q" placeholder="Поиск по названию или файлу" value="${esc(DQ)}" style="width:280px"></p>
         ${RP.length ? `<table class="g"><thead><tr><th>Страница</th><th>Файл</th><th>Тип</th><th>Код</th><th></th><th></th></tr></thead><tbody id="d_tb">${list}</tbody></table>` : '<p class="muted">Пока ни одного.</p>'}</section>`;
     if (er) { dirEditorBind(er); $("#d_edit").scrollIntoView({block: "start"}) }
@@ -533,7 +534,7 @@ function drawDirs(msg) {
         const b = e.target.closest("button"); if (!b) return;
         const r = RP.find(x => x.id === b.closest("tr").dataset.id);
         if (b.dataset.a === "edit") { EDIT = r.id; drawDirs(); return }
-        if (b.dataset.a === "del" && confirm("Удалить «" + r.from_name + " → " + r.to_name + "» из списка? Уже собранный файл " + r.file + " останется на сайте, пока вы не удалите его вручную. Если страница ещё есть и в ROUTES в build.js, она снова появится при сборке: чтобы её убрать, лучше выключите «показывать».")) {
+        if (b.dataset.a === "del" && confirm("Удалить «" + r.from_name + " → " + r.to_name + "» из списка? Уже собранный файл " + r.file + " останется на сайте, пока вы не удалите его вручную. Чтобы страница пропала с сайта, а не из списка, достаточно снять галочку «показывать».")) {
             try { await db("DELETE", "route_pages?id=eq." + encodeURIComponent(r.id)); RP = RP.filter(x => x.id !== r.id); drawDirs("Удалено") } catch (er) { toast(er.message) }
         }
     };
@@ -558,7 +559,7 @@ function viewStations() {
         <td><select data-f="tz_hours"><option value="1" ${s.tz_hours == 1 ? "selected" : ""}>UTC+1</option><option value="2" ${s.tz_hours == 2 ? "selected" : ""}>UTC+2</option></select></td>
         <td class="x"><button data-a="save">Сохранить</button> ${s.id ? '<button data-a="del">✕</button>' : ""}</td></tr>`;
     v.innerHTML = `<section class="panel"><h2>Станции <span class="muted">(${ST.length})</span></h2>
-        <p class="muted">Названия на других языках и формы «в Хелме» / «у Хелмі» / «w Chełmie» (нужны для заголовков вроде «С пересадкой в Хелме»). Если поле пустое, сайт покажет русское название. Изменения попадают на сайт после <b>node sync.js</b> или кнопки «Пересобрать сайт» вверху страницы.</p>
+        <p class="muted">Названия на других языках и формы «в Хелме» / «у Хелмі» / «w Chełmie» (нужны для заголовков вроде «С пересадкой в Хелме»). Если поле пустое, сайт покажет русское название. Изменения попадают на сайт после нажатия «Пересобрать сайт» вверху страницы.</p>
         <div class="frow"><input type="text" id="sf" placeholder="Поиск станции" style="width:240px"><label><input type="checkbox" id="nt"> без перевода</label></div>
         <div id="se"></div>
         <table class="g"><thead><tr><th>Русское</th><th>Українська</th><th>English</th><th>Polski</th><th>в … (ru)</th><th>у … (uk)</th><th>w … (pl)</th><th>Пояс</th><th></th></tr></thead><tbody id="stb"></tbody></table></section>`;
@@ -601,7 +602,7 @@ async function viewTexts() {
         ${["ru", "uk", "en", "pl"].map(l => `<td><textarea data-f="${l}" rows="${Math.min(6, Math.max(1, Math.ceil(String(x[l] || "").length / 34)))}" style="width:100%;min-width:190px">${esc(x[l])}</textarea></td>`).join("")}
         <td class="x"><button data-a="save">Сохранить</button> ${x.key ? '<button data-a="del">✕</button>' : ""}</td></tr>`;
     v.innerHTML = `<section class="panel"><h2>Тексты сайта <span class="muted">(${TX.length})</span></h2>
-        <p class="muted">Подписи, подсказки, шаги покупки и подвал на всех языках. Русский — основной: если другой язык пустой, на сайте будет русский текст. В текстах работают подстановки вида <code>{n}</code>, <code>{FROM}</code>, <code>{uz}</code> и HTML-теги, как в исходных. Ключи <code>cn.xx</code> и <code>cn.xx.gen</code> — названия стран (<code>.gen</code> — родительный падеж). Тексты страниц маршрутов лежат во вкладке «Направления», названия станций — во вкладке «Станции». Изменения попадают на сайт после <b>node sync.js</b> или кнопки «Пересобрать сайт» вверху страницы.</p>
+        <p class="muted">Подписи, подсказки, шаги покупки и подвал на всех языках. Русский — основной: если другой язык пустой, на сайте будет русский текст. В текстах работают подстановки вида <code>{n}</code>, <code>{FROM}</code>, <code>{uz}</code> и HTML-теги, как в исходных. Ключи <code>cn.xx</code> и <code>cn.xx.gen</code> — названия стран (<code>.gen</code> — родительный падеж). Тексты страниц маршрутов лежат во вкладке «Направления», названия станций — во вкладке «Станции». Изменения попадают на сайт после нажатия «Пересобрать сайт» вверху страницы.</p>
         <div class="frow"><input type="text" id="txf" placeholder="Поиск по ключу или тексту" style="width:260px">
         <select id="txg"><option value="">все группы</option>${groups.map(g => `<option>${esc(g)}</option>`).join("")}</select>
         <label><input type="checkbox" id="txn"> без перевода</label></div>
