@@ -82,5 +82,5 @@ node build.js
 - `style.css`: оформление;
 - `config.js`: ключи Supabase;
 - `index.html`, `uk/`, `en/`, `pl/`, `kyiv-warsaw.html` и другие страницы маршрутов, `sitemap.xml`: результат сборки;
-- `admin/index.html`: админка;
+- `admin/trains.html`: админка (страны, направления, поезда, варианты, станции, тексты); `admin/index.html` только перенаправляет на неё;
 - `schema.sql`, `seed.sql`, `i18n.sql`: база.
