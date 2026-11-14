@@ -368,9 +368,9 @@ async function start() {
     shell()
 }
 function shell() {
-    $("#app").innerHTML = `<div class="tabs">${[["trains", "Поезда"], ["conns", "Варианты"], ["dirs", "Направления"], ["stations", "Станции"], ["countries", "Страны"], ["texts", "Тексты"]].map(([k, v]) => `<button data-t="${k}" class="${TAB === k ? "on" : ""}">${v}</button>`).join("")}</div><div id="view"></div>`;
+    $("#app").innerHTML = `<div class="tabs">${[["trains", "Поезда"], ["conns", "Варианты"], ["dirs", "Направления"], ["stations", "Станции"], ["countries", "Страны"], ["home", "Главная"], ["texts", "Тексты"]].map(([k, v]) => `<button data-t="${k}" class="${TAB === k ? "on" : ""}">${v}</button>`).join("")}</div><div id="view"></div>`;
     document.querySelectorAll(".tabs button").forEach(b => b.onclick = () => { TAB = b.dataset.t; shell() });
-    ({trains: viewTrains, conns: viewConns, dirs: viewDirs, stations: viewStations, countries: viewCountries, texts: viewTexts})[TAB]()
+    ({trains: viewTrains, conns: viewConns, dirs: viewDirs, stations: viewStations, countries: viewCountries, home: viewHome, texts: viewTexts})[TAB]()
 }
 
 /* ================= направления (страницы маршрутов сайта) ================= */
@@ -613,6 +613,55 @@ async function viewCountries() {
                 await db("DELETE", "ui_texts?key=in.(cn." + slug + ",cn." + slug + ".gen)", undefined, "return=minimal");
                 toast("Удалено"); viewCountries()
             } catch (e) { alert(e.message || e) }
+        }
+    })
+}
+
+/* ================= главная: телефоны, где купить билет, аэропорты (таблица home_links) ================= */
+const HOME_KINDS = [
+    {k: "phone", h: "Телефоны поддержки", hint: "Номер так, как он должен выглядеть на сайте; ссылка для звонка строится из цифр.", f: [["label_ru", "Номер", 150]]},
+    {k: "buy", h: "Где купить билет (кнопки)", hint: "Название на каждом языке (пустое — берётся русское) и ссылка.", f: [["label_ru", "RU", 170], ["label_uk", "UK", 150], ["label_en", "EN", 130], ["label_pl", "PL", 150], ["url", "Ссылка (https://…)", 240]]},
+    {k: "airport", h: "Аэропорты", hint: "Город так, как он называется в справочнике станций (на другие языки переводится сам), и ссылка на сайт аэропорта.", f: [["label_ru", "Город", 170], ["url", "Ссылка (https://…)", 300]]}];
+async function viewHome() {
+    const v = $("#view");
+    v.innerHTML = '<section class="panel"><p class="muted">Загрузка…</p></section>';
+    let rows;
+    try { rows = await db("GET", "home_links?order=kind,sort,id") } catch (e) { v.innerHTML = `<section class="panel"><h2>Главная</h2><div class="errbox">${esc(e.message)}</div><p class="muted">Если таблицы home_links нет, выполните db/cleanup-6-home-links.sql в Supabase.</p></section>`; return }
+    const check = (kind, o) => {
+        if (!o.label_ru) return "Заполните основное поле";
+        if (kind === "phone" && o.label_ru.replace(/\D/g, "").length < 5) return "В номере должно быть не меньше пяти цифр";
+        if (kind !== "phone" && !/^https?:\/\//.test(o.url)) return "Ссылка должна начинаться с https://";
+        return ""
+    };
+    const rowHtml = (K, r) => `<tr data-id="${esc(r.id || "")}" ${r.active === false ? 'style="opacity:.55"' : ""}>${K.f.map(([f, , w]) => `<td><input type="text" data-f="${f}" value="${esc(r[f] || "")}" style="width:${w}px"></td>`).join("")}
+        <td><input type="text" data-f="sort" value="${esc(r.sort)}" style="width:55px"></td>
+        <td><label><input type="checkbox" data-f="active" ${r.active === false ? "" : "checked"}> показывать</label></td>
+        <td class="x">${r.id ? '<button data-a="del" title="Удалить">✕</button>' : '<button class="pri" data-a="add">+ Добавить</button>'}</td></tr>`;
+    v.innerHTML = `<section class="panel"><h2>Главная страница</h2><p class="muted">Блок «Полезная информация» внизу главной. Заголовки и пояснения к нему правятся во вкладке «Тексты» (ключи ix.help.*, ix.buy.h, ix.fly.*). Изменения попадают на сайт после «Пересобрать сайт». Порядок — по числу в колонке «№».</p></section>`
+        + HOME_KINDS.map(K => `<section class="panel" data-k="${K.k}"><h3 style="margin:0 0 4px">${K.h}</h3><p class="muted">${K.hint}</p><div class="err"></div>
+        <table class="g"><thead><tr>${K.f.map(([, n]) => "<th>" + n + "</th>").join("")}<th>№</th><th></th><th></th></tr></thead><tbody>${rows.filter(r => r.kind === K.k).map(r => rowHtml(K, r)).join("")}${rowHtml(K, {sort: rows.filter(r => r.kind === K.k).reduce((m, r) => Math.max(m, r.sort), 0) + 10})}</tbody></table></section>`).join("");
+    v.querySelectorAll("section[data-k]").forEach(sec => {
+        const kind = sec.dataset.k, K = HOME_KINDS.find(x => x.k === kind), box = sec.querySelector(".err");
+        const read = tr => { const o = {kind}; tr.querySelectorAll("[data-f]").forEach(i => o[i.dataset.f] = i.type === "checkbox" ? i.checked : i.value.trim()); o.sort = /^-?\d+$/.test(o.sort) ? +o.sort : NaN; return o };
+        const bad = o => Number.isNaN(o.sort) ? "Порядок — целое число" : check(kind, o);
+        sec.onchange = async e => {
+            const tr = e.target.closest("tr"); if (!tr || !tr.dataset.id) return;
+            const o = read(tr), er = bad(o);
+            if (er) { box.innerHTML = '<div class="errbox">' + esc(er) + "</div>"; return }
+            box.innerHTML = "";
+            try { await db("PATCH", "home_links?id=eq." + encodeURIComponent(tr.dataset.id), o, "return=minimal"); toast("Сохранено. Чтобы изменение появилось на сайте, нажмите «Пересобрать сайт»") } catch (x) { box.innerHTML = '<div class="errbox">' + esc(x.message) + "</div>" }
+        };
+        sec.onclick = async e => {
+            const b = e.target.closest("button[data-a]"); if (!b) return;
+            const tr = b.closest("tr");
+            if (b.dataset.a === "add") {
+                const o = read(tr), er = bad(o);
+                if (er) { box.innerHTML = '<div class="errbox">' + esc(er) + "</div>"; return }
+                try { await db("POST", "home_links", o, "return=minimal"); toast("Добавлено"); viewHome() } catch (x) { box.innerHTML = '<div class="errbox">' + esc(x.message) + "</div>" }
+            } else if (b.dataset.a === "del") {
+                if (!confirm("Удалить эту строку?")) return;
+                try { await db("DELETE", "home_links?id=eq." + encodeURIComponent(tr.dataset.id), undefined, "return=minimal"); toast("Удалено"); viewHome() } catch (x) { box.innerHTML = '<div class="errbox">' + esc(x.message) + "</div>" }
+            }
         }
     })
 }

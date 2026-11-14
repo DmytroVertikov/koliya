@@ -3701,5 +3701,115 @@
    "number": "716Л",
    "badge": "seat"
   }
+ ],
+ "home_links": [
+  {
+   "kind": "airport",
+   "sort": 10,
+   "label_ru": "Варшава",
+   "label_uk": "",
+   "label_en": "",
+   "label_pl": "",
+   "url": "https://www.lotnisko-chopina.pl/en/index.html"
+  },
+  {
+   "kind": "airport",
+   "sort": 20,
+   "label_ru": "Будапешт",
+   "label_uk": "",
+   "label_en": "",
+   "label_pl": "",
+   "url": "https://www.bud.hu/en"
+  },
+  {
+   "kind": "airport",
+   "sort": 30,
+   "label_ru": "Вена",
+   "label_uk": "",
+   "label_en": "",
+   "label_pl": "",
+   "url": "https://www.viennaairport.com/"
+  },
+  {
+   "kind": "airport",
+   "sort": 40,
+   "label_ru": "Краков",
+   "label_uk": "",
+   "label_en": "",
+   "label_pl": "",
+   "url": "https://www.krakowairport.pl/en/"
+  },
+  {
+   "kind": "airport",
+   "sort": 50,
+   "label_ru": "Жешув",
+   "label_uk": "",
+   "label_en": "",
+   "label_pl": "",
+   "url": "https://www.rzeszowairport.pl/ua"
+  },
+  {
+   "kind": "airport",
+   "sort": 60,
+   "label_ru": "Кошице",
+   "label_uk": "",
+   "label_en": "",
+   "label_pl": "",
+   "url": "https://www.airportkosice.sk/en"
+  },
+  {
+   "kind": "airport",
+   "sort": 70,
+   "label_ru": "Кишинёв",
+   "label_uk": "",
+   "label_en": "",
+   "label_pl": "",
+   "url": "https://airport.md/"
+  },
+  {
+   "kind": "airport",
+   "sort": 80,
+   "label_ru": "Яссы",
+   "label_uk": "",
+   "label_en": "",
+   "label_pl": "",
+   "url": "https://www.aeroport-iasi.ro"
+  },
+  {
+   "kind": "buy",
+   "sort": 10,
+   "label_ru": "Приложение Укрзализныци",
+   "label_uk": "Застосунок Укрзалізниці",
+   "label_en": "Ukrzaliznytsia app",
+   "label_pl": "Aplikacja Ukrzaliznyci",
+   "url": "https://app.uz.gov.ua/start"
+  },
+  {
+   "kind": "buy",
+   "sort": 20,
+   "label_ru": "Сайт УЗ",
+   "label_uk": "Сайт УЗ",
+   "label_en": "UZ website",
+   "label_pl": "Strona UZ",
+   "url": "https://uz.gov.ua/"
+  },
+  {
+   "kind": "phone",
+   "sort": 10,
+   "label_ru": "0 800 503 111",
+   "label_uk": "",
+   "label_en": "",
+   "label_pl": "",
+   "url": ""
+  },
+  {
+   "kind": "phone",
+   "sort": 20,
+   "label_ru": "044 465 33 44",
+   "label_uk": "",
+   "label_en": "",
+   "label_pl": "",
+   "url": ""
+  }
  ]
 }
