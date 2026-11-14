@@ -305,6 +305,8 @@ async function dbAll(path) { /* Supabase отдаёт максимум 1000 ст
 
 /* ---------- данные ---------- */
 let ST = [], TR = [], SP = [], CN = [], LG = [], RT = [];
+/* пометки поездов для карточек в админке: всегда из актуального списка поездов */
+Object.defineProperty(CFG, "TRAIN_BADGES", {get: () => TR.reduce((o, t) => { if (t.badge) (o[t.badge] = o[t.badge] || []).push(t.number); return o }, {})});
 let stById, trById, spByTrain, legsByConn, usedBy;
 function index() {
     stById = new Map(ST.map(s => [s.id, s]));
@@ -735,7 +737,7 @@ function trainEditor() {
         <div class="frow">
             <div><label>Номер</label><input type="text" id="tnum" value="${esc(T.number)}" placeholder="019К или IC 12010" style="width:180px"></div>
             <div><label>Периодичность (пусто = ежедневно)</label><input type="text" id="tfr" value="${esc(T.freq)}" style="width:260px"></div>
-            <div><label>Пометка</label><select id="tbd"><option value="">нет</option><option value="seat" ${T.badge === "seat" ? "selected" : ""}>сидячий</option></select></div>
+            <div><label>Пометка</label><select id="tbd"><option value="">нет</option><option value="seat" ${T.badge === "seat" ? "selected" : ""}>сидячий интерсити</option><option value="odd" ${T.badge === "odd" ? "selected" : ""}>по нечётным числам</option><option value="even" ${T.badge === "even" ? "selected" : ""}>по чётным числам</option></select></div>
             <div><label>Перевозчик / заметка</label><input type="text" id="tnt" value="${esc(T.note)}" style="width:280px"></div>
         </div>
         <p class="muted">Для каждой станции укажите время <b style="color:var(--bl)">прибытия</b> и <b style="color:var(--gr)">отправления</b> (местное). У первой станции есть только отправление, у последней — только прибытие. Вводите только цифры («1906» → 19:06): курсор сам перейдёт к следующему полю. Сутки считаются сами: если время «перескочило» назад, значит прошла полночь.</p>

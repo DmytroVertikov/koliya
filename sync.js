@@ -1,6 +1,6 @@
 /* Колія: node sync.js
    1) забирает из админки (Supabase): направления (таблица route_pages, все записи, включая выключенные, вместе с их текстами) → routes.db.json;
-      тексты интерфейса (ui_texts), станции с переводами (stations) и страны (countries) → i18n.db.json
+      тексты интерфейса (ui_texts), станции с переводами (stations) страны (countries) и пометки поездов (trains.badge) → i18n.db.json
    2) запускает сборку build.js
    Вместо прежнего «node build.js» теперь запускать «node sync.js». Если база недоступна, берётся прежний routes.db.json.
    Нужен Node 18+ (встроенный fetch). */
@@ -29,9 +29,9 @@ const CFG = new Function("window", fs.readFileSync("config.js", "utf8") + "\n;re
     }
   };
   try {
-    const countries = await get("countries?select=slug,name,flag,sort&order=sort,slug"), ui = await get("ui_texts?select=key,ru,uk,en,pl&order=key"), stations = await get("stations?select=name_ru,name_uk,name_en,name_pl,in_ru,in_uk,in_pl,aliases&order=name_ru");
+    const trains = await get("trains?select=number,badge&badge=not.is.null&order=number"), countries = await get("countries?select=slug,name,flag,sort&order=sort,slug"), ui = await get("ui_texts?select=key,ru,uk,en,pl&order=key"), stations = await get("stations?select=name_ru,name_uk,name_en,name_pl,in_ru,in_uk,in_pl,aliases&order=name_ru");
     if (!ui.length) throw new Error("ui_texts пуста: выполните i18n.sql в Supabase");
-    fs.writeFileSync("i18n.db.json", JSON.stringify({ui, stations, countries}, null, 1) + "\n");
+    fs.writeFileSync("i18n.db.json", JSON.stringify({ui, stations, countries, trains}, null, 1) + "\n");
     console.log("sync.js: текстов интерфейса: " + ui.length + ", станций: " + stations.length)
   } catch (e) {
     console.warn("sync.js: не удалось получить переводы из базы (" + e.message + "). Берётся прежний i18n.db.json.")

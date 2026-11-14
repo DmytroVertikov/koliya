@@ -220,15 +220,11 @@ function trainName(t) {
     return m ? m[1].toUpperCase() + " " + m[2].toUpperCase() : t_no() + t.toUpperCase()
 }
 
-/* Пометки у поездов: ключ подписи в i18n → номера поездов. Буква в номере — кириллическая («070О», «070К»), но латиница O/K тоже сработает; регистр, пробелы и ведущие нули не важны */
-const TRAIN_BADGES = {
-    seat: ["705К", "715К", "706Л", "716Л"], /* сидячий интерсити */
-    odd: ["070О"], /* ходит по нечётным числам */
-    even: ["070К"] /* ходит по чётным числам */
-};
+/* Пометки у поездов (seat / odd / even → номера поездов) приходят из базы (trains.badge): на сайте через pages.js (CFG.TRAIN_BADGES), в админке из списка поездов.
+   Буква в номере кириллическая; латинские K и O тоже сработают, регистр, пробелы и ведущие нули не важны. */
 const ICON = {seat: "💺", odd: "📅", even: "📅"};
 const trainKey = n => String(n || "").toUpperCase().replace(/[\s№]/g, "").replace(/K/g, "К").replace(/O/g, "О").replace(/^0+/, "");
-const trainBadges = n => Object.keys(TRAIN_BADGES).filter(k => TRAIN_BADGES[k].some(x => trainKey(x) === trainKey(n)));
+const trainBadges = n => { const B = (window.CFG && CFG.TRAIN_BADGES) || {}; return Object.keys(B).sort().reverse().filter(k => ICON[k] && B[k].some(x => trainKey(x) === trainKey(n))) }; /* порядок: seat, odd, even */
 /* у поезда с пометкой «по нечётным/чётным» периодичность берётся из неё, даже если в базе указано «ежедневно» */
 const isDaily = f => !String(f || "").trim() || /^ежедневно$/.test(String(f).trim().toLowerCase());
 const oddEven = L => isDaily(L.freq) ? trainBadges(L.train).find(k => k === "odd" || k === "even") : "";

@@ -173,8 +173,10 @@ for (const r of ROUTES) for (const l of LANGS) {
 const hx = s => String(s == null ? "" : s).replace(/[&<>"']/g, c => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"}[c]));
 const CFG = new Function("window", fs.readFileSync("config.js", "utf8") + "\n;return window.CFG")({});
 const PGS = CFG.pagesFromRows(DBR); /* порядок — по полю sort, как в базе (sync.js забирает записи уже отсортированными) */
-/* pages.js: тот же список для браузера (главная, блок «Другие направления», админка) */
-fs.writeFileSync("pages.js", "/* создаётся сборкой (node sync.js) из таблицы route_pages, руками не править */\nwindow.CFG.PAGES = " + JSON.stringify(PGS) + ";\n");
+/* pages.js: данные из базы для браузера: список страниц (главная, блок «Другие направления») и пометки поездов (trains.badge: seat / odd / even → номера поездов) */
+const BADGES = {};
+for (const t of (() => { try { return JSON.parse(fs.readFileSync("i18n.db.json", "utf8")).trains || [] } catch (e) { return [] } })()) (BADGES[t.badge] = BADGES[t.badge] || []).push(t.number);
+fs.writeFileSync("pages.js", "/* создаётся сборкой (node sync.js) из базы, руками не править */\nwindow.CFG.PAGES = " + JSON.stringify(PGS) + ";\nwindow.CFG.TRAIN_BADGES = " + JSON.stringify(BADGES) + ";\n");
 /* страны: [код, название, «в …» (вин.), «из …» (род.), флаг-эмодзи]; порядок — как на главной (поле sort).
    Список и флаги — таблица countries, русские формы — ui_texts (cn.<код>, cn.<код>.gen, колонка ru); для uk/en/pl названия берутся из I.CN. Правятся во вкладке «Страны» админки. */
 const CTRY = (() => {

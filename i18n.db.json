@@ -3675,5 +3675,31 @@
    "flag": "🇩🇪",
    "sort": 70
   }
+ ],
+ "trains": [
+  {
+   "number": "070К",
+   "badge": "even"
+  },
+  {
+   "number": "070О",
+   "badge": "odd"
+  },
+  {
+   "number": "705К",
+   "badge": "seat"
+  },
+  {
+   "number": "706Л",
+   "badge": "seat"
+  },
+  {
+   "number": "715К",
+   "badge": "seat"
+  },
+  {
+   "number": "716Л",
+   "badge": "seat"
+  }
  ]
 }
