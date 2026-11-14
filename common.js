@@ -12,10 +12,6 @@ const esc = s => String(s == null ? "" : s).replace(/[&<>"']/g, c => ({
     '"': "&quot;",
     "'": "&#39;"
 }[c]));
-const safeUrl = u => {
-    u = String(u || "").trim();
-    return /^https?:\/\//i.test(u) ? u : "#"
-};
 
 /* i18n: язык страницы задаёт window.LANG (ru по умолчанию), словари лежат в dict/<язык>.js, их создаёт build.js из базы (подключать до common.js) */
 const LG = window.LANG || "ru", TR = (window.I18N && I18N[LG]) || {};
@@ -62,7 +58,6 @@ const tzKnown = n => {
     n = String(n || "").trim().toLowerCase();
     return CET_STATIONS.some(p => n.startsWith(p)) ? 1 : EET_STATIONS.some(p => n.startsWith(p)) ? 2 : null
 };
-const tzOf = n => tzKnown(n) || 2;
 
 /* полное время в пути: каждое «местное» время переводим на общую шкалу (местное − пояс) и идём по станциям вперёд — до ближайшего такого же времени позже предыдущего
    (так учитываются сутки и более, пояс меняется на границе прямо по ходу поезда, а ожидание на пересадке входит в итог).
@@ -157,43 +152,6 @@ function parseOption(dsl) {
     return {head, legs}
 }
 
-function serializeOption(o) {
-    const j = (n, t) => ((n || "").trim() + " " + (t || "").trim()).trim(), h = o.head || {};
-    const hs = "@ " + j(h.from, h.ft) + " > " + j(h.to, h.tt) + ((h.dur || h.tag) ? " ; " + (h.dur || "").trim() : "") + (h.tag ? " ; " + h.tag.trim() : "");
-    return [hs].concat((o.legs || []).map(L => (L.train || "").trim() + ((L.freq || "").trim() && !/^ежедневно$/i.test(L.freq.trim()) ? " ~ " + L.freq.trim() : "") + ": " + L.stops.map(s => (s.hl ? "*" : "") + j(s.name, s.time)).join(" > "))).join("||")
-}
-
-function validateOption(o) {
-    const e = [], h = o.head || {}, bad = /[>|*;]/, tm = /^\d{1,2}:\d{2}/;
-    if (!(h.from || "").trim()) e.push("Шапка: укажите, откуда");
-    if (!(h.to || "").trim()) e.push("Шапка: укажите, куда");
-    if (bad.test((h.from || "") + (h.to || ""))) e.push("Шапка: в названиях нельзя > | * ;");
-    if (!tm.test((h.ft || "").trim())) e.push("Шапка: время отправления вида 19:29");
-    if (!tm.test((h.tt || "").trim())) e.push("Шапка: время прибытия вида 10:24");
-    if (/[|;]/.test((h.dur || "") + (h.tag || ""))) e.push("Шапка: в «в пути» и плашке нельзя | ;");
-    if (!(o.legs || []).length) e.push("Добавьте хотя бы один поезд");
-    (o.legs || []).forEach((L, i) => {
-        const n = "Поезд " + (i + 1) + ": ";
-        if (!(L.train || "").trim()) e.push(n + "укажите номер поезда");
-        if (/[:>|*;~]/.test(L.train || "")) e.push(n + "в номере нельзя : > | * ; ~");
-        if (/[:>|*;~]/.test(L.freq || "")) e.push(n + "в периодичности нельзя : > | * ; ~");
-        if (L.stops.length < 2) e.push(n + "нужно минимум 2 станции");
-        L.stops.forEach((s, k) => {
-            if (!s.name.trim()) e.push(n + "станция " + (k + 1) + " без названия");
-            if (bad.test(s.name)) e.push(n + "в названии станции нельзя > | * ;");
-            if (!tm.test(s.time.trim())) e.push(n + "станция " + (k + 1) + ": время вида 19:06")
-        })
-    });
-    return e
-}
-
-/* совместимость со старым кодом */
-function parseDsl(t) {
-    const p = parseOption(t);
-    if (!p.legs.length) throw new Error("Пустой маршрут");
-    return p.legs.map(L => ({train: L.train, st: L.stops.map(s => [s.name, s.time])}))
-}
-
 /* «в Хелме»: предложный падеж для односложных названий; для составных вернёт "" и плашка покажет «Пересадка: Название» */
 const CITY_IN = {"Хелм": "в Хелме", "Перемышль": "в Перемышле", "Чоп": "в Чопе", "Жешув": "в Жешуве", "Люблин": "в Люблине", "Варшава": "в Варшаве", "Краков": "в Кракове", "Львов": "во Львове", "Киев": "в Киеве", "Ясиня": "в Ясине", "Мостиска": "в Мостисках", "Медика": "в Медике", "Дорогуск": "в Дорогуске"};
 
@@ -230,7 +188,6 @@ const isDaily = f => !String(f || "").trim() || /^ежедневно$/.test(Stri
 const oddEven = L => isDaily(L.freq) ? trainBadges(L.train).find(k => k === "odd" || k === "even") : "";
 /* в заголовке поезда периодичность не дублируем, если она совпадает с пометкой «по чётным/нечётным» */
 const hideFq = L => { const k = trainBadges(L.train).find(k => k === "odd" || k === "even"); return !!k && (isDaily(L.freq) || freqTxt(L.freq) === t("d." + k)) };
-const legFreq = L => { const k = oddEven(L); return k ? t(k) : freqTxt(L.freq) };
 /* в сводке карточки — первая «особая» периодичность среди всех поездов маршрута (не только первого) */
 const sumFreq = legs => {
     for (const L of legs) { if (!isDaily(L.freq)) return freqTxt(L.freq); const k = oddEven(L); if (k) return t(k) }
