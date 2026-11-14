@@ -190,7 +190,14 @@ const CTRY = (() => {
     return [c.slug, c.name, o.acc || c.name, o.gen || c.name, c.flag || ""]
   })
 })();
-const AIR = [["Варшава", "https://www.lotnisko-chopina.pl/en/index.html"], ["Будапешт", "https://www.bud.hu/en"], ["Вена", "https://www.viennaairport.com/"], ["Краков", "https://www.krakowairport.pl/en/"], ["Жешув", "https://www.rzeszowairport.pl/ua"], ["Кошице", "https://www.airportkosice.sk/en"], ["Кишинёв", "https://airport.md/"], ["Яссы", "https://www.aeroport-iasi.ro"]];
+/* ссылки блока «Полезная информация» на главной: телефоны, где купить билет, аэропорты — таблица home_links (вкладка «Главная» в админке) */
+const HL = (() => {
+  let db; try { db = JSON.parse(fs.readFileSync("i18n.db.json", "utf8")) } catch (e) { db = {} }
+  if (!Array.isArray(db.home_links)) throw new Error("build.js: в i18n.db.json нет ссылок главной (home_links). Выполните node sync.js");
+  return db.home_links
+})();
+const hlist = k => HL.filter(x => x.kind === k).sort((x, y) => x.sort - y.sort);
+const hlab = (x, l) => x["label_" + l] || x.label_ru;
 const OGL = {ru: "ru_RU", uk: "uk_UA", en: "en_US", pl: "pl_PL"};
 const ctryOf = p => p.route.replace(/^ua-|-ua$/, "");
 /* страницы, которые показываются на главной сразу, — отмечены галочкой «на главной» во вкладке «Направления» (route_pages.popular);
@@ -225,9 +232,9 @@ for (const l of LANGS) {
     const top = POP[c[0]] ? all.filter(p => POP[c[0]].includes(p.href)) : all, rest = all.filter(p => !top.includes(p));
     return `<div class="pg"><h3>${flag(c, 21, 16)}${hx(names[c[0]])}</h3><div class="rts">${top.map(chip).join("")}</div>${rest.length ? `<details><summary>${hx(fill(d["ix.more"], {n: rest.length}))}</summary><div class="rts">${rest.map(chip).join("")}</div></details>` : ""}</div>`
   }).filter(Boolean).join("\n");
-  v.info = `<div><h3>${hx(d["ix.help.h"])}</h3><p><a href="tel:0800503111"><b>0 800 503 111</b></a> · <a href="tel:0444653344"><b>044 465 33 44</b></a></p><p>${hx(d["ix.help.p"])}</p></div>
-<div><h3>${hx(d["ix.buy.h"])}</h3><p class="lk"><a href="https://app.uz.gov.ua/start">${hx(d["ix.buy.b1"])}</a><a href="https://uz.gov.ua/">${hx(d["ix.buy.b2"])}</a></p></div>
-<div><h3>${hx(d["ix.fly.h"])}</h3><p>${hx(d["ix.fly.p"])}</p><p class="lk">${AIR.map(a => `<a href="${a[1]}" target="_blank" rel="noopener">${hx(st(a[0], l))}</a>`).join("")}</p></div>`;
+  v.info = `<div><h3>${hx(d["ix.help.h"])}</h3><p>${hlist("phone").map(x => `<a href="tel:${hx(x.label_ru.replace(/[^\d+]/g, ""))}"><b>${hx(x.label_ru)}</b></a>`).join(" · ")}</p><p>${hx(d["ix.help.p"])}</p></div>
+<div><h3>${hx(d["ix.buy.h"])}</h3><p class="lk">${hlist("buy").map(x => `<a href="${hx(x.url)}">${hx(hlab(x, l))}</a>`).join("")}</p></div>
+<div><h3>${hx(d["ix.fly.h"])}</h3><p>${hx(d["ix.fly.p"])}</p><p class="lk">${hlist("airport").map(x => `<a href="${hx(x.url)}" target="_blank" rel="noopener">${hx(st(x.label_ru, l))}</a>`).join("")}</p></div>`;
   /* подвал — тот же состав, что в FOOTER_HTML (common.js); скрипт потом перерисует его так же */
   v.footer = `<div class="fcols">\n<div><b>🚆 Колія</b><p>${d.f1}</p></div>\n<div><b>${d.f2h}</b>\n<p>${d.f2a}</p>\n<p>${d.f2b}</p>\n<p>${d.f2c}</p></div>\n<div><b>${d.f3h}</b><p>${d.f3}</p></div></div>\n<p class="fine">${d.fsrc} <a href="https://uz.gov.ua/">uz.gov.ua</a> · <a href="https://intercity.pl/">intercity.pl</a> · © ${new Date().getFullYear()} Колія</p>`;
   const out = ix.replace(/\{\{([\w.]+)\}\}/g, (m, k) => k in v ? v[k] : k in d ? fill(d[k], v) : (console.warn("нет ключа", k), m));
