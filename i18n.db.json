@@ -1458,16 +1458,6 @@
    "aliases": []
   },
   {
-   "name_ru": "Варшава Восточная",
-   "name_uk": "Варшава Східна",
-   "name_en": "Warszawa Wschodnia",
-   "name_pl": "Warszawa Wschodnia",
-   "in_ru": "в Варшаве",
-   "in_uk": "у Варшаві",
-   "in_pl": "w Warszawie",
-   "aliases": []
-  },
-  {
    "name_ru": "Варшава Всходня",
    "name_uk": "Варшава Східна",
    "name_en": "Warszawa Wschodnia",
@@ -1475,17 +1465,9 @@
    "in_ru": "в Варшаве",
    "in_uk": "у Варшаві",
    "in_pl": "w Warszawie",
-   "aliases": []
-  },
-  {
-   "name_ru": "Варшава Западная",
-   "name_uk": "Варшава Західна",
-   "name_en": "Warszawa Zachodnia",
-   "name_pl": "Warszawa Zachodnia",
-   "in_ru": "в Варшаве",
-   "in_uk": "у Варшаві",
-   "in_pl": "w Warszawie",
-   "aliases": []
+   "aliases": [
+    "Варшава Восточная"
+   ]
   },
   {
    "name_ru": "Варшава Заходня",
@@ -1495,17 +1477,9 @@
    "in_ru": "в Варшаве",
    "in_uk": "у Варшаві",
    "in_pl": "w Warszawie",
-   "aliases": []
-  },
-  {
-   "name_ru": "Варшава Центральна",
-   "name_uk": "Варшава Центральна",
-   "name_en": "Warszawa Centralna",
-   "name_pl": "Warszawa Centralna",
-   "in_ru": "в Варшаве",
-   "in_uk": "у Варшаві",
-   "in_pl": "w Warszawie",
-   "aliases": []
+   "aliases": [
+    "Варшава Западная"
+   ]
   },
   {
    "name_ru": "Варшава Центральная",
@@ -1515,7 +1489,9 @@
    "in_ru": "в Варшаве",
    "in_uk": "у Варшаві",
    "in_pl": "w Warszawie",
-   "aliases": []
+   "aliases": [
+    "Варшава Центральна"
+   ]
   },
   {
    "name_ru": "Великий Березный",
@@ -2183,17 +2159,9 @@
    "in_ru": "в Кишиневе",
    "in_uk": "у Кишиневі",
    "in_pl": "w Kiszyniowie",
-   "aliases": []
-  },
-  {
-   "name_ru": "Кишинёв",
-   "name_uk": "Кишинів",
-   "name_en": "Chișinău",
-   "name_pl": "Kiszyniów",
-   "in_ru": null,
-   "in_uk": null,
-   "in_pl": null,
-   "aliases": []
+   "aliases": [
+    "Кишинёв"
+   ]
   },
   {
    "name_ru": "Кишуйсалаш",
