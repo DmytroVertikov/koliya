@@ -323,6 +323,7 @@ async function load() {
     [ST, TR, SP, CN, LG, RT] = await Promise.all([
         dbAll("stations?order=name_ru"), dbAll("trains?order=number"), dbAll("train_stops?order=train_id,seq"),
         dbAll("connections?order=route_slug,sort"), dbAll("connection_legs?order=connection_id,pos"), db("GET", "routes?order=sort")]);
+    CT = await db("GET", "countries?order=sort"); DIR_CTRY = CT.map(c => [c.slug, c.name]);
     CFG.PAGES = CFG.pagesFromRows(await db("GET", "route_pages?order=sort,id").catch(() => [])); /* страницы маршрутов — из базы */
     index()
 }
@@ -365,13 +366,13 @@ async function start() {
     shell()
 }
 function shell() {
-    $("#app").innerHTML = `<div class="tabs">${[["trains", "Поезда"], ["conns", "Варианты"], ["dirs", "Направления"], ["stations", "Станции"], ["texts", "Тексты"]].map(([k, v]) => `<button data-t="${k}" class="${TAB === k ? "on" : ""}">${v}</button>`).join("")}</div><div id="view"></div>`;
+    $("#app").innerHTML = `<div class="tabs">${[["trains", "Поезда"], ["conns", "Варианты"], ["dirs", "Направления"], ["stations", "Станции"], ["countries", "Страны"], ["texts", "Тексты"]].map(([k, v]) => `<button data-t="${k}" class="${TAB === k ? "on" : ""}">${v}</button>`).join("")}</div><div id="view"></div>`;
     document.querySelectorAll(".tabs button").forEach(b => b.onclick = () => { TAB = b.dataset.t; shell() });
-    ({trains: viewTrains, conns: viewConns, dirs: viewDirs, stations: viewStations, texts: viewTexts})[TAB]()
+    ({trains: viewTrains, conns: viewConns, dirs: viewDirs, stations: viewStations, countries: viewCountries, texts: viewTexts})[TAB]()
 }
 
 /* ================= направления (страницы маршрутов сайта) ================= */
-const DIR_CTRY = [["pl", "Польша"], ["cz", "Чехия"], ["hu", "Венгрия"], ["at", "Австрия"], ["sk", "Словакия"], ["ro", "Румыния"], ["md", "Молдова"], ["de", "Германия"]];
+let CT = [], DIR_CTRY = []; /* страны: таблица countries (вкладка «Страны») */
 const DIR_KINDS = {slice: "Прямые поезда из существующих вариантов (как Киев → Хелм)", direct: "Прямые поезда, варианты добавляю вручную (как Киев → Кишинев)", transfer: "С пересадкой на станции (как Киев → Краков)"};
 const DIR_KIND_LBL = {custom: "встроенная", slice: "прямые из вариантов", direct: "прямые вручную", transfer: "с пересадкой"};
 /* параметры страницы (поля страницы в route_pages.extra): [ключ, тип, подпись, основной?]. Типы: text, pair (две станции), bool (не задано / да / нет), sel:значения */
@@ -543,6 +544,69 @@ function drawDirs(msg) {
         const r = RP.find(x => x.id === c.closest("tr").dataset.id);
         try { await db("PATCH", "route_pages?id=eq." + encodeURIComponent(r.id), {active: c.checked}); r.active = c.checked; toast(c.checked ? "Страница включена" : "Страница скрыта") } catch (er) { c.checked = !c.checked; toast(er.message) }
     }
+}
+
+/* ================= страны (таблица countries + названия в ui_texts: cn.<код>, cn.<код>.gen) ================= */
+async function viewCountries() {
+    const v = $("#view");
+    v.innerHTML = '<section class="panel"><p class="muted">Загрузка…</p></section>';
+    let tx;
+    try { [CT, tx] = await Promise.all([db("GET", "countries?order=sort"), dbAll("ui_texts?key=like.cn.*&order=key")]) } catch (e) { v.innerHTML = `<section class="panel"><h2>Страны</h2><div class="errbox">${esc(e.message)}</div></section>`; return }
+    DIR_CTRY = CT.map(c => [c.slug, c.name]);
+    const T = {}; tx.forEach(x => T[x.key] = x);
+    const g = (k, l) => ((T[k] || {})[l]) || "";
+    const card = (c, isNew) => `<section class="panel" data-slug="${esc(c.slug)}" ${isNew ? 'style="border:2px dashed var(--bl)"' : ""}>
+        <h3 style="margin:0 0 8px">${isNew ? "Новая страна" : esc((c.flag || "") + " " + c.name + " (" + c.slug + ")")}</h3>
+        <div class="frow"><div><label>Код (две буквы, как в pl-ua)</label><input type="text" data-f="slug" value="${esc(c.slug)}" ${isNew ? "" : "readonly"} style="width:90px"></div>
+        <div><label>Флаг (эмодзи)</label><input type="text" data-f="flag" value="${esc(c.flag || "")}" style="width:90px"></div>
+        <div><label>Название по-русски</label><input type="text" data-f="name" value="${esc(c.name)}" style="width:190px"></div>
+        <div><label>Порядок на главной</label><input type="text" data-f="sort" value="${esc(c.sort)}" style="width:90px"></div></div>
+        <div class="frow"><div><label>RU: «Из Украины в …» (вин.)</label><input type="text" data-f="ru" value="${esc(g("cn." + c.slug, "ru"))}" placeholder="Польшу" style="width:170px"></div>
+        <div><label>RU: «Из … в Украину» (род.)</label><input type="text" data-f="ru_gen" value="${esc(g("cn." + c.slug + ".gen", "ru"))}" placeholder="Польши" style="width:170px"></div>
+        <div><label>UK: название</label><input type="text" data-f="uk" value="${esc(g("cn." + c.slug, "uk"))}" placeholder="Польща" style="width:150px"></div>
+        <div><label>UK: «з …» (род.)</label><input type="text" data-f="uk_gen" value="${esc(g("cn." + c.slug + ".gen", "uk"))}" placeholder="Польщі" style="width:150px"></div></div>
+        <div class="frow"><div><label>EN: название</label><input type="text" data-f="en" value="${esc(g("cn." + c.slug, "en"))}" placeholder="Poland" style="width:150px"></div>
+        <div><label>PL: название</label><input type="text" data-f="pl" value="${esc(g("cn." + c.slug, "pl"))}" placeholder="Polska" style="width:150px"></div>
+        <div><label>PL: «z …» (род.)</label><input type="text" data-f="pl_gen" value="${esc(g("cn." + c.slug + ".gen", "pl"))}" placeholder="Polski" style="width:150px"></div></div>
+        <div class="err"></div>
+        <p><button class="pri" data-a="save">Сохранить</button> ${isNew ? "" : '<button data-a="del">Удалить страну</button>'}</p></section>`;
+    v.innerHTML = `<section class="panel"><h2>Страны <span class="muted">(${CT.length})</span></h2>
+        <p class="muted">Страны на главной странице: порядок, флаг и названия на четырёх языках. Новая страна появится на сайте после «Пересобрать сайт», затем её можно выбрать в «Направления» → «Новое направление». Если пустой украинский, английский или польский вариант, сайт покажет русский.</p></section>`
+        + CT.map(c => card(c, false)).join("") + card({slug: "", name: "", flag: "", sort: (CT.reduce((m, c) => Math.max(m, +c.sort || 0), 0) + 10)}, true);
+    v.querySelectorAll("section[data-slug]").forEach(sec => {
+        const f = k => sec.querySelector('[data-f="' + k + '"]').value.trim(), box = sec.querySelector(".err");
+        sec.querySelector('[data-a="save"]').onclick = async () => {
+            const slug = f("slug"), errs = [];
+            if (!/^[a-z]{2}$/.test(slug)) errs.push("Код — две латинские буквы (например sk)");
+            if (!f("name")) errs.push("Укажите название по-русски");
+            if (!f("ru") || !f("ru_gen")) errs.push("Заполните русские формы «в …» и «из …»: они нужны для заголовков на главной");
+            if (!/^-?\d+$/.test(f("sort"))) errs.push("Порядок — целое число");
+            if (!sec.dataset.slug && CT.some(c => c.slug === slug)) errs.push("Страна с таким кодом уже есть");
+            if (errs.length) { box.innerHTML = '<div class="errbox">' + errs.map(esc).join("<br>") + "</div>"; return }
+            box.innerHTML = "";
+            const now = new Date().toISOString();
+            try {
+                await db("POST", "countries?on_conflict=slug", {slug, name: f("name"), flag: f("flag"), sort: +f("sort")}, "resolution=merge-duplicates,return=minimal");
+                await db("POST", "ui_texts?on_conflict=key", [
+                    {key: "cn." + slug, ru: f("ru"), uk: f("uk"), en: f("en"), pl: f("pl"), updated_at: now},
+                    {key: "cn." + slug + ".gen", ru: f("ru_gen"), uk: f("uk_gen"), en: "", pl: f("pl_gen"), updated_at: now}], "resolution=merge-duplicates,return=minimal");
+                toast("Сохранено. Чтобы страна появилась на сайте, нажмите «Пересобрать сайт»");
+                viewCountries()
+            } catch (e) { showErr(box, e) }
+        };
+        const d = sec.querySelector('[data-a="del"]');
+        if (d) d.onclick = async () => {
+            const slug = sec.dataset.slug; let used = RT.some(r => r.country === slug);
+            try { used = used || (await db("GET", "route_pages?select=id&route=in.(ua-" + slug + "," + slug + "-ua)")).length > 0 } catch (e) { alert(e.message || e); return }
+            if (used) { alert("Страну нельзя удалить: для неё есть направления. Сначала удалите их во вкладке «Направления»."); return }
+            if (!confirm("Удалить страну «" + slug + "»?")) return;
+            try {
+                await db("DELETE", "countries?slug=eq." + encodeURIComponent(slug), undefined, "return=minimal");
+                await db("DELETE", "ui_texts?key=in.(cn." + slug + ",cn." + slug + ".gen)", undefined, "return=minimal");
+                toast("Удалено"); viewCountries()
+            } catch (e) { alert(e.message || e) }
+        }
+    })
 }
 
 /* ================= станции ================= */

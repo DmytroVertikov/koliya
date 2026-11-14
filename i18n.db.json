@@ -541,112 +541,112 @@
   },
   {
    "key": "cn.at",
-   "ru": "",
+   "ru": "Австрию",
    "uk": "Австрія",
    "en": "Austria",
    "pl": "Austria"
   },
   {
    "key": "cn.at.gen",
-   "ru": "",
+   "ru": "Австрии",
    "uk": "Австрії",
    "en": "",
    "pl": "Austrii"
   },
   {
    "key": "cn.cz",
-   "ru": "",
+   "ru": "Чехию",
    "uk": "Чехія",
    "en": "Czechia",
    "pl": "Czechy"
   },
   {
    "key": "cn.cz.gen",
-   "ru": "",
+   "ru": "Чехии",
    "uk": "Чехії",
    "en": "",
    "pl": "Czech"
   },
   {
    "key": "cn.de",
-   "ru": "",
+   "ru": "Германию",
    "uk": "Німеччина",
    "en": "Germany",
    "pl": "Niemcy"
   },
   {
    "key": "cn.de.gen",
-   "ru": "",
+   "ru": "Германии",
    "uk": "Німеччини",
    "en": "",
    "pl": "Niemiec"
   },
   {
    "key": "cn.hu",
-   "ru": "",
+   "ru": "Венгрию",
    "uk": "Угорщина",
    "en": "Hungary",
    "pl": "Węgry"
   },
   {
    "key": "cn.hu.gen",
-   "ru": "",
+   "ru": "Венгрии",
    "uk": "Угорщини",
    "en": "",
    "pl": "Węgier"
   },
   {
    "key": "cn.md",
-   "ru": "",
+   "ru": "Молдову",
    "uk": "Молдова",
    "en": "Moldova",
    "pl": "Mołdawia"
   },
   {
    "key": "cn.md.gen",
-   "ru": "",
+   "ru": "Молдовы",
    "uk": "Молдови",
    "en": "",
    "pl": "Mołdawii"
   },
   {
    "key": "cn.pl",
-   "ru": "",
+   "ru": "Польшу",
    "uk": "Польща",
    "en": "Poland",
    "pl": "Polska"
   },
   {
    "key": "cn.pl.gen",
-   "ru": "",
+   "ru": "Польши",
    "uk": "Польщі",
    "en": "",
    "pl": "Polski"
   },
   {
    "key": "cn.ro",
-   "ru": "",
+   "ru": "Румынию",
    "uk": "Румунія",
    "en": "Romania",
    "pl": "Rumunia"
   },
   {
    "key": "cn.ro.gen",
-   "ru": "",
+   "ru": "Румынии",
    "uk": "Румунії",
    "en": "",
    "pl": "Rumunii"
   },
   {
    "key": "cn.sk",
-   "ru": "",
+   "ru": "Словакию",
    "uk": "Словаччина",
    "en": "Slovakia",
    "pl": "Słowacja"
   },
   {
    "key": "cn.sk.gen",
-   "ru": "",
+   "ru": "Словакии",
    "uk": "Словаччини",
    "en": "",
    "pl": "Słowacji"
@@ -3656,6 +3656,56 @@
    "in_uk": null,
    "in_pl": null,
    "aliases": []
+  }
+ ],
+ "countries": [
+  {
+   "slug": "pl",
+   "name": "Польша",
+   "flag": "🇵🇱",
+   "sort": 0
+  },
+  {
+   "slug": "cz",
+   "name": "Чехия",
+   "flag": "🇨🇿",
+   "sort": 10
+  },
+  {
+   "slug": "hu",
+   "name": "Венгрия",
+   "flag": "🇭🇺",
+   "sort": 20
+  },
+  {
+   "slug": "at",
+   "name": "Австрия",
+   "flag": "🇦🇹",
+   "sort": 30
+  },
+  {
+   "slug": "sk",
+   "name": "Словакия",
+   "flag": "🇸🇰",
+   "sort": 40
+  },
+  {
+   "slug": "md",
+   "name": "Молдова",
+   "flag": "🇲🇩",
+   "sort": 50
+  },
+  {
+   "slug": "ro",
+   "name": "Румыния",
+   "flag": "🇷🇴",
+   "sort": 60
+  },
+  {
+   "slug": "de",
+   "name": "Германия",
+   "flag": "🇩🇪",
+   "sort": 70
   }
  ]
 }

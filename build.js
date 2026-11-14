@@ -175,8 +175,19 @@ const CFG = new Function("window", fs.readFileSync("config.js", "utf8") + "\n;re
 const PGS = CFG.pagesFromRows(DBR); /* порядок — по полю sort, как в базе (sync.js забирает записи уже отсортированными) */
 /* pages.js: тот же список для браузера (главная, блок «Другие направления», админка) */
 fs.writeFileSync("pages.js", "/* создаётся сборкой (node sync.js) из таблицы route_pages, руками не править */\nwindow.CFG.PAGES = " + JSON.stringify(PGS) + ";\n");
-/* [код, название, «в …» (вин.), «из …» (род.), флаг-эмодзи]; порядок — как на главной; для uk/en/pl названия берутся из I18N.CN */
-const CTRY = [["pl", "Польша", "Польшу", "Польши", "🇵🇱"], ["cz", "Чехия", "Чехию", "Чехии", "🇨🇿"], ["hu", "Венгрия", "Венгрию", "Венгрии", "🇭🇺"], ["at", "Австрия", "Австрию", "Австрии", "🇦🇹"], ["sk", "Словакия", "Словакию", "Словакии", "🇸🇰"], ["md", "Молдова", "Молдову", "Молдовы", "🇲🇩"], ["ro", "Румыния", "Румынию", "Румынии", "🇷🇴"], ["de", "Германия", "Германию", "Германии", "🇩🇪"]];
+/* страны: [код, название, «в …» (вин.), «из …» (род.), флаг-эмодзи]; порядок — как на главной (поле sort).
+   Список и флаги — таблица countries, русские формы — ui_texts (cn.<код>, cn.<код>.gen, колонка ru); для uk/en/pl названия берутся из I.CN. Правятся во вкладке «Страны» админки. */
+const CTRY = (() => {
+  let db; try { db = JSON.parse(fs.readFileSync("i18n.db.json", "utf8")) } catch (e) { db = {} }
+  if (!(db.countries || []).length) throw new Error("build.js: в i18n.db.json нет списка стран. Выполните node sync.js");
+  const f = {};
+  for (const r of db.ui || []) { const m = r.key.match(/^cn\.([a-z]{2})(\.gen)?$/); if (m && r.ru) (f[m[1]] = f[m[1]] || {})[m[2] ? "gen" : "acc"] = r.ru }
+  return db.countries.slice().sort((x, y) => x.sort - y.sort || x.slug.localeCompare(y.slug)).map(c => {
+    const o = f[c.slug] || {};
+    if (!o.acc || !o.gen) console.warn("ВНИМАНИЕ: у страны " + c.slug + " нет русских форм «в …» / «из …» (вкладка «Страны» в админке): на главной будет название в именительном падеже");
+    return [c.slug, c.name, o.acc || c.name, o.gen || c.name, c.flag || ""]
+  })
+})();
 /* страницы, которые показываются сразу; остальные маршруты страны лежат в раскрывающемся списке (в HTML они есть). Страна не указана — все маршруты сразу */
 const POP = {pl: ["kyiv-warsaw.html", "kyiv-krakow.html", "dnipro-warsaw.html", "odesa-warsaw.html", "lviv-warsaw.html", "warsaw-kyiv.html", "krakow-kyiv.html"]};
 const AIR = [["Варшава", "https://www.lotnisko-chopina.pl/en/index.html"], ["Будапешт", "https://www.bud.hu/en"], ["Вена", "https://www.viennaairport.com/"], ["Краков", "https://www.krakowairport.pl/en/"], ["Жешув", "https://www.rzeszowairport.pl/ua"], ["Кошице", "https://www.airportkosice.sk/en"], ["Кишинёв", "https://airport.md/"], ["Яссы", "https://www.aeroport-iasi.ro"]];
