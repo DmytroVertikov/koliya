@@ -107,6 +107,12 @@
         .list p.lh { margin: 0; padding: 6px 12px; background: #f9fafb; border-bottom: 1px solid #eef0f3; font-size: 13px; font-weight: 700; color: var(--mu); position: sticky; top: 0; z-index: 1 }
         .list div[data-id] { border-left-width: 5px }
         .dhead { display: flex; gap: 12px 20px; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; margin-bottom: 12px }
+        #ac { position: absolute; z-index: 1000; background: #fff; border: 1.5px solid var(--bl3); border-radius: 10px; box-shadow: 0 8px 24px rgba(16, 24, 40, .18); max-height: 280px; overflow: auto; display: none; font-size: 17px }
+        #ac div { padding: 7px 12px; cursor: pointer; border-bottom: 1px solid #eef0f3 }
+        #ac div:last-child { border-bottom: 0 }
+        #ac div.on { background: #dbe6ff }
+        #ac small { color: var(--mu); font-size: 13px; margin-left: 8px }
+        #ac b { color: var(--bl) }
         .sbtn { display: flex; gap: 6px; flex-wrap: wrap; justify-content: flex-end; max-width: 55% }
         .dctl { display: flex; gap: 8px 16px; align-items: center; flex-wrap: wrap }
         .dctl label { margin: 0; display: inline-flex; align-items: center; gap: 6px; font-weight: 600; font-size: 15px }
@@ -1037,6 +1043,73 @@ document.addEventListener("input", e => {
     if ((f === "arr" || f === "dep") && e.inputType === "insertText" && t.value.length === 5 && toM(t.value) != null) nextField(t, "#rows input.tm:not([disabled])")
 });
 document.addEventListener("focusin", e => { if (e.target.matches && e.target.matches("#rows input.tm")) e.target.select() });
+/* ---------- подсказки станций: свой выпадающий список вместо datalist (тот не подставляет станцию и в ряде браузеров не показывается) ---------- */
+const AC_LISTS = ["stl", "d_stl", "cities"]; /* id списков, которые заменяются */
+const AC = {el: null, inp: null, items: [], act: 0, nav: false, q: ""};
+function acBox() {
+    if (!AC.el) { AC.el = document.createElement("div"); AC.el.id = "ac"; document.body.appendChild(AC.el) }
+    return AC.el
+}
+function acClose() { if (AC.el) AC.el.style.display = "none"; AC.inp = null; AC.items = [] }
+function acOptions(inp) {
+    const dl = document.getElementById(inp.dataset.ac); if (!dl) return [];
+    return [...dl.options].map(o => {
+        const v = o.value, s = findStation(v);
+        return {v, alt: s ? [s.name_uk, s.name_en, s.name_pl, ...(s.aliases || [])].filter(x => x && norm(x) !== norm(v)) : []}
+    })
+}
+function acRank(it, q) { /* 0 — начало названия, 1 — начало слова, 2 — внутри названия, 3 — совпало в другом языке / синониме */
+    const v = norm(it.v);
+    if (v.startsWith(q)) return 0;
+    if (v.split(/[\s\-–(]+/).some(w => w.startsWith(q))) return 1;
+    if (v.includes(q)) return 2;
+    return it.alt.some(a => norm(a).includes(q)) ? 3 : -1
+}
+function acShow(inp) {
+    const q = norm(inp.value);
+    if (!q) return acClose();
+    const items = acOptions(inp).map(it => ({...it, r: acRank(it, q)})).filter(it => it.r >= 0).sort((a, b) => a.r - b.r || a.v.localeCompare(b.v, "ru")).slice(0, 12);
+    if (!items.length || (items.length === 1 && norm(items[0].v) === q)) return acClose();
+    AC.inp = inp; AC.items = items; AC.q = q; AC.act = 0; AC.nav = false;
+    const box = acBox(), r = inp.getBoundingClientRect();
+    box.innerHTML = items.map((it, i) => {
+        const n = it.v.length, k = norm(it.v).indexOf(q), name = k >= 0 ? esc(it.v.slice(0, k)) + "<b>" + esc(it.v.slice(k, k + q.length)) + "</b>" + esc(it.v.slice(k + q.length)) : esc(it.v);
+        return `<div data-i="${i}" class="${i === 0 ? "on" : ""}">${name}${it.r === 3 ? `<small>${esc(it.alt.find(a => norm(a).includes(q)))}</small>` : ""}</div>`
+    }).join("");
+    Object.assign(box.style, {display: "block", left: r.left + window.scrollX + "px", top: r.bottom + window.scrollY + 2 + "px", minWidth: Math.max(r.width, 220) + "px"})
+}
+function acMark(i) {
+    AC.act = i; AC.el.querySelectorAll("div").forEach((d, k) => d.classList.toggle("on", k === i));
+    const d = AC.el.children[i]; if (d && d.scrollIntoView) d.scrollIntoView({block: "nearest"})
+}
+function acPick(i) {
+    const inp = AC.inp, it = AC.items[i]; if (!inp || !it) return;
+    inp.value = it.v; inp.dispatchEvent(new Event("input", {bubbles: true})); acClose();
+    if (inp.closest("#rows")) nextField(inp, "#rows input[type=text]:not([disabled])") /* сразу к времени */
+}
+document.addEventListener("focusin", e => {
+    const t = e.target;
+    if (t.matches && t.matches("input[list]") && AC_LISTS.includes(t.getAttribute("list"))) { t.dataset.ac = t.getAttribute("list"); t.removeAttribute("list"); t.setAttribute("autocomplete", "off") }
+});
+document.addEventListener("input", e => { const t = e.target; if (t.dataset && t.dataset.ac && e.inputType !== undefined) acShow(t) });
+document.addEventListener("focusout", e => { if (e.target === AC.inp) setTimeout(acClose, 120) });
+document.addEventListener("mousedown", e => { const d = e.target.closest && e.target.closest("#ac div[data-i]"); if (d) { e.preventDefault(); acPick(+d.dataset.i) } });
+window.addEventListener("scroll", e => { if (AC.inp && !(AC.el && AC.el.contains(e.target))) acClose() }, true);
+window.addEventListener("resize", acClose);
+document.addEventListener("keydown", e => {
+    if (!AC.inp || e.target !== AC.inp || !AC.items.length) return;
+    const n = AC.items.length;
+    if (e.key === "ArrowDown" || e.key === "ArrowUp") { e.preventDefault(); AC.nav = true; acMark((AC.act + (e.key === "ArrowDown" ? 1 : n - 1)) % n); return }
+    if (e.key === "Escape") { acClose(); return }
+    if (e.key !== "Enter" && e.key !== "Tab") return;
+    /* подставляем выбранное стрелками или то, что начинается с набранного; иначе Enter/Tab работают как раньше (например, при вводе новой станции) */
+    if (AC.nav || norm(AC.items[AC.act].v).startsWith(AC.q)) {
+        if (e.key === "Enter") { e.preventDefault(); e.stopImmediatePropagation() }
+        const inp = AC.inp, i = AC.act, it = AC.items[i];
+        inp.value = it.v; inp.dispatchEvent(new Event("input", {bubbles: true})); acClose();
+        if (e.key === "Enter" && inp.closest("#rows")) nextField(inp, "#rows input[type=text]:not([disabled])")
+    } else acClose()
+}, true);
 document.addEventListener("keydown", e => {
     if (e.key !== "Enter" || !e.target.matches || !e.target.matches("#rows input[type=text]")) return;
     e.preventDefault(); nextField(e.target, "#rows input[type=text]:not([disabled])")
