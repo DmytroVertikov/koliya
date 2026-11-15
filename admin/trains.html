@@ -48,6 +48,7 @@
         .chip.rd { background: var(--rd2); color: var(--rd) }
         .chip.bl { background: var(--bl2); color: var(--bl) }
         .chip.pu { background: var(--pu2); color: var(--pu) }
+        td.shc { min-width: 150px } td.shc input { width: 70px; margin: 1px 2px; padding: 3px 5px; font-size: 13px }
         table.g { border-collapse: separate; border-spacing: 0; width: 100%; font-size: 16px }
         table.g th, table.g td { padding: 5px 6px; border-bottom: 1px solid #eef0f3; text-align: left; vertical-align: middle }
         table.g thead th { position: sticky; top: 0; z-index: 2; background: #fff; font-size: 13px; color: var(--mu); font-weight: 700; padding: 9px 6px; border-bottom: 2px solid var(--bd) }
@@ -837,7 +838,7 @@ async function viewHome() {
 
 /* ================= станции ================= */
 /* ---------- объединение дублей станций: поезда переносятся на оставляемую станцию, дубль удаляется ---------- */
-const MG_FIELDS = [["name_uk", "Українська"], ["name_en", "English"], ["name_pl", "Polski"], ["in_ru", "в … (ru)"], ["in_uk", "у … (uk)"], ["in_pl", "w … (pl)"]];
+const MG_FIELDS = [["name_uk", "Українська"], ["name_en", "English"], ["name_pl", "Polski"], ["in_ru", "в … (ru)"], ["in_uk", "у … (uk)"], ["in_pl", "w … (pl)"], ["short_ru", "Коротко (ru)"], ["short_uk", "Коротко (uk)"], ["short_en", "Коротко (en)"], ["short_pl", "Коротко (pl)"]];
 function mergePanel(dup) {
     const box = $("#se"); if (!dup) return;
     box.innerHTML = `<div class="unk"><div class="unkl"><b>Объединить дубль «${esc(dup.name_ru)}» с другой станцией</b> <span class="muted">дубль будет удалён, а его поезда перейдут на станцию, которую вы оставите</span></div>
@@ -880,7 +881,10 @@ function mergePanel(dup) {
         } catch (er) { go.disabled = false; showErr($("#mg_info"), er.message.includes("violates foreign key") ? "Дубль всё ещё где-то используется (кроме расписаний поездов). Поезда уже перенесены, откройте станцию и проверьте, где она встречается. " + er.message : er) }
     }
 }
+const SHORT_OK_F = () => ST.length && "short_ru" in ST[0];
+let SHORT_OK = false;
 function viewStations() {
+    SHORT_OK = SHORT_OK_F();
     const v = $("#view");
     const row = s => `<tr data-id="${s.id || ""}">
         <td><input type="text" data-f="name_ru" value="${esc(s.name_ru)}"></td>
@@ -890,13 +894,15 @@ function viewStations() {
         <td><input type="text" data-f="in_ru" value="${esc(s.in_ru)}" placeholder="в Хелме"></td>
         <td><input type="text" data-f="in_uk" value="${esc(s.in_uk)}" placeholder="у Хелмі"></td>
         <td><input type="text" data-f="in_pl" value="${esc(s.in_pl)}" placeholder="w Chełmie"></td>
+        <td class="shc">${["ru", "uk", "en", "pl"].map(l => `<input type="text" data-f="short_${l}" ${SHORT_OK ? "" : "disabled"} value="${esc(s["short_" + l])}" placeholder="${l}">`).join("")}</td>
         <td><select data-f="tz_hours"><option value="1" ${s.tz_hours == 1 ? "selected" : ""}>UTC+1</option><option value="2" ${s.tz_hours == 2 ? "selected" : ""}>UTC+2</option></select></td>
         <td class="x"><button data-a="save">Сохранить</button> ${s.id ? '<button data-a="merge" title="Эта станция — дубль другой: перенести поезда на неё и удалить этот дубль">Дубль…</button> <button data-a="del">✕</button>' : ""}</td></tr>`;
     v.innerHTML = `<section class="panel"><h2>Станции <span class="muted">(${ST.length})</span></h2>
         <p class="muted">Названия на других языках и формы «в Хелме» / «у Хелмі» / «w Chełmie» (нужны для заголовков вроде «С пересадкой в Хелме»). Если поле пустое, сайт покажет русское название. Изменения попадают на сайт после нажатия «Пересобрать сайт» вверху страницы.</p>
+        ${SHORT_OK ? '<p class="muted"><b>Коротко</b> — название для заголовка карточки поезда (например, «Киев» вместо «Киев-Пассажирский»); в «Подробнее» показывается полное. Пусто — везде полное.</p>' : '<div class="errbox">Колонок для коротких названий ещё нет в базе: выполните в Supabase (SQL Editor) файл db/stations-short-names.sql и обновите страницу.</div>'}
         <div class="frow"><input type="text" id="sf" placeholder="Поиск станции" style="width:240px"><label><input type="checkbox" id="nt"> без перевода</label></div>
         <div id="se"></div>
-        <table class="g"><thead><tr><th>Русское</th><th>Українська</th><th>English</th><th>Polski</th><th>в … (ru)</th><th>у … (uk)</th><th>w … (pl)</th><th>Пояс</th><th></th></tr></thead><tbody id="stb"></tbody></table></section>`;
+        <table class="g"><thead><tr><th>Русское</th><th>Українська</th><th>English</th><th>Polski</th><th>в … (ru)</th><th>у … (uk)</th><th>w … (pl)</th><th title="Короткое название в заголовке карточки поезда, полное остаётся в «Подробнее»">Коротко</th><th>Пояс</th><th></th></tr></thead><tbody id="stb"></tbody></table></section>`;
     const draw = () => {
         const q = $("#sf").value.trim().toLowerCase(), nt = $("#nt").checked;
         const list = ST.filter(s => (!q || s.name_ru.toLowerCase().includes(q)) && (!nt || !s.name_uk || !s.name_en || !s.name_pl));
@@ -908,6 +914,7 @@ function viewStations() {
         const tr = b.closest("tr"), id = tr.dataset.id, g = f => tr.querySelector(`[data-f=${f}]`).value.trim() || null;
         if (b.dataset.a === "merge") { mergePanel(stById.get(id) || ST.find(x => String(x.id) === String(id))); return }
         const body = {name_ru: g("name_ru"), name_uk: g("name_uk"), name_en: g("name_en"), name_pl: g("name_pl"), in_ru: g("in_ru"), in_uk: g("in_uk"), in_pl: g("in_pl"), tz_hours: +g("tz_hours")};
+        if (SHORT_OK) ["ru", "uk", "en", "pl"].forEach(l => body["short_" + l] = g("short_" + l));
         $("#se").innerHTML = "";
         try {
             if (b.dataset.a === "save") {
