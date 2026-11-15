@@ -85,6 +85,9 @@
         .unk .unkl button:hover { background: #fef0c7 }
         .unk .unka { display: flex; align-items: center; gap: 10px; flex-wrap: wrap }
         .unk .unka label { margin: 0; display: inline-flex; align-items: center; gap: 6px; font-weight: 600 }
+        .errbox .blk { margin: 8px 0 }
+        .errbox .blr { background: #fff; border: 1px solid #fecdca; border-radius: 8px; padding: 6px 10px; margin: 4px 0; display: flex; flex-wrap: wrap; gap: 6px 10px; align-items: center }
+        .errbox .blr button { font-size: 14px; padding: 3px 10px }
         .errbox { background: var(--rd2); color: var(--rd); border: 1.5px solid #fecdca; border-radius: 10px; padding: 10px 12px; margin: 10px 0; font-size: 15px; white-space: pre-wrap }
         .frow { display: flex; gap: 12px; flex-wrap: wrap; align-items: end; margin: 8px 0 }
         .frow label { display: block; font-size: 13px; color: var(--mu); font-weight: 600; margin-bottom: 3px }
@@ -412,6 +415,7 @@ const DIR_P = [
 ];
 const DIR_TXT = [["title", "Заголовок (title)"], ["desc", "Описание (description)"], ["h1", "Заголовок H1"], ["lead", "Подзаголовок"], ["all", "Заголовок «все варианты»"], ["more", "Заголовок «ещё варианты»"], ["leadm", "Подзаголовок при пересадке на станции (leadm)"]];
 const DIR_LANGS = [["ru", "Русский"], ["uk", "Українська"], ["en", "English"], ["pl", "Polski"]];
+let OPENCONN = null; /* вариант, который нужно открыть сразу после перехода на вкладку направлений */
 let RP = [], DSEL = null, DSUB = "conns", DQ = ""; /* DSEL: id страницы | "new" (форма нового направления) | "orph" (варианты без страницы); DSUB: "conns" | "page" */
 /* Как сайт связывает страницу и варианты: страница «A → B» показывает варианты, у которых город отправления в шапке начинается с A, а город прибытия — с B.
    Страницы «из вариантов других направлений» (slice) своих вариантов не имеют: их поезда вырезаются из остальных вариантов. */
@@ -463,6 +467,7 @@ async function viewDirs() {
         return
     }
     E = null;
+    if (OPENCONN) { if (CN.some(c => c.id === OPENCONN)) editConn(OPENCONN); OPENCONN = null }
     if (!DSEL || (DSEL !== "new" && DSEL !== "orph" && !RP.some(r => r.id === DSEL))) DSEL = RP.length ? RP[0].id : "new";
     drawDirs()
 }
@@ -1156,6 +1161,17 @@ document.addEventListener("input", e => {
     /* набрали время целиком — сразу следующее поле */
     if ((f === "arr" || f === "dep") && e.inputType === "insertText" && t.value.length === 5 && toM(t.value) != null) nextField(t, "#rows input.tm:not([disabled])")
 });
+document.addEventListener("click", async e => {
+    const b = e.target.closest && e.target.closest("#terr .blr button"); if (!b) return;
+    const cid = b.closest(".blr").dataset.c, x = connInfo().find(i => i.c.id === cid);
+    if (b.dataset.a === "open") {
+        const f = x ? fitPages(x.p, x.h) : {own: [], auto: []};
+        TAB = "dirs"; DSEL = f.own[0] ? f.own[0].id : "orph"; DSUB = "conns"; OPENCONN = cid; shell()
+    }
+    if (b.dataset.a === "del" && confirm("Удалить вариант" + (x ? "\n" + x.h.ft + " " + x.h.from + " → " + x.h.tt + " " + x.h.to : "") + "?\n\nОн пропадёт из базы целиком.")) {
+        try { await db("DELETE", "connections?id=eq." + cid); await load(); toast("Вариант удалён"); saveTrain() } catch (er) { toast(er.message) }
+    }
+});
 document.addEventListener("focusin", e => { if (e.target.matches && e.target.matches("#rows input.tm")) e.target.select() });
 /* ---------- подсказки станций: свой выпадающий список вместо datalist (тот не подставляет станцию и в ряде браузеров не показывается) ---------- */
 const AC_LISTS = ["stl", "d_stl", "cities"]; /* id списков, которые заменяются */
@@ -1249,9 +1265,14 @@ async function saveTrain() {
     if (gone.length) {
         const bad = LG.filter(l => l.train_id === TSEL && [l.board_stop_id, l.alight_stop_id, l.show_from_stop_id, l.show_to_stop_id].some(x => gone.includes(x)));
         if (bad.length) {
+            if (!RP.length) { try { RP = await db("GET", "route_pages?order=sort,id") } catch (e) { } } /* страницы нужны, чтобы сказать, где показывается вариант */
             const names = [...new Set(gone.filter(sid => bad.some(l => [l.board_stop_id, l.alight_stop_id, l.show_from_stop_id, l.show_to_stop_id].includes(sid))).map(sid => { const sp = SP.find(x => x.id === sid); return sp ? "«" + ((stById.get(sp.station_id) || {}).name_ru || "?") + "»" : "?" }))];
-            const vs = [...new Set(bad.map(l => { const x = connInfo().find(i => i.c.id === l.connection_id); return x ? x.h.ft + " " + x.h.from + " → " + x.h.tt + " " + x.h.to : l.connection_id }))];
-            return showErr(box, {message: "Нельзя убрать из поезда " + (names.length > 1 ? "станции " : "станцию ") + names.join(", ") + ": на " + (names.length > 1 ? "них" : "неё") + " ссылаются варианты (посадка или высадка):\n" + vs.join("\n") + "\nОткройте эти варианты («Направления и варианты») и выберите другую станцию или верните станцию в таблицу."})
+            const ids = [...new Set(bad.map(l => l.connection_id))];
+            box.innerHTML = '<div class="errbox">Нельзя убрать из поезда ' + (names.length > 1 ? "станции " : "станцию ") + esc(names.join(", ")) + ": на " + (names.length > 1 ? "них" : "неё") + " ссылаются варианты (посадка или высадка). Варианты хранятся в базе, даже если на сайте их не видно.<div class=\"blk\">"
+                + ids.map(cid => { const x = connInfo().find(i => i.c.id === cid), f = x ? fitPages(x.p, x.h) : {own: [], auto: []}, pg = [...f.own, ...f.auto];
+                    return `<div class="blr" data-c="${esc(cid)}"><b>${x ? esc(x.h.ft + " " + x.h.from + " → " + x.h.tt + " " + x.h.to) : esc(cid)}</b> <small>${pg.length ? "показывается на: " + esc(pg.map(r => r.from_name + " → " + r.to_name).join(", ")) : "на сайте не показывается: нет подходящей страницы"}</small> <button data-a="open">Открыть</button> <button data-a="del">Удалить вариант</button></div>` }).join("")
+                + '</div>Откройте вариант и выберите другую станцию, либо удалите ненужный вариант, и сохраните поезд снова (или верните станцию в таблицу).</div>';
+            return
         }
     }
     const dd = calcDays(rows);
