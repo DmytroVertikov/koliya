@@ -441,7 +441,7 @@
         "title": "Дніпро → Варшава потягом | Колія"
       }
     },
-    "popular": true
+    "popular": false
   },
   {
     "id": "warsaw_dnipro",
@@ -509,7 +509,7 @@
         "title": "Варшава → Дніпро потягом | Колія"
       }
     },
-    "popular": true
+    "popular": false
   },
   {
     "id": "dnipro_krakow",
@@ -577,7 +577,7 @@
         "title": "Дніпро → Краків потягом | Колія"
       }
     },
-    "popular": false
+    "popular": true
   },
   {
     "id": "krakow_dnipro",
@@ -645,7 +645,7 @@
         "title": "Краків → Дніпро потягом | Колія"
       }
     },
-    "popular": false
+    "popular": true
   },
   {
     "id": "dnipro_khelm",
@@ -957,7 +957,7 @@
         "title": "Харків → Краків потягом | Колія"
       }
     },
-    "popular": false
+    "popular": true
   },
   {
     "id": "krakow_kharkiv",
@@ -1025,7 +1025,7 @@
         "title": "Краків → Харків потягом | Колія"
       }
     },
-    "popular": false
+    "popular": true
   },
   {
     "id": "kharkiv_khelm",
@@ -1202,7 +1202,7 @@
         "title": "Одеса → Варшава потягом | Колія"
       }
     },
-    "popular": true
+    "popular": false
   },
   {
     "id": "warsaw_odesa",
@@ -1271,7 +1271,7 @@
         "title": "Варшава → Одеса потягом | Колія"
       }
     },
-    "popular": true
+    "popular": false
   },
   {
     "id": "odesa_krakow",
