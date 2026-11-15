@@ -2012,6 +2012,16 @@
    "aliases": []
   },
   {
+   "name_ru": "Житомир",
+   "name_uk": "Житомир",
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
    "name_ru": "Жмеринка",
    "name_uk": null,
    "name_en": null,
@@ -2124,6 +2134,16 @@
   {
    "name_ru": "Зборов",
    "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Здолбунов",
+   "name_uk": "Здолбунів",
    "name_en": null,
    "name_pl": null,
    "in_ru": null,
@@ -2300,7 +2320,7 @@
   },
   {
    "name_ru": "Киверцы",
-   "name_uk": null,
+   "name_uk": "Ківерці",
    "name_en": null,
    "name_pl": null,
    "in_ru": null,
@@ -2375,6 +2395,16 @@
   {
    "name_ru": "Кишуйсалаш",
    "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Клевань",
+   "name_uk": "Клевань",
    "name_en": null,
    "name_pl": null,
    "in_ru": null,
@@ -2719,6 +2749,16 @@
   {
    "name_ru": "Лубны",
    "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Луцк",
+   "name_uk": "Луцьк",
    "name_en": null,
    "name_pl": null,
    "in_ru": null,
@@ -3416,7 +3456,7 @@
   },
   {
    "name_ru": "Ровно",
-   "name_uk": null,
+   "name_uk": "Рівне",
    "name_en": null,
    "name_pl": null,
    "in_ru": null,
@@ -3429,6 +3469,16 @@
    "name_uk": "Рогозьно Велькопольські",
    "name_en": "Rogoźno Wielkopolskie",
    "name_pl": "Rogoźno Wielkopolskie",
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Рожище",
+   "name_uk": "Рожище",
+   "name_en": null,
+   "name_pl": null,
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
@@ -3935,6 +3985,16 @@
    "aliases": []
   },
   {
+   "name_ru": "Фастов 1",
+   "name_uk": "Фастів 1",
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
    "name_ru": "Ферихедь",
    "name_uk": null,
    "name_en": null,
@@ -4165,8 +4225,28 @@
    "aliases": []
   },
   {
+   "name_ru": "Чуднов-Волынский",
+   "name_uk": "Чуднів-Волинський",
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
    "name_ru": "Шамотулы",
    "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Шепетовка",
+   "name_uk": "Шепетівка",
    "name_en": null,
    "name_pl": null,
    "in_ru": null,

@@ -714,7 +714,13 @@
     "border": null,
     "like_id": "kw",
     "single": false,
-    "names": {},
+    "names": {
+      "Днепр": {
+        "en": "Dnipro",
+        "pl": "Dnipro",
+        "uk": "Дніпро"
+      }
+    },
     "extra": {
       "ds3": "buy.d.s3z",
       "like": "kw",
