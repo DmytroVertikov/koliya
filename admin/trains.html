@@ -85,6 +85,8 @@
         .unk .unkl button:hover { background: #fef0c7 }
         .unk .unka { display: flex; align-items: center; gap: 10px; flex-wrap: wrap }
         .unk .unka label { margin: 0; display: inline-flex; align-items: center; gap: 6px; font-weight: 600 }
+        .mgl { margin: 6px 0 4px 18px; padding: 0; line-height: 1.5 }
+        .mgw { color: var(--rd); font-weight: 600 }
         .errbox .blk { margin: 8px 0 }
         .errbox .blr { background: #fff; border: 1px solid #fecdca; border-radius: 8px; padding: 6px 10px; margin: 4px 0; display: flex; flex-wrap: wrap; gap: 6px 10px; align-items: center }
         .errbox .blr button { font-size: 14px; padding: 3px 10px }
@@ -834,6 +836,50 @@ async function viewHome() {
 }
 
 /* ================= станции ================= */
+/* ---------- объединение дублей станций: поезда переносятся на оставляемую станцию, дубль удаляется ---------- */
+const MG_FIELDS = [["name_uk", "Українська"], ["name_en", "English"], ["name_pl", "Polski"], ["in_ru", "в … (ru)"], ["in_uk", "у … (uk)"], ["in_pl", "w … (pl)"]];
+function mergePanel(dup) {
+    const box = $("#se"); if (!dup) return;
+    box.innerHTML = `<div class="unk"><div class="unkl"><b>Объединить дубль «${esc(dup.name_ru)}» с другой станцией</b> <span class="muted">дубль будет удалён, а его поезда перейдут на станцию, которую вы оставите</span></div>
+        <div class="unka" style="justify-content:flex-start"><label>Оставить станцию <input type="text" id="mg_to" list="stl" style="width:320px" placeholder="начните вводить русское название" autocomplete="off"></label></div>
+        <datalist id="stl">${ST.filter(s => s.id !== dup.id).map(s => `<option value="${esc(s.name_ru)}">`).join("")}</datalist>
+        <div id="mg_info" style="width:100%"></div>
+        <div class="unka"><button class="pri" id="mg_go" disabled>Объединить</button> <button id="mg_x">Отмена</button></div></div>`;
+    const keepOf = () => { const v = foldName($("#mg_to").value); return v ? ST.find(s => s.id !== dup.id && foldName(s.name_ru) === v) : null };
+    const upd = () => {
+        const keep = keepOf(), info = $("#mg_info"), go = $("#mg_go");
+        if (!keep) { info.innerHTML = ""; go.disabled = true; return }
+        const stops = SP.filter(x => x.station_id === dup.id), keepTr = new Set(SP.filter(x => x.station_id === keep.id).map(x => x.train_id));
+        const conflict = [...new Set(stops.filter(x => keepTr.has(x.train_id)).map(x => x.train_id))].map(t => (trById.get(t) || {}).number);
+        const fill = MG_FIELDS.filter(([f]) => !keep[f] && dup[f]).map(([, n]) => n);
+        const nums = [...new Set(stops.map(x => (trById.get(x.train_id) || {}).number))];
+        info.innerHTML = `<ul class="mgl"><li>Останется <b>«${esc(keep.name_ru)}»</b>, станция <b>«${esc(dup.name_ru)}»</b> будет удалена.</li>
+            <li>${stops.length ? "В расписаниях перейдёт остановок: <b>" + stops.length + "</b> (поезда: " + esc(nums.join(", ")) + ")." : "В расписаниях поездов дубль не используется."}</li>
+            ${fill.length ? "<li>Пустые поля у оставляемой станции будут заполнены из дубля: " + esc(fill.join(", ")) + ".</li>" : ""}
+            <li>Название «${esc(dup.name_ru)}» сохранится как синоним, поэтому поиск и импорт по-прежнему найдут станцию.</li>
+            ${dup.tz_hours !== keep.tz_hours ? '<li class="mgw">⚠ Часовые пояса разные (UTC+' + dup.tz_hours + " и UTC+" + keep.tz_hours + "): времена в расписаниях не пересчитываются, проверьте их после объединения.</li>" : ""}
+            ${conflict.length ? '<li class="mgw">⛔ Объединить нельзя: поезда ' + esc(conflict.join(", ")) + " проходят через обе станции. Сначала поправьте их расписания.</li>" : ""}</ul>`;
+        go.disabled = !!conflict.length
+    };
+    $("#mg_to").oninput = upd; $("#mg_to").onchange = upd; $("#mg_to").focus();
+    $("#mg_x").onclick = () => { box.innerHTML = "" };
+    $("#mg_go").onclick = async () => {
+        const keep = keepOf(); if (!keep) return;
+        const go = $("#mg_go"); go.disabled = true;
+        try {
+            await db("PATCH", "train_stops?station_id=eq." + dup.id, {station_id: keep.id});
+            const patch = {};
+            MG_FIELDS.forEach(([f]) => { if (!keep[f] && dup[f]) patch[f] = dup[f] });
+            const have = new Set([keep.name_ru, keep.name_uk, keep.name_en, keep.name_pl, ...(keep.aliases || [])].map(foldName));
+            const alias = [...(keep.aliases || [])];
+            [dup.name_ru, dup.name_uk, dup.name_en, dup.name_pl, ...(dup.aliases || [])].forEach(n => { if (n && !have.has(foldName(n))) { have.add(foldName(n)); alias.push(n) } });
+            if (alias.length !== (keep.aliases || []).length) patch.aliases = alias;
+            if (Object.keys(patch).length) await db("PATCH", "stations?id=eq." + keep.id, patch);
+            await db("DELETE", "stations?id=eq." + dup.id);
+            await load(); toast("Станции объединены: осталась «" + keep.name_ru + "»"); viewStations()
+        } catch (er) { go.disabled = false; showErr($("#mg_info"), er.message.includes("violates foreign key") ? "Дубль всё ещё где-то используется (кроме расписаний поездов). Поезда уже перенесены, откройте станцию и проверьте, где она встречается. " + er.message : er) }
+    }
+}
 function viewStations() {
     const v = $("#view");
     const row = s => `<tr data-id="${s.id || ""}">
@@ -845,7 +891,7 @@ function viewStations() {
         <td><input type="text" data-f="in_uk" value="${esc(s.in_uk)}" placeholder="у Хелмі"></td>
         <td><input type="text" data-f="in_pl" value="${esc(s.in_pl)}" placeholder="w Chełmie"></td>
         <td><select data-f="tz_hours"><option value="1" ${s.tz_hours == 1 ? "selected" : ""}>UTC+1</option><option value="2" ${s.tz_hours == 2 ? "selected" : ""}>UTC+2</option></select></td>
-        <td class="x"><button data-a="save">Сохранить</button> ${s.id ? '<button data-a="del">✕</button>' : ""}</td></tr>`;
+        <td class="x"><button data-a="save">Сохранить</button> ${s.id ? '<button data-a="merge" title="Эта станция — дубль другой: перенести поезда на неё и удалить этот дубль">Дубль…</button> <button data-a="del">✕</button>' : ""}</td></tr>`;
     v.innerHTML = `<section class="panel"><h2>Станции <span class="muted">(${ST.length})</span></h2>
         <p class="muted">Названия на других языках и формы «в Хелме» / «у Хелмі» / «w Chełmie» (нужны для заголовков вроде «С пересадкой в Хелме»). Если поле пустое, сайт покажет русское название. Изменения попадают на сайт после нажатия «Пересобрать сайт» вверху страницы.</p>
         <div class="frow"><input type="text" id="sf" placeholder="Поиск станции" style="width:240px"><label><input type="checkbox" id="nt"> без перевода</label></div>
@@ -860,6 +906,7 @@ function viewStations() {
     $("#stb").onclick = async e => {
         const b = e.target.closest("button"); if (!b) return;
         const tr = b.closest("tr"), id = tr.dataset.id, g = f => tr.querySelector(`[data-f=${f}]`).value.trim() || null;
+        if (b.dataset.a === "merge") { mergePanel(stById.get(id) || ST.find(x => String(x.id) === String(id))); return }
         const body = {name_ru: g("name_ru"), name_uk: g("name_uk"), name_en: g("name_en"), name_pl: g("name_pl"), in_ru: g("in_ru"), in_uk: g("in_uk"), in_pl: g("in_pl"), tz_hours: +g("tz_hours")};
         $("#se").innerHTML = "";
         try {
