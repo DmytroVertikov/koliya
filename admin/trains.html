@@ -1085,24 +1085,31 @@ const PL_WORDS = {
     uk: {"główny": "головний", "główna": "головна", "główne": "головне", "centralna": "центральна", "centralny": "центральний", "wschodnia": "східна", "wschodni": "східний", "zachodnia": "західна", "zachodni": "західний", "północna": "північна", "południowa": "південна", "miasto": "місто"}
 };
 const PL_EXC = {"kraków": ["Краков", "Краків"], "łódź": ["Лодзь", "Лодзь"], "przemyśl": ["Перемышль", "Перемишль"], "warszawa": ["Варшава", "Варшава"], "poznań": ["Познань", "Познань"], "gdańsk": ["Гданьск", "Гданськ"], "szczecin": ["Щецин", "Щецін"], "lublin": ["Люблин", "Люблін"], "chełm": ["Хелм", "Холм"]};
+const dk = x => String(x).normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/ł/gi, "l").toLowerCase(); /* ключ без диакритики: сайты часто пишут Lodz вместо Łódź */
+const foldKeys = o => Object.fromEntries(Object.entries(o).map(([k, v]) => [dk(k), v]));
+const PW = {ru: foldKeys(PL_WORDS.ru), uk: foldKeys(PL_WORDS.uk)}, PX = foldKeys(PL_EXC);
+/* названия целиком (в основном немецкие и другие нестандартные), ключ — слова через пробел без диакритики */
+const NAME_EXC = {"frankfurt oder": ["Франкфурт-на-Одере", "Франкфурт-на-Одері"], "berlin gesundbrunnen": ["Берлин-Гезундбруннен", "Берлін-Гезундбруннен"], "berlin hbf": ["Берлин-Главный", "Берлін-Головний"], "berlin hauptbahnhof": ["Берлин-Главный", "Берлін-Головний"], "berlin ostbahnhof": ["Берлин-Остбанхоф", "Берлін-Остбангоф"]};
 function plTranslit(name, lang) {
-    const uk = lang === "uk", W = PL_WORDS[uk ? "uk" : "ru"];
+    const uk = lang === "uk", W = PW[uk ? "uk" : "ru"], whole = NAME_EXC[dk(name).replace(/[^a-z0-9]+/g, " ").trim()];
+    if (whole) return whole[uk ? 1 : 0];
     const cap = (w, t) => w[0] === w[0].toUpperCase() && w[0] !== w[0].toLowerCase() ? t[0].toUpperCase() + t.slice(1) : t;
     const one = w => {
-        let s = w.toLowerCase();
-        if (W[s]) return cap(w, W[s]);
-        if (PL_EXC[s]) return PL_EXC[s][uk ? 1 : 0];
+        let s = w.toLowerCase().replace(/(?<=[bcdfghklmnprstwz])ow$/, "ów").replace(/(?<=[a-z])sl$/, "śl");
+        const k = dk(w);
+        if (W[k]) return cap(w, W[k]);
+        if (PX[k]) return PX[k][uk ? 1 : 0];
         s = s.replace(/szcz/g, "щ").replace(/(?<=[kptfc])rz/g, "ш").replace(/rz/g, "ж").replace(/dź/g, "дзь").replace(/dż/g, "дж").replace(/dz/g, "дз")
             .replace(/sz/g, "ш").replace(/cz/g, "ч").replace(/ch/g, "х").replace(/ż/g, "ж").replace(/śl/g, "сль").replace(/ś/g, "сь").replace(/ć/g, "ць").replace(/ń/g, "нь").replace(/ź/g, "зь")
             .replace(/ią/g, "ён").replace(/ię/g, "ен").replace(/ia/g, "я").replace(/ie/g, "е").replace(/io/g, uk ? "ьо" : "ё").replace(/iu/g, "ю")
-            .replace(/ja/g, "я").replace(/je/g, "е").replace(/ju/g, "ю").replace(/jo/g, uk ? "йо" : "ё").replace(/j/g, "й")
+            .replace(/(?<=[aeiouyąęó])jo/g, "йо").replace(/ja/g, "я").replace(/je/g, "е").replace(/ju/g, "ю").replace(/jo/g, uk ? "йо" : "ё").replace(/j/g, "й")
             .replace(/ę(?=[bp])/g, "ем").replace(/ę$/g, "е").replace(/ę/g, "ен").replace(/ą(?=[bp])/g, "ом").replace(/ą/g, "он");
         const M = {a: "а", b: "б", c: "ц", d: "д", e: "е", f: "ф", g: "г", h: "х", i: uk ? "і" : "и", k: "к", l: "л", ł: "л", m: "м", n: "н", o: "о", ó: "у", p: "п", r: "р", s: "с", t: "т", u: "у", w: "в", y: uk ? "и" : "ы", z: "з", v: "в", x: "кс", q: "к"};
         s = s.replace(/[a-zół]/g, c => M[c] || c).replace(/([жчшщ])ы/g, "$1и");
         if (uk) s = s.replace(/ё/g, "ьо");
         return cap(w, s)
     };
-    return String(name).split(/([\s\-]+)/).map(p => /^[\s\-]*$/.test(p) ? p : one(p)).join("")
+    return String(name).split(/([\s\-()]+)/).map(p => /^[\s\-()]*$/.test(p) ? p : one(p)).join("")
 }
 const isLatin = n => /[A-Za-zĄĆĘŁŃÓŚŹŻąćęłńóśźż]/.test(n);
 const foldName = s => String(s || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/ł/gi, "l").toLowerCase().replace(/[^\p{L}\p{N}]+/gu, " ").trim();
