@@ -107,6 +107,7 @@
         .list p.lh { margin: 0; padding: 6px 12px; background: #f9fafb; border-bottom: 1px solid #eef0f3; font-size: 13px; font-weight: 700; color: var(--mu); position: sticky; top: 0; z-index: 1 }
         .list div[data-id] { border-left-width: 5px }
         .dhead { display: flex; gap: 12px 20px; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; margin-bottom: 12px }
+        .sbtn { display: flex; gap: 6px; flex-wrap: wrap; justify-content: flex-end; max-width: 55% }
         .dctl { display: flex; gap: 8px 16px; align-items: center; flex-wrap: wrap }
         .dctl label { margin: 0; display: inline-flex; align-items: center; gap: 6px; font-weight: 600; font-size: 15px }
         .subtabs { display: flex; gap: 6px; margin: 4px 0 16px; border-bottom: 2px solid #eaecf0 }
@@ -429,15 +430,17 @@ const fitPages = (p, h) => ({own: RP.filter(r => pageMatch(r, h)), auto: RP.filt
 const orphanConns = () => connInfo().filter(x => { const f = fitPages(x.p, x.h); return !f.own.length && !f.auto.length });
 /* поезда страницы «из вариантов других направлений» — та же логика, что на сайте (участок поезда от A до B по его остановкам) */
 function sliceTrains(r) {
-    const seen = new Set(), out = [], tm = s => (String(s).match(/\d{1,2}:\d{2}/) || [""])[0];
-    connInfo().forEach(x => x.p.legs.forEach(L => {
+    const seen = new Map(), out = [], tm = s => (String(s).match(/\d{1,2}:\d{2}/) || [""])[0];
+    connInfo().forEach(x => x.p.legs.forEach((L, li) => {
         const st = L.stops, a = st.findIndex(s => norm(s.name).startsWith(norm(r.from_name)));
         if (a < 0) return;
         const b = st.findIndex((s, i) => i > a && norm(s.name).startsWith(norm(r.to_name)));
         if (b < 0) return;
         const key = norm(L.train) + "|" + tm(st[a].time) + ">" + tm(st[b].time);
-        if (seen.has(key)) return;
-        seen.add(key); out.push({train: L.train, freq: L.freq, ft: tm(st[a].time), tt: tm(st[b].time)})
+        const src = {id: x.c.id, h: x.h};
+        if (seen.has(key)) { const o = seen.get(key); if (!o.srcs.some(z => z.id === src.id)) o.srcs.push(src); return }
+        const o = {train: L.train, train_id: (x.legs[li] || {}).train_id, freq: L.freq, ft: tm(st[a].time), tt: tm(st[b].time), srcs: [src]}; /* srcs — варианты, из которых вырезан поезд */
+        seen.set(key, o); out.push(o)
     }));
     return out.sort((x, y) => depMin(x) - depMin(y))
 }
@@ -610,8 +613,17 @@ function drawDirMain(msg) {
     const sub = $("#d_sub");
     if (DSUB === "page") { sub.innerHTML = dirEditorHtml(r); dirEditorBind(r); return }
     if (slice) {
-        sub.innerHTML = `<p class="muted">У этой страницы нет собственных вариантов: прямые поезда на ней собираются сами из вариантов других направлений (участок поезда от «${esc(r.from_name)}» до «${esc(r.to_name)}»). Чтобы что-то изменить, правьте варианты в направлениях, через которые идут эти поезда.</p>`
-            + (mine.length ? mine.map(t => `<div class="conn"><div class="t"><span class="ht">${esc(t.ft)}</span> → <span class="ht">${esc(t.tt)}</span> <b>${esc(t.train)}</b>${t.freq ? `<small>${esc(t.freq)}</small>` : ""}</div></div>`).join("") : '<p class="muted">Сейчас подходящих поездов нет.</p>');
+        sub.innerHTML = `<p class="muted">У этой страницы нет собственных вариантов: прямые поезда на ней собираются сами из вариантов других направлений (участок поезда от «${esc(r.from_name)}» до «${esc(r.to_name)}»). Чтобы что-то изменить, откройте вариант, из которого взят поезд, или расписание самого поезда (кнопки справа).</p>`
+            + (mine.length ? '<div id="cl">' + mine.map((t, i) => `<div class="conn" data-i="${i}"><div class="t"><span class="ht">${esc(t.ft)}</span> → <span class="ht">${esc(t.tt)}</span> <b>${esc(t.train)}</b>${t.freq ? `<small>${esc(t.freq)}</small>` : ""}
+            <small>${t.srcs.length > 1 ? "Входит в " + t.srcs.length + " " + plural(t.srcs.length, VARS) + ": правка любого из них меняет поезд на этой странице" : "Входит в вариант"}</small></div>
+            <div class="sbtn">${t.train_id ? `<button data-a="train" title="Расписание поезда: станции и время">Расписание поезда</button>` : ""}${t.srcs.map((z, k) => `<button data-a="edit" data-k="${k}" title="${esc(z.h.ft + " " + z.h.from + " → " + z.h.tt + " " + z.h.to)}">${t.srcs.length > 1 ? "Вариант " + (k + 1) + ": " + esc(z.h.from) + " → " + esc(z.h.to) : "Изменить вариант"}</button>`).join("")}</div></div>`).join("") + "</div>" : '<p class="muted">Сейчас подходящих поездов нет.</p>');
+        const cl = $("#cl");
+        if (cl) cl.onclick = e => {
+            const b = e.target.closest("button"), d = e.target.closest(".conn"); if (!b || !d) return;
+            const t = mine[+d.dataset.i];
+            if (b.dataset.a === "train") { TAB = "trains"; openTrain(t.train_id); shell() }
+            if (b.dataset.a === "edit") { editConn(t.srcs[+b.dataset.k].id); drawDirMain() }
+        };
         return
     }
     sub.innerHTML = `<p class="muted" style="margin-top:0">На странице показываются варианты, у которых в шапке «${esc(r.from_name)} → ${esc(r.to_name)}». Варианты на сайте обновляются сразу, пересборка не нужна.</p>
@@ -1193,7 +1205,7 @@ async function saveConn() {
         if (pg && !RT.some(x => x.slug === slug)) { await db("POST", "routes", [{slug, title: pg.from_name + " → " + pg.to_name, sort: 1000}]); RT = await db("GET", "routes?order=sort") }
         await db("POST", "rpc/save_connection", {p: body});
         await load(); E = null;
-        drawDirs(pg && cur && pg !== cur ? "Вариант сохранён, но он показывается на странице «" + pg.from_name + " → " + pg.to_name + "»" : "Вариант сохранён")
+        drawDirs(pg && cur && !isSlice(cur) && pg !== cur ? "Вариант сохранён, но он показывается на странице «" + pg.from_name + " → " + pg.to_name + "»" : "Вариант сохранён")
     } catch (e) { showErr(box, e) }
 }
 
