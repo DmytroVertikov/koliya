@@ -2983,12 +2983,13 @@
    "in_ru": "в Кракове",
    "in_uk": "у Кракові",
    "in_pl": "w Krakowie",
-   "short_ru": null,
-   "short_uk": null,
-   "short_en": null,
-   "short_pl": null,
+   "short_ru": "Краков",
+   "short_uk": "Краків",
+   "short_en": "Kraków",
+   "short_pl": "Kraków",
    "aliases": [
-    "Краков Главный"
+    "Краков Главный",
+    "Краков"
    ]
   },
   {
@@ -3784,7 +3785,8 @@
    "short_en": "Przemyśl",
    "short_pl": "Przemyśl",
    "aliases": [
-    "Перемышль Главный"
+    "Перемышль Главный",
+    "Перемышль"
    ]
   },
   {
