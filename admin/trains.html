@@ -48,7 +48,7 @@
         .chip.rd { background: var(--rd2); color: var(--rd) }
         .chip.bl { background: var(--bl2); color: var(--bl) }
         .chip.pu { background: var(--pu2); color: var(--pu) }
-        td.shc { min-width: 150px } td.shc input { width: 70px; margin: 1px 2px; padding: 3px 5px; font-size: 13px }
+        td.shc { min-width: 190px; background: #f6f9ff } td.shc input { width: 88px; margin: 1px 2px; padding: 4px 6px; font-size: 13px }
         table.g { border-collapse: separate; border-spacing: 0; width: 100%; font-size: 16px }
         table.g th, table.g td { padding: 5px 6px; border-bottom: 1px solid #eef0f3; text-align: left; vertical-align: middle }
         table.g thead th { position: sticky; top: 0; z-index: 2; background: #fff; font-size: 13px; color: var(--mu); font-weight: 700; padding: 9px 6px; border-bottom: 2px solid var(--bd) }
@@ -888,13 +888,13 @@ function viewStations() {
     const v = $("#view");
     const row = s => `<tr data-id="${s.id || ""}">
         <td><input type="text" data-f="name_ru" value="${esc(s.name_ru)}"></td>
+        <td class="shc">${["ru", "uk", "en", "pl"].map(l => `<input type="text" data-f="short_${l}" ${SHORT_OK ? "" : "disabled"} value="${esc(s["short_" + l])}" placeholder="${l}">`).join("")}</td>
         <td><input type="text" data-f="name_uk" value="${esc(s.name_uk)}"></td>
         <td><input type="text" data-f="name_en" value="${esc(s.name_en)}"></td>
         <td><input type="text" data-f="name_pl" value="${esc(s.name_pl)}"></td>
         <td><input type="text" data-f="in_ru" value="${esc(s.in_ru)}" placeholder="в Хелме"></td>
         <td><input type="text" data-f="in_uk" value="${esc(s.in_uk)}" placeholder="у Хелмі"></td>
         <td><input type="text" data-f="in_pl" value="${esc(s.in_pl)}" placeholder="w Chełmie"></td>
-        <td class="shc">${["ru", "uk", "en", "pl"].map(l => `<input type="text" data-f="short_${l}" ${SHORT_OK ? "" : "disabled"} value="${esc(s["short_" + l])}" placeholder="${l}">`).join("")}</td>
         <td><select data-f="tz_hours"><option value="1" ${s.tz_hours == 1 ? "selected" : ""}>UTC+1</option><option value="2" ${s.tz_hours == 2 ? "selected" : ""}>UTC+2</option></select></td>
         <td class="x"><button data-a="save">Сохранить</button> ${s.id ? '<button data-a="merge" title="Эта станция — дубль другой: перенести поезда на неё и удалить этот дубль">Дубль…</button> <button data-a="del">✕</button>' : ""}</td></tr>`;
     v.innerHTML = `<section class="panel"><h2>Станции <span class="muted">(${ST.length})</span></h2>
@@ -902,7 +902,7 @@ function viewStations() {
         ${SHORT_OK ? '<p class="muted"><b>Коротко</b> — название для заголовка карточки поезда (например, «Киев» вместо «Киев-Пассажирский»); в «Подробнее» показывается полное. Пусто — везде полное.</p>' : '<div class="errbox">Колонок для коротких названий ещё нет в базе: выполните в Supabase (SQL Editor) файл db/stations-short-names.sql и обновите страницу.</div>'}
         <div class="frow"><input type="text" id="sf" placeholder="Поиск станции" style="width:240px"><label><input type="checkbox" id="nt"> без перевода</label></div>
         <div id="se"></div>
-        <table class="g"><thead><tr><th>Русское</th><th>Українська</th><th>English</th><th>Polski</th><th>в … (ru)</th><th>у … (uk)</th><th>w … (pl)</th><th title="Короткое название в заголовке карточки поезда, полное остаётся в «Подробнее»">Коротко</th><th>Пояс</th><th></th></tr></thead><tbody id="stb"></tbody></table></section>`;
+        <table class="g"><thead><tr><th>Русское</th><th title="Короткое название в заголовке карточки поезда и на главной; полное остаётся в «Подробнее»">Коротко: ru / uk / en / pl</th><th>Українська</th><th>English</th><th>Polski</th><th>в … (ru)</th><th>у … (uk)</th><th>w … (pl)</th><th>Пояс</th><th></th></tr></thead><tbody id="stb"></tbody></table></section>`;
     const draw = () => {
         const q = $("#sf").value.trim().toLowerCase(), nt = $("#nt").checked;
         const list = ST.filter(s => (!q || s.name_ru.toLowerCase().includes(q)) && (!nt || !s.name_uk || !s.name_en || !s.name_pl));
