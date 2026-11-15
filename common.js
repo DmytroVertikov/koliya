@@ -284,3 +284,74 @@ const FOOTER_HTML = () => `<div class="fcols">
     const f = document.getElementById("site-footer");
     if (f) f.innerHTML = FOOTER_HTML()
 })();
+
+/* Колія: сворачивание списка станций поезда.
+   Если в списке .tl больше трёх станций, по умолчанию видны только выделенные (.h: посадка, пересадка, выход).
+   Остальные (промежуточные и станции вне вашей поездки) прячутся за кнопкой «Показать все станции».
+   Если выделенных нет, остаются первая и последняя станции.
+   Модуль не зависит от рендера карточек: он следит за DOM и обрабатывает каждый .tl один раз. */
+(() => {
+    const TXT = {
+        ru: ["Показать все станции", "Скрыть станции"],
+        uk: ["Показати всі станції", "Сховати станції"],
+        en: ["Show all stations", "Hide stations"],
+        pl: ["Pokaż wszystkie stacje", "Ukryj stacje"]
+    };
+    const [MORE, LESS] = TXT[window.LANG] || TXT.ru;
+    const MIN_TOTAL = 4; /* сворачиваем, только если станций больше трёх */
+
+    function fold(ul) {
+        if (ul.dataset.fold) return;
+        ul.dataset.fold = "1";
+        const items = [...ul.children].filter(el => el.tagName === "LI");
+        if (items.length < MIN_TOTAL) return;
+
+        const hasH = items.some(li => li.classList.contains("h")), last = items.length - 1;
+        const keep = items.map((li, i) => hasH ? li.classList.contains("h") : i === 0 || i === last);
+        const kept = items.filter((_, i) => keep[i]);
+        const hidden = items.length - kept.length;
+        if (!hidden || !kept.length) return;
+
+        items.forEach((li, i) => { if (!keep[i]) li.classList.add("f-hide"); });
+        /* рельса: у крайних видимых станций линия идёт только внутрь списка */
+        kept[0].classList.add("f-first");
+        kept[kept.length - 1].classList.add("f-last");
+
+        /* скрытые участки: строка-кнопка ставится на каждый участок между видимыми станциями;
+           если таких нет (скрыты только крайние), то на первый скрытый участок */
+        const runs = [];
+        items.forEach((li, i) => {
+            if (keep[i]) return;
+            if (i > 0 && !keep[i - 1]) return;
+            runs.push({li, inner: items.slice(0, i).some((_, j) => keep[j]) && items.slice(i).some((_, j) => keep[i + j])});
+        });
+        const rows = runs.filter(r => r.inner);
+        (rows.length ? rows : runs.slice(0, 1)).forEach(({li}) => {
+            const row = document.createElement("li");
+            row.className = "fold";
+            row.innerHTML = `<span><button type="button" class="fold-btn" aria-expanded="false">${MORE} (${hidden})</button></span>`;
+            li.before(row);
+        });
+
+        const less = document.createElement("button");
+        less.type = "button";
+        less.className = "fold-less";
+        less.textContent = LESS;
+        less.hidden = true;
+        ul.after(less);
+        ul.classList.add("folded");
+
+        const set = open => {
+            ul.classList.toggle("folded", !open);
+            less.hidden = !open;
+            ul.querySelectorAll(".fold-btn").forEach(b => b.setAttribute("aria-expanded", String(open)));
+            if (!open) (ul.closest(".leg") || ul).scrollIntoView({block: "nearest"});
+        };
+        ul.addEventListener("click", e => { if (e.target.closest(".fold-btn")) set(true); });
+        less.addEventListener("click", () => set(false));
+    }
+
+    const run = () => document.querySelectorAll(".tl").forEach(fold);
+    new MutationObserver(run).observe(document.documentElement, {childList: true, subtree: true});
+    run();
+})();

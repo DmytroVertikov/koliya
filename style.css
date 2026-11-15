@@ -923,3 +923,39 @@ details[open] .more .chev{transform:rotate(-135deg) translate(-2px,-2px)}
   .pg:has(details) .rts{grid-template-columns:1fr}
   .pg details .rt.d-o,.pg details .rt.d-i{grid-column:auto}
 }
+
+/* ===== Сворачивание списка станций (fold-stations.js) ===== */
+.tl.folded li.f-hide{display:none}
+.tl.folded li.fold{display:grid}
+.tl:not(.folded) li.fold{display:none}
+
+/* рельса у крайних видимых станций идёт только внутрь списка (скрытые станции выше/ниже не рисуем) */
+.tl.folded li.f-first:after{top:50%}
+.tl.folded li.f-last:after{bottom:50%;opacity:1}
+
+/* строка-кнопка: рельса идёт дальше пунктиром, вместо кружка маленькая точка */
+.tl li.fold{padding:8px 0;align-items:center}
+.tl li.fold:before{width:5px;height:5px;border:0;background:var(--rail)}
+.tl li.fold:after{background:repeating-linear-gradient(180deg,var(--rail) 0 4px,transparent 4px 9px)}
+
+.fold-btn,.fold-less{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:6px 14px;border:0;border-radius:99px;cursor:pointer;
+  background:var(--soft);color:var(--brand);
+  font:600 13.5px/1.4 var(--body);transition:filter .15s
+}
+.fold-btn:hover,.fold-less:hover{filter:brightness(.95)}
+.fold-btn:focus-visible,.fold-less:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+.fold-btn::after{content:"";width:6px;height:6px;border:solid currentColor;border-width:0 2px 2px 0;transform:rotate(45deg) translateY(-2px)}
+.fold-less::before{content:"";width:6px;height:6px;border:solid currentColor;border-width:2px 0 0 2px;transform:rotate(45deg) translateY(2px)}
+
+/* «Скрыть станции» под списком, выровнена по колонке с названиями станций */
+.fold-less{margin:6px 0 4px 104px}
+@media (max-width:480px){.fold-less{margin-left:92px}}
+
+/* зелёный вариант (прямой поезд) */
+.opt.is-d .fold-btn,.opt.is-d .fold-less{background:#dcf5e9;color:#0a6b46}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]) .opt.is-d .fold-btn,
+  :root:not([data-theme="light"]) .opt.is-d .fold-less{background:#12392b;color:#7be0b0}
+}
