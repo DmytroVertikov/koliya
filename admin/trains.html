@@ -616,13 +616,18 @@ function drawDirMain(msg) {
         sub.innerHTML = `<p class="muted">У этой страницы нет собственных вариантов: прямые поезда на ней собираются сами из вариантов других направлений (участок поезда от «${esc(r.from_name)}» до «${esc(r.to_name)}»). Чтобы что-то изменить, откройте вариант, из которого взят поезд, или расписание самого поезда (кнопки справа).</p>`
             + (mine.length ? '<div id="cl">' + mine.map((t, i) => `<div class="conn" data-i="${i}"><div class="t"><span class="ht">${esc(t.ft)}</span> → <span class="ht">${esc(t.tt)}</span> <b>${esc(t.train)}</b>${t.freq ? `<small>${esc(t.freq)}</small>` : ""}
             <small>${t.srcs.length > 1 ? "Входит в " + t.srcs.length + " " + plural(t.srcs.length, VARS) + ": правка любого из них меняет поезд на этой странице" : "Входит в вариант"}</small></div>
-            <div class="sbtn">${t.train_id ? `<button data-a="train" title="Расписание поезда: станции и время">Расписание поезда</button>` : ""}${t.srcs.map((z, k) => `<button data-a="edit" data-k="${k}" title="${esc(z.h.ft + " " + z.h.from + " → " + z.h.tt + " " + z.h.to)}">${t.srcs.length > 1 ? "Вариант " + (k + 1) + ": " + esc(z.h.from) + " → " + esc(z.h.to) : "Изменить вариант"}</button>`).join("")}</div></div>`).join("") + "</div>" : '<p class="muted">Сейчас подходящих поездов нет.</p>');
+            <div class="sbtn">${t.train_id ? `<button data-a="train" title="Расписание поезда: станции и время">Расписание поезда</button>` : ""}${t.srcs.map((z, k) => `<button data-a="edit" data-k="${k}" title="${esc(z.h.ft + " " + z.h.from + " → " + z.h.tt + " " + z.h.to)}">${t.srcs.length > 1 ? "Вариант " + (k + 1) + ": " + esc(z.h.from) + " → " + esc(z.h.to) : "Изменить вариант"}</button><button data-a="del" data-k="${k}" title="Удалить этот вариант целиком">✕</button>`).join("")}</div></div>`).join("") + "</div>" : '<p class="muted">Сейчас подходящих поездов нет.</p>');
         const cl = $("#cl");
         if (cl) cl.onclick = e => {
             const b = e.target.closest("button"), d = e.target.closest(".conn"); if (!b || !d) return;
             const t = mine[+d.dataset.i];
             if (b.dataset.a === "train") { TAB = "trains"; openTrain(t.train_id); shell() }
             if (b.dataset.a === "edit") { editConn(t.srcs[+b.dataset.k].id); drawDirMain() }
+            if (b.dataset.a === "del") {
+                const z = t.srcs[+b.dataset.k], x = connInfo().find(i => i.c.id === z.id);
+                if (!confirm("Удалить вариант целиком?\n\n" + z.h.ft + " " + z.h.from + " → " + z.h.tt + " " + z.h.to + (x ? " (" + x.trains + ")" : "") + "\n\nИз базы пропадёт весь вариант, а не только поезд " + t.train + ": он исчезнет и со своей страницы, и отовсюду, где участвует в этом варианте.")) return;
+                db("DELETE", "connections?id=eq." + z.id).then(load).then(() => drawDirs("Вариант удалён")).catch(er => toast(er.message))
+            }
         };
         return
     }
