@@ -897,3 +897,29 @@ details[open] .more .chev{transform:rotate(-135deg) translate(-2px,-2px)}
 .pg .rt:hover{background:var(--brand);border-color:var(--brand);color:var(--card);filter:none}
 .pg details{margin-top:8px}
 .pg summary{padding:6px 2px}
+
+/* «Популярные маршруты»: сетка вместо multi-columns */
+.pgrid{display:grid;columns:auto;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
+.pg{margin:0}
+
+/* страна со списком «Ещё маршруты» — на всю ширину */
+.pg:has(details){grid-column:1/-1}
+.pg:has(details) .rts{display:grid;grid-template-columns:repeat(2,1fr);gap:6px 10px}
+
+/* внутри раскрытого списка: слева «из Украины», справа «в Украину» */
+.pg details .rts{grid-auto-flow:dense}
+.pg details .rt.d-o{grid-column:1}
+.pg details .rt.d-i{grid-column:2}
+
+/* кнопка раскрытия вместо подчёркнутого текста */
+.pg summary{display:inline-flex;align-items:center;gap:8px;padding:9px 16px;border-radius:12px;
+  background:var(--soft);color:var(--brand);text-decoration:none;font-weight:700}
+.pg summary::after{content:"";width:7px;height:7px;border:solid currentColor;border-width:0 2px 2px 0;
+  transform:rotate(45deg) translateY(-2px);transition:transform .2s}
+.pg details[open] summary::after{transform:rotate(-135deg)}
+.pg summary:hover{filter:brightness(.96)}
+
+@media (max-width:560px){
+  .pg:has(details) .rts{grid-template-columns:1fr}
+  .pg details .rt.d-o,.pg details .rt.d-i{grid-column:auto}
+}
