@@ -75,11 +75,19 @@
         .muted { color: var(--mu); font-size: 14px }
         .unk { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 16px; background: #fffaeb; border: 1.5px solid #fedf89; border-radius: 12px; padding: 12px 14px; margin: 12px 0; font-size: 15px }
         .unk .unkl { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; flex: 1 1 320px }
+        .unk .unkt { width: 100%; margin: 4px 0 }
+        .unk .unkt td { padding: 4px 8px }
+        .unk .ust { margin-top: 3px; font-size: 13px }
+        .unk .unkt input { width: 100%; min-width: 150px }
+        .unk .unka { width: 100%; justify-content: flex-end; display: flex; align-items: center; gap: 14px }
         .unk .unkl > b { color: #b54708 }
         .unk .unkl button { font-size: 15px; padding: 5px 12px; border-radius: 999px; border: 1.5px solid #fec84b; background: #fff; color: #b54708; font-weight: 600; cursor: pointer }
         .unk .unkl button:hover { background: #fef0c7 }
         .unk .unka { display: flex; align-items: center; gap: 10px; flex-wrap: wrap }
         .unk .unka label { margin: 0; display: inline-flex; align-items: center; gap: 6px; font-weight: 600 }
+        .errbox .blk { margin: 8px 0 }
+        .errbox .blr { background: #fff; border: 1px solid #fecdca; border-radius: 8px; padding: 6px 10px; margin: 4px 0; display: flex; flex-wrap: wrap; gap: 6px 10px; align-items: center }
+        .errbox .blr button { font-size: 14px; padding: 3px 10px }
         .errbox { background: var(--rd2); color: var(--rd); border: 1.5px solid #fecdca; border-radius: 10px; padding: 10px 12px; margin: 10px 0; font-size: 15px; white-space: pre-wrap }
         .frow { display: flex; gap: 12px; flex-wrap: wrap; align-items: end; margin: 8px 0 }
         .frow label { display: block; font-size: 13px; color: var(--mu); font-weight: 600; margin-bottom: 3px }
@@ -407,6 +415,7 @@ const DIR_P = [
 ];
 const DIR_TXT = [["title", "Заголовок (title)"], ["desc", "Описание (description)"], ["h1", "Заголовок H1"], ["lead", "Подзаголовок"], ["all", "Заголовок «все варианты»"], ["more", "Заголовок «ещё варианты»"], ["leadm", "Подзаголовок при пересадке на станции (leadm)"]];
 const DIR_LANGS = [["ru", "Русский"], ["uk", "Українська"], ["en", "English"], ["pl", "Polski"]];
+let OPENCONN = null; /* вариант, который нужно открыть сразу после перехода на вкладку направлений */
 let RP = [], DSEL = null, DSUB = "conns", DQ = ""; /* DSEL: id страницы | "new" (форма нового направления) | "orph" (варианты без страницы); DSUB: "conns" | "page" */
 /* Как сайт связывает страницу и варианты: страница «A → B» показывает варианты, у которых город отправления в шапке начинается с A, а город прибытия — с B.
    Страницы «из вариантов других направлений» (slice) своих вариантов не имеют: их поезда вырезаются из остальных вариантов. */
@@ -458,6 +467,7 @@ async function viewDirs() {
         return
     }
     E = null;
+    if (OPENCONN) { if (CN.some(c => c.id === OPENCONN)) editConn(OPENCONN); OPENCONN = null }
     if (!DSEL || (DSEL !== "new" && DSEL !== "orph" && !RP.some(r => r.id === DSEL))) DSEL = RP.length ? RP[0].id : "new";
     drawDirs()
 }
@@ -919,7 +929,8 @@ function openTrain(id) {
     if (id === "new") TD = {t: {number: "", freq: "", badge: "", note: ""}, rows: [{name: "", arr: "", dep: "", chk: false}, {name: "", arr: "", dep: "", chk: false}]};
     else {
         const t = trById.get(id);
-        TD = {t: {...t, badge: t.badge || "", note: t.note || ""}, rows: (spByTrain.get(id) || []).map(s => ({id: s.id, name: stById.get(s.station_id).name_ru, arr: hm(s.arr_time), dep: hm(s.dep_time), chk: s.needs_check}))}
+        TD = {t: {...t, badge: t.badge || "", note: t.note || ""}, rows: (spByTrain.get(id) || []).map(s => ({id: s.id, name: stById.get(s.station_id).name_ru, arr: hm(s.arr_time), dep: hm(s.dep_time), chk: s.needs_check}))};
+        TD.orig = (spByTrain.get(id) || []).map(s => s.id) /* остановки, которые сейчас есть в базе */
     }
 }
 function viewTrains() {
@@ -955,7 +966,10 @@ function trainEditor() {
         <p class="muted">Для каждой станции укажите время <b style="color:var(--bl)">прибытия</b> и <b style="color:var(--gr)">отправления</b> (местное). У первой станции есть только отправление, у последней — только прибытие. Вводите только цифры («1906» → 19:06): курсор сам перейдёт к следующему полю. Сутки считаются сами: если время «перескочило» назад, значит прошла полночь.</p>
         <div class="sumbar" id="sum"></div>
         <table class="g"><thead><tr><th>№</th><th>Станция</th><th class="ha">⬇ Прибытие</th><th class="hd">⬆ Отправление</th><th>Стоянка</th><th title="Время перенесено из старых данных и не проверено. Снимите галочку, когда убедитесь, что время верное">Проверить</th><th></th></tr></thead><tbody id="rows"></tbody></table>
-        <p><button id="addrow">+ Станция в конец</button></p>
+        <p><button id="addrow">+ Станция в конец</button> <button id="impbtn" title="Вставить скопированное расписание поезда (например, со страницы Koleo) и разобрать его на станции и время">Вставить расписание</button></p>
+        <div id="imp" style="display:none" class="panel"><label>Вставьте текст страницы расписания (Ctrl+A, Ctrl+C на странице поезда) или её HTML</label>
+            <textarea id="imptx" rows="8" style="width:100%;font-family:monospace" placeholder="15:40&#10;Przemyśl Główny&#10;15:42&#10;15:43&#10;Przemyśl Zasanie&#10;…"></textarea>
+            <p><button class="pri" id="impgo">Распознать и заполнить таблицу</button> <button id="impx">Закрыть</button></p><div id="imperr"></div></div>
         <div id="unk"></div>
         <div id="terr"></div>
         <div class="bar2"><button id="tsave" class="pri big">Сохранить поезд</button>${TSEL !== "new" ? '<button id="tdel">Удалить поезд</button>' : ""}<span class="chip am" id="dirty" style="display:none">● есть несохранённые изменения</span></div>`;
@@ -964,6 +978,26 @@ function trainEditor() {
     const sync = () => { T.number = $("#tnum").value.trim(); T.freq = $("#tfr").value.trim(); T.badge = $("#tbd").value; T.note = $("#tnt").value.trim(); markDirty() };
     ["tnum", "tfr", "tbd", "tnt"].forEach(i => $("#" + i).oninput = sync);
     $("#addrow").onclick = () => { TD.rows.push({name: "", arr: "", dep: "", chk: false}); markDirty(); drawRows(); const l = document.querySelectorAll("#rows input[data-f=name]"); l[l.length - 1].focus() };
+    $("#impbtn").onclick = () => { const b = $("#imp"); b.style.display = b.style.display === "none" ? "" : "none"; if (b.style.display === "") $("#imptx").focus() };
+    $("#impx").onclick = () => { $("#imp").style.display = "none" };
+    $("#impgo").onclick = () => {
+        const box = $("#imperr"), r = parseSchedule($("#imptx").value);
+        if (r.rows.length < 2) { box.innerHTML = '<div class="errbox">Не удалось найти станции со временем. Нужен текст, где перед названием каждой станции стоят время прибытия и отправления (первой только отправление, последней только прибытие).</div>'; return }
+        const had = TD.rows.some(x => x.name || x.arr || x.dep);
+        if (had && !confirm("Заменить текущие станции (" + TD.rows.length + ") распознанными (" + r.rows.length + ")?")) return;
+        let unk = 0;
+        const pool = TD.rows.filter(x => x.id), used = new Set();
+        TD.rows = r.rows.map(x => {
+            const s = stationAny(x.name); if (!s) unk++;
+            /* та же станция, что уже была в поезде, остаётся той же остановкой (на неё ссылаются варианты), иначе база пересоздала бы остановки */
+            const old = s && pool.find(o => !used.has(o.id) && (findStation(o.name) || {}).id === s.id); if (old) used.add(old.id);
+            return {id: old ? old.id : undefined, name: s ? s.name_ru : x.name, arr: x.arr, dep: x.dep, chk: false}
+        });
+        if (r.number && !$("#tnum").value.trim()) { $("#tnum").value = r.number; T.number = r.number }
+        markDirty(); drawRows();
+        $("#imp").style.display = "";
+        $("#imperr").innerHTML = '<span class="chip gr">Распознано станций: ' + r.rows.length + '</span> ' + (unk ? '<span class="chip am">не найдено в справочнике: ' + unk + ' (они подсвечены, внизу можно добавить)</span>' : '<span class="chip gr">все станции найдены в справочнике</span>') + ' Проверьте таблицу и нажмите «Сохранить поезд».'
+    };
     $("#tsave").onclick = saveTrain;
     if ($("#tdel")) $("#tdel").onclick = async () => {
         if (!confirm("Удалить поезд " + T.number + " вместе с расписанием?")) return;
@@ -992,30 +1026,49 @@ function unknownNames() {
     return out
 }
 let UNKTZ = "1";
+const UNKED = {}; /* правки в панели «Нет в справочнике»: ключ — название как в таблице */
+const unkNote = ru => sameRu(ru) ? '<span class="chip gr">уже есть в справочнике: станция будет привязана, дубль не создаётся</span>' : "";
+const unkVal = n => UNKED[n.toLowerCase()] || (isLatin(n) ? {ru: plTranslit(n, "ru"), uk: plTranslit(n, "uk")} : {ru: n, uk: ""});
 function drawUnk() {
     const box = $("#unk"); if (!box) return;
     const u = unknownNames();
     if (!u.length) { box.innerHTML = ""; return }
-    box.innerHTML = `<div class="unk"><div class="unkl"><b>Нет в справочнике:</b>${u.map((n, i) => `<button data-i="${i}" title="Добавить «${esc(n)}» в справочник">+ ${esc(n)}</button>`).join("")}</div>
+    box.innerHTML = `<div class="unk"><div class="unkl"><b>Нет в справочнике:</b> <span class="muted">названия по-русски и по-украински подставлены автоматически (приблизительно), поправьте при необходимости</span></div>
+        <table class="g unkt"><thead><tr><th>Как в источнике</th><th>По-русски</th><th>По-украински</th><th></th></tr></thead><tbody>${u.map((n, i) => { const v = unkVal(n); return `<tr data-i="${i}"><td>${esc(n)}</td><td><input type="text" data-f="ru" value="${esc(v.ru)}"><div class="ust">${unkNote(v.ru)}</div></td><td><input type="text" data-f="uk" value="${esc(v.uk)}"></td><td><button data-a="one" title="Добавить только эту станцию">+ Добавить</button></td></tr>` }).join("")}</tbody></table>
         <div class="unka"><label>Часовой пояс <select id="unktz"><option value="1" ${UNKTZ === "1" ? "selected" : ""}>UTC+1</option><option value="2" ${UNKTZ === "2" ? "selected" : ""}>UTC+2</option></select></label>
         <button id="unkall" class="pri">+ Добавить в справочник${u.length > 1 ? " все (" + u.length + ")" : ""}</button></div></div>`
 }
 async function addStations(names) {
-    const box = $("#terr");
+    const box = $("#terr"), items = names.map(n => { const v = unkVal(n), lat = isLatin(n), ru = v.ru.trim() || n; return {src: n, ru, uk: v.uk.trim() || null, lat, ex: sameRu(ru)} });
+    const fresh = [], seen = new Set();
+    items.filter(x => !x.ex).forEach(x => { const k = foldName(x.ru); if (!seen.has(k)) { seen.add(k); fresh.push(x) } });
     try {
-        await db("POST", "stations", names.map(n => ({name_ru: n, tz_hours: +UNKTZ})));
+        if (fresh.length) await db("POST", "stations", fresh.map(x => ({name_ru: x.ru, name_uk: x.uk, name_pl: x.lat ? x.src : null, name_en: x.lat ? x.src : null, tz_hours: +UNKTZ})));
+        /* уже существующие станции: дописываем польское/английское/украинское название, если оно пустое, чтобы в следующий раз находились сразу */
+        for (const x of items.filter(x => x.ex)) {
+            const patch = {}; if (x.lat && !x.ex.name_pl) patch.name_pl = x.src; if (x.lat && !x.ex.name_en) patch.name_en = x.src; if (x.uk && !x.ex.name_uk) patch.name_uk = x.uk;
+            if (Object.keys(patch).length) await db("PATCH", "stations?id=eq." + x.ex.id, patch)
+        }
         await load();
+        TD.rows.forEach(r => { const it = items.find(x => x.src.toLowerCase() === (r.name || "").trim().toLowerCase()); if (it) r.name = (it.ex || {}).name_ru || it.ru });
         const dl = $("#stl"); if (dl) dl.innerHTML = ST.map(s => `<option value="${esc(s.name_ru)}">`).join("");
         if (box) box.innerHTML = "";
-        drawRows();
-        toast(names.length > 1 ? "Добавлено станций: " + names.length : "Станция добавлена")
-    } catch (e) { showErr(box, e) }
+        markDirty(); drawRows();
+        const linked = items.filter(x => x.ex).length;
+        toast((fresh.length ? "Добавлено станций: " + fresh.length : "Новых станций нет") + (linked ? ", привязано к существующим: " + linked : ""))
+    } catch (e) { showErr(box, /stations_name_ru_uq|duplicate key/.test(String(e.message || e)) ? "Станция с таким русским названием уже есть в справочнике. Измените название в колонке «По-русски» (или оставьте как есть, тогда станция привяжется к существующей) и повторите." : e) }
 }
 document.addEventListener("change", e => { if (e.target.id === "unktz") UNKTZ = e.target.value });
+document.addEventListener("input", e => {
+    const t = e.target, tr = t.closest && t.closest("#unk tr[data-i]"); if (!tr || !t.dataset.f) return;
+    const n = unknownNames()[+tr.dataset.i]; if (!n) return;
+    const v = {...unkVal(n)}; v[t.dataset.f] = t.value; UNKED[n.toLowerCase()] = v;
+    if (t.dataset.f === "ru") tr.querySelector(".ust").innerHTML = unkNote(t.value)
+});
 document.addEventListener("click", e => {
     const b = e.target.closest && e.target.closest("#unk button"); if (!b) return;
     const u = unknownNames();
-    if (b.id === "unkall") addStations(u); else if (u[+b.dataset.i]) addStations([u[+b.dataset.i]])
+    if (b.id === "unkall") addStations(u); else { const tr = b.closest("tr"); if (tr && u[+tr.dataset.i]) addStations([u[+tr.dataset.i]]) }
 });
 function computed() {
     const rows = TD.rows.map((r, i) => ({arr: i === 0 ? "" : r.arr, dep: i === TD.rows.length - 1 ? "" : r.dep, tz: (findStation(r.name) || {}).tz_hours})), dd = calcDays(rows);
@@ -1030,6 +1083,72 @@ function computed() {
         sm.innerHTML = `<span class="chip bl">станций: ${rows.length}</span>${total != null && total >= 0 ? `<span class="chip gr">в пути по расписанию: ${durTxt(total)}</span>` : ""}${nChk ? `<span class="chip am">⚠ нужно проверить: ${nChk}</span>` : '<span class="chip gr">✓ всё подтверждено</span>'}`
     }
 }
+/* ---------- импорт расписания из скопированной страницы (Koleo и похожие): время идёт перед названием станции ---------- */
+/* ---------- польское название → кириллица (практическая транскрипция; приблизительно, результат правится вручную) ---------- */
+const PL_WORDS = {
+    ru: {"główny": "главный", "główna": "главная", "główne": "главное", "centralna": "центральная", "centralny": "центральный", "wschodnia": "восточная", "wschodni": "восточный", "zachodnia": "западная", "zachodni": "западный", "północna": "северная", "południowa": "южная", "miasto": "город"},
+    uk: {"główny": "головний", "główna": "головна", "główne": "головне", "centralna": "центральна", "centralny": "центральний", "wschodnia": "східна", "wschodni": "східний", "zachodnia": "західна", "zachodni": "західний", "północna": "північна", "południowa": "південна", "miasto": "місто"}
+};
+const PL_EXC = {"kraków": ["Краков", "Краків"], "łódź": ["Лодзь", "Лодзь"], "przemyśl": ["Перемышль", "Перемишль"], "warszawa": ["Варшава", "Варшава"], "poznań": ["Познань", "Познань"], "gdańsk": ["Гданьск", "Гданськ"], "szczecin": ["Щецин", "Щецін"], "lublin": ["Люблин", "Люблін"], "chełm": ["Хелм", "Холм"]};
+const dk = x => String(x).normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/ł/gi, "l").toLowerCase(); /* ключ без диакритики: сайты часто пишут Lodz вместо Łódź */
+const foldKeys = o => Object.fromEntries(Object.entries(o).map(([k, v]) => [dk(k), v]));
+const PW = {ru: foldKeys(PL_WORDS.ru), uk: foldKeys(PL_WORDS.uk)}, PX = foldKeys(PL_EXC);
+/* названия целиком (в основном немецкие и другие нестандартные), ключ — слова через пробел без диакритики */
+const NAME_EXC = {"frankfurt oder": ["Франкфурт-на-Одере", "Франкфурт-на-Одері"], "berlin gesundbrunnen": ["Берлин-Гезундбруннен", "Берлін-Гезундбруннен"], "berlin hbf": ["Берлин-Главный", "Берлін-Головний"], "berlin hauptbahnhof": ["Берлин-Главный", "Берлін-Головний"], "berlin ostbahnhof": ["Берлин-Остбанхоф", "Берлін-Остбангоф"]};
+function plTranslit(name, lang) {
+    const uk = lang === "uk", W = PW[uk ? "uk" : "ru"], whole = NAME_EXC[dk(name).replace(/[^a-z0-9]+/g, " ").trim()];
+    if (whole) return whole[uk ? 1 : 0];
+    const cap = (w, t) => w[0] === w[0].toUpperCase() && w[0] !== w[0].toLowerCase() ? t[0].toUpperCase() + t.slice(1) : t;
+    const one = w => {
+        let s = w.toLowerCase().replace(/(?<=[bcdfghklmnprstwz])ow$/, "ów").replace(/(?<=[a-z])sl$/, "śl");
+        const k = dk(w);
+        if (W[k]) return cap(w, W[k]);
+        if (PX[k]) return PX[k][uk ? 1 : 0];
+        s = s.replace(/szcz/g, "щ").replace(/(?<=[kptfc])rz/g, "ш").replace(/rz/g, "ж").replace(/dź/g, "дзь").replace(/dż/g, "дж").replace(/dz/g, "дз")
+            .replace(/sz/g, "ш").replace(/cz/g, "ч").replace(/ch/g, "х").replace(/ż/g, "ж").replace(/śl/g, "сль").replace(/ś/g, "сь").replace(/ć/g, "ць").replace(/ń/g, "нь").replace(/ź/g, "зь")
+            .replace(/ią/g, "ён").replace(/ię/g, "ен").replace(/ia/g, "я").replace(/ie/g, "е").replace(/io/g, uk ? "ьо" : "ё").replace(/iu/g, "ю")
+            .replace(/(?<=[aeiouyąęó])jo/g, "йо").replace(/ja/g, "я").replace(/je/g, "е").replace(/ju/g, "ю").replace(/jo/g, uk ? "йо" : "ё").replace(/j/g, "й")
+            .replace(/ę(?=[bp])/g, "ем").replace(/ę$/g, "е").replace(/ę/g, "ен").replace(/ą(?=[bp])/g, "ом").replace(/ą/g, "он");
+        const M = {a: "а", b: "б", c: "ц", d: "д", e: "е", f: "ф", g: "г", h: "х", i: uk ? "і" : "и", k: "к", l: "л", ł: "л", m: "м", n: "н", o: "о", ó: "у", p: "п", r: "р", s: "с", t: "т", u: "у", w: "в", y: uk ? "и" : "ы", z: "з", v: "в", x: "кс", q: "к"};
+        s = s.replace(/[a-zół]/g, c => M[c] || c).replace(/([жчшщ])ы/g, "$1и");
+        if (uk) s = s.replace(/ё/g, "ьо");
+        return cap(w, s)
+    };
+    return String(name).split(/([\s\-()]+)/).map(p => /^[\s\-()]*$/.test(p) ? p : one(p)).join("")
+}
+const isLatin = n => /[A-Za-zĄĆĘŁŃÓŚŹŻąćęłńóśźż]/.test(n);
+const foldName = s => String(s || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/ł/gi, "l").toLowerCase().replace(/[^\p{L}\p{N}]+/gu, " ").trim();
+function stationAny(name) { /* станция по названию на любом из четырёх языков или по синониму; без учёта диакритики */
+    const f = foldName(name); if (!f) return null;
+    const hit = ST.find(s => [s.name_ru, s.name_uk, s.name_en, s.name_pl, ...(s.aliases || [])].some(n => foldName(n) === f));
+    if (hit || !isLatin(name)) return hit || null;
+    const tr = foldName(plTranslit(name, "ru")); /* польское название ещё не записано у станции — сверяем с её русским названием по транскрипции */
+    return ST.find(s => foldName(s.name_ru) === tr) || null
+}
+const sameRu = ru => ST.find(s => foldName(s.name_ru) === foldName(ru)) || null;
+function parseSchedule(text) {
+    const src = String(text || "").replace(/\[([^\]]+)\]\([^)]*\)[^\n<]*/g, "$1\n") /* [Название](ссылка)Перон… → Название */
+        .replace(/<[^>]*>/g, "\n").replace(/&nbsp;/g, " ").replace(/&amp;/g, "&");
+    const stops = []; let pend = [];
+    src.split(/\n/).forEach(line => {
+        line.split(/(\b\d{1,2}:\d{2}\b)/).forEach(tok => {
+            tok = tok.trim(); if (!tok) return;
+            if (/^\d{1,2}:\d{2}$/.test(tok)) { pend.push(tok.padStart(5, "0")); return }
+            const name = tok.replace(/\s*\b(peron|tor|platform|gleis|perron|nást|нас)\b.*$/i, "").replace(/^[\s\-–—·|:,.]+|[\s\-–—·|:,.]+$/g, "").trim();
+            if (!pend.length || name.length < 2 || /^\d+$/.test(name)) return; /* текст без времени перед ним (заголовки, подписи) пропускаем */
+            stops.push({name, times: pend}); pend = []
+        })
+    });
+    const n = stops.length;
+    const rows = stops.map((x, i) => {
+        const t = x.times;
+        if (i === 0) return {name: x.name, arr: "", dep: t[t.length - 1]};
+        if (i === n - 1) return {name: x.name, arr: t[0], dep: ""};
+        return t.length >= 2 ? {name: x.name, arr: t[0], dep: t[1]} : {name: x.name, arr: t[0], dep: t[0]}
+    });
+    const num = (String(text).match(/\b(EIC|IC|TLK|EC|EN|NJ|RJX?|ICE|RE|REX)\s*\d{2,5}\b/) || [])[0];
+    return {rows, number: num ? num.replace(/\s+/, " ") : ""}
+}
 const markDirty = () => { if (TD) TD.dirty = true; const d = $("#dirty"); if (d) d.style.display = "" };
 window.addEventListener("beforeunload", e => { if (TD && TD.dirty) { e.preventDefault(); e.returnValue = "" } });
 const nextField = (t, sel) => { const all = [...document.querySelectorAll(sel)], n = all[all.indexOf(t) + 1]; if (n) { n.focus(); n.select && n.select(); return true } return false };
@@ -1041,6 +1160,17 @@ document.addEventListener("input", e => {
     markDirty(); computed();
     /* набрали время целиком — сразу следующее поле */
     if ((f === "arr" || f === "dep") && e.inputType === "insertText" && t.value.length === 5 && toM(t.value) != null) nextField(t, "#rows input.tm:not([disabled])")
+});
+document.addEventListener("click", async e => {
+    const b = e.target.closest && e.target.closest("#terr .blr button"); if (!b) return;
+    const cid = b.closest(".blr").dataset.c, x = connInfo().find(i => i.c.id === cid);
+    if (b.dataset.a === "open") {
+        const f = x ? fitPages(x.p, x.h) : {own: [], auto: []};
+        TAB = "dirs"; DSEL = f.own[0] ? f.own[0].id : "orph"; DSUB = "conns"; OPENCONN = cid; shell()
+    }
+    if (b.dataset.a === "del" && confirm("Удалить вариант" + (x ? "\n" + x.h.ft + " " + x.h.from + " → " + x.h.tt + " " + x.h.to : "") + "?\n\nОн пропадёт из базы целиком.")) {
+        try { await db("DELETE", "connections?id=eq." + cid); await load(); toast("Вариант удалён"); saveTrain() } catch (er) { toast(er.message) }
+    }
 });
 document.addEventListener("focusin", e => { if (e.target.matches && e.target.matches("#rows input.tm")) e.target.select() });
 /* ---------- подсказки станций: свой выпадающий список вместо datalist (тот не подставляет станцию и в ряде браузеров не показывается) ---------- */
@@ -1131,6 +1261,20 @@ async function saveTrain() {
     if (/[:>|*;~]/.test(T.number + T.freq)) errs.push("В номере и периодичности нельзя использовать символы : > | * ; ~");
     errs.push(...validateStops(rows, r => !!findStation(r.name)));
     if (errs.length) return showErr(box, {message: errs.join("\n")});
+    const gone = (TD.orig || []).filter(sid => !R.some(r => r.id === sid)); /* остановки, которых больше нет в таблице */
+    if (gone.length) {
+        const bad = LG.filter(l => l.train_id === TSEL && [l.board_stop_id, l.alight_stop_id, l.show_from_stop_id, l.show_to_stop_id].some(x => gone.includes(x)));
+        if (bad.length) {
+            if (!RP.length) { try { RP = await db("GET", "route_pages?order=sort,id") } catch (e) { } } /* страницы нужны, чтобы сказать, где показывается вариант */
+            const names = [...new Set(gone.filter(sid => bad.some(l => [l.board_stop_id, l.alight_stop_id, l.show_from_stop_id, l.show_to_stop_id].includes(sid))).map(sid => { const sp = SP.find(x => x.id === sid); return sp ? "«" + ((stById.get(sp.station_id) || {}).name_ru || "?") + "»" : "?" }))];
+            const ids = [...new Set(bad.map(l => l.connection_id))];
+            box.innerHTML = '<div class="errbox">Нельзя убрать из поезда ' + (names.length > 1 ? "станции " : "станцию ") + esc(names.join(", ")) + ": на " + (names.length > 1 ? "них" : "неё") + " ссылаются варианты (посадка или высадка). Варианты хранятся в базе, даже если на сайте их не видно.<div class=\"blk\">"
+                + ids.map(cid => { const x = connInfo().find(i => i.c.id === cid), f = x ? fitPages(x.p, x.h) : {own: [], auto: []}, pg = [...f.own, ...f.auto];
+                    return `<div class="blr" data-c="${esc(cid)}"><b>${x ? esc(x.h.ft + " " + x.h.from + " → " + x.h.tt + " " + x.h.to) : esc(cid)}</b> <small>${pg.length ? "показывается на: " + esc(pg.map(r => r.from_name + " → " + r.to_name).join(", ")) : "на сайте не показывается: нет подходящей страницы"}</small> <button data-a="open">Открыть</button> <button data-a="del">Удалить вариант</button></div>` }).join("")
+                + '</div>Откройте вариант и выберите другую станцию, либо удалите ненужный вариант, и сохраните поезд снова (или верните станцию в таблицу).</div>';
+            return
+        }
+    }
     const dd = calcDays(rows);
     const stops = R.map((r, i) => ({
         id: r.id || null, seq: i + 1, station_id: findStation(r.name).id,
@@ -1142,7 +1286,7 @@ async function saveTrain() {
         if (id === "new") { const c = await db("POST", "trains", meta); id = c[0].id } else await db("PATCH", "trains?id=eq." + id, meta);
         await db("POST", "rpc/save_train_stops", {p_train: id, p_stops: stops});
         await load(); TSEL = id; openTrain(id); toast("Поезд сохранён"); viewTrains()
-    } catch (e) { showErr(box, e) }
+    } catch (e) { showErr(box, /connection_legs_.*_fkey/.test(String(e.message || e)) ? "Нельзя убрать станцию, на которую ссылается вариант. Откройте варианты этого поезда и выберите другую станцию посадки/высадки." : e) }
 }
 
 /* ================= варианты ================= */
