@@ -509,7 +509,7 @@
         "title": "Варшава → Дніпро потягом | Колія"
       }
     },
-    "popular": false
+    "popular": true
   },
   {
     "id": "dnipro_krakow",
@@ -1271,7 +1271,7 @@
         "title": "Варшава → Одеса потягом | Колія"
       }
     },
-    "popular": false
+    "popular": true
   },
   {
     "id": "odesa_krakow",
@@ -1597,7 +1597,7 @@
         "title": "Варшава → Львів потягом | Колія"
       }
     },
-    "popular": false
+    "popular": true
   },
   {
     "id": "lviv_krakow",
