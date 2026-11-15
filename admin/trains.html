@@ -1016,7 +1016,7 @@ function trainEditor() {
         <p><button id="addrow">+ Станция в конец</button> <button id="impbtn" title="Вставить скопированное расписание поезда (например, со страницы Koleo) и разобрать его на станции и время">Вставить расписание</button></p>
         <div id="imp" style="display:none" class="panel"><label>Вставьте текст страницы расписания (Ctrl+A, Ctrl+C на странице поезда) или её HTML</label>
             <textarea id="imptx" rows="8" style="width:100%;font-family:monospace" placeholder="15:40&#10;Przemyśl Główny&#10;15:42&#10;15:43&#10;Przemyśl Zasanie&#10;…"></textarea>
-            <p><button class="pri" id="impgo">Распознать и заполнить таблицу</button> <button id="impx">Закрыть</button></p><div id="imperr"></div></div>
+            <p><button class="pri" id="impgo">Распознать и заполнить таблицу</button> <select id="imporder" title="Если станции и время сдвинулись на одну строку, выберите порядок вручную"><option value="auto">порядок определить сам</option><option value="before">время стоит перед названием</option><option value="after">время стоит после названия</option></select> <button id="impx">Закрыть</button></p><div id="imperr"></div></div>
         <div id="unk"></div>
         <div id="terr"></div>
         <div class="bar2"><button id="tsave" class="pri big">Сохранить поезд</button>${TSEL !== "new" ? '<button id="tdel">Удалить поезд</button>' : ""}<span class="chip am" id="dirty" style="display:none">● есть несохранённые изменения</span></div>`;
@@ -1028,7 +1028,7 @@ function trainEditor() {
     $("#impbtn").onclick = () => { const b = $("#imp"); b.style.display = b.style.display === "none" ? "" : "none"; if (b.style.display === "") $("#imptx").focus() };
     $("#impx").onclick = () => { $("#imp").style.display = "none" };
     $("#impgo").onclick = () => {
-        const box = $("#imperr"), r = parseSchedule($("#imptx").value);
+        const box = $("#imperr"), r = parseSchedule($("#imptx").value, $("#imporder").value);
         if (r.rows.length < 2) { box.innerHTML = '<div class="errbox">Не удалось найти станции со временем. Нужен текст, где перед названием каждой станции стоят время прибытия и отправления (первой только отправление, последней только прибытие).</div>'; return }
         const had = TD.rows.some(x => x.name || x.arr || x.dep);
         if (had && !confirm("Заменить текущие станции (" + TD.rows.length + ") распознанными (" + r.rows.length + ")?")) return;
@@ -1043,7 +1043,7 @@ function trainEditor() {
         if (r.number && !$("#tnum").value.trim()) { $("#tnum").value = r.number; T.number = r.number }
         markDirty(); drawRows();
         $("#imp").style.display = "";
-        $("#imperr").innerHTML = '<span class="chip gr">Распознано станций: ' + r.rows.length + '</span> ' + (unk ? '<span class="chip am">не найдено в справочнике: ' + unk + ' (они подсвечены, внизу можно добавить)</span>' : '<span class="chip gr">все станции найдены в справочнике</span>') + ' Проверьте таблицу и нажмите «Сохранить поезд».'
+        $("#imperr").innerHTML = '<span class="chip gr">Распознано станций: ' + r.rows.length + '</span> <span class="muted">(' + ({labels: "время по подписям", before: "время перед названием", after: "время после названия"})[r.mode] + ')</span> ' + (unk ? '<span class="chip am">не найдено в справочнике: ' + unk + ' (они подсвечены, внизу можно добавить)</span>' : '<span class="chip gr">все станции найдены в справочнике</span>') + ' Проверьте таблицу и нажмите «Сохранить поезд».'
     };
     $("#tsave").onclick = saveTrain;
     if ($("#tdel")) $("#tdel").onclick = async () => {
@@ -1075,7 +1075,7 @@ function unknownNames() {
 let UNKTZ = "1";
 const UNKED = {}; /* правки в панели «Нет в справочнике»: ключ — название как в таблице */
 const unkNote = ru => sameRu(ru) ? '<span class="chip gr">уже есть в справочнике: станция будет привязана, дубль не создаётся</span>' : "";
-const unkVal = n => UNKED[n.toLowerCase()] || (isLatin(n) ? {ru: plTranslit(n, "ru"), uk: plTranslit(n, "uk")} : {ru: n, uk: ""});
+const unkVal = n => UNKED[n.toLowerCase()] || (isLatin(n) ? {ru: plTranslit(n, "ru"), uk: hasCyr(n) && hasUkLetters(n) ? n : plTranslit(n, "uk")} : {ru: ukToRu(n), uk: hasUkLetters(n) ? n : ""});
 function drawUnk() {
     const box = $("#unk"); if (!box) return;
     const u = unknownNames();
@@ -1086,7 +1086,7 @@ function drawUnk() {
         <button id="unkall" class="pri">+ Добавить в справочник${u.length > 1 ? " все (" + u.length + ")" : ""}</button></div></div>`
 }
 async function addStations(names) {
-    const box = $("#terr"), items = names.map(n => { const v = unkVal(n), lat = isLatin(n), ru = v.ru.trim() || n; return {src: n, ru, uk: v.uk.trim() || null, lat, ex: sameRu(ru)} });
+    const box = $("#terr"), items = names.map(n => { const v = unkVal(n), lat = isLatin(n) && !hasCyr(n), ru = v.ru.trim() || n; return {src: n, ru, uk: v.uk.trim() || null, lat, ex: sameRu(ru)} });
     const fresh = [], seen = new Set();
     items.filter(x => !x.ex).forEach(x => { const k = foldName(x.ru); if (!seen.has(k)) { seen.add(k); fresh.push(x) } });
     try {
@@ -1159,6 +1159,7 @@ function plTranslit(name, lang) {
             .replace(/ę(?=[bp])/g, "ем").replace(/ę$/g, "е").replace(/ę/g, "ен").replace(/ą(?=[bp])/g, "ом").replace(/ą/g, "он");
         const M = {a: "а", b: "б", c: "ц", d: "д", e: "е", f: "ф", g: "г", h: cz ? "г" : "х", i: uk ? "і" : "и", k: "к", l: "л", ł: "л", m: "м", n: "н", o: "о", ó: "у", p: "п", r: "р", s: "с", t: "т", u: "у", w: "в", y: uk ? "и" : "ы", z: "з", v: "в", x: "кс", q: "к"};
         s = s.replace(/[a-zół]/g, c => M[c] || c).replace(/([жчшщ])ы/g, "$1и");
+        if (!uk) s = ukToRu(s);
         if (uk) s = s.replace(/ё/g, "ьо");
         return cap(w, s)
     };
@@ -1169,14 +1170,21 @@ const foldName = s => String(s || "").normalize("NFD").replace(/[\u0300-\u036f]/
 function stationAny(name) { /* станция по названию на любом из четырёх языков или по синониму; без учёта диакритики */
     const f = foldName(name); if (!f) return null;
     const hit = ST.find(s => [s.name_ru, s.name_uk, s.name_en, s.name_pl, ...(s.aliases || [])].some(n => foldName(n) === f));
-    if (hit || !isLatin(name)) return hit || null;
-    const tr = foldName(plTranslit(name, "ru")); /* польское название ещё не записано у станции — сверяем с её русским названием по транскрипции */
+    if (hit) return hit;
+    const tr = foldName(isLatin(name) ? plTranslit(name, "ru") : ukToRu(name)); /* польское название ещё не записано у станции — сверяем с её русским названием по транскрипции */
     return ST.find(s => foldName(s.name_ru) === tr) || null
 }
 const sameRu = ru => ST.find(s => foldName(s.name_ru) === foldName(ru)) || null;
 /* Формат «название, затем PŘÍJEZD/ODJEZD (прибытие/отправление) с временем» (ČD и похожие): время берётся по подписи, пометки между названием и подписями игнорируются */
 const LB_ARR = /^(?:p[řr][íi]jezd|przyjazd|ankunft|arrival|arr\.?|прибытие|прибуття)\s*(\d{1,2}[:.]\d{2})?$/iu, LB_DEP = /^(?:odjezd|odjazd|abfahrt|departure|dep\.?|отправление|відправлення)\s*(\d{1,2}[:.]\d{2})?$/iu;
-const cleanStName = n => n.replace(/\s*\b(peron|tor|platform|gleis|perron|nást|нас)\b.*$/i, "").replace(/^[\s\-–—·|:,.*]+|[\s\-–—·|:,.*]+$/g, "").trim();
+const UK_RU = {"і": "и", "ї": "и", "є": "е", "ґ": "г", "І": "И", "Ї": "И", "Є": "Е", "Ґ": "Г", "’": "", "'": ""};
+const ukToRu = t => String(t).replace(/[іїєґІЇЄҐ’']/g, c => UK_RU[c]); /* украинские буквы → русские (названия со станционных сайтов на украинском) */
+const hasUkLetters = t => /[іїєґІЇЄҐ]/.test(t), hasCyr = t => /[а-яіїєґё]/i.test(t);
+const cleanStName = n => n.replace(/\s*\b(peron|tor|platform|gleis|perron|nást|нас)\b.*$/i, "")
+    .replace(/\s*\((?:поблизу|near|bei|blisko|вблизи|nearby)[^)]*\)/i, "") /* «Кисак (поблизу Прешова)» → «Кисак» */
+    .replace(/\s+[-–]\s*(?:žst\.?|žel\.?\s*st\.?|zast\.?|stacja|dworzec|(?:залізнична|железнодорожная)\s+(?:станція|станция)|železničná\s+stanica)$/i, "") /* приставка «станция» */
+    .replace(/\s+[-–]\s+/g, "-")
+    .replace(/^[\s\-–—·|:,.*]+|[\s\-–—·|:,.*]+$/g, "").trim();
 function parseLabeled(lines) {
     const stops = []; let buf = [], cur = null;
     lines.forEach(l => {
@@ -1199,33 +1207,49 @@ function parseLabeled(lines) {
         return {name: x.name, arr: x.arr || x.dep, dep: x.dep || x.arr, chk: true} /* во времени есть пропуск: подставили одно из двух и отметили «проверить» */
     })
 }
-function parseSchedule(text) {
-    const lines = String(text || "").replace(/\[([^\]]+)\]\([^)]*\)[^\n<]*/g, "$1\n").replace(/<[^>]*>/g, "\n").split(/\n/).map(x => x.trim()).filter(Boolean);
-    if (lines.filter(l => LB_ARR.test(l) || LB_DEP.test(l)).length >= 2) {
-        const num = (String(text).match(/\b(EIC|IC|TLK|EC|EN|NJ|RJX?|ICE|RE|REX|SC|Ex|R)\s*\d{2,5}\b/) || [])[0];
-        return {rows: parseLabeled(lines), number: num ? num.replace(/\s+/, " ") : ""}
-    }
-    const src = String(text || "").replace(/\[([^\]]+)\]\([^)]*\)[^\n<]*/g, "$1\n") /* [Название](ссылка)Перон… → Название */
-        .replace(/<[^>]*>/g, "\n").replace(/&nbsp;/g, " ").replace(/&amp;/g, "&");
-    const stops = []; let pend = [];
-    src.split(/\n/).forEach(line => {
-        line.split(/(\b\d{1,2}:\d{2}\b)/).forEach(tok => {
+const NUMRE = /\b(EIC|IC|TLK|EC|EN|NJ|RJX?|ICE|RE|REX|SC|Ex)\s*\d{2,5}\b/;
+function scheduleTokens(text) { /* текст → последовательность {time} / {name}: ссылки [Название](url), HTML-теги и платформы убираются */
+    const out = [];
+    String(text || "").replace(/\[([^\]]+)\]\([^)]*\)[^\n<]*/g, "$1\n").replace(/<[^>]*>/g, "\n").replace(/&nbsp;/g, " ").replace(/&amp;/g, "&").split(/\n/)
+        .forEach(line => line.split(/(\b\d{1,2}:\d{2}\b)/).forEach(tok => {
             tok = tok.trim(); if (!tok) return;
-            if (/^\d{1,2}:\d{2}$/.test(tok)) { pend.push(tok.padStart(5, "0")); return }
-            const name = tok.replace(/\s*\b(peron|tor|platform|gleis|perron|nást|нас)\b.*$/i, "").replace(/^[\s\-–—·|:,.]+|[\s\-–—·|:,.]+$/g, "").trim();
-            if (!pend.length || name.length < 2 || /^\d+$/.test(name)) return; /* текст без времени перед ним (заголовки, подписи) пропускаем */
-            stops.push({name, times: pend}); pend = []
-        })
+            if (/^\d{1,2}:\d{2}$/.test(tok)) { out.push({time: tok.padStart(5, "0")}); return }
+            const name = cleanStName(tok); if (name.length > 1 && !/^\d+$/.test(name)) out.push({name})
+        }));
+    return out
+}
+function timeFirst(tk) { /* время перед названием (Koleo и т. п.) */
+    const stops = []; let pend = [];
+    tk.forEach(x => { if (x.time) pend.push(x.time); else if (pend.length) { stops.push({name: x.name, times: pend}); pend = [] } });
+    return {stops, dangling: pend.length}
+}
+function nameFirst(tk) { /* название, затем время (RegioJet и т. п.); текст между временем и следующей станцией — пометки, у первой станции заголовок страницы стоит перед названием */
+    const stops = []; let buf = [], cur = null;
+    tk.forEach(x => {
+        if (x.time) {
+            if (!cur) { if (!buf.length) return; cur = {name: stops.length ? buf[0] : buf[buf.length - 1], times: []}; stops.push(cur); buf = [] }
+            cur.times.push(x.time)
+        } else { if (cur) { cur = null; buf = [] } buf.push(x.name) }
     });
+    return {stops}
+}
+function stopsToRows(stops) {
     const n = stops.length;
-    const rows = stops.map((x, i) => {
+    return stops.map((x, i) => {
         const t = x.times;
         if (i === 0) return {name: x.name, arr: "", dep: t[t.length - 1]};
         if (i === n - 1) return {name: x.name, arr: t[0], dep: ""};
-        return t.length >= 2 ? {name: x.name, arr: t[0], dep: t[1]} : {name: x.name, arr: t[0], dep: t[0]}
-    });
-    const num = (String(text).match(/\b(EIC|IC|TLK|EC|EN|NJ|RJX?|ICE|RE|REX)\s*\d{2,5}\b/) || [])[0];
-    return {rows, number: num ? num.replace(/\s+/, " ") : ""}
+        return t.length >= 2 ? {name: x.name, arr: t[0], dep: t[1]} : {name: x.name, arr: t[0], dep: t[0], chk: true}
+    })
+}
+function parseSchedule(text, order) { /* order: "auto" | "before" (время перед названием) | "after" (время после названия) */
+    const lines = String(text || "").replace(/\[([^\]]+)\]\([^)]*\)[^\n<]*/g, "$1\n").replace(/<[^>]*>/g, "\n").split(/\n/).map(x => x.trim()).filter(Boolean);
+    const num = (String(text).match(NUMRE) || [])[0], number = num ? num.replace(/\s+/, " ") : "";
+    if (lines.filter(l => LB_ARR.test(l) || LB_DEP.test(l)).length >= 2) return {rows: parseLabeled(lines), number, mode: "labels"};
+    const tk = scheduleTokens(text), tf = timeFirst(tk);
+    /* авто: если текст начинается с названия и в конце остались времена без названия после них, значит время стоит после названия */
+    const mode = order === "after" || order === "before" ? order : (tk[0] && !tk[0].time && tf.dangling > 0 ? "after" : "before");
+    return {rows: stopsToRows(mode === "after" ? nameFirst(tk).stops : tf.stops), number, mode}
 }
 const markDirty = () => { if (TD) TD.dirty = true; const d = $("#dirty"); if (d) d.style.display = "" };
 window.addEventListener("beforeunload", e => { if (TD && TD.dirty) { e.preventDefault(); e.returnValue = "" } });
