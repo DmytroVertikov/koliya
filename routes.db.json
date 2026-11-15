@@ -3470,5 +3470,69 @@
       }
     },
     "popular": false
+  },
+  {
+    "id": "dnipro_prague",
+    "file": "dnipro-prague.html",
+    "from_name": "Днепр",
+    "to_name": "Прага",
+    "route": "ua-cz",
+    "back": "cz-ua",
+    "rev": "prague-dnipro.html",
+    "kind": "transfer",
+    "x": "Перемышль Главный",
+    "border": null,
+    "like_id": "kw",
+    "single": false,
+    "names": {
+      "Днепр": {
+        "en": "Dnipro",
+        "pl": "Dnipro",
+        "uk": "Дніпро"
+      },
+      "Прага": {
+        "en": "Prague",
+        "pl": "Praga",
+        "uk": "Прага"
+      }
+    },
+    "extra": {},
+    "sort": 1000,
+    "active": true,
+    "created_at": "2026-11-15T19:17:29.810598+00:00",
+    "texts": {},
+    "popular": false
+  },
+  {
+    "id": "prague_dnipro",
+    "file": "prague-dnipro.html",
+    "from_name": "Прага",
+    "to_name": "Днепр",
+    "route": "cz-ua",
+    "back": "ua-cz",
+    "rev": "dnipro-prague.html",
+    "kind": "transfer",
+    "x": "Перемышль Главный",
+    "border": null,
+    "like_id": "wk",
+    "single": false,
+    "names": {
+      "Днепр": {
+        "en": "Dnipro",
+        "pl": "Dnipro",
+        "uk": "Дніпро"
+      },
+      "Прага": {
+        "en": "Prague",
+        "pl": "Praga",
+        "uk": "Прага"
+      }
+    },
+    "extra": {},
+    "sort": 1000,
+    "active": true,
+    "created_at": "2026-11-15T19:17:29.810598+00:00",
+    "texts": {},
+    "popular": false
   }
 ]
