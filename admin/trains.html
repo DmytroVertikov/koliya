@@ -1033,7 +1033,7 @@ function trainEditor() {
         const had = TD.rows.some(x => x.name || x.arr || x.dep);
         if (had && !confirm("Заменить текущие станции (" + TD.rows.length + ") распознанными (" + r.rows.length + ")?")) return;
         let unk = 0;
-        const pool = TD.rows.filter(x => x.id), used = new Set();
+        const pool = (TD.orig || []).map(id => (spByTrain.get(TSEL) || []).find(s => s.id === id)).filter(Boolean).map(s => ({id: s.id, name: stById.get(s.station_id).name_ru})), used = new Set();
         TD.rows = r.rows.map(x => {
             const s = stationAny(x.name); if (!s) unk++;
             /* та же станция, что уже была в поезде, остаётся той же остановкой (на неё ссылаются варианты), иначе база пересоздала бы остановки */
