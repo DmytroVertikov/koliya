@@ -439,7 +439,7 @@ function sliceTrains(r) {
         const key = norm(L.train) + "|" + tm(st[a].time) + ">" + tm(st[b].time);
         const src = {id: x.c.id, h: x.h};
         if (seen.has(key)) { const o = seen.get(key); if (!o.srcs.some(z => z.id === src.id)) o.srcs.push(src); return }
-        const o = {train: L.train, train_id: (x.legs[li] || {}).train_id, freq: L.freq, ft: tm(st[a].time), tt: tm(st[b].time), srcs: [src]}; /* srcs — варианты, из которых вырезан поезд */
+        const o = {hidden: ((r.extra || {}).hide || []).map(norm).includes(norm(L.train)), train: L.train, train_id: (x.legs[li] || {}).train_id, freq: L.freq, ft: tm(st[a].time), tt: tm(st[b].time), srcs: [src]}; /* srcs — варианты, из которых вырезан поезд */
         seen.set(key, o); out.push(o)
     }));
     return out.sort((x, y) => depMin(x) - depMin(y))
@@ -597,7 +597,7 @@ function drawDirMain(msg) {
         <label title="Показывать на главной сразу, а не в раскрывающемся списке «Ещё маршруты»"><input type="checkbox" id="h_pop" ${r.popular ? "checked" : ""}> на главной</label>
         <button id="h_del" title="Удалить направление из списка">✕ Удалить</button></div></div>
         ${msg ? `<p style="margin:0 0 10px"><span class="chip gr">${esc(msg)}</span></p>` : ""}
-        <div class="subtabs"><button data-s="conns" class="${DSUB === "conns" ? "on" : ""}">${slice ? "Поезда" : "Варианты"} (${mine.length})</button><button data-s="page" class="${DSUB === "page" ? "on" : ""}">Страница и тексты</button></div>
+        <div class="subtabs"><button data-s="conns" class="${DSUB === "conns" ? "on" : ""}">${slice ? "Поезда" : "Варианты"} (${slice ? mine.filter(t => !t.hidden).length : mine.length})</button><button data-s="page" class="${DSUB === "page" ? "on" : ""}">Страница и тексты</button></div>
         <div id="d_sub"></div></section>`;
     m.querySelectorAll(".subtabs button").forEach(b => b.onclick = () => { DSUB = b.dataset.s; drawDirMain() });
     const patch = async (body, ok, undo) => {
@@ -613,14 +613,19 @@ function drawDirMain(msg) {
     const sub = $("#d_sub");
     if (DSUB === "page") { sub.innerHTML = dirEditorHtml(r); dirEditorBind(r); return }
     if (slice) {
-        sub.innerHTML = `<p class="muted">У этой страницы нет собственных вариантов: прямые поезда на ней собираются сами из вариантов других направлений (участок поезда от «${esc(r.from_name)}» до «${esc(r.to_name)}»). Чтобы что-то изменить, откройте вариант, из которого взят поезд, или расписание самого поезда (кнопки справа).</p>`
-            + (mine.length ? '<div id="cl">' + mine.map((t, i) => `<div class="conn" data-i="${i}"><div class="t"><span class="ht">${esc(t.ft)}</span> → <span class="ht">${esc(t.tt)}</span> <b>${esc(t.train)}</b>${t.freq ? `<small>${esc(t.freq)}</small>` : ""}
+        sub.innerHTML = `<p class="muted">У этой страницы нет собственных вариантов: прямые поезда на ней собираются сами из вариантов других направлений (участок поезда от «${esc(r.from_name)}» до «${esc(r.to_name)}»). «Скрыть здесь» убирает поезд только с этой страницы (после «Пересобрать сайт»), сам вариант остаётся. Чтобы изменить сам поезд, откройте вариант или расписание поезда.</p>`
+            + (mine.length ? '<div id="cl">' + mine.map((t, i) => `<div class="conn ${t.hidden ? "off" : ""}" data-i="${i}"><div class="t"><span class="ht">${esc(t.ft)}</span> → <span class="ht">${esc(t.tt)}</span> <b>${esc(t.train)}</b>${t.hidden ? ' <span class="chip rd">скрыт на этой странице</span>' : ""}${t.freq ? `<small>${esc(t.freq)}</small>` : ""}
             <small>${t.srcs.length > 1 ? "Входит в " + t.srcs.length + " " + plural(t.srcs.length, VARS) + ": правка любого из них меняет поезд на этой странице" : "Входит в вариант"}</small></div>
-            <div class="sbtn">${t.train_id ? `<button data-a="train" title="Расписание поезда: станции и время">Расписание поезда</button>` : ""}${t.srcs.map((z, k) => `<button data-a="edit" data-k="${k}" title="${esc(z.h.ft + " " + z.h.from + " → " + z.h.tt + " " + z.h.to)}">${t.srcs.length > 1 ? "Вариант " + (k + 1) + ": " + esc(z.h.from) + " → " + esc(z.h.to) : "Изменить вариант"}</button><button data-a="del" data-k="${k}" title="Удалить этот вариант целиком">✕</button>`).join("")}</div></div>`).join("") + "</div>" : '<p class="muted">Сейчас подходящих поездов нет.</p>');
+            <div class="sbtn"><button data-a="${t.hidden ? "show" : "hide"}" class="${t.hidden ? "" : "pri"}" title="${t.hidden ? "Снова показывать этот поезд на странице" : "Убрать поезд только с этой страницы; вариант и другие страницы не меняются"}">${t.hidden ? "Показать здесь" : "Скрыть здесь"}</button>${t.train_id ? `<button data-a="train" title="Расписание поезда: станции и время">Расписание поезда</button>` : ""}${t.srcs.map((z, k) => `<button data-a="edit" data-k="${k}" title="${esc(z.h.ft + " " + z.h.from + " → " + z.h.tt + " " + z.h.to)}">${t.srcs.length > 1 ? "Вариант " + (k + 1) + ": " + esc(z.h.from) + " → " + esc(z.h.to) : "Изменить вариант"}</button><button data-a="del" data-k="${k}" title="Удалить этот вариант из базы целиком (пропадёт и с других страниц)">✕ из базы</button>`).join("")}</div></div>`).join("") + "</div>" : '<p class="muted">Сейчас подходящих поездов нет.</p>');
         const cl = $("#cl");
         if (cl) cl.onclick = e => {
             const b = e.target.closest("button"), d = e.target.closest(".conn"); if (!b || !d) return;
             const t = mine[+d.dataset.i];
+            if (b.dataset.a === "hide" || b.dataset.a === "show") {
+                const hide = b.dataset.a === "hide", cur = ((r.extra || {}).hide || []).filter(n => norm(n) !== norm(t.train));
+                patch({extra: {...(r.extra || {}), hide: hide ? [...cur, t.train] : cur}}, hide ? "Поезд " + t.train + " скрыт на этой странице (после «Пересобрать сайт»)" : "Поезд " + t.train + " снова показывается (после «Пересобрать сайт»)", () => { }).then(() => drawDirMain());
+                return
+            }
             if (b.dataset.a === "train") { TAB = "trains"; openTrain(t.train_id); shell() }
             if (b.dataset.a === "edit") { editConn(t.srcs[+b.dataset.k].id); drawDirMain() }
             if (b.dataset.a === "del") {
