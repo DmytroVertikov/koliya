@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- build 2026-11-15T20:13:21.510Z vmwi9v1z0 direct=false x=Хелм -->
+<!-- build 2026-11-15T21:19:28.806Z vmwic8355 direct=false x=Хелм -->
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -255,7 +255,7 @@
         <h1>By train: Kyiv → Berlin</h1>
         <p id="lead">Train timetable Kyiv — Berlin: options with a transfer in Chełm and Warsaw. Journey time, stops and ticket information.</p></div>
 </header>
-<main class="wrap"><a class="back" href="./">← Home</a> <a class="back" href="./#ua-de">All routes: Ukraine — Germany</a> <a class="back" href="berlin-kyiv.html">🔄 Berlin → Kyiv</a>
+<main class="wrap"><a class="back" href="./">← Home</a> <a class="back" href="./#ua-de">All routes: Ukraine — Germany</a> <a class="back" href="berlin-kyiv.html">🔄 Berlin-Lichtenberg → Kyiv</a>
     <p class="chk" id="chk" hidden>📅 Checked: <b></b></p>
     <div id="app"><p>Loading…</p></div>
     <div id="more"></div>
@@ -266,9 +266,9 @@
 <script src="../config.js"></script>
 <script src="../pages.js"></script>
 <script src="../dict/en.js"></script>
-<script src="../common.js?v=mwi9v1z0"></script>
+<script src="../common.js?v=mwic8355"></script>
 <script>
-    const SPLIT = [["Перемышль","With a transfer in Перемышль",1,0],["Хелм","With a transfer in Chełm and Warsaw",0,3],["Хелм","With a transfer in Chełm",0,2]]; /* [станция пересадки, заголовок, пограничный контроль]: страница делится на группы по пересадке */
+    const SPLIT = [["Перемышль","With a transfer in Перемышль",1,0],["Хелм","With a transfer in Chełm and Warszawa Centralna",0,3],["Хелм","With a transfer in Chełm",0,2]]; /* [станция пересадки, заголовок, пограничный контроль]: страница делится на группы по пересадке */
     const HIDE = [].map(s => s.trim().toLowerCase()); /* номера поездов, скрытых на этой странице */
     const SLICE = false; /* true: варианты собираются из поездов других вариантов (страницы вроде Киев → Хелм) */
     const FROM = "Киев", TO = "Берлин", BACK = "de-ua"; // FROM/TO: русские названия, как в шапке карточки в админке
@@ -276,27 +276,27 @@
     const BUY = `<section class="panel" id="buy"><h2>How to buy tickets</h2>
 <div class="buy three">
 
-<!--T--><div><h3>With a transfer in Chełm and Warsaw</h3><ol class="steps">
+<!--T--><div><h3>With a transfer in Chełm and Warszawa Centralna</h3><ol class="steps">
 <li>Open the Ukrzaliznytsia app, choose the route Kyiv → Chełm and the travel date. Sales open 20 days before departure at 09:00 Kyiv time. Choose a suitable train and pay for the ticket.</li>
-<li>Tickets for Chełm → Warsaw can be bought on the Polish PKP Intercity website (intercity.pl), and for Warsaw → Berlin on the German website bahn.de or in the DB Navigator app.</li>
+<li>Tickets for Chełm → Warszawa Centralna can be bought on the Polish PKP Intercity website (intercity.pl), and for Warszawa Centralna → Berlin-Lichtenberg on the German website bahn.de or in the DB Navigator app.</li>
 
 <li>After buying, save both e-tickets on your phone. Before you travel, check the dates, departure times and arrival stations.</li></ol>
 <a class="btn pri" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Buy the Kyiv → Chełm ticket in the UZ app</a>
-<a class="btn" href="https://www.intercity.pl/" target="_blank" rel="noopener">Buy the Chełm → Warsaw ticket on PKP Intercity</a>
-<a class="btn" href="https://www.bahn.de/" target="_blank" rel="noopener">Buy the Warsaw → Berlin ticket on DB</a></div><!--/T-->
+<a class="btn" href="https://www.intercity.pl/" target="_blank" rel="noopener">Buy the Chełm → Warszawa Centralna ticket on PKP Intercity</a>
+<a class="btn" href="https://www.bahn.de/" target="_blank" rel="noopener">Buy the Warszawa Centralna → Berlin-Lichtenberg ticket on DB</a></div><!--/T-->
 <!--H--><div><h3>With a transfer in Перемышль</h3><ol class="steps">
 <li>Open the Ukrzaliznytsia app, choose the route Kyiv → Перемышль and the travel date. Sales open 20 days before departure at 09:00 Kyiv time. Choose a suitable train and pay for the ticket.</li>
-<li>Tickets for Перемышль → Berlin can be bought on the Polish PKP Intercity website (intercity.pl; except the night train) and on the German website bahn.de or in the DB Navigator app.</li>
+<li>Tickets for Перемышль → Berlin-Lichtenberg can be bought on the Polish PKP Intercity website (intercity.pl; except the night train) and on the German website bahn.de or in the DB Navigator app.</li>
 <li>After buying, save both e-tickets on your phone. Before you travel, check the dates, departure times and arrival stations.</li></ol>
 <a class="btn pri" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Buy the Kyiv → Перемышль ticket in the UZ app</a>
-<a class="btn" href="https://www.intercity.pl/" target="_blank" rel="noopener">Buy the Перемышль → Berlin ticket on PKP Intercity</a>
-<a class="btn" href="https://www.bahn.de/" target="_blank" rel="noopener">Buy the Перемышль → Berlin ticket on DB</a></div><!--/H-->
+<a class="btn" href="https://www.intercity.pl/" target="_blank" rel="noopener">Buy the Перемышль → Berlin-Lichtenberg ticket on PKP Intercity</a>
+<a class="btn" href="https://www.bahn.de/" target="_blank" rel="noopener">Buy the Перемышль → Berlin-Lichtenberg ticket on DB</a></div><!--/H-->
 <!--C--><div><h3>With a transfer in Chełm</h3><ol class="steps">
 <li>Open the Ukrzaliznytsia app, choose the route Kyiv → Chełm and the travel date. Sales open 20 days before departure at 09:00 Kyiv time. Choose a suitable train and pay for the ticket.</li>
-<li>Tickets for Chełm → Berlin can be bought on the German website bahn.de or in the DB Navigator app.</li>
+<li>Tickets for Chełm → Berlin-Lichtenberg can be bought on the German website bahn.de or in the DB Navigator app.</li>
 <li>After buying, save both e-tickets on your phone. Before you travel, check the dates, departure times and arrival stations.</li></ol>
 <a class="btn pri" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Buy the Kyiv → Chełm ticket in the UZ app</a>
-<a class="btn" href="https://www.bahn.de/" target="_blank" rel="noopener">Buy the Chełm → Berlin ticket on DB</a></div><!--/C-->
+<a class="btn" href="https://www.bahn.de/" target="_blank" rel="noopener">Buy the Chełm → Berlin-Lichtenberg ticket on DB</a></div><!--/C-->
 
 
 </div>
