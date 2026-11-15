@@ -355,3 +355,31 @@ const FOOTER_HTML = () => `<div class="fcols">
     new MutationObserver(run).observe(document.documentElement, {childList: true, subtree: true});
     run();
 })();
+
+/* Блок «Ещё маршруты» на страницах маршрутов: обратное направление, другие направления из того же города, другие маршруты в тот же город.
+   Пары городов берутся из CFG.PAGES (title «Откуда → Куда»), страница определяется по имени файла.
+   Тексты приходят из шаблона (словарь ui_texts: more.h, more.rev, more.from, more.to, more.dir, more.all); «%s» в них заменяется названием города.
+   Вызов: document.getElementById("more").innerHTML = BUY + moreRoutes({...}) */
+function moreRoutes(o) {
+    o = Object.assign({h: "Ещё маршруты", rev: "Обратное направление", from: "Другие направления из города %s", to: "Другие маршруты в город %s", dir: "Все маршруты этого направления", all: "Все страны", home: "./"}, o);
+    const n = s => String(s || "").trim().toLowerCase(),
+        pages = (window.CFG && CFG.PAGES) || [],
+        here = location.pathname.split("/").pop() || "index.html",
+        cur = pages.find(p => p.href === here) || {},
+        [a, b] = cur.title ? String(cur.title).split(" → ") : [window.FROM, window.TO],
+        [f0, t0] = [n(a), n(b)],
+        ends = p => String(p.title).split(" → ").map(n),
+        part = (p, i) => esc(stn(String(p.title).split(" → ")[i])),
+        chip = (p, html) => `<a class="chip" href="${esc(p.href)}" title="${esc(trRoute(p.title))}">${html}</a>`,
+        group = (h, arr) => arr.length ? `<div class="dir-group"><h3>${h}</h3><div class="chips">${arr.join("")}</div></div>` : "",
+        others = pages.filter(p => p.href !== here),
+        reverse = others.filter(p => ends(p)[0] === t0 && ends(p)[1] === f0),
+        sameFrom = others.filter(p => ends(p)[0] === f0 && ends(p)[1] !== t0),
+        sameTo = others.filter(p => ends(p)[1] === t0 && ends(p)[0] !== f0),
+        hash = o.hash || cur.route;
+    return `<section class="panel" id="routes"><h2>${o.h}</h2>`
+        + group(o.rev, reverse.map(p => chip(p, "🔄 " + esc(trRoute(p.title)))))
+        + group(o.from.replace("%s", () => esc(stn(a))), sameFrom.map(p => chip(p, `<span class="ar">→</span>${part(p, 1)}`)))
+        + group(o.to.replace("%s", () => esc(stn(b))), sameTo.map(p => chip(p, `${part(p, 0)}<span class="ar"> →</span>`)))
+        + `<div class="grid" style="margin-top:16px">${hash ? `<a class="btn" href="${o.home}#${esc(hash)}">${o.dir}</a>` : ""}<a class="btn" href="${o.home}">${o.all}</a></div></section>`
+}

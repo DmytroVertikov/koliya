@@ -25,6 +25,14 @@ const I = (() => {
 })();
 /* что нужно браузеру: тексты интерфейса и станции (без текстов страниц маршрутов) */
 const CLIENT = JSON.parse(JSON.stringify(I));
+/* тексты блока «Ещё маршруты» по умолчанию; если ключ есть в ui_texts (админка → «Тексты»), берётся значение из базы */
+const MORE_DEF = {
+  "more.rev": {ru: "Обратное направление", uk: "Зворотний напрямок", en: "Return route", pl: "Trasa powrotna"},
+  "more.from": {ru: "Другие направления из города %s", uk: "Інші напрямки з міста %s", en: "More routes from %s", pl: "Inne trasy z miasta %s"},
+  "more.to": {ru: "Другие маршруты в город %s", uk: "Інші маршрути до міста %s", en: "More routes to %s", pl: "Inne trasy do miasta %s"},
+  "more.dir": {ru: "Все маршруты этого направления", uk: "Усі маршрути цього напрямку", en: "All routes in this direction", pl: "Wszystkie trasy w tym kierunku"}
+};
+for (const k in MORE_DEF) for (const l of LANGS) if (!I[l][k]) I[l][k] = MORE_DEF[k][l];
 /* нет перевода — подставляется русский текст */
 for (const l of LANGS.slice(1)) { const miss = Object.keys(I.ru).filter(k => !I[l][k]); for (const k of miss) I[l][k] = I.ru[k]; if (miss.length) console.warn("ВНИМАНИЕ: " + l + ": нет перевода для " + miss.length + " ключей (показан русский): " + miss.slice(0, 8).join(", ") + (miss.length > 8 ? "…" : "")) }
 /* Список страниц маршрутов живёт только в базе (таблица route_pages, админка → «Направления»): sync.js сохраняет его в routes.db.json. */

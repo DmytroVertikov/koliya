@@ -261,7 +261,7 @@
 <script src="{{base}}config.js"></script>
 <script src="{{base}}pages.js"></script>
 <script src="{{base}}dict/{{lang}}.js"></script>
-<script src="{{base}}common.js"></script>
+<script src="{{base}}common.js?v={{ver}}"></script>
 <script>
     const SPLIT = {{split}}; /* [станция пересадки, заголовок, пограничный контроль]: страница делится на группы по пересадке */
     const HIDE = {{hide}}.map(s => s.trim().toLowerCase()); /* номера поездов, скрытых на этой странице */
@@ -385,9 +385,7 @@
     }).catch(() => {
         app.innerHTML = `<div class="panel"><h2>{{err.h}}</h2><p>{{err.p}}</p></div>`
     });
-    const here = location.pathname.split("/").pop() || "index.html",
-        others = ((window.CFG && CFG.PAGES) || []).filter(p => p.href !== here);
-    document.getElementById("more").innerHTML = BUY + `<section class="panel"><h2>{{more.h}}</h2><div class="grid" style="margin-top:12px"><a class="btn" href="{{home}}#${BACK}">{{r_more}}</a>${others.map(p => `<a class="btn" href="${esc(p.href)}">${esc(trRoute(p.title))}</a>`).join("")}<a class="btn" href="{{home}}">{{more.all}}</a></div></section>`;
+    document.getElementById("more").innerHTML = BUY + moreRoutes({h: "{{more.h}}", rev: "{{more.rev}}", from: "{{more.from}}", to: "{{more.to}}", dir: "{{more.dir}}", all: "{{more.all}}", home: "{{home}}", hash: "{{hash}}"});
 </script>
 </body>
 </html>
