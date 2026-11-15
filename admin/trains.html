@@ -77,6 +77,7 @@
         .unk .unkl { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; flex: 1 1 320px }
         .unk .unkt { width: 100%; margin: 4px 0 }
         .unk .unkt td { padding: 4px 8px }
+        .unk .ust { margin-top: 3px; font-size: 13px }
         .unk .unkt input { width: 100%; min-width: 150px }
         .unk .unka { width: 100%; justify-content: flex-end; display: flex; align-items: center; gap: 14px }
         .unk .unkl > b { color: #b54708 }
@@ -1014,33 +1015,43 @@ function unknownNames() {
 }
 let UNKTZ = "1";
 const UNKED = {}; /* правки в панели «Нет в справочнике»: ключ — название как в таблице */
+const unkNote = ru => sameRu(ru) ? '<span class="chip gr">уже есть в справочнике: станция будет привязана, дубль не создаётся</span>' : "";
 const unkVal = n => UNKED[n.toLowerCase()] || (isLatin(n) ? {ru: plTranslit(n, "ru"), uk: plTranslit(n, "uk")} : {ru: n, uk: ""});
 function drawUnk() {
     const box = $("#unk"); if (!box) return;
     const u = unknownNames();
     if (!u.length) { box.innerHTML = ""; return }
     box.innerHTML = `<div class="unk"><div class="unkl"><b>Нет в справочнике:</b> <span class="muted">названия по-русски и по-украински подставлены автоматически (приблизительно), поправьте при необходимости</span></div>
-        <table class="g unkt"><thead><tr><th>Как в источнике</th><th>По-русски</th><th>По-украински</th><th></th></tr></thead><tbody>${u.map((n, i) => { const v = unkVal(n); return `<tr data-i="${i}"><td>${esc(n)}</td><td><input type="text" data-f="ru" value="${esc(v.ru)}"></td><td><input type="text" data-f="uk" value="${esc(v.uk)}"></td><td><button data-a="one" title="Добавить только эту станцию">+ Добавить</button></td></tr>` }).join("")}</tbody></table>
+        <table class="g unkt"><thead><tr><th>Как в источнике</th><th>По-русски</th><th>По-украински</th><th></th></tr></thead><tbody>${u.map((n, i) => { const v = unkVal(n); return `<tr data-i="${i}"><td>${esc(n)}</td><td><input type="text" data-f="ru" value="${esc(v.ru)}"><div class="ust">${unkNote(v.ru)}</div></td><td><input type="text" data-f="uk" value="${esc(v.uk)}"></td><td><button data-a="one" title="Добавить только эту станцию">+ Добавить</button></td></tr>` }).join("")}</tbody></table>
         <div class="unka"><label>Часовой пояс <select id="unktz"><option value="1" ${UNKTZ === "1" ? "selected" : ""}>UTC+1</option><option value="2" ${UNKTZ === "2" ? "selected" : ""}>UTC+2</option></select></label>
         <button id="unkall" class="pri">+ Добавить в справочник${u.length > 1 ? " все (" + u.length + ")" : ""}</button></div></div>`
 }
 async function addStations(names) {
-    const box = $("#terr"), items = names.map(n => { const v = unkVal(n), lat = isLatin(n); return {src: n, ru: v.ru.trim() || n, row: {name_ru: v.ru.trim() || n, name_uk: v.uk.trim() || null, name_pl: lat ? n : null, name_en: lat ? n : null, tz_hours: +UNKTZ}} });
+    const box = $("#terr"), items = names.map(n => { const v = unkVal(n), lat = isLatin(n), ru = v.ru.trim() || n; return {src: n, ru, uk: v.uk.trim() || null, lat, ex: sameRu(ru)} });
+    const fresh = [], seen = new Set();
+    items.filter(x => !x.ex).forEach(x => { const k = foldName(x.ru); if (!seen.has(k)) { seen.add(k); fresh.push(x) } });
     try {
-        await db("POST", "stations", items.map(x => x.row));
+        if (fresh.length) await db("POST", "stations", fresh.map(x => ({name_ru: x.ru, name_uk: x.uk, name_pl: x.lat ? x.src : null, name_en: x.lat ? x.src : null, tz_hours: +UNKTZ})));
+        /* уже существующие станции: дописываем польское/английское/украинское название, если оно пустое, чтобы в следующий раз находились сразу */
+        for (const x of items.filter(x => x.ex)) {
+            const patch = {}; if (x.lat && !x.ex.name_pl) patch.name_pl = x.src; if (x.lat && !x.ex.name_en) patch.name_en = x.src; if (x.uk && !x.ex.name_uk) patch.name_uk = x.uk;
+            if (Object.keys(patch).length) await db("PATCH", "stations?id=eq." + x.ex.id, patch)
+        }
         await load();
-        TD.rows.forEach(r => { const it = items.find(x => x.src.toLowerCase() === (r.name || "").trim().toLowerCase()); if (it) r.name = it.ru });
+        TD.rows.forEach(r => { const it = items.find(x => x.src.toLowerCase() === (r.name || "").trim().toLowerCase()); if (it) r.name = (it.ex || {}).name_ru || it.ru });
         const dl = $("#stl"); if (dl) dl.innerHTML = ST.map(s => `<option value="${esc(s.name_ru)}">`).join("");
         if (box) box.innerHTML = "";
         markDirty(); drawRows();
-        toast(names.length > 1 ? "Добавлено станций: " + names.length : "Станция добавлена")
-    } catch (e) { showErr(box, e) }
+        const linked = items.filter(x => x.ex).length;
+        toast((fresh.length ? "Добавлено станций: " + fresh.length : "Новых станций нет") + (linked ? ", привязано к существующим: " + linked : ""))
+    } catch (e) { showErr(box, /stations_name_ru_uq|duplicate key/.test(String(e.message || e)) ? "Станция с таким русским названием уже есть в справочнике. Измените название в колонке «По-русски» (или оставьте как есть, тогда станция привяжется к существующей) и повторите." : e) }
 }
 document.addEventListener("change", e => { if (e.target.id === "unktz") UNKTZ = e.target.value });
 document.addEventListener("input", e => {
     const t = e.target, tr = t.closest && t.closest("#unk tr[data-i]"); if (!tr || !t.dataset.f) return;
     const n = unknownNames()[+tr.dataset.i]; if (!n) return;
-    const v = {...unkVal(n)}; v[t.dataset.f] = t.value; UNKED[n.toLowerCase()] = v
+    const v = {...unkVal(n)}; v[t.dataset.f] = t.value; UNKED[n.toLowerCase()] = v;
+    if (t.dataset.f === "ru") tr.querySelector(".ust").innerHTML = unkNote(t.value)
 });
 document.addEventListener("click", e => {
     const b = e.target.closest && e.target.closest("#unk button"); if (!b) return;
@@ -1090,8 +1101,12 @@ const isLatin = n => /[A-Za-zĄĆĘŁŃÓŚŹŻąćęłńóśźż]/.test(n);
 const foldName = s => String(s || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/ł/gi, "l").toLowerCase().replace(/[^\p{L}\p{N}]+/gu, " ").trim();
 function stationAny(name) { /* станция по названию на любом из четырёх языков или по синониму; без учёта диакритики */
     const f = foldName(name); if (!f) return null;
-    return ST.find(s => [s.name_ru, s.name_uk, s.name_en, s.name_pl, ...(s.aliases || [])].some(n => foldName(n) === f)) || null
+    const hit = ST.find(s => [s.name_ru, s.name_uk, s.name_en, s.name_pl, ...(s.aliases || [])].some(n => foldName(n) === f));
+    if (hit || !isLatin(name)) return hit || null;
+    const tr = foldName(plTranslit(name, "ru")); /* польское название ещё не записано у станции — сверяем с её русским названием по транскрипции */
+    return ST.find(s => foldName(s.name_ru) === tr) || null
 }
+const sameRu = ru => ST.find(s => foldName(s.name_ru) === foldName(ru)) || null;
 function parseSchedule(text) {
     const src = String(text || "").replace(/\[([^\]]+)\]\([^)]*\)[^\n<]*/g, "$1\n") /* [Название](ссылка)Перон… → Название */
         .replace(/<[^>]*>/g, "\n").replace(/&nbsp;/g, " ").replace(/&amp;/g, "&");
