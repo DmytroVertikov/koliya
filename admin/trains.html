@@ -104,6 +104,15 @@
         .conn .ht { font: 700 19px/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; color: var(--bl) }
         .bar2 { position: sticky; bottom: 0; z-index: 3; background: rgba(255, 255, 255, .96); border-top: 2px solid var(--bd); padding: 12px 0; margin-top: 14px; display: flex; gap: 12px; align-items: center; flex-wrap: wrap }
         #toast { position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%); background: #101828; color: #fff; padding: 11px 22px; border-radius: 10px; font-size: 16px; display: none; z-index: 9 }
+        .list p.lh { margin: 0; padding: 6px 12px; background: #f9fafb; border-bottom: 1px solid #eef0f3; font-size: 13px; font-weight: 700; color: var(--mu); position: sticky; top: 0; z-index: 1 }
+        .list div[data-id] { border-left-width: 5px }
+        .dhead { display: flex; gap: 12px 20px; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; margin-bottom: 12px }
+        .dctl { display: flex; gap: 8px 16px; align-items: center; flex-wrap: wrap }
+        .dctl label { margin: 0; display: inline-flex; align-items: center; gap: 6px; font-weight: 600; font-size: 15px }
+        .subtabs { display: flex; gap: 6px; margin: 4px 0 16px; border-bottom: 2px solid #eaecf0 }
+        main#app .subtabs button { font-size: 16px; font-weight: 600; padding: 9px 18px; border: 0; border-bottom: 3px solid transparent; border-radius: 8px 8px 0 0; background: transparent; color: #475467; margin-bottom: -2px }
+        main#app .subtabs button:hover { color: var(--bl); background: var(--bl2) }
+        main#app .subtabs button.on { color: var(--bl); border-bottom-color: var(--bl); background: var(--bl2) }
         .pvw { border: 2px dashed #98a2b3; border-radius: 12px; padding: 10px; margin: 12px 0; background: #fff }
     </style>
 </head>
@@ -317,7 +326,7 @@ function index() {
     legsByConn = new Map();
     LG.forEach(l => { if (!legsByConn.has(l.connection_id)) legsByConn.set(l.connection_id, []); legsByConn.get(l.connection_id).push(l) });
     legsByConn.forEach(a => a.sort((x, y) => x.pos - y.pos));
-    usedBy = new Map();
+    usedBy = new Map(); CIC = null;
     LG.forEach(l => usedBy.set(l.train_id, (usedBy.get(l.train_id) || 0) + 1))
 }
 const CTX = {train: id => trById.get(id), stops: id => spByTrain.get(id) || [], station: id => stById.get(id)};
@@ -368,9 +377,9 @@ async function start() {
     shell()
 }
 function shell() {
-    $("#app").innerHTML = `<div class="tabs">${[["trains", "Поезда"], ["conns", "Варианты"], ["dirs", "Направления"], ["stations", "Станции"], ["countries", "Страны"], ["home", "Главная"], ["texts", "Тексты"]].map(([k, v]) => `<button data-t="${k}" class="${TAB === k ? "on" : ""}">${v}</button>`).join("")}</div><div id="view"></div>`;
+    $("#app").innerHTML = `<div class="tabs">${[["trains", "Поезда"], ["dirs", "Направления и варианты"], ["stations", "Станции"], ["countries", "Страны"], ["home", "Главная"], ["texts", "Тексты"]].map(([k, v]) => `<button data-t="${k}" class="${TAB === k ? "on" : ""}">${v}</button>`).join("")}</div><div id="view"></div>`;
     document.querySelectorAll(".tabs button").forEach(b => b.onclick = () => { TAB = b.dataset.t; shell() });
-    ({trains: viewTrains, conns: viewConns, dirs: viewDirs, stations: viewStations, countries: viewCountries, home: viewHome, texts: viewTexts})[TAB]()
+    ({trains: viewTrains, dirs: viewDirs, stations: viewStations, countries: viewCountries, home: viewHome, texts: viewTexts})[TAB]()
 }
 
 /* ================= направления (страницы маршрутов сайта) ================= */
@@ -391,7 +400,47 @@ const DIR_P = [
 ];
 const DIR_TXT = [["title", "Заголовок (title)"], ["desc", "Описание (description)"], ["h1", "Заголовок H1"], ["lead", "Подзаголовок"], ["all", "Заголовок «все варианты»"], ["more", "Заголовок «ещё варианты»"], ["leadm", "Подзаголовок при пересадке на станции (leadm)"]];
 const DIR_LANGS = [["ru", "Русский"], ["uk", "Українська"], ["en", "English"], ["pl", "Polski"]];
-let RP = [], EDIT = null, DQ = "";
+let RP = [], DSEL = null, DSUB = "conns", DQ = ""; /* DSEL: id страницы | "new" (форма нового направления) | "orph" (варианты без страницы); DSUB: "conns" | "page" */
+/* Как сайт связывает страницу и варианты: страница «A → B» показывает варианты, у которых город отправления в шапке начинается с A, а город прибытия — с B.
+   Страницы «из вариантов других направлений» (slice) своих вариантов не имеют: их поезда вырезаются из остальных вариантов. */
+const norm = s => String(s || "").trim().toLowerCase();
+const isSlice = r => r.kind === "slice" || !!(r.extra || {}).slice;
+const plural = (n, f) => f[n % 10 === 1 && n % 100 !== 11 ? 0 : n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 10 || n % 100 >= 20) ? 1 : 2];
+const VARS = ["вариант", "варианта", "вариантов"];
+const ctryOf = r => String(r.route || "").replace(/^ua-|-ua$/, "");
+const ctryName = code => (CT.find(c => c.slug === code) || {}).name || code;
+const depMin = h => { const m = String(h.ft || "").match(/(\d{1,2}):(\d{2})/); return m ? +m[1] * 60 + +m[2] : 1e4 };
+let CIC = null; /* разобранные варианты; сбрасывается в index() при каждой перезагрузке данных */
+function connInfo() {
+    if (!CIC) CIC = CN.map(c => {
+        const legs = legsByConn.get(c.id) || [];
+        let p = {head: null, legs: []}, h = {from: "", to: "", ft: "", tt: ""};
+        try { p = parseOption(connDsl(c.id)); h = p.head || deriveHead(p.legs) } catch (e) { }
+        return {c, legs, p, h, trains: legs.map(l => (trById.get(l.train_id) || {}).number || "?").join(" + ")}
+    });
+    return CIC
+}
+const pageMatch = (r, h) => !isSlice(r) && norm(h.from).startsWith(norm(r.from_name)) && norm(h.to).startsWith(norm(r.to_name));
+const pageConns = r => connInfo().filter(x => pageMatch(r, x.h));
+/* участок поезда от A до B по его остановкам (так сайт собирает страницы «из вариантов других направлений») */
+const legFits = (r, L) => { const st = L.stops, a = st.findIndex(s => norm(s.name).startsWith(norm(r.from_name))); return a >= 0 && st.findIndex((s, i) => i > a && norm(s.name).startsWith(norm(r.to_name))) >= 0 };
+/* где окажется вариант: own — страницы, на которых показывается его карточка; auto — страницы «из вариантов других направлений», куда попадают его поезда */
+const fitPages = (p, h) => ({own: RP.filter(r => pageMatch(r, h)), auto: RP.filter(r => isSlice(r) && p.legs.some(L => legFits(r, L)))});
+const orphanConns = () => connInfo().filter(x => { const f = fitPages(x.p, x.h); return !f.own.length && !f.auto.length });
+/* поезда страницы «из вариантов других направлений» — та же логика, что на сайте (участок поезда от A до B по его остановкам) */
+function sliceTrains(r) {
+    const seen = new Set(), out = [], tm = s => (String(s).match(/\d{1,2}:\d{2}/) || [""])[0];
+    connInfo().forEach(x => x.p.legs.forEach(L => {
+        const st = L.stops, a = st.findIndex(s => norm(s.name).startsWith(norm(r.from_name)));
+        if (a < 0) return;
+        const b = st.findIndex((s, i) => i > a && norm(s.name).startsWith(norm(r.to_name)));
+        if (b < 0) return;
+        const key = norm(L.train) + "|" + tm(st[a].time) + ">" + tm(st[b].time);
+        if (seen.has(key)) return;
+        seen.add(key); out.push({train: L.train, freq: L.freq, ft: tm(st[a].time), tt: tm(st[b].time)})
+    }));
+    return out.sort((x, y) => depMin(x) - depMin(y))
+}
 async function viewDirs() {
     const v = $("#view");
     v.innerHTML = '<section class="panel"><p class="muted">Загрузка…</p></section>';
@@ -399,7 +448,9 @@ async function viewDirs() {
         v.innerHTML = `<section class="panel"><h2>Направления</h2><div class="errbox">${esc(e.message)}</div><p>Похоже, таблица <b>route_pages</b> ещё не создана. Выполните файл <code>route_pages.sql</code> в Supabase → SQL Editor и обновите страницу.</p></section>`;
         return
     }
-    EDIT = null; drawDirs()
+    E = null;
+    if (!DSEL || (DSEL !== "new" && DSEL !== "orph" && !RP.some(r => r.id === DSEL))) DSEL = RP.length ? RP[0].id : "new";
+    drawDirs()
 }
 const dirOk = (val, t) => val === undefined || (t === "pair" ? Array.isArray(val) && val.length === 2 && val.every(x => typeof x === "string") : t === "bool" ? typeof val === "boolean" : typeof val === "string");
 /* блок параметров: виджеты для известных ключей; всё остальное (и значения нестандартного вида) остаётся в JSON */
@@ -430,7 +481,7 @@ function dirEditorHtml(r) {
     const rest = {}; Object.keys(ex).forEach(k => { if (!handled.has(k)) rest[k] = ex[k] });
     const nm = r.names || {}, sf = n => findStation(n) || {}, nmv = (n, k, c) => (nm[n] || {})[k] || sf(n)[c] || "";
     const tx = r.texts || {};
-    return `<section class="panel" id="d_edit" style="border:2px solid var(--bl)"><h2>Редактирование: ${esc(r.from_name)} → ${esc(r.to_name)} <span class="muted">(${esc(r.file)}, ${esc(DIR_KIND_LBL[r.kind] || r.kind)})</span></h2>
+    return `<div id="d_edit"><p class="muted" style="margin-top:0">Изменения страницы и её текстов попадают на сайт после кнопки «Пересобрать сайт» (вверху страницы), обновление занимает 1–2 минуты. Города «Откуда» и «Куда» определяют, какие варианты показывает страница: берутся варианты с такими же городами в шапке.</p>
         <div class="frow"><div><label>Откуда</label><input type="text" id="e_from" list="d_stl" value="${esc(r.from_name)}" style="width:210px"></div>
         <div><label>Куда</label><input type="text" id="e_to" list="d_stl" value="${esc(r.to_name)}" style="width:210px"></div>
         <div><label>Код направления</label><input type="text" id="e_route" value="${esc(r.route)}" style="width:90px"></div>
@@ -445,11 +496,10 @@ function dirEditorHtml(r) {
         <details><summary class="muted">Тексты страницы (пусто — для новых страниц собирается автоматически; можно использовать {FROM} и {TO})</summary>
         ${DIR_LANGS.map(([l, ln]) => `<details style="margin-left:14px"><summary class="muted">${ln}</summary>${DIR_TXT.map(([k, kl]) => `<div class="frow"><div style="flex:1 1 100%"><label>${esc(kl)}</label><textarea rows="${k === "lead" ? 3 : 1}" data-tx="${l}.${k}" style="width:100%">${esc((tx[l] || {})[k] || "")}</textarea></div></div>`).join("")}</details>`).join("")}</details>
         <div id="e_err"></div>
-        <p><button class="pri" id="e_save">Сохранить</button> <button id="e_cancel">Отмена</button></p></section>`
+        <p><button class="pri" id="e_save">Сохранить</button></p></div>`
 }
 function dirEditorBind(r) {
     const root = $("#d_edit"), v = id => $("#" + id).value.trim();
-    $("#e_cancel").onclick = () => { EDIT = null; drawDirs() };
     $("#e_save").onclick = async () => {
         const box = $("#e_err"), errs = [];
         if (!v("e_from") || !v("e_to")) errs.push("Укажите «откуда» и «куда»");
@@ -468,20 +518,124 @@ function dirEditorBind(r) {
         try {
             const res = await db("PATCH", "route_pages?id=eq." + encodeURIComponent(r.id), p, "return=representation");
             RP[RP.findIndex(z => z.id === r.id)] = (res && res[0]) || Object.assign({}, r, p);
-            EDIT = null; drawDirs("Сохранено: " + p.from_name + " → " + p.to_name)
+            drawDirs("Сохранено: " + p.from_name + " → " + p.to_name)
         } catch (e) { showErr(box, e) }
     }
 }
+/* ---------- список направлений (слева) ---------- */
+function dirListHtml() {
+    const q = DQ.trim().toLowerCase(), orph = orphanConns().length;
+    const item = (id, title, chips, off) => `<div data-id="${esc(id)}" class="${DSEL === id ? "on" : ""}" ${off ? 'style="opacity:.55"' : ""}>${title}<small>${chips}</small></div>`;
+    let h = orph ? item("orph", "⚠ Варианты без страницы", `<span class="chip rd">${orph}</span> на сайте не видны`) : "";
+    const order = CT.map(c => c.slug), groups = new Map();
+    RP.filter(r => !q || (r.from_name + " " + r.to_name + " " + r.file + " " + r.id).toLowerCase().includes(q)).forEach(r => {
+        const k = ctryOf(r); if (!groups.has(k)) groups.set(k, []); groups.get(k).push(r)
+    });
+    [...groups.keys()].sort((a, b) => (order.indexOf(a) + 1 || 999) - (order.indexOf(b) + 1 || 999)).forEach(k => {
+        h += `<p class="lh">${esc(ctryName(k))}</p>`;
+        groups.get(k).sort((a, b) => (/^ua-/.test(b.route) ? 1 : 0) - (/^ua-/.test(a.route) ? 1 : 0)).forEach(r => {
+            const n = isSlice(r) ? null : pageConns(r).length;
+            h += item(r.id, esc(r.from_name) + " → " + esc(r.to_name),
+                (n == null ? '<span class="chip pu">поезда собираются сами</span>' : `<span class="chip ${n ? "gr" : "am"}">${n} ${plural(n, VARS)}</span>`) + (r.active ? "" : ' <span class="chip rd">скрыта</span>'), !r.active)
+        })
+    });
+    return h || '<p class="muted" style="padding:10px 12px;margin:0">Ничего не найдено</p>'
+}
+const redrawDirList = () => { const l = $("#d_list"); if (l) l.innerHTML = dirListHtml() };
+const leaveEditor = () => !E || confirm("Закрыть редактор варианта без сохранения?");
 function drawDirs(msg) {
-    const v = $("#view"), er = EDIT && RP.find(r => r.id === EDIT);
-    const list = RP.map(r => `<tr data-id="${esc(r.id)}" ${r.active ? "" : 'style="opacity:.55"'}><td><b>${esc(r.from_name)} → ${esc(r.to_name)}</b></td><td class="muted">${esc(r.file)}</td><td>${esc(DIR_KIND_LBL[r.kind] || r.kind)}${r.x ? " · " + esc(r.x) : (r.extra || {}).x ? " · " + esc(r.extra.x) : ""}</td><td class="muted">${esc(r.route)}</td>
-        <td><label><input type="checkbox" data-a="act" ${r.active ? "checked" : ""}> показывать</label></td><td><label title="Показывать на главной сразу, а не в раскрывающемся списке «Ещё маршруты»"><input type="checkbox" data-a="pop" ${r.popular ? "checked" : ""}> на главной</label></td><td class="x"><button data-a="edit" title="Изменить">✎ Изменить</button> <button data-a="del" title="Удалить">✕</button></td></tr>`).join("");
-    v.innerHTML = (er ? dirEditorHtml(er) : "") + `<section class="panel"><h2>Новое направление</h2>
-        <p class="muted">Создаются сразу две страницы: «A → B» и обратная «B → A», на русском, украинском, английском и польском. Города — как они называются в справочнике станций.</p>
+    const v = $("#view"), old = $("#d_list"), sc = old ? old.scrollTop : 0;
+    if (DSEL === "orph" && !orphanConns().length) DSEL = RP.length ? RP[0].id : "new";
+    v.innerHTML = `<datalist id="d_stl">${ST.map(s => `<option value="${esc(s.name_ru)}">`).join("")}</datalist>
+        <div class="two"><div><p style="margin:0 0 10px"><button id="d_nw" class="pri" style="width:100%">+ Новое направление</button></p>
+        <p style="margin:0 0 10px"><input type="text" id="d_q" placeholder="Поиск: город или файл" value="${esc(DQ)}" style="width:100%"></p>
+        <div class="list" id="d_list"></div></div><div id="d_main"></div></div>`;
+    redrawDirList(); $("#d_list").scrollTop = sc;
+    $("#d_q").oninput = e => { DQ = e.target.value; redrawDirList() };
+    $("#d_list").onclick = e => {
+        const d = e.target.closest("div[data-id]"); if (!d || (d.dataset.id === DSEL && !E) || !leaveEditor()) return;
+        E = null; DSEL = d.dataset.id; DSUB = "conns"; drawDirs();
+        if (window.innerWidth <= 900) $("#d_main").scrollIntoView({behavior: "smooth", block: "start"}) /* на узком экране список сверху, направление под ним */
+    };
+    $("#d_nw").onclick = () => { if (!leaveEditor()) return; E = null; DSEL = "new"; drawDirs() };
+    drawDirMain(msg)
+}
+
+/* ---------- карточки вариантов ---------- */
+function connCards(items) {
+    return items.map(({c, h, trains, legs}) => `<div class="conn ${c.active ? "" : "off"}" data-id="${c.id}" data-q="${esc((h.from + " " + h.to + " " + trains).toLowerCase())}">
+        <div class="t"><span class="ht">${esc(h.ft)}</span> <b>${esc(h.from)}</b> → <span class="ht">${esc(h.tt)}</span> <b>${esc(h.to)}</b>
+        <small>${legs.length > 1 ? `<span class="chip ${legs.length > 2 ? "rd" : "am"}">${legs.length - 1} ${legs.length > 2 ? "пересадки" : "пересадка"}</span>` : '<span class="chip gr">прямой</span>'}
+        ${c.active ? "" : '<span class="chip rd">скрыт</span>'} ${esc(trains)}</small></div>
+        <button data-a="edit">Изменить</button><button data-a="dup">Копия</button><button data-a="del">✕</button></div>`).join("")
+}
+function bindConnCards(root) {
+    root.onclick = async e => {
+        const b = e.target.closest("button"), d = e.target.closest(".conn"); if (!b || !d) return;
+        const id = d.dataset.id;
+        if (b.dataset.a === "edit") { editConn(id); drawDirMain() }
+        if (b.dataset.a === "dup") { editConn(id, true); drawDirMain() }
+        if (b.dataset.a === "del" && confirm("Удалить вариант?")) {
+            try { await db("DELETE", "connections?id=eq." + id); await load(); drawDirs("Вариант удалён") } catch (er) { toast(er.message) }
+        }
+    }
+}
+
+/* ---------- правая часть: выбранное направление ---------- */
+function drawDirMain(msg) {
+    const m = $("#d_main"), r = RP.find(x => x.id === DSEL);
+    if (E && (r || DSEL === "orph")) return connEditor();
+    if (DSEL === "new") return drawNewDir(m);
+    if (DSEL === "orph") return drawOrphans(m);
+    if (!r) { m.innerHTML = '<section class="panel"><p class="muted">Выберите направление слева или создайте новое.</p></section>'; return }
+    const slice = isSlice(r), mine = slice ? sliceTrains(r) : pageConns(r).sort((a, b) => depMin(a.h) - depMin(b.h));
+    m.innerHTML = `<section class="panel"><div class="dhead"><div><h2 style="margin:0">${esc(r.from_name)} → ${esc(r.to_name)}</h2><span class="muted">${esc(r.file)}</span></div>
+        <div class="dctl"><label><input type="checkbox" id="h_act" ${r.active ? "checked" : ""}> показывать на сайте</label>
+        <label title="Показывать на главной сразу, а не в раскрывающемся списке «Ещё маршруты»"><input type="checkbox" id="h_pop" ${r.popular ? "checked" : ""}> на главной</label>
+        <button id="h_del" title="Удалить направление из списка">✕ Удалить</button></div></div>
+        ${msg ? `<p style="margin:0 0 10px"><span class="chip gr">${esc(msg)}</span></p>` : ""}
+        <div class="subtabs"><button data-s="conns" class="${DSUB === "conns" ? "on" : ""}">${slice ? "Поезда" : "Варианты"} (${mine.length})</button><button data-s="page" class="${DSUB === "page" ? "on" : ""}">Страница и тексты</button></div>
+        <div id="d_sub"></div></section>`;
+    m.querySelectorAll(".subtabs button").forEach(b => b.onclick = () => { DSUB = b.dataset.s; drawDirMain() });
+    const patch = async (body, ok, undo) => {
+        try { await db("PATCH", "route_pages?id=eq." + encodeURIComponent(r.id), body); Object.assign(r, body); toast(ok); redrawDirList() } catch (er) { undo(); toast(er.message) }
+    };
+    $("#h_act").onchange = e => patch({active: e.target.checked}, e.target.checked ? "Страница включена (после «Пересобрать сайт»)" : "Страница скрыта (после «Пересобрать сайт»)", () => { e.target.checked = !e.target.checked });
+    $("#h_pop").onchange = e => patch({popular: e.target.checked}, e.target.checked ? "Будет показываться на главной сразу (после «Пересобрать сайт»)" : "Уйдёт в раскрывающийся список (после «Пересобрать сайт»)", () => { e.target.checked = !e.target.checked });
+    $("#h_del").onclick = async () => {
+        const k = slice ? 0 : mine.length;
+        if (!confirm("Удалить направление «" + r.from_name + " → " + r.to_name + "» из списка?" + (k ? "\n\nЕго " + k + " " + plural(k, VARS) + " останутся в базе, но перестанут показываться на сайте (их можно будет найти в разделе «Варианты без страницы»)." : "") + "\n\nУже собранный файл " + r.file + " останется на сайте, пока вы не удалите его вручную. Чтобы страница пропала с сайта, а не из списка, достаточно снять галочку «показывать на сайте».")) return;
+        try { await db("DELETE", "route_pages?id=eq." + encodeURIComponent(r.id)); RP = RP.filter(x => x.id !== r.id); DSEL = RP.length ? RP[0].id : "new"; DSUB = "conns"; drawDirs("Направление удалено") } catch (er) { toast(er.message) }
+    };
+    const sub = $("#d_sub");
+    if (DSUB === "page") { sub.innerHTML = dirEditorHtml(r); dirEditorBind(r); return }
+    if (slice) {
+        sub.innerHTML = `<p class="muted">У этой страницы нет собственных вариантов: прямые поезда на ней собираются сами из вариантов других направлений (участок поезда от «${esc(r.from_name)}» до «${esc(r.to_name)}»). Чтобы что-то изменить, правьте варианты в направлениях, через которые идут эти поезда.</p>`
+            + (mine.length ? mine.map(t => `<div class="conn"><div class="t"><span class="ht">${esc(t.ft)}</span> → <span class="ht">${esc(t.tt)}</span> <b>${esc(t.train)}</b>${t.freq ? `<small>${esc(t.freq)}</small>` : ""}</div></div>`).join("") : '<p class="muted">Сейчас подходящих поездов нет.</p>');
+        return
+    }
+    sub.innerHTML = `<p class="muted" style="margin-top:0">На странице показываются варианты, у которых в шапке «${esc(r.from_name)} → ${esc(r.to_name)}». Варианты на сайте обновляются сразу, пересборка не нужна.</p>
+        <div class="frow"><button id="cn" class="pri">+ Новый вариант</button><input type="text" id="cf" placeholder="Поиск: город, поезд" style="width:240px"></div>
+        <div id="cl">${mine.length ? connCards(mine) : '<p class="muted">Пока ни одного варианта. Нажмите «+ Новый вариант».</p>'}</div>`;
+    $("#cn").onclick = () => { newConn(); drawDirMain() };
+    $("#cf").oninput = e => { const q = norm(e.target.value); sub.querySelectorAll(".conn").forEach(d => d.style.display = !q || (d.dataset.q || "").includes(q) ? "" : "none") };
+    bindConnCards($("#cl"))
+}
+function drawOrphans(m) {
+    const items = orphanConns().sort((a, b) => (a.h.from + a.h.to).localeCompare(b.h.from + b.h.to) || depMin(a.h) - depMin(b.h));
+    m.innerHTML = `<section class="panel"><h2 style="margin:0 0 8px">Варианты без страницы <span class="muted">(${items.length})</span></h2>
+        <p class="muted">Страница сайта «A → B» показывает варианты, у которых в шапке город отправления A и город прибытия B. Эти варианты не подходят ни к одной странице (и их поезда не попадают на страницы «из вариантов других направлений»), поэтому на сайте их не видно. Откройте вариант и поправьте шапку или станции, либо создайте нужное направление.</p>
+        <div id="cl">${connCards(items)}</div></section>`;
+    bindConnCards($("#cl"))
+}
+
+/* ---------- новое направление ---------- */
+function drawNewDir(m) {
+    m.innerHTML = `<section class="panel"><h2>Новое направление</h2>
+        <p class="muted">Создаются сразу две страницы: «A → B» и обратная «B → A», на русском, украинском, английском и польском. Города — как они называются в справочнике станций. После создания откроется список вариантов этого направления.</p>
         <div class="frow"><div><label>Украинский город (откуда)</label><input type="text" id="d_a" list="d_stl" placeholder="Запорожье" style="width:230px"></div>
         <div><label>Зарубежный город (куда)</label><input type="text" id="d_b" list="d_stl" placeholder="Лодзь" style="width:230px"></div>
         <div><label>Страна</label><select id="d_cc">${DIR_CTRY.map(c => `<option value="${c[0]}">${c[1]}</option>`).join("")}</select></div></div>
-        <datalist id="d_stl">${ST.map(s => `<option value="${esc(s.name_ru)}">`).join("")}</datalist>
         <div class="frow"><div><label>Тип страницы</label><select id="d_kind">${Object.entries(DIR_KINDS).map(([k, t]) => `<option value="${k}">${esc(t)}</option>`).join("")}</select></div></div>
         <div class="frow" id="d_tr" style="display:none"><div><label>Станция пересадки</label><input type="text" id="d_x" list="d_stl" placeholder="Хелм" style="width:230px"></div>
         <label style="align-self:center"><input type="checkbox" id="d_bd"> пограничный контроль на этой станции</label></div>
@@ -492,14 +646,7 @@ function drawDirs(msg) {
         <div class="frow"><span id="d_na_l" class="muted" style="align-self:center;width:130px"></span><input type="text" data-n="na.uk" placeholder="Українська" style="width:170px"><input type="text" data-n="na.en" placeholder="English" style="width:170px"><input type="text" data-n="na.pl" placeholder="Polski" style="width:170px"></div>
         <div class="frow"><span id="d_nb_l" class="muted" style="align-self:center;width:130px"></span><input type="text" data-n="nb.uk" placeholder="Українська" style="width:170px"><input type="text" data-n="nb.en" placeholder="English" style="width:170px"><input type="text" data-n="nb.pl" placeholder="Polski" style="width:170px"></div></details>
         <div id="d_err"></div>
-        <p><button class="pri" id="d_add">Создать направление</button> ${msg ? `<span class="chip gr">${esc(msg)}</span>` : ""}</p></section>
-        <section class="panel"><h2>Все направления сайта <span class="muted">(${RP.length})</span></h2>
-        <p class="muted">Изменения попадают на сайт после нажатия «Пересобрать сайт» (кнопка вверху страницы), обновление занимает 1–2 минуты.</p>
-        <p><input type="text" id="d_q" placeholder="Поиск по названию или файлу" value="${esc(DQ)}" style="width:280px"></p>
-        ${RP.length ? `<table class="g"><thead><tr><th>Страница</th><th>Файл</th><th>Тип</th><th>Код</th><th></th><th></th><th></th></tr></thead><tbody id="d_tb">${list}</tbody></table>` : '<p class="muted">Пока ни одного.</p>'}</section>`;
-    if (er) { dirEditorBind(er); $("#d_edit").scrollIntoView({block: "start"}) }
-    const flt = () => { DQ = $("#d_q").value.toLowerCase(); document.querySelectorAll("#d_tb tr").forEach(tr => { const r = RP.find(z => z.id === tr.dataset.id); tr.style.display = !DQ || (r.from_name + " " + r.to_name + " " + r.file + " " + r.id).toLowerCase().includes(DQ) ? "" : "none" }) };
-    $("#d_q").oninput = flt; flt();
+        <p><button class="pri" id="d_add">Создать направление</button></p></section>`;
     const val = id => $("#" + id).value, form = () => ({a: val("d_a"), b: val("d_b"), cc: val("d_cc"), sa: val("d_sa"), sb: val("d_sb"), kind: val("d_kind"), x: val("d_x"), border: $("#d_bd").checked, single: $("#d_one").checked,
         na: {uk: $('[data-n="na.uk"]').value, en: $('[data-n="na.en"]').value, pl: $('[data-n="na.pl"]').value}, nb: {uk: $('[data-n="nb.uk"]').value, en: $('[data-n="nb.en"]').value, pl: $('[data-n="nb.pl"]').value}});
     const touched = {sa: false, sb: false};
@@ -521,36 +668,18 @@ function drawDirs(msg) {
         if (errs.length) { box.innerHTML = '<div class="errbox">' + errs.map(esc).join("<br>") + "</div>"; return }
         box.innerHTML = "";
         try {
-            await db("POST", "route_pages", dirRows(f));
-            /* справочник направлений для вариантов (вкладка «Варианты»): по возможности добавляем, чтобы к новой странице можно было сразу привязывать варианты */
+            const rows = dirRows(f);
+            await db("POST", "route_pages", rows);
+            /* справочник направлений для вариантов (таблица routes): по возможности добавляем, чтобы к новой странице можно было сразу привязывать варианты */
             let note = "";
             try {
-                const rows = dirRows(f).map((r, i) => ({slug: r.file.replace(/\.html$/, ""), title: r.from_name + " → " + r.to_name, sort: 1000 + i}));
-                await db("POST", "routes", rows); RT = await db("GET", "routes?order=sort")
-            } catch (e2) { note = " (в список направлений вариантов добавьте вручную: " + e2.message + ")" }
+                await db("POST", "routes", rows.map((r, i) => ({slug: r.file.replace(/\.html$/, ""), title: r.from_name + " → " + r.to_name, sort: 1000 + i})));
+                RT = await db("GET", "routes?order=sort")
+            } catch (e2) { note = " (в справочник направлений вариантов добавится при сохранении первого варианта: " + e2.message + ")" }
             RP = await db("GET", "route_pages?order=sort,id");
+            DSEL = rows[0].id; DSUB = "conns";
             drawDirs("Создано: " + f.a.trim() + " ↔ " + f.b.trim() + note)
         } catch (e) { showErr(box, e) }
-    };
-    const tb = $("#d_tb"); if (!tb) return;
-    tb.onclick = async e => {
-        const b = e.target.closest("button"); if (!b) return;
-        const r = RP.find(x => x.id === b.closest("tr").dataset.id);
-        if (b.dataset.a === "edit") { EDIT = r.id; drawDirs(); return }
-        if (b.dataset.a === "del" && confirm("Удалить «" + r.from_name + " → " + r.to_name + "» из списка? Уже собранный файл " + r.file + " останется на сайте, пока вы не удалите его вручную. Чтобы страница пропала с сайта, а не из списка, достаточно снять галочку «показывать».")) {
-            try { await db("DELETE", "route_pages?id=eq." + encodeURIComponent(r.id)); RP = RP.filter(x => x.id !== r.id); drawDirs("Удалено") } catch (er) { toast(er.message) }
-        }
-    };
-    tb.onchange = async e => {
-        const pc = e.target.closest('input[data-a="pop"]');
-        if (pc) {
-            const r = RP.find(x => x.id === pc.closest("tr").dataset.id);
-            try { await db("PATCH", "route_pages?id=eq." + encodeURIComponent(r.id), {popular: pc.checked}); r.popular = pc.checked; toast(pc.checked ? "Будет показываться на главной сразу (после «Пересобрать сайт»)" : "Уйдёт в раскрывающийся список (после «Пересобрать сайт»)") } catch (er) { pc.checked = !pc.checked; toast(er.message) }
-            return
-        }
-        const c = e.target.closest('input[data-a="act"]'); if (!c) return;
-        const r = RP.find(x => x.id === c.closest("tr").dataset.id);
-        try { await db("PATCH", "route_pages?id=eq." + encodeURIComponent(r.id), {active: c.checked}); r.active = c.checked; toast(c.checked ? "Страница включена" : "Страница скрыта") } catch (er) { c.checked = !c.checked; toast(er.message) }
     }
 }
 
@@ -923,65 +1052,23 @@ async function saveTrain() {
 
 /* ================= варианты ================= */
 let E = null; /* редактируемый вариант: {id?, C:{...шапка}, legs:[{train_id, board, alight, vis:Set, any:boolean}]} */
-const pageRoute = (from, to) => {
-    const n = s => String(s || "").trim().toLowerCase(), pg = ((window.CFG && CFG.PAGES) || []).find(p => {
-        const [a, b] = String(p.title).split("→").map(x => x.trim()); return n(from).startsWith(n(a)) && n(to).startsWith(n(b))
-    });
-    return pg ? pg.route : null
-};
 const connDsl = id => {
     const c = CN.find(x => x.id === id), legs = legsByConn.get(id) || [];
     return legs.length ? dslOf(c, legs, CTX) : ""
 };
-function viewConns() {
-    const v = $("#view");
-    v.innerHTML = `<section class="panel"><h2>Варианты <span class="muted">(${CN.length})</span></h2>
-        <div class="frow"><button id="cn" class="pri">+ Новый вариант</button><input type="text" id="cf" placeholder="Поиск: город, поезд" style="width:240px">
-        <select id="cr"><option value="">все направления</option>${RT.map(r => `<option value="${esc(r.slug)}">${esc(r.title || r.slug)}</option>`).join("")}</select></div>
-        <div id="cl"></div></section><section class="panel" id="ce" style="display:none"></section>`;
-    const draw = () => {
-        const q = $("#cf").value.trim().toLowerCase(), r = $("#cr").value;
-        const list = CN.filter(c => (!r || c.route_slug === r)).map(c => {
-            const legs = legsByConn.get(c.id) || [], p = parseOption(connDsl(c.id)), h = p.head || deriveHead(p.legs);
-            return {c, legs, h, trains: legs.map(l => trById.get(l.train_id).number).join(" + ")}
-        }).filter(x => !q || (x.h.from + " " + x.h.to + " " + x.trains).toLowerCase().includes(q)).sort((a, b) => a.c.route_slug.localeCompare(b.c.route_slug) || a.c.sort - b.c.sort);
-        const hue = s => [...s].reduce((a, ch) => a * 31 + ch.charCodeAt(0), 7) % 360;
-        $("#cl").innerHTML = list.map(({c, h, trains, legs}) => `<div class="conn ${c.active ? "" : "off"}" data-id="${c.id}">
-            <div class="t"><span class="ht">${esc(h.ft)}</span> <b>${esc(h.from)}</b> → <span class="ht">${esc(h.tt)}</span> <b>${esc(h.to)}</b>
-            <small>${legs.length > 1 ? `<span class="chip ${legs.length > 2 ? "rd" : "am"}">${legs.length - 1} ${legs.length > 2 ? "пересадки" : "пересадка"}</span>` : '<span class="chip gr">прямой</span>'}
-            <span class="chip" style="background:hsl(${hue(c.route_slug)} 75% 94%);color:hsl(${hue(c.route_slug)} 60% 28%)">${esc(c.route_slug)}</span>
-            ${c.active ? "" : '<span class="chip rd">скрыт</span>'} ${esc(trains)}</small></div>
-            <button data-a="edit">Изменить</button><button data-a="dup">Копия</button><button data-a="del">✕</button></div>`).join("") || '<p class="muted">Ничего не найдено</p>'
-    };
-    draw(); $("#cf").oninput = draw; $("#cr").onchange = draw;
-    $("#cn").onclick = () => { newConn(); connEditor() };
-    $("#cl").onclick = async e => {
-        const b = e.target.closest("button"), d = e.target.closest(".conn"); if (!b || !d) return;
-        const id = d.dataset.id;
-        if (b.dataset.a === "edit") { editConn(id); connEditor() }
-        if (b.dataset.a === "dup") { editConn(id, true); connEditor() }
-        if (b.dataset.a === "del" && confirm("Удалить вариант?")) {
-            try { await db("DELETE", "connections?id=eq." + id); await load(); toast("Удалён"); viewConns() } catch (er) { toast(er.message) }
-        }
-    }
-}
 const emptyC = () => ({route_slug: "", head_from: "", head_to: "", head_dep_time: "", head_arr_time: "", head_dur: "", head_tag: "", note: "", active: true});
-function newConn() { E = {id: null, C: emptyC(), legs: [], routeTouched: false} }
+function newConn() { E = {id: null, C: emptyC(), legs: []} }
 function editConn(id, copy) {
     const c = CN.find(x => x.id === id);
-    E = {id: copy ? null : id, routeTouched: true, C: {...emptyC(), ...c, head_from: c.head_from || "", head_to: c.head_to || "", head_dep_time: hm(c.head_dep_time), head_arr_time: hm(c.head_arr_time), head_dur: c.head_dur || "", head_tag: c.head_tag || ""},
+    E = {id: copy ? null : id, C: {...emptyC(), ...c, head_from: c.head_from || "", head_to: c.head_to || "", head_dep_time: hm(c.head_dep_time), head_arr_time: hm(c.head_arr_time), head_dur: c.head_dur || "", head_tag: c.head_tag || ""},
         legs: (legsByConn.get(id) || []).map(l => ({train_id: l.train_id, board: l.board_stop_id, alight: l.alight_stop_id, vis: visFromLeg(l, CTX.stops(l.train_id)), any: false}))}
 }
 const stopOpt = (s, sel) => `<option value="${s.id}" ${s.id === sel ? "selected" : ""}>${s.seq}. ${esc(stById.get(s.station_id).name_ru)} (${hm(s.arr_time) || "—"} / ${hm(s.dep_time) || "—"})</option>`;
 function legPayloads() { return E.legs.map((L, i) => legPayload(i + 1, L.train_id, L.board, L.alight, L.vis, CTX.stops(L.train_id))) }
 function connEditor() {
-    const el = $("#ce"); el.style.display = ""; el.scrollIntoView({behavior: "smooth", block: "start"});
-    const C = E.C;
-    el.innerHTML = `<h2>${E.id ? "Редактирование варианта" : "Новый вариант"}</h2>
-        <div class="frow">
-            <div><label>Направление</label><select id="c_route"><option value="">выберите…</option>${RT.map(r => `<option value="${esc(r.slug)}" ${r.slug === C.route_slug ? "selected" : ""}>${esc(r.title || r.slug)} (${esc(r.slug)})</option>`).join("")}</select></div>
-            <label style="align-self:center"><input type="checkbox" id="c_act" ${C.active ? "checked" : ""}> показывать на сайте</label>
-        </div>
+    const el = $("#d_main"), C = E.C, pg = RP.find(x => x.id === DSEL);
+    el.innerHTML = `<section class="panel"><div class="frow" style="align-items:center;margin-top:0"><button id="cback">← Назад</button><h2 style="margin:0">${E.id ? "Редактирование варианта" : "Новый вариант"}</h2>${pg ? `<span class="chip bl">${esc(pg.from_name)} → ${esc(pg.to_name)}</span>` : ""}</div>
+        <div class="frow"><label style="align-self:center"><input type="checkbox" id="c_act" ${C.active ? "checked" : ""}> показывать на сайте</label></div>
         <div id="legs"></div>
         <p><button id="addleg" class="big">+ Ещё поезд (пересадка)</button></p>
         <details><summary>Шапка карточки (по умолчанию заполняется само)</summary>
@@ -997,23 +1084,14 @@ function connEditor() {
         </details>
         <datalist id="cities">${[...new Set(((window.CFG && CFG.PAGES) || []).flatMap(p => String(p.title).split("→").map(x => x.trim())))].map(c => `<option value="${esc(c)}">`).join("")}</datalist>
         <div class="pvw" id="pv"></div><div id="cerr"></div>
-        <div class="bar2"><button id="csave" class="pri big">Сохранить вариант</button> <button id="ccancel">Закрыть</button></div>`;
+        <div class="bar2"><button id="csave" class="pri big">Сохранить вариант</button> <button id="ccancel">Закрыть</button></div></section>`;
+    el.scrollIntoView({behavior: "smooth", block: "start"});
     drawLegs(); preview();
-    $("#c_route").onchange = e => { C.route_slug = e.target.value; E.routeTouched = true };
     $("#c_act").onchange = e => C.active = e.target.checked;
-    el.querySelectorAll("[data-c]").forEach(i => i.oninput = () => { C[i.dataset.c] = i.value; autoRoute(); preview() });
+    el.querySelectorAll("[data-c]").forEach(i => i.oninput = () => { C[i.dataset.c] = i.value; preview() });
     $("#addleg").onclick = () => { E.legs.push({train_id: null, board: null, alight: null, vis: new Set(), any: false}); drawLegs(); preview() };
-    $("#ccancel").onclick = () => { el.style.display = "none"; E = null };
+    $("#ccancel").onclick = $("#cback").onclick = () => { E = null; drawDirMain() };
     $("#csave").onclick = saveConn
-}
-function autoRoute() {
-    if (E.routeTouched || !E.legs.length || !E.legs.every(l => l.train_id)) return;
-    try {
-        const f = E.legs[0], l = E.legs[E.legs.length - 1];
-        const from = E.C.head_from || stById.get(CTX.stops(f.train_id).find(s => s.id === f.board).station_id).name_ru;
-        const to = E.C.head_to || stById.get(CTX.stops(l.train_id).find(s => s.id === l.alight).station_id).name_ru;
-        const r = pageRoute(from, to); if (r) { E.C.route_slug = r; const s = $("#c_route"); if (s) s.value = r }
-    } catch (e) { }
 }
 function legCard(L, i) {
     const stops = L.train_id ? CTX.stops(L.train_id) : [], prev = i > 0 ? E.legs[i - 1] : null;
@@ -1028,6 +1106,11 @@ function legCard(L, i) {
         const key = c => c.w == null ? 1e6 : c.w < 20 ? 5000 + c.w : c.w;
         cand.sort((a, b) => key(a) - key(b));
         trains = cand.map(c => c.t); cand.forEach(c => waits.set(c.t.id, c.w))
+    }
+    const pg0 = RP.find(x => x.id === DSEL);
+    if (!prev && pg0 && !isSlice(pg0)) { /* первый поезд: сначала те, что идут через город «откуда» этого направления */
+        const has = t => CTX.stops(t.id).some((s, j, a) => j < a.length - 1 && norm(stById.get(s.station_id).name_ru).startsWith(norm(pg0.from_name)));
+        trains = [...TR].sort((a, b) => (has(b) ? 1 : 0) - (has(a) ? 1 : 0))
     }
     const cur = L.train_id ? trById.get(L.train_id) : null;
     const alights = stops.filter(s => { const b = stops.find(x => x.id === L.board); return b && s.seq > b.seq });
@@ -1070,7 +1153,7 @@ document.addEventListener("change", e => {
     else if (k === "vis") { +t.value && (t.checked ? L.vis.add(+t.value) : L.vis.delete(+t.value)) }
     else return;
     if (k === "vis") return preview();
-    drawLegs(); autoRoute(); preview()
+    drawLegs(); preview()
 });
 document.addEventListener("click", e => {
     const b = e.target.closest && e.target.closest("button[data-l=rm]"); if (!b || !E) return;
@@ -1085,20 +1168,32 @@ function preview() {
         const legs = legPayloads(), dsl = dslOf(E.C, legs, CTX);
         let total = 0, ok = true;
         legs.forEach((l, i) => { const m = legMinutes(l, CTX); if (m == null) ok = false; else total += m; if (i > 0) { const w = waitMinutes(legs[i - 1], l, CTX); if (w == null) ok = false; else total += w } });
-        pv.innerHTML = '<div class="muted" style="margin-bottom:6px">Так карточка выглядит на сайте' + (ok ? " · общее время в пути по расписанию: <b>" + durTxt(total) + "</b>" : "") + ":</div>" + optHtml({dsl, note: E.C.note || ""})
+        const p = parseOption(dsl), h = p.head || deriveHead(p.legs), f = fitPages(p, h), pages = f.own, cur = RP.find(r => r.id === DSEL), pn = r => "<b>" + esc(r.from_name) + " → " + esc(r.to_name) + "</b>";
+        let hint = pages.length ? '<div class="chip gr" style="margin-bottom:8px">Вариант покажется на странице: ' + pages.map(pn).join(", ") + "</div>"
+            : f.auto.length ? '<div class="chip am" style="margin-bottom:8px">Карточкой не покажется (в шапке «' + esc(h.from) + " → " + esc(h.to) + '» нет такой страницы), но поезда попадут на страницы: ' + f.auto.map(pn).join(", ") + "</div>"
+            : '<div class="errbox">Вариант не подходит ни к одной странице сайта: в шапке «' + esc(h.from) + " → " + esc(h.to) + '». На сайте его не будет. Измените станции посадки и выхода или шапку карточки, либо создайте такое направление.</div>';
+        if (pages.length && cur && !isSlice(cur) && !pages.includes(cur)) hint += '<div class="errbox">На странице «' + esc(cur.from_name) + " → " + esc(cur.to_name) + '» этот вариант показан не будет: в шапке другие города.</div>';
+        pv.innerHTML = hint + '<div class="muted" style="margin-bottom:6px">Так карточка выглядит на сайте' + (ok ? " · общее время в пути по расписанию: <b>" + durTxt(total) + "</b>" : "") + ":</div>" + optHtml({dsl, note: E.C.note || ""})
     } catch (e) { pv.innerHTML = '<div class="errbox">' + esc(e.message) + "</div>" }
 }
 async function saveConn() {
     const box = $("#cerr"); box.innerHTML = "";
-    if (!E.C.route_slug) return showErr(box, "Выберите направление");
     if (!readyLegs()) return showErr(box, "Заполните все поезда: поезд, где садимся и где выходим");
     const legs = legPayloads(), first = CTX.stops(legs[0].train_id).find(s => s.id === legs[0].board_stop_id);
     const dep = toM(E.C.head_dep_time || hm(first.dep_time)), C = E.C;
-    const body = {id: E.id, route_slug: C.route_slug, head_from: C.head_from, head_to: C.head_to, head_dep_time: C.head_dep_time || null, head_arr_time: C.head_arr_time || null,
+    /* страница определяется по городам шапки (так же, как на сайте); «направление» варианта в базе — имя файла этой страницы без .html */
+    const p = parseOption(dslOf(C, legs, CTX)), h = p.head || deriveHead(p.legs), f = fitPages(p, h), pages = f.own, cur = RP.find(r => r.id === DSEL);
+    const pg = pages.includes(cur) ? cur : pages[0] || (cur && !isSlice(cur) ? cur : null);
+    const slug = pg ? pg.file.replace(/\.html$/, "") : C.route_slug;
+    if (!slug) return showErr(box, "Не удалось определить направление. Сначала создайте направление для этого маршрута.");
+    if (!pages.length && !f.auto.length && !confirm("Вариант «" + h.from + " → " + h.to + "» не подходит ни к одной странице сайта и показан не будет. Сохранить всё равно?")) return;
+    const body = {id: E.id, route_slug: slug, head_from: C.head_from, head_to: C.head_to, head_dep_time: C.head_dep_time || null, head_arr_time: C.head_arr_time || null,
         head_dur: C.head_dur, head_tag: C.head_tag, note: C.note, sort: dep == null ? 0 : dep, active: C.active, legs};
     try {
+        if (pg && !RT.some(x => x.slug === slug)) { await db("POST", "routes", [{slug, title: pg.from_name + " → " + pg.to_name, sort: 1000}]); RT = await db("GET", "routes?order=sort") }
         await db("POST", "rpc/save_connection", {p: body});
-        await load(); toast("Вариант сохранён"); E = null; viewConns()
+        await load(); E = null;
+        drawDirs(pg && cur && pg !== cur ? "Вариант сохранён, но он показывается на странице «" + pg.from_name + " → " + pg.to_name + "»" : "Вариант сохранён")
     } catch (e) { showErr(box, e) }
 }
 
