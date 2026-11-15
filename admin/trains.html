@@ -924,7 +924,8 @@ function openTrain(id) {
     if (id === "new") TD = {t: {number: "", freq: "", badge: "", note: ""}, rows: [{name: "", arr: "", dep: "", chk: false}, {name: "", arr: "", dep: "", chk: false}]};
     else {
         const t = trById.get(id);
-        TD = {t: {...t, badge: t.badge || "", note: t.note || ""}, rows: (spByTrain.get(id) || []).map(s => ({id: s.id, name: stById.get(s.station_id).name_ru, arr: hm(s.arr_time), dep: hm(s.dep_time), chk: s.needs_check}))}
+        TD = {t: {...t, badge: t.badge || "", note: t.note || ""}, rows: (spByTrain.get(id) || []).map(s => ({id: s.id, name: stById.get(s.station_id).name_ru, arr: hm(s.arr_time), dep: hm(s.dep_time), chk: s.needs_check}))};
+        TD.orig = (spByTrain.get(id) || []).map(s => s.id) /* остановки, которые сейчас есть в базе */
     }
 }
 function viewTrains() {
@@ -980,7 +981,13 @@ function trainEditor() {
         const had = TD.rows.some(x => x.name || x.arr || x.dep);
         if (had && !confirm("Заменить текущие станции (" + TD.rows.length + ") распознанными (" + r.rows.length + ")?")) return;
         let unk = 0;
-        TD.rows = r.rows.map(x => { const s = stationAny(x.name); if (!s) unk++; return {name: s ? s.name_ru : x.name, arr: x.arr, dep: x.dep, chk: false} });
+        const pool = TD.rows.filter(x => x.id), used = new Set();
+        TD.rows = r.rows.map(x => {
+            const s = stationAny(x.name); if (!s) unk++;
+            /* та же станция, что уже была в поезде, остаётся той же остановкой (на неё ссылаются варианты), иначе база пересоздала бы остановки */
+            const old = s && pool.find(o => !used.has(o.id) && (findStation(o.name) || {}).id === s.id); if (old) used.add(old.id);
+            return {id: old ? old.id : undefined, name: s ? s.name_ru : x.name, arr: x.arr, dep: x.dep, chk: false}
+        });
         if (r.number && !$("#tnum").value.trim()) { $("#tnum").value = r.number; T.number = r.number }
         markDirty(); drawRows();
         $("#imp").style.display = "";
@@ -1231,6 +1238,15 @@ async function saveTrain() {
     if (/[:>|*;~]/.test(T.number + T.freq)) errs.push("В номере и периодичности нельзя использовать символы : > | * ; ~");
     errs.push(...validateStops(rows, r => !!findStation(r.name)));
     if (errs.length) return showErr(box, {message: errs.join("\n")});
+    const gone = (TD.orig || []).filter(sid => !R.some(r => r.id === sid)); /* остановки, которых больше нет в таблице */
+    if (gone.length) {
+        const bad = LG.filter(l => l.train_id === TSEL && [l.board_stop_id, l.alight_stop_id, l.show_from_stop_id, l.show_to_stop_id].some(x => gone.includes(x)));
+        if (bad.length) {
+            const names = [...new Set(gone.filter(sid => bad.some(l => [l.board_stop_id, l.alight_stop_id, l.show_from_stop_id, l.show_to_stop_id].includes(sid))).map(sid => { const sp = SP.find(x => x.id === sid); return sp ? "«" + ((stById.get(sp.station_id) || {}).name_ru || "?") + "»" : "?" }))];
+            const vs = [...new Set(bad.map(l => { const x = connInfo().find(i => i.c.id === l.connection_id); return x ? x.h.ft + " " + x.h.from + " → " + x.h.tt + " " + x.h.to : l.connection_id }))];
+            return showErr(box, {message: "Нельзя убрать из поезда " + (names.length > 1 ? "станции " : "станцию ") + names.join(", ") + ": на " + (names.length > 1 ? "них" : "неё") + " ссылаются варианты (посадка или высадка):\n" + vs.join("\n") + "\nОткройте эти варианты («Направления и варианты») и выберите другую станцию или верните станцию в таблицу."})
+        }
+    }
     const dd = calcDays(rows);
     const stops = R.map((r, i) => ({
         id: r.id || null, seq: i + 1, station_id: findStation(r.name).id,
@@ -1242,7 +1258,7 @@ async function saveTrain() {
         if (id === "new") { const c = await db("POST", "trains", meta); id = c[0].id } else await db("PATCH", "trains?id=eq." + id, meta);
         await db("POST", "rpc/save_train_stops", {p_train: id, p_stops: stops});
         await load(); TSEL = id; openTrain(id); toast("Поезд сохранён"); viewTrains()
-    } catch (e) { showErr(box, e) }
+    } catch (e) { showErr(box, /connection_legs_.*_fkey/.test(String(e.message || e)) ? "Нельзя убрать станцию, на которую ссылается вариант. Откройте варианты этого поезда и выберите другую станцию посадки/высадки." : e) }
 }
 
 /* ================= варианты ================= */
