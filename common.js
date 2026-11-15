@@ -286,8 +286,9 @@ const FOOTER_HTML = () => `<div class="fcols">
 })();
 
 /* Колія: сворачивание списка станций поезда.
-   Если в списке .tl больше трёх станций, по умолчанию видны только выделенные (.h: посадка, пересадка, выход).
+   Если станций, которые можно спрятать, больше трёх, по умолчанию видны только выделенные (.h: посадка, пересадка, выход).
    Остальные (промежуточные и станции вне вашей поездки) прячутся за кнопкой «Показать все станции».
+   Если их три или меньше, список показывается целиком.
    Если выделенных нет, остаются первая и последняя станции.
    Модуль не зависит от рендера карточек: он следит за DOM и обрабатывает каждый .tl один раз. */
 (() => {
@@ -298,19 +299,18 @@ const FOOTER_HTML = () => `<div class="fcols">
         pl: ["Pokaż wszystkie stacje", "Ukryj stacje"]
     };
     const [MORE, LESS] = TXT[window.LANG] || TXT.ru;
-    const MIN_TOTAL = 4; /* сворачиваем, только если станций больше трёх */
+    const MAX_PLAIN = 3; /* сворачиваем, только если скрываемых станций больше трёх */
 
     function fold(ul) {
         if (ul.dataset.fold) return;
         ul.dataset.fold = "1";
         const items = [...ul.children].filter(el => el.tagName === "LI");
-        if (items.length < MIN_TOTAL) return;
 
         const hasH = items.some(li => li.classList.contains("h")), last = items.length - 1;
         const keep = items.map((li, i) => hasH ? li.classList.contains("h") : i === 0 || i === last);
         const kept = items.filter((_, i) => keep[i]);
         const hidden = items.length - kept.length;
-        if (!hidden || !kept.length) return;
+        if (hidden <= MAX_PLAIN || !kept.length) return;
 
         items.forEach((li, i) => { if (!keep[i]) li.classList.add("f-hide"); });
         /* рельса: у крайних видимых станций линия идёт только внутрь списка */
