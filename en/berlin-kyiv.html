@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- build 2026-11-15T12:41:34.891Z vmwhtq2d4 direct=false x=Хелм -->
+<!-- build 2026-11-15T16:37:38.627Z vmwi25n5x direct=false x=Хелм -->
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -266,9 +266,9 @@
 <script src="../config.js"></script>
 <script src="../pages.js"></script>
 <script src="../dict/en.js"></script>
-<script src="../common.js"></script>
+<script src="../common.js?v=mwi25n5x"></script>
 <script>
-    const SPLIT = [["Перемышль","With a transfer in Przemyśl",1,0],["Варшава","With a transfer in Warsaw and Chełm",0,3],["Хелм","With a transfer in Chełm",0,2]]; /* [станция пересадки, заголовок, пограничный контроль]: страница делится на группы по пересадке */
+    const SPLIT = [["Перемышль","With a transfer in Перемышль",1,0],["Варшава","With a transfer in Warsaw and Chełm",0,3],["Хелм","With a transfer in Chełm",0,2]]; /* [станция пересадки, заголовок, пограничный контроль]: страница делится на группы по пересадке */
     const HIDE = [].map(s => s.trim().toLowerCase()); /* номера поездов, скрытых на этой странице */
     const SLICE = false; /* true: варианты собираются из поездов других вариантов (страницы вроде Киев → Хелм) */
     const FROM = "Берлин", TO = "Киев", BACK = "ua-de"; // FROM/TO: русские названия, как в шапке карточки в админке
@@ -284,13 +284,13 @@
 <a class="btn pri" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Buy the Chełm → Kyiv ticket in the UZ app</a>
 <a class="btn" href="https://www.intercity.pl/" target="_blank" rel="noopener">Buy the Warsaw → Chełm ticket on PKP Intercity</a>
 <a class="btn" href="https://www.bahn.de/" target="_blank" rel="noopener">Buy the Berlin → Warsaw ticket on DB</a></div><!--/T-->
-<!--H--><div><h3>With a transfer in Przemyśl</h3><ol class="steps">
-<li>Open the Ukrzaliznytsia app, choose the route Przemyśl → Kyiv and the travel date. Sales open 20 days before departure at 09:00 Kyiv time. Choose a suitable train and pay for the ticket.</li>
-<li>Tickets for Berlin → Przemyśl can be bought on the Polish PKP Intercity website (intercity.pl; except the night train) and on the German website bahn.de or in the DB Navigator app.</li>
+<!--H--><div><h3>With a transfer in Перемышль</h3><ol class="steps">
+<li>Open the Ukrzaliznytsia app, choose the route Перемышль → Kyiv and the travel date. Sales open 20 days before departure at 09:00 Kyiv time. Choose a suitable train and pay for the ticket.</li>
+<li>Tickets for Berlin → Перемышль can be bought on the Polish PKP Intercity website (intercity.pl; except the night train) and on the German website bahn.de or in the DB Navigator app.</li>
 <li>After buying, save both e-tickets on your phone. Before you travel, check the dates, departure times and arrival stations.</li></ol>
-<a class="btn pri" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Buy the Przemyśl → Kyiv ticket in the UZ app</a>
-<a class="btn" href="https://www.intercity.pl/" target="_blank" rel="noopener">Buy the Berlin → Przemyśl ticket on PKP Intercity</a>
-<a class="btn" href="https://www.bahn.de/" target="_blank" rel="noopener">Buy the Berlin → Przemyśl ticket on DB</a></div><!--/H-->
+<a class="btn pri" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Buy the Перемышль → Kyiv ticket in the UZ app</a>
+<a class="btn" href="https://www.intercity.pl/" target="_blank" rel="noopener">Buy the Berlin → Перемышль ticket on PKP Intercity</a>
+<a class="btn" href="https://www.bahn.de/" target="_blank" rel="noopener">Buy the Berlin → Перемышль ticket on DB</a></div><!--/H-->
 <!--C--><div><h3>With a transfer in Chełm</h3><ol class="steps">
 <li>Open the Ukrzaliznytsia app, choose the route Chełm → Kyiv and the travel date. Sales open 20 days before departure at 09:00 Kyiv time. Choose a suitable train and pay for the ticket.</li>
 <li>Tickets for Berlin → Chełm can be bought on the German website bahn.de or in the DB Navigator app.</li>
@@ -388,9 +388,7 @@
     }).catch(() => {
         app.innerHTML = `<div class="panel"><h2>Could not load the data</h2><p>Please refresh the page later.</p></div>`
     });
-    const here = location.pathname.split("/").pop() || "index.html",
-        others = ((window.CFG && CFG.PAGES) || []).filter(p => p.href !== here);
-    document.getElementById("more").innerHTML = BUY + `<section class="panel"><h2>More routes</h2><div class="grid" style="margin-top:12px"><a class="btn" href="./#${BACK}">← Ukraine — Germany</a>${others.map(p => `<a class="btn" href="${esc(p.href)}">${esc(trRoute(p.title))}</a>`).join("")}<a class="btn" href="./">All countries</a></div></section>`;
+    document.getElementById("more").innerHTML = BUY + moreRoutes({h: "More routes", rev: "Return route", from: "More routes from %s", to: "More routes to %s", dir: "All routes in this direction", all: "All countries", home: "./", hash: "de-ua"});
 </script>
 </body>
 </html>

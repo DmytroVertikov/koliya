@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- build 2026-11-15T12:41:34.861Z vmwhtq2d4 direct=false x=Перемышль -->
+<!-- build 2026-11-15T16:37:38.590Z vmwi25n5x direct=false x=Перемышль -->
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -254,7 +254,7 @@
         <h1>By train: Kharkiv → Kraków</h1>
         <p id="lead">Train timetable Kharkiv — Kraków: options with a transfer in Przemyśl. Journey time, stops and ticket information.</p></div>
 </header>
-<main class="wrap"><a class="back" href="./">← Home</a> <a class="back" href="./#ua-pl">All routes: Ukraine — Poland</a> <a class="back" href="krakow-kharkiv.html">🔄 Kraków → Kharkiv</a>
+<main class="wrap"><a class="back" href="./">← Home</a> <a class="back" href="./#ua-pl">All routes: Ukraine — Poland</a> <a class="back" href="krakow-kharkiv.html">🔄 Краков → Kharkiv</a>
     <p class="chk" id="chk" hidden>📅 Checked: <b></b></p>
     <div id="app"><p>Loading…</p></div>
     <div id="more"></div>
@@ -265,7 +265,7 @@
 <script src="../config.js"></script>
 <script src="../pages.js"></script>
 <script src="../dict/en.js"></script>
-<script src="../common.js"></script>
+<script src="../common.js?v=mwi25n5x"></script>
 <script>
     const SPLIT = []; /* [станция пересадки, заголовок, пограничный контроль]: страница делится на группы по пересадке */
     const HIDE = [].map(s => s.trim().toLowerCase()); /* номера поездов, скрытых на этой странице */
@@ -275,13 +275,13 @@
     const BUY = `<section class="panel" id="buy"><h2>How to buy tickets</h2>
 <div class="buy one">
 
-<!--T--><div><h3>With a transfer in Przemyśl</h3><ol class="steps">
-<li>Open the Ukrzaliznytsia app, choose the route Kharkiv → Przemyśl and the travel date. Sales open 20 days before departure at 09:00 Kyiv time. Choose the train and pay for the ticket.</li>
-<li>Buy the Przemyśl → Kraków ticket separately from the Polish carrier PKP Intercity, on intercity.pl or in the PKP Intercity app. You can also buy it on koleo.pl or in the KOLEO app.</li>
+<!--T--><div><h3>With a transfer in Перемышль</h3><ol class="steps">
+<li>Open the Ukrzaliznytsia app, choose the route Kharkiv → Перемышль and the travel date. Sales open 20 days before departure at 09:00 Kyiv time. Choose the train and pay for the ticket.</li>
+<li>Buy the Перемышль → Краков ticket separately from the Polish carrier PKP Intercity, on intercity.pl or in the PKP Intercity app. You can also buy it on koleo.pl or in the KOLEO app.</li>
 
 <li>After buying, save both e-tickets on your phone. Before you travel, check the dates, departure times and arrival stations.</li></ol>
-<a class="btn pri" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Buy the Kharkiv → Przemyśl ticket in the UZ app</a>
-<a class="btn" href="https://www.intercity.pl/" target="_blank" rel="noopener">Buy the Przemyśl → Kraków ticket on PKP Intercity</a></div><!--/T-->
+<a class="btn pri" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Buy the Kharkiv → Перемышль ticket in the UZ app</a>
+<a class="btn" href="https://www.intercity.pl/" target="_blank" rel="noopener">Buy the Перемышль → Краков ticket on PKP Intercity</a></div><!--/T-->
 
 
 
@@ -374,9 +374,7 @@
     }).catch(() => {
         app.innerHTML = `<div class="panel"><h2>Could not load the data</h2><p>Please refresh the page later.</p></div>`
     });
-    const here = location.pathname.split("/").pop() || "index.html",
-        others = ((window.CFG && CFG.PAGES) || []).filter(p => p.href !== here);
-    document.getElementById("more").innerHTML = BUY + `<section class="panel"><h2>More routes</h2><div class="grid" style="margin-top:12px"><a class="btn" href="./#${BACK}">← Poland — Ukraine</a>${others.map(p => `<a class="btn" href="${esc(p.href)}">${esc(trRoute(p.title))}</a>`).join("")}<a class="btn" href="./">All countries</a></div></section>`;
+    document.getElementById("more").innerHTML = BUY + moreRoutes({h: "More routes", rev: "Return route", from: "More routes from %s", to: "More routes to %s", dir: "All routes in this direction", all: "All countries", home: "./", hash: "ua-pl"});
 </script>
 </body>
 </html>

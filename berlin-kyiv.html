@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- build 2026-11-15T12:41:34.890Z vmwhtq2d4 direct=false x=Хелм -->
+<!-- build 2026-11-15T16:37:38.626Z vmwi25n5x direct=false x=Хелм -->
 <html lang="ru">
 <head>
     <meta charset="utf-8">
@@ -266,9 +266,9 @@
 <script src="config.js"></script>
 <script src="pages.js"></script>
 <script src="dict/ru.js"></script>
-<script src="common.js"></script>
+<script src="common.js?v=mwi25n5x"></script>
 <script>
-    const SPLIT = [["Перемышль","С пересадкой в Перемышле",1,0],["Варшава","С пересадкой в Варшаве и Хелме",0,3],["Хелм","С пересадкой в Хелме",0,2]]; /* [станция пересадки, заголовок, пограничный контроль]: страница делится на группы по пересадке */
+    const SPLIT = [["Перемышль","С пересадкой через Перемышль",1,0],["Варшава","С пересадкой в Варшаве и Хелме",0,3],["Хелм","С пересадкой в Хелме",0,2]]; /* [станция пересадки, заголовок, пограничный контроль]: страница делится на группы по пересадке */
     const HIDE = [].map(s => s.trim().toLowerCase()); /* номера поездов, скрытых на этой странице */
     const SLICE = false; /* true: варианты собираются из поездов других вариантов (страницы вроде Киев → Хелм) */
     const FROM = "Берлин", TO = "Киев", BACK = "ua-de"; // FROM/TO: русские названия, как в шапке карточки в админке
@@ -284,7 +284,7 @@
 <a class="btn pri" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Купить в приложении УЗ билет Хелм → Киев</a>
 <a class="btn" href="https://www.intercity.pl/" target="_blank" rel="noopener">Купить на сайте PKP Intercity билет Варшава → Хелм</a>
 <a class="btn" href="https://www.bahn.de/" target="_blank" rel="noopener">Купить на сайте DB билет Берлин → Варшава</a></div><!--/T-->
-<!--H--><div><h3>С пересадкой в Перемышле</h3><ol class="steps">
+<!--H--><div><h3>С пересадкой через Перемышль</h3><ol class="steps">
 <li>Откройте приложение «Укрзалізниця», выберите маршрут Перемышль → Киев и укажите дату поездки. Продажа билетов открывается за 20 суток до отправления, в 09:00 по киевскому времени. Выберите подходящий поезд и оплатите билет.</li>
 <li>Билеты Берлин → Перемышль можно купить на польском сайте PKP Intercity (intercity.pl; кроме ночного поезда) и на немецком сайте bahn.de или в приложении DB Navigator.</li>
 <li>После покупки сохраните оба электронных билета в телефоне. Перед поездкой проверьте даты, время отправления и станции прибытия.</li></ol>
@@ -388,9 +388,7 @@
     }).catch(() => {
         app.innerHTML = `<div class="panel"><h2>Не удалось загрузить данные</h2><p>Обновите страницу позже.</p></div>`
     });
-    const here = location.pathname.split("/").pop() || "index.html",
-        others = ((window.CFG && CFG.PAGES) || []).filter(p => p.href !== here);
-    document.getElementById("more").innerHTML = BUY + `<section class="panel"><h2>Ещё маршруты</h2><div class="grid" style="margin-top:12px"><a class="btn" href="./#${BACK}">← Украина — Германия</a>${others.map(p => `<a class="btn" href="${esc(p.href)}">${esc(trRoute(p.title))}</a>`).join("")}<a class="btn" href="./">Все страны</a></div></section>`;
+    document.getElementById("more").innerHTML = BUY + moreRoutes({h: "Ещё маршруты", rev: "Обратное направление", from: "Другие направления из города %s", to: "Другие маршруты в город %s", dir: "Все маршруты этого направления", all: "Все страны", home: "./", hash: "de-ua"});
 </script>
 </body>
 </html>

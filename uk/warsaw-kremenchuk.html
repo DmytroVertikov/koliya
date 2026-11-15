@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- build 2026-11-15T12:41:34.878Z vmwhtq2d4 direct=false x=Перемышль -->
+<!-- build 2026-11-15T16:37:38.610Z vmwi25n5x direct=false x=Перемышль -->
 <html lang="uk">
 <head>
     <meta charset="utf-8">
@@ -265,7 +265,7 @@
 <script src="../config.js"></script>
 <script src="../pages.js"></script>
 <script src="../dict/uk.js"></script>
-<script src="../common.js"></script>
+<script src="../common.js?v=mwi25n5x"></script>
 <script>
     const SPLIT = []; /* [станция пересадки, заголовок, пограничный контроль]: страница делится на группы по пересадке */
     const HIDE = [].map(s => s.trim().toLowerCase()); /* номера поездов, скрытых на этой странице */
@@ -275,13 +275,13 @@
     const BUY = `<section class="panel" id="buy"><h2>Як купити квитки</h2>
 <div class="buy one">
 
-<!--T--><div><h3>З пересадкою у Перемишлі</h3><ol class="steps">
-<li>Відкрийте застосунок «Укрзалізниця», оберіть маршрут Перемишль → Кременчук і вкажіть дату поїздки. Продаж квитків відкривається за 20 діб до відправлення, о 09:00 за київським часом. Оберіть поїзд і сплатіть квиток.</li>
-<li>Квиток на поїзд Варшава → Перемишль придбайте окремо в польського перевізника PKP Intercity — на офіційному сайті intercity.pl або в застосунку PKP Intercity. Також квитки можна купити на сайті koleo.pl або в застосунку KOLEO.</li>
+<!--T--><div><h3>З пересадкою через Перемышль</h3><ol class="steps">
+<li>Відкрийте застосунок «Укрзалізниця», оберіть маршрут Перемышль → Кременчук і вкажіть дату поїздки. Продаж квитків відкривається за 20 діб до відправлення, о 09:00 за київським часом. Оберіть поїзд і сплатіть квиток.</li>
+<li>Квиток на поїзд Варшава → Перемышль придбайте окремо в польського перевізника PKP Intercity — на офіційному сайті intercity.pl або в застосунку PKP Intercity. Також квитки можна купити на сайті koleo.pl або в застосунку KOLEO.</li>
 
 <li>Після купівлі збережіть обидва електронні квитки в телефоні. Перед поїздкою перевірте дати, час відправлення та станції прибуття.</li></ol>
-<a class="btn pri" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Купити в застосунку УЗ квиток Перемишль → Кременчук</a>
-<a class="btn" href="https://www.intercity.pl/" target="_blank" rel="noopener">Купити на сайті PKP Intercity квиток Варшава → Перемишль</a></div><!--/T-->
+<a class="btn pri" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Купити в застосунку УЗ квиток Перемышль → Кременчук</a>
+<a class="btn" href="https://www.intercity.pl/" target="_blank" rel="noopener">Купити на сайті PKP Intercity квиток Варшава → Перемышль</a></div><!--/T-->
 
 
 
@@ -374,9 +374,7 @@
     }).catch(() => {
         app.innerHTML = `<div class="panel"><h2>Не вдалося завантажити дані</h2><p>Оновіть сторінку пізніше.</p></div>`
     });
-    const here = location.pathname.split("/").pop() || "index.html",
-        others = ((window.CFG && CFG.PAGES) || []).filter(p => p.href !== here);
-    document.getElementById("more").innerHTML = BUY + `<section class="panel"><h2>Інші маршрути</h2><div class="grid" style="margin-top:12px"><a class="btn" href="./#${BACK}">← Україна — Польща</a>${others.map(p => `<a class="btn" href="${esc(p.href)}">${esc(trRoute(p.title))}</a>`).join("")}<a class="btn" href="./">Усі країни</a></div></section>`;
+    document.getElementById("more").innerHTML = BUY + moreRoutes({h: "Інші маршрути", rev: "Зворотний напрямок", from: "Інші напрямки з міста %s", to: "Інші маршрути до міста %s", dir: "Усі маршрути цього напрямку", all: "Усі країни", home: "./", hash: "pl-ua"});
 </script>
 </body>
 </html>

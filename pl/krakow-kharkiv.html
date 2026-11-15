@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- build 2026-11-15T12:41:34.862Z vmwhtq2d4 direct=false x=Перемышль -->
+<!-- build 2026-11-15T16:37:38.591Z vmwi25n5x direct=false x=Перемышль -->
 <html lang="pl">
 <head>
     <meta charset="utf-8">
@@ -254,7 +254,7 @@
         <h1>Pociągiem: Kraków → Charków</h1>
         <p id="lead">Rozkład pociągów Kraków — Charków: warianty z przesiadką w Przemyślu. Czas podróży, postoje i informacje o zakupie biletów.</p></div>
 </header>
-<main class="wrap"><a class="back" href="./">← Strona główna</a> <a class="back" href="./#pl-ua">Wszystkie trasy: Polska — Ukraina</a> <a class="back" href="kharkiv-krakow.html">🔄 Charków → Kraków</a>
+<main class="wrap"><a class="back" href="./">← Strona główna</a> <a class="back" href="./#pl-ua">Wszystkie trasy: Polska — Ukraina</a> <a class="back" href="kharkiv-krakow.html">🔄 Charków → Краков</a>
     <p class="chk" id="chk" hidden>📅 Sprawdzono: <b></b></p>
     <div id="app"><p>Ładowanie…</p></div>
     <div id="more"></div>
@@ -265,7 +265,7 @@
 <script src="../config.js"></script>
 <script src="../pages.js"></script>
 <script src="../dict/pl.js"></script>
-<script src="../common.js"></script>
+<script src="../common.js?v=mwi25n5x"></script>
 <script>
     const SPLIT = []; /* [станция пересадки, заголовок, пограничный контроль]: страница делится на группы по пересадке */
     const HIDE = [].map(s => s.trim().toLowerCase()); /* номера поездов, скрытых на этой странице */
@@ -275,13 +275,13 @@
     const BUY = `<section class="panel" id="buy"><h2>Jak kupić bilety</h2>
 <div class="buy one">
 
-<!--T--><div><h3>Z przesiadką w Przemyślu</h3><ol class="steps">
-<li>Otwórz aplikację Ukrzaliznytsia, wybierz trasę Przemyśl → Charków i datę podróży. Sprzedaż biletów rusza na 20 dni przed odjazdem o 9:00 czasu kijowskiego. Wybierz pociąg i opłać bilet.</li>
-<li>Bilet na pociąg Kraków → Przemyśl kup osobno u polskiego przewoźnika PKP Intercity — na stronie intercity.pl lub w aplikacji PKP Intercity. Można go też kupić na koleo.pl lub w aplikacji KOLEO.</li>
+<!--T--><div><h3>Z przesiadką przez Перемышль</h3><ol class="steps">
+<li>Otwórz aplikację Ukrzaliznytsia, wybierz trasę Перемышль → Charków i datę podróży. Sprzedaż biletów rusza na 20 dni przed odjazdem o 9:00 czasu kijowskiego. Wybierz pociąg i opłać bilet.</li>
+<li>Bilet na pociąg Краков → Перемышль kup osobno u polskiego przewoźnika PKP Intercity — na stronie intercity.pl lub w aplikacji PKP Intercity. Można go też kupić na koleo.pl lub w aplikacji KOLEO.</li>
 
 <li>Po zakupie zapisz oba e-bilety w telefonie. Przed podróżą sprawdź daty, godziny odjazdu i stacje docelowe.</li></ol>
-<a class="btn pri" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Kup w aplikacji UZ bilet Przemyśl → Charków</a>
-<a class="btn" href="https://www.intercity.pl/" target="_blank" rel="noopener">Kup na stronie PKP Intercity bilet Kraków → Przemyśl</a></div><!--/T-->
+<a class="btn pri" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Kup w aplikacji UZ bilet Перемышль → Charków</a>
+<a class="btn" href="https://www.intercity.pl/" target="_blank" rel="noopener">Kup na stronie PKP Intercity bilet Краков → Перемышль</a></div><!--/T-->
 
 
 
@@ -374,9 +374,7 @@
     }).catch(() => {
         app.innerHTML = `<div class="panel"><h2>Nie udało się załadować danych</h2><p>Odśwież stronę później.</p></div>`
     });
-    const here = location.pathname.split("/").pop() || "index.html",
-        others = ((window.CFG && CFG.PAGES) || []).filter(p => p.href !== here);
-    document.getElementById("more").innerHTML = BUY + `<section class="panel"><h2>Inne trasy</h2><div class="grid" style="margin-top:12px"><a class="btn" href="./#${BACK}">← Ukraina — Polska</a>${others.map(p => `<a class="btn" href="${esc(p.href)}">${esc(trRoute(p.title))}</a>`).join("")}<a class="btn" href="./">Wszystkie kraje</a></div></section>`;
+    document.getElementById("more").innerHTML = BUY + moreRoutes({h: "Inne trasy", rev: "Trasa powrotna", from: "Inne trasy z miasta %s", to: "Inne trasy do miasta %s", dir: "Wszystkie trasy w tym kierunku", all: "Wszystkie kraje", home: "./", hash: "pl-ua"});
 </script>
 </body>
 </html>

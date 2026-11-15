@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- build 2026-11-15T12:41:34.890Z vmwhtq2d4 direct=false x=Хелм -->
+<!-- build 2026-11-15T16:37:38.626Z vmwi25n5x direct=false x=Хелм -->
 <html lang="pl">
 <head>
     <meta charset="utf-8">
@@ -266,9 +266,9 @@
 <script src="../config.js"></script>
 <script src="../pages.js"></script>
 <script src="../dict/pl.js"></script>
-<script src="../common.js"></script>
+<script src="../common.js?v=mwi25n5x"></script>
 <script>
-    const SPLIT = [["Перемышль","Z przesiadką w Przemyślu",1,0],["Хелм","Z przesiadką w Chełmie i Warszawie",0,3],["Хелм","Z przesiadką w Chełmie",0,2]]; /* [станция пересадки, заголовок, пограничный контроль]: страница делится на группы по пересадке */
+    const SPLIT = [["Перемышль","Z przesiadką przez Перемышль",1,0],["Хелм","Z przesiadką w Chełmie i Warszawie",0,3],["Хелм","Z przesiadką w Chełmie",0,2]]; /* [станция пересадки, заголовок, пограничный контроль]: страница делится на группы по пересадке */
     const HIDE = [].map(s => s.trim().toLowerCase()); /* номера поездов, скрытых на этой странице */
     const SLICE = false; /* true: варианты собираются из поездов других вариантов (страницы вроде Киев → Хелм) */
     const FROM = "Киев", TO = "Берлин", BACK = "de-ua"; // FROM/TO: русские названия, как в шапке карточки в админке
@@ -284,13 +284,13 @@
 <a class="btn pri" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Kup w aplikacji UZ bilet Kijów → Chełm</a>
 <a class="btn" href="https://www.intercity.pl/" target="_blank" rel="noopener">Kup na stronie PKP Intercity bilet Chełm → Warszawa</a>
 <a class="btn" href="https://www.bahn.de/" target="_blank" rel="noopener">Kup na stronie DB bilet Warszawa → Berlin</a></div><!--/T-->
-<!--H--><div><h3>Z przesiadką w Przemyślu</h3><ol class="steps">
-<li>Otwórz aplikację Ukrzaliznytsia, wybierz trasę Kijów → Przemyśl i datę podróży. Sprzedaż biletów rusza na 20 dni przed odjazdem o 9:00 czasu kijowskiego. Wybierz odpowiedni pociąg i opłać bilet.</li>
-<li>Bilety na odcinek Przemyśl → Berlin kupisz na polskiej stronie PKP Intercity (intercity.pl; z wyjątkiem pociągu nocnego) oraz na niemieckiej stronie bahn.de lub w aplikacji DB Navigator.</li>
+<!--H--><div><h3>Z przesiadką przez Перемышль</h3><ol class="steps">
+<li>Otwórz aplikację Ukrzaliznytsia, wybierz trasę Kijów → Перемышль i datę podróży. Sprzedaż biletów rusza na 20 dni przed odjazdem o 9:00 czasu kijowskiego. Wybierz odpowiedni pociąg i opłać bilet.</li>
+<li>Bilety na odcinek Перемышль → Berlin kupisz na polskiej stronie PKP Intercity (intercity.pl; z wyjątkiem pociągu nocnego) oraz na niemieckiej stronie bahn.de lub w aplikacji DB Navigator.</li>
 <li>Po zakupie zapisz oba e-bilety w telefonie. Przed podróżą sprawdź daty, godziny odjazdu i stacje docelowe.</li></ol>
-<a class="btn pri" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Kup w aplikacji UZ bilet Kijów → Przemyśl</a>
-<a class="btn" href="https://www.intercity.pl/" target="_blank" rel="noopener">Kup na stronie PKP Intercity bilet Przemyśl → Berlin</a>
-<a class="btn" href="https://www.bahn.de/" target="_blank" rel="noopener">Kup na stronie DB bilet Przemyśl → Berlin</a></div><!--/H-->
+<a class="btn pri" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Kup w aplikacji UZ bilet Kijów → Перемышль</a>
+<a class="btn" href="https://www.intercity.pl/" target="_blank" rel="noopener">Kup na stronie PKP Intercity bilet Перемышль → Berlin</a>
+<a class="btn" href="https://www.bahn.de/" target="_blank" rel="noopener">Kup na stronie DB bilet Перемышль → Berlin</a></div><!--/H-->
 <!--C--><div><h3>Z przesiadką w Chełmie</h3><ol class="steps">
 <li>Otwórz aplikację Ukrzaliznytsia, wybierz trasę Kijów → Chełm i datę podróży. Sprzedaż biletów rusza na 20 dni przed odjazdem o 9:00 czasu kijowskiego. Wybierz odpowiedni pociąg i opłać bilet.</li>
 <li>Bilety na odcinek Chełm → Berlin kupisz na niemieckiej stronie bahn.de lub w aplikacji DB Navigator.</li>
@@ -388,9 +388,7 @@
     }).catch(() => {
         app.innerHTML = `<div class="panel"><h2>Nie udało się załadować danych</h2><p>Odśwież stronę później.</p></div>`
     });
-    const here = location.pathname.split("/").pop() || "index.html",
-        others = ((window.CFG && CFG.PAGES) || []).filter(p => p.href !== here);
-    document.getElementById("more").innerHTML = BUY + `<section class="panel"><h2>Inne trasy</h2><div class="grid" style="margin-top:12px"><a class="btn" href="./#${BACK}">← Niemcy — Ukraina</a>${others.map(p => `<a class="btn" href="${esc(p.href)}">${esc(trRoute(p.title))}</a>`).join("")}<a class="btn" href="./">Wszystkie kraje</a></div></section>`;
+    document.getElementById("more").innerHTML = BUY + moreRoutes({h: "Inne trasy", rev: "Trasa powrotna", from: "Inne trasy z miasta %s", to: "Inne trasy do miasta %s", dir: "Wszystkie trasy w tym kierunku", all: "Wszystkie kraje", home: "./", hash: "ua-de"});
 </script>
 </body>
 </html>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- build 2026-11-15T12:41:34.847Z vmwhtq2d4 direct=true x=Хелм -->
+<!-- build 2026-11-15T16:37:38.572Z vmwi25n5x direct=true x=Хелм -->
 <html lang="ru">
 <head>
     <meta charset="utf-8">
@@ -265,7 +265,7 @@
 <script src="config.js"></script>
 <script src="pages.js"></script>
 <script src="dict/ru.js"></script>
-<script src="common.js"></script>
+<script src="common.js?v=mwi25n5x"></script>
 <script>
     const SPLIT = []; /* [станция пересадки, заголовок, пограничный контроль]: страница делится на группы по пересадке */
     const HIDE = ["067К"].map(s => s.trim().toLowerCase()); /* номера поездов, скрытых на этой странице */
@@ -372,9 +372,7 @@
     }).catch(() => {
         app.innerHTML = `<div class="panel"><h2>Не удалось загрузить данные</h2><p>Обновите страницу позже.</p></div>`
     });
-    const here = location.pathname.split("/").pop() || "index.html",
-        others = ((window.CFG && CFG.PAGES) || []).filter(p => p.href !== here);
-    document.getElementById("more").innerHTML = BUY + `<section class="panel"><h2>Ещё маршруты</h2><div class="grid" style="margin-top:12px"><a class="btn" href="./#${BACK}">← Из Польши в Украину</a>${others.map(p => `<a class="btn" href="${esc(p.href)}">${esc(trRoute(p.title))}</a>`).join("")}<a class="btn" href="./">Все страны</a></div></section>`;
+    document.getElementById("more").innerHTML = BUY + moreRoutes({h: "Ещё маршруты", rev: "Обратное направление", from: "Другие направления из города %s", to: "Другие маршруты в город %s", dir: "Все маршруты этого направления", all: "Все страны", home: "./", hash: "ua-pl"});
 </script>
 </body>
 </html>

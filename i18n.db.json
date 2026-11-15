@@ -1206,6 +1206,26 @@
    "aliases": []
   },
   {
+   "name_ru": "Бабимост",
+   "name_uk": "Бабімост",
+   "name_en": "Babimost",
+   "name_pl": "Babimost",
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Бабяк",
+   "name_uk": "Бабяк",
+   "name_en": "Babiak",
+   "name_pl": "Babiak",
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
    "name_ru": "Бакэу",
    "name_uk": null,
    "name_en": null,
@@ -1300,6 +1320,16 @@
    "name_uk": "Бжег",
    "name_en": "Brzeg",
    "name_pl": "Brzeg",
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Бжег Дольны",
+   "name_uk": "Бжег Дольний",
+   "name_en": "Brzeg Dolny",
+   "name_pl": "Brzeg Dolny",
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
@@ -1442,6 +1472,16 @@
    "name_uk": "Бухарест-Норд",
    "name_en": "Bucharest Nord",
    "name_pl": "Bukareszt Nord",
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Бытом",
+   "name_uk": "Битом",
+   "name_en": "Bytom",
+   "name_pl": "Bytom",
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
@@ -1614,6 +1654,16 @@
    "aliases": []
   },
   {
+   "name_ru": "Вжесня",
+   "name_uk": "Вжесьня",
+   "name_en": "Września",
+   "name_pl": "Września",
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
    "name_ru": "Винница",
    "name_uk": null,
    "name_en": null,
@@ -1654,6 +1704,16 @@
    "aliases": []
   },
   {
+   "name_ru": "Волув",
+   "name_uk": "Волув",
+   "name_en": "Wołów",
+   "name_pl": "Wołów",
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
    "name_ru": "Вольногорск",
    "name_uk": null,
    "name_en": null,
@@ -1674,16 +1734,6 @@
    "aliases": []
   },
   {
-   "name_ru": "Вроцлав",
-   "name_uk": null,
-   "name_en": null,
-   "name_pl": null,
-   "in_ru": null,
-   "in_uk": null,
-   "in_pl": null,
-   "aliases": []
-  },
-  {
    "name_ru": "Вроцлав Главный",
    "name_uk": "Вроцлав Головний",
    "name_en": "Wrocław Główny",
@@ -1691,7 +1741,9 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
-   "aliases": []
+   "aliases": [
+    "Вроцлав"
+   ]
   },
   {
    "name_ru": "Врутки",
@@ -1724,6 +1776,16 @@
    "aliases": []
   },
   {
+   "name_ru": "Гавиржов",
+   "name_uk": "Гавіржов",
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
    "name_ru": "Гливице",
    "name_uk": "Гливиці",
    "name_en": "Gliwice",
@@ -1748,6 +1810,16 @@
    "name_uk": "Глогув",
    "name_en": "Głogów",
    "name_pl": "Głogów",
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Гнезно",
+   "name_uk": "Гнезно",
+   "name_en": "Gniezno",
+   "name_pl": "Gniezno",
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
@@ -1866,24 +1938,18 @@
    "aliases": []
   },
   {
-   "name_ru": "Дорогуск",
+   "name_ru": "Дорохуск",
    "name_uk": "Дорогуськ",
    "name_en": "Dorohusk",
    "name_pl": "Dorohusk",
    "in_ru": "в Дорогуске",
    "in_uk": "у Дорогуську",
    "in_pl": "w Dorohusku",
-   "aliases": []
-  },
-  {
-   "name_ru": "Дорохуск",
-   "name_uk": null,
-   "name_en": null,
-   "name_pl": null,
-   "in_ru": null,
-   "in_uk": null,
-   "in_pl": null,
-   "aliases": []
+   "aliases": [
+    "Дорогуск",
+    "Дорогуськ",
+    "Dorohusk"
+   ]
   },
   {
    "name_ru": "Дьёр",
@@ -2092,18 +2158,11 @@
    "name_pl": "Zielona Góra Główna",
    "in_ru": null,
    "in_uk": null,
-   "in_pl": null,
-   "aliases": []
-  },
-  {
-   "name_ru": "Зелена-Гура",
-   "name_uk": "Зелена-Гура",
-   "name_en": "Zielona Góra",
-   "name_pl": "Zielona Góra",
-   "in_ru": null,
-   "in_uk": null,
    "in_pl": "w Zielonej Górze",
-   "aliases": []
+   "aliases": [
+    "Зелена-Гура",
+    "Zielona Góra"
+   ]
   },
   {
    "name_ru": "Знаменка-Пасс.",
@@ -2142,6 +2201,16 @@
    "name_uk": null,
    "name_en": null,
    "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Иновроцлав Ромбинек",
+   "name_uk": "Іновроцлав Ромбінек",
+   "name_en": "Inowrocław Rąbinek",
+   "name_pl": "Inowrocław Rąbinek",
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
@@ -2344,6 +2413,16 @@
    "aliases": []
   },
   {
+   "name_ru": "Коло",
+   "name_uk": "Коло",
+   "name_en": "Koło",
+   "name_pl": "Koło",
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
    "name_ru": "Коломыя",
    "name_uk": null,
    "name_en": null,
@@ -2454,24 +2533,16 @@
    "aliases": []
   },
   {
-   "name_ru": "Краков",
+   "name_ru": "Краков Главный",
    "name_uk": "Краків",
    "name_en": "Kraków",
    "name_pl": "Kraków",
    "in_ru": "в Кракове",
    "in_uk": "у Кракові",
    "in_pl": "w Krakowie",
-   "aliases": []
-  },
-  {
-   "name_ru": "Краков Главный",
-   "name_uk": null,
-   "name_en": null,
-   "name_pl": null,
-   "in_ru": "в Кракове",
-   "in_uk": "у Кракові",
-   "in_pl": "w Krakowie",
-   "aliases": []
+   "aliases": [
+    "Краков Главный"
+   ]
   },
   {
    "name_ru": "Краков Плашув",
@@ -2610,6 +2681,16 @@
    "name_uk": null,
    "name_en": null,
    "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Лович Главный",
+   "name_uk": "Лович Головний",
+   "name_en": "Łowicz Główny",
+   "name_pl": "Łowicz Główny",
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
@@ -2760,6 +2841,16 @@
    "name_uk": null,
    "name_en": null,
    "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Могильно",
+   "name_uk": "Могільно",
+   "name_en": "Mogilno",
+   "name_pl": "Mogilno",
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
@@ -3006,16 +3097,6 @@
    "aliases": []
   },
   {
-   "name_ru": "Пардубице",
-   "name_uk": null,
-   "name_en": null,
-   "name_pl": null,
-   "in_ru": null,
-   "in_uk": null,
-   "in_pl": null,
-   "aliases": []
-  },
-  {
    "name_ru": "Пардубице Главный",
    "name_uk": null,
    "name_en": null,
@@ -3023,27 +3104,21 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
-   "aliases": []
+   "aliases": [
+    "Пардубице"
+   ]
   },
   {
-   "name_ru": "Перемышль",
+   "name_ru": "Перемышль Главный",
    "name_uk": "Перемишль",
    "name_en": "Przemyśl",
    "name_pl": "Przemyśl",
    "in_ru": "в Перемышле",
    "in_uk": "у Перемишлі",
    "in_pl": "w Przemyślu",
-   "aliases": []
-  },
-  {
-   "name_ru": "Перемышль Главный",
-   "name_uk": null,
-   "name_en": null,
-   "name_pl": null,
-   "in_ru": "в Перемышле",
-   "in_uk": "у Перемишлі",
-   "in_pl": "w Przemyślu",
-   "aliases": []
+   "aliases": [
+    "Перемышль Главный"
+   ]
   },
   {
    "name_ru": "Перемышль Засане",
@@ -3060,6 +3135,16 @@
    "name_uk": null,
    "name_en": null,
    "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Пётркув Куявский",
+   "name_uk": "Пйотркув Куявський",
+   "name_en": "Piotrków Kujawski",
+   "name_pl": "Piotrków Kujawski",
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
@@ -3176,24 +3261,18 @@
    "aliases": []
   },
   {
-   "name_ru": "Прага",
+   "name_ru": "Прага Главная",
    "name_uk": "Прага",
    "name_en": "Prague",
    "name_pl": "Praga",
    "in_ru": "в Праге",
    "in_uk": "у Празі",
    "in_pl": "w Pradze",
-   "aliases": []
-  },
-  {
-   "name_ru": "Прага Главная",
-   "name_uk": null,
-   "name_en": null,
-   "name_pl": null,
-   "in_ru": "в Праге",
-   "in_uk": "у Празі",
-   "in_pl": "w Pradze",
-   "aliases": []
+   "aliases": [
+    "Прага",
+    "Prague",
+    "Praga"
+   ]
   },
   {
    "name_ru": "Прага-Либень",
@@ -3436,6 +3515,16 @@
    "aliases": []
   },
   {
+   "name_ru": "Сважендз",
+   "name_uk": "Сважендз",
+   "name_en": "Swarzędz",
+   "name_pl": "Swarzędz",
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
    "name_ru": "Свалява",
    "name_uk": null,
    "name_en": null,
@@ -3556,10 +3645,30 @@
    "aliases": []
   },
   {
+   "name_ru": "Слупца",
+   "name_uk": "Слупца",
+   "name_en": "Słupca",
+   "name_pl": "Słupca",
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
    "name_ru": "Сольнок",
    "name_uk": null,
    "name_en": null,
    "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Сохачев",
+   "name_uk": "Сохачев",
+   "name_en": "Sochaczew",
+   "name_pl": "Sochaczew",
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
@@ -3636,6 +3745,16 @@
    "aliases": []
   },
   {
+   "name_ru": "Сулехув",
+   "name_uk": "Сулехув",
+   "name_en": "Sulechów",
+   "name_pl": "Sulechów",
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
    "name_ru": "Сучава",
    "name_uk": "Сучава",
    "name_en": "Suceava",
@@ -3643,6 +3762,16 @@
    "in_ru": "в Сучаве",
    "in_uk": "у Сучаві",
    "in_pl": "w Suczawie",
+   "aliases": []
+  },
+  {
+   "name_ru": "Сцинава",
+   "name_uk": "Сцинава",
+   "name_en": "Ścinawa",
+   "name_pl": "Ścinawa",
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
    "aliases": []
   },
   {
@@ -3906,6 +4035,16 @@
    "aliases": []
   },
   {
+   "name_ru": "Хожув Баторы",
+   "name_uk": "Хожув Батори",
+   "name_en": "Chorzów Batory",
+   "name_pl": "Chorzów Batory",
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
    "name_ru": "Хойна",
    "name_uk": "Хойна",
    "name_en": "Chojna",
@@ -3958,6 +4097,16 @@
   {
    "name_ru": "Цеглед",
    "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Чадца",
+   "name_uk": "Чадця",
    "name_en": null,
    "name_pl": null,
    "in_ru": null,
@@ -4036,27 +4185,21 @@
    "aliases": []
   },
   {
-   "name_ru": "Щецин",
+   "name_ru": "Щецин Главный",
    "name_uk": "Щецін",
    "name_en": "Szczecin",
    "name_pl": "Szczecin",
    "in_ru": "в Щецине",
    "in_uk": "у Щецині",
    "in_pl": "w Szczecinie",
-   "aliases": []
+   "aliases": [
+    "Щецин",
+    "Щецін",
+    "Szczecin"
+   ]
   },
   {
    "name_ru": "Щецин Домбе",
-   "name_uk": null,
-   "name_en": null,
-   "name_pl": null,
-   "in_ru": null,
-   "in_uk": null,
-   "in_pl": null,
-   "aliases": []
-  },
-  {
-   "name_ru": "Щецин-Главный",
    "name_uk": null,
    "name_en": null,
    "name_pl": null,
