@@ -1193,6 +1193,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -1203,6 +1207,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -1213,6 +1221,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -1223,6 +1235,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -1233,6 +1249,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -1243,6 +1263,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -1253,6 +1277,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -1263,6 +1291,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -1273,6 +1305,10 @@
    "in_ru": "в Берлине",
    "in_uk": "у Берліні",
    "in_pl": "w Berlinie",
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -1283,6 +1319,10 @@
    "in_ru": "в Берлине",
    "in_uk": "у Берліні",
    "in_pl": "w Berlinie",
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -1293,16 +1333,10 @@
    "in_ru": "в Берлине",
    "in_uk": "у Берліні",
    "in_pl": "w Berlinie",
-   "aliases": []
-  },
-  {
-   "name_ru": "Берлин-Главный",
-   "name_uk": null,
-   "name_en": null,
-   "name_pl": null,
-   "in_ru": null,
-   "in_uk": null,
-   "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -1313,6 +1347,10 @@
    "in_ru": "в Берлине",
    "in_uk": "у Берліні",
    "in_pl": "w Berlinie",
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -1323,6 +1361,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -1333,6 +1375,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -1343,6 +1389,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -1353,6 +1403,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -1363,6 +1417,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -1373,6 +1431,10 @@
    "in_ru": "в Братиславе",
    "in_uk": "у Братиславі",
    "in_pl": "w Bratysławie",
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -1383,6 +1445,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -1393,6 +1459,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -1403,6 +1473,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -1413,6 +1487,10 @@
    "in_ru": "в Будапеште",
    "in_uk": "у Будапешті",
    "in_pl": "w Budapeszcie",
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -1423,6 +1501,10 @@
    "in_ru": "в Будапеште",
    "in_uk": "у Будапешті",
    "in_pl": "w Budapeszcie",
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -1433,6 +1515,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": [
     "Будапешт Нюгати"
    ]
@@ -1445,6 +1531,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -1455,6 +1545,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -1465,6 +1559,10 @@
    "in_ru": "в Бухаресте",
    "in_uk": "у Бухаресті",
    "in_pl": "w Bukareszcie",
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -1475,6 +1573,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -1485,6 +1587,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -1495,6 +1601,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -1505,6 +1615,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -1515,6 +1629,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -1525,6 +1643,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -1535,6 +1657,10 @@
    "in_ru": "в Варшаве",
    "in_uk": "у Варшаві",
    "in_pl": "w Warszawie",
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -1545,6 +1671,10 @@
    "in_ru": "в Варшаве",
    "in_uk": "у Варшаві",
    "in_pl": "w Warszawie",
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": [
     "Варшава Восточная"
    ]
@@ -1557,6 +1687,10 @@
    "in_ru": "в Варшаве",
    "in_uk": "у Варшаві",
    "in_pl": "w Warszawie",
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": [
     "Варшава Западная"
    ]
@@ -1569,6 +1703,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -1579,6 +1717,10 @@
    "in_ru": "в Варшаве",
    "in_uk": "у Варшаві",
    "in_pl": "w Warszawie",
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": [
     "Варшава Центральна"
    ]
@@ -1591,6 +1733,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -1601,6 +1747,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -1611,6 +1761,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -1621,6 +1775,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -1631,6 +1789,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -1641,6 +1803,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -1651,6 +1817,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -1661,6 +1831,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -1671,6 +1845,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -1681,6 +1859,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -1691,6 +1873,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -1701,6 +1887,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -1711,6 +1901,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -1721,6 +1915,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -1731,6 +1929,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -1741,6 +1943,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": [
     "Вроцлав"
    ]
@@ -1753,6 +1959,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -1763,6 +1973,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -1773,6 +1987,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -1783,6 +2001,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -1793,6 +2015,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -1803,6 +2029,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -1813,6 +2043,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -1823,6 +2057,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -1833,6 +2071,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -1843,6 +2085,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -1853,6 +2099,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -1863,6 +2113,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -1873,6 +2127,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -1883,6 +2141,10 @@
    "in_ru": "в Дебрецене",
    "in_uk": "у Дебрецені",
    "in_pl": "w Debreczynie",
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -1893,6 +2155,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -1903,28 +2169,29 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
-   "aliases": []
-  },
-  {
-   "name_ru": "Днепр",
-   "name_uk": "Дніпро",
-   "name_en": "Dnipro",
-   "name_pl": "Dnipro",
-   "in_ru": "в Днепре",
-   "in_uk": "у Дніпрі",
-   "in_pl": "w Dnipro",
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
    "name_ru": "Днепр-Главный",
-   "name_uk": "Дніпро-Головний",
+   "name_uk": null,
    "name_en": null,
    "name_pl": null,
    "in_ru": "в Днепре",
    "in_uk": "у Дніпрі",
    "in_pl": "w Dnipro",
+   "short_ru": "Днепр",
+   "short_uk": "Дніпро",
+   "short_en": "Dnipro",
+   "short_pl": "Dnipro",
    "aliases": [
-    "Днепр-Главный"
+    "Днепр-Главный",
+    "Днепр",
+    "Дніпро",
+    "Dnipro"
    ]
   },
   {
@@ -1935,6 +2202,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -1945,6 +2216,10 @@
    "in_ru": "в Дорогуске",
    "in_uk": "у Дорогуську",
    "in_pl": "w Dorohusku",
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": [
     "Дорогуск",
     "Дорогуськ",
@@ -1959,6 +2234,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -1969,6 +2248,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -1979,6 +2262,10 @@
    "in_ru": "в Жешуве",
    "in_uk": "у Жешуві",
    "in_pl": "w Rzeszowie",
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -1989,6 +2276,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -1999,6 +2290,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -2009,6 +2304,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -2019,6 +2318,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -2029,6 +2332,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -2039,6 +2346,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -2049,6 +2360,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -2059,6 +2374,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -2069,6 +2388,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -2079,6 +2402,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -2089,6 +2416,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -2099,6 +2430,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -2109,6 +2444,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -2119,6 +2458,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -2129,6 +2472,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -2139,6 +2486,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -2149,6 +2500,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -2159,6 +2514,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -2169,6 +2528,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -2179,6 +2542,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": "w Zielonej Górze",
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": [
     "Зелена-Гура",
     "Zielona Góra"
@@ -2192,6 +2559,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": [
     "Знаменка-Пасс."
    ]
@@ -2204,6 +2575,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -2214,6 +2589,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -2224,6 +2603,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -2234,6 +2617,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -2244,6 +2631,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -2254,6 +2645,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -2264,6 +2659,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": [
     "Каменское-Пасс."
    ]
@@ -2276,6 +2675,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -2286,6 +2689,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -2296,6 +2703,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -2306,6 +2717,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -2316,6 +2731,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -2326,39 +2745,35 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
-   "name_ru": "Киев",
+   "name_ru": "Киев-Пасс.",
    "name_uk": "Київ",
    "name_en": "Kyiv",
    "name_pl": "Kijów",
    "in_ru": "в Киеве",
    "in_uk": "у Києві",
    "in_pl": "w Kijowie",
-   "aliases": []
-  },
-  {
-   "name_ru": "Киев-Пасс.",
-   "name_uk": null,
-   "name_en": null,
-   "name_pl": null,
-   "in_ru": "в Киеве",
-   "in_uk": "у Києві",
-   "in_pl": "w Kijowie",
+   "short_ru": "Киев",
+   "short_uk": "Київ",
+   "short_en": "Kyiv",
+   "short_pl": "Kijów",
    "aliases": [
-    "Киев-Пасс."
+    "Киев-Пасс.",
+    "Киев",
+    "Київ",
+    "Kyiv",
+    "Kijów",
+    "Киев-Пассажирский",
+    "Київ-Пасажирський",
+    "Kyiv-Pasazhyrskyi",
+    "Kijów Pasażerski"
    ]
-  },
-  {
-   "name_ru": "Киев-Пассажирский",
-   "name_uk": "Київ-Пасажирський",
-   "name_en": "Kyiv-Pasazhyrskyi",
-   "name_pl": "Kijów Pasażerski",
-   "in_ru": null,
-   "in_uk": null,
-   "in_pl": null,
-   "aliases": []
   },
   {
    "name_ru": "Кисак",
@@ -2368,6 +2783,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -2378,6 +2797,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -2388,6 +2811,10 @@
    "in_ru": "в Кишиневе",
    "in_uk": "у Кишиневі",
    "in_pl": "w Kiszyniowie",
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": [
     "Кишинёв"
    ]
@@ -2400,6 +2827,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -2410,6 +2841,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -2420,6 +2855,10 @@
    "in_ru": "в Ковеле",
    "in_uk": "у Ковелі",
    "in_pl": "w Kowlu",
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -2430,6 +2869,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -2440,6 +2883,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -2450,6 +2897,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -2460,6 +2911,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -2470,6 +2925,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -2480,6 +2939,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -2490,6 +2953,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -2500,6 +2967,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -2510,6 +2981,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -2520,6 +2995,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -2530,6 +3009,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -2540,6 +3023,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -2550,6 +3037,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -2560,16 +3051,24 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
    "name_ru": "Краков Главный",
-   "name_uk": "Краків",
-   "name_en": "Kraków",
-   "name_pl": "Kraków",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
    "in_ru": "в Кракове",
    "in_uk": "у Кракові",
    "in_pl": "w Krakowie",
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": [
     "Краков Главный"
    ]
@@ -2582,6 +3081,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -2592,6 +3095,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -2602,6 +3109,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -2612,6 +3123,10 @@
    "in_ru": "в Кременчуге",
    "in_uk": "у Кременчуці",
    "in_pl": "w Krzemieńczuku",
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": [
     "Кременчук"
    ]
@@ -2624,6 +3139,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -2634,6 +3153,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -2644,6 +3167,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -2654,6 +3181,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -2664,6 +3195,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -2674,6 +3209,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -2684,6 +3223,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -2694,6 +3237,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -2704,6 +3251,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -2714,6 +3265,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -2724,6 +3279,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -2734,6 +3293,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -2744,6 +3307,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -2754,6 +3321,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -2764,6 +3335,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -2774,6 +3349,10 @@
    "in_ru": "во Львове",
    "in_uk": "у Львові",
    "in_pl": "we Lwowie",
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -2784,6 +3363,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -2794,6 +3377,10 @@
    "in_ru": "в Люблине",
    "in_uk": "у Любліні",
    "in_pl": "w Lublinie",
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -2804,6 +3391,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -2814,6 +3405,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -2824,6 +3419,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -2834,6 +3433,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -2844,6 +3447,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -2854,6 +3461,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -2864,6 +3475,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -2874,6 +3489,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -2884,6 +3503,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -2894,6 +3517,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -2904,6 +3531,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -2914,6 +3545,10 @@
    "in_ru": "в Мукачево",
    "in_uk": "у Мукачеві",
    "in_pl": "w Mukaczewie",
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -2924,6 +3559,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -2934,6 +3573,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -2944,6 +3587,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -2954,6 +3601,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -2964,6 +3615,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -2974,6 +3629,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -2984,6 +3643,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -2994,6 +3657,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -3004,6 +3671,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -3014,6 +3685,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -3024,6 +3699,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -3034,6 +3713,10 @@
    "in_ru": "в Одессе",
    "in_uk": "в Одесі",
    "in_pl": "w Odessie",
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -3044,6 +3727,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -3054,6 +3741,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -3064,6 +3755,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -3074,6 +3769,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -3084,6 +3783,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -3094,6 +3797,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -3104,6 +3811,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -3114,6 +3825,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -3124,6 +3839,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -3134,6 +3853,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -3144,6 +3867,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": [
     "Пардубице"
    ]
@@ -3156,6 +3883,10 @@
    "in_ru": "в Перемышле",
    "in_uk": "у Перемишлі",
    "in_pl": "w Przemyślu",
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": [
     "Перемышль Главный"
    ]
@@ -3168,6 +3899,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -3178,6 +3913,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -3188,6 +3927,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -3198,6 +3941,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -3208,6 +3955,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -3218,6 +3969,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -3228,6 +3983,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -3238,6 +3997,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -3248,6 +4011,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -3258,6 +4025,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -3268,6 +4039,10 @@
    "in_ru": "в Познани",
    "in_uk": "у Познані",
    "in_pl": "w Poznaniu",
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -3278,6 +4053,10 @@
    "in_ru": "в Познани",
    "in_uk": "у Познані",
    "in_pl": "w Poznaniu",
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -3288,6 +4067,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -3298,16 +4081,24 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
    "name_ru": "Прага Главная",
-   "name_uk": "Прага",
-   "name_en": "Prague",
-   "name_pl": "Praga",
+   "name_uk": null,
+   "name_en": null,
+   "name_pl": null,
    "in_ru": "в Праге",
    "in_uk": "у Празі",
    "in_pl": "w Pradze",
+   "short_ru": "Прага",
+   "short_uk": "Прага",
+   "short_en": "Prague",
+   "short_pl": "Praga",
    "aliases": [
     "Прага",
     "Prague",
@@ -3322,6 +4113,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -3332,6 +4127,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -3342,6 +4141,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -3352,6 +4155,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -3362,6 +4169,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -3372,6 +4183,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -3382,6 +4197,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -3392,6 +4211,10 @@
    "in_ru": "в Раве-Русской",
    "in_uk": "у Раві-Руській",
    "in_pl": "w Rawie Ruskiej",
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -3402,6 +4225,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -3412,6 +4239,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -3422,6 +4253,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -3432,6 +4267,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -3442,6 +4281,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -3452,6 +4295,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -3462,6 +4309,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -3472,6 +4323,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -3482,6 +4337,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -3492,6 +4351,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -3502,6 +4365,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -3512,6 +4379,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -3522,6 +4393,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -3532,6 +4407,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -3542,6 +4421,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -3552,6 +4435,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -3562,6 +4449,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -3572,6 +4463,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -3582,6 +4477,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -3592,6 +4491,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -3602,6 +4505,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -3612,6 +4519,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": "w Świnoujściu",
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -3622,6 +4533,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -3632,6 +4547,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -3642,6 +4561,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -3652,6 +4575,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -3662,6 +4589,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -3672,6 +4603,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -3682,6 +4617,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -3692,6 +4631,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -3702,6 +4645,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -3712,6 +4659,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -3722,6 +4673,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -3732,6 +4687,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -3742,6 +4701,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -3752,6 +4715,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -3762,6 +4729,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -3772,6 +4743,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -3782,6 +4757,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -3792,6 +4771,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -3802,6 +4785,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -3812,6 +4799,10 @@
    "in_ru": "в Сучаве",
    "in_uk": "у Сучаві",
    "in_pl": "w Suczawie",
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -3822,6 +4813,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -3832,6 +4827,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -3842,6 +4841,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -3852,6 +4855,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -3862,6 +4869,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -3872,6 +4883,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -3882,6 +4897,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -3892,6 +4911,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -3902,6 +4925,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -3912,6 +4939,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -3922,6 +4953,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -3932,6 +4967,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -3942,6 +4981,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -3952,6 +4995,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -3962,6 +5009,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -3972,6 +5023,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -3982,6 +5037,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -3992,6 +5051,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -4002,6 +5065,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -4012,6 +5079,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -4022,6 +5093,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -4032,6 +5107,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -4042,6 +5121,10 @@
    "in_ru": "в Харькове",
    "in_uk": "у Харкові",
    "in_pl": "w Charkowie",
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -4052,6 +5135,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -4062,6 +5149,10 @@
    "in_ru": "в Хелме",
    "in_uk": "у Хелмі",
    "in_pl": "w Chełmie",
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -4072,6 +5163,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -4082,6 +5177,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -4092,6 +5191,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -4102,6 +5205,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -4112,6 +5219,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -4122,6 +5233,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -4132,6 +5247,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -4142,6 +5261,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -4152,6 +5275,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -4162,6 +5289,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -4172,6 +5303,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -4182,6 +5317,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -4192,6 +5331,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -4202,6 +5345,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -4212,6 +5359,10 @@
    "in_ru": "в Чопе",
    "in_uk": "у Чопі",
    "in_pl": "w Czopie",
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -4222,6 +5373,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -4232,6 +5387,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -4242,6 +5401,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -4252,6 +5415,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -4262,6 +5429,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -4272,6 +5443,10 @@
    "in_ru": "в Щецине",
    "in_uk": "у Щецині",
    "in_pl": "w Szczecinie",
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": [
     "Щецин",
     "Щецін",
@@ -4286,6 +5461,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -4296,6 +5475,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -4306,6 +5489,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -4316,6 +5503,10 @@
    "in_ru": "в Ягодине",
    "in_uk": "в Ягодині",
    "in_pl": "w Jagodzinie",
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -4326,6 +5517,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -4336,6 +5531,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -4346,6 +5545,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   },
   {
@@ -4356,6 +5559,10 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
    "aliases": []
   }
  ],

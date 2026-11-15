@@ -274,7 +274,18 @@
     "border": null,
     "like_id": "kw",
     "single": false,
-    "names": {},
+    "names": {
+      "Киев": {
+        "en": "Kyiv",
+        "pl": "Kijów",
+        "uk": "Київ"
+      },
+      "Хелм": {
+        "en": "Chełm",
+        "pl": "Chełm",
+        "uk": "Хелм"
+      }
+    },
     "extra": {
       "ds3": "buy.d.s3t",
       "hide": [
