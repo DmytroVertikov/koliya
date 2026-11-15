@@ -1038,7 +1038,7 @@ function trainEditor() {
             const s = stationAny(x.name); if (!s) unk++;
             /* та же станция, что уже была в поезде, остаётся той же остановкой (на неё ссылаются варианты), иначе база пересоздала бы остановки */
             const old = s && pool.find(o => !used.has(o.id) && (findStation(o.name) || {}).id === s.id); if (old) used.add(old.id);
-            return {id: old ? old.id : undefined, name: s ? s.name_ru : x.name, arr: x.arr, dep: x.dep, chk: false}
+            return {id: old ? old.id : undefined, name: s ? s.name_ru : x.name, arr: x.arr, dep: x.dep, chk: !!x.chk}
         });
         if (r.number && !$("#tnum").value.trim()) { $("#tnum").value = r.number; T.number = r.number }
         markDirty(); drawRows();
@@ -1133,8 +1133,8 @@ function computed() {
 /* ---------- импорт расписания из скопированной страницы (Koleo и похожие): время идёт перед названием станции ---------- */
 /* ---------- польское название → кириллица (практическая транскрипция; приблизительно, результат правится вручную) ---------- */
 const PL_WORDS = {
-    ru: {"główny": "главный", "główna": "главная", "główne": "главное", "centralna": "центральная", "centralny": "центральный", "wschodnia": "восточная", "wschodni": "восточный", "zachodnia": "западная", "zachodni": "западный", "północna": "северная", "południowa": "южная", "miasto": "город"},
-    uk: {"główny": "головний", "główna": "головна", "główne": "головне", "centralna": "центральна", "centralny": "центральний", "wschodnia": "східна", "wschodni": "східний", "zachodnia": "західна", "zachodni": "західний", "północna": "північна", "południowa": "південна", "miasto": "місто"}
+    ru: {"gl": "Главный", "hln": "Главная", "główny": "главный", "główna": "главная", "główne": "главное", "centralna": "центральная", "centralny": "центральный", "wschodnia": "восточная", "wschodni": "восточный", "zachodnia": "западная", "zachodni": "западный", "północna": "северная", "południowa": "южная", "miasto": "город"},
+    uk: {"gl": "Головний", "hln": "Головна", "główny": "головний", "główna": "головна", "główne": "головне", "centralna": "центральна", "centralny": "центральний", "wschodnia": "східна", "wschodni": "східний", "zachodnia": "західна", "zachodni": "західний", "północna": "північна", "południowa": "південна", "miasto": "місто"}
 };
 const PL_EXC = {"kraków": ["Краков", "Краків"], "łódź": ["Лодзь", "Лодзь"], "przemyśl": ["Перемышль", "Перемишль"], "warszawa": ["Варшава", "Варшава"], "poznań": ["Познань", "Познань"], "gdańsk": ["Гданьск", "Гданськ"], "szczecin": ["Щецин", "Щецін"], "lublin": ["Люблин", "Люблін"], "chełm": ["Хелм", "Холм"]};
 const dk = x => String(x).normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/ł/gi, "l").toLowerCase(); /* ключ без диакритики: сайты часто пишут Lodz вместо Łódź */
@@ -1143,20 +1143,21 @@ const PW = {ru: foldKeys(PL_WORDS.ru), uk: foldKeys(PL_WORDS.uk)}, PX = foldKeys
 /* названия целиком (в основном немецкие и другие нестандартные), ключ — слова через пробел без диакритики */
 const NAME_EXC = {"frankfurt oder": ["Франкфурт-на-Одере", "Франкфурт-на-Одері"], "berlin gesundbrunnen": ["Берлин-Гезундбруннен", "Берлін-Гезундбруннен"], "berlin hbf": ["Берлин-Главный", "Берлін-Головний"], "berlin hauptbahnhof": ["Берлин-Главный", "Берлін-Головний"], "berlin ostbahnhof": ["Берлин-Остбанхоф", "Берлін-Остбангоф"]};
 function plTranslit(name, lang) {
-    const uk = lang === "uk", W = PW[uk ? "uk" : "ru"], whole = NAME_EXC[dk(name).replace(/[^a-z0-9]+/g, " ").trim()];
+    const uk = lang === "uk", cz = /[ěřůčšžťďňýáéíú]|\bhl\.?n\b/i.test(name), W = PW[uk ? "uk" : "ru"], whole = NAME_EXC[dk(name).replace(/[^a-z0-9]+/g, " ").trim()];
     if (whole) return whole[uk ? 1 : 0];
     const cap = (w, t) => w[0] === w[0].toUpperCase() && w[0] !== w[0].toLowerCase() ? t[0].toUpperCase() + t.slice(1) : t;
     const one = w => {
         let s = w.toLowerCase().replace(/(?<=[bcdfghklmnprstwz])ow$/, "ów").replace(/(?<=[a-z])sl$/, "śl");
-        const k = dk(w);
+        const k = dk(w).replace(/\./g, ""); /* Gl. → Główny, hl.n. → главный вокзал */
         if (W[k]) return cap(w, W[k]);
         if (PX[k]) return PX[k][uk ? 1 : 0];
         s = s.replace(/szcz/g, "щ").replace(/(?<=[kptfc])rz/g, "ш").replace(/rz/g, "ж").replace(/dź/g, "дзь").replace(/dż/g, "дж").replace(/dz/g, "дз")
             .replace(/sz/g, "ш").replace(/cz/g, "ч").replace(/ch/g, "х").replace(/ż/g, "ж").replace(/śl/g, "сль").replace(/ś/g, "сь").replace(/ć/g, "ць").replace(/ń/g, "нь").replace(/ź/g, "зь")
             .replace(/ią/g, "ён").replace(/ię/g, "ен").replace(/ia/g, "я").replace(/ie/g, "е").replace(/io/g, uk ? "ьо" : "ё").replace(/iu/g, "ю")
             .replace(/(?<=[aeiouyąęó])jo/g, "йо").replace(/ja/g, "я").replace(/je/g, "е").replace(/ju/g, "ю").replace(/jo/g, uk ? "йо" : "ё").replace(/j/g, "й")
+            .replace(/(?<=[kptfcsšč])ř/g, "рш").replace(/ř/g, "рж").replace(/č/g, "ч").replace(/š/g, "ш").replace(/ž/g, "ж").replace(/ě/g, "е").replace(/á/g, "а").replace(/é/g, "е").replace(/í/g, uk ? "і" : "и").replace(/[úů]/g, "у").replace(/ý/g, uk ? "и" : "ы").replace(/ď/g, "дь").replace(/ť/g, "ть").replace(/ň/g, "нь")
             .replace(/ę(?=[bp])/g, "ем").replace(/ę$/g, "е").replace(/ę/g, "ен").replace(/ą(?=[bp])/g, "ом").replace(/ą/g, "он");
-        const M = {a: "а", b: "б", c: "ц", d: "д", e: "е", f: "ф", g: "г", h: "х", i: uk ? "і" : "и", k: "к", l: "л", ł: "л", m: "м", n: "н", o: "о", ó: "у", p: "п", r: "р", s: "с", t: "т", u: "у", w: "в", y: uk ? "и" : "ы", z: "з", v: "в", x: "кс", q: "к"};
+        const M = {a: "а", b: "б", c: "ц", d: "д", e: "е", f: "ф", g: "г", h: cz ? "г" : "х", i: uk ? "і" : "и", k: "к", l: "л", ł: "л", m: "м", n: "н", o: "о", ó: "у", p: "п", r: "р", s: "с", t: "т", u: "у", w: "в", y: uk ? "и" : "ы", z: "з", v: "в", x: "кс", q: "к"};
         s = s.replace(/[a-zół]/g, c => M[c] || c).replace(/([жчшщ])ы/g, "$1и");
         if (uk) s = s.replace(/ё/g, "ьо");
         return cap(w, s)
@@ -1173,7 +1174,37 @@ function stationAny(name) { /* станция по названию на люб�
     return ST.find(s => foldName(s.name_ru) === tr) || null
 }
 const sameRu = ru => ST.find(s => foldName(s.name_ru) === foldName(ru)) || null;
+/* Формат «название, затем PŘÍJEZD/ODJEZD (прибытие/отправление) с временем» (ČD и похожие): время берётся по подписи, пометки между названием и подписями игнорируются */
+const LB_ARR = /^(?:p[řr][íi]jezd|przyjazd|ankunft|arrival|arr\.?|прибытие|прибуття)\s*(\d{1,2}[:.]\d{2})?$/iu, LB_DEP = /^(?:odjezd|odjazd|abfahrt|departure|dep\.?|отправление|відправлення)\s*(\d{1,2}[:.]\d{2})?$/iu;
+const cleanStName = n => n.replace(/\s*\b(peron|tor|platform|gleis|perron|nást|нас)\b.*$/i, "").replace(/^[\s\-–—·|:,.*]+|[\s\-–—·|:,.*]+$/g, "").trim();
+function parseLabeled(lines) {
+    const stops = []; let buf = [], cur = null;
+    lines.forEach(l => {
+        const a = LB_ARR.exec(l), d = a ? null : LB_DEP.exec(l);
+        if (a || d) {
+            if (!cur) {
+                if (!buf.length) return;
+                cur = {name: cleanStName(stops.length ? buf[0] : buf[buf.length - 1]), arr: "", dep: ""}; /* у первой станции перед названием может быть заголовок страницы */
+                stops.push(cur); buf = []
+            }
+            const m = (a || d)[1], t = m ? m.replace(".", ":").padStart(5, "0") : "";
+            if (a) cur.arr = t; else cur.dep = t
+        } else { if (cur) { cur = null; buf = [] } buf.push(l) }
+    });
+    const st = stops.filter(x => x.name.length > 1 && (x.arr || x.dep)), n = st.length;
+    return st.map((x, i) => {
+        if (i === 0) return {name: x.name, arr: "", dep: x.dep || x.arr};
+        if (i === n - 1) return {name: x.name, arr: x.arr || x.dep, dep: ""};
+        if (x.arr && x.dep) return x;
+        return {name: x.name, arr: x.arr || x.dep, dep: x.dep || x.arr, chk: true} /* во времени есть пропуск: подставили одно из двух и отметили «проверить» */
+    })
+}
 function parseSchedule(text) {
+    const lines = String(text || "").replace(/\[([^\]]+)\]\([^)]*\)[^\n<]*/g, "$1\n").replace(/<[^>]*>/g, "\n").split(/\n/).map(x => x.trim()).filter(Boolean);
+    if (lines.filter(l => LB_ARR.test(l) || LB_DEP.test(l)).length >= 2) {
+        const num = (String(text).match(/\b(EIC|IC|TLK|EC|EN|NJ|RJX?|ICE|RE|REX|SC|Ex|R)\s*\d{2,5}\b/) || [])[0];
+        return {rows: parseLabeled(lines), number: num ? num.replace(/\s+/, " ") : ""}
+    }
     const src = String(text || "").replace(/\[([^\]]+)\]\([^)]*\)[^\n<]*/g, "$1\n") /* [Название](ссылка)Перон… → Название */
         .replace(/<[^>]*>/g, "\n").replace(/&nbsp;/g, " ").replace(/&amp;/g, "&");
     const stops = []; let pend = [];
