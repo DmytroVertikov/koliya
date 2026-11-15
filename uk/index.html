@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- build 2026-11-15T21:38:05.293Z vmwicw0m2 -->
+<!-- build 2026-11-15T21:47:11.356Z vmwid7pyf -->
 <html lang="uk">
 <head>
     <meta charset="utf-8">
@@ -23,7 +23,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap">
-    <link rel="stylesheet" href="../style.css?v=mwicw0m2">
+    <link rel="stylesheet" href="../style.css?v=mwid7pyf">
 </head>
 <body>
 <header>
@@ -103,7 +103,7 @@
         /* группы по городу отправления (первая часть «A → B»): каждый город — своя карточка, внутри — строки со ссылками на город прибытия */
         const groups = new Map();
         list.forEach(p => {
-            const parts = trRoute(p.title).split(" → "), g = parts.length > 1 ? parts[0] : "", label = parts.length > 1 ? parts.slice(1).join(" → ") : parts[0];
+            const parts = trRouteShort(p.title).split(" → "), g = parts.length > 1 ? parts[0] : "", label = parts.length > 1 ? parts.slice(1).join(" → ") : parts[0];
             if (!groups.has(g)) groups.set(g, []);
             groups.get(g).push({p, label})
         });
