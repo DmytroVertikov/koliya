@@ -18,7 +18,7 @@ const I = (() => {
     }
   }
   for (const s of db.stations || []) {
-    const a = [s.name_uk || "", s.name_en || "", s.name_pl || "", s.in_ru || "", s.in_uk || "", s.in_pl || ""];
+    const a = [s.name_uk || "", s.name_en || "", s.name_pl || "", s.in_ru || "", s.in_uk || "", s.in_pl || "", s.short_ru || "", s.short_uk || "", s.short_en || "", s.short_pl || ""]; /* [6..9] — короткие названия для карточек */
     for (const n of [s.name_ru].concat(s.aliases || [])) if (!(n in I.ST)) I.ST[n] = a
   }
   return I

@@ -23,6 +23,11 @@ const stn = n => {
     if (n && window.console) console.info("i18n: нет перевода станции «" + n + "» (" + LG + ")");
     return n
 };
+/* короткое название станции для заголовка карточки (в «Подробнее» остаются полные); нет короткого — обычное название */
+const stnShort = n => {
+    const s = (window.I18N && I18N.ST || {})[String(n || "").trim()], i = {ru: 6, uk: 7, en: 8, pl: 9}[LG];
+    return s && i != null && s[i] ? s[i] : stn(n)
+};
 const t_no = () => t("no");
 const trRoute = x => String(x).split(" → ").map(stn).join(" → ");
 const toMin = t => {
@@ -260,9 +265,9 @@ function optHtml(o) {
     const badge = isD ? `<span class="bd">✓ ${esc(t("direct.h"))}</span>` : `<span class="bd">⇄ ${esc(tag)}</span>`;
     const xfs = swaps.filter(Boolean).map(s => `<div class="xf"><span class="xi" aria-hidden="true">⇄</span><div><b>${esc(s.where)}</b>${s.wait ? `<small>${esc(s.wait)}${s.t1 && s.t2 ? " (" + esc(s.t1) + " – " + esc(s.t2) + ")" : ""}</small>` : ""}</div></div>`).join("");
     const head = `<summary class="oc"><div class="oc-main"><div class="oc-top">${badge}<span class="oc-tr">${esc(trains)}</span><span class="oc-fq">🗓 ${esc(sumFreq(legs))}</span></div>` +
-        `<div class="oc-row"><div class="pt"><time>${esc(h.ft)}</time><span>${esc(stn(h.from))}</span></div>` +
+        `<div class="oc-row"><div class="pt"><time>${esc(h.ft)}</time><span>${esc(stnShort(h.from))}</span></div>` +
         `<div class="mid"><span class="line"></span>${dur ? `<span class="dur">${esc(dur)}</span>` : ""}<span class="loc">${esc(t("loc"))}</span></div>` +
-        `<div class="pt end"><time>${esc(h.tt)}</time><span>${esc(stn(h.to))}</span></div></div></div>` +
+        `<div class="pt end"><time>${esc(h.tt)}</time><span>${esc(stnShort(h.to))}</span></div></div></div>` +
         `<div class="oc-side">${isD ? `<span class="nc">✓ ${esc(t("d.nochg"))}</span>` : `<div class="xfs">${xfs}</div>`}<span class="more"><span class="t-more">${esc(t("d.more"))}</span><span class="t-less">${esc(t("d.less"))}</span><i class="chev"></i></span></div></summary>`;
     const body = legs.map((L, i) => {
         const s = swaps[i + 1], sw = s ? `<div class="swap">🔁 ${esc(s.where)}${s.wait ? " · " + esc(s.wait) : ""}</div>` : "";
