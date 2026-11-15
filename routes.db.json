@@ -277,6 +277,9 @@
     "names": {},
     "extra": {
       "ds3": "buy.d.s3t",
+      "hide": [
+        "067К"
+      ],
       "like": "kw",
       "coach": false,
       "dOnly": true,
@@ -304,6 +307,9 @@
     "names": {},
     "extra": {
       "ds3": "buy.d.s3t",
+      "hide": [
+        "068Л"
+      ],
       "like": "wk",
       "coach": false,
       "dOnly": true,

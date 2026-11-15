@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- build 2026-11-14T13:47:37.188Z vmwggn51x direct=false x=Хелм -->
+<!-- build 2026-11-15T08:22:10.814Z vmwhkgh2n direct=false x=Хелм -->
 <html lang="ru">
 <head>
     <meta charset="utf-8">
@@ -268,6 +268,7 @@
 <script src="common.js"></script>
 <script>
     const SPLIT = []; /* [станция пересадки, заголовок, пограничный контроль]: страница делится на группы по пересадке */
+    const HIDE = [].map(s => s.trim().toLowerCase()); /* номера поездов, скрытых на этой странице */
     const SLICE = false; /* true: варианты собираются из поездов других вариантов (страницы вроде Киев → Хелм) */
     const FROM = "Варшава", TO = "Днепр", BACK = "ua-pl"; // FROM/TO: русские названия, как в шапке карточки в админке
     
@@ -302,6 +303,7 @@
         const sliced = () => {
             const seen = new Set(), out = [];
             rows.forEach(x => x.p.legs.forEach(L => {
+                if (HIDE.includes(norm(L.train))) return;
                 const st = L.stops, a = st.findIndex(s => norm(s.name).startsWith(norm(FROM)));
                 if (a < 0) return;
                 const b = st.findIndex((s, i) => i > a && norm(s.name).startsWith(norm(TO)));
