@@ -30,6 +30,8 @@ const stnShort = n => {
 };
 const t_no = () => t("no");
 const trRoute = x => String(x).split(" → ").map(stn).join(" → ");
+/* то же с короткими названиями — для ссылок и заголовков, где важна компактность (главная, «Другие направления») */
+const trRouteShort = x => String(x).split(" → ").map(stnShort).join(" → ");
 const toMin = t => {
     const m = String(t || "").match(/(\d{1,2}):(\d{2})/);
     return m ? (+m[1]) * 60 + (+m[2]) : null
@@ -374,7 +376,7 @@ function moreRoutes(o) {
         [a, b] = cur.title ? String(cur.title).split(" → ") : [window.FROM, window.TO],
         [f0, t0] = [n(a), n(b)],
         ends = p => String(p.title).split(" → ").map(n),
-        part = (p, i) => esc(stn(String(p.title).split(" → ")[i])),
+        part = (p, i) => esc(stnShort(String(p.title).split(" → ")[i])),
         chip = (p, html) => `<a class="chip" href="${esc(p.href)}" title="${esc(trRoute(p.title))}">${html}</a>`,
         group = (h, arr) => arr.length ? `<div class="dir-group"><h3>${h}</h3><div class="chips">${arr.join("")}</div></div>` : "",
         others = pages.filter(p => p.href !== here),
@@ -383,8 +385,8 @@ function moreRoutes(o) {
         sameTo = others.filter(p => ends(p)[1] === t0 && ends(p)[0] !== f0),
         hash = o.hash || cur.route;
     return `<section class="panel" id="routes"><h2>${o.h}</h2>`
-        + group(o.rev, reverse.map(p => chip(p, "🔄 " + esc(trRoute(p.title)))))
-        + group(o.from.replace("%s", () => esc(stn(a))), sameFrom.map(p => chip(p, `<span class="ar">→</span>${part(p, 1)}`)))
-        + group(o.to.replace("%s", () => esc(stn(b))), sameTo.map(p => chip(p, `${part(p, 0)}<span class="ar"> →</span>`)))
+        + group(o.rev, reverse.map(p => chip(p, "🔄 " + esc(trRouteShort(p.title)))))
+        + group(o.from.replace("%s", () => esc(stnShort(a))), sameFrom.map(p => chip(p, `<span class="ar">→</span>${part(p, 1)}`)))
+        + group(o.to.replace("%s", () => esc(stnShort(b))), sameTo.map(p => chip(p, `${part(p, 0)}<span class="ar"> →</span>`)))
         + `<div class="grid" style="margin-top:16px">${hash ? `<a class="btn" href="${o.home}#${esc(hash)}">${o.dir}</a>` : ""}<a class="btn" href="${o.home}">${o.all}</a></div></section>`
 }
