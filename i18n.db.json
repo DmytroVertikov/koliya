@@ -1296,6 +1296,26 @@
    "aliases": []
   },
   {
+   "name_ru": "Бжег",
+   "name_uk": "Бжег",
+   "name_en": "Brzeg",
+   "name_pl": "Brzeg",
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Бжеско Окоцим",
+   "name_uk": "Бжесько Окоцим",
+   "name_en": "Brzesko Okocim",
+   "name_pl": "Brzesko Okocim",
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
    "name_ru": "Богумин",
    "name_uk": null,
    "name_en": null,
@@ -1448,6 +1468,16 @@
    "aliases": []
   },
   {
+   "name_ru": "Варка",
+   "name_uk": "Варка",
+   "name_en": "Warka",
+   "name_pl": "Warka",
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
    "name_ru": "Варшава",
    "name_uk": "Варшава",
    "name_en": "Warsaw",
@@ -1480,6 +1510,16 @@
    "aliases": [
     "Варшава Западная"
    ]
+  },
+  {
+   "name_ru": "Варшава Служевец",
+   "name_uk": "Варшава Служевець",
+   "name_en": "Warszawa Służewiec",
+   "name_pl": "Warszawa Służewiec",
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
   },
   {
    "name_ru": "Варшава Центральная",
@@ -1634,6 +1674,16 @@
    "aliases": []
   },
   {
+   "name_ru": "Вроцлав Главный",
+   "name_uk": "Вроцлав Головний",
+   "name_en": "Wrocław Główny",
+   "name_pl": "Wrocław Główny",
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
    "name_ru": "Врутки",
    "name_uk": null,
    "name_en": null,
@@ -1664,10 +1714,30 @@
    "aliases": []
   },
   {
+   "name_ru": "Гливице",
+   "name_uk": "Гливиці",
+   "name_en": "Gliwice",
+   "name_pl": "Gliwice",
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
    "name_ru": "Глобино",
    "name_uk": null,
    "name_en": null,
    "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Глогов",
+   "name_uk": "Глогув",
+   "name_en": "Głogów",
+   "name_pl": "Głogów",
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
@@ -1876,6 +1946,16 @@
    "aliases": []
   },
   {
+   "name_ru": "Забже",
+   "name_uk": "Забже",
+   "name_en": "Zabrze",
+   "name_pl": "Zabrze",
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
    "name_ru": "Забржег-на-Мораве",
    "name_uk": null,
    "name_en": null,
@@ -1960,6 +2040,16 @@
    "name_uk": null,
    "name_en": null,
    "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Зелёна Гура Главная",
+   "name_uk": "Зелена Гура Головна",
+   "name_en": "Zielona Góra Główna",
+   "name_pl": "Zielona Góra Główna",
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
@@ -2090,6 +2180,16 @@
    "aliases": []
   },
   {
+   "name_ru": "Кендзежин-Козле",
+   "name_uk": "Кендзежин-Козьле",
+   "name_en": "Kędzierzyn-Koźle",
+   "name_pl": "Kędzierzyn-Koźle",
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
    "name_ru": "Киверцы",
    "name_uk": null,
    "name_en": null,
@@ -2208,6 +2308,16 @@
    "name_uk": null,
    "name_en": null,
    "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Кольбушова",
+   "name_uk": "Кольбушова",
+   "name_en": "Kolbuszowa",
+   "name_pl": "Kolbuszowa",
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
@@ -2386,6 +2496,16 @@
    "aliases": []
   },
   {
+   "name_ru": "Легница",
+   "name_uk": "Легниця",
+   "name_en": "Legnica",
+   "name_pl": "Legnica",
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
    "name_ru": "Лейпциг",
    "name_uk": null,
    "name_en": null,
@@ -2453,6 +2573,16 @@
    "in_ru": "во Львове",
    "in_uk": "у Львові",
    "in_pl": "we Lwowie",
+   "aliases": []
+  },
+  {
+   "name_ru": "Любин",
+   "name_uk": "Любін",
+   "name_en": "Lubin",
+   "name_pl": "Lubin",
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
    "aliases": []
   },
   {
@@ -2566,6 +2696,16 @@
    "aliases": []
   },
   {
+   "name_ru": "Мысловице",
+   "name_uk": "Мисловиці",
+   "name_en": "Mysłowice",
+   "name_pl": "Mysłowice",
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
    "name_ru": "Мэрэшешты",
    "name_uk": null,
    "name_en": null,
@@ -2606,6 +2746,26 @@
    "aliases": []
   },
   {
+   "name_ru": "Нова Демба",
+   "name_uk": "Нова Демба",
+   "name_en": "Nowa Dęba",
+   "name_pl": "Nowa Dęba",
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Нова Суль",
+   "name_uk": "Нова Суль",
+   "name_en": "Nowa Sól",
+   "name_pl": "Nowa Sól",
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
    "name_ru": "Ньиредьхаза",
    "name_uk": null,
    "name_en": null,
@@ -2626,10 +2786,30 @@
    "aliases": []
   },
   {
+   "name_ru": "Олава",
+   "name_uk": "Олава",
+   "name_en": "Oława",
+   "name_pl": "Oława",
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
    "name_ru": "Оломоуц Главный",
    "name_uk": null,
    "name_en": null,
    "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Ополе Главный",
+   "name_uk": "Ополе Головне",
+   "name_en": "Opole Główne",
+   "name_pl": "Opole Główne",
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
@@ -2670,6 +2850,16 @@
    "name_uk": null,
    "name_en": null,
    "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Островец Свентокшиский",
+   "name_uk": "Островець Свєнтокшиський",
+   "name_en": "Ostrowiec Świętokrzyski",
+   "name_pl": "Ostrowiec Świętokrzyski",
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
@@ -2916,6 +3106,16 @@
    "aliases": []
   },
   {
+   "name_ru": "Пясечно",
+   "name_uk": "Пясечно",
+   "name_en": "Piaseczno",
+   "name_pl": "Piaseczno",
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
    "name_ru": "Пятихатки",
    "name_uk": null,
    "name_en": null,
@@ -2933,6 +3133,26 @@
    "in_ru": "в Раве-Русской",
    "in_uk": "у Раві-Руській",
    "in_pl": "w Rawie Ruskiej",
+   "aliases": []
+  },
+  {
+   "name_ru": "Радом Главный",
+   "name_uk": "Радом Головний",
+   "name_en": "Radom Główny",
+   "name_pl": "Radom Główny",
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Радымно",
+   "name_uk": "Радимно",
+   "name_en": "Radymno",
+   "name_pl": "Radymno",
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
    "aliases": []
   },
   {
@@ -2996,6 +3216,16 @@
    "aliases": []
   },
   {
+   "name_ru": "Ропчице",
+   "name_uk": "Ропчиці",
+   "name_en": "Ropczyce",
+   "name_pl": "Ropczyce",
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
    "name_ru": "Рудница",
    "name_uk": null,
    "name_en": null,
@@ -3030,6 +3260,16 @@
    "name_uk": null,
    "name_en": null,
    "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Сандомир",
+   "name_uk": "Сандомир",
+   "name_en": "Sandomierz",
+   "name_pl": "Sandomierz",
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
@@ -3073,6 +3313,16 @@
    "in_ru": null,
    "in_uk": null,
    "in_pl": "w Świnoujściu",
+   "aliases": []
+  },
+  {
+   "name_ru": "Сендзишув Малопольски",
+   "name_uk": "Сендзішув Малопольський",
+   "name_en": "Sędziszów Małopolski",
+   "name_pl": "Sędziszów Małopolski",
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
    "aliases": []
   },
   {
@@ -3146,6 +3396,16 @@
    "aliases": []
   },
   {
+   "name_ru": "Стараховице Всходне",
+   "name_uk": "Стараховіце Всходнє",
+   "name_en": "Starachowice Wschodnie",
+   "name_pl": "Starachowice Wschodnie",
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
    "name_ru": "Старгард",
    "name_uk": null,
    "name_en": null,
@@ -3186,6 +3446,16 @@
    "aliases": []
   },
   {
+   "name_ru": "Стшельце Опольске",
+   "name_uk": "Стшельці Опольські",
+   "name_en": "Strzelce Opolskie",
+   "name_pl": "Strzelce Opolskie",
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
    "name_ru": "Сучава",
    "name_uk": "Сучава",
    "name_en": "Suceava",
@@ -3210,6 +3480,16 @@
    "name_uk": null,
    "name_en": null,
    "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Тарнобжег",
+   "name_uk": "Тарнобжег",
+   "name_en": "Tarnobrzeg",
+   "name_pl": "Tarnobrzeg",
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
@@ -3580,6 +3860,16 @@
    "name_uk": null,
    "name_en": null,
    "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Явожно Щакова",
+   "name_uk": "Явожно Щакова",
+   "name_en": "Jaworzno Szczakowa",
+   "name_pl": "Jaworzno Szczakowa",
    "in_ru": null,
    "in_uk": null,
    "in_pl": null,
