@@ -1986,6 +1986,20 @@
    "aliases": []
   },
   {
+   "name_ru": "Гречаны",
+   "name_uk": "Гречани",
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
+   "aliases": []
+  },
+  {
    "name_ru": "Грыфино",
    "name_uk": "Грифіно",
    "name_en": "Gryfino",
@@ -3846,6 +3860,20 @@
    "in_ru": "в Поважска-Бистрице",
    "in_uk": "у Поважській Бистриці",
    "in_pl": "w Považskiej Bystricy",
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Подволочиск",
+   "name_uk": "Підволочиськ",
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
    "short_ru": null,
    "short_uk": null,
    "short_en": null,

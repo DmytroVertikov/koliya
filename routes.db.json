@@ -3547,6 +3547,38 @@
     "popular": false
   },
   {
+    "id": "odesa_prague",
+    "file": "odesa-prague.html",
+    "from_name": "Одесса",
+    "to_name": "Прага",
+    "route": "ua-pl",
+    "back": "pl-ua",
+    "rev": "prague-odesa.html",
+    "kind": "transfer",
+    "x": "Перемышль Главный",
+    "border": null,
+    "like_id": "kw",
+    "single": false,
+    "names": {
+      "Прага": {
+        "en": "Praha hl.n.",
+        "pl": "Praga Główna",
+        "uk": "Прага-Головна"
+      },
+      "Одесса": {
+        "en": "Odesa",
+        "pl": "Odessa",
+        "uk": "Одеса"
+      }
+    },
+    "extra": {},
+    "sort": 1000,
+    "active": true,
+    "created_at": "2026-11-16T15:56:41.751596+00:00",
+    "texts": {},
+    "popular": false
+  },
+  {
     "id": "prague_dnipro",
     "file": "prague-dnipro.html",
     "from_name": "Прага",
@@ -3607,6 +3639,38 @@
     "sort": 1000,
     "active": true,
     "created_at": "2026-11-16T15:44:48.675244+00:00",
+    "texts": {},
+    "popular": false
+  },
+  {
+    "id": "prague_odesa",
+    "file": "prague-odesa.html",
+    "from_name": "Прага",
+    "to_name": "Одесса",
+    "route": "pl-ua",
+    "back": "ua-pl",
+    "rev": "odesa-prague.html",
+    "kind": "transfer",
+    "x": "Перемышль Главный",
+    "border": null,
+    "like_id": "wk",
+    "single": false,
+    "names": {
+      "Прага": {
+        "en": "Praha hl.n.",
+        "pl": "Praga Główna",
+        "uk": "Прага-Головна"
+      },
+      "Одесса": {
+        "en": "Odesa",
+        "pl": "Odessa",
+        "uk": "Одеса"
+      }
+    },
+    "extra": {},
+    "sort": 1000,
+    "active": true,
+    "created_at": "2026-11-16T15:56:41.751596+00:00",
     "texts": {},
     "popular": false
   }
