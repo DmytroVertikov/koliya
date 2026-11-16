@@ -286,10 +286,73 @@ const FOOTER_HTML = () => `<div class="fcols">
 <p>${t("f2b")}</p>
 <p>${t("f2c")}</p></div>
 <div><b>${t("f3h")}</b><p>${t("f3")}</p></div></div>
-<p class="fine">${t("fsrc")} <a href="https://uz.gov.ua/">uz.gov.ua</a> · <a href="https://intercity.pl/">intercity.pl</a> · © ${new Date().getFullYear()} Колія</p>`;
+<p class="fine">${t("fsrc")} <a href="https://uz.gov.ua/">uz.gov.ua</a> · <a href="https://intercity.pl/">intercity.pl</a> · <button type="button" class="fb-link" data-fb="other">${t("fb.link")}</button> · © ${new Date().getFullYear()} Колія</p>`;
 (function () {
     const f = document.getElementById("site-footer");
     if (f) f.innerHTML = FOOTER_HTML()
+})();
+
+/* Обратная связь: окно <dialog> открывается любой кнопкой с data-fb="<тема>" (data / idea / question / other).
+   Сообщение уходит в таблицу feedback (db/feedback-1.sql): анонимный посетитель может только добавить строку.
+   Тексты — ключи fb.* (по умолчанию в build.js, правятся в админке → «Тексты»). Страница и язык подставляются сами.
+   На страницах маршрутов под блоком «Ещё маршруты» добавляется ссылка «Нашли неточность?». */
+(() => {
+    const KINDS = ["data", "idea", "question", "other"], GAP = 15000;
+    let dlg, sentAt = 0;
+    const make = () => {
+        dlg = document.createElement("dialog");
+        dlg.className = "fb";
+        dlg.setAttribute("aria-labelledby", "fb-h");
+        dlg.innerHTML = `<form novalidate><h2 id="fb-h">${esc(t("fb.title"))}</h2>
+<label for="fb-kind">${esc(t("fb.kind"))}</label><select id="fb-kind" name="kind">${KINDS.map(k => `<option value="${k}">${esc(t("fb.k." + k))}</option>`).join("")}</select>
+<label for="fb-msg">${esc(t("fb.msg"))}</label><textarea id="fb-msg" name="message" maxlength="2000" rows="5" placeholder="${esc(t("fb.msg.ph"))}"></textarea>
+<label for="fb-contact">${esc(t("fb.contact"))}</label><input id="fb-contact" name="contact" type="text" maxlength="200" autocomplete="email" placeholder="${esc(t("fb.contact.ph"))}">
+<div class="fb-hp" aria-hidden="true"><label>Website <input name="website" type="text" tabindex="-1" autocomplete="off"></label></div>
+<p class="fb-note">${esc(t("fb.privacy"))}</p>
+<p class="fb-msg" role="status" aria-live="polite"></p>
+<div class="fb-row"><button type="submit" class="btn pri">${esc(t("fb.send"))}</button><button type="button" class="btn" data-close>${esc(t("fb.cancel"))}</button></div></form>`;
+        document.body.appendChild(dlg);
+        const form = dlg.querySelector("form"), msg = dlg.querySelector(".fb-msg"), go = form.querySelector('[type="submit"]');
+        const say = (txt, bad) => { msg.textContent = txt; msg.classList.toggle("err", !!bad) };
+        dlg.addEventListener("click", e => { if (e.target === dlg || e.target.closest("[data-close]")) dlg.close() });
+        form.addEventListener("submit", async e => {
+            e.preventDefault();
+            const f = form.elements, text = f.message.value.trim();
+            if (f.website.value) { say(t("fb.thanks")); return } /* поле-приманка заполнил бот: делаем вид, что всё хорошо */
+            if (text.length < 5) { say(t("fb.short"), true); return }
+            if (Date.now() - sentAt < GAP) { say(t("fb.wait"), true); return }
+            if (!U || !K) { say(t("fb.err"), true); return }
+            go.disabled = true; say("…");
+            try {
+                const r = await fetch(U + "/rest/v1/feedback", {
+                    method: "POST",
+                    headers: {apikey: K, Authorization: "Bearer " + K, "Content-Type": "application/json", Prefer: "return=minimal"},
+                    body: JSON.stringify({kind: f.kind.value, message: text, contact: f.contact.value.trim(), page: (location.pathname + location.hash).slice(0, 300), lang: LG})
+                });
+                if (!r.ok) throw new Error(r.status);
+                sentAt = Date.now();
+                f.message.value = "";
+                say(t("fb.thanks"))
+            } catch (err) { say(t("fb.err"), true) }
+            go.disabled = false
+        })
+    };
+    const open = kind => {
+        if (!dlg) make();
+        dlg.querySelector("#fb-kind").value = KINDS.includes(kind) ? kind : "other";
+        dlg.querySelector(".fb-msg").textContent = "";
+        dlg.showModal();
+        dlg.querySelector("#fb-msg").focus()
+    };
+    document.addEventListener("click", e => {
+        const b = e.target.closest("[data-fb]");
+        if (b && typeof HTMLDialogElement === "function") { e.preventDefault(); open(b.dataset.fb) }
+    });
+    const ask = () => {
+        const more = document.getElementById("more");
+        if (more && !document.querySelector(".fb-ask")) more.insertAdjacentHTML("afterend", `<p class="fb-ask"><button type="button" data-fb="data">⚠️ ${esc(t("fb.report"))}</button></p>`)
+    };
+    if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", ask); else ask()
 })();
 
 /* Колія: сворачивание списка станций поезда.

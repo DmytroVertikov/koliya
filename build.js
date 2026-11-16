@@ -23,6 +23,29 @@ const I = (() => {
   }
   return I
 })();
+/* тексты формы обратной связи (common.js) по умолчанию; если ключ fb.* есть в ui_texts (админка → «Тексты»), берётся значение из базы */
+const FB_DEF = {
+  "fb.link": {ru: "Обратная связь", uk: "Зворотний зв’язок", en: "Feedback", pl: "Kontakt"},
+  "fb.report": {ru: "Нашли неточность?", uk: "Знайшли неточність?", en: "Found a mistake?", pl: "Znalazłeś błąd?"},
+  "fb.title": {ru: "Обратная связь", uk: "Зворотний зв’язок", en: "Feedback", pl: "Kontakt"},
+  "fb.kind": {ru: "Тема", uk: "Тема", en: "Topic", pl: "Temat"},
+  "fb.k.data": {ru: "Ошибка в данных", uk: "Помилка в даних", en: "Mistake in the data", pl: "Błąd w danych"},
+  "fb.k.idea": {ru: "Предложение", uk: "Пропозиція", en: "Suggestion", pl: "Propozycja"},
+  "fb.k.question": {ru: "Вопрос", uk: "Запитання", en: "Question", pl: "Pytanie"},
+  "fb.k.other": {ru: "Другое", uk: "Інше", en: "Other", pl: "Inne"},
+  "fb.msg": {ru: "Сообщение", uk: "Повідомлення", en: "Message", pl: "Wiadomość"},
+  "fb.msg.ph": {ru: "Что не так или что улучшить? Если это ошибка, укажите поезд, дату и как должно быть.", uk: "Що не так або що покращити? Якщо це помилка, вкажіть потяг, дату і як має бути.", en: "What is wrong or what could be better? For a mistake, please give the train, the date and what it should say.", pl: "Co jest nie tak lub co poprawić? W razie błędu podaj pociąg, datę i jak powinno być."},
+  "fb.contact": {ru: "Как вам ответить (необязательно)", uk: "Як вам відповісти (необов’язково)", en: "How can we reply (optional)", pl: "Jak możemy odpowiedzieć (opcjonalnie)"},
+  "fb.contact.ph": {ru: "Email или Telegram", uk: "Email або Telegram", en: "Email or Telegram", pl: "E-mail lub Telegram"},
+  "fb.privacy": {ru: "Мы сохраним сообщение, адрес страницы и контакт (если вы его укажете), только чтобы разобраться с обращением и ответить вам. Не пишите лишних личных данных.", uk: "Ми збережемо повідомлення, адресу сторінки та контакт (якщо ви його вкажете) лише для того, щоб розібратися із зверненням і відповісти вам. Не пишіть зайвих особистих даних.", en: "We store your message, the page address and your contact (if you give one) only to look into the report and reply to you. Please do not include unnecessary personal data.", pl: "Zapisujemy wiadomość, adres strony i kontakt (jeśli go podasz) wyłącznie po to, aby zająć się zgłoszeniem i odpowiedzieć. Nie podawaj zbędnych danych osobowych."},
+  "fb.send": {ru: "Отправить", uk: "Надіслати", en: "Send", pl: "Wyślij"},
+  "fb.cancel": {ru: "Закрыть", uk: "Закрити", en: "Close", pl: "Zamknij"},
+  "fb.thanks": {ru: "Спасибо! Сообщение отправлено.", uk: "Дякуємо! Повідомлення надіслано.", en: "Thank you! Your message has been sent.", pl: "Dziękujemy! Wiadomość została wysłana."},
+  "fb.err": {ru: "Не удалось отправить. Попробуйте ещё раз позже.", uk: "Не вдалося надіслати. Спробуйте ще раз пізніше.", en: "Could not send. Please try again later.", pl: "Nie udało się wysłać. Spróbuj ponownie później."},
+  "fb.short": {ru: "Напишите хотя бы несколько слов (от 5 символов).", uk: "Напишіть хоча б кілька слів (від 5 символів).", en: "Please write a few words (at least 5 characters).", pl: "Napisz kilka słów (co najmniej 5 znaków)."},
+  "fb.wait": {ru: "Подождите несколько секунд перед повторной отправкой.", uk: "Зачекайте кілька секунд перед повторним надсиланням.", en: "Please wait a few seconds before sending again.", pl: "Poczekaj kilka sekund przed ponownym wysłaniem."}
+};
+for (const k in FB_DEF) for (const l of LANGS) if (!I[l][k]) I[l][k] = FB_DEF[k][l];
 /* что нужно браузеру: тексты интерфейса и станции (без текстов страниц маршрутов) */
 const CLIENT = JSON.parse(JSON.stringify(I));
 /* тексты блока «Ещё маршруты» по умолчанию; если ключ есть в ui_texts (админка → «Тексты»), берётся значение из базы */
@@ -247,7 +270,7 @@ for (const l of LANGS) {
 <div><h3>${hx(d["ix.buy.h"])}</h3><p class="lk">${hlist("buy").map(x => `<a href="${hx(x.url)}">${hx(hlab(x, l))}</a>`).join("")}</p></div>
 <div><h3>${hx(d["ix.fly.h"])}</h3><p>${hx(d["ix.fly.p"])}</p><p class="lk">${hlist("airport").map(x => `<a href="${hx(x.url)}" target="_blank" rel="noopener">${hx(st(x.label_ru, l))}</a>`).join("")}</p></div>`;
   /* подвал — тот же состав, что в FOOTER_HTML (common.js); скрипт потом перерисует его так же */
-  v.footer = `<div class="fcols">\n<div><b>🚆 Колія</b><p>${d.f1}</p></div>\n<div><b>${d.f2h}</b>\n<p>${d.f2a}</p>\n<p>${d.f2b}</p>\n<p>${d.f2c}</p></div>\n<div><b>${d.f3h}</b><p>${d.f3}</p></div></div>\n<p class="fine">${d.fsrc} <a href="https://uz.gov.ua/">uz.gov.ua</a> · <a href="https://intercity.pl/">intercity.pl</a> · © ${new Date().getFullYear()} Колія</p>`;
+  v.footer = `<div class="fcols">\n<div><b>🚆 Колія</b><p>${d.f1}</p></div>\n<div><b>${d.f2h}</b>\n<p>${d.f2a}</p>\n<p>${d.f2b}</p>\n<p>${d.f2c}</p></div>\n<div><b>${d.f3h}</b><p>${d.f3}</p></div></div>\n<p class="fine">${d.fsrc} <a href="https://uz.gov.ua/">uz.gov.ua</a> · <a href="https://intercity.pl/">intercity.pl</a> · <button type="button" class="fb-link" data-fb="other">${d["fb.link"]}</button> · © ${new Date().getFullYear()} Колія</p>`;
   const out = ix.replace(/\{\{([\w.]+)\}\}/g, (m, k) => k in v ? v[k] : k in d ? fill(d[k], v) : (console.warn("нет ключа", k), m));
   if (l !== "ru") fs.mkdirSync(l, {recursive: true});
   fs.writeFileSync(path(l, "index.html"), out);
