@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- build 2026-11-16T08:14:00.422Z vmwizlta9 direct=false x=Перемышль -->
+<!-- build 2026-11-16T13:47:21.075Z vmwjbihv2 direct=false x=Перемышль Главный -->
 <html lang="ru">
 <head>
     <meta charset="utf-8">
@@ -265,7 +265,7 @@
 <script src="config.js"></script>
 <script src="pages.js"></script>
 <script src="dict/ru.js"></script>
-<script src="common.js?v=mwizlta9"></script>
+<script src="common.js?v=mwjbihv2"></script>
 <script>
     const SPLIT = []; /* [станция пересадки, заголовок, пограничный контроль]: страница делится на группы по пересадке */
     const HIDE = [].map(s => s.trim().toLowerCase()); /* номера поездов, скрытых на этой странице */
@@ -273,21 +273,20 @@
     const FROM = "Днепр", TO = "Прага", BACK = "cz-ua"; // FROM/TO: русские названия, как в шапке карточки в админке
     
     const BUY = `<section class="panel" id="buy"><h2>Как купить билеты</h2>
-<div class="buy two">
-<div><h3 data-x="Перемышль">С пересадкой в Перемышле</h3><ol class="steps">
-<li>Откройте приложение «Укрзалізниця», выберите маршрут Днепр → Перемышль и укажите дату поездки. Продажа билетов открывается за 20 суток до отправления, в 09:00 по киевскому времени. Выберите <span class="utr" data-def="подходящий поезд">подходящий поезд</span> и оплатите билет.</li>
-<li>Билет Перемышль → Прага на поезд RJ приобретите отдельно у чешского перевозчика RegioJet — на официальном сайте regiojet.cz или в приложении RegioJet.</li>
+<div class="buy one">
+
+<!--T--><div><h3>С пересадкой в Перемышле</h3><ol class="steps">
+<li>Откройте приложение «Укрзалізниця», выберите маршрут Днепр → Перемышль Главный и укажите дату поездки. Продажа билетов открывается за 20 суток до отправления, в 09:00 по киевскому времени. Выберите подходящий поезд и оплатите билет.</li>
+<li>Билет на поезд Перемышль Главный → Прага приобретите отдельно у польского перевозчика PKP Intercity — на официальном сайте intercity.pl или в приложении PKP Intercity. Также билеты можно приобрести на сайте koleo.pl или в приложении KOLEO.</li>
+
 <li>После покупки сохраните оба электронных билета в телефоне. Перед поездкой проверьте даты, время отправления и станции прибытия.</li></ol>
-<a class="btn pri" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Купить в приложении УЗ билет Днепр → Перемышль</a>
-<a class="btn" href="https://regiojet.cz/" target="_blank" rel="noopener">Купить на сайте RegioJet билет Перемышль → Прага</a></div>
-<div><h3 data-x="Чоп">С пересадкой в Чопе</h3><ol class="steps">
-<li>Откройте приложение «Укрзалізниця», выберите маршрут Днепр → Чоп и укажите дату поездки. Продажа билетов открывается за 20 суток до отправления, в 08:00 по киевскому времени. Выберите <span class="utr" data-def="поезд 003П">поезд 003П</span> и оплатите билет.</li>
-<li>Билет Чоп → Прага на поезд RJ приобретите отдельно у чешского перевозчика RegioJet — на официальном сайте regiojet.cz или в приложении RegioJet.</li>
-<li>После покупки сохраните оба электронных билета в телефоне. Перед поездкой проверьте даты, время отправления и станции прибытия.</li></ol>
-<a class="btn pri" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Купить в приложении УЗ билет Днепр → Чоп</a>
-<a class="btn" href="https://regiojet.cz/" target="_blank" rel="noopener">Купить на сайте RegioJet билет Чоп → Прага</a></div>
+<a class="btn pri" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Купить в приложении УЗ билет Днепр → Перемышль Главный</a>
+<a class="btn" href="https://www.intercity.pl/" target="_blank" rel="noopener">Купить на сайте PKP Intercity билет Перемышль Главный → Прага</a></div><!--/T-->
+
+
+
 </div>
-<p class="buy-note">Графики движения поездов могут измениться, актуальную информацию смотрите в приложении УЗ и на сайте RegioJet.</p></section>`;
+<p class="buy-note">Графики движения поездов могут измениться, актуальную информацию смотрите в приложении УЗ и на сайте PKP Intercity.</p></section>`;
     const app = document.getElementById("app");
     const HOWBAR = `<a class="howbar" href="#buy"><span class="hi" aria-hidden="true">i</span><span><b>Как купить билеты?</b><small>Подробная инструкция для каждого варианта маршрута.</small></span><span class="go">Инструкция →</span></a>`;
     const norm = s => String(s || "").trim().toLowerCase();
@@ -340,14 +339,15 @@
         const tm = s => (String(s).match(/\d{1,2}:\d{2}/) || [""])[0], isUz = L => !/^[A-Za-z]/.test(String(L.train).trim());
         const carOf = L => /^(EC|IC)\b/i.test(L.train.trim()) ? "cd" : /^RJ\b/i.test(L.train.trim()) ? "rj" : "";
         const blocks = [];
-        document.querySelectorAll("#more h3[data-x]").forEach(h => {
+        document.querySelectorAll("#more h3[data-car]").forEach(h => {
             const x = list.find(x => {
-                const L = x.p.legs, s = L[0].stops;
-                return L.length > 1 && norm(s[s.length - 1].name).startsWith(norm(h.dataset.x))
+                const L = x.p.legs, cz = L.find(l => !isUz(l)), s = L[0].stops;
+                return L.length > 1 && cz && carOf(cz) === h.dataset.car && norm(s[s.length - 1].name).startsWith(norm(h.dataset.x))
             });
             if (!x) { blocks.push({blk: h.parentNode, k: [9, 0]}); return }
-            const u = x.p.legs.find(isUz);
-            if (u) h.parentNode.querySelectorAll(".utr").forEach(e => e.textContent = "поезд " + String(u.train).trim().replace(/^№\s*/, "").toUpperCase());
+            const L = x.p.legs, last = L[L.length - 1].stops, ft = tm(L[0].stops[0].time) || x.h.ft, tt = tm(last[last.length - 1].time) || x.h.tt, u = L.find(isUz);
+            h.insertAdjacentText("beforeend", " (" + h.dataset.dt.replace("{t1}", ft).replace("{t2}", tt) + ")");
+            if (u) h.parentNode.querySelectorAll(".utr").forEach(e => e.textContent = String(u.train).trim().replace(/^№\s*/, "").toUpperCase());
             blocks.push({blk: h.parentNode, k: [0, list.indexOf(x)]})
         });
         /* блоки покупки идут в том же порядке, что и варианты на странице: в порядке списка вариантов */
