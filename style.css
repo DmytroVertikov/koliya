@@ -1044,7 +1044,7 @@ dialog.fb .fb-row .btn {
     margin: 0
 }
 
-.fb-link, .fb-ask button {
+.fb-link {
     background: none;
     border: 0;
     padding: 0;
@@ -1054,43 +1054,69 @@ dialog.fb .fb-row .btn {
     cursor: pointer
 }
 
+/* Оценка страницы «Информация помогла?» (common.js): карточка под блоком «Ещё маршруты» */
 .fb-ask {
-    margin: 16px 0 0;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 22px;
+    padding: 20px 22px;
+    margin-top: 18px;
     text-align: center;
-    font-size: 14px
-}
-
-/* Оценка страницы «Информация помогла?» (common.js) */
-.fb-ask {
-    margin: 16px 0 0;
-    text-align: center;
-    font-size: 14px
+    font-size: 15px
 }
 
 .fb-ask p {
-    margin: 8px 0 0
+    margin: 10px 0 0
 }
 
 .fb-rate {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
+    gap: 10px 12px;
     align-items: center;
     justify-content: center
 }
 
+.fb-rate span {
+    flex-basis: 100%;
+    font-family: var(--disp);
+    font-weight: 800;
+    font-size: 18px
+}
+
 .fb-rate button {
+    min-width: 120px;
+    background: var(--card);
+    color: var(--ink);
+    border: 2px solid var(--brand);
+    border-radius: 14px;
+    padding: 11px 22px;
+    font: inherit;
+    font-size: 17px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background .15s, color .15s
+}
+
+.fb-rate button:hover, .fb-rate button:focus-visible {
+    background: var(--acc);
+    border-color: var(--acc);
+    color: var(--accink)
+}
+
+.fb-ask [data-fb] {
     background: var(--soft);
     color: var(--brand);
     border: 0;
     border-radius: 12px;
-    padding: 8px 14px;
+    padding: 9px 16px;
     font: inherit;
     font-weight: 600;
+    text-decoration: none;
     cursor: pointer
 }
 
-.fb-rate button:hover {
+.fb-ask [data-fb]:hover {
     filter: brightness(.95)
 }
 

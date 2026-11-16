@@ -409,7 +409,16 @@ async function viewFeedback() {
     v.innerHTML = '<section class="panel"><p class="muted">Загрузка…</p></section>';
     let rows;
     try { rows = await dbAll("feedback?select=*&order=created_at.desc") } catch (e) { v.innerHTML = `<section class="panel"><h2>Обращения</h2><div class="errbox">${esc(e.message)}</div><p class="muted">Если таблицы feedback нет, выполните db/feedback-1.sql в Supabase.</p></section>`; return }
-    const nNew = rows.filter(r => r.status === "new").length, shown = rows.filter(r => FB_FILTER === "all" || r.status === FB_FILTER);
+    const isRate = r => r.kind === "up" || r.kind === "down", nRate = rows.filter(isRate).length;
+    const nNew = rows.filter(r => r.status === "new").length;
+    /* «Новые» включают 👎 (ему нужен ответ), 👍 сразу «обработан» и виден только во вкладке «Оценки» и в «Все» */
+    const shown = rows.filter(r => FB_FILTER === "all" ? true : FB_FILTER === "rate" ? isRate(r) : FB_FILTER === "done" ? r.status === "done" && !isRate(r) : r.status === FB_FILTER);
+    const rateTable = () => {
+        const m = {};
+        rows.filter(isRate).forEach(r => { const k = r.page || "—", o = m[k] = m[k] || {up: 0, down: 0, last: r.created_at}; o[r.kind]++; if (r.created_at > o.last) o.last = r.created_at });
+        const list = Object.entries(m).sort((a, b) => b[1].down - a[1].down || b[1].up - a[1].up || (b[1].last > a[1].last ? -1 : 1));
+        return `<section class="panel"><h3 style="margin:0 0 8px">Оценки по страницам</h3><table class="g"><thead><tr><th>Страница</th><th>👍</th><th>👎</th><th>Последняя оценка</th></tr></thead><tbody>${list.map(([k, o]) => `<tr><td>${k === "—" ? "—" : `<a href="${esc(SITE_URL + k)}" target="_blank" rel="noopener">${esc(k)}</a>`}</td><td>${o.up}</td><td>${o.down}</td><td>${esc(new Date(o.last).toLocaleString("ru-RU"))}</td></tr>`).join("")}</tbody></table></section>`
+    };
     const link = c => /^@?[A-Za-z0-9_]{4,}$/.test(c) && !/@.+\./.test(c) ? `<a href="https://t.me/${esc(c.replace(/^@/, ""))}" target="_blank" rel="noopener">${esc(c)}</a>` : /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(c) ? `<a href="mailto:${esc(c)}">${esc(c)}</a>` : esc(c);
     const card = r => `<section class="panel" data-id="${r.id}" ${r.status === "new" ? 'style="border:2px solid var(--bl)"' : ""}>
         <h3 style="margin:0 0 6px">${esc(FB_KINDS[r.kind] || r.kind)} <span class="muted">· ${esc(new Date(r.created_at).toLocaleString("ru-RU"))} · ${esc((r.lang || "").toUpperCase())}${r.status === "done" ? " · обработано" : ""}</span></h3>
@@ -419,9 +428,10 @@ async function viewFeedback() {
         <div class="err"></div>
         <p><button class="pri" data-a="${r.status === "new" ? "done" : "new"}">${r.status === "new" ? "Обработано" : "Вернуть в новые"}</button> <button data-a="note">Сохранить заметку</button> <button data-a="del">Удалить</button></p></section>`;
     v.innerHTML = `<section class="panel"><h2>Обращения <span class="muted">(новых: ${nNew}, всего: ${rows.length})</span></h2>
-        <p class="muted">Сообщения из формы «Обратная связь», «Нашли неточность?» и оценки страниц маршрутов. Оценок всего: 👍 ${rows.filter(r => r.kind === "up").length} · 👎 ${rows.filter(r => r.kind === "down").length}.</p>
-        <p>${[["new", "Новые"], ["done", "Обработанные"], ["all", "Все"]].map(([k, n]) => `<button data-filter="${k}" class="${FB_FILTER === k ? "pri" : ""}">${n}</button>`).join(" ")}</p></section>`
-        + (shown.length ? shown.map(card).join("") : '<section class="panel"><p class="muted">Здесь пока ничего нет.</p></section>');
+        <p class="muted">Сообщения из формы «Обратная связь», «Нашли неточность?» и оценки страниц маршрутов. Оценок всего: 👍 ${rows.filter(r => r.kind === "up").length} · 👎 ${rows.filter(r => r.kind === "down").length}; по страницам их видно во вкладке «Оценки».</p>
+        <p>${[["new", "Новые"], ["done", "Обработанные"], ["rate", "Оценки (" + nRate + ")"], ["all", "Все"]].map(([k, n]) => `<button data-filter="${k}" class="${FB_FILTER === k ? "pri" : ""}">${n}</button>`).join(" ")}</p></section>`
+        + (FB_FILTER === "rate" ? (nRate ? rateTable() : '<section class="panel"><p class="muted">Оценок пока нет.</p></section>')
+            : shown.length ? shown.map(card).join("") : '<section class="panel"><p class="muted">Здесь пока ничего нет.</p></section>');
     v.querySelectorAll("[data-filter]").forEach(b => b.onclick = () => { FB_FILTER = b.dataset.filter; viewFeedback() });
     v.querySelectorAll("section[data-id]").forEach(sec => {
         const id = sec.dataset.id, box = sec.querySelector(".err"), note = () => sec.querySelector('[data-f="note"]').value.trim().slice(0, 2000);
