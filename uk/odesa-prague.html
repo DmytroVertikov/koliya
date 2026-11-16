@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- build 2026-11-16T16:03:15.608Z vmwjgd9z9 direct=false x=Перемышль Главный -->
+<!-- build 2026-11-16T16:05:44.945Z vmwjgggps direct=false x=Перемышль Главный -->
 <html lang="uk">
 <head>
     <meta charset="utf-8">
@@ -254,7 +254,7 @@
         <h1>Потягом: Одеса → Прага-Головна</h1>
         <p id="lead">Розклад поїздів Одеса — Прага-Головна: варіанти з пересадкою у Перемишлі. Час у дорозі, зупинки та інформація про купівлю квитків.</p></div>
 </header>
-<main class="wrap"><a class="back" href="./">← Головна</a> <a class="back" href="./#ua-pl">Усі маршрути: Україна — Польща</a> <a class="back" href="prague-odesa.html">🔄 Прага-Головна → Одеса</a>
+<main class="wrap"><a class="back" href="./">← Головна</a> <a class="back" href="./#ua-cz">Усі маршрути: Україна — Польща</a> <a class="back" href="prague-odesa.html">🔄 Прага-Головна → Одеса</a>
     <p class="chk" id="chk" hidden>📅 Перевірено: <b></b></p>
     <div id="app"><p>Завантаження…</p></div>
     <div id="more"></div>
@@ -265,12 +265,12 @@
 <script src="../config.js"></script>
 <script src="../pages.js"></script>
 <script src="../dict/uk.js"></script>
-<script src="../common.js?v=mwjgd9z9"></script>
+<script src="../common.js?v=mwjgggps"></script>
 <script>
     const SPLIT = []; /* [станция пересадки, заголовок, пограничный контроль]: страница делится на группы по пересадке */
     const HIDE = [].map(s => s.trim().toLowerCase()); /* номера поездов, скрытых на этой странице */
     const SLICE = false; /* true: варианты собираются из поездов других вариантов (страницы вроде Киев → Хелм) */
-    const FROM = "Одесса", TO = "Прага", BACK = "pl-ua"; // FROM/TO: русские названия, как в шапке карточки в админке
+    const FROM = "Одесса", TO = "Прага", BACK = "cz-ua"; // FROM/TO: русские названия, как в шапке карточки в админке
     
     const BUY = `<section class="panel" id="buy"><h2>Як купити квитки</h2>
 <div class="buy one">
@@ -370,11 +370,11 @@
             return head + `<div class="cols${transfer.length === 1 ? " one" : ""}" style="margin-top:${head ? 16 : 6}px">${cards}</div>`
         })() + HOWBAR;
         
-        
+        /*B*/document.querySelectorAll(".opt[data-b"+"] .swap").forEach(s => s.insertAdjacentHTML("afterend", `<div class="swap border">🛂 Після прибуття до Перемишля відбувається прикордонний контроль</div>`));/*/B*/
     }).catch(() => {
         app.innerHTML = `<div class="panel"><h2>Не вдалося завантажити дані</h2><p>Оновіть сторінку пізніше.</p></div>`
     });
-    document.getElementById("more").innerHTML = BUY + moreRoutes({h: "Інші маршрути", rev: "Зворотний напрямок", from: "Інші напрямки з міста %s", to: "Інші маршрути до міста %s", dir: "Усі маршрути цього напрямку", all: "Усі країни", home: "./", hash: "ua-pl"});
+    document.getElementById("more").innerHTML = BUY + moreRoutes({h: "Інші маршрути", rev: "Зворотний напрямок", from: "Інші напрямки з міста %s", to: "Інші маршрути до міста %s", dir: "Усі маршрути цього напрямку", all: "Усі країни", home: "./", hash: "ua-cz"});
 </script>
 </body>
 </html>

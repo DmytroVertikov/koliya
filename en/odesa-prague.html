@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- build 2026-11-16T16:03:15.608Z vmwjgd9z9 direct=false x=Перемышль Главный -->
+<!-- build 2026-11-16T16:05:44.945Z vmwjgggps direct=false x=Перемышль Главный -->
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -254,7 +254,7 @@
         <h1>By train: Odesa → Praha hl.n.</h1>
         <p id="lead">Train timetable Odesa — Praha hl.n.: connections with a change in Przemyśl Główny. Journey time, stops and ticket information.</p></div>
 </header>
-<main class="wrap"><a class="back" href="./">← Home</a> <a class="back" href="./#ua-pl">All routes: Ukraine — Poland</a> <a class="back" href="prague-odesa.html">🔄 Praha hl.n. → Odesa</a>
+<main class="wrap"><a class="back" href="./">← Home</a> <a class="back" href="./#ua-cz">All routes: Ukraine — Poland</a> <a class="back" href="prague-odesa.html">🔄 Praha hl.n. → Odesa</a>
     <p class="chk" id="chk" hidden>📅 Checked: <b></b></p>
     <div id="app"><p>Loading…</p></div>
     <div id="more"></div>
@@ -265,12 +265,12 @@
 <script src="../config.js"></script>
 <script src="../pages.js"></script>
 <script src="../dict/en.js"></script>
-<script src="../common.js?v=mwjgd9z9"></script>
+<script src="../common.js?v=mwjgggps"></script>
 <script>
     const SPLIT = []; /* [станция пересадки, заголовок, пограничный контроль]: страница делится на группы по пересадке */
     const HIDE = [].map(s => s.trim().toLowerCase()); /* номера поездов, скрытых на этой странице */
     const SLICE = false; /* true: варианты собираются из поездов других вариантов (страницы вроде Киев → Хелм) */
-    const FROM = "Одесса", TO = "Прага", BACK = "pl-ua"; // FROM/TO: русские названия, как в шапке карточки в админке
+    const FROM = "Одесса", TO = "Прага", BACK = "cz-ua"; // FROM/TO: русские названия, как в шапке карточки в админке
     
     const BUY = `<section class="panel" id="buy"><h2>How to buy tickets</h2>
 <div class="buy one">
@@ -370,11 +370,11 @@
             return head + `<div class="cols${transfer.length === 1 ? " one" : ""}" style="margin-top:${head ? 16 : 6}px">${cards}</div>`
         })() + HOWBAR;
         
-        
+        /*B*/document.querySelectorAll(".opt[data-b"+"] .swap").forEach(s => s.insertAdjacentHTML("afterend", `<div class="swap border">🛂 Border control takes place in Przemyśl after arrival</div>`));/*/B*/
     }).catch(() => {
         app.innerHTML = `<div class="panel"><h2>Could not load the data</h2><p>Please refresh the page later.</p></div>`
     });
-    document.getElementById("more").innerHTML = BUY + moreRoutes({h: "More routes", rev: "Return route", from: "More routes from %s", to: "More routes to %s", dir: "All routes in this direction", all: "All countries", home: "./", hash: "ua-pl"});
+    document.getElementById("more").innerHTML = BUY + moreRoutes({h: "More routes", rev: "Return route", from: "More routes from %s", to: "More routes to %s", dir: "All routes in this direction", all: "All countries", home: "./", hash: "ua-cz"});
 </script>
 </body>
 </html>
