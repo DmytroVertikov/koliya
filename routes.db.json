@@ -3558,7 +3558,7 @@
     "rev": "prague-odesa.html",
     "kind": "transfer",
     "x": "Перемышль Главный",
-    "border": "after",
+    "border": null,
     "like_id": "kw",
     "single": false,
     "names": {
@@ -3692,7 +3692,7 @@
     "rev": "odesa-prague.html",
     "kind": "transfer",
     "x": "Перемышль Главный",
-    "border": "before",
+    "border": null,
     "like_id": "wk",
     "single": false,
     "names": {
