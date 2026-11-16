@@ -3507,7 +3507,9 @@
         "uk": "Прага"
       }
     },
-    "extra": {},
+    "extra": {
+      "car": "rj"
+    },
     "sort": 1000,
     "active": true,
     "created_at": "2026-11-15T19:17:29.810598+00:00",
@@ -3571,7 +3573,11 @@
         "uk": "Одеса"
       }
     },
-    "extra": {},
+    "extra": {
+      "car": "rj",
+      "slice": false,
+      "direct": false
+    },
     "sort": 1000,
     "active": true,
     "created_at": "2026-11-16T15:56:41.751596+00:00",
@@ -3603,7 +3609,9 @@
         "uk": "Прага"
       }
     },
-    "extra": {},
+    "extra": {
+      "car": "rj"
+    },
     "sort": 1000,
     "active": true,
     "created_at": "2026-11-15T19:17:29.810598+00:00",
