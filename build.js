@@ -74,6 +74,8 @@ const VIA = {ru: "через", uk: "через", en: "via", pl: "przez"};
 /* «в Хелме» / «in Chełm»: из словаря станций; нет формы — «через Название» */
 const xin = (n, l) => { const s = I.ST[n], i = {ru: 3, uk: 4, pl: 5}[l]; return l === "en" ? "in " + st(n, l) : s && s[i] ? s[i] : VIA[l] + " " + st(n, l) };
 const st = (n, l) => { const s = I.ST[n], i = {uk: 0, en: 1, pl: 2}[l]; return s && i != null && s[i] ? s[i] : n };
+/* короткое название для компактных ссылок (главная): short_uk / short_en / short_pl из таблицы станций; нет короткого — обычное название; ru остаётся как есть */
+const stShort = (n, l) => { const s = I.ST[n], i = {uk: 7, en: 8, pl: 9}[l]; return s && i != null && s[i] ? s[i] : st(n, l) };
 const fill = (s, v) => s.replace(/\{(\w+)\}/g, (m, k) => k in v ? v[k] : m);
 const path = (l, f) => (l === "ru" ? "" : l + "/") + f;
 const VER = Date.now().toString(36), urls = [SITE];
@@ -234,7 +236,7 @@ for (const l of LANGS) {
   const flag = (c, w, h) => `<img src="https://flagcdn.com/w40/${c[0]}.png" srcset="https://flagcdn.com/w80/${c[0]}.png 2x" width="${w}" height="${h}" alt="" onerror="this.replaceWith(document.createTextNode('${c[4]}'))">`;
   const has = s => PGS.some(p => p.route === s);
   v.countries = CTRY.map(c => `<li class="cc"><div class="ch">${flag(c, 29, 22)}<h3>${hx(names[c[0]])}</h3></div>${has("ua-" + c[0]) ? `<a class="btn pri d-o" href="#ua-${c[0]}">${hx(d["ix.fromUa"])}</a>` : ""}${has(c[0] + "-ua") ? `<a class="btn d-i" href="#${c[0]}-ua">${hx(d["ix.toUa"])}</a>` : ""}</li>`).join("\n");
-  const chip = p => `<a class="rt ${/^ua-/.test(p.route) ? "d-o" : "d-i"}" href="${hx(p.href)}">${hx(p.title.split(" → ").map(n => st(n, l)).join(" → "))}</a>`;
+  const chip = p => `<a class="rt ${/^ua-/.test(p.route) ? "d-o" : "d-i"}" href="${hx(p.href)}">${hx(p.title.split(" → ").map(n => stShort(n, l)).join(" → "))}</a>`;
   v.popular = CTRY.map(c => {
     const all = PGS.filter(p => ctryOf(p) === c[0]);
     if (!all.length) return "";
