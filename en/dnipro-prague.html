@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- build 2026-11-16T16:37:35.454Z vmwjhlfe2 direct=false x=Перемышль Главный -->
+<!-- build 2026-11-16T18:38:10.291Z vmwjlwhtd direct=false x=Перемышль Главный -->
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -265,7 +265,7 @@
 <script src="../config.js"></script>
 <script src="../pages.js"></script>
 <script src="../dict/en.js"></script>
-<script src="../common.js?v=mwjhlfe2"></script>
+<script src="../common.js?v=mwjlwhtd"></script>
 <script>
     const SPLIT = []; /* [станция пересадки, заголовок, пограничный контроль]: страница делится на группы по пересадке */
     const HIDE = [].map(s => s.trim().toLowerCase()); /* номера поездов, скрытых на этой странице */
@@ -273,18 +273,23 @@
     const FROM = "Днепр", TO = "Прага", BACK = "cz-ua"; // FROM/TO: русские названия, как в шапке карточки в админке
     
     const BUY = `<section class="panel" id="buy"><h2>How to buy tickets</h2>
-<div class="buy one">
+<div class="buy two">
 
-<!--T--><div><h3>With a transfer in Przemyśl Główny</h3><ol class="steps">
-<li>Open the Ukrzaliznytsia app, choose the route Dnipro-Holovnyi → Przemyśl Główny and the travel date. Sales open 20 days before departure at 09:00 Kyiv time. Choose a suitable train and pay for the ticket.</li>
-<li>Buy the Przemyśl Główny → Praha hl.n. ticket separately from the Polish carrier PKP Intercity, on intercity.pl or in the PKP Intercity app. You can also buy it on koleo.pl or in the KOLEO app.</li>
 
+
+
+<div><h3 data-car="rj" data-x="Перемышль" data-dt="departure from Dnipro-Holovnyi {t1}, arrival in Praha hl.n. {t2}">With a transfer in Przemyśl Główny</h3><ol class="steps">
+<li>Open the Ukrzaliznytsia app, choose the route Dnipro-Holovnyi → Przemyśl Główny and the travel date. Sales open 20 days before departure at 09:00 Kyiv time. Choose train <span class="utr">073П</span> and pay for the ticket.</li>
+<li>Buy the Przemyśl Główny → Praha hl.n. ticket for the RJ train separately from the Czech carrier RegioJet, on regiojet.cz or in the RegioJet app.</li>
 <li>After buying, save both e-tickets on your phone. Before you travel, check the dates, departure times and arrival stations.</li></ol>
 <a class="btn pri" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Buy the Dnipro-Holovnyi → Przemyśl Główny ticket in the UZ app</a>
-<a class="btn" href="https://www.intercity.pl/" target="_blank" rel="noopener">Buy the Przemyśl Główny → Praha hl.n. ticket on PKP Intercity</a></div><!--/T-->
-
-
-
+<a class="btn" href="https://regiojet.cz/" target="_blank" rel="noopener">Buy the Przemyśl Główny → Praha hl.n. ticket on RegioJet</a></div>
+<div><h3 data-car="rj" data-x="Чоп" data-dt="departure from Dnipro-Holovnyi {t1}, arrival in Praha hl.n. {t2}">With a transfer in Chop</h3><ol class="steps">
+<li>Open the Ukrzaliznytsia app, choose the route Dnipro-Holovnyi → Chop and the travel date. Sales open 20 days before departure at 08:00 Kyiv time. Choose train <span class="utr">003П</span> and pay for the ticket.</li>
+<li>Buy the Chop → Praha hl.n. ticket for the RJ train separately from the Czech carrier RegioJet, on regiojet.cz or in the RegioJet app.</li>
+<li>After buying, save both e-tickets on your phone. Before you travel, check the dates, departure times and arrival stations.</li></ol>
+<a class="btn pri" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Buy the Dnipro-Holovnyi → Chop ticket in the UZ app</a>
+<a class="btn" href="https://regiojet.cz/" target="_blank" rel="noopener">Buy the Chop → Praha hl.n. ticket on RegioJet</a></div>
 </div>
 <p class="buy-note">Train schedules may change. Check the latest information in the UZ app and on the PKP Intercity website.</p></section>`;
     const app = document.getElementById("app");
