@@ -295,10 +295,20 @@ const FOOTER_HTML = () => `<div class="fcols">
 /* Обратная связь: окно <dialog> открывается любой кнопкой с data-fb="<тема>" (data / idea / question / other).
    Сообщение уходит в таблицу feedback (db/feedback-1.sql): анонимный посетитель может только добавить строку.
    Тексты — ключи fb.* (по умолчанию в build.js, правятся в админке → «Тексты»). Страница и язык подставляются сами.
-   На страницах маршрутов под блоком «Ещё маршруты» добавляется ссылка «Нашли неточность?». */
+   На страницах маршрутов под блоком «Ещё маршруты» добавляются оценка «Информация помогла? 👍 / 👎» (db/feedback-2.sql) и ссылка «Нашли неточность?». */
 (() => {
     const KINDS = ["data", "idea", "question", "other"], GAP = 15000;
     let dlg, sentAt = 0;
+    /* отправка одной строки в feedback; тема: data / idea / question / other (форма) или up / down (оценка страницы) */
+    const post = async (kind, message, contact) => {
+        if (!U || !K) throw new Error("no config");
+        const r = await fetch(U + "/rest/v1/feedback", {
+            method: "POST",
+            headers: {apikey: K, Authorization: "Bearer " + K, "Content-Type": "application/json", Prefer: "return=minimal"},
+            body: JSON.stringify({kind, message, contact: contact || "", page: (location.pathname + location.hash).slice(0, 300), lang: LG})
+        });
+        if (!r.ok) throw new Error(r.status)
+    };
     const make = () => {
         dlg = document.createElement("dialog");
         dlg.className = "fb";
@@ -321,15 +331,9 @@ const FOOTER_HTML = () => `<div class="fcols">
             if (f.website.value) { say(t("fb.thanks")); return } /* поле-приманка заполнил бот: делаем вид, что всё хорошо */
             if (text.length < 5) { say(t("fb.short"), true); return }
             if (Date.now() - sentAt < GAP) { say(t("fb.wait"), true); return }
-            if (!U || !K) { say(t("fb.err"), true); return }
             go.disabled = true; say("…");
             try {
-                const r = await fetch(U + "/rest/v1/feedback", {
-                    method: "POST",
-                    headers: {apikey: K, Authorization: "Bearer " + K, "Content-Type": "application/json", Prefer: "return=minimal"},
-                    body: JSON.stringify({kind: f.kind.value, message: text, contact: f.contact.value.trim(), page: (location.pathname + location.hash).slice(0, 300), lang: LG})
-                });
-                if (!r.ok) throw new Error(r.status);
+                await post(f.kind.value, text, f.contact.value.trim());
                 sentAt = Date.now();
                 f.message.value = "";
                 say(t("fb.thanks"))
@@ -348,9 +352,36 @@ const FOOTER_HTML = () => `<div class="fcols">
         const b = e.target.closest("[data-fb]");
         if (b && typeof HTMLDialogElement === "function") { e.preventDefault(); open(b.dataset.fb) }
     });
+    /* оценка страницы «Информация помогла?»: 👍 уходит сразу, 👎 раскрывает поле «Что не так?»; одна оценка на страницу в браузере */
+    const rateKey = "fb-rate:" + location.pathname;
+    const voted = () => { try { return !!localStorage.getItem(rateKey) } catch (e) { return false } };
+    const mark = () => { try { localStorage.setItem(rateKey, "1") } catch (e) {} };
+    const rateHtml = () => voted()
+        ? `<p class="fb-rate-done">${esc(t("fb.rate.thanks"))}</p>`
+        : `<div class="fb-rate"><span>${esc(t("fb.rate"))}</span><button type="button" data-rate="up">👍 ${esc(t("fb.yes"))}</button><button type="button" data-rate="down">👎 ${esc(t("fb.no"))}</button></div>
+<form class="fb-down" hidden><label for="fb-down-t">${esc(t("fb.down.h"))}</label><textarea id="fb-down-t" maxlength="2000" rows="3" placeholder="${esc(t("fb.down.ph"))}"></textarea><button type="submit" class="btn pri">${esc(t("fb.send"))}</button></form>`;
+    const rate = async (box, kind, text) => {
+        try {
+            await post(kind, text);
+            mark();
+            box.querySelector(".fb-rate-wrap").innerHTML = `<p class="fb-rate-done">${esc(t("fb.rate.thanks"))}</p>`
+        } catch (e) {
+            const m = box.querySelector(".fb-rate-err"); if (m) m.textContent = t("fb.err")
+        }
+    };
     const ask = () => {
         const more = document.getElementById("more");
-        if (more && !document.querySelector(".fb-ask")) more.insertAdjacentHTML("afterend", `<p class="fb-ask"><button type="button" data-fb="data">⚠️ ${esc(t("fb.report"))}</button></p>`)
+        if (!more || document.querySelector(".fb-ask")) return;
+        more.insertAdjacentHTML("afterend", `<section class="fb-ask"><div class="fb-rate-wrap">${rateHtml()}</div><p class="fb-rate-err" role="status"></p><p><button type="button" data-fb="data">⚠️ ${esc(t("fb.report"))}</button></p></section>`);
+        const box = document.querySelector(".fb-ask");
+        box.addEventListener("click", e => {
+            const b = e.target.closest("[data-rate]");
+            if (!b) return;
+            if (b.dataset.rate === "up") rate(box, "up", "");
+            else { const f = box.querySelector(".fb-down"); f.hidden = false; f.querySelector("textarea").focus() }
+        });
+        const f = box.querySelector(".fb-down");
+        if (f) f.addEventListener("submit", e => { e.preventDefault(); rate(box, "down", f.querySelector("textarea").value.trim()) })
     };
     if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", ask); else ask()
 })();

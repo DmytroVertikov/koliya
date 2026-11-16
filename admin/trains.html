@@ -402,8 +402,8 @@ function shell() {
 
 /* ================= обращения с сайта (таблица feedback, форма «Обратная связь» в common.js) ================= */
 let FB_FILTER = "new";
-const FB_KINDS = {data: "Ошибка в данных", idea: "Предложение", question: "Вопрос", other: "Другое"};
-const SITE_URL = "https://dmytrovertikov.github.io/koliya";
+const FB_KINDS = {data: "Ошибка в данных", idea: "Предложение", question: "Вопрос", other: "Другое", up: "👍 Помогло", down: "👎 Не помогло"};
+const SITE_URL = "https://dmytrovertikov.github.io"; /* в feedback.page лежит путь целиком, вместе с /koliya */
 async function viewFeedback() {
     const v = $("#view");
     v.innerHTML = '<section class="panel"><p class="muted">Загрузка…</p></section>';
@@ -413,13 +413,13 @@ async function viewFeedback() {
     const link = c => /^@?[A-Za-z0-9_]{4,}$/.test(c) && !/@.+\./.test(c) ? `<a href="https://t.me/${esc(c.replace(/^@/, ""))}" target="_blank" rel="noopener">${esc(c)}</a>` : /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(c) ? `<a href="mailto:${esc(c)}">${esc(c)}</a>` : esc(c);
     const card = r => `<section class="panel" data-id="${r.id}" ${r.status === "new" ? 'style="border:2px solid var(--bl)"' : ""}>
         <h3 style="margin:0 0 6px">${esc(FB_KINDS[r.kind] || r.kind)} <span class="muted">· ${esc(new Date(r.created_at).toLocaleString("ru-RU"))} · ${esc((r.lang || "").toUpperCase())}${r.status === "done" ? " · обработано" : ""}</span></h3>
-        <p style="white-space:pre-wrap;margin:0 0 8px">${esc(r.message)}</p>
+        ${r.message ? `<p style="white-space:pre-wrap;margin:0 0 8px">${esc(r.message)}</p>` : ""}
         <p class="muted" style="margin:0 0 8px">${r.contact ? "Контакт: " + link(r.contact) + " · " : ""}Страница: ${r.page ? `<a href="${esc(SITE_URL + r.page)}" target="_blank" rel="noopener">${esc(r.page)}</a>` : "—"}</p>
         <label>Заметка (видна только вам)</label><textarea data-f="note" rows="2" style="width:100%">${esc(r.note || "")}</textarea>
         <div class="err"></div>
         <p><button class="pri" data-a="${r.status === "new" ? "done" : "new"}">${r.status === "new" ? "Обработано" : "Вернуть в новые"}</button> <button data-a="note">Сохранить заметку</button> <button data-a="del">Удалить</button></p></section>`;
     v.innerHTML = `<section class="panel"><h2>Обращения <span class="muted">(новых: ${nNew}, всего: ${rows.length})</span></h2>
-        <p class="muted">Сообщения из формы «Обратная связь» и ссылки «Нашли неточность?» на сайте.</p>
+        <p class="muted">Сообщения из формы «Обратная связь», «Нашли неточность?» и оценки страниц маршрутов. Оценок всего: 👍 ${rows.filter(r => r.kind === "up").length} · 👎 ${rows.filter(r => r.kind === "down").length}.</p>
         <p>${[["new", "Новые"], ["done", "Обработанные"], ["all", "Все"]].map(([k, n]) => `<button data-filter="${k}" class="${FB_FILTER === k ? "pri" : ""}">${n}</button>`).join(" ")}</p></section>`
         + (shown.length ? shown.map(card).join("") : '<section class="panel"><p class="muted">Здесь пока ничего нет.</p></section>');
     v.querySelectorAll("[data-filter]").forEach(b => b.onclick = () => { FB_FILTER = b.dataset.filter; viewFeedback() });

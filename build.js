@@ -43,6 +43,12 @@ const FB_DEF = {
   "fb.thanks": {ru: "Спасибо! Сообщение отправлено.", uk: "Дякуємо! Повідомлення надіслано.", en: "Thank you! Your message has been sent.", pl: "Dziękujemy! Wiadomość została wysłana."},
   "fb.err": {ru: "Не удалось отправить. Попробуйте ещё раз позже.", uk: "Не вдалося надіслати. Спробуйте ще раз пізніше.", en: "Could not send. Please try again later.", pl: "Nie udało się wysłać. Spróbuj ponownie później."},
   "fb.short": {ru: "Напишите хотя бы несколько слов (от 5 символов).", uk: "Напишіть хоча б кілька слів (від 5 символів).", en: "Please write a few words (at least 5 characters).", pl: "Napisz kilka słów (co najmniej 5 znaków)."},
+  "fb.rate": {ru: "Информация помогла?", uk: "Інформація допомогла?", en: "Was this helpful?", pl: "Czy informacja pomogła?"},
+  "fb.yes": {ru: "Да", uk: "Так", en: "Yes", pl: "Tak"},
+  "fb.no": {ru: "Нет", uk: "Ні", en: "No", pl: "Nie"},
+  "fb.down.h": {ru: "Что не так?", uk: "Що не так?", en: "What is wrong?", pl: "Co jest nie tak?"},
+  "fb.down.ph": {ru: "Необязательно: что помогло бы лучше?", uk: "Необов’язково: що допомогло б краще?", en: "Optional: what would help more?", pl: "Opcjonalnie: co pomogłoby bardziej?"},
+  "fb.rate.thanks": {ru: "Спасибо за оценку!", uk: "Дякуємо за оцінку!", en: "Thanks for your feedback!", pl: "Dziękujemy za ocenę!"},
   "fb.wait": {ru: "Подождите несколько секунд перед повторной отправкой.", uk: "Зачекайте кілька секунд перед повторним надсиланням.", en: "Please wait a few seconds before sending again.", pl: "Poczekaj kilka sekund przed ponownym wysłaniem."}
 };
 for (const k in FB_DEF) for (const l of LANGS) if (!I[l][k]) I[l][k] = FB_DEF[k][l];

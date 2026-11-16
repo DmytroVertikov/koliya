@@ -1059,3 +1059,83 @@ dialog.fb .fb-row .btn {
     text-align: center;
     font-size: 14px
 }
+
+/* Оценка страницы «Информация помогла?» (common.js) */
+.fb-ask {
+    margin: 16px 0 0;
+    text-align: center;
+    font-size: 14px
+}
+
+.fb-ask p {
+    margin: 8px 0 0
+}
+
+.fb-rate {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    justify-content: center
+}
+
+.fb-rate button {
+    background: var(--soft);
+    color: var(--brand);
+    border: 0;
+    border-radius: 12px;
+    padding: 8px 14px;
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer
+}
+
+.fb-rate button:hover {
+    filter: brightness(.95)
+}
+
+.fb-down {
+    max-width: 420px;
+    margin: 12px auto 0;
+    text-align: left
+}
+
+.fb-down[hidden] {
+    display: none
+}
+
+.fb-down label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 4px
+}
+
+.fb-down textarea {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    font: inherit;
+    padding: 10px 12px;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: var(--bg);
+    color: var(--ink);
+    resize: vertical
+}
+
+.fb-down .btn {
+    width: 100%;
+    border: 0;
+    cursor: pointer;
+    font: inherit;
+    font-weight: 600
+}
+
+.fb-rate-done {
+    color: var(--mute)
+}
+
+.fb-rate-err {
+    min-height: 0;
+    color: #d1432f
+}
