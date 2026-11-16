@@ -253,13 +253,6 @@
    "pl": "Rozkłady jazdy mogą ulec zmianie. Aktualne informacje znajdziesz w aplikacji UZ i w aplikacji ZSSK."
   },
   {
-   "key": "buy.s1",
-   "ru": "Откройте приложение «Укрзалізниця» и войдите в свою учётную запись.",
-   "uk": "Відкрийте застосунок «Укрзалізниця» та увійдіть у свій обліковий запис.",
-   "en": "Open the Ukrzaliznytsia app and sign in to your account.",
-   "pl": "Otwórz aplikację Ukrzaliznytsia i zaloguj się na swoje konto."
-  },
-  {
    "key": "buy.t.b1",
    "ru": "Купить в приложении УЗ билет {uz}",
    "uk": "Купити в застосунку УЗ квиток {uz}",
@@ -370,13 +363,6 @@
    "uk": "Відкрийте застосунок «Укрзалізниця», оберіть маршрут {uz} і вкажіть дату поїздки. Продаж квитків відкривається за 20 діб до відправлення, о 08:00 за київським часом. Оберіть поїзд 028Л і сплатіть квиток.",
    "en": "Open the Ukrzaliznytsia app, choose the route {uz} and the travel date. Sales open 20 days before departure at 08:00 Kyiv time. Choose train 028Л and pay for the ticket.",
    "pl": "Otwórz aplikację Ukrzaliznytsia, wybierz trasę {uz} i datę podróży. Sprzedaż biletów rusza na 20 dni przed odjazdem o 08:00 czasu kijowskiego. Wybierz pociąg 028Л i opłać bilet."
-  },
-  {
-   "key": "buy.t.s1z",
-   "ru": "Откройте приложение «Укрзалізниця», выберите маршрут {uz} и укажите дату поездки. Продажа билетов открывается за 20 суток до отправления, в 08:00 по киевскому времени. Выберите подходящий поезд и оплатите билет.",
-   "uk": "Відкрийте застосунок «Укрзалізниця», оберіть маршрут {uz} і вкажіть дату поїздки. Продаж квитків відкривається за 20 діб до відправлення, о 08:00 за київським часом. Оберіть потрібний поїзд і сплатіть квиток.",
-   "en": "Open the Ukrzaliznytsia app, choose the route {uz} and the travel date. Sales open 20 days before departure at 08:00 Kyiv time. Choose a suitable train and pay for the ticket.",
-   "pl": "Otwórz aplikację Ukrzaliznytsia, wybierz trasę {uz} i datę podróży. Sprzedaż biletów rusza na 20 dni przed odjazdem o 08:00 czasu kijowskiego. Wybierz odpowiedni pociąg i opłać bilet."
   },
   {
    "key": "buy.t.s2",
@@ -834,20 +820,6 @@
    "pl": "← Wszystkie kierunki"
   },
   {
-   "key": "ix.buy.b1",
-   "ru": "Приложение Укрзализныци",
-   "uk": "Застосунок Укрзалізниці",
-   "en": "Ukrzaliznytsia app",
-   "pl": "Aplikacja Ukrzaliznyci"
-  },
-  {
-   "key": "ix.buy.b2",
-   "ru": "Сайт УЗ",
-   "uk": "Сайт УЗ",
-   "en": "UZ website",
-   "pl": "Strona UZ"
-  },
-  {
    "key": "ix.buy.h",
    "ru": "Купить билеты на УЗ",
    "uk": "Купити квитки на УЗ",
@@ -895,20 +867,6 @@
    "uk": "Потягом в Україну та з України",
    "en": "By train to and from Ukraine",
    "pl": "Pociągiem na Ukrainę i z Ukrainy"
-  },
-  {
-   "key": "ix.help.b1",
-   "ru": "График работы касс",
-   "uk": "Графік роботи кас",
-   "en": "Ticket office hours",
-   "pl": "Godziny pracy kas"
-  },
-  {
-   "key": "ix.help.b2",
-   "ru": "Список задерживающихся рейсов",
-   "uk": "Список поїздів, що затримуються",
-   "en": "List of delayed trains",
-   "pl": "Lista opóźnionych pociągów"
   },
   {
    "key": "ix.help.h",
@@ -986,13 +944,6 @@
    "uk": "Напрям",
    "en": "Direction",
    "pl": "Kierunek"
-  },
-  {
-   "key": "ix.one",
-   "ru": "⚡ {t} →",
-   "uk": "⚡ {t} →",
-   "en": "⚡ {t} →",
-   "pl": "⚡ {t} →"
   },
   {
    "key": "ix.popular",
