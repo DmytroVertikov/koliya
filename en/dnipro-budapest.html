@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<!-- build 2026-11-17T19:51:37.386Z vmwl3yt01 direct=false x=Чоп -->
+<!-- build 2026-11-17T19:56:20.236Z vmwl44v8m direct=false x=Чоп -->
 <html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <title>Dnipro → Budapest by train | Koliya</title>
-    <meta name="description" content="Trains Dnipro — Budapest with a change in Mukachevo and Chop: times, stations, duration.">
+    <meta name="description" content="Trains Dnipro — Budapest with a change in Kyiv and Mukachevo and Chop: times, stations, duration.">
     <meta name="theme-color" content="#12145c">
     <link rel="canonical" href="https://dmytrovertikov.github.io/koliya/en/dnipro-budapest.html">
     <link rel="alternate" hreflang="ru" href="https://dmytrovertikov.github.io/koliya/dnipro-budapest.html">
@@ -253,7 +253,7 @@
     <div class="wrap"><div class="hbar"><a class="logo" href="./"><span class="rails" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="14" rx="3"/><path d="M5 11h14"/><circle cx="9" cy="14" r=".8" fill="currentColor"/><circle cx="15" cy="14" r=".8" fill="currentColor"/><path d="M8 21l2-4M16 21l-2-4"/></svg></span><span class="wm">КОЛІЯ</span></a><nav class="lang" aria-label="Language"><a href="../dnipro-budapest.html" hreflang="ru" lang="ru">RU</a><a href="../uk/dnipro-budapest.html" hreflang="uk" lang="uk">UK</a><a href="../en/dnipro-budapest.html" hreflang="en" lang="en" class="on">EN</a><a href="../pl/dnipro-budapest.html" hreflang="pl" lang="pl">PL</a></nav></div>
         <svg class="hero-art" viewBox="-24 -16 468 206" aria-hidden="true" focusable="false"><circle cx="410" cy="30" r="30" fill="#fff" fill-opacity=".06"/><circle cx="410" cy="30" r="16" fill="#fff" fill-opacity=".08"/><path d="M10 150C90 150 110 60 190 78S320 140 410 30" fill="none" stroke="#fff" stroke-opacity=".4" stroke-width="2.5" stroke-dasharray="1 9" stroke-linecap="round"/><circle cx="190" cy="78" r="6" fill="#fff" fill-opacity=".85"/><circle cx="300" cy="113" r="5" fill="#fff" fill-opacity=".6"/><circle cx="410" cy="30" r="8" fill="#fff"/><g transform="translate(10 150)"><circle r="12" fill="#ffd23f"/><path d="M-12 0A12 12 0 0 1 12 0Z" fill="#3b82f6"/></g></svg>
         <h1>By train: Dnipro → Budapest</h1>
-        <p id="lead">Train timetable Dnipro — Budapest: connections with a change in Mukachevo and Chop. Journey time, stops and ticket information.</p></div>
+        <p id="lead">Train timetable Dnipro — Budapest: connections with a change in Kyiv and Mukachevo and Chop. Journey time, stops and ticket information.</p></div>
 </header>
 <main class="wrap"><a class="back" href="./">← Home</a> <a class="back" href="./#ua-hu">All routes: Ukraine — Hungary</a> <a class="back" href="budapest-dnipro.html">🔄 Budapest → Dnipro</a>
     <p class="chk" id="chk" hidden>📅 Checked: <b></b></p>
@@ -266,7 +266,7 @@
 <script src="../config.js"></script>
 <script src="../pages.js"></script>
 <script src="../dict/en.js"></script>
-<script src="../common.js?v=mwl3yt01"></script>
+<script src="../common.js?v=mwl44v8m"></script>
 <script>
     const SPLIT = []; /* [станция пересадки, заголовок, пограничный контроль]: страница делится на группы по пересадке */
     const HIDE = [].map(s => s.trim().toLowerCase()); /* номера поездов, скрытых на этой странице */
@@ -274,7 +274,7 @@
     const FROM = "Днепр", TO = "Будапешт", BACK = "hu-ua"; // FROM/TO: русские названия, как в шапке карточки в админке
     
     const BUY = `<section class="panel" id="buy"><h2>How to buy tickets</h2>
-<div class="buy two">
+<div class="buy three">
 
 
 
@@ -291,6 +291,12 @@
 <li>After buying, save both e-tickets on your phone. Before you travel, check the dates, departure times and arrival stations.</li></ol>
 <a class="btn pri" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Buy the Dnipro → Mukachevo ticket in the UZ app</a>
 <a class="btn" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Buy the Mukachevo → Budapest ticket in the UZ app</a></div>
+<div><h3 data-car="uz" data-x="Киев" data-dt="">With a transfer in Kyiv</h3><ol class="steps">
+<li>Open the Ukrzaliznytsia app, choose the route Dnipro → Kyiv and the travel date. Sales open 20 days before departure at 08:00 Kyiv time. Choose train <span class="utr">119П</span> and pay for the ticket.</li>
+<li>The train from Kyiv to Budapest Keleti departs the next day, so ticket sales for it in the Ukrzaliznytsia app open the next day.</li>
+<li>After buying, save both e-tickets on your phone. Before you travel, check the dates, departure times and arrival stations.</li></ol>
+<a class="btn pri" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Buy the Dnipro → Kyiv ticket in the UZ app</a>
+<a class="btn" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Buy the Kyiv → Budapest ticket in the UZ app</a></div>
 </div>
 <p class="buy-note">Train schedules may change. Check the latest information in the UZ app and on the PKP Intercity website.</p></section>`;
     const app = document.getElementById("app");
