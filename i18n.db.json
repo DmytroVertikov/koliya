@@ -527,10 +527,10 @@
   },
   {
    "key": "buy.x.s2z",
-   "ru": "Билеты на поезда {xp} можно купить в приложении «Укрзалізниця» или отдельно у словацкого перевозчика ZSSK в его приложении. Обычно у ZSSK билеты дешевле.",
-   "uk": "Квитки на поїзди {xp} можна купити в застосунку «Укрзалізниця» або окремо в словацького перевізника ZSSK у його застосунку. Зазвичай у ZSSK квитки дешевші.",
-   "en": "You can buy tickets for the trains {xp} in the Ukrzaliznytsia app or separately from the Slovak carrier ZSSK in its app. Tickets from ZSSK are usually cheaper.",
-   "pl": "Bilety na pociągi {xp} możesz kupić w aplikacji Ukrzaliznytsia lub osobno u słowackiego przewoźnika ZSSK w jego aplikacji. Zwykle u ZSSK bilety są tańsze."
+   "ru": "Поезда {xp} отправляются на следующие сутки, поэтому продажа билетов на них в приложении «Укрзалізниця» открывается на следующий день. Если хотите приобрести билет заранее, его можно отдельно купить в приложении словацкого перевозчика ZSSK. Как правило, билеты у ZSSK дешевле.",
+   "uk": "Поїзди {xp} відправляються наступної доби, тому продаж квитків на них у застосунку «Укрзалізниця» відкривається наступного дня. Якщо хочете придбати квиток заздалегідь, його можна окремо купити в застосунку словацького перевізника ZSSK. Як правило, квитки в ZSSK дешевші.",
+   "en": "The trains {xp} depart the next day, so ticket sales for them in the Ukrzaliznytsia app open the next day. If you want to buy a ticket in advance, you can buy it separately in the app of the Slovak carrier ZSSK. ZSSK tickets are usually cheaper.",
+   "pl": "Pociągi {xp} odjeżdżają następnej doby, dlatego sprzedaż biletów na nie w aplikacji Ukrzaliznytsia rusza następnego dnia. Jeśli chcesz kupić bilet wcześniej, możesz kupić go osobno w aplikacji słowackiego przewoźnika ZSSK. Zwykle bilety ZSSK są tańsze."
   },
   {
    "key": "cn.at",
