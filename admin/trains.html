@@ -545,8 +545,57 @@ function dirParamsRead(root, kind) {
     });
     return out
 }
+/* ---------- «Блоки покупки»: route_pages.extra.cols, по одному блоку «С пересадкой в …» на каждую станцию ---------- */
+const COL_CARS = {rj: "RegioJet", cd: "České dráhy (ČD)"};
+const colsOk = v => Array.isArray(v) && v.every(c => c && typeof c === "object" && typeof c.x === "string" && Array.isArray(c.uz) && c.uz.length === 2 && Array.isArray(c.pkp) && c.pkp.length === 2 && typeof c.train === "string");
+function colRowHtml(c) {
+    const car = c.car || "rj", cars = Object.assign({}, COL_CARS); if (!cars[car]) cars[car] = car;
+    const t = (k, val, w, ph) => `<input type="text" data-c="${k}" value="${esc(val || "")}" style="width:${w}px" ${ph ? `placeholder="${esc(ph)}"` : ""}>`;
+    return `<div class="colrow" style="border:1px solid var(--line,#ddd);border-radius:8px;padding:10px;margin:8px 0">
+        <div class="frow"><div><label>Пересадка в (станция)</label>${t("x", c.x, 170, "Перемышль")}</div>
+        <div><label>Номер поезда УЗ</label>${t("train", c.train, 90, "073П")}</div>
+        <div><label>Второй перевозчик</label><select data-c="car">${Object.entries(cars).map(([k, n]) => `<option value="${esc(k)}" ${k === car ? "selected" : ""}>${esc(n)}</option>`).join("")}</select></div>
+        <div><label>Продажа УЗ открывается в (пусто — 08:00)</label>${t("open", c.open, 90, "09:00")}</div>
+        <button type="button" class="colrm" style="align-self:end">Удалить блок</button></div>
+        <div class="frow"><div><label>Билет Укрзалізниці: от → до</label><span>${t("uz0", (c.uz || [])[0], 150)} → ${t("uz1", (c.uz || [])[1], 170)}</span></div>
+        <div><label>Билет второго перевозчика: от → до</label><span>${t("pkp0", (c.pkp || [])[0], 170)} → ${t("pkp1", (c.pkp || [])[1], 150)}</span></div></div></div>`
+}
+function colsHtml(r) {
+    const cols = colsOk((r.extra || {}).cols) ? r.extra.cols : [];
+    return `<h3 style="margin:14px 0 4px">Блоки «Как купить билеты»</h3>
+        <p class="muted" style="margin:0 0 4px">По одному блоку на каждую станцию пересадки. Если блоков нет, сайт показывает один стандартный блок по параметрам ниже. Станция в билете (например, «Перемышль Главный») подставляется в кнопки и инструкцию как есть.</p>
+        <div id="d_cols">${cols.map(colRowHtml).join("")}</div>
+        <p><button type="button" id="d_coladd">+ Добавить блок</button></p>`
+}
+function colsBind(r) {
+    const box = $("#d_cols");
+    $("#d_coladd").onclick = () => { box.insertAdjacentHTML("beforeend", colRowHtml({uz: [r.from_name, ""], pkp: ["", r.to_name]})) };
+    box.addEventListener("click", e => { if (e.target.classList.contains("colrm")) e.target.closest(".colrow").remove() });
+    box.addEventListener("input", e => { /* станция пересадки подставляется в билеты, пока те пустые или совпадали с ней */
+        if (e.target.dataset.c !== "x") return;
+        const row = e.target.closest(".colrow"), x = e.target.value.trim(), prev = row.dataset.px || "";
+        ["uz1", "pkp0"].forEach(k => { const el = row.querySelector(`[data-c="${k}"]`); if (!el.value.trim() || el.value.trim() === prev) el.value = x });
+        row.dataset.px = x
+    });
+}
+function colsRead(errs) {
+    const out = [];
+    document.querySelectorAll("#d_cols .colrow").forEach((row, i) => {
+        const g = k => row.querySelector(`[data-c="${k}"]`).value.trim(), n = "Блок покупки " + (i + 1) + ": ";
+        const c = {x: g("x"), uz: [g("uz0"), g("uz1")], car: g("car"), pkp: [g("pkp0"), g("pkp1")], train: g("train")};
+        if (g("open")) c.open = g("open");
+        if (!c.x) errs.push(n + "укажите станцию пересадки");
+        if (!c.train) errs.push(n + "укажите номер поезда УЗ");
+        if (c.uz.some(z => !z)) errs.push(n + "заполните билет Укрзалізниці (от и до)");
+        if (c.pkp.some(z => !z)) errs.push(n + "заполните билет второго перевозчика (от и до)");
+        if (c.open && !/^\d{1,2}:\d{2}$/.test(c.open)) errs.push(n + "время открытия продажи — вида 09:00");
+        out.push(c)
+    });
+    return out
+}
 function dirEditorHtml(r) {
     const ex = r.extra || {}, handled = new Set(DIR_P.filter(p => !(r.kind !== "custom" && (p[0] === "x" || p[0] === "border")) && dirOk(ex[p[0]], p[1].split(":")[0])).map(p => p[0]));
+    if (colsOk(ex.cols) || ex.cols === undefined) handled.add("cols");
     const rest = {}; Object.keys(ex).forEach(k => { if (!handled.has(k)) rest[k] = ex[k] });
     const nm = r.names || {}, sf = n => findStation(n) || {}, nmv = (n, k, c) => (nm[n] || {})[k] || sf(n)[c] || "";
     const tx = r.texts || {};
@@ -558,6 +607,7 @@ function dirEditorHtml(r) {
         <div><label>Порядок</label><input type="text" id="e_sort" value="${esc(r.sort)}" style="width:70px"></div>
         <label style="align-self:end"><input type="checkbox" id="e_act" ${r.active ? "checked" : ""}> показывать на сайте</label></div>
         ${r.kind === "custom" ? "" : `<div class="frow">${r.kind === "transfer" ? `<div><label>Станция пересадки</label><input type="text" id="e_x" list="d_stl" value="${esc(r.x || "")}" style="width:210px"></div><div><label>Пограничный контроль</label><select id="e_bd"><option value="">нет</option><option value="after" ${r.border === "after" ? "selected" : ""}>after</option><option value="before" ${r.border === "before" ? "selected" : ""}>before</option></select></div>` : `<label><input type="checkbox" id="e_one" ${r.single ? "checked" : ""}> на направлении один поезд</label>`}</div>`}
+        ${colsHtml(r)}
         <h3 style="margin:14px 0 4px">Параметры страницы</h3>${dirParamsHtml(ex, r.kind)}
         <div class="frow"><div style="flex:1 1 100%"><label>Прочие параметры (JSON; пусто, если не нужны)</label><textarea id="e_json" rows="${Object.keys(rest).length ? 4 : 2}" style="width:100%;font-family:monospace">${Object.keys(rest).length ? esc(JSON.stringify(rest, null, 1)) : ""}</textarea></div></div>
         <details><summary class="muted">Переводы городов</summary>
@@ -569,6 +619,7 @@ function dirEditorHtml(r) {
 }
 function dirEditorBind(r) {
     const root = $("#d_edit"), v = id => $("#" + id).value.trim();
+    colsBind(r);
     $("#e_save").onclick = async () => {
         const box = $("#e_err"), errs = [];
         if (!v("e_from") || !v("e_to")) errs.push("Укажите «откуда» и «куда»");
@@ -578,7 +629,10 @@ function dirEditorBind(r) {
         try { const t = $("#e_json").value.trim(); if (t) { extra = JSON.parse(t); if (!extra || typeof extra !== "object" || Array.isArray(extra)) throw new Error("нужен объект {…}") } } catch (e) { errs.push("JSON параметров: " + e.message) }
         const x = r.kind === "transfer" ? v("e_x") : null; if (r.kind === "transfer" && !x) errs.push("Укажите станцию пересадки");
         if (errs.length) { box.innerHTML = '<div class="errbox">' + errs.map(esc).join("<br>") + "</div>"; return }
+        const cols = colsRead(errs);
+        if (errs.length) { box.innerHTML = '<div class="errbox">' + errs.map(esc).join("<br>") + "</div>"; return }
         Object.assign(extra, dirParamsRead(root, r.kind));
+        if (cols.length) extra.cols = cols; else delete extra.cols;
         const names = Object.assign({}, r.names || {});
         [["from", v("e_from")], ["to", v("e_to")]].forEach(([w, n]) => { const o = {}; ["uk", "en", "pl"].forEach(k => { const t = root.querySelector(`[data-nm="${w}.${k}"]`).value.trim(); if (t) o[k] = t }); if (Object.keys(o).length) names[n] = o });
         const texts = {}; root.querySelectorAll("[data-tx]").forEach(e => { const [l, k] = e.dataset.tx.split("."), t = e.value.trim(); if (t) (texts[l] = texts[l] || {})[k] = t });
