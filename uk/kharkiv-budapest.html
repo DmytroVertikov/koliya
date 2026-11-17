@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <title>Харків → Будапешт потягом | Колія</title>
-    <meta name="description" content="Поїзди Харків — Будапешт з пересадкою у Мукачеві: час, станції, тривалість.">
+    <meta name="description" content="Поїзди Харків — Будапешт з пересадкою у Києві та Мукачеві: час, станції, тривалість.">
     <meta name="theme-color" content="#12145c">
     <link rel="canonical" href="https://dmytrovertikov.github.io/koliya/uk/kharkiv-budapest.html">
     <link rel="alternate" hreflang="ru" href="https://dmytrovertikov.github.io/koliya/kharkiv-budapest.html">
@@ -253,7 +253,7 @@
     <div class="wrap"><div class="hbar"><a class="logo" href="./"><span class="rails" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="14" rx="3"/><path d="M5 11h14"/><circle cx="9" cy="14" r=".8" fill="currentColor"/><circle cx="15" cy="14" r=".8" fill="currentColor"/><path d="M8 21l2-4M16 21l-2-4"/></svg></span><span class="wm">КОЛІЯ</span></a><nav class="lang" aria-label="Language"><a href="../kharkiv-budapest.html" hreflang="ru" lang="ru">RU</a><a href="../uk/kharkiv-budapest.html" hreflang="uk" lang="uk" class="on">UK</a><a href="../en/kharkiv-budapest.html" hreflang="en" lang="en">EN</a><a href="../pl/kharkiv-budapest.html" hreflang="pl" lang="pl">PL</a></nav></div>
         <svg class="hero-art" viewBox="-24 -16 468 206" aria-hidden="true" focusable="false"><circle cx="410" cy="30" r="30" fill="#fff" fill-opacity=".06"/><circle cx="410" cy="30" r="16" fill="#fff" fill-opacity=".08"/><path d="M10 150C90 150 110 60 190 78S320 140 410 30" fill="none" stroke="#fff" stroke-opacity=".4" stroke-width="2.5" stroke-dasharray="1 9" stroke-linecap="round"/><circle cx="190" cy="78" r="6" fill="#fff" fill-opacity=".85"/><circle cx="300" cy="113" r="5" fill="#fff" fill-opacity=".6"/><circle cx="410" cy="30" r="8" fill="#fff"/><g transform="translate(10 150)"><circle r="12" fill="#ffd23f"/><path d="M-12 0A12 12 0 0 1 12 0Z" fill="#3b82f6"/></g></svg>
         <h1>Потягом: Харків → Будапешт</h1>
-        <p id="lead">Розклад поїздів Харків — Будапешт: варіанти з пересадкою у Мукачеві. Час у дорозі, зупинки та інформація про купівлю квитків.</p></div>
+        <p id="lead">Розклад поїздів Харків — Будапешт: варіанти з пересадкою у Києві та Мукачеві. Час у дорозі, зупинки та інформація про купівлю квитків.</p></div>
 </header>
 <main class="wrap"><a class="back" href="./">← Головна</a> <a class="back" href="./#ua-hu">Усі маршрути: Україна — Угорщина</a> <a class="back" href="budapest-kharkiv.html">🔄 Будапешт → Харків</a>
     <p class="chk" id="chk" hidden>📅 Перевірено: <b></b></p>
@@ -274,7 +274,7 @@
     const FROM = "Харьков", TO = "Будапешт", BACK = "hu-ua"; // FROM/TO: русские названия, как в шапке карточки в админке
     
     const BUY = `<section class="panel" id="buy"><h2>Як купити квитки</h2>
-<div class="buy one">
+<div class="buy two">
 
 
 
@@ -285,6 +285,12 @@
 <li>Після купівлі збережіть обидва електронні квитки в телефоні. Перед поїздкою перевірте дати, час відправлення та станції прибуття.</li></ol>
 <a class="btn pri" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Купити в застосунку УЗ квиток Харків → Мукачево</a>
 <a class="btn" href="https://jegy.mav.hu/" target="_blank" rel="noopener">Купити на сайті MÁV квиток Мукачево → Будапешт</a></div>
+<div><h3 data-car="uz" data-x="Киев" data-dt="">З пересадкою у Києві</h3><ol class="steps">
+<li>Відкрийте застосунок «Укрзалізниця», оберіть маршрут Харків → Київ і вкажіть дату поїздки. Продаж квитків відкривається за 20 діб до відправлення, о 08:00 за київським часом. Оберіть поїзд <span class="utr">063О</span> і сплатіть квиток.</li>
+<li>Поїзд із Києва до Будапешта відправляється наступної доби, тому продаж квитків на нього в застосунку «Укрзалізниця» відкривається наступного дня.</li>
+<li>Після купівлі збережіть обидва електронні квитки в телефоні. Перед поїздкою перевірте дати, час відправлення та станції прибуття.</li></ol>
+<a class="btn pri" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Купити в застосунку УЗ квиток Харків → Київ</a>
+<a class="btn" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Купити в застосунку УЗ квиток Київ → Будапешт</a></div>
 </div>
 <p class="buy-note">Графіки руху поїздів можуть змінюватися, актуальну інформацію дивіться в застосунку УЗ та на сайті PKP Intercity.</p></section>`;
     const app = document.getElementById("app");
