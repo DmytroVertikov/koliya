@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<!-- build 2026-11-17T09:37:30.120Z vmwki11hc direct=false x=Перемышль Главный -->
+<!-- build 2026-11-17T09:44:29.926Z vmwkia1dq direct=false x=Перемышль Главный -->
 <html lang="pl">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <title>Praga → Krzemieńczuk pociągiem | Koliya</title>
-    <meta name="description" content="Pociągi Praga — Krzemieńczuk z przesiadką w Przemyślu: godziny, stacje, czas podróży.">
+    <meta name="description" content="Pociągi Praga — Krzemieńczuk z przesiadką w Przemyślu i Czopie: godziny, stacje, czas podróży.">
     <meta name="theme-color" content="#12145c">
     <link rel="canonical" href="https://dmytrovertikov.github.io/koliya/pl/prague-kremenchuk.html">
     <link rel="alternate" hreflang="ru" href="https://dmytrovertikov.github.io/koliya/prague-kremenchuk.html">
@@ -252,7 +252,7 @@
 <header>
     <div class="wrap"><div class="hbar"><a class="logo" href="./"><span class="rails" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="14" rx="3"/><path d="M5 11h14"/><circle cx="9" cy="14" r=".8" fill="currentColor"/><circle cx="15" cy="14" r=".8" fill="currentColor"/><path d="M8 21l2-4M16 21l-2-4"/></svg></span><span class="wm">КОЛІЯ</span></a><nav class="lang" aria-label="Language"><a href="../prague-kremenchuk.html" hreflang="ru" lang="ru">RU</a><a href="../uk/prague-kremenchuk.html" hreflang="uk" lang="uk">UK</a><a href="../en/prague-kremenchuk.html" hreflang="en" lang="en">EN</a><a href="../pl/prague-kremenchuk.html" hreflang="pl" lang="pl" class="on">PL</a></nav></div>
         <h1>Pociągiem: Praga → Krzemieńczuk</h1>
-        <p id="lead">Rozkład pociągów Praga — Krzemieńczuk: połączenia z przesiadką w Przemyślu. Czas podróży, postoje i informacje o zakupie biletów.</p></div>
+        <p id="lead">Rozkład pociągów Praga — Krzemieńczuk: połączenia z przesiadką w Przemyślu i Czopie. Czas podróży, postoje i informacje o zakupie biletów.</p></div>
 </header>
 <main class="wrap"><a class="back" href="./">← Strona główna</a> <a class="back" href="./#cz-ua">Wszystkie trasy: Czechy — Ukraina</a> <a class="back" href="kremenchuk-prague.html">🔄 Krzemieńczuk → Praga</a>
     <p class="chk" id="chk" hidden>📅 Sprawdzono: <b></b></p>
@@ -265,7 +265,7 @@
 <script src="../config.js"></script>
 <script src="../pages.js"></script>
 <script src="../dict/pl.js"></script>
-<script src="../common.js?v=mwki11hc"></script>
+<script src="../common.js?v=mwkia1dq"></script>
 <script>
     const SPLIT = []; /* [станция пересадки, заголовок, пограничный контроль]: страница делится на группы по пересадке */
     const HIDE = [].map(s => s.trim().toLowerCase()); /* номера поездов, скрытых на этой странице */
@@ -273,18 +273,23 @@
     const FROM = "Прага", TO = "Кременчуг", BACK = "ua-cz"; // FROM/TO: русские названия, как в шапке карточки в админке
     
     const BUY = `<section class="panel" id="buy"><h2>Jak kupić bilety</h2>
-<div class="buy one">
+<div class="buy two">
 
-<!--T--><div><h3>Z przesiadką w Przemyślu</h3><ol class="steps">
-<li>Otwórz aplikację Ukrzaliznytsia, wybierz trasę Przemyśl → Krzemieńczuk i datę podróży. Sprzedaż biletów rusza na 20 dni przed odjazdem o 9:00 czasu kijowskiego. Wybierz odpowiedni pociąg i opłać bilet.</li>
-<li>Bilet na pociąg Praga → Przemyśl kup osobno u polskiego przewoźnika PKP Intercity — na stronie intercity.pl lub w aplikacji PKP Intercity. Można go też kupić na koleo.pl lub w aplikacji KOLEO.</li>
 
+
+
+<div><h3 data-car="rj" data-x="Чоп" data-dt="">Z przesiadką w Czopie</h3><ol class="steps">
+<li>Otwórz aplikację Ukrzaliznytsia, wybierz trasę Praga → Czop i datę podróży. Sprzedaż biletów rusza na 20 dni przed odjazdem o 08:00 czasu kijowskiego. Wybierz pociąg <span class="utr">132Л</span> i opłać bilet.</li>
+<li>Bilet Mukaczewo → Krzemieńczuk na pociąg RJ kup osobno u czeskiego przewoźnika RegioJet — na stronie regiojet.cz lub w aplikacji RegioJet.</li>
 <li>Po zakupie zapisz oba e-bilety w telefonie. Przed podróżą sprawdź daty, godziny odjazdu i stacje docelowe.</li></ol>
-<a class="btn pri" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Kup w aplikacji UZ bilet Przemyśl → Krzemieńczuk</a>
-<a class="btn" href="https://www.intercity.pl/" target="_blank" rel="noopener">Kup na stronie PKP Intercity bilet Praga → Przemyśl</a></div><!--/T-->
-
-
-
+<a class="btn pri" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Kup w aplikacji UZ bilet Praga → Czop</a>
+<a class="btn" href="https://regiojet.cz/" target="_blank" rel="noopener">Kup bilet Mukaczewo → Krzemieńczuk na stronie RegioJet</a></div>
+<div><h3 data-car="rj" data-x="Перемышль" data-dt="">Z przesiadką w Przemyślu</h3><ol class="steps">
+<li>Otwórz aplikację Ukrzaliznytsia, wybierz trasę Praga → Przemyśl i datę podróży. Sprzedaż biletów rusza na 20 dni przed odjazdem o 09:00 czasu kijowskiego. Wybierz pociąg <span class="utr">070К</span> i opłać bilet.</li>
+<li>Bilet Przemyśl → Krzemieńczuk na pociąg RJ kup osobno u czeskiego przewoźnika RegioJet — na stronie regiojet.cz lub w aplikacji RegioJet.</li>
+<li>Po zakupie zapisz oba e-bilety w telefonie. Przed podróżą sprawdź daty, godziny odjazdu i stacje docelowe.</li></ol>
+<a class="btn pri" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Kup w aplikacji UZ bilet Praga → Przemyśl</a>
+<a class="btn" href="https://regiojet.cz/" target="_blank" rel="noopener">Kup bilet Przemyśl → Krzemieńczuk na stronie RegioJet</a></div>
 </div>
 <p class="buy-note">Rozkłady jazdy mogą ulec zmianie. Aktualne informacje znajdziesz w aplikacji UZ i na stronie PKP Intercity.</p></section>`;
     const app = document.getElementById("app");
@@ -372,7 +377,7 @@
             return head + `<div class="cols${transfer.length === 1 ? " one" : ""}" style="margin-top:${head ? 16 : 6}px">${cards}</div>`
         })() + HOWBAR;
         
-        /*B*/document.querySelectorAll(".opt[data-b"+"] .swap").forEach(s => s.insertAdjacentHTML("afterend", `<div class="swap border">🛂 Przed odjazdem z Przemyśla odbywa się kontrola graniczna</div>`));/*/B*/
+        
     }).catch(() => {
         app.innerHTML = `<div class="panel"><h2>Nie udało się załadować danych</h2><p>Odśwież stronę później.</p></div>`
     });

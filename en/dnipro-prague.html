@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- build 2026-11-17T09:37:30.114Z vmwki11hc direct=false x=Перемышль Главный -->
+<!-- build 2026-11-17T09:44:29.913Z vmwkia1dq direct=false x=Перемышль Главный -->
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -265,7 +265,7 @@
 <script src="../config.js"></script>
 <script src="../pages.js"></script>
 <script src="../dict/en.js"></script>
-<script src="../common.js?v=mwki11hc"></script>
+<script src="../common.js?v=mwkia1dq"></script>
 <script>
     const SPLIT = []; /* [станция пересадки, заголовок, пограничный контроль]: страница делится на группы по пересадке */
     const HIDE = [].map(s => s.trim().toLowerCase()); /* номера поездов, скрытых на этой странице */
@@ -377,7 +377,7 @@
             return head + `<div class="cols${transfer.length === 1 ? " one" : ""}" style="margin-top:${head ? 16 : 6}px">${cards}</div>`
         })() + HOWBAR;
         
-        /*B*/document.querySelectorAll(".opt[data-b"+"] .swap").forEach(s => s.insertAdjacentHTML("afterend", `<div class="swap border">🛂 Border control takes place in Przemyśl after arrival</div>`));/*/B*/
+        
     }).catch(() => {
         app.innerHTML = `<div class="panel"><h2>Could not load the data</h2><p>Please refresh the page later.</p></div>`
     });
