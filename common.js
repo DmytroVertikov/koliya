@@ -74,7 +74,8 @@ function legsDur(legs, head) {
     (legs || []).forEach((L, li) => {
         const part = [];
         let nh = 0; /* у первой выделенной станции поезда (посадка) считаем отправление, у остальных — прибытие */
-        L.stops.forEach(s => {
+        const sp = legSpan(L.stops); /* только участок поездки: остановки до посадки и после выхода (поезд идёт раньше/дальше) в счёт не идут, иначе они сбивают цепочку времени и набегают лишние сутки */
+        L.stops.slice(sp.ib, sp.ie + 1).forEach(s => {
             const m = toMin(s.hl && nh === 0 ? depOf(s.time) : arrOf(s.time));
             if (s.hl) nh++;
             if (m != null) part.push({m, name: s.name, li, tz: tzKnown(s.name)})
