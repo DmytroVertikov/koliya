@@ -1317,7 +1317,6 @@ header p {
     bottom: 40px;
     width: min(40%, 360px);
     height: auto;
-    max-height: calc(100% - 120px);
     pointer-events: none;
     transform: scaleX(-1) /* Украина на востоке (справа), Европа на западе (слева) */
 }
@@ -1345,3 +1344,12 @@ header p {
     backdrop-filter: blur(4px)
 }
 
+/* страница страны / направления на главной: шапка без подзаголовка-кнопок, схема остаётся заметной */
+header.compact {
+    min-height: 224px
+}
+
+header.compact .hero-art {
+    width: 230px;
+    bottom: -4px
+}
