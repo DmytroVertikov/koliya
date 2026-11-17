@@ -186,7 +186,7 @@ for (const r of ROUTES) for (const l of LANGS) {
   const CASEF = {ru: {"Киев": ["Киева", "Киев"], "Прага": ["Праги", "Прагу"], "Днепр": ["Днепра", "Днепр"]}, uk: {"Киев": ["Києва", "Києва"], "Прага": ["Праги", "Праги"], "Днепр": ["Дніпра", "Дніпра"]}, pl: {"Киев": ["Kijowa", "Kijowa"], "Прага": ["Pragi", "Pragi"], "Днепр": ["Dnipro", "Dnipro"]}};
   const cf = (n, i) => (CASEF[l] && CASEF[l][n] && CASEF[l][n][i]) || st(n, l);
   const attr = x => String(x).replace(/&/g, "&amp;").replace(/"/g, "&quot;");
-  const dtTpl = r.cols ? fill(d["buy.c.dt"], {a: cf(r.FROM, 0), b: cf(r.TO, 1), t1: "{t1}", t2: "{t2}"}) : "";
+  const dtTpl = r.cols && /^(kyiv_prague|prague_kyiv)$/.test(r.id) ? fill(d["buy.c.dt"], {a: cf(r.FROM, 0), b: cf(r.TO, 1), t1: "{t1}", t2: "{t2}"}) : "";
   v.buycols = (r.cols || []).map(c => {
     const cc = CARRIER[c.car], cv = Object.assign({}, v, {uz: pair(c.uz), pkp: pair(c.pkp), open: c.open || "08:00", train: `<span class="utr">${c.train}</span>`, xin: xin(c.x, l), car: cc.n});
     const a = (cls, href, label) => `<a class="btn${cls}" href="${href}" target="_blank" rel="noopener">${label}</a>`;
