@@ -1133,6 +1133,13 @@
    "uk": "З пересадкою",
    "en": "With a transfer",
    "pl": "Z przesiadką"
+  },
+  {
+   "key": "buy.t.s2uz",
+   "ru": "Поезд из {a} в {b} отправляется на следующие сутки, поэтому продажа билетов на него в приложении «Укрзалізниця» открывается на следующий день.",
+   "uk": "Поїзд із {a} до {b} відправляється наступної доби, тому продаж квитків на нього в застосунку «Укрзалізниця» відкривається наступного дня.",
+   "en": "The train from {a} to {b} departs the next day, so ticket sales for it in the Ukrzaliznytsia app open the next day.",
+   "pl": "Pociąg z {a} do {b} odjeżdża następnej doby, dlatego sprzedaż biletów na niego w aplikacji Ukrzaliznytsia rusza następnego dnia."
   }
  ],
  "stations": [
