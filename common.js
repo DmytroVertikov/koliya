@@ -279,17 +279,26 @@ function optHtml(o) {
 }
 
 /* Общий футер: правится здесь, подключается на всех страницах, где есть <footer id="site-footer"> */
+const FOOT_SRC = [["Укрзалізниця", "https://uz.gov.ua/"], ["PKP Intercity", "https://intercity.pl/"], ["RegioJet", "https://regiojet.cz/"], ["České dráhy", "https://www.cd.cz/"], ["ZSSK", "https://www.zssk.sk/"], ["MÁV", "https://jegy.mav.hu/"], ["ÖBB", "https://www.oebb.at/"], ["CFR Călători", "https://www.cfrcalatori.ro/"], ["Deutsche Bahn", "https://www.bahn.de/"]];
+/* дата обновления информации: по умолчанию как в тексте, затем уточняется по последнему изменению вариантов в базе */
+const footDate = (txt, date) => /\{date\}/.test(txt) ? txt.replace(/\{date\}/g, `<time class="fdate">${date}</time>`) : txt.replace(/\d{1,2}\.\d{1,2}\.\d{4}/, `<time class="fdate">${date}</time>`);
+const fmtDate = x => new Intl.DateTimeFormat("ru-RU", {day: "2-digit", month: "2-digit", year: "numeric", timeZone: "Europe/Kyiv"}).format(x);
 const FOOTER_HTML = () => `<div class="fcols">
 <div><b>🚆 Колія</b><p>${t("f1")}</p></div>
 <div><b>${t("f2h")}</b>
 <p>${t("f2a")}</p>
-<p>${t("f2b")}</p>
+<p>${footDate(t("f2b"), fmtDate(new Date()))}</p>
 <p>${t("f2c")}</p></div>
 <div><b>${t("f3h")}</b><p>${t("f3")}</p></div></div>
-<p class="fine">${t("fsrc")} <a href="https://uz.gov.ua/">uz.gov.ua</a> · <a href="https://intercity.pl/">intercity.pl</a> · <button type="button" class="fb-link" data-fb="other">${t("fb.link")}</button> · © ${new Date().getFullYear()} Колія</p>`;
+<div class="fbar"><div class="fsrc"><span class="fsl">${t("f.src")}</span><ul class="fchips">${FOOT_SRC.map(x => `<li><a href="${x[1]}" target="_blank" rel="noopener">${x[0]}</a></li>`).join("")}</ul></div>
+<div class="flow"><span>© ${new Date().getFullYear()} Колія</span><button type="button" class="fb-link" data-fb="other">${t("fb.link")}</button></div></div>`;
 (function () {
     const f = document.getElementById("site-footer");
-    if (f) f.innerHTML = FOOTER_HTML()
+    if (!f) return;
+    f.innerHTML = FOOTER_HTML();
+    /* дата обновления = последнее изменение вариантов в базе */
+    const el = f.querySelector(".fdate");
+    if (el && U && K) fetch(U + "/rest/v1/options?select=updated_at&updated_at=not.is.null&order=updated_at.desc&limit=1", {headers: {apikey: K, Authorization: "Bearer " + K}}).then(r => r.ok ? r.json() : []).then(a => { const d = a[0] && new Date(a[0].updated_at); if (d && !isNaN(d)) el.textContent = fmtDate(d) }).catch(() => { })
 })();
 
 /* Обратная связь: окно <dialog> открывается любой кнопкой с data-fb="<тема>" (data / idea / question / other).
