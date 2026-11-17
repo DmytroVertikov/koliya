@@ -125,6 +125,8 @@ const xAll = (r, l) => {
   const J = {ru: " и ", uk: " та ", en: " and ", pl: " i "}[l], rest = n => l === "en" ? stH1(n, l) : xin(n, l).replace(/^\S+\s+/, "");
   return xinS(xs[0], l) + xs.slice(1).map(n => J + rest(n)).join("")
 };
+/* пара станций для блоков «Как купить билеты»: короткие названия (без «Главный», «Центральный» и т. п.) */
+const pairS = (a, l) => stH1(a[0], l) + " → " + stH1(a[1], l);
 const stShort = (n, l) => { const s = I.ST[n], i = {uk: 7, en: 8, pl: 9}[l]; return s && i != null && s[i] ? s[i] : st(n, l) };
 const fill = (s, v) => s.replace(/\{(\w+)\}/g, (m, k) => k in v ? v[k] : m);
 const path = (l, f) => (l === "ru" ? "" : l + "/") + f;
@@ -160,7 +162,7 @@ const allTxt = (r, l) => { const m = String(r.hash).match(/^ua-([a-z]{2})$|^([a-
 for (const r of ROUTES) for (const l of LANGS) {
   const d = I[l], pair = a => st(a[0], l) + " → " + st(a[1], l), pre = l === "ru" ? "" : "../";
   const v = {ver: VER, lang: l, base: pre, home: "./", FROM: r.FROM, TO: r.TO, BACK: r.BACK, hash: r.hash, rev: r.rev,
-    chipRev: stH1(r.TO, l) + " → " + stH1(r.FROM, l), dir: pair([r.FROM, r.TO]), uz: pair(r.uz || [r.FROM, r.TO]), pkp: pair(r.pkp || [r.FROM, r.TO]), canon: SITE + path(l, r.file)};
+    chipRev: stH1(r.TO, l) + " → " + stH1(r.FROM, l), dir: pair([r.FROM, r.TO]), uz: pairS(r.uz || [r.FROM, r.TO], l), pkp: pairS(r.pkp || [r.FROM, r.TO], l), canon: SITE + path(l, r.file)};
   v.alts = LANGS.map(x => `    <link rel="alternate" hreflang="${x}" href="${SITE + path(x, r.file)}">`).join("\n") + `\n    <link rel="alternate" hreflang="x-default" href="${SITE + r.file}">`;
   v.langs = LANGS.map(x => `<a href="${pre + path(x, r.file)}" hreflang="${x}" lang="${x}"${x === l ? ' class="on"' : ""}>${x.toUpperCase()}</a>`).join("");
   d["buy.d.s3t"] = S3T[l];
@@ -185,7 +187,7 @@ for (const r of ROUTES) for (const l of LANGS) {
   if (r.hxs) { const J = {ru: " и ", uk: " та ", en: " and ", pl: " i "}[l]; const H = fill(d["transfer.h2"], {xin: hdr(r.hxs)}); if (!SPX.length) v["transfer.h"] = H; v["buy.t.h"] = H }
   if (r.xs) { const J = {ru: " и ", uk: " та ", en: " and ", pl: " i "}[l], rest = n => l === "en" ? st(n, l) : xin(n, l).replace(/^\S+\s+/, ""); const XI = xin(r.xs[0], l) + r.xs.slice(1).map(n => J + rest(n)).join(""), out = r.t3 === "buy.t3out"; if (!SPX.length) v["transfer.h"] = fill(d["transfer.h2"], {xin: XI}); /* split задан: карточки делятся на отдельные группы, xs влияет только на блок покупки */
     /* блок покупки для всех станций сразу: общий заголовок, шаги и кнопки */
-    v.xp = r.xs.map(n => pair(out ? [n, r.TO] : [r.FROM, n])).join(J); v["buy.t.h"] = fill(d["transfer.h2"], {xin: xin(r.xs[0], l) + r.xs.slice(1).map(n => ({ru: " или ", uk: " або ", en: " or ", pl: " lub "})[l] + rest(n)).join("")}); v.xu = r.xs.map(n => pair(out ? [r.FROM, n] : [n, r.TO])).join({ru: " или ", uk: " або ", en: " or ", pl: " lub "}[l]); v["buy.t.s1x"] = fill(d["buy.x.s1"], v); v["buy.t.s2"] = fill(d[out ? (r.xs2o || "buy.x.s2o") : (r.xs2i || "buy.x.s2i")], v); v["buy.t.b1"] = fill(d["buy.x.b1"], v); v["buy.t.b2"] = fill(d[r.xb2 || "buy.x.b2"], v) }
+    v.xp = r.xs.map(n => pairS(out ? [n, r.TO] : [r.FROM, n], l)).join(J); v["buy.t.h"] = fill(d["transfer.h2"], {xin: xin(r.xs[0], l) + r.xs.slice(1).map(n => ({ru: " или ", uk: " або ", en: " or ", pl: " lub "})[l] + rest(n)).join("")}); v.xu = r.xs.map(n => pairS(out ? [r.FROM, n] : [n, r.TO], l)).join({ru: " или ", uk: " або ", en: " or ", pl: " lub "}[l]); v["buy.t.s1x"] = fill(d["buy.x.s1"], v); v["buy.t.s2"] = fill(d[out ? (r.xs2o || "buy.x.s2o") : (r.xs2i || "buy.x.s2i")], v); v["buy.t.b1"] = fill(d["buy.x.b1"], v); v["buy.t.b2"] = fill(d[r.xb2 || "buy.x.b2"], v) }
   if (r.third) v["buy.h3"] = fill(d["transfer.h2"], Object.assign({}, v, {xin: xin(r.third, l)}));
   if (r.third) { /* содержимое третьего столбца: по умолчанию копия колонки про первую пересадку; h: true — свои тексты и кнопки (buy.h.*) */
     const btn = (cls, href, label) => `<a class="btn${cls}" href="${href}" target="_blank" rel="noopener">${label}</a>`;
@@ -194,7 +196,7 @@ for (const r of ROUTES) for (const l of LANGS) {
       v["buy.h.s1"] = fill(d["buy.h.s1"], hv); v["buy.h.s2"] = fill(d["buy.h.s2"], hv);
       v["buy.h.btns"] = btn(" pri", "https://app.uz.gov.ua/start", fill(d["buy.h.b1"], hv)) + "\n" + btn("", "https://jegy.mav.hu/", fill(d["buy.h.b2"], hv)) + "\n" + btn("", "https://tickets.oebb.at/", fill(d["buy.h.b3"], hv))
     } else {
-      const v3 = r.pkp3 ? Object.assign({}, v, {pkp: pair(r.pkp3), uz: pair(r.uz3 || r.uz || [r.FROM, r.TO])}) : v; v["buy.h.s1"] = r.hs1 ? fill(d[r.hs1], v3) : v["buy.t.s1x"]; v["buy.h.s2"] = r.hs2 ? fill(d[r.hs2], v3) : v["buy.t.s2"]; /* hs1/hs2: тексты третьей колонки, если у основной (s1/s2) они другие */
+      const v3 = r.pkp3 ? Object.assign({}, v, {pkp: pairS(r.pkp3, l), uz: pairS(r.uz3 || r.uz || [r.FROM, r.TO], l)}) : v; v["buy.h.s1"] = r.hs1 ? fill(d[r.hs1], v3) : v["buy.t.s1x"]; v["buy.h.s2"] = r.hs2 ? fill(d[r.hs2], v3) : v["buy.t.s2"]; /* hs1/hs2: тексты третьей колонки, если у основной (s1/s2) они другие */
       v["buy.h.btns"] = btn(" pri", "https://app.uz.gov.ua/start", fill(d[r.hb1k || "buy.t.b1"], v3)) + (r.honly ? "" : "\n" + (r.hurl ? btn("", r.hurl, fill(d[r.hb2k || "buy.t.b2"], v3)) : btn("", v["buy.t.url"], v["buy.t.b2"])))
     }
   }
@@ -204,7 +206,7 @@ for (const r of ROUTES) for (const l of LANGS) {
     const bb = (cls, href, label) => `<a class="btn${cls}" href="${href}" target="_blank" rel="noopener">${label}</a>`, DB = "https://www.bahn.de/", T = r.be.T, H = r.be.H;
     v["buy.t.s2"] = fill(d["buy.be.sT"], {pl: pair(T.pl), de: pair(T.de)}); v["buy.t.b2"] = fill(d["buy.t.b2"], {pkp: pair(T.pl)}); dbBtnT = bb("", DB, fill(d["buy.be.bd"], {de: pair(T.de)}));
     v["buy.h.s2"] = fill(d["buy.be.sH"], {pl: pair(H.pl), de: pair(H.de)});
-    v["buy.h.btns"] = bb(" pri", "https://app.uz.gov.ua/start", fill(d["buy.t.b1"], {uz: pair(r.uz3 || r.uz)})) + "\n" + bb("", "https://www.intercity.pl/", fill(d["buy.t.b2"], {pkp: pair(H.pl)})) + "\n" + bb("", DB, fill(d["buy.be.bd"], {de: pair(H.de)}));
+    v["buy.h.btns"] = bb(" pri", "https://app.uz.gov.ua/start", fill(d["buy.t.b1"], {uz: pairS(r.uz3 || r.uz, l)})) + "\n" + bb("", "https://www.intercity.pl/", fill(d["buy.t.b2"], {pkp: pair(H.pl)})) + "\n" + bb("", DB, fill(d["buy.be.bd"], {de: pair(H.de)}));
     v["buy.notex"] = d["buy.note.be"];
     const C = r.be.C, cv = {uz: pair(C.uz), de: pair(C.de)}; /* третий блок: «С пересадкой в Хелме» (Хелм ↔ Берлин одним поездом), немецкий сайт */
     cBlock = `<!--C--><div><h3>${fill(d["transfer.h2"], {xin: xin("Хелм", l)})}</h3><ol class="steps">\n<li>${fill(d["buy.t.s1"], cv)}</li>\n<li>${fill(d["buy.be.sC"], cv)}</li>\n<li>${d["buy.t.s4"]}</li></ol>\n${bb(" pri", "https://app.uz.gov.ua/start", fill(d["buy.t.b1"], cv))}\n${bb("", DB, fill(d["buy.be.bd"], cv))}</div><!--/C-->`
@@ -222,7 +224,7 @@ for (const r of ROUTES) for (const l of LANGS) {
   const attr = x => String(x).replace(/&/g, "&amp;").replace(/"/g, "&quot;");
   const dtTpl = r.cols && /^(kyiv_prague|prague_kyiv)$/.test(r.id) ? fill(d["buy.c.dt"], {a: cf(r.FROM, 0), b: cf(r.TO, 1), t1: "{t1}", t2: "{t2}"}) : "";
   v.buycols = (r.cols || []).map(c => {
-    const cc = CARRIER[c.car], cv = Object.assign({}, v, {uz: pair(c.uz), pkp: pair(c.pkp), open: c.open || "08:00", train: `<span class="utr">${c.train}</span>`, xin: xin(c.x, l), car: cc.n});
+    const cc = CARRIER[c.car], cv = Object.assign({}, v, {uz: pairS(c.uz, l), pkp: pairS(c.pkp, l), open: c.open || "08:00", train: `<span class="utr">${c.train}</span>`, xin: xin(c.x, l), car: cc.n});
     const a = (cls, href, label) => `<a class="btn${cls}" href="${href}" target="_blank" rel="noopener">${label}</a>`;
     return `<div><h3 data-car="${c.car}" data-x="${attr(c.x)}" data-dt="${attr(dtTpl)}">${fill(d["buy.c.h"], cv)}</h3><ol class="steps">\n<li>${c.days ? fill(d["buy.c.s1e"], Object.assign({}, cv, {early: fill(d[c.sale_at || c.sale_time ? "buy.c.earlyt" : "buy.c.early"], Object.assign({}, cv, {days: dayWord(l, +c.days), time: `<span class="stime"${c.sale_at ? ` data-at="${attr(c.sale_at)}"` : ""}>${c.sale_time || ""}</span>`}))})) : fill(d["buy.c.s1"], cv)}</li>\n<li>${fill(d[cc.s2], cv)}</li>\n<li>${fill(d["buy.t.s4"], cv)}</li></ol>\n${a(" pri", "https://app.uz.gov.ua/start", fill(d["buy.t.b1"], cv))}\n${a("", cc.url, fill(d[cc.b2], cv))}</div>`
   }).join("\n");
