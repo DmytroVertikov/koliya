@@ -123,6 +123,19 @@ const TRANSFER_TXT = {
   en: (a, b, x) => ({title: `${a} → ${b} by train | Koliya`, desc: `Trains ${a} — ${b} with a change ${x}: times, stations, duration.`, h1: `By train: ${a} → ${b}`, lead: `Train timetable ${a} — ${b}: connections with a change ${x}. Journey time, stops and ticket information.`}),
   pl: (a, b, x) => ({title: `${a} → ${b} pociągiem | Koliya`, desc: `Pociągi ${a} — ${b} z przesiadką ${x}: godziny, stacje, czas podróży.`, h1: `Pociągiem: ${a} → ${b}`, lead: `Rozkład pociągów ${a} — ${b}: połączenia z przesiadką ${x}. Czas podróży, postoje i informacje o zakupie biletów.`})
 };
+const CTRY = (() => {
+  let db; try { db = JSON.parse(fs.readFileSync("i18n.db.json", "utf8")) } catch (e) { db = {} }
+  if (!(db.countries || []).length) throw new Error("build.js: в i18n.db.json нет списка стран. Выполните node sync.js");
+  const f = {};
+  for (const r of db.ui || []) { const m = r.key.match(/^cn\.([a-z]{2})(\.gen)?$/); if (m && r.ru) (f[m[1]] = f[m[1]] || {})[m[2] ? "gen" : "acc"] = r.ru }
+  return db.countries.slice().sort((x, y) => x.sort - y.sort || x.slug.localeCompare(y.slug)).map(c => {
+    const o = f[c.slug] || {};
+    if (!o.acc || !o.gen) console.warn("ВНИМАНИЕ: у страны " + c.slug + " нет русских форм «в …» / «из …» (вкладка «Страны» в админке): на главной будет название в именительном падеже");
+    return [c.slug, c.name, o.acc || c.name, o.gen || c.name, c.flag || ""]
+  })
+})();
+/* «Все маршруты: Украина — Чехия» для страницы без своего текста: страны берутся из кода направления (ua-cz / cz-ua), а не копируются из похожей страницы (там всегда Польша) */
+const allTxt = (r, l) => { const m = String(r.hash).match(/^ua-([a-z]{2})$|^([a-z]{2})-ua$/); if (!m) return ""; const c = m[1] || m[2], UA = {ru: "Украина", uk: "Україна", en: "Ukraine", pl: "Ukraina"}[l], CC = l === "ru" ? (CTRY.find(z => z[0] === c) || [])[1] : ((I.CN[c] || {})[l] || [])[0]; return CC ? {ru: "Все маршруты: ", uk: "Усі маршрути: ", en: "All routes: ", pl: "Wszystkie trasy: "}[l] + (m[1] ? UA + " — " + CC : CC + " — " + UA) : "" };
 for (const r of ROUTES) for (const l of LANGS) {
   const d = I[l], pair = a => st(a[0], l) + " → " + st(a[1], l), pre = l === "ru" ? "" : "../";
   const v = {ver: VER, lang: l, base: pre, home: "./", FROM: r.FROM, TO: r.TO, BACK: r.BACK, hash: r.hash, rev: r.rev,
@@ -130,7 +143,7 @@ for (const r of ROUTES) for (const l of LANGS) {
   v.alts = LANGS.map(x => `    <link rel="alternate" hreflang="${x}" href="${SITE + path(x, r.file)}">`).join("\n") + `\n    <link rel="alternate" hreflang="x-default" href="${SITE + r.file}">`;
   v.langs = LANGS.map(x => `<a href="${pre + path(x, r.file)}" hreflang="${x}" lang="${x}"${x === l ? ' class="on"' : ""}>${x.toUpperCase()}</a>`).join("");
   d["buy.d.s3t"] = S3T[l];
-  if (r.slice || r.autotxt) { const tx = (r.xtxt ? TRANSFER_TXT : SLICE_TXT)[l](st(r.FROM, l), st(r.TO, l), r.x ? xin(r.x, l) : ""); for (const k in tx) if (!d[r.id + "." + k]) d[r.id + "." + k] = tx[k]; for (const k of ["all", "more"]) if (!d[r.id + "." + k]) d[r.id + "." + k] = d[r.like + "." + k] }
+  if (r.slice || r.autotxt) { const tx = (r.xtxt ? TRANSFER_TXT : SLICE_TXT)[l](st(r.FROM, l), st(r.TO, l), r.x ? xin(r.x, l) : ""); for (const k in tx) if (!d[r.id + "." + k]) d[r.id + "." + k] = tx[k]; for (const k of ["all", "more"]) if (!d[r.id + "." + k]) d[r.id + "." + k] = k === "all" && allTxt(r, l) || d[r.like + "." + k] }
   for (const k of ["title", "desc", "h1", "lead", "all", "more"]) v["r_" + k] = fill(d[r.id + "." + k], v);
   v["buy.t3"] = fill(d[r.t3 || "buy.t3out"], v); v["buy.t.s1x"] = fill(d[r.s1 || (r.one ? "buy.t.s1one" : "buy.t.s1")], v);
   const X = r.x || "Хелм", direct = r.direct !== false, plat = r.plat !== undefined ? r.plat : X === "Хелм";
@@ -219,17 +232,7 @@ for (const t of (() => { try { return JSON.parse(fs.readFileSync("i18n.db.json",
 fs.writeFileSync("pages.js", "/* создаётся сборкой (node sync.js) из базы, руками не править */\nwindow.CFG.PAGES = " + JSON.stringify(PGS) + ";\nwindow.CFG.TRAIN_BADGES = " + JSON.stringify(BADGES) + ";\n");
 /* страны: [код, название, «в …» (вин.), «из …» (род.), флаг-эмодзи]; порядок — как на главной (поле sort).
    Список и флаги — таблица countries, русские формы — ui_texts (cn.<код>, cn.<код>.gen, колонка ru); для uk/en/pl названия берутся из I.CN. Правятся во вкладке «Страны» админки. */
-const CTRY = (() => {
-  let db; try { db = JSON.parse(fs.readFileSync("i18n.db.json", "utf8")) } catch (e) { db = {} }
-  if (!(db.countries || []).length) throw new Error("build.js: в i18n.db.json нет списка стран. Выполните node sync.js");
-  const f = {};
-  for (const r of db.ui || []) { const m = r.key.match(/^cn\.([a-z]{2})(\.gen)?$/); if (m && r.ru) (f[m[1]] = f[m[1]] || {})[m[2] ? "gen" : "acc"] = r.ru }
-  return db.countries.slice().sort((x, y) => x.sort - y.sort || x.slug.localeCompare(y.slug)).map(c => {
-    const o = f[c.slug] || {};
-    if (!o.acc || !o.gen) console.warn("ВНИМАНИЕ: у страны " + c.slug + " нет русских форм «в …» / «из …» (вкладка «Страны» в админке): на главной будет название в именительном падеже");
-    return [c.slug, c.name, o.acc || c.name, o.gen || c.name, c.flag || ""]
-  })
-})();
+
 /* ссылки блока «Полезная информация» на главной: телефоны, где купить билет, аэропорты — таблица home_links (вкладка «Главная» в админке) */
 const HL = (() => {
   let db; try { db = JSON.parse(fs.readFileSync("i18n.db.json", "utf8")) } catch (e) { db = {} }
