@@ -428,6 +428,13 @@
    "pl": "Bilet {pkp} na pociąg RJ kup osobno u czeskiego przewoźnika RegioJet — na stronie regiojet.cz lub w aplikacji RegioJet."
   },
   {
+   "key": "buy.t.s2uz",
+   "ru": "Поезд из {a} в {b} отправляется на следующие сутки, поэтому продажа билетов на него в приложении «Укрзалізниця» открывается на следующий день.",
+   "uk": "Поїзд із {a} до {b} відправляється наступної доби, тому продаж квитків на нього в застосунку «Укрзалізниця» відкривається наступного дня.",
+   "en": "The train from {a} to {b} departs the next day, so ticket sales for it in the Ukrzaliznytsia app open the next day.",
+   "pl": "Pociąg z {a} do {b} odjeżdża następnej doby, dlatego sprzedaż biletów na niego w aplikacji Ukrzaliznytsia rusza następnego dnia."
+  },
+  {
    "key": "buy.t.s2v",
    "ru": "Билет на остальную часть пути приобретите отдельно, например у австрийского перевозчика ÖBB — на tickets.oebb.at или в приложении ÖBB Tickets.",
    "uk": "Квиток на решту шляху придбайте окремо, наприклад в австрійського перевізника ÖBB — на tickets.oebb.at або в застосунку ÖBB Tickets.",
@@ -1133,13 +1140,6 @@
    "uk": "З пересадкою",
    "en": "With a transfer",
    "pl": "Z przesiadką"
-  },
-  {
-   "key": "buy.t.s2uz",
-   "ru": "Поезд из {a} в {b} отправляется на следующие сутки, поэтому продажа билетов на него в приложении «Укрзалізниця» открывается на следующий день.",
-   "uk": "Поїзд із {a} до {b} відправляється наступної доби, тому продаж квитків на нього в застосунку «Укрзалізниця» відкривається наступного дня.",
-   "en": "The train from {a} to {b} departs the next day, so ticket sales for it in the Ukrzaliznytsia app open the next day.",
-   "pl": "Pociąg z {a} do {b} odjeżdża następnej doby, dlatego sprzedaż biletów na niego w aplikacji Ukrzaliznytsia rusza następnego dnia."
   }
  ],
  "stations": [
@@ -5640,6 +5640,6 @@
   }
  ],
  "meta": {
-  "updated": "2026-11-17T10:11:22.211633+00:00"
+  "updated": "2026-11-17T19:39:39.238833+00:00"
  }
 }
