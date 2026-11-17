@@ -903,8 +903,11 @@ details[open] .more .chev{transform:rotate(-135deg) translate(-2px,-2px)}
 .pg{margin:0}
 
 /* страна со списком «Ещё маршруты» — на всю ширину */
-.pg:has(details){grid-column:1/-1}
-.pg:has(details) .rts{display:grid;grid-template-columns:repeat(2,1fr);gap:6px 10px}
+.pg:has(details),.pg.wide{grid-column:1/-1}
+.pg:has(details) .rts,.pg.wide .rts{display:grid;grid-template-columns:repeat(2,1fr);gap:6px 10px}
+.pg.wide .rts{grid-auto-flow:dense}
+.pg.wide .rt.d-o{grid-column:1}
+.pg.wide .rt.d-i{grid-column:2}
 
 /* внутри раскрытого списка: слева «из Украины», справа «в Украину» */
 .pg details .rts{grid-auto-flow:dense}
@@ -920,8 +923,8 @@ details[open] .more .chev{transform:rotate(-135deg) translate(-2px,-2px)}
 .pg summary:hover{filter:brightness(.96)}
 
 @media (max-width:560px){
-  .pg:has(details) .rts{grid-template-columns:1fr}
-  .pg details .rt.d-o,.pg details .rt.d-i{grid-column:auto}
+  .pg:has(details) .rts,.pg.wide .rts{grid-template-columns:1fr}
+  .pg details .rt.d-o,.pg details .rt.d-i,.pg.wide .rt.d-o,.pg.wide .rt.d-i{grid-column:auto}
 }
 
 /* ===== Сворачивание списка станций (fold-stations.js) ===== */
