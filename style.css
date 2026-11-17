@@ -1236,7 +1236,7 @@ dialog.fb .fb-row .btn {
 
 /* ===== Шапка: верхняя панель (логотип + язык), схема маршрута, крупный заголовок ===== */
 header {
-    padding: 16px 0 50px;
+    padding: 14px 0 46px;
     overflow: hidden;
     background: radial-gradient(700px 320px at 88% -10%, #5a54e6 0, transparent 62%), radial-gradient(520px 260px at -5% 110%, rgba(255, 210, 63, .14) 0, transparent 60%), linear-gradient(160deg, var(--board2), var(--board))
 }
@@ -1246,7 +1246,7 @@ header {
     align-items: center;
     justify-content: space-between;
     gap: 12px;
-    margin-bottom: 24px
+    margin-bottom: 16px
 }
 
 header a.logo {
@@ -1294,30 +1294,35 @@ header .lang a.on {
 }
 
 header h1 {
-    margin: 0 0 8px;
-    font-size: clamp(26px, 5vw, 38px);
+    margin: 0 0 6px;
+    font-size: clamp(24px, 4.4vw, 34px);
     line-height: 1.12
 }
 
 header p {
-    font-size: 16px;
-    line-height: 1.5;
+    font-size: 15px;
+    line-height: 1.45;
     opacity: .88
 }
 
 .hero-art {
     position: absolute;
     right: 18px;
-    bottom: 40px;
-    width: min(40%, 360px);
-    height: auto;
+    top: 56px;
+    height: 92px;
+    width: auto;
+    max-width: 36%;
     pointer-events: none;
     transform: scaleX(-1) /* Украина на востоке (справа), Европа на западе (слева) */
 }
 
 @media (min-width: 760px) {
-    header h1, header p {
-        max-width: min(620px, 64%)
+    header h1 {
+        max-width: min(760px, 66%)
+    }
+
+    header p {
+        max-width: min(830px, 70%)
     }
 }
 
@@ -1328,8 +1333,8 @@ header p {
 }
 
 .dirnav {
-    margin-top: 0;
-    margin-bottom: 14px
+    margin-top: 26px;
+    margin-bottom: 16px
 }
 
 .dirnav a {
