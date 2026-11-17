@@ -1233,3 +1233,114 @@ dialog.fb .fb-row .btn {
     min-height: 0;
     color: #d1432f
 }
+
+/* ===== Шапка: верхняя панель (логотип + язык), схема маршрута, крупный заголовок ===== */
+header {
+    padding: 16px 0 50px;
+    overflow: hidden;
+    background: radial-gradient(700px 320px at 88% -10%, #5a54e6 0, transparent 62%), radial-gradient(520px 260px at -5% 110%, rgba(255, 210, 63, .14) 0, transparent 60%), linear-gradient(160deg, var(--board2), var(--board))
+}
+
+.hbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 24px
+}
+
+header a.logo {
+    gap: 11px;
+    letter-spacing: 0
+}
+
+header a.logo .rails {
+    width: 36px;
+    height: 36px;
+    border-radius: 11px;
+    background: linear-gradient(135deg, #ffd95e, #ffb300);
+    color: #3a2f00;
+    box-shadow: 0 4px 14px rgba(255, 179, 0, .35)
+}
+
+header a.logo .wm {
+    font-size: 15px;
+    font-weight: 800;
+    letter-spacing: .22em;
+    color: #fff
+}
+
+header .lang {
+    position: static;
+    padding: 3px;
+    gap: 2px;
+    border-radius: 99px;
+    background: rgba(255, 255, 255, .08);
+    border: 1px solid rgba(255, 255, 255, .16)
+}
+
+header .lang a {
+    background: transparent;
+    padding: 5px 11px;
+    transition: background .15s
+}
+
+header .lang a:hover {
+    background: rgba(255, 255, 255, .16)
+}
+
+header .lang a.on {
+    background: var(--acc)
+}
+
+header h1 {
+    margin: 0 0 8px;
+    font-size: clamp(26px, 5vw, 38px);
+    line-height: 1.12
+}
+
+header h1#h1 {
+    font-size: clamp(30px, 6.2vw, 50px);
+    line-height: 1.08;
+    margin-bottom: 12px
+}
+
+header p {
+    font-size: 16px;
+    line-height: 1.5;
+    opacity: .88
+}
+
+.hero-art {
+    position: absolute;
+    right: 18px;
+    bottom: 40px;
+    width: min(40%, 360px);
+    height: auto;
+    max-height: calc(100% - 120px);
+    pointer-events: none
+}
+
+@media (min-width: 760px) {
+    header h1, header p {
+        max-width: min(620px, 64%)
+    }
+}
+
+@media (max-width: 759px) {
+    .hero-art {
+        display: none
+    }
+}
+
+.dirnav {
+    margin-top: 22px
+}
+
+.dirnav a {
+    padding: 10px 20px;
+    border: 1px solid rgba(255, 255, 255, .2);
+    background: rgba(255, 255, 255, .1);
+    backdrop-filter: blur(4px)
+}
+
