@@ -1140,6 +1140,13 @@
    "uk": "З пересадкою",
    "en": "With a transfer",
    "pl": "Z przesiadką"
+  },
+  {
+   "key": "buy.t.s2mx",
+   "ru": "Поезд {pkp} отправляется на следующие сутки, поэтому продажа билетов на него в приложении «Укрзалізниця» открывается на следующий день. Также билет можно приобрести заранее у венгерского перевозчика MÁV — на jegy.mav.hu или в приложении MÁVPlusz. Как правило, билеты у MÁV дешевле.",
+   "uk": "Поїзд {pkp} відправляється наступної доби, тому продаж квитків на нього в застосунку «Укрзалізниця» відкривається наступного дня. Також квиток можна придбати заздалегідь в угорського перевізника MÁV — на jegy.mav.hu або в застосунку MÁVPlusz. Як правило, квитки в MÁV дешевші.",
+   "en": "The train {pkp} departs the next day, so ticket sales for it in the Ukrzaliznytsia app open the next day. You can also buy a ticket in advance from the Hungarian carrier MÁV, on jegy.mav.hu or in the MÁVPlusz app. MÁV tickets are usually cheaper.",
+   "pl": "Pociąg {pkp} odjeżdża następnej doby, dlatego sprzedaż biletów na niego w aplikacji Ukrzaliznytsia rusza następnego dnia. Bilet można też kupić wcześniej u węgierskiego przewoźnika MÁV — na jegy.mav.hu lub w aplikacji MÁVPlusz. Zwykle bilety MÁV są tańsze."
   }
  ],
  "stations": [
