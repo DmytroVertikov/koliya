@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- build 2026-11-17T19:20:46.987Z vmwl2v58k direct=true x=Хелм -->
+<!-- build 2026-11-17T19:26:44.485Z vmwl32t2k direct=true x=Хелм -->
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -266,7 +266,7 @@
 <script src="../config.js"></script>
 <script src="../pages.js"></script>
 <script src="../dict/en.js"></script>
-<script src="../common.js?v=mwl2v58k"></script>
+<script src="../common.js?v=mwl32t2k"></script>
 <script>
     const SPLIT = []; /* [станция пересадки, заголовок, пограничный контроль]: страница делится на группы по пересадке */
     const HIDE = [].map(s => s.trim().toLowerCase()); /* номера поездов, скрытых на этой странице */
@@ -339,8 +339,8 @@
         const blocks = [];
         document.querySelectorAll("#more h3[data-car]").forEach(h => {
             const x = list.find(x => {
-                const L = x.p.legs, cz = L.find(l => !isUz(l)), s = L[0].stops;
-                return L.length > 1 && cz && carOf(cz) === h.dataset.car && norm(s[s.length - 1].name).startsWith(norm(h.dataset.x))
+                const L = x.p.legs, mav = h.dataset.car === "mav", cz = mav ? L[L.length - 1] : L.find(l => !isUz(l)), s = L[0].stops; /* MÁV: поезда второго отрезка нумеруются как у УЗ (031Ш), поэтому перевозчика по номеру не узнать — ищем по станции пересадки */
+                return L.length > 1 && cz && (mav || carOf(cz) === h.dataset.car) && norm(s[s.length - 1].name).startsWith(norm(h.dataset.x))
             });
             if (!x) { blocks.push({blk: h.parentNode, k: [9, 0]}); return }
             const L = x.p.legs, last = L[L.length - 1].stops, ft = tm(L[0].stops[0].time) || x.h.ft, tt = tm(last[last.length - 1].time) || x.h.tt, u = L.find(isUz);

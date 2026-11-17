@@ -226,7 +226,7 @@ for (const r of ROUTES) for (const l of LANGS) {
   { const k2 = r.ds2 || "buy.d.s2", s2 = fill(d[k2], v); v["buy.d.s2"] = r.id === "kw" || !/^buy\.d\.s2v?$/.test(k2) ? s2 : s2.replace(/\s*[^.]*\.\s*$/, ""); } /* фраза про высокий спрос на прямой поезд (последнее предложение) — только на странице Киев → Варшава */ v["buy.d.s3"] = fill(d[r.ds3 || "buy.d.s3"], v); /* dOnly: страница только с прямым поездом (одна колонка покупки УЗ), coach: false: без описания купе */
   const tpl0b = r.third ? tpl0 : tpl0.replace(/<!--H-->[\s\S]*?<!--\/H-->/g, ""); /* third: третий столбец покупки «С пересадкой в …» (вторая пересадочная станция) */
   /* cols: любое число блоков покупки «С пересадкой … · УЗ + перевозчик»; train — номер поезда УЗ, который нужно выбрать */
-  const CARRIER = {cd: {n: "ČD", url: "https://www.cd.cz/spojeni-a-jizdenka/", s2: "buy.t.s2cd", b2: "buy.t.b2cd"}, rj: {n: "RegioJet", url: "https://regiojet.cz/", s2: "buy.t.s2rj", b2: "buy.t.b2rj"}};
+  const CARRIER = {cd: {n: "ČD", url: "https://www.cd.cz/spojeni-a-jizdenka/", s2: "buy.t.s2cd", b2: "buy.t.b2cd"}, rj: {n: "RegioJet", url: "https://regiojet.cz/", s2: "buy.t.s2rj", b2: "buy.t.b2rj"}, mav: {n: "MÁV", url: "https://jegy.mav.hu/", s2: "buy.t.s2m", b2: "buy.t.b2m"}};
   /* падежи для «отправление из … , прибытие в …»: [«из/з/z» (родительный), «в/до/do» (винительный или родительный)] */
   const CASEF = {ru: {"Киев": ["Киева", "Киев"], "Прага": ["Праги", "Прагу"], "Днепр": ["Днепра", "Днепр"]}, uk: {"Киев": ["Києва", "Києва"], "Прага": ["Праги", "Праги"], "Днепр": ["Дніпра", "Дніпра"]}, pl: {"Киев": ["Kijowa", "Kijowa"], "Прага": ["Pragi", "Pragi"], "Днепр": ["Dnipro", "Dnipro"]}};
   const cf = (n, i) => (CASEF[l] && CASEF[l][n] && CASEF[l][n][i]) || st(n, l);
