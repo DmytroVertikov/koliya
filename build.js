@@ -117,6 +117,14 @@ const st = (n, l) => { const s = I.ST[n], i = {uk: 0, en: 1, pl: 2}[l]; return s
 /* короткое название для компактных ссылок (главная): short_uk / short_en / short_pl из таблицы станций; нет короткого — обычное название; ru остаётся как есть */
 /* короткое название для H1 шапки страницы: без «Главный», «Центральный» и т. п. (как в карточках); нет короткого — обычное */
 const stH1 = (n, l) => { const s = I.ST[n], i = {ru: 6, uk: 7, en: 8, pl: 9}[l]; return s && s[i] ? s[i] : st(n, l) };
+/* «в Перемышле и Чопе»: если у страницы несколько блоков покупки (cols) с разными станциями пересадки, в тексте перечисляются все (по алфавиту); иначе одна станция x */
+const xinS = (n, l) => l === "en" ? "in " + stH1(n, l) : xin(n, l); /* «в Перемышле» без «Главный» для en */
+const xAll = (r, l) => {
+  const xs = [...new Set((r.cols || []).map(c => c.x))].sort((a, b) => a.localeCompare(b, "ru"));
+  if (xs.length < 2) return r.x ? xinS(r.x, l) : "";
+  const J = {ru: " и ", uk: " та ", en: " and ", pl: " i "}[l], rest = n => l === "en" ? stH1(n, l) : xin(n, l).replace(/^\S+\s+/, "");
+  return xinS(xs[0], l) + xs.slice(1).map(n => J + rest(n)).join("")
+};
 const stShort = (n, l) => { const s = I.ST[n], i = {uk: 7, en: 8, pl: 9}[l]; return s && i != null && s[i] ? s[i] : st(n, l) };
 const fill = (s, v) => s.replace(/\{(\w+)\}/g, (m, k) => k in v ? v[k] : m);
 const path = (l, f) => (l === "ru" ? "" : l + "/") + f;
@@ -152,11 +160,11 @@ const allTxt = (r, l) => { const m = String(r.hash).match(/^ua-([a-z]{2})$|^([a-
 for (const r of ROUTES) for (const l of LANGS) {
   const d = I[l], pair = a => st(a[0], l) + " → " + st(a[1], l), pre = l === "ru" ? "" : "../";
   const v = {ver: VER, lang: l, base: pre, home: "./", FROM: r.FROM, TO: r.TO, BACK: r.BACK, hash: r.hash, rev: r.rev,
-    chipRev: pair([r.TO, r.FROM]), dir: pair([r.FROM, r.TO]), uz: pair(r.uz || [r.FROM, r.TO]), pkp: pair(r.pkp || [r.FROM, r.TO]), canon: SITE + path(l, r.file)};
+    chipRev: stH1(r.TO, l) + " → " + stH1(r.FROM, l), dir: pair([r.FROM, r.TO]), uz: pair(r.uz || [r.FROM, r.TO]), pkp: pair(r.pkp || [r.FROM, r.TO]), canon: SITE + path(l, r.file)};
   v.alts = LANGS.map(x => `    <link rel="alternate" hreflang="${x}" href="${SITE + path(x, r.file)}">`).join("\n") + `\n    <link rel="alternate" hreflang="x-default" href="${SITE + r.file}">`;
   v.langs = LANGS.map(x => `<a href="${pre + path(x, r.file)}" hreflang="${x}" lang="${x}"${x === l ? ' class="on"' : ""}>${x.toUpperCase()}</a>`).join("");
   d["buy.d.s3t"] = S3T[l];
-  if (r.slice || r.autotxt) { const tx = (r.xtxt ? TRANSFER_TXT : SLICE_TXT)[l](st(r.FROM, l), st(r.TO, l), r.x ? xin(r.x, l) : ""); tx.h1 = (r.xtxt ? TRANSFER_TXT : SLICE_TXT)[l](stH1(r.FROM, l), stH1(r.TO, l), "").h1; for (const k in tx) if (!d[r.id + "." + k]) d[r.id + "." + k] = tx[k]; for (const k of ["all", "more"]) if (!d[r.id + "." + k]) d[r.id + "." + k] = k === "all" && allTxt(r, l) || d[r.like + "." + k] }
+  if (r.slice || r.autotxt) { const tx = (r.xtxt ? TRANSFER_TXT : SLICE_TXT)[l](stH1(r.FROM, l), stH1(r.TO, l), xAll(r, l)); for (const k in tx) if (!d[r.id + "." + k]) d[r.id + "." + k] = tx[k]; for (const k of ["all", "more"]) if (!d[r.id + "." + k]) d[r.id + "." + k] = k === "all" && allTxt(r, l) || d[r.like + "." + k] }
   for (const k of ["title", "desc", "h1", "lead", "all", "more"]) v["r_" + k] = fill(d[r.id + "." + k], v);
   v["buy.t3"] = fill(d[r.t3 || "buy.t3out"], v); v["buy.t.s1x"] = fill(d[r.s1 || (r.one ? "buy.t.s1one" : "buy.t.s1")], v);
   const X = r.x || "Хелм", direct = r.direct !== false, plat = r.plat !== undefined ? r.plat : X === "Хелм";
