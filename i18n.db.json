@@ -863,10 +863,10 @@
   },
   {
    "key": "ix.h1",
-   "ru": "Поездом в Украину и из Украины",
-   "uk": "Потягом в Україну та з України",
-   "en": "By train to and from Ukraine",
-   "pl": "Pociągiem na Ukrainę i z Ukrainy"
+   "ru": "Поездом из Украины в Европу",
+   "uk": "Потягом з України до Європи",
+   "en": "By train from Ukraine to Europe",
+   "pl": "Pociągiem z Ukrainy do Europy"
   },
   {
    "key": "ix.help.h",
@@ -975,10 +975,10 @@
   },
   {
    "key": "ix.title",
-   "ru": "Колія: поездом из Украины и в Украину",
-   "uk": "Колія: потягом з України та в Україну",
-   "en": "Koliya: by train from and to Ukraine",
-   "pl": "Koliya: pociągiem z Ukrainy i na Ukrainę"
+   "ru": "Колія: поездом из Украины в Европу",
+   "uk": "Колія: потягом з України до Європи",
+   "en": "Koliya: by train from Ukraine to Europe",
+   "pl": "Koliya: pociągiem z Ukrainy do Europy"
   },
   {
    "key": "ix.toUa",
