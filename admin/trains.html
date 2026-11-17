@@ -593,6 +593,7 @@ function colsRead(errs) {
         if (g("sale_at")) c.sale_at = g("sale_at");
         if (g("sale_time")) c.sale_time = g("sale_time");
         if (!c.x) errs.push(n + "укажите станцию пересадки");
+        else if (!findStation(c.x)) errs.push(n + "станции «" + c.x + "» нет в списке станций (проверьте раскладку клавиатуры и написание)");
         if (!c.train) errs.push(n + "укажите номер поезда УЗ");
         if (c.uz.some(z => !z)) errs.push(n + "заполните билет Укрзалізниці (от и до)");
         if (c.pkp.some(z => !z)) errs.push(n + "заполните билет второго перевозчика (от и до)");
