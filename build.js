@@ -295,8 +295,10 @@ for (const l of LANGS) {
   v.popular = CTRY.map(c => {
     const all = PGS.filter(p => ctryOf(p) === c[0]);
     if (!all.length) return "";
-    const top = POP[c[0]] ? all.filter(p => POP[c[0]].includes(p.href)) : all, rest = all.filter(p => !top.includes(p));
-    return `<div class="pg"><h3>${flag(c, 21, 16)}${hx(names[c[0]])}</h3><div class="rts">${top.map(chip).join("")}</div>${rest.length ? `<details><summary>${hx(fill(d["ix.more"], {n: rest.length}))}</summary><div class="rts">${rest.map(chip).join("")}</div></details>` : ""}</div>`
+    /* не больше 5 строк (по 5 маршрутов «из Украины» и «в Украину») на виду; остальное — в раскрывающемся списке «Ещё маршруты» */
+    const out = p => /^ua-/.test(p.route), cut = list => { const o = list.filter(out), i = list.filter(p => !out(p)); if (Math.max(o.length, i.length) <= 5) return list; const keep = new Set([...o.slice(0, 5), ...i.slice(0, 5)]); return list.filter(p => keep.has(p)) };
+    const top = cut(POP[c[0]] ? all.filter(p => POP[c[0]].includes(p.href)) : all), rest = all.filter(p => !top.includes(p));
+    return `<div class="pg${top.length > 5 || rest.length ? " wide" : ""}"><h3>${flag(c, 21, 16)}${hx(names[c[0]])}</h3><div class="rts">${top.map(chip).join("")}</div>${rest.length ? `<details><summary>${hx(fill(d["ix.more"], {n: rest.length}))}</summary><div class="rts">${rest.map(chip).join("")}</div></details>` : ""}</div>`
   }).filter(Boolean).join("\n");
   v.info = `<div><h3>${hx(d["ix.help.h"])}</h3><p>${hlist("phone").map(x => `<a href="tel:${hx(x.label_ru.replace(/[^\d+]/g, ""))}"><b>${hx(x.label_ru)}</b></a>`).join(" · ")}</p><p>${hx(d["ix.help.p"])}</p></div>
 <div><h3>${hx(d["ix.buy.h"])}</h3><p class="lk">${hlist("buy").map(x => `<a href="${hx(x.url)}">${hx(hlab(x, l))}</a>`).join("")}</p></div>
