@@ -558,7 +558,12 @@ function colRowHtml(c) {
         <div><label>Продажа УЗ открывается в (пусто — 08:00)</label>${t("open", c.open, 90, "09:00")}</div>
         <button type="button" class="colrm" style="align-self:end">Удалить блок</button></div>
         <div class="frow"><div><label>Билет Укрзалізниці: от → до</label><span>${t("uz0", (c.uz || [])[0], 150)} → ${t("uz1", (c.uz || [])[1], 170)}</span></div>
-        <div><label>Билет второго перевозчика: от → до</label><span>${t("pkp0", (c.pkp || [])[0], 170)} → ${t("pkp1", (c.pkp || [])[1], 150)}</span></div></div></div>`
+        <div><label>Билет второго перевозчика: от → до</label><span>${t("pkp0", (c.pkp || [])[0], 170)} → ${t("pkp1", (c.pkp || [])[1], 150)}</span></div></div>
+        <details ${c.days ? "open" : ""}><summary class="muted">Особая продажа этого поезда (необязательно)</summary><div class="frow">
+        <div><label>Продажа за сколько суток</label>${t("days", c.days, 70, "10")}</div>
+        <div><label>Время — отправление со станции</label>${t("sale_at", c.sale_at, 130, "Ужгород")}</div>
+        <div><label>Время (запасное, если станции нет в поезде)</label>${t("sale_time", c.sale_time, 90, "11:12")}</div></div>
+        <p class="muted" style="margin:2px 0 0">В инструкцию добавится фраза «Поезд № …: продажа открывается за N суток до отправления[, в ЧЧ:ММ по киевскому времени]». Если указана станция, сайт сам берёт время отправления поезда с неё из варианта, иначе — запасное время.</p></details></div>`
 }
 function colsHtml(r) {
     const cols = colsOk((r.extra || {}).cols) ? r.extra.cols : [];
@@ -584,11 +589,18 @@ function colsRead(errs) {
         const g = k => row.querySelector(`[data-c="${k}"]`).value.trim(), n = "Блок покупки " + (i + 1) + ": ";
         const c = {x: g("x"), uz: [g("uz0"), g("uz1")], car: g("car"), pkp: [g("pkp0"), g("pkp1")], train: g("train")};
         if (g("open")) c.open = g("open");
+        if (g("days")) c.days = +g("days");
+        if (g("sale_at")) c.sale_at = g("sale_at");
+        if (g("sale_time")) c.sale_time = g("sale_time");
         if (!c.x) errs.push(n + "укажите станцию пересадки");
         if (!c.train) errs.push(n + "укажите номер поезда УЗ");
         if (c.uz.some(z => !z)) errs.push(n + "заполните билет Укрзалізниці (от и до)");
         if (c.pkp.some(z => !z)) errs.push(n + "заполните билет второго перевозчика (от и до)");
         if (c.open && !/^\d{1,2}:\d{2}$/.test(c.open)) errs.push(n + "время открытия продажи — вида 09:00");
+        if (g("days") && !/^[1-9]\d?$/.test(g("days"))) errs.push(n + "срок продажи — число суток, например 10");
+        if ((c.sale_at || c.sale_time) && !c.days) errs.push(n + "укажите, за сколько суток открывается продажа");
+        if (c.sale_at && !c.sale_time) errs.push(n + "укажите запасное время продажи (на случай, если станции нет в поезде)");
+        if (c.sale_time && !/^\d{1,2}:\d{2}$/.test(c.sale_time)) errs.push(n + "время продажи — вида 11:12");
         out.push(c)
     });
     return out

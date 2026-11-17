@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- build 2026-11-17T07:49:49.270Z vmwke6kan direct=true x=Хелм -->
+<!-- build 2026-11-17T08:04:14.848Z vmwkep463 direct=true x=Хелм -->
 <html lang="ru">
 <head>
     <meta charset="utf-8">
@@ -265,7 +265,7 @@
 <script src="config.js"></script>
 <script src="pages.js"></script>
 <script src="dict/ru.js"></script>
-<script src="common.js?v=mwke6kan"></script>
+<script src="common.js?v=mwkep463"></script>
 <script>
     const SPLIT = []; /* [станция пересадки, заголовок, пограничный контроль]: страница делится на группы по пересадке */
     const HIDE = [].map(s => s.trim().toLowerCase()); /* номера поездов, скрытых на этой странице */
@@ -344,6 +344,8 @@
             if (!x) { blocks.push({blk: h.parentNode, k: [9, 0]}); return }
             const L = x.p.legs, last = L[L.length - 1].stops, ft = tm(L[0].stops[0].time) || x.h.ft, tt = tm(last[last.length - 1].time) || x.h.tt, u = L.find(isUz);
             if (h.dataset.dt) h.insertAdjacentText("beforeend", " (" + h.dataset.dt.replace("{t1}", ft).replace("{t2}", tt) + ")");
+            /* особая продажа: время открытия = время отправления поезда УЗ с указанной станции (например, 003Л из Ужгорода) */
+            if (u) h.parentNode.querySelectorAll(".stime[data-at]").forEach(e => { const s = u.stops.find(z => norm(z.name).startsWith(norm(e.dataset.at))), t = s && tm(s.time); if (t) e.textContent = t });
             if (u) h.parentNode.querySelectorAll(".utr").forEach(e => e.textContent = String(u.train).trim().replace(/^№\s*/, "").toUpperCase());
             blocks.push({blk: h.parentNode, k: [0, list.indexOf(x)]})
         });
