@@ -21,6 +21,7 @@ const I = (() => {
     const a = [s.name_uk || "", s.name_en || "", s.name_pl || "", s.in_ru || "", s.in_uk || "", s.in_pl || "", s.short_ru || "", s.short_uk || "", s.short_en || "", s.short_pl || ""]; /* [6..9] — короткие названия для карточек */
     for (const n of [s.name_ru].concat(s.aliases || [])) if (!(n in I.ST)) I.ST[n] = a
   }
+  I.META = db.meta || {};
   return I
 })();
 /* тексты формы обратной связи (common.js) по умолчанию; если ключ fb.* есть в ui_texts (админка → «Тексты»), берётся значение из базы */
@@ -52,6 +53,9 @@ const FB_DEF = {
   "fb.wait": {ru: "Подождите несколько секунд перед повторной отправкой.", uk: "Зачекайте кілька секунд перед повторним надсиланням.", en: "Please wait a few seconds before sending again.", pl: "Poczekaj kilka sekund przed ponownym wysłaniem."}
 };
 for (const k in FB_DEF) for (const l of LANGS) if (!I[l][k]) I[l][k] = FB_DEF[k][l];
+/* подпись к источникам данных в подвале; если ключ есть в ui_texts (админка → «Тексты»), берётся значение из базы */
+const FOOT_DEF = {"f.src": {ru: "Источники данных о поездах:", uk: "Джерела даних про поїзди:", en: "Train data sources:", pl: "Źródła danych o pociągach:"}};
+for (const k in FOOT_DEF) for (const l of LANGS) if (!I[l][k]) I[l][k] = FOOT_DEF[k][l];
 /* что нужно браузеру: тексты интерфейса и станции (без текстов страниц маршрутов) */
 const CLIENT = JSON.parse(JSON.stringify(I));
 /* тексты блока «Ещё маршруты» по умолчанию; если ключ есть в ui_texts (админка → «Тексты»), берётся значение из базы */
@@ -159,6 +163,11 @@ const CTRY = (() => {
 })();
 /* «Все маршруты: Украина — Чехия» для страницы без своего текста: страны берутся из кода направления (ua-cz / cz-ua), а не копируются из похожей страницы (там всегда Польша) */
 const allTxt = (r, l) => { const m = String(r.hash).match(/^ua-([a-z]{2})$|^([a-z]{2})-ua$/); if (!m) return ""; const c = m[1] || m[2], UA = {ru: "Украина", uk: "Україна", en: "Ukraine", pl: "Ukraina"}[l], CC = l === "ru" ? (CTRY.find(z => z[0] === c) || [])[1] : ((I.CN[c] || {})[l] || [])[0]; return CC ? {ru: "Все маршруты: ", uk: "Усі маршрути: ", en: "All routes: ", pl: "Wszystkie trasy: "}[l] + (m[1] ? UA + " — " + CC : CC + " — " + UA) : "" };
+/* подвал: источники данных (название, сайт) и дата обновления информации. Дата — последнее изменение вариантов в базе (sync.js кладёт её в i18n.db.json → meta.updated), иначе дата сборки; в браузере common.js уточняет её по базе */
+const FOOT_SRC = [["Укрзалізниця", "https://uz.gov.ua/"], ["PKP Intercity", "https://intercity.pl/"], ["RegioJet", "https://regiojet.cz/"], ["České dráhy", "https://www.cd.cz/"], ["ZSSK", "https://www.zssk.sk/"], ["MÁV", "https://jegy.mav.hu/"], ["ÖBB", "https://www.oebb.at/"], ["CFR Călători", "https://www.cfrcalatori.ro/"], ["Deutsche Bahn", "https://www.bahn.de/"]];
+const fmtDate = x => new Intl.DateTimeFormat("ru-RU", {day: "2-digit", month: "2-digit", year: "numeric", timeZone: "Europe/Kyiv"}).format(x);
+const footDate = (txt, date) => /\{date\}/.test(txt) ? txt.replace(/\{date\}/g, `<time class="fdate">${date}</time>`) : txt.replace(/\d{1,2}\.\d{1,2}\.\d{4}/, `<time class="fdate">${date}</time>`);
+const footerHtml = (d, l) => `<div class="fcols">\n<div><b>🚆 Колія</b><p>${d.f1}</p></div>\n<div><b>${d.f2h}</b>\n<p>${d.f2a}</p>\n<p>${footDate(d.f2b, fmtDate(I.META.updated ? new Date(I.META.updated) : new Date()))}</p>\n<p>${d.f2c}</p></div>\n<div><b>${d.f3h}</b><p>${d.f3}</p></div></div>\n<div class="fbar"><div class="fsrc"><span class="fsl">${d["f.src"]}</span><ul class="fchips">${FOOT_SRC.map(x => `<li><a href="${x[1]}" target="_blank" rel="noopener">${x[0]}</a></li>`).join("")}</ul></div>\n<div class="flow"><span>© ${new Date().getFullYear()} Колія</span><button type="button" class="fb-link" data-fb="other">${d["fb.link"]}</button></div></div>`;
 for (const r of ROUTES) for (const l of LANGS) {
   const d = I[l], pair = a => st(a[0], l) + " → " + st(a[1], l), pre = l === "ru" ? "" : "../";
   const v = {ver: VER, lang: l, base: pre, home: "./", FROM: r.FROM, TO: r.TO, BACK: r.BACK, hash: r.hash, rev: r.rev,
@@ -303,8 +312,8 @@ for (const l of LANGS) {
   v.info = `<div><h3>${hx(d["ix.help.h"])}</h3><p>${hlist("phone").map(x => `<a href="tel:${hx(x.label_ru.replace(/[^\d+]/g, ""))}"><b>${hx(x.label_ru)}</b></a>`).join(" · ")}</p><p>${hx(d["ix.help.p"])}</p></div>
 <div><h3>${hx(d["ix.buy.h"])}</h3><p class="lk">${hlist("buy").map(x => `<a href="${hx(x.url)}">${hx(hlab(x, l))}</a>`).join("")}</p></div>
 <div><h3>${hx(d["ix.fly.h"])}</h3><p>${hx(d["ix.fly.p"])}</p><p class="lk">${hlist("airport").map(x => `<a href="${hx(x.url)}" target="_blank" rel="noopener">${hx(st(x.label_ru, l))}</a>`).join("")}</p></div>`;
-  /* подвал — тот же состав, что в FOOTER_HTML (common.js); скрипт потом перерисует его так же */
-  v.footer = `<div class="fcols">\n<div><b>🚆 Колія</b><p>${d.f1}</p></div>\n<div><b>${d.f2h}</b>\n<p>${d.f2a}</p>\n<p>${d.f2b}</p>\n<p>${d.f2c}</p></div>\n<div><b>${d.f3h}</b><p>${d.f3}</p></div></div>\n<p class="fine">${d.fsrc} <a href="https://uz.gov.ua/">uz.gov.ua</a> · <a href="https://intercity.pl/">intercity.pl</a> · <button type="button" class="fb-link" data-fb="other">${d["fb.link"]}</button> · © ${new Date().getFullYear()} Колія</p>`;
+  /* подвал — тот же состав, что в FOOTER_HTML (common.js); скрипт потом перерисует его так же и уточнит дату обновления */
+  v.footer = footerHtml(d, l);
   const out = ix.replace(/\{\{([\w.]+)\}\}/g, (m, k) => k in v ? v[k] : k in d ? fill(d[k], v) : (console.warn("нет ключа", k), m));
   if (l !== "ru") fs.mkdirSync(l, {recursive: true});
   fs.writeFileSync(path(l, "index.html"), out);

@@ -31,7 +31,9 @@ const CFG = new Function("window", fs.readFileSync("config.js", "utf8") + "\n;re
   try {
     const home_links = await get("home_links?select=kind,sort,label_ru,label_uk,label_en,label_pl,url&active=eq.true&order=kind,sort,id"), trains = await get("trains?select=number,badge&badge=not.is.null&order=number"), countries = await get("countries?select=slug,name,flag,sort&order=sort,slug"), ui = await get("ui_texts?select=key,ru,uk,en,pl&order=key"), stations = (await get("stations?select=*&order=name_ru")).map(s => ({name_ru: s.name_ru, name_uk: s.name_uk, name_en: s.name_en, name_pl: s.name_pl, in_ru: s.in_ru, in_uk: s.in_uk, in_pl: s.in_pl, short_ru: s.short_ru || null, short_uk: s.short_uk || null, short_en: s.short_en || null, short_pl: s.short_pl || null, aliases: s.aliases}));
     if (!ui.length) throw new Error("ui_texts пуста: выполните i18n.sql в Supabase");
-    fs.writeFileSync("i18n.db.json", JSON.stringify({ui, stations, countries, trains, home_links}, null, 1) + "\n");
+    let meta = {}; /* дата обновления для подвала: последнее изменение вариантов маршрутов */
+    try { const o = await get("options?select=updated_at&updated_at=not.is.null&order=updated_at.desc"); const m = o.length ? o[0].updated_at : null; if (m) meta.updated = m } catch (e) { try { meta = JSON.parse(fs.readFileSync("i18n.db.json", "utf8")).meta || {} } catch (e2) { } }
+    fs.writeFileSync("i18n.db.json", JSON.stringify({ui, stations, countries, trains, home_links, meta}, null, 1) + "\n");
     console.log("sync.js: текстов интерфейса: " + ui.length + ", станций: " + stations.length)
   } catch (e) {
     console.warn("sync.js: не удалось получить переводы из базы (" + e.message + "). Берётся прежний i18n.db.json.")

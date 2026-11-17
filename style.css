@@ -666,6 +666,71 @@ footer .fine {
     font-size: 12.5px
 }
 
+/* нижняя строка подвала: источники данных чипами, справа внизу © и обратная связь */
+footer .fbar {
+    margin-top: 28px;
+    padding-top: 18px;
+    border-top: 1px solid var(--line);
+    font-size: 12.5px
+}
+
+footer .fsrc {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 12px
+}
+
+footer .fsl {
+    color: var(--ink);
+    font-weight: 600
+}
+
+footer .fchips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    list-style: none;
+    margin: 0;
+    padding: 0
+}
+
+footer .fchips a {
+    display: inline-block;
+    padding: 4px 11px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: var(--card);
+    color: var(--brand);
+    font-weight: 600;
+    text-decoration: none;
+    transition: background .15s, color .15s, border-color .15s
+}
+
+footer .fchips a:hover {
+    background: var(--brand);
+    border-color: var(--brand);
+    color: var(--card)
+}
+
+footer .flow {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 8px 16px;
+    margin-top: 16px;
+    color: var(--mute)
+}
+
+footer .flow .fb-link {
+    text-decoration: none;
+    font-weight: 600
+}
+
+footer .flow .fb-link:hover {
+    text-decoration: underline
+}
+
 footer a {
     color: var(--brand)
 }
