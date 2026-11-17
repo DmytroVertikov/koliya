@@ -3545,6 +3545,54 @@
     "popular": false
   },
   {
+    "id": "budapest_kharkiv",
+    "file": "budapest-kharkiv.html",
+    "from_name": "Будапешт",
+    "to_name": "Харьков",
+    "route": "hu-ua",
+    "back": "ua-hu",
+    "rev": "kharkiv-budapest.html",
+    "kind": "transfer",
+    "x": "Мукачево",
+    "border": null,
+    "like_id": "wk",
+    "single": false,
+    "names": {
+      "Харьков": {
+        "en": "Kharkiv",
+        "pl": "Charków",
+        "uk": "Харків"
+      },
+      "Будапешт": {
+        "en": "Budapest Keleti",
+        "pl": "Budapest Keleti",
+        "uk": "Будапешт-Келеті"
+      }
+    },
+    "extra": {
+      "cols": [
+        {
+          "x": "Мукачево",
+          "uz": [
+            "Будапешт",
+            "Мукачево"
+          ],
+          "car": "uz",
+          "pkp": [
+            "Мукачево",
+            "Харьков"
+          ],
+          "train": "017Л"
+        }
+      ]
+    },
+    "sort": 1000,
+    "active": true,
+    "created_at": "2026-11-17T20:16:15.124235+00:00",
+    "texts": {},
+    "popular": false
+  },
+  {
     "id": "dnipro_budapest",
     "file": "dnipro-budapest.html",
     "from_name": "Днепр",
@@ -3679,6 +3727,54 @@
     "sort": 1000,
     "active": true,
     "created_at": "2026-11-15T19:17:29.810598+00:00",
+    "texts": {},
+    "popular": false
+  },
+  {
+    "id": "kharkiv_budapest",
+    "file": "kharkiv-budapest.html",
+    "from_name": "Харьков",
+    "to_name": "Будапешт",
+    "route": "ua-hu",
+    "back": "hu-ua",
+    "rev": "budapest-kharkiv.html",
+    "kind": "transfer",
+    "x": "Мукачево",
+    "border": null,
+    "like_id": "kw",
+    "single": false,
+    "names": {
+      "Харьков": {
+        "en": "Kharkiv",
+        "pl": "Charków",
+        "uk": "Харків"
+      },
+      "Будапешт": {
+        "en": "Budapest Keleti",
+        "pl": "Budapest Keleti",
+        "uk": "Будапешт-Келеті"
+      }
+    },
+    "extra": {
+      "cols": [
+        {
+          "x": "Мукачево",
+          "uz": [
+            "Харьков",
+            "Мукачево"
+          ],
+          "car": "mav",
+          "pkp": [
+            "Мукачево",
+            "Будапешт"
+          ],
+          "train": "017О"
+        }
+      ]
+    },
+    "sort": 1000,
+    "active": true,
+    "created_at": "2026-11-17T20:16:15.124235+00:00",
     "texts": {},
     "popular": false
   },
