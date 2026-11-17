@@ -3492,7 +3492,7 @@
     "rev": "prague-dnipro.html",
     "kind": "transfer",
     "x": "Перемышль Главный",
-    "border": null,
+    "border": "after",
     "like_id": "kw",
     "single": false,
     "names": {
@@ -3608,6 +3608,38 @@
     "popular": false
   },
   {
+    "id": "kremenchuk_prague",
+    "file": "kremenchuk-prague.html",
+    "from_name": "Кременчуг",
+    "to_name": "Прага",
+    "route": "ua-cz",
+    "back": "cz-ua",
+    "rev": "prague-kremenchuk.html",
+    "kind": "transfer",
+    "x": "Перемышль Главный",
+    "border": "after",
+    "like_id": "kw",
+    "single": false,
+    "names": {
+      "Прага": {
+        "en": "Przemyśl Główny",
+        "pl": "Przemyśl Główny",
+        "uk": "Перемишль-Головний"
+      },
+      "Кременчуг": {
+        "en": "Kremenchuk",
+        "pl": "Krzemieńczuk",
+        "uk": "Кременчук"
+      }
+    },
+    "extra": {},
+    "sort": 1000,
+    "active": true,
+    "created_at": "2026-11-17T09:33:22.742746+00:00",
+    "texts": {},
+    "popular": false
+  },
+  {
     "id": "odesa_prague",
     "file": "odesa-prague.html",
     "from_name": "Одесса",
@@ -3682,7 +3714,7 @@
     "rev": "dnipro-prague.html",
     "kind": "transfer",
     "x": "Перемышль Главный",
-    "border": null,
+    "border": "before",
     "like_id": "wk",
     "single": false,
     "names": {
@@ -3798,6 +3830,38 @@
     "popular": false
   },
   {
+    "id": "prague_kremenchuk",
+    "file": "prague-kremenchuk.html",
+    "from_name": "Прага",
+    "to_name": "Кременчуг",
+    "route": "cz-ua",
+    "back": "ua-cz",
+    "rev": "kremenchuk-prague.html",
+    "kind": "transfer",
+    "x": "Перемышль Главный",
+    "border": "before",
+    "like_id": "wk",
+    "single": false,
+    "names": {
+      "Прага": {
+        "en": "Przemyśl Główny",
+        "pl": "Przemyśl Główny",
+        "uk": "Перемишль-Головний"
+      },
+      "Кременчуг": {
+        "en": "Kremenchuk",
+        "pl": "Krzemieńczuk",
+        "uk": "Кременчук"
+      }
+    },
+    "extra": {},
+    "sort": 1000,
+    "active": true,
+    "created_at": "2026-11-17T09:33:22.742746+00:00",
+    "texts": {},
+    "popular": false
+  },
+  {
     "id": "prague_lviv",
     "file": "prague-lviv.html",
     "from_name": "Прага",
@@ -3827,29 +3891,26 @@
         {
           "x": "Чоп",
           "uz": [
-            "Чоп",
-            "Львов"
-          ],
-          "car": "rj",
-          "pkp": [
             "Прага",
             "Чоп"
           ],
-          "train": "003Л",
-          "days": 2,
-          "sale_at": "Ужгород",
-          "sale_time": "11:12"
+          "car": "rj",
+          "pkp": [
+            "Чоп",
+            "Львов"
+          ],
+          "train": "003Л"
         },
         {
           "x": "Перемышль",
           "uz": [
-            "Перемышль",
-            "Львов"
+            "Прага",
+            "Перемышль"
           ],
           "car": "rj",
           "pkp": [
-            "Прага",
-            "Перемышль"
+            "Перемышль",
+            "Львов"
           ],
           "open": "09:00",
           "train": "706Л"
@@ -3962,8 +4023,7 @@
             "Чоп",
             "Прага"
           ],
-          "train": "833Л",
-          "days": 10
+          "train": "833Л"
         },
         {
           "x": "Перемышль",
