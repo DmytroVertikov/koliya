@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- build 2026-11-17T10:14:14.053Z vmwkjca0l -->
+<!-- build 2026-11-17T19:12:19.184Z vmwl2k9cj -->
 <html lang="uk">
 <head>
     <meta charset="utf-8">
@@ -23,18 +23,18 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap">
-    <link rel="stylesheet" href="../style.css?v=mwkjca0l">
+    <link rel="stylesheet" href="../style.css?v=mwl2k9cj">
 </head>
 <body>
 <header>
     <div class="wrap"><div class="hbar"><a class="logo" href="#"><span class="rails" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="14" rx="3"/><path d="M5 11h14"/><circle cx="9" cy="14" r=".8" fill="currentColor"/><circle cx="15" cy="14" r=".8" fill="currentColor"/><path d="M8 21l2-4M16 21l-2-4"/></svg></span><span class="wm">КОЛІЯ</span></a><nav class="lang" aria-label="Language"><a href="../index.html" hreflang="ru" lang="ru">RU</a><a href="../uk/index.html" hreflang="uk" lang="uk" class="on">UK</a><a href="../en/index.html" hreflang="en" lang="en">EN</a><a href="../pl/index.html" hreflang="pl" lang="pl">PL</a></nav></div>
         <svg class="hero-art" viewBox="-24 -16 468 206" aria-hidden="true" focusable="false"><circle cx="410" cy="30" r="30" fill="#fff" fill-opacity=".06"/><circle cx="410" cy="30" r="16" fill="#fff" fill-opacity=".08"/><path d="M10 150C90 150 110 60 190 78S320 140 410 30" fill="none" stroke="#fff" stroke-opacity=".4" stroke-width="2.5" stroke-dasharray="1 9" stroke-linecap="round"/><circle cx="190" cy="78" r="6" fill="#fff" fill-opacity=".85"/><circle cx="300" cy="113" r="5" fill="#fff" fill-opacity=".6"/><circle cx="410" cy="30" r="8" fill="#fff"/><g transform="translate(10 150)"><circle r="12" fill="#ffd23f"/><path d="M-12 0A12 12 0 0 1 12 0Z" fill="#3b82f6"/></g></svg>
         <h1 id="h1">Потягом з України до Європи</h1>
-        <p id="lead">Маршрути, розклади, пересадки та купівля квитків у європейські країни.</p>
-        <nav class="dirnav" id="dirnav" aria-label="Напрям"><a href="#countries" data-dir="out">З України →</a><a href="#countries" data-dir="in">← В Україну</a></nav></div>
+        <p id="lead">Маршрути, розклади, пересадки та купівля квитків у європейські країни.</p></div>
 </header>
 <main class="wrap" id="app">
     <div id="home">
+        <nav class="dirnav" id="dirnav" aria-label="Напрям"><a href="#countries" data-dir="out">З України →</a><a href="#countries" data-dir="in">← В Україну</a></nav>
         <section class="panel" id="countries" aria-labelledby="h-countries">
             <h2 id="h-countries">Оберіть країну</h2>
             <ul class="cgrid">
@@ -127,8 +127,6 @@
         cur = want;
         if (r) {
             home.hidden = true;
-            dnav.hidden = true;
-            document.querySelector("header").classList.add("compact"); /* страница страны/направления: шапка ниже, схема меньше */
             dir.hidden = false;
             document.title = t("ix.dirTitle", {t: r});
             h1El.textContent = r;
@@ -136,8 +134,6 @@
             dir.innerHTML = `${dirBar(id)}${pageLinks(id) || `<section class="panel" style="margin-top:0"><p>${esc(t("ix.soon"))}</p></section>`}`
         } else {
             home.hidden = false;
-            dnav.hidden = false;
-            document.querySelector("header").classList.remove("compact");
             dir.hidden = true;
             dir.innerHTML = "";
             document.title = T0.title;
