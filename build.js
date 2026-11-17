@@ -134,7 +134,8 @@ const pairS = (a, l) => stH1(a[0], l) + " → " + stH1(a[1], l);
 const stShort = (n, l) => { const s = I.ST[n], i = {uk: 7, en: 8, pl: 9}[l]; return s && i != null && s[i] ? s[i] : st(n, l) };
 const fill = (s, v) => s.replace(/\{(\w+)\}/g, (m, k) => k in v ? v[k] : m);
 const path = (l, f) => (l === "ru" ? "" : l + "/") + f;
-const VER = Date.now().toString(36), urls = [SITE];
+/* версия для ?v= считается от содержимого style.css и common.js: пока они не менялись, страницы при пересборке не меняются */
+const VER = require("crypto").createHash("md5").update(fs.readFileSync(__dirname + "/style.css")).update(fs.readFileSync(__dirname + "/common.js")).digest("hex").slice(0, 8), urls = [SITE];
 const S3T = {ru: "Выберите подходящий поезд и оплатите билет банковской картой. Электронный билет появится в приложении. При посадке предъявите его вместе с паспортом.", uk: "Оберіть відповідний поїзд і сплатіть квиток банківською карткою. Електронний квиток з’явиться в застосунку. Під час посадки пред’явіть його разом із паспортом.", en: "Choose a suitable train and pay by bank card. The e-ticket will appear in the app. Show it with your passport when boarding.", pl: "Wybierz odpowiedni pociąg i zapłać kartą. E-bilet pojawi się w aplikacji. Przy wsiadaniu okaż go razem z paszportem."}; /* шаг 2 покупки для Киев ↔ Хелм: там несколько поездов, на Днепр / Харьков ↔ Хелм поезд один, у них «Выберите место» (buy.d.s3z) */
 /* тексты страниц slice-маршрутов (Киев → Хелм и т.п.) собираются здесь, отдельно вносить их в админке не нужно */
 const SLICE_TXT = {
@@ -179,7 +180,7 @@ for (const r of ROUTES) for (const l of LANGS) {
   for (const k of ["title", "desc", "h1", "lead", "all", "more"]) v["r_" + k] = fill(d[r.id + "." + k], v);
   v["buy.t3"] = fill(d[r.t3 || "buy.t3out"], v); v["buy.t.s1x"] = fill(d[r.s1 || (r.one ? "buy.t.s1one" : "buy.t.s1")], v);
   const X = r.x || "Хелм", direct = r.direct !== false, plat = r.plat !== undefined ? r.plat : X === "Хелм";
-  v.stamp = new Date().toISOString() + " v" + VER + " direct=" + direct + " x=" + X;
+  v.stamp = "v" + VER + " direct=" + direct + " x=" + X;
   /* второй отрезок: PKP Intercity (по умолчанию) или другой перевозчик (car: "zssk" | "cfr" | "oebb"), у него свои тексты покупки */
   const CARS = {zssk: {url: "https://www.zssk.sk/ideme-vlakom/", s2: "buy.t.s2z", b2: "buy.t.b2z", note: "buy.note.z"}, cfr: {url: "https://bilete.cfrcalatori.ro/", s2: "buy.t.s2c", b2: "buy.t.b2c", note: "buy.note.c"}, cd: {url: "https://www.cd.cz/spojeni-a-jizdenka/", s2: "buy.t.s2cd", b2: "buy.t.b2cd", note: "buy.note.cz"}, oebb: {url: "https://tickets.oebb.at/", s2: "buy.t.s2o", b2: "buy.t.b2o", note: "buy.note.o"}, mav: {url: "https://jegy.mav.hu/", s2: "buy.t.s2m", b2: "buy.t.b2m", note: "buy.note.m"}}, cr = CARS[r.car];
   v["buy.t.url"] = cr ? cr.url : "https://www.intercity.pl/";
@@ -285,7 +286,7 @@ for (const p of PGS) { /* проверки: ссылки главной веду
 const ix = fs.readFileSync("index.src.html", "utf8");
 for (const l of LANGS) {
   const d = I[l], pre = l === "ru" ? "" : "../";
-  const v = {ver: VER, stamp: new Date().toISOString() + " v" + VER, lang: l, base: pre, canon: SITE + path(l, ""), ogloc: OGL[l]};
+  const v = {ver: VER, stamp: "v" + VER, lang: l, base: pre, canon: SITE + path(l, ""), ogloc: OGL[l]};
   v.alts = LANGS.map(x => `    <link rel="alternate" hreflang="${x}" href="${SITE + path(x, "")}">`).join("\n") + `\n    <link rel="alternate" hreflang="x-default" href="${SITE}">`;
   v.langs = LANGS.map(x => `<a href="${pre + path(x, "index.html")}" hreflang="${x}" lang="${x}"${x === l ? ' class="on"' : ""}>${x.toUpperCase()}</a>`).join("");
   v.jsonld = JSON.stringify({"@context": "https://schema.org", "@type": "WebSite", name: "Колія", url: SITE + path(l, ""), inLanguage: l, description: d["ix.lead"]}).replace(/</g, "\\u003c");
