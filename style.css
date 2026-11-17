@@ -1318,7 +1318,8 @@ header p {
     width: min(40%, 360px);
     height: auto;
     max-height: calc(100% - 120px);
-    pointer-events: none
+    pointer-events: none;
+    transform: scaleX(-1) /* Украина на востоке (справа), Европа на западе (слева) */
 }
 
 @media (min-width: 760px) {
