@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- build 2026-11-17T09:20:06.838Z vmwkheodt -->
+<!-- build 2026-11-17T09:23:35.668Z vmwkhj5ic -->
 <html lang="uk">
 <head>
     <meta charset="utf-8">
@@ -23,7 +23,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap">
-    <link rel="stylesheet" href="../style.css?v=mwkheodt">
+    <link rel="stylesheet" href="../style.css?v=mwkhj5ic">
 </head>
 <body>
 <header>
@@ -128,6 +128,7 @@
         if (r) {
             home.hidden = true;
             dnav.hidden = true;
+            document.querySelector("header").classList.add("compact"); /* страница страны/направления: шапка ниже, схема меньше */
             dir.hidden = false;
             document.title = t("ix.dirTitle", {t: r});
             h1El.textContent = r;
@@ -136,6 +137,7 @@
         } else {
             home.hidden = false;
             dnav.hidden = false;
+            document.querySelector("header").classList.remove("compact");
             dir.hidden = true;
             dir.innerHTML = "";
             document.title = T0.title;
