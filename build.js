@@ -62,6 +62,17 @@ const MORE_DEF = {
   "more.dir": {ru: "Все маршруты этого направления", uk: "Усі маршрути цього напрямку", en: "All routes in this direction", pl: "Wszystkie trasy w tym kierunku"}
 };
 for (const k in MORE_DEF) for (const l of LANGS) if (!I[l][k]) I[l][k] = MORE_DEF[k][l];
+/* особая продажа поезда в блоке покупки (cols: days, sale_at, sale_time): тексты по умолчанию; ключ в ui_texts (админка → «Тексты») главнее */
+const SALE_DEF = {
+  "buy.c.s1e": {ru: "Откройте приложение «Укрзалізниця», выберите маршрут {uz} и укажите дату поездки. Продажа билетов открывается за 20 суток до отправления, в {open} по киевскому времени.{early} Выберите подходящий поезд и оплатите билет.",
+    uk: "Відкрийте застосунок «Укрзалізниця», оберіть маршрут {uz} і вкажіть дату поїздки. Продаж квитків відкривається за 20 діб до відправлення, о {open} за київським часом.{early} Оберіть відповідний поїзд і сплатіть квиток.",
+    en: "Open the Ukrzaliznytsia app, choose the route {uz} and select the travel date. Ticket sales open 20 days before departure, at {open} Kyiv time.{early} Choose a suitable train and pay for the ticket.",
+    pl: "Otwórz aplikację Ukrzaliznytsia, wybierz trasę {uz} i podaj datę podróży. Sprzedaż biletów rusza na 20 dni przed odjazdem, o {open} czasu kijowskiego.{early} Wybierz odpowiedni pociąg i opłać bilet."},
+  "buy.c.early": {ru: " Поезд № {train}: продажа открывается за {days} до отправления.", uk: " Поїзд № {train}: продаж відкривається за {days} до відправлення.", en: " Train No. {train}: sales open {days} before departure.", pl: " Pociąg nr {train}: sprzedaż rusza na {days} przed odjazdem."},
+  "buy.c.earlyt": {ru: " Поезд № {train}: продажа открывается за {days} до отправления, в {time} по киевскому времени.", uk: " Поїзд № {train}: продаж відкривається за {days} до відправлення, о {time} за київським часом.", en: " Train No. {train}: sales open {days} before departure, at {time} Kyiv time.", pl: " Pociąg nr {train}: sprzedaż rusza na {days} przed odjazdem, o {time} czasu kijowskiego."}
+};
+for (const k in SALE_DEF) for (const l of LANGS) if (!I[l][k]) I[l][k] = SALE_DEF[k][l];
+const dayWord = (l, n) => n + " " + (l === "ru" ? (n === 1 ? "сутки" : "суток") : l === "uk" ? (n === 1 ? "добу" : n < 5 ? "доби" : "діб") : l === "en" ? (n === 1 ? "day" : "days") : (n === 1 ? "dzień" : "dni"));
 /* нет перевода — подставляется русский текст */
 for (const l of LANGS.slice(1)) { const miss = Object.keys(I.ru).filter(k => !I[l][k]); for (const k of miss) I[l][k] = I.ru[k]; if (miss.length) console.warn("ВНИМАНИЕ: " + l + ": нет перевода для " + miss.length + " ключей (показан русский): " + miss.slice(0, 8).join(", ") + (miss.length > 8 ? "…" : "")) }
 /* Список страниц маршрутов живёт только в базе (таблица route_pages, админка → «Направления»): sync.js сохраняет его в routes.db.json. */
@@ -203,7 +214,7 @@ for (const r of ROUTES) for (const l of LANGS) {
   v.buycols = (r.cols || []).map(c => {
     const cc = CARRIER[c.car], cv = Object.assign({}, v, {uz: pair(c.uz), pkp: pair(c.pkp), open: c.open || "08:00", train: `<span class="utr">${c.train}</span>`, xin: xin(c.x, l), car: cc.n});
     const a = (cls, href, label) => `<a class="btn${cls}" href="${href}" target="_blank" rel="noopener">${label}</a>`;
-    return `<div><h3 data-car="${c.car}" data-x="${attr(c.x)}" data-dt="${attr(dtTpl)}">${fill(d["buy.c.h"], cv)}</h3><ol class="steps">\n<li>${fill(d["buy.c.s1"], cv)}</li>\n<li>${fill(d[cc.s2], cv)}</li>\n<li>${fill(d["buy.t.s4"], cv)}</li></ol>\n${a(" pri", "https://app.uz.gov.ua/start", fill(d["buy.t.b1"], cv))}\n${a("", cc.url, fill(d[cc.b2], cv))}</div>`
+    return `<div><h3 data-car="${c.car}" data-x="${attr(c.x)}" data-dt="${attr(dtTpl)}">${fill(d["buy.c.h"], cv)}</h3><ol class="steps">\n<li>${c.days ? fill(d["buy.c.s1e"], Object.assign({}, cv, {early: fill(d[c.sale_at || c.sale_time ? "buy.c.earlyt" : "buy.c.early"], Object.assign({}, cv, {days: dayWord(l, +c.days), time: `<span class="stime"${c.sale_at ? ` data-at="${attr(c.sale_at)}"` : ""}>${c.sale_time || ""}</span>`}))})) : fill(d["buy.c.s1"], cv)}</li>\n<li>${fill(d[cc.s2], cv)}</li>\n<li>${fill(d["buy.t.s4"], cv)}</li></ol>\n${a(" pri", "https://app.uz.gov.ua/start", fill(d["buy.t.b1"], cv))}\n${a("", cc.url, fill(d[cc.b2], cv))}</div>`
   }).join("\n");
   const tpl1 = direct ? tpl0b : tpl0b.replace(/<!--D-->[\s\S]*?<!--\/D-->/g, "").replace(/\/\*D\*\/[\s\S]*?\/\*\/D\*\//g, ""),
     tpl2 = r.border ? tpl1 : tpl1.replace(/\/\*B\*\/[\s\S]*?\/\*\/B\*\//g, ""),
