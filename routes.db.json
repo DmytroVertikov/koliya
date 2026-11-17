@@ -3619,6 +3619,54 @@
     "popular": false
   },
   {
+    "id": "budapest_odesa",
+    "file": "budapest-odesa.html",
+    "from_name": "Будапешт",
+    "to_name": "Одесса",
+    "route": "hu-ua",
+    "back": "ua-hu",
+    "rev": "odesa-budapest.html",
+    "kind": "transfer",
+    "x": "Мукачево",
+    "border": null,
+    "like_id": "wk",
+    "single": false,
+    "names": {
+      "Одесса": {
+        "en": "Odesa",
+        "pl": "Odessa",
+        "uk": "Одеса"
+      },
+      "Будапешт": {
+        "en": "Budapest Keleti",
+        "pl": "Budapest Keleti",
+        "uk": "Будапешт-Келеті"
+      }
+    },
+    "extra": {
+      "cols": [
+        {
+          "x": "Мукачево",
+          "uz": [
+            "Будапешт",
+            "Мукачево"
+          ],
+          "car": "uz",
+          "pkp": [
+            "Мукачево",
+            "Одесса"
+          ],
+          "train": "010К"
+        }
+      ]
+    },
+    "sort": 1000,
+    "active": true,
+    "created_at": "2026-11-17T20:39:59.029488+00:00",
+    "texts": {},
+    "popular": false
+  },
+  {
     "id": "dnipro_budapest",
     "file": "dnipro-budapest.html",
     "from_name": "Днепр",
@@ -3889,6 +3937,54 @@
     "sort": 1000,
     "active": true,
     "created_at": "2026-11-16T15:44:48.675244+00:00",
+    "texts": {},
+    "popular": false
+  },
+  {
+    "id": "odesa_budapest",
+    "file": "odesa-budapest.html",
+    "from_name": "Одесса",
+    "to_name": "Будапешт",
+    "route": "ua-hu",
+    "back": "hu-ua",
+    "rev": "budapest-odesa.html",
+    "kind": "transfer",
+    "x": "Мукачево",
+    "border": null,
+    "like_id": "kw",
+    "single": false,
+    "names": {
+      "Одесса": {
+        "en": "Odesa",
+        "pl": "Odessa",
+        "uk": "Одеса"
+      },
+      "Будапешт": {
+        "en": "Budapest Keleti",
+        "pl": "Budapest Keleti",
+        "uk": "Будапешт-Келеті"
+      }
+    },
+    "extra": {
+      "cols": [
+        {
+          "x": "Мукачево",
+          "uz": [
+            "Одесса",
+            "Мукачево"
+          ],
+          "car": "mav",
+          "pkp": [
+            "Мукачево",
+            "Будапешт"
+          ],
+          "train": "038Ш"
+        }
+      ]
+    },
+    "sort": 1000,
+    "active": true,
+    "created_at": "2026-11-17T20:39:59.029488+00:00",
     "texts": {},
     "popular": false
   },
