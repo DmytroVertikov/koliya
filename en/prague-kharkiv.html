@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<!-- build 2026-11-17T07:07:19.166Z vmwkcnwks direct=false x=Пшемысль -->
+<!-- build 2026-11-17T07:10:09.577Z vmwkcrk2x direct=false x=Перемышль -->
 <html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <title>Praha hl.n. → Kharkiv by train | Koliya</title>
-    <meta name="description" content="Trains Praha hl.n. — Kharkiv with a change in Пшемысль: times, stations, duration.">
+    <meta name="description" content="Trains Praha hl.n. — Kharkiv with a change in Przemyśl Główny: times, stations, duration.">
     <meta name="theme-color" content="#12145c">
     <link rel="canonical" href="https://dmytrovertikov.github.io/koliya/en/prague-kharkiv.html">
     <link rel="alternate" hreflang="ru" href="https://dmytrovertikov.github.io/koliya/prague-kharkiv.html">
@@ -252,7 +252,7 @@
 <header>
     <div class="wrap"><nav class="lang"><a href="../prague-kharkiv.html" hreflang="ru" lang="ru">RU</a><a href="../uk/prague-kharkiv.html" hreflang="uk" lang="uk">UK</a><a href="../en/prague-kharkiv.html" hreflang="en" lang="en" class="on">EN</a><a href="../pl/prague-kharkiv.html" hreflang="pl" lang="pl">PL</a></nav><a class="logo" href="./"><span class="rails">🚆</span> КОЛІЯ</a>
         <h1>By train: Praha hl.n. → Kharkiv</h1>
-        <p id="lead">Train timetable Praha hl.n. — Kharkiv: connections with a change in Пшемысль. Journey time, stops and ticket information.</p></div>
+        <p id="lead">Train timetable Praha hl.n. — Kharkiv: connections with a change in Przemyśl Główny. Journey time, stops and ticket information.</p></div>
 </header>
 <main class="wrap"><a class="back" href="./">← Home</a> <a class="back" href="./#cz-ua">All routes: Poland — Ukraine</a> <a class="back" href="kharkiv-prague.html">🔄 Kharkiv → Praha hl.n.</a>
     <p class="chk" id="chk" hidden>📅 Checked: <b></b></p>
@@ -265,7 +265,7 @@
 <script src="../config.js"></script>
 <script src="../pages.js"></script>
 <script src="../dict/en.js"></script>
-<script src="../common.js?v=mwkcnwks"></script>
+<script src="../common.js?v=mwkcrk2x"></script>
 <script>
     const SPLIT = []; /* [станция пересадки, заголовок, пограничный контроль]: страница делится на группы по пересадке */
     const HIDE = [].map(s => s.trim().toLowerCase()); /* номера поездов, скрытых на этой странице */
@@ -273,18 +273,23 @@
     const FROM = "Прага", TO = "Харьков", BACK = "ua-cz"; // FROM/TO: русские названия, как в шапке карточки в админке
     
     const BUY = `<section class="panel" id="buy"><h2>How to buy tickets</h2>
-<div class="buy one">
+<div class="buy two">
 
-<!--T--><div><h3>With a transfer in Пшемысль</h3><ol class="steps">
-<li>Open the Ukrzaliznytsia app, choose the route Пшемысль → Kharkiv and the travel date. Sales open 20 days before departure at 09:00 Kyiv time. Choose a suitable train and pay for the ticket.</li>
-<li>Buy the Praha hl.n. → Пшемысль ticket separately from the Polish carrier PKP Intercity, on intercity.pl or in the PKP Intercity app. You can also buy it on koleo.pl or in the KOLEO app.</li>
 
+
+
+<div><h3 data-car="rj" data-x="Чоп" data-dt="">With a transfer in Chop</h3><ol class="steps">
+<li>Open the Ukrzaliznytsia app, choose the route Praha hl.n. → Chop and the travel date. Sales open 20 days before departure at 08:00 Kyiv time. Choose train <span class="utr">017Л</span> and pay for the ticket.</li>
+<li>Buy the Uzhhorod → Kharkiv ticket for the RJ train separately from the Czech carrier RegioJet, on regiojet.cz or in the RegioJet app.</li>
 <li>After buying, save both e-tickets on your phone. Before you travel, check the dates, departure times and arrival stations.</li></ol>
-<a class="btn pri" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Buy the Пшемысль → Kharkiv ticket in the UZ app</a>
-<a class="btn" href="https://www.intercity.pl/" target="_blank" rel="noopener">Buy the Praha hl.n. → Пшемысль ticket on PKP Intercity</a></div><!--/T-->
-
-
-
+<a class="btn pri" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Buy the Praha hl.n. → Chop ticket in the UZ app</a>
+<a class="btn" href="https://regiojet.cz/" target="_blank" rel="noopener">Buy the Uzhhorod → Kharkiv ticket on RegioJet</a></div>
+<div><h3 data-car="rj" data-x="Перемышль" data-dt="">With a transfer in Przemyśl Główny</h3><ol class="steps">
+<li>Open the Ukrzaliznytsia app, choose the route Praha hl.n. → Przemyśl Główny and the travel date. Sales open 20 days before departure at 09:00 Kyiv time. Choose train <span class="utr">064О</span> and pay for the ticket.</li>
+<li>Buy the Przemyśl Główny → Kharkiv ticket for the RJ train separately from the Czech carrier RegioJet, on regiojet.cz or in the RegioJet app.</li>
+<li>After buying, save both e-tickets on your phone. Before you travel, check the dates, departure times and arrival stations.</li></ol>
+<a class="btn pri" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Buy the Praha hl.n. → Przemyśl Główny ticket in the UZ app</a>
+<a class="btn" href="https://regiojet.cz/" target="_blank" rel="noopener">Buy the Przemyśl Główny → Kharkiv ticket on RegioJet</a></div>
 </div>
 <p class="buy-note">Train schedules may change. Check the latest information in the UZ app and on the PKP Intercity website.</p></section>`;
     const app = document.getElementById("app");
