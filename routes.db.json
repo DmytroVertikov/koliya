@@ -3483,6 +3483,70 @@
     "popular": false
   },
   {
+    "id": "budapest_dnipro",
+    "file": "budapest-dnipro.html",
+    "from_name": "Будапешт",
+    "to_name": "Днепр",
+    "route": "hu-ua",
+    "back": "ua-hu",
+    "rev": "dnipro-budapest.html",
+    "kind": "transfer",
+    "x": "Мукачево",
+    "border": null,
+    "like_id": "wk",
+    "single": false,
+    "names": {
+      "Днепр": {
+        "en": "Dnipro-Holovnyi",
+        "pl": "Dnipro Główny",
+        "uk": "Дніпро-Головний"
+      },
+      "Будапешт": {
+        "en": "Budapest Keleti",
+        "pl": "Budapest Keleti",
+        "uk": "Будапешт-Келеті"
+      }
+    },
+    "extra": {},
+    "sort": 1000,
+    "active": true,
+    "created_at": "2026-11-17T10:03:29.162917+00:00",
+    "texts": {},
+    "popular": false
+  },
+  {
+    "id": "dnipro_budapest",
+    "file": "dnipro-budapest.html",
+    "from_name": "Днепр",
+    "to_name": "Будапешт",
+    "route": "ua-hu",
+    "back": "hu-ua",
+    "rev": "budapest-dnipro.html",
+    "kind": "transfer",
+    "x": "Чоп",
+    "border": null,
+    "like_id": "kw",
+    "single": false,
+    "names": {
+      "Днепр": {
+        "en": "Dnipro-Holovnyi",
+        "pl": "Dnipro Główny",
+        "uk": "Дніпро-Головний"
+      },
+      "Будапешт": {
+        "en": "Budapest Keleti",
+        "pl": "Budapest Keleti",
+        "uk": "Будапешт-Келеті"
+      }
+    },
+    "extra": {},
+    "sort": 1000,
+    "active": true,
+    "created_at": "2026-11-17T10:03:29.162917+00:00",
+    "texts": {},
+    "popular": false
+  },
+  {
     "id": "dnipro_prague",
     "file": "dnipro-prague.html",
     "from_name": "Днепр",
