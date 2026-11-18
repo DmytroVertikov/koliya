@@ -3619,6 +3619,38 @@
     "popular": false
   },
   {
+    "id": "budapest_lviv",
+    "file": "budapest-lviv.html",
+    "from_name": "Будапешт",
+    "to_name": "Львов",
+    "route": "hu-ua",
+    "back": "ua-hu",
+    "rev": "lviv-budapest.html",
+    "kind": "slice",
+    "x": null,
+    "border": null,
+    "like_id": "wk",
+    "single": false,
+    "names": {
+      "Львов": {
+        "en": "Lviv",
+        "pl": "Lwów",
+        "uk": "Львів"
+      },
+      "Будапешт": {
+        "en": "Budapest Keleti",
+        "pl": "Budapest Keleti",
+        "uk": "Будапешт-Келеті"
+      }
+    },
+    "extra": {},
+    "sort": 1000,
+    "active": true,
+    "created_at": "2026-11-18T08:42:04.308595+00:00",
+    "texts": {},
+    "popular": false
+  },
+  {
     "id": "budapest_odesa",
     "file": "budapest-odesa.html",
     "from_name": "Будапешт",
@@ -3950,6 +3982,38 @@
     "sort": 1000,
     "active": true,
     "created_at": "2026-11-16T15:44:48.675244+00:00",
+    "texts": {},
+    "popular": false
+  },
+  {
+    "id": "lviv_budapest",
+    "file": "lviv-budapest.html",
+    "from_name": "Львов",
+    "to_name": "Будапешт",
+    "route": "ua-hu",
+    "back": "hu-ua",
+    "rev": "budapest-lviv.html",
+    "kind": "slice",
+    "x": null,
+    "border": null,
+    "like_id": "kw",
+    "single": false,
+    "names": {
+      "Львов": {
+        "en": "Lviv",
+        "pl": "Lwów",
+        "uk": "Львів"
+      },
+      "Будапешт": {
+        "en": "Budapest Keleti",
+        "pl": "Budapest Keleti",
+        "uk": "Будапешт-Келеті"
+      }
+    },
+    "extra": {},
+    "sort": 1000,
+    "active": true,
+    "created_at": "2026-11-18T08:42:04.308595+00:00",
     "texts": {},
     "popular": false
   },
