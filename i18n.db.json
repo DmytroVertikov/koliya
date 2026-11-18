@@ -1147,6 +1147,13 @@
    "uk": "З пересадкою",
    "en": "With a transfer",
    "pl": "Z przesiadką"
+  },
+  {
+   "key": "buy.t.s2o2",
+   "ru": "Поезд {pkp} отправляется через сутки, поэтому продажа билетов на него в приложении «Укрзалізниця» открывается через два дня. Также билет можно приобрести заранее у австрийского перевозчика ÖBB — на tickets.oebb.at или в приложении ÖBB Tickets. Но в таком случае он будет существенно дороже, чем в приложении «Укрзалізниця».",
+   "uk": "Поїзд {pkp} відправляється через добу, тому продаж квитків на нього в застосунку «Укрзалізниця» відкривається через два дні. Також квиток можна придбати заздалегідь в австрійського перевізника ÖBB — на tickets.oebb.at або в застосунку ÖBB Tickets. Але в такому разі він буде значно дорожчим, ніж у застосунку «Укрзалізниця».",
+   "en": "The train {pkp} departs a day later, so ticket sales for it in the Ukrzaliznytsia app open in two days. You can also buy a ticket in advance from the Austrian carrier ÖBB, on tickets.oebb.at or in the ÖBB Tickets app. In that case, however, it will be considerably more expensive than in the Ukrzaliznytsia app.",
+   "pl": "Pociąg {pkp} odjeżdża za dobę, dlatego sprzedaż biletów na niego w aplikacji Ukrzaliznytsia rusza za dwa dni. Bilet można też kupić wcześniej u austriackiego przewoźnika ÖBB — na tickets.oebb.at lub w aplikacji ÖBB Tickets. W takim przypadku będzie on jednak znacznie droższy niż w aplikacji Ukrzaliznytsia."
   }
  ],
  "stations": [
