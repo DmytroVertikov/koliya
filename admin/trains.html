@@ -479,7 +479,7 @@ const DIR_KEYS = {
     s1: [["", "Стандартный (по умолчанию)"], ["buy.t.s1", "«Выберите подходящий поезд и оплатите билет»"], ["buy.t.s1one", "Один поезд на направлении: «Выберите поезд и оплатите»"], ["buy.m.s1", "Мукачево / Чоп: «Выберите нужный поезд и оплатите»"],
         ["buy.t.s1v", "Без маршрута: «выберите нужный поезд на украинском участке»"], ["buy.t.s1kv", "Поезд 027К (Киев → Вена / Братислава)"], ["buy.t.s1vk", "Поезд 028Л (Вена / Братислава → Киев)"]],
     s2: [["", "Стандартный (по умолчанию)"], ["buy.t.s2", "PKP Intercity (Польша)"], ["buy.t.s2z", "ZSSK (Словакия): в приложении УЗ или у ZSSK"], ["buy.t.s2zk", "ZSSK: поезд следующих суток (Киев → Братислава)"],
-        ["buy.t.s2c", "CFR (Румыния)"], ["buy.t.s2cd", "České dráhy (Чехия), поезда EC и IC"], ["buy.t.s2rj", "RegioJet (Чехия)"], ["buy.t.s2o", "ÖBB (Австрия)"], ["buy.t.s2ov", "ÖBB: поезда следующих суток (Киев → Вена)"],
+        ["buy.t.s2c", "CFR (Румыния)"], ["buy.t.s2cd", "České dráhy (Чехия), поезда EC и IC"], ["buy.t.s2rj", "RegioJet (Чехия)"], ["buy.t.s2o", "ÖBB (Австрия)"], ["buy.t.s2ov", "ÖBB: поезда следующих суток (Киев → Вена)"], ["buy.t.s2o2", "ÖBB: поезд через сутки (продажа УЗ — через два дня)"],
         ["buy.t.s2vk", "ÖBB: в приложении УЗ и заранее у ÖBB (Вена → Киев)"], ["buy.t.s2v", "Остальная часть пути отдельно (ÖBB)"], ["buy.t.s2m", "MÁV (Венгрия)"], ["buy.t.s2mo", "MÁV: поезда следующих суток (Чоп / Мукачево → Будапешт)"],
         ["buy.t.s2mx", "MÁV: поезд следующих суток (один поезд)"], ["buy.t.s2mi", "MÁV: в приложении УЗ и заранее у MÁV (Будапешт → Киев)"]],
     ds2: [["", "Стандартный (по умолчанию)"], ["buy.d.s2", "Продажа в 09:00 + совет покупать сразу"], ["buy.d.s2v", "Продажа в 08:00 + совет покупать сразу"], ["buy.d.s2z", "Продажа в 08:00, без совета"]],
@@ -598,8 +598,11 @@ function dirParamsRead(root, kind) {
 /* ---------- «Блоки покупки»: route_pages.extra.cols, по одному блоку «С пересадкой в …» на каждую станцию ---------- */
 const COL_CARS = {pkp: "PKP Intercity (Польша)", zssk: "ZSSK (Словакия)", cfr: "CFR (Румыния)", cd: "České dráhy (Чехия)", oebb: "ÖBB (Австрия)", mav: "MÁV (Венгрия)", rj: "RegioJet (Чехия)", uz: "Укрзалізниця (оба поезда УЗ)"}; /* ключи — те же, что в CARRIER в build.js */
 const colsOk = v => Array.isArray(v) && v.every(c => c && typeof c === "object" && typeof c.x === "string" && Array.isArray(c.uz) && c.uz.length === 2 && Array.isArray(c.pkp) && c.pkp.length === 2 && typeof c.train === "string");
+/* тексты шага 2 для блока покупки: ключ из «Тексты» → подпись (пусто — стандартный текст по перевозчику) */
+const COL_S2 = [["", "По перевозчику (стандартный текст)"], ["buy.t.s2ov", "ÖBB: поезд следующих суток (продажа УЗ — на следующий день)"], ["buy.t.s2o2", "ÖBB: поезд через сутки (продажа УЗ — через два дня)"], ["buy.t.s2mx", "MÁV: поезд следующих суток (продажа УЗ — на следующий день)"]];
 function colRowHtml(c) {
     const car = c.car || "rj", cars = Object.assign({}, COL_CARS); if (!cars[car]) cars[car] = car;
+    const s2opts = COL_S2.slice(); if (c.s2 && !s2opts.some(z => z[0] === c.s2)) s2opts.push([c.s2, "Текущий: " + c.s2]);
     const t = (k, val, w, ph) => `<input type="text" data-c="${k}" value="${esc(val || "")}" style="width:${w}px" ${ph ? `placeholder="${esc(ph)}"` : ""}>`;
     return `<div class="colrow" style="border:1px solid var(--line,#ddd);border-radius:8px;padding:10px;margin:8px 0">
         <div class="frow"><div><label>Пересадка в (станция)</label>${t("x", c.x, 170, "Перемышль")}</div>
@@ -608,7 +611,8 @@ function colRowHtml(c) {
         <div><label>Продажа УЗ открывается в (пусто — 08:00)</label>${t("open", c.open, 90, "09:00")}</div>
         <button type="button" class="colrm" style="align-self:end">Удалить блок</button></div>
         <div class="frow"><div><label>Билет Укрзалізниці: от → до</label><span>${t("uz0", (c.uz || [])[0], 150)} → ${t("uz1", (c.uz || [])[1], 170)}</span></div>
-        <div><label>Билет второго перевозчика: от → до</label><span>${t("pkp0", (c.pkp || [])[0], 170)} → ${t("pkp1", (c.pkp || [])[1], 150)}</span></div></div>
+        <div><label>Билет второго перевозчика: от → до</label><span>${t("pkp0", (c.pkp || [])[0], 170)} → ${t("pkp1", (c.pkp || [])[1], 150)}</span></div>
+        <div><label>Текст шага 2</label><select data-c="s2" style="max-width:420px">${s2opts.map(([k, n]) => `<option value="${esc(k)}" ${k === (c.s2 || "") ? "selected" : ""}>${esc(n)}</option>`).join("")}</select></div></div>
         <details ${c.days ? "open" : ""}><summary class="muted">Особая продажа этого поезда (необязательно)</summary><div class="frow">
         <div><label>Продажа за сколько суток</label>${t("days", c.days, 70, "10")}</div>
         <div><label>Время — отправление со станции</label>${t("sale_at", c.sale_at, 130, "Ужгород")}</div>
@@ -637,6 +641,7 @@ function colsRead(errs) {
     document.querySelectorAll("#d_cols .colrow").forEach((row, i) => {
         const g = k => row.querySelector(`[data-c="${k}"]`).value.trim(), n = "Блок покупки " + (i + 1) + ": ";
         const c = {x: g("x"), uz: [g("uz0"), g("uz1")], car: g("car"), pkp: [g("pkp0"), g("pkp1")], train: g("train")};
+        if (g("s2")) c.s2 = g("s2");
         if (g("open")) c.open = g("open");
         if (g("days")) c.days = +g("days");
         if (g("sale_at")) c.sale_at = g("sale_at");
