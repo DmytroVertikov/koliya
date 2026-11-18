@@ -24,7 +24,10 @@ const BuyPreview = (() => {
 
     /* routes — строки таблицы route_pages (редактируемая страница + страницы, на тексты которых она ссылается) */
     function build(P, ui, routes) {
-        const db = Object.assign({}, P.db, ui ? {ui} : {}), files = {}, warns = [];
+        /* живые тексты из базы главнее снимка, но ключи, которых в базе нет (есть только в снимке), остаются */
+        let mergedUi = P.db.ui;
+        if (ui) { const live = new Set(ui.map(r => r.key)); mergedUi = (P.db.ui || []).filter(r => !live.has(r.key)).concat(ui) }
+        const db = Object.assign({}, P.db, {ui: mergedUi}), files = {}, warns = [];
         const fs = {
             readFileSync(n) {
                 n = String(n).replace(/^.*\//, "");
