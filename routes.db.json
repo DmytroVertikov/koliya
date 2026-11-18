@@ -3218,7 +3218,18 @@
     "border": null,
     "like_id": "kw",
     "single": false,
-    "names": {},
+    "names": {
+      "Киев": {
+        "en": "Kyiv",
+        "pl": "Kijów",
+        "uk": "Київ"
+      },
+      "Будапешт": {
+        "en": "Budapest Keleti",
+        "pl": "Budapest Keleti",
+        "uk": "Будапешт-Келеті"
+      }
+    },
     "extra": {
       "x": "Чоп",
       "s1": "buy.m.s1",
@@ -3644,7 +3655,8 @@
       }
     },
     "extra": {
-      "ds2": "buy.d.s2v"
+      "ds2": "buy.d.s2v",
+      "direct": true
     },
     "sort": 1000,
     "active": true,
@@ -4013,7 +4025,10 @@
       }
     },
     "extra": {
-      "ds2": "buy.d.s2v"
+      "s1": "buy.m.s1",
+      "s2": "buy.t.s2mo",
+      "ds2": "buy.d.s2v",
+      "direct": true
     },
     "sort": 1000,
     "active": true,

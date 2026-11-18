@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- build vc81b064d direct=false x=Чоп -->
+<!-- build vc81b064d direct=true x=Чоп -->
 <html lang="ru">
 <head>
     <meta charset="utf-8">
@@ -272,10 +272,13 @@
     const HIDE = [].map(s => s.trim().toLowerCase()); /* номера поездов, скрытых на этой странице */
     const SLICE = false; /* true: варианты собираются из поездов других вариантов (страницы вроде Киев → Хелм) */
     const FROM = "Будапешт", TO = "Львов", BACK = "ua-hu"; // FROM/TO: русские названия, как в шапке карточки в админке
-    
+    /*D*//*C*/const COACH = `<aside class="coach"><p>В купе предусмотрены три спальных места, расположенные одно над другим. Если средняя полка приведена в спальное положение, пользоваться нижней полкой для сидения нельзя. Для подъёма на верхнюю полку предусмотрена лестница.</p></aside>`;/*/C*//*/D*/
     const BUY = `<section class="panel" id="buy"><h2>Как купить билеты</h2>
-<div class="buy one">
-
+<div class="buy">
+<!--D--><div class="d"><h3>Прямой поезд</h3><ol class="steps">
+<li>Откройте приложение «Укрзалізниця», выберите маршрут Будапешт → Львов и укажите дату поездки. Продажа билетов открывается за 20 суток до отправления, в 08:00 по киевскому времени.</li>
+<li>Выберите место в купейном вагоне стандарта RIC и оплатите билет банковской картой. Электронный билет появится в приложении. При посадке предъявите его вместе с паспортом.</li></ol>
+<a class="btn" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Купить в приложении УЗ билет Будапешт → Львов</a></div><!--/D-->
 <!--T--><div><h3>С пересадкой в Чопе</h3><ol class="steps">
 <li>Откройте приложение «Укрзалізниця», выберите маршрут Чоп → Львов и укажите дату поездки. Продажа билетов открывается за 20 суток до отправления, в 09:00 по киевскому времени. Выберите подходящий поезд и оплатите билет.</li>
 <li>Билет на поезд Будапешт → Чоп приобретите отдельно у польского перевозчика PKP Intercity — на официальном сайте intercity.pl или в приложении PKP Intercity. Также билеты можно приобрести на сайте koleo.pl или в приложении KOLEO.</li>
@@ -330,7 +333,7 @@
             ce.querySelector("b").textContent = p2(d.getDate()) + "." + p2(d.getMonth() + 1) + "." + d.getFullYear();
             ce.hidden = false
         }
-        const HAS_DIRECT = false; /* false: страница без прямого поезда, все варианты идут как «с пересадкой» */
+        const HAS_DIRECT = true; /* false: страница без прямого поезда, все варианты идут как «с пересадкой» */
         /* LEADX: если среди вариантов есть пересадка на этой станции, подзаголовок страницы берётся из LEADM (с этой станцией) */
         const LEADX = "", LEADM = "";
         if (LEADX && LEADM && list.some(x => x.p.legs.length > 1 && (s => norm(s[s.length - 1].name).startsWith(norm(LEADX)))(x.p.legs[0].stops))) document.getElementById("lead").textContent = LEADM;
@@ -362,7 +365,8 @@
             app.innerHTML = `<div class="panel"><h2>Пока нет вариантов</h2><p>Добавьте их в админке.</p></div>`;
             return
         }
-        app.innerHTML = ""
+        app.innerHTML = ""/*D*/ + (direct.length ? `<h2 class="sub" style="margin-top:6px">Прямой поезд <small>без пересадок</small></h2><div class="direct direct-wrap" style="margin-top:16px">${direct.map(x => optHtml(x.o)).join("")}</div>` : "")
+            + (direct.length && transfer.length ? `<aside class="ad wide" data-slot="mid" hidden></aside>` : "")/*/D*/
             + (() => {
             /* все варианты с пересадкой — одним списком (по времени отправления), без подзаголовков по станциям */
             if (!transfer.length) return "";
@@ -372,7 +376,10 @@
             const head = direct.length ? `<h2 class="sub">С пересадкой</h2>` : ""; /* заголовок только чтобы отделить от блока прямого поезда */
             return head + `<div class="cols${transfer.length === 1 ? " one" : ""}" style="margin-top:${head ? 16 : 6}px">${cards}</div>`
         })() + HOWBAR;
-        
+        /*D*//*C*/document.querySelectorAll(".direct .body").forEach(b => {
+            b.classList.add("two");
+            b.insertAdjacentHTML("beforeend", COACH)
+        });/*/C*//*/D*/
         
     }).catch(() => {
         app.innerHTML = `<div class="panel"><h2>Не удалось загрузить данные</h2><p>Обновите страницу позже.</p></div>`

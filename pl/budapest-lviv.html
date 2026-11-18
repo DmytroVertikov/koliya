@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- build vc81b064d direct=false x=Чоп -->
+<!-- build vc81b064d direct=true x=Чоп -->
 <html lang="pl">
 <head>
     <meta charset="utf-8">
@@ -272,10 +272,13 @@
     const HIDE = [].map(s => s.trim().toLowerCase()); /* номера поездов, скрытых на этой странице */
     const SLICE = false; /* true: варианты собираются из поездов других вариантов (страницы вроде Киев → Хелм) */
     const FROM = "Будапешт", TO = "Львов", BACK = "ua-hu"; // FROM/TO: русские названия, как в шапке карточки в админке
-    
+    /*D*//*C*/const COACH = `<aside class="coach"><p>W przedziale są trzy miejsca do spania, jedno nad drugim. Gdy środkowa półka jest rozłożona do spania, nie wolno siedzieć na dolnej. Na górną półkę prowadzi drabinka.</p></aside>`;/*/C*//*/D*/
     const BUY = `<section class="panel" id="buy"><h2>Jak kupić bilety</h2>
-<div class="buy one">
-
+<div class="buy">
+<!--D--><div class="d"><h3>Pociąg bezpośredni</h3><ol class="steps">
+<li>Otwórz aplikację Ukrzaliznytsia, wybierz trasę Budapest Keleti → Lwów i datę podróży. Sprzedaż biletów rusza na 20 dni przed odjazdem o 08:00 czasu kijowskiego.</li>
+<li>Wybierz miejsce w wagonie z przedziałami standardu RIC i zapłać kartą. E-bilet pojawi się w aplikacji. Przy wsiadaniu okaż go razem z paszportem.</li></ol>
+<a class="btn" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Kup w aplikacji UZ bilet Budapest Keleti → Lwów</a></div><!--/D-->
 <!--T--><div><h3>Z przesiadką w Czopie</h3><ol class="steps">
 <li>Otwórz aplikację Ukrzaliznytsia, wybierz trasę Czop → Lwów i datę podróży. Sprzedaż biletów rusza na 20 dni przed odjazdem o 9:00 czasu kijowskiego. Wybierz odpowiedni pociąg i opłać bilet.</li>
 <li>Bilet na pociąg Budapest → Czop kup osobno u polskiego przewoźnika PKP Intercity — na stronie intercity.pl lub w aplikacji PKP Intercity. Można go też kupić na koleo.pl lub w aplikacji KOLEO.</li>
@@ -330,7 +333,7 @@
             ce.querySelector("b").textContent = p2(d.getDate()) + "." + p2(d.getMonth() + 1) + "." + d.getFullYear();
             ce.hidden = false
         }
-        const HAS_DIRECT = false; /* false: страница без прямого поезда, все варианты идут как «с пересадкой» */
+        const HAS_DIRECT = true; /* false: страница без прямого поезда, все варианты идут как «с пересадкой» */
         /* LEADX: если среди вариантов есть пересадка на этой станции, подзаголовок страницы берётся из LEADM (с этой станцией) */
         const LEADX = "", LEADM = "";
         if (LEADX && LEADM && list.some(x => x.p.legs.length > 1 && (s => norm(s[s.length - 1].name).startsWith(norm(LEADX)))(x.p.legs[0].stops))) document.getElementById("lead").textContent = LEADM;
@@ -362,7 +365,8 @@
             app.innerHTML = `<div class="panel"><h2>Brak połączeń</h2><p>Dodaj je w panelu administratora.</p></div>`;
             return
         }
-        app.innerHTML = ""
+        app.innerHTML = ""/*D*/ + (direct.length ? `<h2 class="sub" style="margin-top:6px">Pociąg bezpośredni <small>bez przesiadek</small></h2><div class="direct direct-wrap" style="margin-top:16px">${direct.map(x => optHtml(x.o)).join("")}</div>` : "")
+            + (direct.length && transfer.length ? `<aside class="ad wide" data-slot="mid" hidden></aside>` : "")/*/D*/
             + (() => {
             /* все варианты с пересадкой — одним списком (по времени отправления), без подзаголовков по станциям */
             if (!transfer.length) return "";
@@ -372,7 +376,10 @@
             const head = direct.length ? `<h2 class="sub">Z przesiadką</h2>` : ""; /* заголовок только чтобы отделить от блока прямого поезда */
             return head + `<div class="cols${transfer.length === 1 ? " one" : ""}" style="margin-top:${head ? 16 : 6}px">${cards}</div>`
         })() + HOWBAR;
-        
+        /*D*//*C*/document.querySelectorAll(".direct .body").forEach(b => {
+            b.classList.add("two");
+            b.insertAdjacentHTML("beforeend", COACH)
+        });/*/C*//*/D*/
         
     }).catch(() => {
         app.innerHTML = `<div class="panel"><h2>Nie udało się załadować danych</h2><p>Odśwież stronę później.</p></div>`
