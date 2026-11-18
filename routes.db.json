@@ -3888,11 +3888,13 @@
       }
     },
     "extra": {
-      "s2": "buy.t.s2ov",
+      "s1": "buy.t.s1one",
+      "s2": "buy.t.s2o2",
       "car": "oebb",
       "cols": [
         {
           "x": "Чоп",
+          "s2": "buy.t.s2o2",
           "uz": [
             "Днепр",
             "Чоп"
