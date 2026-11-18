@@ -1972,6 +1972,20 @@
    "aliases": []
   },
   {
+   "name_ru": "Городище",
+   "name_uk": "Городище",
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
+   "aliases": []
+  },
+  {
    "name_ru": "Границе-на-Мораве",
    "name_uk": "Границе-на-Моравє",
    "name_en": "Hranice na Moravě",
@@ -2864,6 +2878,20 @@
    "in_ru": "в Копычинцах",
    "in_uk": "у Копичинцях",
    "in_pl": "w Kopyczyńcach",
+   "short_ru": null,
+   "short_uk": null,
+   "short_en": null,
+   "short_pl": null,
+   "aliases": []
+  },
+  {
+   "name_ru": "Корсунь",
+   "name_uk": "Корсунь",
+   "name_en": null,
+   "name_pl": null,
+   "in_ru": null,
+   "in_uk": null,
+   "in_pl": null,
    "short_ru": null,
    "short_uk": null,
    "short_en": null,
@@ -5647,6 +5675,6 @@
   }
  ],
  "meta": {
-  "updated": "2026-11-18T09:29:09.259227+00:00"
+  "updated": "2026-11-18T11:20:06.847328+00:00"
  }
 }

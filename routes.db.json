@@ -3630,41 +3630,34 @@
     "popular": false
   },
   {
-    "id": "budapest_lviv",
-    "file": "budapest-lviv.html",
+    "id": "budapest_kremenchuk",
+    "file": "budapest-kremenchuk.html",
     "from_name": "Будапешт",
-    "to_name": "Львов",
+    "to_name": "Кременчуг",
     "route": "hu-ua",
     "back": "ua-hu",
-    "rev": "lviv-budapest.html",
+    "rev": "kremenchuk-budapest.html",
     "kind": "transfer",
-    "x": "Чоп",
+    "x": "Мукачево",
     "border": null,
     "like_id": "wk",
     "single": false,
     "names": {
-      "Львов": {
-        "en": "Lviv",
-        "pl": "Lwów",
-        "uk": "Львів"
-      },
       "Будапешт": {
         "en": "Budapest Keleti",
         "pl": "Budapest Keleti",
         "uk": "Будапешт-Келеті"
+      },
+      "Кременчуг": {
+        "en": "Kremenchuk",
+        "pl": "Krzemieńczuk",
+        "uk": "Кременчук"
       }
     },
-    "extra": {
-      "s1": "buy.m.s1",
-      "s2": "buy.t.s2mi",
-      "car": "mav",
-      "ds2": "buy.d.s2v",
-      "ds3": "buy.d.s3z",
-      "direct": true
-    },
+    "extra": {},
     "sort": 1000,
     "active": true,
-    "created_at": "2026-11-18T08:51:39.058159+00:00",
+    "created_at": "2026-11-18T11:09:25.392293+00:00",
     "texts": {},
     "popular": false
   },
@@ -4004,52 +3997,34 @@
     "popular": false
   },
   {
-    "id": "lviv_budapest",
-    "file": "lviv-budapest.html",
-    "from_name": "Львов",
+    "id": "kremenchuk_budapest",
+    "file": "kremenchuk-budapest.html",
+    "from_name": "Кременчуг",
     "to_name": "Будапешт",
     "route": "ua-hu",
     "back": "hu-ua",
-    "rev": "budapest-lviv.html",
+    "rev": "budapest-kremenchuk.html",
     "kind": "transfer",
-    "x": "Чоп",
+    "x": "Мукачево",
     "border": null,
     "like_id": "kw",
     "single": false,
     "names": {
-      "Львов": {
-        "en": "Lviv",
-        "pl": "Lwów",
-        "uk": "Львів"
-      },
       "Будапешт": {
         "en": "Budapest Keleti",
         "pl": "Budapest Keleti",
         "uk": "Будапешт-Келеті"
+      },
+      "Кременчуг": {
+        "en": "Kremenchuk",
+        "pl": "Krzemieńczuk",
+        "uk": "Кременчук"
       }
     },
-    "extra": {
-      "s1": "buy.m.s1",
-      "s2": "buy.t.s2mo",
-      "xs": [
-        "Чоп",
-        "Мукачево"
-      ],
-      "car": "mav",
-      "ds2": "buy.d.s2v",
-      "ds3": "buy.d.s3z",
-      "plat": false,
-      "coach": false,
-      "leadx": "Мукачево",
-      "split": [
-        "Чоп",
-        "Мукачево"
-      ],
-      "direct": true
-    },
+    "extra": {},
     "sort": 1000,
     "active": true,
-    "created_at": "2026-11-18T08:51:39.058159+00:00",
+    "created_at": "2026-11-18T11:09:25.392293+00:00",
     "texts": {},
     "popular": false
   },
@@ -4425,6 +4400,95 @@
     "sort": 1000,
     "active": true,
     "created_at": "2026-11-16T15:56:41.751596+00:00",
+    "texts": {},
+    "popular": false
+  },
+  {
+    "id": "budapest_lviv",
+    "file": "budapest-lviv.html",
+    "from_name": "Будапешт",
+    "to_name": "Львов",
+    "route": "hu-ua",
+    "back": "ua-hu",
+    "rev": "lviv-budapest.html",
+    "kind": "transfer",
+    "x": "Чоп",
+    "border": null,
+    "like_id": "wk",
+    "single": false,
+    "names": {
+      "Львов": {
+        "en": "Lviv",
+        "pl": "Lwów",
+        "uk": "Львів"
+      },
+      "Будапешт": {
+        "en": "Budapest Keleti",
+        "pl": "Budapest Keleti",
+        "uk": "Будапешт-Келеті"
+      }
+    },
+    "extra": {
+      "s1": "buy.m.s1",
+      "s2": "buy.t.s2mi",
+      "car": "mav",
+      "ds2": "buy.d.s2v",
+      "ds3": "buy.d.s3z",
+      "direct": true
+    },
+    "sort": 1010,
+    "active": true,
+    "created_at": "2026-11-18T08:51:39.058159+00:00",
+    "texts": {},
+    "popular": false
+  },
+  {
+    "id": "lviv_budapest",
+    "file": "lviv-budapest.html",
+    "from_name": "Львов",
+    "to_name": "Будапешт",
+    "route": "ua-hu",
+    "back": "hu-ua",
+    "rev": "budapest-lviv.html",
+    "kind": "transfer",
+    "x": "Чоп",
+    "border": null,
+    "like_id": "kw",
+    "single": false,
+    "names": {
+      "Львов": {
+        "en": "Lviv",
+        "pl": "Lwów",
+        "uk": "Львів"
+      },
+      "Будапешт": {
+        "en": "Budapest Keleti",
+        "pl": "Budapest Keleti",
+        "uk": "Будапешт-Келеті"
+      }
+    },
+    "extra": {
+      "s1": "buy.m.s1",
+      "s2": "buy.t.s2mo",
+      "xs": [
+        "Чоп",
+        "Мукачево"
+      ],
+      "car": "mav",
+      "ds2": "buy.d.s2v",
+      "ds3": "buy.d.s3z",
+      "plat": false,
+      "coach": false,
+      "leadx": "Мукачево",
+      "split": [
+        "Чоп",
+        "Мукачево"
+      ],
+      "direct": true
+    },
+    "sort": 1010,
+    "active": true,
+    "created_at": "2026-11-18T08:51:39.058159+00:00",
     "texts": {},
     "popular": false
   },
