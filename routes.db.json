@@ -3626,8 +3626,8 @@
     "route": "hu-ua",
     "back": "ua-hu",
     "rev": "lviv-budapest.html",
-    "kind": "slice",
-    "x": null,
+    "kind": "transfer",
+    "x": "Чоп",
     "border": null,
     "like_id": "wk",
     "single": false,
@@ -3644,16 +3644,11 @@
       }
     },
     "extra": {
-      "s1": "buy.t.s1one",
-      "app": true,
-      "ds2": "buy.d.s2v",
-      "hide": [
-        "347Л"
-      ]
+      "ds2": "buy.d.s2v"
     },
     "sort": 1000,
     "active": true,
-    "created_at": "2026-11-18T08:42:04.308595+00:00",
+    "created_at": "2026-11-18T08:51:39.058159+00:00",
     "texts": {},
     "popular": false
   },
@@ -4000,8 +3995,8 @@
     "route": "ua-hu",
     "back": "hu-ua",
     "rev": "budapest-lviv.html",
-    "kind": "slice",
-    "x": null,
+    "kind": "transfer",
+    "x": "Чоп",
     "border": null,
     "like_id": "kw",
     "single": false,
@@ -4018,14 +4013,11 @@
       }
     },
     "extra": {
-      "ds2": "buy.d.s2v",
-      "hide": [
-        "749Д"
-      ]
+      "ds2": "buy.d.s2v"
     },
     "sort": 1000,
     "active": true,
-    "created_at": "2026-11-18T08:42:04.308595+00:00",
+    "created_at": "2026-11-18T08:51:39.058159+00:00",
     "texts": {},
     "popular": false
   },

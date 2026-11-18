@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<!-- build vc81b064d direct=true x=Хелм -->
+<!-- build vc81b064d direct=false x=Чоп -->
 <html lang="uk">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <title>Львів → Будапешт потягом | Колія</title>
-    <meta name="description" content="Поїзди Львів — Будапешт без пересадок: час, станції, тривалість.">
+    <meta name="description" content="Поїзди Львів — Будапешт з пересадкою у Чопі: час, станції, тривалість.">
     <meta name="theme-color" content="#12145c">
     <link rel="canonical" href="https://dmytrovertikov.github.io/koliya/uk/lviv-budapest.html">
     <link rel="alternate" hreflang="ru" href="https://dmytrovertikov.github.io/koliya/lviv-budapest.html">
@@ -253,7 +253,7 @@
     <div class="wrap"><div class="hbar"><a class="logo" href="./"><span class="rails" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="14" rx="3"/><path d="M5 11h14"/><circle cx="9" cy="14" r=".8" fill="currentColor"/><circle cx="15" cy="14" r=".8" fill="currentColor"/><path d="M8 21l2-4M16 21l-2-4"/></svg></span><span class="wm">КОЛІЯ</span></a><nav class="lang" aria-label="Language"><a href="../lviv-budapest.html" hreflang="ru" lang="ru">RU</a><a href="../uk/lviv-budapest.html" hreflang="uk" lang="uk" class="on">UK</a><a href="../en/lviv-budapest.html" hreflang="en" lang="en">EN</a><a href="../pl/lviv-budapest.html" hreflang="pl" lang="pl">PL</a></nav></div>
         <svg class="hero-art" viewBox="-24 -16 468 206" aria-hidden="true" focusable="false"><circle cx="410" cy="30" r="30" fill="#fff" fill-opacity=".06"/><circle cx="410" cy="30" r="16" fill="#fff" fill-opacity=".08"/><path d="M10 150C90 150 110 60 190 78S320 140 410 30" fill="none" stroke="#fff" stroke-opacity=".4" stroke-width="2.5" stroke-dasharray="1 9" stroke-linecap="round"/><circle cx="190" cy="78" r="6" fill="#fff" fill-opacity=".85"/><circle cx="300" cy="113" r="5" fill="#fff" fill-opacity=".6"/><circle cx="410" cy="30" r="8" fill="#fff"/><g transform="translate(10 150)"><circle r="12" fill="#ffd23f"/><path d="M-12 0A12 12 0 0 1 12 0Z" fill="#3b82f6"/></g></svg>
         <h1>Потягом: Львів → Будапешт</h1>
-        <p id="lead">Розклад поїздів Львів — Будапешт: прямі поїзди без пересадок. Час у дорозі, зупинки та інформація про купівлю квитків.</p></div>
+        <p id="lead">Розклад поїздів Львів — Будапешт: варіанти з пересадкою у Чопі. Час у дорозі, зупинки та інформація про купівлю квитків.</p></div>
 </header>
 <main class="wrap"><a class="back" href="./">← Головна</a> <a class="back" href="./#ua-hu">Усі маршрути: Україна — Угорщина</a> <a class="back" href="budapest-lviv.html">🔄 Будапешт → Львів</a>
     <p class="chk" id="chk" hidden>📅 Перевірено: <b></b></p>
@@ -269,22 +269,25 @@
 <script src="../common.js?v=c81b064d"></script>
 <script>
     const SPLIT = []; /* [станция пересадки, заголовок, пограничный контроль]: страница делится на группы по пересадке */
-    const HIDE = ["749Д"].map(s => s.trim().toLowerCase()); /* номера поездов, скрытых на этой странице */
-    const SLICE = true; /* true: варианты собираются из поездов других вариантов (страницы вроде Киев → Хелм) */
+    const HIDE = [].map(s => s.trim().toLowerCase()); /* номера поездов, скрытых на этой странице */
+    const SLICE = false; /* true: варианты собираются из поездов других вариантов (страницы вроде Киев → Хелм) */
     const FROM = "Львов", TO = "Будапешт", BACK = "hu-ua"; // FROM/TO: русские названия, как в шапке карточки в админке
-    /*D*//*/D*/
+    
     const BUY = `<section class="panel" id="buy"><h2>Як купити квитки</h2>
 <div class="buy one">
-<!--D--><div class="d"><h3>Прямий поїзд</h3><ol class="steps">
-<li>Відкрийте застосунок «Укрзалізниця», оберіть маршрут Львів → Будапешт-Келеті і вкажіть дату поїздки. Продаж квитків відкривається за 20 діб до відправлення, о 08:00 за київським часом.</li>
-<li>Оберіть відповідний поїзд і сплатіть квиток банківською карткою. Електронний квиток з’явиться в застосунку. Під час посадки пред’явіть його разом із паспортом.</li></ol>
-<a class="btn" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Купити в застосунку УЗ квиток Львів → Будапешт-Келеті</a></div><!--/D-->
 
+<!--T--><div><h3>З пересадкою у Чопі</h3><ol class="steps">
+<li>Відкрийте застосунок «Укрзалізниця», оберіть маршрут Львів → Чоп і вкажіть дату поїздки. Продаж квитків відкривається за 20 діб до відправлення, о 09:00 за київським часом. Оберіть потрібний поїзд і сплатіть квиток.</li>
+<li>Квиток на поїзд Чоп → Будапешт придбайте окремо в польського перевізника PKP Intercity — на офіційному сайті intercity.pl або в застосунку PKP Intercity. Також квитки можна купити на сайті koleo.pl або в застосунку KOLEO.</li>
+
+<li>Після купівлі збережіть обидва електронні квитки в телефоні. Перед поїздкою перевірте дати, час відправлення та станції прибуття.</li></ol>
+<a class="btn pri" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Купити в застосунку УЗ квиток Львів → Чоп</a>
+<a class="btn" href="https://www.intercity.pl/" target="_blank" rel="noopener">Купити на сайті PKP Intercity квиток Чоп → Будапешт</a></div><!--/T-->
 
 
 
 </div>
-<p class="buy-note">Графіки руху поїздів можуть змінюватися, актуальну інформацію дивіться в застосунку УЗ.</p></section>`;
+<p class="buy-note">Графіки руху поїздів можуть змінюватися, актуальну інформацію дивіться в застосунку УЗ та на сайті PKP Intercity.</p></section>`;
     const app = document.getElementById("app");
     const HOWBAR = `<a class="howbar" href="#buy"><span class="hi" aria-hidden="true">i</span><span><b>Як купити квитки?</b><small>Докладна інструкція для кожного варіанта маршруту.</small></span><span class="go">Інструкція →</span></a>`;
     const norm = s => String(s || "").trim().toLowerCase();
@@ -327,7 +330,7 @@
             ce.querySelector("b").textContent = p2(d.getDate()) + "." + p2(d.getMonth() + 1) + "." + d.getFullYear();
             ce.hidden = false
         }
-        const HAS_DIRECT = true; /* false: страница без прямого поезда, все варианты идут как «с пересадкой» */
+        const HAS_DIRECT = false; /* false: страница без прямого поезда, все варианты идут как «с пересадкой» */
         /* LEADX: если среди вариантов есть пересадка на этой станции, подзаголовок страницы берётся из LEADM (с этой станцией) */
         const LEADX = "", LEADM = "";
         if (LEADX && LEADM && list.some(x => x.p.legs.length > 1 && (s => norm(s[s.length - 1].name).startsWith(norm(LEADX)))(x.p.legs[0].stops))) document.getElementById("lead").textContent = LEADM;
@@ -359,8 +362,7 @@
             app.innerHTML = `<div class="panel"><h2>Поки що немає варіантів</h2><p>Додайте їх в адмінці.</p></div>`;
             return
         }
-        app.innerHTML = ""/*D*/ + (direct.length ? `<h2 class="sub" style="margin-top:6px">Прямий поїзд <small>без пересадок</small></h2><div class="direct direct-wrap" style="margin-top:16px">${direct.map(x => optHtml(x.o)).join("")}</div>` : "")
-            + (direct.length && transfer.length ? `<aside class="ad wide" data-slot="mid" hidden></aside>` : "")/*/D*/
+        app.innerHTML = ""
             + (() => {
             /* все варианты с пересадкой — одним списком (по времени отправления), без подзаголовков по станциям */
             if (!transfer.length) return "";
@@ -370,7 +372,7 @@
             const head = direct.length ? `<h2 class="sub">З пересадкою</h2>` : ""; /* заголовок только чтобы отделить от блока прямого поезда */
             return head + `<div class="cols${transfer.length === 1 ? " one" : ""}" style="margin-top:${head ? 16 : 6}px">${cards}</div>`
         })() + HOWBAR;
-        /*D*//*/D*/
+        
         
     }).catch(() => {
         app.innerHTML = `<div class="panel"><h2>Не вдалося завантажити дані</h2><p>Оновіть сторінку пізніше.</p></div>`

@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<!-- build vc81b064d direct=true x=Хелм -->
+<!-- build vc81b064d direct=false x=Чоп -->
 <html lang="pl">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <title>Budapest → Lwów pociągiem | Koliya</title>
-    <meta name="description" content="Pociągi Budapest — Lwów bez przesiadek: godziny, stacje, czas podróży.">
+    <meta name="description" content="Pociągi Budapest — Lwów z przesiadką w Czopie: godziny, stacje, czas podróży.">
     <meta name="theme-color" content="#12145c">
     <link rel="canonical" href="https://dmytrovertikov.github.io/koliya/pl/budapest-lviv.html">
     <link rel="alternate" hreflang="ru" href="https://dmytrovertikov.github.io/koliya/budapest-lviv.html">
@@ -253,7 +253,7 @@
     <div class="wrap"><div class="hbar"><a class="logo" href="./"><span class="rails" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="14" rx="3"/><path d="M5 11h14"/><circle cx="9" cy="14" r=".8" fill="currentColor"/><circle cx="15" cy="14" r=".8" fill="currentColor"/><path d="M8 21l2-4M16 21l-2-4"/></svg></span><span class="wm">КОЛІЯ</span></a><nav class="lang" aria-label="Language"><a href="../budapest-lviv.html" hreflang="ru" lang="ru">RU</a><a href="../uk/budapest-lviv.html" hreflang="uk" lang="uk">UK</a><a href="../en/budapest-lviv.html" hreflang="en" lang="en">EN</a><a href="../pl/budapest-lviv.html" hreflang="pl" lang="pl" class="on">PL</a></nav></div>
         <svg class="hero-art" viewBox="-24 -16 468 206" aria-hidden="true" focusable="false"><circle cx="410" cy="30" r="30" fill="#fff" fill-opacity=".06"/><circle cx="410" cy="30" r="16" fill="#fff" fill-opacity=".08"/><path d="M10 150C90 150 110 60 190 78S320 140 410 30" fill="none" stroke="#fff" stroke-opacity=".4" stroke-width="2.5" stroke-dasharray="1 9" stroke-linecap="round"/><circle cx="190" cy="78" r="6" fill="#fff" fill-opacity=".85"/><circle cx="300" cy="113" r="5" fill="#fff" fill-opacity=".6"/><circle cx="410" cy="30" r="8" fill="#fff"/><g transform="translate(10 150)"><circle r="12" fill="#ffd23f"/><path d="M-12 0A12 12 0 0 1 12 0Z" fill="#3b82f6"/></g></svg>
         <h1>Pociągiem: Budapest → Lwów</h1>
-        <p id="lead">Rozkład pociągów Budapest — Lwów: pociągi bezpośrednie bez przesiadek. Czas podróży, postoje i informacje o zakupie biletów.</p></div>
+        <p id="lead">Rozkład pociągów Budapest — Lwów: połączenia z przesiadką w Czopie. Czas podróży, postoje i informacje o zakupie biletów.</p></div>
 </header>
 <main class="wrap"><a class="back" href="./">← Strona główna</a> <a class="back" href="./#hu-ua">Wszystkie trasy: Węgry — Ukraina</a> <a class="back" href="lviv-budapest.html">🔄 Lwów → Budapest</a>
     <p class="chk" id="chk" hidden>📅 Sprawdzono: <b></b></p>
@@ -269,22 +269,25 @@
 <script src="../common.js?v=c81b064d"></script>
 <script>
     const SPLIT = []; /* [станция пересадки, заголовок, пограничный контроль]: страница делится на группы по пересадке */
-    const HIDE = ["347Л"].map(s => s.trim().toLowerCase()); /* номера поездов, скрытых на этой странице */
-    const SLICE = true; /* true: варианты собираются из поездов других вариантов (страницы вроде Киев → Хелм) */
+    const HIDE = [].map(s => s.trim().toLowerCase()); /* номера поездов, скрытых на этой странице */
+    const SLICE = false; /* true: варианты собираются из поездов других вариантов (страницы вроде Киев → Хелм) */
     const FROM = "Будапешт", TO = "Львов", BACK = "ua-hu"; // FROM/TO: русские названия, как в шапке карточки в админке
-    /*D*//*/D*/
+    
     const BUY = `<section class="panel" id="buy"><h2>Jak kupić bilety</h2>
 <div class="buy one">
-<!--D--><div class="d"><h3>Pociąg bezpośredni</h3><ol class="steps">
-<li>Otwórz aplikację Ukrzaliznytsia, wybierz trasę Budapest Keleti → Lwów i datę podróży. Sprzedaż biletów rusza na 20 dni przed odjazdem o 08:00 czasu kijowskiego.</li>
-<li>Wybierz odpowiedni pociąg i zapłać kartą. E-bilet pojawi się w aplikacji. Przy wsiadaniu okaż go razem z paszportem.</li></ol>
-<a class="btn" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Kup w aplikacji UZ bilet Budapest Keleti → Lwów</a></div><!--/D-->
 
+<!--T--><div><h3>Z przesiadką w Czopie</h3><ol class="steps">
+<li>Otwórz aplikację Ukrzaliznytsia, wybierz trasę Czop → Lwów i datę podróży. Sprzedaż biletów rusza na 20 dni przed odjazdem o 9:00 czasu kijowskiego. Wybierz odpowiedni pociąg i opłać bilet.</li>
+<li>Bilet na pociąg Budapest → Czop kup osobno u polskiego przewoźnika PKP Intercity — na stronie intercity.pl lub w aplikacji PKP Intercity. Można go też kupić na koleo.pl lub w aplikacji KOLEO.</li>
+
+<li>Po zakupie zapisz oba e-bilety w telefonie. Przed podróżą sprawdź daty, godziny odjazdu i stacje docelowe.</li></ol>
+<a class="btn pri" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Kup w aplikacji UZ bilet Czop → Lwów</a>
+<a class="btn" href="https://www.intercity.pl/" target="_blank" rel="noopener">Kup na stronie PKP Intercity bilet Budapest → Czop</a></div><!--/T-->
 
 
 
 </div>
-<p class="buy-note">Rozkłady jazdy mogą ulec zmianie. Aktualne informacje znajdziesz w aplikacji UZ.</p></section>`;
+<p class="buy-note">Rozkłady jazdy mogą ulec zmianie. Aktualne informacje znajdziesz w aplikacji UZ i na stronie PKP Intercity.</p></section>`;
     const app = document.getElementById("app");
     const HOWBAR = `<a class="howbar" href="#buy"><span class="hi" aria-hidden="true">i</span><span><b>Jak kupić bilety?</b><small>Szczegółowa instrukcja dla każdego wariantu trasy.</small></span><span class="go">Instrukcja →</span></a>`;
     const norm = s => String(s || "").trim().toLowerCase();
@@ -327,7 +330,7 @@
             ce.querySelector("b").textContent = p2(d.getDate()) + "." + p2(d.getMonth() + 1) + "." + d.getFullYear();
             ce.hidden = false
         }
-        const HAS_DIRECT = true; /* false: страница без прямого поезда, все варианты идут как «с пересадкой» */
+        const HAS_DIRECT = false; /* false: страница без прямого поезда, все варианты идут как «с пересадкой» */
         /* LEADX: если среди вариантов есть пересадка на этой станции, подзаголовок страницы берётся из LEADM (с этой станцией) */
         const LEADX = "", LEADM = "";
         if (LEADX && LEADM && list.some(x => x.p.legs.length > 1 && (s => norm(s[s.length - 1].name).startsWith(norm(LEADX)))(x.p.legs[0].stops))) document.getElementById("lead").textContent = LEADM;
@@ -359,8 +362,7 @@
             app.innerHTML = `<div class="panel"><h2>Brak połączeń</h2><p>Dodaj je w panelu administratora.</p></div>`;
             return
         }
-        app.innerHTML = ""/*D*/ + (direct.length ? `<h2 class="sub" style="margin-top:6px">Pociąg bezpośredni <small>bez przesiadek</small></h2><div class="direct direct-wrap" style="margin-top:16px">${direct.map(x => optHtml(x.o)).join("")}</div>` : "")
-            + (direct.length && transfer.length ? `<aside class="ad wide" data-slot="mid" hidden></aside>` : "")/*/D*/
+        app.innerHTML = ""
             + (() => {
             /* все варианты с пересадкой — одним списком (по времени отправления), без подзаголовков по станциям */
             if (!transfer.length) return "";
@@ -370,7 +372,7 @@
             const head = direct.length ? `<h2 class="sub">Z przesiadką</h2>` : ""; /* заголовок только чтобы отделить от блока прямого поезда */
             return head + `<div class="cols${transfer.length === 1 ? " one" : ""}" style="margin-top:${head ? 16 : 6}px">${cards}</div>`
         })() + HOWBAR;
-        /*D*//*/D*/
+        
         
     }).catch(() => {
         app.innerHTML = `<div class="panel"><h2>Nie udało się załadować danych</h2><p>Odśwież stronę później.</p></div>`
