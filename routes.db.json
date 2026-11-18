@@ -3863,6 +3863,56 @@
     "popular": false
   },
   {
+    "id": "dnipro_vienna",
+    "file": "dnipro-vienna.html",
+    "from_name": "Днепр",
+    "to_name": "Вена",
+    "route": "ua-at",
+    "back": "at-ua",
+    "rev": "vienna-dnipro.html",
+    "kind": "transfer",
+    "x": "Чоп",
+    "border": null,
+    "like_id": "kw",
+    "single": false,
+    "names": {
+      "Вена": {
+        "en": "Wien Hbf",
+        "pl": "Wiedeń Główny",
+        "uk": "Відень-Головна"
+      },
+      "Днепр": {
+        "en": "Dnipro-Holovnyi",
+        "pl": "Dnipro Główny",
+        "uk": "Дніпро-Головний"
+      }
+    },
+    "extra": {
+      "s2": "buy.t.s2ov",
+      "car": "oebb",
+      "cols": [
+        {
+          "x": "Чоп",
+          "uz": [
+            "Днепр",
+            "Чоп"
+          ],
+          "car": "oebb",
+          "pkp": [
+            "Чоп",
+            "Вена"
+          ],
+          "train": "003П"
+        }
+      ]
+    },
+    "sort": 1000,
+    "active": true,
+    "created_at": "2026-11-18T12:47:35.91422+00:00",
+    "texts": {},
+    "popular": false
+  },
+  {
     "id": "kharkiv_budapest",
     "file": "kharkiv-budapest.html",
     "from_name": "Харьков",
@@ -4370,6 +4420,38 @@
     "sort": 1000,
     "active": true,
     "created_at": "2026-11-16T15:56:41.751596+00:00",
+    "texts": {},
+    "popular": false
+  },
+  {
+    "id": "vienna_dnipro",
+    "file": "vienna-dnipro.html",
+    "from_name": "Вена",
+    "to_name": "Днепр",
+    "route": "at-ua",
+    "back": "ua-at",
+    "rev": "dnipro-vienna.html",
+    "kind": "transfer",
+    "x": "Чоп",
+    "border": null,
+    "like_id": "wk",
+    "single": false,
+    "names": {
+      "Вена": {
+        "en": "Wien Hbf",
+        "pl": "Wiedeń Główny",
+        "uk": "Відень-Головна"
+      },
+      "Днепр": {
+        "en": "Dnipro-Holovnyi",
+        "pl": "Dnipro Główny",
+        "uk": "Дніпро-Головний"
+      }
+    },
+    "extra": {},
+    "sort": 1000,
+    "active": true,
+    "created_at": "2026-11-18T12:47:35.91422+00:00",
     "texts": {},
     "popular": false
   },
