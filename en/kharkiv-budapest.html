@@ -353,8 +353,8 @@
         const blocks = [];
         document.querySelectorAll("#more h3[data-car]").forEach(h => {
             const x = list.find(x => {
-                const L = x.p.legs, car = h.dataset.car, mav = car === "mav", cz = mav ? L[L.length - 1] : L.find(l => !isUz(l)), s = L[0].stops; /* MÁV: поезда второго отрезка нумеруются как у УЗ (031Ш), поэтому перевозчика по номеру не узнать — ищем по станции пересадки; uz: оба поезда УЗ (003П + 009К) */
-                return L.length > 1 && (car === "uz" ? L.every(isUz) : cz && (mav || carOf(cz) === car)) && norm(s[s.length - 1].name).startsWith(norm(h.dataset.x))
+                const L = x.p.legs, car = h.dataset.car, byNum = car === "cd" || car === "rj", cz = byNum ? L.find(l => !isUz(l)) : L[L.length - 1], s = L[0].stops; /* cd и rj определяются по номеру поезда (EC/IC, RJ); у остальных перевозчиков (PKP, ZSSK, CFR, ÖBB, MÁV) номер надёжно не определить (у MÁV он как у УЗ, 031Ш) — ищем по станции пересадки; uz: оба поезда УЗ (003П + 009К) */
+                return L.length > 1 && (car === "uz" ? L.every(isUz) : byNum ? cz && carOf(cz) === car : !carOf(cz) && (car === "mav" || !isUz(cz))) && norm(s[s.length - 1].name).startsWith(norm(h.dataset.x))
             });
             if (!x) { blocks.push({blk: h.parentNode, k: [9, 0]}); return }
             const L = x.p.legs, last = L[L.length - 1].stops, ft = tm(L[0].stops[0].time) || x.h.ft, tt = tm(last[last.length - 1].time) || x.h.tt, u = L.find(isUz);

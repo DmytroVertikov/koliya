@@ -596,7 +596,7 @@ function dirParamsRead(root, kind) {
     return out
 }
 /* ---------- «Блоки покупки»: route_pages.extra.cols, по одному блоку «С пересадкой в …» на каждую станцию ---------- */
-const COL_CARS = {rj: "RegioJet", cd: "České dráhy (ČD)", mav: "MÁV (Венгрия)", uz: "Укрзалізниця (оба поезда УЗ)"};
+const COL_CARS = {pkp: "PKP Intercity (Польша)", zssk: "ZSSK (Словакия)", cfr: "CFR (Румыния)", cd: "České dráhy (Чехия)", oebb: "ÖBB (Австрия)", mav: "MÁV (Венгрия)", rj: "RegioJet (Чехия)", uz: "Укрзалізниця (оба поезда УЗ)"}; /* ключи — те же, что в CARRIER в build.js */
 const colsOk = v => Array.isArray(v) && v.every(c => c && typeof c === "object" && typeof c.x === "string" && Array.isArray(c.uz) && c.uz.length === 2 && Array.isArray(c.pkp) && c.pkp.length === 2 && typeof c.train === "string");
 function colRowHtml(c) {
     const car = c.car || "rj", cars = Object.assign({}, COL_CARS); if (!cars[car]) cars[car] = car;
