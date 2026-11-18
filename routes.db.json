@@ -4044,7 +4044,8 @@
       "split": [
         "Чоп",
         "Мукачево"
-      ]
+      ],
+      "direct": true
     },
     "sort": 1000,
     "active": true,
