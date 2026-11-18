@@ -94,6 +94,12 @@
         .errbox { background: var(--rd2); color: var(--rd); border: 1.5px solid #fecdca; border-radius: 10px; padding: 10px 12px; margin: 10px 0; font-size: 15px; white-space: pre-wrap }
         .frow { display: flex; gap: 12px; flex-wrap: wrap; align-items: end; margin: 8px 0 }
         .infobox { background: #eef1fb; border: 1px solid #d5dbf3; border-radius: 10px; padding: 10px 14px; font-size: 14px; line-height: 1.5; margin: 0 0 8px }
+        .bprev { position: sticky; bottom: 0; z-index: 20; margin: 18px -4px 0; padding: 8px 12px 10px; background: var(--card, #fff); border: 1px solid #c9d1ee; border-radius: 12px 12px 0 0; box-shadow: 0 -6px 18px rgba(30, 40, 100, .16) }
+        .bprev .bph { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 6px }
+        .bprev .bpt { padding: 0 8px; line-height: 1.6 }
+        .bprev iframe { display: block; width: 100%; height: 120px; resize: vertical; border: 1px solid #e1e5f5; border-radius: 8px; background: #f3f4fa }
+        .bprev.shut iframe, .bprev.shut .bpw { display: none }
+        .bprev.shut .bph { margin-bottom: 0 }
         .dsec { margin: 22px 0 6px; padding-top: 14px; border-top: 1px solid var(--line, #ddd); font-size: 17px }
         .dsec:first-of-type { border-top: 0; padding-top: 0; margin-top: 10px }
         .dgrp { border: 1px solid var(--line, #ddd); border-radius: 10px; padding: 8px 12px; margin: 8px 0 }
@@ -149,6 +155,7 @@
 <main class="wrap" id="app"></main>
 <div id="toast"></div>
 <script src="../config.js"></script>
+<script src="buy-preview.js"></script>
 <script src="../dict/ru.js"></script>
 <script src="../common.js"></script>
 <script>
@@ -326,6 +333,7 @@ async function db(m, p, b, pref, retry = true) {
     if (!r.ok) throw new Error(errText(t));
     return t ? JSON.parse(t) : null
 }
+BuyPreview.init({texts: () => dbAll("ui_texts?select=key,ru,uk,en,pl&order=key")}); /* предпросмотр блока покупки берёт актуальные тексты из базы */
 async function dbAll(path) { /* Supabase отдаёт максимум 1000 строк за запрос */
     let out = [], off = 0;
     for (;;) {
@@ -672,7 +680,55 @@ function dirEditorHtml(r) {
         <details class="dgrp"><summary><b>Заголовки и описания страницы</b> <span class="muted">(пусто — соберутся автоматически; можно использовать {FROM} и {TO})</span></summary>
         ${DIR_LANGS.map(([l, ln]) => `<details style="margin-left:14px"><summary class="muted">${ln}</summary>${DIR_TXT.map(([k, kl]) => `<div class="frow"><div style="flex:1 1 100%"><label>${esc(kl)}</label><textarea rows="${k === "lead" ? 3 : 1}" data-tx="${l}.${k}" style="width:100%">${esc((tx[l] || {})[k] || "")}</textarea></div></div>`).join("")}</details>`).join("")}</details>
         <div id="e_err"></div>
-        <p><button class="pri" id="e_save">Сохранить</button></p></div>`
+        <p><button class="pri" id="e_save">Сохранить</button></p>${bpHtml()}</div>`
+}
+/* значения формы направления → поля для таблицы route_pages ({errs, p}); используется и при сохранении, и в предпросмотре */
+function dirCollect(r) {
+    const root = $("#d_edit"), v = id => $("#" + id).value.trim(), errs = [];
+    if (!v("e_from") || !v("e_to")) errs.push("Укажите «откуда» и «куда»");
+    if (!/^[a-z]{2}-[a-z]{2}$/.test(v("e_route")) || !/^[a-z]{2}-[a-z]{2}$/.test(v("e_back"))) errs.push("Код направления — вида ua-pl / pl-ua");
+    if (!/^-?\d+$/.test(v("e_sort"))) errs.push("Порядок — целое число");
+    let extra = {};
+    try { const t = $("#e_json").value.trim(); if (t) { extra = JSON.parse(t); if (!extra || typeof extra !== "object" || Array.isArray(extra)) throw new Error("нужен объект {…}") } } catch (e) { errs.push("JSON параметров: " + e.message) }
+    const x = r.kind === "transfer" ? v("e_x") : null; if (r.kind === "transfer" && !x) errs.push("Укажите станцию пересадки");
+    if (errs.length) return {errs};
+    const cols = colsRead(errs);
+    if (errs.length) return {errs};
+    Object.assign(extra, dirParamsRead(root, r.kind));
+    if (cols.length) extra.cols = cols; else delete extra.cols;
+    const names = Object.assign({}, r.names || {});
+    [["from", v("e_from")], ["to", v("e_to")]].forEach(([w, n]) => { const o = {}; ["uk", "en", "pl"].forEach(k => { const t = root.querySelector(`[data-nm="${w}.${k}"]`).value.trim(); if (t) o[k] = t }); if (Object.keys(o).length) names[n] = o });
+    const texts = {}; root.querySelectorAll("[data-tx]").forEach(e => { const [l, k] = e.dataset.tx.split("."), t = e.value.trim(); if (t) (texts[l] = texts[l] || {})[k] = t });
+    const p = {from_name: v("e_from"), to_name: v("e_to"), route: v("e_route"), back: v("e_back"), sort: +v("e_sort"), active: $("#e_act").checked, names, extra, texts};
+    if (r.kind === "transfer") { p.x = x; p.border = v("e_bd") || null } else if (r.kind !== "custom") p.single = $("#e_one").checked;
+    return {errs, p}
+}
+/* панель предпросмотра: закреплена внизу экрана, сворачивается; перерисовывается через 0,3 с после последнего изменения формы */
+function bpHtml() {
+    let open = true; try { open = localStorage.getItem("bpOpen") !== "0" } catch (e) {}
+    return `<div id="bp" class="bprev ${open ? "" : "shut"}"><div class="bph"><button type="button" id="bp_t" class="bpt" title="Свернуть / развернуть">${open ? "▾" : "▸"}</button><b>Так блок «Как купить билеты» выглядит на сайте</b>
+        <select id="bp_l" title="Язык страницы"><option value="ru">RU</option><option value="uk">UK</option><option value="en">EN</option><option value="pl">PL</option></select><span id="bp_s" class="muted"></span></div>
+        <div id="bp_w" class="bpw"></div><iframe id="bp_f" title="Предпросмотр блока покупки"></iframe></div>`
+}
+function bpBind(r, collect) {
+    const root = $("#d_edit"), bp = $("#bp"), frame = $("#bp_f"), st = $("#bp_s"), warn = $("#bp_w"); let timer = 0, seq = 0;
+    const run = async () => {
+        const my = ++seq, {errs, p} = collect();
+        if (errs.length) { st.textContent = "Предпросмотр не обновлён: " + errs[0]; return }
+        st.textContent = "собираю…";
+        try {
+            const res = await BuyPreview.render(Object.assign({}, r, p), RP, $("#bp_l").value);
+            if (my !== seq) return; /* пока собирали, форму изменили ещё раз */
+            frame.srcdoc = res.html; st.textContent = "";
+            warn.innerHTML = res.warns.length ? '<div class="errbox">Нет текста для ключей: ' + [...new Set(res.warns)].map(esc).join(", ") + ". Их нужно добавить на вкладке «Тексты».</div>" : ""
+        } catch (e) { if (my === seq) st.textContent = "Не удалось собрать предпросмотр: " + e.message }
+    };
+    frame.onload = () => { try { const d = frame.contentDocument; frame.style.height = Math.min(d.documentElement.scrollHeight, Math.round(innerHeight * .4)) + "px" } catch (e) {} };
+    const later = () => { clearTimeout(timer); if (!bp.classList.contains("shut")) timer = setTimeout(run, 300) };
+    root.addEventListener("input", later); root.addEventListener("change", later); root.addEventListener("click", e => { if (e.target.closest("button") && e.target.id !== "bp_t" && e.target.id !== "e_save") later() });
+    $("#bp_l").onchange = run;
+    $("#bp_t").onclick = () => { const shut = bp.classList.toggle("shut"); $("#bp_t").textContent = shut ? "▸" : "▾"; try { localStorage.setItem("bpOpen", shut ? "0" : "1") } catch (e) {} if (!shut) run() };
+    if (!bp.classList.contains("shut")) run()
 }
 function dirEditorBind(r) {
     const root = $("#d_edit"), v = id => $("#" + id).value.trim();
@@ -682,24 +738,11 @@ function dirEditorBind(r) {
         const inp = document.createElement("input"); inp.type = "text"; inp.dataset.p = sel.dataset.p; inp.placeholder = "buy.t.s2…"; inp.style.width = "230px";
         sel.replaceWith(inp); inp.focus()
     });
+    /* предпросмотр блока «Как купить билеты»: пересобирается при любом изменении формы */
+    bpBind(r, () => dirCollect(r));
     $("#e_save").onclick = async () => {
-        const box = $("#e_err"), errs = [];
-        if (!v("e_from") || !v("e_to")) errs.push("Укажите «откуда» и «куда»");
-        if (!/^[a-z]{2}-[a-z]{2}$/.test(v("e_route")) || !/^[a-z]{2}-[a-z]{2}$/.test(v("e_back"))) errs.push("Код направления — вида ua-pl / pl-ua");
-        if (!/^-?\d+$/.test(v("e_sort"))) errs.push("Порядок — целое число");
-        let extra = {};
-        try { const t = $("#e_json").value.trim(); if (t) { extra = JSON.parse(t); if (!extra || typeof extra !== "object" || Array.isArray(extra)) throw new Error("нужен объект {…}") } } catch (e) { errs.push("JSON параметров: " + e.message) }
-        const x = r.kind === "transfer" ? v("e_x") : null; if (r.kind === "transfer" && !x) errs.push("Укажите станцию пересадки");
+        const box = $("#e_err"), {errs, p} = dirCollect(r);
         if (errs.length) { box.innerHTML = '<div class="errbox">' + errs.map(esc).join("<br>") + "</div>"; return }
-        const cols = colsRead(errs);
-        if (errs.length) { box.innerHTML = '<div class="errbox">' + errs.map(esc).join("<br>") + "</div>"; return }
-        Object.assign(extra, dirParamsRead(root, r.kind));
-        if (cols.length) extra.cols = cols; else delete extra.cols;
-        const names = Object.assign({}, r.names || {});
-        [["from", v("e_from")], ["to", v("e_to")]].forEach(([w, n]) => { const o = {}; ["uk", "en", "pl"].forEach(k => { const t = root.querySelector(`[data-nm="${w}.${k}"]`).value.trim(); if (t) o[k] = t }); if (Object.keys(o).length) names[n] = o });
-        const texts = {}; root.querySelectorAll("[data-tx]").forEach(e => { const [l, k] = e.dataset.tx.split("."), t = e.value.trim(); if (t) (texts[l] = texts[l] || {})[k] = t });
-        const p = {from_name: v("e_from"), to_name: v("e_to"), route: v("e_route"), back: v("e_back"), sort: +v("e_sort"), active: $("#e_act").checked, names, extra, texts};
-        if (r.kind === "transfer") { p.x = x; p.border = v("e_bd") || null } else if (r.kind !== "custom") p.single = $("#e_one").checked;
         try {
             const res = await db("PATCH", "route_pages?id=eq." + encodeURIComponent(r.id), p, "return=representation");
             RP[RP.findIndex(z => z.id === r.id)] = (res && res[0]) || Object.assign({}, r, p);
