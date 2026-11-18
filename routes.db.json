@@ -3646,6 +3646,7 @@
     "extra": {
       "s1": "buy.t.s1one",
       "app": true,
+      "ds2": "buy.d.s2v",
       "hide": [
         "347Л"
       ]
@@ -4017,6 +4018,7 @@
       }
     },
     "extra": {
+      "ds2": "buy.d.s2v",
       "hide": [
         "749Д"
       ]
