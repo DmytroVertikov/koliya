@@ -4031,10 +4031,20 @@
     "extra": {
       "s1": "buy.m.s1",
       "s2": "buy.t.s2mo",
+      "xs": [
+        "Чоп",
+        "Мукачево"
+      ],
       "car": "mav",
       "ds2": "buy.d.s2v",
       "ds3": "buy.d.s3z",
-      "direct": true
+      "plat": false,
+      "coach": false,
+      "leadx": "Мукачево",
+      "split": [
+        "Чоп",
+        "Мукачево"
+      ]
     },
     "sort": 1000,
     "active": true,
