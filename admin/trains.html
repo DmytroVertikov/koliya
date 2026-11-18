@@ -93,6 +93,12 @@
         .errbox .blr button { font-size: 14px; padding: 3px 10px }
         .errbox { background: var(--rd2); color: var(--rd); border: 1.5px solid #fecdca; border-radius: 10px; padding: 10px 12px; margin: 10px 0; font-size: 15px; white-space: pre-wrap }
         .frow { display: flex; gap: 12px; flex-wrap: wrap; align-items: end; margin: 8px 0 }
+        .infobox { background: #eef1fb; border: 1px solid #d5dbf3; border-radius: 10px; padding: 10px 14px; font-size: 14px; line-height: 1.5; margin: 0 0 8px }
+        .dsec { margin: 22px 0 6px; padding-top: 14px; border-top: 1px solid var(--line, #ddd); font-size: 17px }
+        .dsec:first-of-type { border-top: 0; padding-top: 0; margin-top: 10px }
+        .dgrp { border: 1px solid var(--line, #ddd); border-radius: 10px; padding: 8px 12px; margin: 8px 0 }
+        .dgrp > summary { cursor: pointer }
+        .chip { display: inline-block; background: #e3e8fb; color: #28307e; border-radius: 999px; padding: 1px 9px; font-size: 12px; font-weight: 600; margin-left: 6px }
         .frow label { display: block; font-size: 13px; color: var(--mu); font-weight: 600; margin-bottom: 3px }
         .sumbar { display: flex; gap: 8px; flex-wrap: wrap; margin: 6px 0 10px }
         .leg { border: 1.5px solid var(--bd); border-left: 7px solid var(--bl); border-radius: 12px; padding: 12px 14px; margin: 12px 0; background: #fcfcfd }
@@ -452,16 +458,24 @@ let CT = [], DIR_CTRY = []; /* страны: таблица countries (вкла�
 const DIR_KINDS = {slice: "Прямые поезда из существующих вариантов (как Киев → Хелм)", direct: "Прямые поезда, варианты добавляю вручную (как Киев → Кишинев)", transfer: "С пересадкой на станции (как Киев → Краков)"};
 const DIR_KIND_LBL = {custom: "встроенная", slice: "прямые из вариантов", direct: "прямые вручную", transfer: "с пересадкой"};
 /* параметры страницы (поля страницы в route_pages.extra): [ключ, тип, подпись, основной?]. Типы: text, pair (две станции), bool (не задано / да / нет), sel:значения */
+/* Параметры страницы: [ключ, тип, подпись, группа, подсказка]. Типы: text, pair (от — до), bool, sel:знач=подпись,… (список), car (второй перевозчик). Ключи — те же, что читает build.js. */
+const DIR_G = [
+    ["std", "Стандартный блок покупки", "Один общий блок «Как купить билеты». Нужен, только если выше нет своих блоков по станциям пересадки.", ""],
+    ["trains", "Какие поезда и что показывать", "Тонкая настройка карточек: прямые поезда, купе, платформа.", "Обычно оставляйте «по умолчанию»."],
+    ["steps", "Тексты шагов инструкции", "Подставляют другой текст шага вместо стандартного (ключи — из вкладки «Тексты»).", "Нужны для страниц с особой логикой покупки (Словакия, Австрия, Румыния…)."],
+    ["multi", "Несколько пересадок (особые страницы)", "Третий столбец покупки, разбивка вариантов, заголовки блоков.", "Используются на страницах вроде Киев ↔ Берлин и Киев ↔ Вена; для остальных пусто."]
+];
+const DIR_CARS = ["=PKP Intercity (по умолчанию)", "zssk=ZSSK (Словакия)", "cfr=CFR (Румыния)", "cd=České dráhy (Чехия)", "oebb=ÖBB (Австрия)", "mav=MÁV (Венгрия)", "rj=RegioJet (Чехия)"];
 const DIR_P = [
-    ["x", "text", "Станция пересадки (пусто — Хелм)", 1], ["uz", "pair", "Покупка: Укрзалізниця (от — до)", 1], ["pkp", "pair", "Покупка: второй перевозчик (от — до)", 1],
-    ["car", "text", "Второй перевозчик: zssk, cfr, cd, oebb, mav (пусто — PKP Intercity)", 1], ["border", "sel:after,before", "Пограничный контроль на станции пересадки", 1],
-    ["direct", "bool", "Есть прямой поезд (по умолчанию да)", 1], ["t3", "text", "Текст шага 3: buy.t3out / buy.t3in", 1],
-    ["dOnly", "bool", "Только прямой поезд (одна колонка покупки)"], ["coach", "bool", "Описание купе (по умолчанию да)"], ["slice", "bool", "Поезда вырезаются из других вариантов"],
-    ["plat", "bool", "Платформа (по умолчанию да только для Хелма)"], ["one", "bool", "Один поезд на направлении"], ["app", "bool", "Покупка через приложение"], ["h", "bool", "Свои тексты третьей колонки (buy.h.*)"],
-    ["s1", "text", "Ключ текста шага 1"], ["s2", "text", "Ключ текста шага 2"], ["ds2", "text", "Прямой поезд: ключ шага 2"], ["ds3", "text", "Прямой поезд: ключ шага 3 (buy.d.s3t / buy.d.s3z)"],
-    ["third", "text", "Третий столбец: станция пересадки"], ["uz3", "pair", "Третий столбец: УЗ (от — до)"], ["pkp3", "pair", "Третий столбец: перевозчик (от — до)"],
-    ["split", "pair", "Разбивка вариантов по пересадке: две станции"], ["xs", "pair", "Один блок вариантов: две станции"], ["hxs", "pair", "Заголовок блока: две станции пересадки"],
-    ["hb1", "pair", "Заголовок блока 1 (от — до)"], ["hb2", "pair", "Заголовок блока 2 (от — до)"], ["leadx", "text", "Станция для подзаголовка при пересадке (leadx)"], ["hurl", "text", "Ссылка на сайт перевозчика"]
+    ["x", "text", "Станция пересадки (пусто — Хелм)", "std"], ["uz", "pair", "Билет Укрзалізниці: от → до", "std"], ["pkp", "pair", "Билет второго перевозчика: от → до", "std"],
+    ["car", "car", "Второй перевозчик", "std"], ["border", "sel:after=после станции пересадки,before=до станции пересадки", "Пограничный контроль", "std"], ["t3", "sel:buy.t3out=поездка из Украины,buy.t3in=поездка в Украину", "Текст шага 3 (про границу и пересадку)", "std"],
+    ["direct", "bool", "Есть прямой поезд (по умолчанию да)", "trains"], ["dOnly", "bool", "Только прямой поезд (одна колонка покупки)", "trains"], ["slice", "bool", "Поезда берутся из других вариантов", "trains"],
+    ["one", "bool", "На направлении один поезд (текст в единственном числе)", "trains"], ["coach", "bool", "Описание купе (по умолчанию да)", "trains"], ["plat", "bool", "Платформа (по умолчанию да только для Хелма)", "trains"],
+    ["app", "bool", "Покупка только через приложение (без блока пересадки)", "steps"], ["s1", "text", "Текст шага 1 (ключ)", "steps"], ["s2", "text", "Текст шага 2 (ключ)", "steps"],
+    ["ds2", "text", "Прямой поезд: текст шага 2 (ключ)", "steps"], ["ds3", "text", "Прямой поезд: текст шага 3 (ключ: buy.d.s3t / buy.d.s3z)", "steps"],
+    ["h", "bool", "Свои тексты третьего столбца (buy.h.*)", "multi"], ["third", "text", "Третий столбец: станция пересадки", "multi"], ["uz3", "pair", "Третий столбец: билет УЗ (от — до)", "multi"], ["pkp3", "pair", "Третий столбец: билет перевозчика (от — до)", "multi"],
+    ["split", "pair", "Разбивка вариантов по пересадке: две станции", "multi"], ["xs", "pair", "Один блок вариантов: две станции", "multi"], ["hxs", "pair", "Заголовок блока: две станции пересадки", "multi"],
+    ["hb1", "pair", "Заголовок блока 1 (от — до)", "multi"], ["hb2", "pair", "Заголовок блока 2 (от — до)", "multi"], ["leadx", "text", "Станция для подзаголовка при пересадке", "multi"], ["hurl", "text", "Ссылка на сайт перевозчика", "multi"]
 ];
 const DIR_TXT = [["title", "Заголовок (title)"], ["desc", "Описание (description)"], ["h1", "Заголовок H1"], ["lead", "Подзаголовок"], ["all", "Заголовок «все варианты»"], ["more", "Заголовок «ещё варианты»"], ["leadm", "Подзаголовок при пересадке на станции (leadm)"]];
 const DIR_LANGS = [["ru", "Русский"], ["uk", "Українська"], ["en", "English"], ["pl", "Polski"]];
@@ -522,17 +536,29 @@ async function viewDirs() {
     drawDirs()
 }
 const dirOk = (val, t) => val === undefined || (t === "pair" ? Array.isArray(val) && val.length === 2 && val.every(x => typeof x === "string") : t === "bool" ? typeof val === "boolean" : typeof val === "string");
-/* блок параметров: виджеты для известных ключей; всё остальное (и значения нестандартного вида) остаётся в JSON */
-function dirParamsHtml(extra, kind) {
+/* блок параметров: виджеты для известных ключей, сгруппированные по смыслу; всё остальное (и значения нестандартного вида) остаётся в JSON.
+   Группа раскрыта, только если в ней что-то задано; скрытые поля остаются в DOM, поэтому при сохранении значения не теряются. */
+function dirParamsHtml(extra, kind, hasCols) {
     const hide = k => kind !== "custom" && (k === "x" || k === "border"), one = ([k, t, l]) => {
         const val = extra[k], tp = t.split(":")[0], id = `data-p="${k}"`;
         if (tp === "pair") return `<div><label>${esc(l)}</label><span><input type="text" ${id} data-i="0" value="${esc((val || [])[0] || "")}" style="width:150px"> → <input type="text" ${id} data-i="1" value="${esc((val || [])[1] || "")}" style="width:150px"></span></div>`;
-        if (tp === "bool") return `<div><label>${esc(l)}</label><select ${id}><option value="">не задано</option><option value="true" ${val === true ? "selected" : ""}>да</option><option value="false" ${val === false ? "selected" : ""}>нет</option></select></div>`;
-        if (tp === "sel") return `<div><label>${esc(l)}</label><select ${id}><option value="">нет</option>${t.split(":")[1].split(",").map(o => `<option ${val === o ? "selected" : ""}>${o}</option>`).join("")}</select></div>`;
+        if (tp === "bool") return `<div><label>${esc(l)}</label><select ${id}><option value="">по умолчанию</option><option value="true" ${val === true ? "selected" : ""}>да</option><option value="false" ${val === false ? "selected" : ""}>нет</option></select></div>`;
+        if (tp === "sel" || tp === "car") {
+            const opts = tp === "car" ? DIR_CARS : t.split(":")[1].split(",").map(o => (/=/.test(o) ? o : "=" + o)).map(o => o.replace(/^=/, ""));
+            const list = (tp === "car" ? opts : (["=нет"].concat(opts))).map(o => { const i = o.indexOf("="); return i < 0 ? [o, o] : [o.slice(0, i), o.slice(i + 1)] });
+            if (val && !list.some(z => z[0] === val)) list.push([val, val]);
+            return `<div><label>${esc(l)}</label><select ${id}>${list.map(([v, n]) => `<option value="${esc(v)}" ${val === v || (!val && v === "") ? "selected" : ""}>${esc(n)}</option>`).join("")}</select></div>`
+        }
         return `<div><label>${esc(l)}</label><input type="text" ${id} value="${esc(val || "")}" style="width:230px"></div>`
     };
-    const ok = DIR_P.filter(p => !hide(p[0]) && dirOk(extra[p[0]], p[1].split(":")[0])), main = ok.filter(p => p[3]), rest = ok.filter(p => !p[3]);
-    return `<div class="frow">${main.map(one).join("")}</div><details><summary class="muted">Ещё параметры (${rest.length})</summary><div class="frow">${rest.map(one).join("")}</div></details>`
+    const ok = DIR_P.filter(p => !hide(p[0]) && dirOk(extra[p[0]], p[1].split(":")[0] === "car" ? "text" : p[1].split(":")[0]));
+    const auto = kind !== "custom" ? '<p class="muted" style="margin:0 0 6px">Для этого типа страницы почти всё задаётся автоматически; менять эти настройки обычно не нужно.</p>' : "";
+    return auto + DIR_G.map(([g, title, what, note]) => {
+        const items = ok.filter(p => p[3] === g), set = items.filter(p => extra[p[0]] !== undefined).length;
+        if (!items.length) return "";
+        const open = set > 0;
+        return `<details class="dgrp" ${open ? "open" : ""}><summary><b>${esc(title)}</b>${set ? ` <span class="chip">задано: ${set}</span>` : ""}</summary><p class="muted" style="margin:4px 0">${esc(what)}${g === "std" && hasCols ? " На этой странице блоки заданы выше, поэтому поля ниже не нужны." : note ? " " + esc(note) : ""}</p><div class="frow">${items.map(one).join("")}</div></details>`
+    }).join("")
 }
 function dirParamsRead(root, kind) {
     const out = {};
@@ -567,8 +593,7 @@ function colRowHtml(c) {
 }
 function colsHtml(r) {
     const cols = colsOk((r.extra || {}).cols) ? r.extra.cols : [];
-    return `<h3 style="margin:14px 0 4px">Блоки «Как купить билеты»</h3>
-        <p class="muted" style="margin:0 0 4px">По одному блоку на каждую станцию пересадки. Если блоков нет, сайт показывает один стандартный блок по параметрам ниже. Станция в билете (например, «Перемышль Главный») подставляется в кнопки и инструкцию как есть.</p>
+    return `<p class="muted" style="margin:0 0 4px">По одному блоку на каждую станцию пересадки. Если блоков нет, сайт показывает один стандартный блок по параметрам ниже. Станция в билете (например, «Перемышль Главный») подставляется в кнопки и инструкцию как есть.</p>
         <div id="d_cols">${cols.map(colRowHtml).join("")}</div>
         <p><button type="button" id="d_coladd">+ Добавить блок</button></p>`
 }
@@ -612,20 +637,23 @@ function dirEditorHtml(r) {
     const rest = {}; Object.keys(ex).forEach(k => { if (!handled.has(k)) rest[k] = ex[k] });
     const nm = r.names || {}, sf = n => findStation(n) || {}, nmv = (n, k, c) => (nm[n] || {})[k] || sf(n)[c] || "";
     const tx = r.texts || {};
-    return `<div id="d_edit"><p class="muted" style="margin-top:0">Изменения страницы и её текстов попадают на сайт после кнопки «Пересобрать сайт» (вверху страницы), обновление занимает 1–2 минуты. Города «Откуда» и «Куда» определяют, какие варианты показывает страница: берутся варианты с такими же городами в шапке.</p>
+    return `<div id="d_edit"><div class="infobox"><b>Что здесь настраивается.</b> Это сама страница маршрута: куда она ведёт, как на ней объясняется покупка билетов и какие у неё заголовки. Сами поезда и расписание — на вкладке «Варианты».<br>Изменения попадают на сайт после кнопки «Пересобрать сайт» (вверху страницы), обновление занимает 1–2 минуты. Города «Откуда» и «Куда» определяют, какие варианты показывает страница: берутся варианты с такими же городами в шапке.</div>
+        <h3 class="dsec">1. Основное</h3>
         <div class="frow"><div><label>Откуда</label><input type="text" id="e_from" list="d_stl" value="${esc(r.from_name)}" style="width:210px"></div>
         <div><label>Куда</label><input type="text" id="e_to" list="d_stl" value="${esc(r.to_name)}" style="width:210px"></div>
-        <div><label>Код направления</label><input type="text" id="e_route" value="${esc(r.route)}" style="width:90px"></div>
-        <div><label>Код обратного</label><input type="text" id="e_back" value="${esc(r.back)}" style="width:90px"></div>
         <div><label>Порядок</label><input type="text" id="e_sort" value="${esc(r.sort)}" style="width:70px"></div>
         <label style="align-self:end"><input type="checkbox" id="e_act" ${r.active ? "checked" : ""}> показывать на сайте</label></div>
-        ${r.kind === "custom" ? "" : `<div class="frow">${r.kind === "transfer" ? `<div><label>Станция пересадки</label><input type="text" id="e_x" list="d_stl" value="${esc(r.x || "")}" style="width:210px"></div><div><label>Пограничный контроль</label><select id="e_bd"><option value="">нет</option><option value="after" ${r.border === "after" ? "selected" : ""}>after</option><option value="before" ${r.border === "before" ? "selected" : ""}>before</option></select></div>` : `<label><input type="checkbox" id="e_one" ${r.single ? "checked" : ""}> на направлении один поезд</label>`}</div>`}
-        ${colsHtml(r)}
-        <h3 style="margin:14px 0 4px">Параметры страницы</h3>${dirParamsHtml(ex, r.kind)}
-        <div class="frow"><div style="flex:1 1 100%"><label>Прочие параметры (JSON; пусто, если не нужны)</label><textarea id="e_json" rows="${Object.keys(rest).length ? 4 : 2}" style="width:100%;font-family:monospace">${Object.keys(rest).length ? esc(JSON.stringify(rest, null, 1)) : ""}</textarea></div></div>
-        <details><summary class="muted">Переводы городов</summary>
+        ${r.kind === "custom" ? "" : `<div class="frow">${r.kind === "transfer" ? `<div><label>Станция пересадки</label><input type="text" id="e_x" list="d_stl" value="${esc(r.x || "")}" style="width:210px"></div><div><label>Пограничный контроль</label><select id="e_bd"><option value="">нет</option><option value="after" ${r.border === "after" ? "selected" : ""}>после станции пересадки</option><option value="before" ${r.border === "before" ? "selected" : ""}>до станции пересадки</option></select></div>` : `<label><input type="checkbox" id="e_one" ${r.single ? "checked" : ""}> на направлении один поезд</label>`}</div>`}
+                <details class="dgrp"><summary><b>Технические коды</b> <span class="muted">(обычно менять не нужно)</span></summary><p class="muted" style="margin:4px 0">Коды используются в ссылках и в адресах страниц: «ua-pl» — из Украины в Польшу, «pl-ua» — обратно. Порядок — позиция страницы в списке на главной (меньше — выше).</p><div class="frow">
+        <div><label>Код направления</label><input type="text" id="e_route" value="${esc(r.route)}" style="width:90px"></div>
+        <div><label>Код обратного</label><input type="text" id="e_back" value="${esc(r.back)}" style="width:90px"></div></div></details>
+        <h3 class="dsec">2. Как купить билеты</h3>${colsHtml(r)}
+        <h3 class="dsec">3. Дополнительные настройки</h3>${dirParamsHtml(ex, r.kind, colsOk(ex.cols) && ex.cols.length > 0)}
+        <details class="dgrp" ${Object.keys(rest).length ? "open" : ""}><summary><b>Технические параметры (JSON)</b>${Object.keys(rest).length ? ` <span class="chip">задано: ${Object.keys(rest).length}</span>` : ""}</summary><p class="muted" style="margin:4px 0">Служебные настройки, для которых нет отдельных полей. Менять только по инструкции разработчика; пусто — значит не нужны.</p><div class="frow"><div style="flex:1 1 100%"><textarea id="e_json" rows="${Object.keys(rest).length ? 4 : 2}" style="width:100%;font-family:monospace">${Object.keys(rest).length ? esc(JSON.stringify(rest, null, 1)) : ""}</textarea></div></div></details>
+        <h3 class="dsec">4. Названия и тексты</h3>
+        <details class="dgrp"><summary><b>Переводы городов</b> <span class="muted">(для украинской, английской и польской версий)</span></summary>
         ${[["from", r.from_name], ["to", r.to_name]].map(([w, n]) => `<div class="frow"><span class="muted" style="align-self:center;width:130px">${esc(n)}</span>${[["uk", "name_uk", "Українська"], ["en", "name_en", "English"], ["pl", "name_pl", "Polski"]].map(([k, c, ph]) => `<input type="text" data-nm="${w}.${k}" placeholder="${ph}" value="${esc(nmv(n, k, c))}" style="width:170px">`).join("")}</div>`).join("")}</details>
-        <details><summary class="muted">Тексты страницы (пусто — для новых страниц собирается автоматически; можно использовать {FROM} и {TO})</summary>
+        <details class="dgrp"><summary><b>Заголовки и описания страницы</b> <span class="muted">(пусто — соберутся автоматически; можно использовать {FROM} и {TO})</span></summary>
         ${DIR_LANGS.map(([l, ln]) => `<details style="margin-left:14px"><summary class="muted">${ln}</summary>${DIR_TXT.map(([k, kl]) => `<div class="frow"><div style="flex:1 1 100%"><label>${esc(kl)}</label><textarea rows="${k === "lead" ? 3 : 1}" data-tx="${l}.${k}" style="width:100%">${esc((tx[l] || {})[k] || "")}</textarea></div></div>`).join("")}</details>`).join("")}</details>
         <div id="e_err"></div>
         <p><button class="pri" id="e_save">Сохранить</button></p></div>`
@@ -730,7 +758,7 @@ function drawDirMain(msg) {
         <label title="Показывать на главной сразу, а не в раскрывающемся списке «Ещё маршруты»"><input type="checkbox" id="h_pop" ${r.popular ? "checked" : ""}> на главной</label>
         <button id="h_del" title="Удалить направление из списка">✕ Удалить</button></div></div>
         ${msg ? `<p style="margin:0 0 10px"><span class="chip gr">${esc(msg)}</span></p>` : ""}
-        <div class="subtabs"><button data-s="conns" class="${DSUB === "conns" ? "on" : ""}">${slice ? "Поезда" : "Варианты"} (${slice ? mine.filter(t => !t.hidden).length : mine.length})</button><button data-s="page" class="${DSUB === "page" ? "on" : ""}">Страница и тексты</button></div>
+        <div class="subtabs"><button data-s="conns" class="${DSUB === "conns" ? "on" : ""}">${slice ? "Поезда" : "Варианты"} (${slice ? mine.filter(t => !t.hidden).length : mine.length})</button><button data-s="page" class="${DSUB === "page" ? "on" : ""}">Настройки страницы</button></div>
         <div id="d_sub"></div></section>`;
     m.querySelectorAll(".subtabs button").forEach(b => b.onclick = () => { DSUB = b.dataset.s; drawDirMain() });
     const patch = async (body, ok, undo) => {
