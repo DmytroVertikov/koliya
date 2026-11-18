@@ -3655,7 +3655,10 @@
       }
     },
     "extra": {
+      "s1": "buy.m.s1",
+      "s2": "buy.t.s2mo",
       "ds2": "buy.d.s2v",
+      "ds3": "buy.d.s3z",
       "direct": true
     },
     "sort": 1000,
@@ -4028,6 +4031,7 @@
       "s1": "buy.m.s1",
       "s2": "buy.t.s2mo",
       "ds2": "buy.d.s2v",
+      "ds3": "buy.d.s3z",
       "direct": true
     },
     "sort": 1000,
