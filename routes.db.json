@@ -11,19 +11,8 @@
     "x": null,
     "border": null,
     "like_id": "kw",
-    "single": false,
     "names": {},
-    "extra": {
-      "t3": "buy.t3out",
-      "uz": [
-        "Киев",
-        "Хелм"
-      ],
-      "pkp": [
-        "Хелм",
-        "Варшава"
-      ]
-    },
+    "extra": {},
     "sort": 0,
     "active": true,
     "created_at": "2026-11-13T12:44:27.684265+00:00",
@@ -171,19 +160,8 @@
     "x": null,
     "border": null,
     "like_id": "wk",
-    "single": false,
     "names": {},
-    "extra": {
-      "t3": "buy.t3in",
-      "uz": [
-        "Хелм",
-        "Киев"
-      ],
-      "pkp": [
-        "Варшава",
-        "Хелм"
-      ]
-    },
+    "extra": {},
     "sort": 10,
     "active": true,
     "created_at": "2026-11-13T12:44:27.684265+00:00",
@@ -331,19 +309,8 @@
     "x": null,
     "border": null,
     "like_id": "kw",
-    "single": false,
     "names": {},
     "extra": {
-      "x": "Перемышль",
-      "t3": "buy.t3out",
-      "uz": [
-        "Киев",
-        "Перемышль"
-      ],
-      "pkp": [
-        "Перемышль",
-        "Краков"
-      ],
       "border": "after",
       "direct": false
     },
@@ -459,19 +426,8 @@
     "x": null,
     "border": null,
     "like_id": "wk",
-    "single": false,
     "names": {},
     "extra": {
-      "x": "Перемышль",
-      "t3": "buy.t3in",
-      "uz": [
-        "Перемышль",
-        "Киев"
-      ],
-      "pkp": [
-        "Краков",
-        "Перемышль"
-      ],
       "border": "before",
       "direct": false
     },
@@ -587,7 +543,6 @@
     "x": null,
     "border": null,
     "like_id": "kw",
-    "single": false,
     "names": {
       "Киев": {
         "en": "Kyiv",
@@ -601,13 +556,11 @@
       }
     },
     "extra": {
-      "ds3": "buy.d.s3t",
       "hide": [
         "067К"
       ],
       "like": "kw",
       "coach": false,
-      "dOnly": true,
       "slice": true
     },
     "sort": 40,
@@ -673,16 +626,13 @@
     "x": null,
     "border": null,
     "like_id": "wk",
-    "single": false,
     "names": {},
     "extra": {
-      "ds3": "buy.d.s3t",
       "hide": [
         "068Л"
       ],
       "like": "wk",
       "coach": false,
-      "dOnly": true,
       "slice": true
     },
     "sort": 50,
@@ -748,13 +698,10 @@
     "x": null,
     "border": null,
     "like_id": "kw",
-    "single": false,
     "names": {},
     "extra": {
-      "ds3": "buy.d.s3t",
       "like": "kw",
       "coach": false,
-      "dOnly": true,
       "slice": true
     },
     "sort": 60,
@@ -820,13 +767,10 @@
     "x": null,
     "border": null,
     "like_id": "wk",
-    "single": false,
     "names": {},
     "extra": {
-      "ds3": "buy.d.s3t",
       "like": "wk",
       "coach": false,
-      "dOnly": true,
       "slice": true
     },
     "sort": 70,
@@ -892,21 +836,8 @@
     "x": null,
     "border": null,
     "like_id": "kw",
-    "single": false,
     "names": {},
     "extra": {
-      "x": "Хелм",
-      "t3": "buy.t3out",
-      "uz": [
-        "Днепр",
-        "Хелм"
-      ],
-      "one": true,
-      "pkp": [
-        "Хелм",
-        "Варшава"
-      ],
-      "plat": false,
       "direct": false
     },
     "sort": 80,
@@ -1021,21 +952,8 @@
     "x": null,
     "border": null,
     "like_id": "wk",
-    "single": false,
     "names": {},
     "extra": {
-      "x": "Хелм",
-      "t3": "buy.t3in",
-      "uz": [
-        "Хелм",
-        "Днепр"
-      ],
-      "one": true,
-      "pkp": [
-        "Варшава",
-        "Хелм"
-      ],
-      "plat": false,
       "direct": false
     },
     "sort": 90,
@@ -1150,20 +1068,8 @@
     "x": null,
     "border": null,
     "like_id": "kw",
-    "single": false,
     "names": {},
     "extra": {
-      "x": "Перемышль",
-      "t3": "buy.t3out",
-      "uz": [
-        "Днепр",
-        "Перемышль"
-      ],
-      "one": true,
-      "pkp": [
-        "Перемышль",
-        "Краков"
-      ],
       "border": "after",
       "direct": false
     },
@@ -1279,20 +1185,8 @@
     "x": null,
     "border": null,
     "like_id": "wk",
-    "single": false,
     "names": {},
     "extra": {
-      "x": "Перемышль",
-      "t3": "buy.t3in",
-      "uz": [
-        "Перемышль",
-        "Днепр"
-      ],
-      "one": true,
-      "pkp": [
-        "Краков",
-        "Перемышль"
-      ],
       "border": "before",
       "direct": false
     },
@@ -1408,13 +1302,10 @@
     "x": null,
     "border": null,
     "like_id": "kw",
-    "single": false,
     "names": {},
     "extra": {
-      "ds3": "buy.d.s3z",
       "like": "kw",
       "coach": false,
-      "dOnly": true,
       "slice": true
     },
     "sort": 120,
@@ -1480,13 +1371,10 @@
     "x": null,
     "border": null,
     "like_id": "wk",
-    "single": false,
     "names": {},
     "extra": {
-      "ds3": "buy.d.s3z",
       "like": "wk",
       "coach": false,
-      "dOnly": true,
       "slice": true
     },
     "sort": 130,
@@ -1552,7 +1440,6 @@
     "x": null,
     "border": null,
     "like_id": "kw",
-    "single": false,
     "names": {
       "Днепр": {
         "en": "Dnipro",
@@ -1561,10 +1448,8 @@
       }
     },
     "extra": {
-      "ds3": "buy.d.s3z",
       "like": "kw",
       "coach": false,
-      "dOnly": true,
       "slice": true
     },
     "sort": 140,
@@ -1630,13 +1515,10 @@
     "x": null,
     "border": null,
     "like_id": "wk",
-    "single": false,
     "names": {},
     "extra": {
-      "ds3": "buy.d.s3z",
       "like": "wk",
       "coach": false,
-      "dOnly": true,
       "slice": true
     },
     "sort": 150,
@@ -1702,21 +1584,8 @@
     "x": null,
     "border": null,
     "like_id": "kw",
-    "single": false,
     "names": {},
     "extra": {
-      "x": "Хелм",
-      "t3": "buy.t3out",
-      "uz": [
-        "Харьков",
-        "Хелм"
-      ],
-      "one": true,
-      "pkp": [
-        "Хелм",
-        "Варшава"
-      ],
-      "plat": false,
       "direct": false
     },
     "sort": 160,
@@ -1831,21 +1700,8 @@
     "x": null,
     "border": null,
     "like_id": "wk",
-    "single": false,
     "names": {},
     "extra": {
-      "x": "Хелм",
-      "t3": "buy.t3in",
-      "uz": [
-        "Хелм",
-        "Харьков"
-      ],
-      "one": true,
-      "pkp": [
-        "Варшава",
-        "Хелм"
-      ],
-      "plat": false,
       "direct": false
     },
     "sort": 170,
@@ -1960,20 +1816,8 @@
     "x": null,
     "border": null,
     "like_id": "kw",
-    "single": false,
     "names": {},
     "extra": {
-      "x": "Перемышль",
-      "t3": "buy.t3out",
-      "uz": [
-        "Харьков",
-        "Перемышль"
-      ],
-      "one": true,
-      "pkp": [
-        "Перемышль",
-        "Краков"
-      ],
       "border": "after",
       "direct": false
     },
@@ -2089,20 +1933,8 @@
     "x": null,
     "border": null,
     "like_id": "wk",
-    "single": false,
     "names": {},
     "extra": {
-      "x": "Перемышль",
-      "t3": "buy.t3in",
-      "uz": [
-        "Перемышль",
-        "Харьков"
-      ],
-      "one": true,
-      "pkp": [
-        "Краков",
-        "Перемышль"
-      ],
       "border": "before",
       "direct": false
     },
@@ -2218,13 +2050,10 @@
     "x": null,
     "border": null,
     "like_id": "kw",
-    "single": false,
     "names": {},
     "extra": {
-      "ds3": "buy.d.s3z",
       "like": "kw",
       "coach": false,
-      "dOnly": true,
       "slice": true
     },
     "sort": 200,
@@ -2290,13 +2119,10 @@
     "x": null,
     "border": null,
     "like_id": "wk",
-    "single": false,
     "names": {},
     "extra": {
-      "ds3": "buy.d.s3z",
       "like": "wk",
       "coach": false,
-      "dOnly": true,
       "slice": true
     },
     "sort": 210,
@@ -2362,13 +2188,10 @@
     "x": null,
     "border": null,
     "like_id": "kw",
-    "single": false,
     "names": {},
     "extra": {
-      "ds3": "buy.d.s3z",
       "like": "kw",
       "coach": false,
-      "dOnly": true,
       "slice": true
     },
     "sort": 220,
@@ -2434,13 +2257,10 @@
     "x": null,
     "border": null,
     "like_id": "wk",
-    "single": false,
     "names": {},
     "extra": {
-      "ds3": "buy.d.s3z",
       "like": "wk",
       "coach": false,
-      "dOnly": true,
       "slice": true
     },
     "sort": 230,
@@ -2506,21 +2326,8 @@
     "x": null,
     "border": null,
     "like_id": "kw",
-    "single": false,
     "names": {},
     "extra": {
-      "x": "Перемышль",
-      "t3": "buy.t3out",
-      "uz": [
-        "Одесса",
-        "Перемышль"
-      ],
-      "one": true,
-      "pkp": [
-        "Перемышль",
-        "Варшава"
-      ],
-      "plat": false,
       "border": "after",
       "direct": false
     },
@@ -2636,21 +2443,8 @@
     "x": null,
     "border": null,
     "like_id": "wk",
-    "single": false,
     "names": {},
     "extra": {
-      "x": "Перемышль",
-      "t3": "buy.t3in",
-      "uz": [
-        "Перемышль",
-        "Одесса"
-      ],
-      "one": true,
-      "pkp": [
-        "Варшава",
-        "Перемышль"
-      ],
-      "plat": false,
       "border": "before",
       "direct": false
     },
@@ -2766,20 +2560,8 @@
     "x": null,
     "border": null,
     "like_id": "kw",
-    "single": false,
     "names": {},
     "extra": {
-      "x": "Перемышль",
-      "t3": "buy.t3out",
-      "uz": [
-        "Одесса",
-        "Перемышль"
-      ],
-      "one": true,
-      "pkp": [
-        "Перемышль",
-        "Краков"
-      ],
       "border": "after",
       "direct": false
     },
@@ -2895,20 +2677,8 @@
     "x": null,
     "border": null,
     "like_id": "wk",
-    "single": false,
     "names": {},
     "extra": {
-      "x": "Перемышль",
-      "t3": "buy.t3in",
-      "uz": [
-        "Перемышль",
-        "Одесса"
-      ],
-      "one": true,
-      "pkp": [
-        "Краков",
-        "Перемышль"
-      ],
       "border": "before",
       "direct": false
     },
@@ -3024,13 +2794,10 @@
     "x": null,
     "border": null,
     "like_id": "kw",
-    "single": false,
     "names": {},
     "extra": {
-      "ds3": "buy.d.s3z",
       "like": "kw",
       "coach": false,
-      "dOnly": true,
       "slice": true
     },
     "sort": 280,
@@ -3096,13 +2863,10 @@
     "x": null,
     "border": null,
     "like_id": "wk",
-    "single": false,
     "names": {},
     "extra": {
-      "ds3": "buy.d.s3z",
       "like": "wk",
       "coach": false,
-      "dOnly": true,
       "slice": true
     },
     "sort": 290,
@@ -3168,21 +2932,8 @@
     "x": null,
     "border": null,
     "like_id": "kw",
-    "single": false,
     "names": {},
     "extra": {
-      "x": "Рава-Русская",
-      "t3": "buy.t3out",
-      "uz": [
-        "Львов",
-        "Перемышль"
-      ],
-      "app": true,
-      "pkp": [
-        "Перемышль",
-        "Варшава"
-      ],
-      "plat": false,
       "direct": false
     },
     "sort": 300,
@@ -3287,21 +3038,8 @@
     "x": null,
     "border": null,
     "like_id": "wk",
-    "single": false,
     "names": {},
     "extra": {
-      "x": "Рава-Русская",
-      "t3": "buy.t3in",
-      "uz": [
-        "Перемышль",
-        "Львов"
-      ],
-      "app": true,
-      "pkp": [
-        "Варшава",
-        "Перемышль"
-      ],
-      "plat": false,
       "direct": false
     },
     "sort": 310,
@@ -3406,19 +3144,8 @@
     "x": null,
     "border": null,
     "like_id": "kw",
-    "single": false,
     "names": {},
     "extra": {
-      "x": "Перемышль",
-      "t3": "buy.t3out",
-      "uz": [
-        "Львов",
-        "Перемышль"
-      ],
-      "pkp": [
-        "Перемышль",
-        "Краков"
-      ],
       "border": "after",
       "direct": false
     },
@@ -3534,19 +3261,8 @@
     "x": null,
     "border": null,
     "like_id": "wk",
-    "single": false,
     "names": {},
     "extra": {
-      "x": "Перемышль",
-      "t3": "buy.t3in",
-      "uz": [
-        "Перемышль",
-        "Львов"
-      ],
-      "pkp": [
-        "Краков",
-        "Перемышль"
-      ],
       "border": "before",
       "direct": false
     },
@@ -3662,13 +3378,10 @@
     "x": null,
     "border": null,
     "like_id": "kw",
-    "single": false,
     "names": {},
     "extra": {
-      "ds3": "buy.d.s3t",
       "like": "kw",
       "coach": false,
-      "dOnly": true,
       "slice": true
     },
     "sort": 340,
@@ -3734,13 +3447,10 @@
     "x": null,
     "border": null,
     "like_id": "wk",
-    "single": false,
     "names": {},
     "extra": {
-      "ds3": "buy.d.s3t",
       "like": "wk",
       "coach": false,
-      "dOnly": true,
       "slice": true
     },
     "sort": 350,
@@ -3806,21 +3516,8 @@
     "x": null,
     "border": null,
     "like_id": "kw",
-    "single": false,
     "names": {},
     "extra": {
-      "x": "Перемышль",
-      "t3": "buy.t3out",
-      "uz": [
-        "Кременчуг",
-        "Перемышль"
-      ],
-      "one": true,
-      "pkp": [
-        "Перемышль",
-        "Варшава"
-      ],
-      "plat": false,
       "border": "after",
       "direct": false
     },
@@ -3936,21 +3633,8 @@
     "x": null,
     "border": null,
     "like_id": "wk",
-    "single": false,
     "names": {},
     "extra": {
-      "x": "Перемышль",
-      "t3": "buy.t3in",
-      "uz": [
-        "Перемышль",
-        "Кременчуг"
-      ],
-      "one": true,
-      "pkp": [
-        "Варшава",
-        "Перемышль"
-      ],
-      "plat": false,
       "border": "before",
       "direct": false
     },
@@ -4066,20 +3750,8 @@
     "x": null,
     "border": null,
     "like_id": "kw",
-    "single": false,
     "names": {},
     "extra": {
-      "x": "Перемышль",
-      "t3": "buy.t3out",
-      "uz": [
-        "Кременчуг",
-        "Перемышль"
-      ],
-      "one": true,
-      "pkp": [
-        "Перемышль",
-        "Краков"
-      ],
       "border": "after",
       "direct": false
     },
@@ -4195,20 +3867,8 @@
     "x": null,
     "border": null,
     "like_id": "wk",
-    "single": false,
     "names": {},
     "extra": {
-      "x": "Перемышль",
-      "t3": "buy.t3in",
-      "uz": [
-        "Перемышль",
-        "Кременчуг"
-      ],
-      "one": true,
-      "pkp": [
-        "Краков",
-        "Перемышль"
-      ],
       "border": "before",
       "direct": false
     },
@@ -4324,13 +3984,10 @@
     "x": null,
     "border": null,
     "like_id": "kw",
-    "single": false,
     "names": {},
     "extra": {
-      "ds3": "buy.d.s3z",
       "like": "kw",
       "coach": false,
-      "dOnly": true,
       "slice": true
     },
     "sort": 400,
@@ -4396,13 +4053,10 @@
     "x": null,
     "border": null,
     "like_id": "wk",
-    "single": false,
     "names": {},
     "extra": {
-      "ds3": "buy.d.s3z",
       "like": "wk",
       "coach": false,
-      "dOnly": true,
       "slice": true
     },
     "sort": 410,
@@ -4468,23 +4122,8 @@
     "x": null,
     "border": null,
     "like_id": "kw",
-    "single": false,
     "names": {},
     "extra": {
-      "x": "Чоп",
-      "s1": "buy.t.s1kv",
-      "s2": "buy.t.s2zk",
-      "t3": "buy.t3out",
-      "uz": [
-        "Киев",
-        "Чоп"
-      ],
-      "car": "zssk",
-      "pkp": [
-        "Чоп",
-        "Братислава"
-      ],
-      "plat": false,
       "direct": false
     },
     "sort": 420,
@@ -4599,22 +4238,8 @@
     "x": null,
     "border": null,
     "like_id": "wk",
-    "single": false,
     "names": {},
     "extra": {
-      "x": "Чоп",
-      "s1": "buy.t.s1vk",
-      "t3": "buy.t3in",
-      "uz": [
-        "Чоп",
-        "Киев"
-      ],
-      "car": "zssk",
-      "pkp": [
-        "Братислава",
-        "Чоп"
-      ],
-      "plat": false,
       "direct": false
     },
     "sort": 430,
@@ -4729,13 +4354,9 @@
     "x": null,
     "border": null,
     "like_id": "kw",
-    "single": false,
     "names": {},
     "extra": {
-      "ds2": "buy.d.s2z",
-      "ds3": "buy.d.s3z",
-      "coach": false,
-      "dOnly": true
+      "coach": false
     },
     "sort": 440,
     "active": true,
@@ -4833,13 +4454,9 @@
     "x": null,
     "border": null,
     "like_id": "wk",
-    "single": false,
     "names": {},
     "extra": {
-      "ds2": "buy.d.s2z",
-      "ds3": "buy.d.s3z",
-      "coach": false,
-      "dOnly": true
+      "coach": false
     },
     "sort": 450,
     "active": true,
@@ -4937,27 +4554,8 @@
     "x": null,
     "border": null,
     "like_id": "kw",
-    "single": false,
     "names": {},
-    "extra": {
-      "h": true,
-      "x": "Чоп",
-      "s1": "buy.t.s1kv",
-      "s2": "buy.t.s2ov",
-      "t3": "buy.t3out",
-      "uz": [
-        "Киев",
-        "Чоп"
-      ],
-      "car": "oebb",
-      "ds2": "buy.d.s2v",
-      "pkp": [
-        "Чоп",
-        "Вена"
-      ],
-      "plat": false,
-      "third": "Будапешт"
-    },
+    "extra": {},
     "sort": 460,
     "active": true,
     "created_at": "2026-11-13T12:44:27.684265+00:00",
@@ -5166,35 +4764,8 @@
     "x": null,
     "border": null,
     "like_id": "wk",
-    "single": false,
     "names": {},
-    "extra": {
-      "h": true,
-      "x": "Чоп",
-      "s1": "buy.t.s1vk",
-      "s2": "buy.t.s2vk",
-      "t3": "buy.t3in",
-      "uz": [
-        "Чоп",
-        "Киев"
-      ],
-      "car": "oebb",
-      "ds2": "buy.d.s2v",
-      "hb1": [
-        "Будапешт",
-        "Киев"
-      ],
-      "hb2": [
-        "Вена",
-        "Будапешт"
-      ],
-      "pkp": [
-        "Вена",
-        "Чоп"
-      ],
-      "plat": false,
-      "third": "Будапешт"
-    },
+    "extra": {},
     "sort": 470,
     "active": true,
     "created_at": "2026-11-13T12:44:27.684265+00:00",
@@ -5403,13 +4974,9 @@
     "x": null,
     "border": null,
     "like_id": "kw",
-    "single": false,
     "names": {},
     "extra": {
-      "ds2": "buy.d.s2z",
-      "ds3": "buy.d.s3z",
-      "coach": false,
-      "dOnly": true
+      "coach": false
     },
     "sort": 480,
     "active": true,
@@ -5507,13 +5074,9 @@
     "x": null,
     "border": null,
     "like_id": "wk",
-    "single": false,
     "names": {},
     "extra": {
-      "ds2": "buy.d.s2z",
-      "ds3": "buy.d.s3z",
-      "coach": false,
-      "dOnly": true
+      "coach": false
     },
     "sort": 490,
     "active": true,
@@ -5611,92 +5174,15 @@
     "x": null,
     "border": null,
     "like_id": "kw",
-    "single": false,
     "names": {},
     "extra": {
-      "x": "Хелм",
-      "be": {
-        "C": {
-          "de": [
-            "Хелм",
-            "Берлин"
-          ],
-          "uz": [
-            "Киев",
-            "Хелм"
-          ]
-        },
-        "H": {
-          "de": [
-            "Перемышль",
-            "Берлин"
-          ],
-          "pl": [
-            "Перемышль",
-            "Берлин"
-          ]
-        },
-        "T": {
-          "de": [
-            "Варшава",
-            "Берлин"
-          ],
-          "pl": [
-            "Хелм",
-            "Варшава"
-          ]
-        }
-      },
-      "t3": "buy.t3out",
-      "uz": [
-        "Киев",
-        "Хелм"
-      ],
-      "hs1": "buy.t.s1",
-      "hs2": "buy.t.s2",
-      "hxs": [
-        "Хелм",
-        "Варшава"
-      ],
-      "pkp": [
-        "Хелм",
-        "Берлин"
-      ],
-      "uz3": [
-        "Киев",
-        "Перемышль"
-      ],
-      "hb2k": "buy.t.b2",
-      "hurl": "https://www.intercity.pl/",
-      "pkp3": [
-        "Перемышль",
-        "Берлин"
-      ],
       "leadx": "Перемышль",
       "split": [
         "Перемышль",
         "Хелм"
       ],
-      "third": "Перемышль",
       "border": "after",
-      "direct": false,
-      "splitx": [
-        {
-          "s": "Перемышль"
-        },
-        {
-          "h": [
-            "Хелм",
-            "Варшава"
-          ],
-          "l": 3,
-          "s": "Хелм"
-        },
-        {
-          "l": 2,
-          "s": "Хелм"
-        }
-      ]
+      "direct": false
     },
     "sort": 500,
     "active": true,
@@ -5936,93 +5422,16 @@
     "x": null,
     "border": null,
     "like_id": "wk",
-    "single": false,
     "names": {},
     "extra": {
-      "x": "Хелм",
-      "be": {
-        "C": {
-          "de": [
-            "Берлин",
-            "Хелм"
-          ],
-          "uz": [
-            "Хелм",
-            "Киев"
-          ]
-        },
-        "H": {
-          "de": [
-            "Берлин",
-            "Перемышль"
-          ],
-          "pl": [
-            "Берлин",
-            "Перемышль"
-          ]
-        },
-        "T": {
-          "de": [
-            "Берлин",
-            "Варшава"
-          ],
-          "pl": [
-            "Варшава",
-            "Хелм"
-          ]
-        }
-      },
-      "t3": "buy.t3in",
-      "uz": [
-        "Хелм",
-        "Киев"
-      ],
-      "hs1": "buy.t.s1",
-      "hs2": "buy.t.s2",
-      "hxs": [
-        "Варшава",
-        "Хелм"
-      ],
-      "pkp": [
-        "Берлин",
-        "Хелм"
-      ],
-      "uz3": [
-        "Перемышль",
-        "Киев"
-      ],
-      "hb2k": "buy.t.b2",
-      "hurl": "https://www.intercity.pl/",
-      "pkp3": [
-        "Берлин",
-        "Перемышль"
-      ],
       "leadx": "Перемышль",
       "split": [
         "Перемышль",
         "Варшава",
         "Хелм"
       ],
-      "third": "Перемышль",
       "border": "before",
-      "direct": false,
-      "splitx": [
-        {
-          "s": "Перемышль"
-        },
-        {
-          "h": [
-            "Варшава",
-            "Хелм"
-          ],
-          "l": 3,
-          "s": "Варшава"
-        },
-        {
-          "l": 2,
-          "s": "Хелм"
-        }
-      ]
+      "direct": false
     },
     "sort": 510,
     "active": true,
@@ -6262,29 +5671,8 @@
     "x": null,
     "border": null,
     "like_id": "kw",
-    "single": false,
     "names": {},
     "extra": {
-      "x": "Чоп",
-      "s1": "buy.m.s1",
-      "t3": "buy.t3out",
-      "uz": [
-        "Киев",
-        "Чоп"
-      ],
-      "xs": [
-        "Чоп",
-        "Мукачево"
-      ],
-      "car": "zssk",
-      "pkp": [
-        "Чоп",
-        "Кошице"
-      ],
-      "xb2": "buy.x.b2z",
-      "plat": false,
-      "xs2i": "buy.x.s2z",
-      "xs2o": "buy.x.s2z",
       "leadx": "Мукачево",
       "split": [
         "Чоп",
@@ -6408,22 +5796,8 @@
     "x": null,
     "border": null,
     "like_id": "wk",
-    "single": false,
     "names": {},
     "extra": {
-      "x": "Мукачево",
-      "s1": "buy.m.s1",
-      "t3": "buy.t3in",
-      "uz": [
-        "Мукачево",
-        "Киев"
-      ],
-      "car": "zssk",
-      "pkp": [
-        "Кошице",
-        "Мукачево"
-      ],
-      "plat": false,
       "direct": false
     },
     "sort": 530,
@@ -6538,64 +5912,8 @@
     "x": null,
     "border": null,
     "like_id": "kw",
-    "single": false,
     "names": {},
     "extra": {
-      "x": "Перемышль",
-      "t3": "buy.t3out",
-      "uz": [
-        "Киев",
-        "Перемышль"
-      ],
-      "car": "cd",
-      "pkp": [
-        "Перемышль",
-        "Прага"
-      ],
-      "cols": [
-        {
-          "x": "Перемышль",
-          "uz": [
-            "Киев",
-            "Перемышль"
-          ],
-          "car": "cd",
-          "pkp": [
-            "Перемышль",
-            "Прага"
-          ],
-          "open": "09:00",
-          "train": "051К"
-        },
-        {
-          "x": "Перемышль",
-          "uz": [
-            "Киев",
-            "Перемышль"
-          ],
-          "car": "rj",
-          "pkp": [
-            "Перемышль",
-            "Прага"
-          ],
-          "open": "09:00",
-          "train": "715К"
-        },
-        {
-          "x": "Чоп",
-          "uz": [
-            "Киев",
-            "Чоп"
-          ],
-          "car": "rj",
-          "pkp": [
-            "Чоп",
-            "Прага"
-          ],
-          "train": "059К"
-        }
-      ],
-      "plat": false,
       "split": [
         "Перемышль",
         "Чоп"
@@ -6817,7 +6135,6 @@
     "x": null,
     "border": null,
     "like_id": "kw",
-    "single": false,
     "names": {
       "Киев": {
         "en": "Kyiv",
@@ -6831,26 +6148,6 @@
       }
     },
     "extra": {
-      "x": "Чоп",
-      "s1": "buy.m.s1",
-      "s2": "buy.t.s2mo",
-      "t3": "buy.t3out",
-      "uz": [
-        "Киев",
-        "Чоп"
-      ],
-      "xs": [
-        "Чоп",
-        "Мукачево"
-      ],
-      "car": "mav",
-      "ds2": "buy.d.s2v",
-      "ds3": "buy.d.s3z",
-      "pkp": [
-        "Чоп",
-        "Будапешт"
-      ],
-      "plat": false,
       "coach": false,
       "leadx": "Мукачево",
       "split": [
@@ -7009,25 +6306,8 @@
     "x": null,
     "border": null,
     "like_id": "wk",
-    "single": false,
     "names": {},
     "extra": {
-      "x": "Чоп",
-      "s1": "buy.m.s1",
-      "s2": "buy.t.s2mi",
-      "t3": "buy.t3in",
-      "uz": [
-        "Чоп",
-        "Киев"
-      ],
-      "car": "mav",
-      "ds2": "buy.d.s2v",
-      "ds3": "buy.d.s3z",
-      "pkp": [
-        "Будапешт",
-        "Чоп"
-      ],
-      "plat": false,
       "coach": false
     },
     "sort": 560,
@@ -7181,64 +6461,8 @@
     "x": null,
     "border": null,
     "like_id": "wk",
-    "single": false,
     "names": {},
     "extra": {
-      "x": "Перемышль",
-      "t3": "buy.t3in",
-      "uz": [
-        "Перемышль",
-        "Киев"
-      ],
-      "car": "cd",
-      "pkp": [
-        "Прага",
-        "Перемышль"
-      ],
-      "cols": [
-        {
-          "x": "Перемышль",
-          "uz": [
-            "Перемышль",
-            "Киев"
-          ],
-          "car": "cd",
-          "pkp": [
-            "Прага",
-            "Перемышль"
-          ],
-          "open": "09:00",
-          "train": "052Л"
-        },
-        {
-          "x": "Перемышль",
-          "uz": [
-            "Перемышль",
-            "Киев"
-          ],
-          "car": "rj",
-          "pkp": [
-            "Прага",
-            "Перемышль"
-          ],
-          "open": "09:00",
-          "train": "716Л"
-        },
-        {
-          "x": "Чоп",
-          "uz": [
-            "Чоп",
-            "Киев"
-          ],
-          "car": "rj",
-          "pkp": [
-            "Прага",
-            "Чоп"
-          ],
-          "train": "060Л"
-        }
-      ],
-      "plat": false,
       "split": [
         "Перемышль",
         "Чоп"
@@ -7460,7 +6684,6 @@
     "x": "Мукачево",
     "border": null,
     "like_id": "wk",
-    "single": false,
     "names": {
       "Днепр": {
         "en": "Dnipro-Holovnyi",
@@ -7473,37 +6696,7 @@
         "uk": "Будапешт-Келеті"
       }
     },
-    "extra": {
-      "cols": [
-        {
-          "x": "Мукачево",
-          "uz": [
-            "Мукачево",
-            "Днепр"
-          ],
-          "car": "mav",
-          "pkp": [
-            "Будапешт",
-            "Мукачево"
-          ],
-          "open": "08:00",
-          "train": "003Л"
-        },
-        {
-          "x": "Киев",
-          "uz": [
-            "Будапешт",
-            "Киев"
-          ],
-          "car": "uz",
-          "pkp": [
-            "Киев",
-            "Днепр"
-          ],
-          "train": "120Д"
-        }
-      ]
-    },
+    "extra": {},
     "sort": 1000,
     "active": true,
     "created_at": "2026-11-17T10:03:29.162917+00:00",
@@ -7659,7 +6852,6 @@
     "x": "Мукачево",
     "border": null,
     "like_id": "wk",
-    "single": false,
     "names": {
       "Харьков": {
         "en": "Kharkiv",
@@ -7672,49 +6864,7 @@
         "uk": "Будапешт-Келеті"
       }
     },
-    "extra": {
-      "cols": [
-        {
-          "x": "Мукачево",
-          "uz": [
-            "Будапешт",
-            "Мукачево"
-          ],
-          "car": "uz",
-          "pkp": [
-            "Мукачево",
-            "Харьков"
-          ],
-          "train": "010К"
-        },
-        {
-          "x": "Киев",
-          "uz": [
-            "Будапешт",
-            "Киев"
-          ],
-          "car": "uz",
-          "pkp": [
-            "Киев",
-            "Харьков"
-          ],
-          "train": "010К"
-        },
-        {
-          "x": "Львов",
-          "uz": [
-            "Будапешт",
-            "Львов"
-          ],
-          "car": "uz",
-          "pkp": [
-            "Львов",
-            "Харьков"
-          ],
-          "train": "010К"
-        }
-      ]
-    },
+    "extra": {},
     "sort": 1000,
     "active": true,
     "created_at": "2026-11-17T20:16:15.124235+00:00",
@@ -7921,7 +7071,6 @@
     "x": "Мукачево",
     "border": null,
     "like_id": "wk",
-    "single": false,
     "names": {
       "Будапешт": {
         "en": "Budapest Keleti",
@@ -7934,9 +7083,7 @@
         "uk": "Кременчук"
       }
     },
-    "extra": {
-      "s2": "buy.t.s2mi"
-    },
+    "extra": {},
     "sort": 1000,
     "active": true,
     "created_at": "2026-11-18T11:09:25.392293+00:00",
@@ -8041,7 +7188,6 @@
     "x": "Мукачево",
     "border": null,
     "like_id": "wk",
-    "single": false,
     "names": {
       "Одесса": {
         "en": "Odesa",
@@ -8054,36 +7200,7 @@
         "uk": "Будапешт-Келеті"
       }
     },
-    "extra": {
-      "cols": [
-        {
-          "x": "Мукачево",
-          "uz": [
-            "Будапешт",
-            "Мукачево"
-          ],
-          "car": "uz",
-          "pkp": [
-            "Мукачево",
-            "Одесса"
-          ],
-          "train": "010К"
-        },
-        {
-          "x": "Львов",
-          "uz": [
-            "Будапешт",
-            "Львов"
-          ],
-          "car": "uz",
-          "pkp": [
-            "Львов",
-            "Одесса"
-          ],
-          "train": "010К"
-        }
-      ]
-    },
+    "extra": {},
     "sort": 1000,
     "active": true,
     "created_at": "2026-11-17T20:39:59.029488+00:00",
@@ -8239,7 +7356,6 @@
     "x": "Чоп",
     "border": null,
     "like_id": "kw",
-    "single": false,
     "names": {
       "Днепр": {
         "en": "Dnipro-Holovnyi",
@@ -8252,50 +7368,7 @@
         "uk": "Будапешт-Келеті"
       }
     },
-    "extra": {
-      "cols": [
-        {
-          "x": "Чоп",
-          "uz": [
-            "Днепр",
-            "Чоп"
-          ],
-          "car": "mav",
-          "pkp": [
-            "Чоп",
-            "Будапешт"
-          ],
-          "open": "08:00",
-          "train": "003П"
-        },
-        {
-          "x": "Мукачево",
-          "uz": [
-            "Днепр",
-            "Мукачево"
-          ],
-          "car": "uz",
-          "pkp": [
-            "Мукачево",
-            "Будапешт"
-          ],
-          "train": "003П"
-        },
-        {
-          "x": "Киев",
-          "uz": [
-            "Днепр",
-            "Киев"
-          ],
-          "car": "uz",
-          "pkp": [
-            "Киев",
-            "Будапешт"
-          ],
-          "train": "119П"
-        }
-      ]
-    },
+    "extra": {},
     "sort": 1000,
     "active": true,
     "created_at": "2026-11-17T10:03:29.162917+00:00",
@@ -8502,7 +7575,6 @@
     "x": "Перемышль Главный",
     "border": null,
     "like_id": "kw",
-    "single": false,
     "names": {
       "Днепр": {
         "en": "Dnipro",
@@ -8515,38 +7587,7 @@
         "uk": "Прага"
       }
     },
-    "extra": {
-      "car": "rj",
-      "cols": [
-        {
-          "x": "Перемышль",
-          "uz": [
-            "Днепр",
-            "Перемышль"
-          ],
-          "car": "rj",
-          "pkp": [
-            "Перемышль",
-            "Прага"
-          ],
-          "open": "09:00",
-          "train": "073П"
-        },
-        {
-          "x": "Чоп",
-          "uz": [
-            "Днепр",
-            "Чоп"
-          ],
-          "car": "rj",
-          "pkp": [
-            "Чоп",
-            "Прага"
-          ],
-          "train": "003П"
-        }
-      ]
-    },
+    "extra": {},
     "sort": 1000,
     "active": true,
     "created_at": "2026-11-15T19:17:29.810598+00:00",
@@ -8702,7 +7743,6 @@
     "x": "Чоп",
     "border": null,
     "like_id": "kw",
-    "single": false,
     "names": {
       "Вена": {
         "en": "Wien Hbf",
@@ -8715,27 +7755,7 @@
         "uk": "Дніпро-Головний"
       }
     },
-    "extra": {
-      "s1": "buy.t.s1one",
-      "s2": "buy.t.s2o2",
-      "car": "oebb",
-      "cols": [
-        {
-          "x": "Чоп",
-          "s2": "buy.t.s2o2",
-          "uz": [
-            "Днепр",
-            "Чоп"
-          ],
-          "car": "oebb",
-          "pkp": [
-            "Чоп",
-            "Вена"
-          ],
-          "train": "003П"
-        }
-      ]
-    },
+    "extra": {},
     "sort": 1000,
     "active": true,
     "created_at": "2026-11-18T12:47:35.91422+00:00",
@@ -8840,7 +7860,6 @@
     "x": "Мукачево",
     "border": null,
     "like_id": "kw",
-    "single": false,
     "names": {
       "Харьков": {
         "en": "Kharkiv",
@@ -8853,49 +7872,7 @@
         "uk": "Будапешт-Келеті"
       }
     },
-    "extra": {
-      "cols": [
-        {
-          "x": "Мукачево",
-          "uz": [
-            "Харьков",
-            "Мукачево"
-          ],
-          "car": "mav",
-          "pkp": [
-            "Мукачево",
-            "Будапешт"
-          ],
-          "train": "017О"
-        },
-        {
-          "x": "Киев",
-          "uz": [
-            "Харьков",
-            "Киев"
-          ],
-          "car": "uz",
-          "pkp": [
-            "Киев",
-            "Будапешт"
-          ],
-          "train": "063О"
-        },
-        {
-          "x": "Львов",
-          "uz": [
-            "Харьков",
-            "Львов"
-          ],
-          "car": "uz",
-          "pkp": [
-            "Львов",
-            "Будапешт"
-          ],
-          "train": "021О"
-        }
-      ]
-    },
+    "extra": {},
     "sort": 1000,
     "active": true,
     "created_at": "2026-11-17T20:16:15.124235+00:00",
@@ -9102,7 +8079,6 @@
     "x": "Пшемысль",
     "border": null,
     "like_id": "kw",
-    "single": false,
     "names": {
       "Прага": {
         "en": "Praha hl.n.",
@@ -9115,37 +8091,7 @@
         "uk": "Харків"
       }
     },
-    "extra": {
-      "cols": [
-        {
-          "x": "Чоп",
-          "uz": [
-            "Харьков",
-            "Ужгород"
-          ],
-          "car": "rj",
-          "pkp": [
-            "Чоп",
-            "Прага"
-          ],
-          "train": "017О"
-        },
-        {
-          "x": "Перемышль",
-          "uz": [
-            "Харьков",
-            "Перемышль"
-          ],
-          "car": "rj",
-          "pkp": [
-            "Перемышль",
-            "Прага"
-          ],
-          "open": "09:00",
-          "train": "063О"
-        }
-      ]
-    },
+    "extra": {},
     "sort": 1000,
     "active": true,
     "created_at": "2026-11-16T15:44:48.675244+00:00",
@@ -9301,7 +8247,6 @@
     "x": "Мукачево",
     "border": null,
     "like_id": "kw",
-    "single": false,
     "names": {
       "Одесса": {
         "en": "Odesa",
@@ -9314,36 +8259,7 @@
         "uk": "Будапешт-Келеті"
       }
     },
-    "extra": {
-      "cols": [
-        {
-          "x": "Мукачево",
-          "uz": [
-            "Одесса",
-            "Мукачево"
-          ],
-          "car": "mav",
-          "pkp": [
-            "Мукачево",
-            "Будапешт"
-          ],
-          "train": "038Ш"
-        },
-        {
-          "x": "Львов",
-          "uz": [
-            "Одесса",
-            "Львов"
-          ],
-          "car": "uz",
-          "pkp": [
-            "Львов",
-            "Будапешт"
-          ],
-          "train": "012Ш"
-        }
-      ]
-    },
+    "extra": {},
     "sort": 1000,
     "active": true,
     "created_at": "2026-11-17T20:39:59.029488+00:00",
@@ -9499,7 +8415,6 @@
     "x": "Перемышль Главный",
     "border": null,
     "like_id": "kw",
-    "single": false,
     "names": {
       "Прага": {
         "en": "Praha hl.n.",
@@ -9513,36 +8428,6 @@
       }
     },
     "extra": {
-      "car": "rj",
-      "cols": [
-        {
-          "x": "Чоп",
-          "uz": [
-            "Одесса",
-            "Ужгород"
-          ],
-          "car": "rj",
-          "pkp": [
-            "Чоп",
-            "Прага"
-          ],
-          "train": "038Ш"
-        },
-        {
-          "x": "Перемышль",
-          "uz": [
-            "Одесса",
-            "Перемышль"
-          ],
-          "car": "rj",
-          "pkp": [
-            "Перемышль",
-            "Прага"
-          ],
-          "open": "09:00",
-          "train": "036Ш"
-        }
-      ],
       "slice": false,
       "direct": false
     },
@@ -9701,7 +8586,6 @@
     "x": "Перемышль Главный",
     "border": null,
     "like_id": "wk",
-    "single": false,
     "names": {
       "Днепр": {
         "en": "Dnipro",
@@ -9714,38 +8598,7 @@
         "uk": "Прага"
       }
     },
-    "extra": {
-      "car": "rj",
-      "cols": [
-        {
-          "x": "Перемышль",
-          "uz": [
-            "Перемышль",
-            "Днепр"
-          ],
-          "car": "rj",
-          "pkp": [
-            "Прага",
-            "Перемышль"
-          ],
-          "open": "09:00",
-          "train": "074Д"
-        },
-        {
-          "x": "Чоп",
-          "uz": [
-            "Чоп",
-            "Днепр"
-          ],
-          "car": "rj",
-          "pkp": [
-            "Прага",
-            "Чоп"
-          ],
-          "train": "003Л"
-        }
-      ]
-    },
+    "extra": {},
     "sort": 1000,
     "active": true,
     "created_at": "2026-11-15T19:17:29.810598+00:00",
@@ -9901,7 +8754,6 @@
     "x": "Перемышль",
     "border": null,
     "like_id": "wk",
-    "single": false,
     "names": {
       "Прага": {
         "en": "Praha hl.n.",
@@ -9914,37 +8766,7 @@
         "uk": "Харків"
       }
     },
-    "extra": {
-      "cols": [
-        {
-          "x": "Чоп",
-          "uz": [
-            "Ужгород",
-            "Харьков"
-          ],
-          "car": "rj",
-          "pkp": [
-            "Прага",
-            "Чоп"
-          ],
-          "train": "017Л"
-        },
-        {
-          "x": "Перемышль",
-          "uz": [
-            "Перемышль",
-            "Харьков"
-          ],
-          "car": "rj",
-          "pkp": [
-            "Прага",
-            "Перемышль"
-          ],
-          "open": "09:00",
-          "train": "064О"
-        }
-      ]
-    },
+    "extra": {},
     "sort": 1000,
     "active": true,
     "created_at": "2026-11-16T15:44:48.675244+00:00",
@@ -10100,7 +8922,6 @@
     "x": "Перемышль Главный",
     "border": null,
     "like_id": "wk",
-    "single": false,
     "names": {
       "Львов": {
         "en": "Lviv",
@@ -10113,37 +8934,7 @@
         "uk": "Прага-Головна"
       }
     },
-    "extra": {
-      "cols": [
-        {
-          "x": "Чоп",
-          "uz": [
-            "Прага",
-            "Чоп"
-          ],
-          "car": "rj",
-          "pkp": [
-            "Чоп",
-            "Львов"
-          ],
-          "train": "003Л"
-        },
-        {
-          "x": "Перемышль",
-          "uz": [
-            "Прага",
-            "Перемышль"
-          ],
-          "car": "rj",
-          "pkp": [
-            "Перемышль",
-            "Львов"
-          ],
-          "open": "09:00",
-          "train": "706Л"
-        }
-      ]
-    },
+    "extra": {},
     "sort": 1000,
     "active": true,
     "created_at": "2026-11-16T16:22:18.206548+00:00",
@@ -10299,7 +9090,6 @@
     "x": "Перемышль Главный",
     "border": null,
     "like_id": "wk",
-    "single": false,
     "names": {
       "Прага": {
         "en": "Praha hl.n.",
@@ -10312,37 +9102,7 @@
         "uk": "Одеса"
       }
     },
-    "extra": {
-      "cols": [
-        {
-          "x": "Чоп",
-          "uz": [
-            "Ужгород",
-            "Одесса"
-          ],
-          "car": "rj",
-          "pkp": [
-            "Прага",
-            "Чоп"
-          ],
-          "train": "037Л"
-        },
-        {
-          "x": "Перемышль",
-          "uz": [
-            "Перемышль",
-            "Одесса"
-          ],
-          "car": "rj",
-          "pkp": [
-            "Прага",
-            "Перемышль"
-          ],
-          "open": "09:00",
-          "train": "036Л"
-        }
-      ]
-    },
+    "extra": {},
     "sort": 1000,
     "active": true,
     "created_at": "2026-11-16T15:56:41.751596+00:00",
@@ -10498,7 +9258,6 @@
     "x": "Чоп",
     "border": null,
     "like_id": "wk",
-    "single": false,
     "names": {
       "Вена": {
         "en": "Wien Hbf",
@@ -10562,7 +9321,7 @@
               "t": {
                 "en": "Buy the Chop → Dnipro ticket in the UZ app",
                 "pl": "Kup w aplikacji UZ bilet Czop → Dnipro",
-                "ru": "Купить в приложении УЗ билет Чоп → Днепр",
+                "ru": "Купить в приложении УЗ билет Вена → Чоп",
                 "uk": "Купити в застосунку УЗ квиток Чоп → Дніпро"
               },
               "pri": true,
@@ -10570,26 +9329,23 @@
             },
             {
               "t": {
-                "en": "Buy the Vienna → Chop ticket on PKP Intercity",
-                "pl": "Kup na stronie PKP Intercity bilet Wiedeń → Czop",
-                "ru": "Купить на сайте PKP Intercity билет Вена → Чоп",
-                "uk": "Купити на сайті PKP Intercity квиток Відень → Чоп"
+                "ru": "Купить в приложении УЗ билет Чоп → Днепр"
               },
               "pri": false,
-              "url": "https://www.intercity.pl/"
+              "url": "https://app.uz.gov.ua/start"
             }
           ],
           "steps": [
             {
               "en": "Open the Ukrzaliznytsia app, choose the route Chop → Dnipro and the travel date. Sales open 20 days before departure at 09:00 Kyiv time. Choose a suitable train and pay for the ticket.",
               "pl": "Otwórz aplikację Ukrzaliznytsia, wybierz trasę Czop → Dnipro i datę podróży. Sprzedaż biletów rusza na 20 dni przed odjazdem o 9:00 czasu kijowskiego. Wybierz odpowiedni pociąg i opłać bilet.",
-              "ru": "Откройте приложение «Укрзалізниця», выберите маршрут Чоп → Днепр и укажите дату поездки. Продажа билетов открывается за 20 суток до отправления, в 09:00 по киевскому времени. Выберите подходящий поезд и оплатите билет.",
+              "ru": "Откройте приложение «Укрзалізниця», выберите маршрут Вена → Чоп и укажите дату поездки. Продажа билетов открывается за 20 суток до отправления, в 08:00 по киевскому времени. Выберите поезд 347Л и оплатите билет. Также билет можно приобрести заранее у австрийского перевозчика ÖBB — на tickets.oebb.at или в приложении ÖBB Tickets. Но в таком случае он будет существенно дороже, чем в приложении «Укрзалізниця».",
               "uk": "Відкрийте застосунок «Укрзалізниця», оберіть маршрут Чоп → Дніпро і вкажіть дату поїздки. Продаж квитків відкривається за 20 діб до відправлення, о 09:00 за київським часом. Оберіть потрібний поїзд і сплатіть квиток."
             },
             {
               "en": "Buy the Vienna → Chop ticket separately from the Polish carrier PKP Intercity, on intercity.pl or in the PKP Intercity app. You can also buy it on koleo.pl or in the KOLEO app.",
               "pl": "Bilet na pociąg Wiedeń → Czop kup osobno u polskiego przewoźnika PKP Intercity — na stronie intercity.pl lub w aplikacji PKP Intercity. Można go też kupić na koleo.pl lub w aplikacji KOLEO.",
-              "ru": "Билет на поезд Вена → Чоп приобретите отдельно у польского перевозчика PKP Intercity — на официальном сайте intercity.pl или в приложении PKP Intercity. Также билеты можно приобрести на сайте koleo.pl или в приложении KOLEO.",
+              "ru": "Поезд из Чопа в Днепр отправляется на следующие сутки, поэтому продажа билетов на него в приложении «Укрзалізниця» открывается на следующий день.",
               "uk": "Квиток на поїзд Відень → Чоп придбайте окремо в польського перевізника PKP Intercity — на офіційному сайті intercity.pl або в застосунку PKP Intercity. Також квитки можна купити на сайті koleo.pl або в застосунку KOLEO."
             },
             {
@@ -10616,7 +9372,6 @@
     "x": "Чоп",
     "border": null,
     "like_id": "wk",
-    "single": false,
     "names": {
       "Львов": {
         "en": "Lviv",
@@ -10630,11 +9385,6 @@
       }
     },
     "extra": {
-      "s1": "buy.m.s1",
-      "s2": "buy.t.s2mi",
-      "car": "mav",
-      "ds2": "buy.d.s2v",
-      "ds3": "buy.d.s3z",
       "direct": true
     },
     "sort": 1010,
@@ -10776,7 +9526,6 @@
     "x": "Чоп",
     "border": null,
     "like_id": "kw",
-    "single": false,
     "names": {
       "Львов": {
         "en": "Lviv",
@@ -10790,16 +9539,6 @@
       }
     },
     "extra": {
-      "s1": "buy.m.s1",
-      "s2": "buy.t.s2mo",
-      "xs": [
-        "Чоп",
-        "Мукачево"
-      ],
-      "car": "mav",
-      "ds2": "buy.d.s2v",
-      "ds3": "buy.d.s3z",
-      "plat": false,
       "coach": false,
       "leadx": "Мукачево",
       "split": [
@@ -10947,7 +9686,6 @@
     "x": "Перемышль Главный",
     "border": null,
     "like_id": "kw",
-    "single": false,
     "names": {
       "Львов": {
         "en": "Lviv",
@@ -10960,37 +9698,7 @@
         "uk": "Прага-Головна"
       }
     },
-    "extra": {
-      "cols": [
-        {
-          "x": "Чоп",
-          "uz": [
-            "Львов",
-            "Чоп"
-          ],
-          "car": "rj",
-          "pkp": [
-            "Чоп",
-            "Прага"
-          ],
-          "train": "833Л"
-        },
-        {
-          "x": "Перемышль",
-          "uz": [
-            "Львов",
-            "Перемышль"
-          ],
-          "car": "rj",
-          "pkp": [
-            "Перемышль",
-            "Прага"
-          ],
-          "open": "09:00",
-          "train": "715К"
-        }
-      ]
-    },
+    "extra": {},
     "sort": 1010,
     "active": true,
     "created_at": "2026-11-16T16:22:18.206548+00:00",
@@ -11146,7 +9854,6 @@
     "x": "Мукачево",
     "border": null,
     "like_id": "kw",
-    "single": false,
     "names": {
       "Будапешт": {
         "en": "Budapest Keleti",
@@ -11159,39 +9866,7 @@
         "uk": "Кременчук"
       }
     },
-    "extra": {
-      "s1": "buy.t.s1one",
-      "car": "mav",
-      "ds2": "buy.d.s2v",
-      "cols": [
-        {
-          "x": "Мукачево",
-          "uz": [
-            "Кременчуг",
-            "Мукачево"
-          ],
-          "car": "mav",
-          "pkp": [
-            "Мукачево",
-            "Будапешт"
-          ],
-          "train": "132О"
-        },
-        {
-          "x": "Киев",
-          "uz": [
-            "Кременчуг",
-            "Киев"
-          ],
-          "car": "uz",
-          "pkp": [
-            "Киев",
-            "Будапешт"
-          ],
-          "train": "791Д"
-        }
-      ]
-    },
+    "extra": {},
     "sort": 1020,
     "active": true,
     "created_at": "2026-11-18T11:09:25.392293+00:00",
@@ -11347,7 +10022,6 @@
     "x": "Перемышль Главный",
     "border": null,
     "like_id": "kw",
-    "single": false,
     "names": {
       "Прага": {
         "en": "Przemyśl Główny",
@@ -11360,37 +10034,7 @@
         "uk": "Кременчук"
       }
     },
-    "extra": {
-      "cols": [
-        {
-          "x": "Перемышль",
-          "uz": [
-            "Кременчуг",
-            "Перемышль"
-          ],
-          "car": "rj",
-          "pkp": [
-            "Перемышль",
-            "Прага"
-          ],
-          "open": "09:00",
-          "train": "070О"
-        },
-        {
-          "x": "Чоп",
-          "uz": [
-            "Кременчуг",
-            "Мукачево"
-          ],
-          "car": "rj",
-          "pkp": [
-            "Чоп",
-            "Прага"
-          ],
-          "train": "132О"
-        }
-      ]
-    },
+    "extra": {},
     "sort": 1020,
     "active": true,
     "created_at": "2026-11-17T09:33:22.742746+00:00",
@@ -11546,7 +10190,6 @@
     "x": "Перемышль Главный",
     "border": null,
     "like_id": "wk",
-    "single": false,
     "names": {
       "Прага": {
         "en": "Przemyśl Główny",
@@ -11559,37 +10202,7 @@
         "uk": "Кременчук"
       }
     },
-    "extra": {
-      "cols": [
-        {
-          "x": "Чоп",
-          "uz": [
-            "Мукачево",
-            "Кременчуг"
-          ],
-          "car": "rj",
-          "pkp": [
-            "Прага",
-            "Чоп"
-          ],
-          "train": "132Л"
-        },
-        {
-          "x": "Перемышль",
-          "uz": [
-            "Перемышль",
-            "Кременчуг"
-          ],
-          "car": "rj",
-          "pkp": [
-            "Прага",
-            "Перемышль"
-          ],
-          "open": "09:00",
-          "train": "070К"
-        }
-      ]
-    },
+    "extra": {},
     "sort": 1020,
     "active": true,
     "created_at": "2026-11-17T09:33:22.742746+00:00",
