@@ -7,7 +7,7 @@
 //   GH_REPO        по умолчанию DmytroVertikov/koliya
 //   GH_WORKFLOW    по умолчанию rebuild.yml
 //   GH_REF         по умолчанию main
-//   ALLOWED_ORIGINS  откуда разрешены запросы из браузера, через запятую; по умолчанию https://dmytrovertikov.github.io
+//   ALLOWED_ORIGINS  откуда разрешены запросы из браузера, через запятую; по умолчанию https://koliya.org и https://dmytrovertikov.github.io
 // SUPABASE_URL и SUPABASE_ANON_KEY Supabase подставляет сам.
 
 declare const Deno: any;
@@ -19,7 +19,7 @@ export interface Deps {
 }
 
 export async function handle(req: Request, d: Deps): Promise<Response> {
-    const origins = (d.env("ALLOWED_ORIGINS") || "https://dmytrovertikov.github.io").split(",").map(s => s.trim()).filter(Boolean);
+    const origins = (d.env("ALLOWED_ORIGINS") || "https://koliya.org,https://dmytrovertikov.github.io").split(",").map(s => s.trim()).filter(Boolean);
     const origin = req.headers.get("origin") || "";
     const cors: Record<string, string> = {
         "Access-Control-Allow-Headers": "authorization, apikey, content-type, x-client-info",
