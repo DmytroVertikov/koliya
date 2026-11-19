@@ -9046,22 +9046,22 @@
             {
               "t": {
                 "en": "Buy the Prague → Przemyśl ticket in the UZ app",
-                "pl": "Kup w aplikacji UZ bilet Praga → Przemyśl",
-                "ru": "Купить в приложении УЗ билет Прага → Перемышль",
+                "pl": "Kup bilet Praga → Przemyśl na stronie RegioJet",
+                "ru": "Купить на сайте RegioJet билет Прага → Перемышль",
                 "uk": "Купити в застосунку УЗ квиток Прага → Перемишль"
               },
               "pri": true,
-              "url": "https://app.uz.gov.ua/start"
+              "url": "https://regiojet.cz/"
             },
             {
               "t": {
                 "en": "Buy the Przemyśl → Lviv ticket on RegioJet",
-                "pl": "Kup bilet Przemyśl → Lwów na stronie RegioJet",
-                "ru": "Купить на сайте RegioJet билет Перемышль → Львов",
+                "pl": "Kup w aplikacji UZ bilet Przemyśl → Lwów",
+                "ru": "Купить в приложении УЗ билет Перемышль → Львов",
                 "uk": "Купити на сайті RegioJet квиток Перемишль → Львів"
               },
               "pri": false,
-              "url": "https://regiojet.cz/"
+              "url": "https://app.uz.gov.ua/start"
             }
           ],
           "steps": [
