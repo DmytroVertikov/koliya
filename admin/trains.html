@@ -434,7 +434,9 @@ function shell() {
 /* ================= обращения с сайта (таблица feedback, форма «Обратная связь» в common.js) ================= */
 let FB_FILTER = "new";
 const FB_KINDS = {data: "Ошибка в данных", idea: "Предложение", question: "Вопрос", other: "Другое", up: "👍 Помогло", down: "👎 Не помогло"};
-const SITE_URL = "https://dmytrovertikov.github.io"; /* в feedback.page лежит путь целиком, вместе с /koliya */
+/* в feedback.page лежит путь целиком: старые записи с /koliya/ (github.io), новые без префикса (koliya.org) */
+const SITE_URL = "https://koliya.org", OLD_SITE_URL = "https://dmytrovertikov.github.io";
+const pageUrl = p => (p.startsWith("/koliya/") ? OLD_SITE_URL : SITE_URL) + p;
 async function viewFeedback() {
     const v = $("#view");
     v.innerHTML = '<section class="panel"><p class="muted">Загрузка…</p></section>';
@@ -454,7 +456,7 @@ async function viewFeedback() {
     const card = r => `<section class="panel" data-id="${r.id}" ${r.status === "new" ? 'style="border:2px solid var(--bl)"' : ""}>
         <h3 style="margin:0 0 6px">${esc(FB_KINDS[r.kind] || r.kind)} <span class="muted">· ${esc(new Date(r.created_at).toLocaleString("ru-RU"))} · ${esc((r.lang || "").toUpperCase())}${r.status === "done" ? " · обработано" : ""}</span></h3>
         ${r.message ? `<p style="white-space:pre-wrap;margin:0 0 8px">${esc(r.message)}</p>` : ""}
-        <p class="muted" style="margin:0 0 8px">${r.contact ? "Контакт: " + link(r.contact) + " · " : ""}Страница: ${r.page ? `<a href="${esc(SITE_URL + r.page)}" target="_blank" rel="noopener">${esc(r.page)}</a>` : "—"}</p>
+        <p class="muted" style="margin:0 0 8px">${r.contact ? "Контакт: " + link(r.contact) + " · " : ""}Страница: ${r.page ? `<a href="${esc(pageUrl(r.page))}" target="_blank" rel="noopener">${esc(r.page)}</a>` : "—"}</p>
         <label>Заметка (видна только вам)</label><textarea data-f="note" rows="2" style="width:100%">${esc(r.note || "")}</textarea>
         <div class="err"></div>
         <p><button class="pri" data-a="${r.status === "new" ? "done" : "new"}">${r.status === "new" ? "Обработано" : "Вернуть в новые"}</button> <button data-a="note">Сохранить заметку</button> <button data-a="del">Удалить</button></p></section>`;

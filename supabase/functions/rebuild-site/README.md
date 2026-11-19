@@ -12,7 +12,7 @@
 |---|---|
 | `GH_TOKEN` | fine-grained токен GitHub: только репозиторий `koliya`, право **Actions: Read and write**, больше ничего |
 | `ADMIN_EMAILS` | email админов через запятую (желательно задать) |
-| `GH_REPO`, `GH_WORKFLOW`, `GH_REF`, `ALLOWED_ORIGINS` | необязательные: по умолчанию `DmytroVertikov/koliya`, `rebuild.yml`, `main`, `https://dmytrovertikov.github.io` |
+| `GH_REPO`, `GH_WORKFLOW`, `GH_REF`, `ALLOWED_ORIGINS` | необязательные: по умолчанию `DmytroVertikov/koliya`, `rebuild.yml`, `main`, `https://koliya.org` (нужен домен сайта, откуда открыта админка) |
 
 ## Развёртывание
 Через панель: Edge Functions → `rebuild-site` → вставить содержимое `index.ts` → Deploy. Или из консоли: `supabase functions deploy rebuild-site --project-ref <ref>`.

@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /admin/
 
-Sitemap: https://dmytrovertikov.github.io/koliya/sitemap.xml
+Sitemap: https://koliya.org/sitemap.xml

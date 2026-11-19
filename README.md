@@ -11,7 +11,7 @@
 3. **Ключи.** Project Settings → API. Скопируйте Project URL и anon public key в `config.js`. Эти ключи публичные, безопасность обеспечивают правила RLS из `schema.sql`.
 4. **Сборка.** Установите Node.js и выполните `node build.js` (подробнее ниже).
 5. **GitHub.** Создайте репозиторий `koliya`, загрузите все файлы из этой папки, откройте Settings → Pages → Source: Deploy from a branch → `main` / root.
-6. Сайт будет по адресу `https://<ник>.github.io/koliya/`, админка по адресу `.../admin/`.
+6. Сайт будет по адресу `https://koliya.org/` (через CNAME и свой домен; без домена: `https://<ник>.github.io/koliya/`), админка по адресу `.../admin/`.
 
 ## Как устроена сборка
 

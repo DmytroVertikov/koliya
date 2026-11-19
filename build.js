@@ -3,7 +3,7 @@
    Переводы правятся в админке (вкладки «Тексты», «Станции», «Направления»); готовые .html руками не править.
    Данные из базы лежат в снимках i18n.db.json (тексты интерфейса, станции) и routes.db.json (направления и их тексты). */
 const fs = require("fs");
-const SITE = "https://dmytrovertikov.github.io/koliya/", LANGS = ["ru", "uk", "en", "pl"];
+const SITE = "https://koliya.org/", LANGS = ["ru", "uk", "en", "pl"];
 /* переводы: I.ru/uk/en/pl — тексты интерфейса, I.ST — станции [uk, en, pl, «в…» ru, «у…» uk, «w…» pl], I.CN — страны. Собираются из снимка базы */
 const I = (() => {
   let db; try { db = JSON.parse(fs.readFileSync("i18n.db.json", "utf8")) } catch (e) { throw new Error("build.js: нет i18n.db.json. Выполните node sync.js (или i18n.sql в Supabase, потом node sync.js).") }
