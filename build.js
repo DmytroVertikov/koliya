@@ -167,6 +167,7 @@ const buyHtml = (r, l, d) => {
   if (miss) NOTR.push([r.file, l, miss]);
   return html
 };
+const PEND = []; /* страницы, в которые карточки вставляются вторым проходом (после dict/*.js и pages.js) */
 for (const r of ROUTES) for (const l of LANGS) {
   const d = I[l], pre = l === "ru" ? "" : "../";
   const v = {ver: VER, lang: l, base: pre, home: "./", FROM: r.FROM, TO: r.TO, BACK: r.BACK, hash: r.hash, rev: r.rev,
@@ -186,13 +187,15 @@ for (const r of ROUTES) for (const l of LANGS) {
   /* split: станции пересадки, на которых вариант получает пометку «пограничный контроль» (если у страницы задан border; сейчас это Перемышль) */
   v.split = JSON.stringify((r.split || []).map(n => [n, r.border && n === "Перемышль" ? 1 : 0])); v["transfer.hx"] = fill(d["transfer.h3"], v); /* нейтральный заголовок «С пересадкой» — только если на странице есть прямой поезд */
   v.leadx = r.leadx || ""; v.leadm = JSON.stringify(r.leadx && d[r.id + ".leadm"] ? fill(d[r.id + ".leadm"], v) : ""); /* leadx: станция; если на странице есть пересадка на ней, подзаголовок заменяется на <id>.leadm */
+  v.cards = JSON.stringify({FROM: r.FROM, TO: r.TO, SLICE: !!r.slice, HIDE: Array.isArray(r.hide) ? r.hide.map(String) : [], SPLIT: JSON.parse(v.split), HAS_DIRECT: direct, HAS_BUY: !!v.buyhtml,
+    dh: fill(d["direct.h"], v), ds: fill(d["direct.s"], v), th: v["transfer.hx"], noH: fill(d["noopts.h"], v), noP: fill(d["noopts.p"], v), howq: fill(d["d.howq"], v), hows: fill(d["d.hows"], v), how: fill(d["d.how"], v)}).replace(/</g, "\\u003c");
   const tpl1 = direct ? tpl0 : tpl0.replace(/\/\*D\*\/[\s\S]*?\/\*\/D\*\//g, ""),
     tpl2 = r.border ? tpl1 : tpl1.replace(/\/\*B\*\/[\s\S]*?\/\*\/B\*\//g, ""),
     tplC = r.coach === false ? tpl2.replace(/\/\*C\*\/[\s\S]*?\/\*\/C\*\//g, "") : tpl2; /* coach: false — без описания купе в карточках прямого поезда */
   const out = tplC.replace(/\{\{([\w.]+)\}\}/g, (m, k) => k in v ? v[k] : k in d ? fill(d[k], v) : (console.warn("нет ключа", k), m));
   if (l !== "ru") fs.mkdirSync(l, {recursive: true});
   fs.writeFileSync(path(l, r.file), out);
-  urls.push(SITE + path(l, r.file)); SM.push({loc: SITE + path(l, r.file), alts: LANGS.map(x => [x, SITE + path(x, r.file)]), body: out});
+  urls.push(SITE + path(l, r.file)); const sme = {loc: SITE + path(l, r.file), alts: LANGS.map(x => [x, SITE + path(x, r.file)]), body: out}; SM.push(sme); PEND.push({file: path(l, r.file), l, C: JSON.parse(v.cards), sme});
   if (l === "ru") console.log("  " + r.file + ": " + (direct ? "есть прямой поезд" : "БЕЗ прямого поезда") + ", пересадка: " + X);
 }
 for (const [f, l, n] of NOTR) console.warn("ВНИМАНИЕ: " + f + " (" + l + "): в блоке «Как купить билеты» нет перевода для " + n + " текстов (показан русский)");
@@ -268,6 +271,29 @@ for (const l of LANGS) {
   d.ST = CLIENT.ST; d.CN = CLIENT.CN;
   fs.writeFileSync("dict/" + l + ".js", "/* создаётся командой node sync.js (build.js) из базы, руками не править */\nvar I18N = " + JSON.stringify(d) + ";\n")
 }
+/* карточки вариантов в HTML (их видят поисковики без JS): тот же renderCards из common.js, что и в браузере, на данных options.db.json.
+   Нет снимка — остаётся «Загрузка…», карточки рисует браузер, как раньше. Скрипт страницы потом заменяет их свежими данными из базы. */
+(() => {
+  let OPTS = null; try { OPTS = JSON.parse(fs.readFileSync("options.db.json", "utf8")) } catch (e) {}
+  if (!OPTS) { console.warn("build.js: нет options.db.json, карточки в HTML не вставляются (выполните node sync.js)"); return }
+  const vm = require("vm"), noop = () => {}, code = fs.readFileSync("common.js", "utf8") + "\n;globalThis.__rc = renderCards;", CTX = {};
+  const ctxFor = l => CTX[l] || (CTX[l] = (() => { /* общий код common.js объявляет const на верхнем уровне, поэтому свой контекст на каждый язык */
+    const el = {innerHTML: "", querySelector: () => null, querySelectorAll: () => [], addEventListener: noop, insertAdjacentHTML: noop},
+      ctx = {document: {readyState: "complete", getElementById: () => null, querySelector: () => null, querySelectorAll: () => [], addEventListener: noop, createElement: () => el, body: el, documentElement: el},
+        location: {pathname: "/", hash: ""}, localStorage: {getItem: () => null, setItem: noop}, MutationObserver: class { observe() {} }, console: {info: noop, warn: noop, log: noop}};
+    ctx.window = ctx; ctx.CFG = Object.assign({}, CFG, {TRAIN_BADGES: BADGES}); ctx.LANG = l; ctx.I18N = new Function(fs.readFileSync("dict/" + l + ".js", "utf8") + ";return I18N")();
+    vm.createContext(ctx); vm.runInContext(code, ctx); return ctx
+  })());
+  let n = 0, empty = 0;
+  for (const p of PEND) {
+    const l = p.l, ctx = ctxFor(l);
+    const res = ctx.__rc(OPTS, p.C);
+    if (!res.list.length) { empty++; continue } /* пустой список: оставляем «Загрузка…», браузер покажет сообщение сам */
+    const html = fs.readFileSync(p.file, "utf8").replace(/<div id="app">[\s\S]*?<\/div>\n/, () => `<div id="app">${res.html}</div>\n`);
+    fs.writeFileSync(p.file, html); p.sme.body = html; n++
+  }
+  console.log("карточки в HTML: " + n + " страниц" + (empty ? ", без вариантов: " + empty : ""))
+})();
 /* sitemap.xml: у каждой страницы языковые версии (xhtml:link) и lastmod. Дата меняется только когда изменилось содержимое страницы:
    хеш прошлой сборки лежит в sitemap-lastmod.json (его коммитит та же пересборка), версия ?v= и подпись сборки в хеш не входят. */
 let LM = {}; try { LM = JSON.parse(fs.readFileSync("sitemap-lastmod.json", "utf8")) } catch (e) {}

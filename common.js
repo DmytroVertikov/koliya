@@ -494,3 +494,53 @@ function moreRoutes(o) {
         + group(o.to.replace("%s", () => esc(stnShort(b))), sameTo.map(p => chip(p, `${part(p, 0)}<span class="ar"> →</span>`)))
         + `<div class="grid" style="margin-top:16px">${hash ? `<a class="btn" href="${o.home}#${esc(hash)}">${o.dir}</a>` : ""}<a class="btn" href="${o.home}">${o.all}</a></div></section>`
 }
+
+/* Карточки вариантов страницы маршрута. Одна и та же функция работает в браузере (route.src.html) и при сборке (build.js: готовый HTML
+   попадает в страницу, чтобы поисковики видели расписание без JS). all — строки таблицы options, C — настройки страницы (CARDS в шаблоне).
+   Возвращает {list, html}: list — подходящие варианты, html — содержимое блока #app. */
+function renderCards(all, C) {
+    const norm = s => String(s || "").trim().toLowerCase(), HIDE = (C.HIDE || []).map(norm), FROM = C.FROM, TO = C.TO;
+    const rows = all.filter(o => o.active !== false).map(o => {
+        const p = parseOption(o.dsl);
+        return {o, p, h: p.head || deriveHead(p.legs)}
+    }).filter(x => x.p.legs.length);
+    /* SLICE: страница «A → B» без своих вариантов в базе: поезда берутся из поездов других вариантов (участок от A до B по остановкам поезда) */
+    const hm = s => (String(s).match(/\d{1,2}:\d{2}/) || [""])[0];
+    const sliced = () => {
+        const seen = new Set(), out = [];
+        rows.forEach(x => x.p.legs.forEach(L => {
+            if (HIDE.includes(norm(L.train))) return;
+            const st = L.stops, a = st.findIndex(s => norm(s.name).startsWith(norm(FROM)));
+            if (a < 0) return;
+            const b = st.findIndex((s, i) => i > a && norm(s.name).startsWith(norm(TO)));
+            if (b < 0) return;
+            const key = norm(L.train) + "|" + hm(st[a].time) + ">" + hm(st[b].time);
+            if (seen.has(key)) return;
+            seen.add(key);
+            /* поезд показывается целиком (от начальной до конечной станции), выделены только «откуда» и «куда» страницы */
+            const fq = L.freq && !/^ежедневно$/i.test(L.freq.trim()) ? " ~ " + L.freq.trim() : "",
+                dsl = L.train.trim() + fq + ": " + st.map((s, i) => (i === a || i === b ? "*" : "") + (s.name + " " + s.time).trim()).join(" > "),
+                o = {dsl, updated_at: x.o.updated_at, active: true}, p = parseOption(dsl);
+            out.push({o, p, h: deriveHead(p.legs)})
+        }));
+        return out
+    };
+    const mins = x => (m => m ? m[1] * 60 + +m[2] : 1e4)(String(x.h.ft).match(/(\d{1,2}):(\d{2})/));
+    /* всегда по времени отправления; одинаковое время сохраняет порядок из базы */
+    const list = (C.SLICE ? sliced() : rows.filter(x => norm(x.h.from).startsWith(norm(FROM)) && norm(x.h.to).startsWith(norm(TO)))).sort((a, b) => mins(a) - mins(b));
+    const direct = C.HAS_DIRECT ? list.filter(x => x.p.legs.length === 1) : [], transfer = C.HAS_DIRECT ? list.filter(x => x.p.legs.length > 1) : list;
+    if (!list.length) return {list, html: `<div class="panel"><h2>${C.noH}</h2><p>${C.noP}</p></div>`};
+    const SPLIT = C.SPLIT || [];
+    const html = (direct.length ? `<h2 class="sub" style="margin-top:6px">${C.dh} <small>${C.ds}</small></h2><div class="direct direct-wrap" style="margin-top:16px">${direct.map(x => optHtml(x.o)).join("")}</div>` : "")
+        + (direct.length && transfer.length ? `<aside class="ad wide" data-slot="mid" hidden></aside>` : "")
+        + (() => {
+            /* все варианты с пересадкой — одним списком (по времени отправления), без подзаголовков по станциям */
+            if (!transfer.length) return "";
+            const at = x => { const s = x.p.legs[0].stops; return norm(s[s.length - 1].name) }; /* станция первой пересадки */
+            const bf = x => !SPLIT.length || SPLIT.some(s => s[1] && at(x).startsWith(norm(s[0]))); /* пограничный контроль — по карточке */
+            const cards = transfer.map(x => { const c = optHtml(x.o); return bf(x) ? c.replace("<details ", '<details data-b="1" ') : c }).join("");
+            const head = direct.length ? `<h2 class="sub">${C.th}</h2>` : "";
+            return head + `<div class="cols${transfer.length === 1 ? " one" : ""}" style="margin-top:${head ? 16 : 6}px">${cards}</div>`
+        })() + (C.HAS_BUY ? `<a class="howbar" href="#buy"><span class="hi" aria-hidden="true">i</span><span><b>${C.howq}</b><small>${C.hows}</small></span><span class="go">${C.how} →</span></a>` : "");
+    return {list, html}
+}
