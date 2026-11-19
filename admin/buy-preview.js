@@ -55,9 +55,9 @@ const BuyPreview = (() => {
         const ru = files[file], page = files[(lang === "ru" ? "" : lang + "/") + file];
         if (!ru || !page) throw new Error("страница не собралась: проверьте, что страница включена и заполнены «откуда» и «куда»");
         const m = page.match(/const BUY = `([\s\S]*?<\/section>)`;/);
-        if (!m) throw new Error("в странице нет блока покупки");
+        const buy = m ? m[1].replace(/\\(\\|`|\$\{)/g, "$1") : '<p style="padding:8px 16px;color:#667085">Блоков нет: раздел «Как купить билеты» на странице не выводится.</p>'; /* снимаем экранирование строки-шаблона */
         const head = attrs((ru.match(/<head>([\s\S]*?)<\/head>/) || [0, ""])[1]).replace(/<base[^>]*>/g, "");
-        return `<!doctype html><html lang="${lang}"><head><meta charset="utf-8"><base href="../">${head}<style>body{margin:0;padding:12px 0 8px}</style></head><body><main class="wrap">${m[1]}</main></body></html>`
+        return `<!doctype html><html lang="${lang}"><head><meta charset="utf-8"><base href="../">${head}<style>body{margin:0;padding:12px 0 8px}</style></head><body><main class="wrap">${buy}</main></body></html>`
     }
 
     /* row — строка route_pages с текущими значениями формы; all — все строки (для страниц, на тексты которых ссылается эта) */

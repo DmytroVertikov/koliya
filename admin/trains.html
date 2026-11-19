@@ -100,6 +100,22 @@
         .bprev iframe { display: block; width: 100%; height: 120px; resize: vertical; border: 1px solid #e1e5f5; border-radius: 8px; background: #f3f4fa }
         .bprev.shut iframe, .bprev.shut .bpw { display: none }
         .bprev.shut .bph { margin-bottom: 0 }
+        .btabs { display: flex; gap: 6px; flex-wrap: wrap; margin: 8px 0; position: sticky; top: 0; z-index: 5; background: var(--card, #fff); padding: 6px 0 }
+        main#app .btabs button { font-weight: 700; border: 1.5px solid var(--bd); background: #fff }
+        main#app .btabs button.on { background: var(--bl); color: #fff; border-color: var(--bl) }
+        .bblk { border: 1.5px solid var(--bd, #d0d5dd); border-radius: 12px; padding: 10px 14px; margin: 12px 0; background: #fcfcfd }
+        .bhead { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 6px }
+        .bhead .bsp { flex: 1 }
+        .bchk { display: inline-flex; gap: 6px; align-items: center; font-weight: 600 }
+        label.bl { display: block; font-size: 13px; font-weight: 600; color: var(--mu); margin: 10px 0 3px }
+        .bf input[type=text], .bf textarea, .bfr input[type=text] { width: 100%; box-sizing: border-box; font: inherit; font-size: 16px; border: 1.5px solid var(--bd); border-radius: 8px; padding: 8px 10px; background: #fff }
+        .bfr { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; margin-bottom: 6px }
+        .bfr input[type=text] { flex: 1 1 320px; width: auto }
+        .bf.nt input, .bf.nt textarea { border-color: #f97066; background: var(--rd2) }
+        .bf.nt::before { content: "нет перевода"; display: inline-block; font-size: 12px; font-weight: 700; color: var(--rd); margin-bottom: 2px }
+        .bref { font-size: 13px; color: var(--mu); margin-bottom: 3px; white-space: pre-wrap }
+        .bx { padding: 0 6px !important; font-size: 12px !important }
+        .bnote { border-top: 1px dashed var(--bd, #d0d5dd); margin-top: 14px; padding-top: 8px }
         .dsec { margin: 22px 0 6px; padding-top: 14px; border-top: 1px solid var(--line, #ddd); font-size: 17px }
         .dsec:first-of-type { border-top: 0; padding-top: 0; margin-top: 10px }
         .dgrp { border: 1px solid var(--line, #ddd); border-radius: 10px; padding: 8px 12px; margin: 8px 0 }
@@ -264,11 +280,11 @@ const dirSlug = n => {
     if (DIR_SLUGS[n]) return DIR_SLUGS[n];
     return [...n.toLowerCase()].map(ch => DIR_TRL[ch] != null ? DIR_TRL[ch] : /[a-z0-9]/.test(ch) ? ch : /[\s-]/.test(ch) ? "-" : "").join("").replace(/-+/g, "-").replace(/^-|-$/g, "")
 };
-/* f: {a (украинский город), b (зарубежный), cc (код страны), sa, sb (части имён файлов), kind, x, border, single, na, nb: {uk, en, pl}} → две записи route_pages: a → b и обратная b → a */
+/* f: {a (украинский город), b (зарубежный), cc (код страны), sa, sb (части имён файлов), kind, x, border, na, nb: {uk, en, pl}} → две записи route_pages: a → b и обратная b → a */
 function dirRows(f) {
     const a = f.a.trim(), b = f.b.trim(), sa = f.sa.trim(), sb = f.sb.trim(), tr = f.kind === "transfer", fa = sa + "-" + sb + ".html", fb = sb + "-" + sa + ".html", names = {};
     [[a, f.na], [b, f.nb]].forEach(([n, t]) => { const o = {}; ["uk", "en", "pl"].forEach(k => { if (t && t[k] && t[k].trim()) o[k] = t[k].trim() }); if (Object.keys(o).length) names[n] = o });
-    const common = {kind: f.kind, x: tr ? (f.x || "").trim() : null, single: !!f.single && !tr, names, extra: {}, sort: 1000, active: true};
+    const common = {kind: f.kind, x: tr ? (f.x || "").trim() : null, names, extra: {}, sort: 1000, active: true};
     return [
         Object.assign({id: sa + "_" + sb, file: fa, from_name: a, to_name: b, route: "ua-" + f.cc, back: f.cc + "-ua", rev: fb, like_id: "kw", border: tr && f.border ? "after" : null}, common),
         Object.assign({id: sb + "_" + sa, file: fb, from_name: b, to_name: a, route: f.cc + "-ua", back: "ua-" + f.cc, rev: fa, like_id: "wk", border: tr && f.border ? "before" : null}, common)]
@@ -465,36 +481,16 @@ async function viewFeedback() {
 let CT = [], DIR_CTRY = []; /* страны: таблица countries (вкладка «Страны») */
 const DIR_KINDS = {slice: "Прямые поезда из существующих вариантов (как Киев → Хелм)", direct: "Прямые поезда, варианты добавляю вручную (как Киев → Кишинев)", transfer: "С пересадкой на станции (как Киев → Краков)"};
 const DIR_KIND_LBL = {custom: "встроенная", slice: "прямые из вариантов", direct: "прямые вручную", transfer: "с пересадкой"};
-/* параметры страницы (поля страницы в route_pages.extra): [ключ, тип, подпись, основной?]. Типы: text, pair (две станции), bool (не задано / да / нет), sel:значения */
-/* Параметры страницы: [ключ, тип, подпись, группа, подсказка]. Типы: text, pair (от — до), bool, sel:знач=подпись,… (список), car (второй перевозчик). Ключи — те же, что читает build.js. */
+/* Параметры страницы: [ключ, тип, подпись, группа, подсказка]. Типы: text, pair (от — до), bool, sel:знач=подпись,… (список). Ключи — те же, что читает build.js. */
 const DIR_G = [
-    ["std", "Стандартный блок покупки", "Один общий блок «Как купить билеты». Нужен, только если выше нет своих блоков по станциям пересадки.", ""],
-    ["trains", "Какие поезда и что показывать", "Тонкая настройка карточек: прямые поезда, купе, платформа.", "Обычно оставляйте «по умолчанию»."],
-    ["steps", "Тексты шагов инструкции", "Подставляют другой готовый текст шага вместо стандартного. Сами тексты правятся на вкладке «Тексты».", "Нужны для страниц с особой логикой покупки (Словакия, Австрия, Румыния…)."],
-    ["multi", "Несколько пересадок (особые страницы)", "Третий столбец покупки, разбивка вариантов, заголовки блоков.", "Используются на страницах вроде Киев ↔ Берлин и Киев ↔ Вена; для остальных пусто."]
+    ["trains", "Какие поезда и что показывать", "Тонкая настройка карточек вариантов: прямые поезда, купе, пограничный контроль.", "Обычно оставляйте «по умолчанию»."]
 ];
-const DIR_CARS = ["=PKP Intercity (по умолчанию)", "zssk=ZSSK (Словакия)", "cfr=CFR (Румыния)", "cd=České dráhy (Чехия)", "oebb=ÖBB (Австрия)", "mav=MÁV (Венгрия)", "rj=RegioJet (Чехия)"];
-/* Тексты шагов инструкции: ключ из «Тексты» → понятная подпись. Нужного нет в списке — пункт «Другой ключ…» (ввод вручную). */
-const DIR_KEYS = {
-    s1: [["", "Стандартный (по умолчанию)"], ["buy.t.s1", "«Выберите подходящий поезд и оплатите билет»"], ["buy.t.s1one", "Один поезд на направлении: «Выберите поезд и оплатите»"], ["buy.m.s1", "Мукачево / Чоп: «Выберите нужный поезд и оплатите»"],
-        ["buy.t.s1v", "Без маршрута: «выберите нужный поезд на украинском участке»"], ["buy.t.s1kv", "Поезд 027К (Киев → Вена / Братислава)"], ["buy.t.s1vk", "Поезд 028Л (Вена / Братислава → Киев)"], ["buy.t.s1vo", "Поезд 347Л (Вена → Чоп) + заранее у ÖBB"]],
-    s2: [["", "Стандартный (по умолчанию)"], ["buy.t.s2", "PKP Intercity (Польша)"], ["buy.t.s2z", "ZSSK (Словакия): в приложении УЗ или у ZSSK"], ["buy.t.s2zk", "ZSSK: поезд следующих суток (Киев → Братислава)"],
-        ["buy.t.s2c", "CFR (Румыния)"], ["buy.t.s2cd", "České dráhy (Чехия), поезда EC и IC"], ["buy.t.s2rj", "RegioJet (Чехия)"], ["buy.t.s2o", "ÖBB (Австрия)"], ["buy.t.s2ov", "ÖBB: поезда следующих суток (Киев → Вена)"], ["buy.t.s2o2", "ÖBB: поезд через сутки (продажа УЗ — через два дня)"],
-        ["buy.t.s2vk", "ÖBB: в приложении УЗ и заранее у ÖBB (Вена → Киев)"], ["buy.t.s2v", "Остальная часть пути отдельно (ÖBB)"], ["buy.t.s2m", "MÁV (Венгрия)"], ["buy.t.s2mo", "MÁV: поезда следующих суток (Чоп / Мукачево → Будапешт)"],
-        ["buy.t.s2mx", "MÁV: поезд следующих суток (один поезд)"], ["buy.t.s2mi", "MÁV: в приложении УЗ и заранее у MÁV (Будапешт → Киев)"], ["buy.t.s2chd", "УЗ: поезд Чоп → Днепр следующих суток"]],
-    ds2: [["", "Стандартный (по умолчанию)"], ["buy.d.s2", "Продажа в 09:00 + совет покупать сразу"], ["buy.d.s2v", "Продажа в 08:00 + совет покупать сразу"], ["buy.d.s2z", "Продажа в 08:00, без совета"]],
-    ds3: [["", "Стандартный (по умолчанию)"], ["buy.d.s3", "Купейный вагон RIC, оплата картой, паспорт"], ["buy.d.s3t", "«Выберите подходящий поезд», оплата картой, паспорт"], ["buy.d.s3z", "«Выберите место», оплата картой, паспорт"]]
-};
 const DIR_P = [
-    ["x", "text", "Станция пересадки (пусто — Хелм)", "std"], ["uz", "pair", "Билет Укрзалізниці: от → до", "std"], ["pkp", "pair", "Билет второго перевозчика: от → до", "std"],
-    ["car", "car", "Второй перевозчик", "std"], ["border", "sel:after=после станции пересадки,before=до станции пересадки", "Пограничный контроль", "std"], ["t3", "sel:buy.t3out=поездка из Украины,buy.t3in=поездка в Украину", "Текст шага 3 (про границу и пересадку)", "std"],
-    ["direct", "bool", "Есть прямой поезд (по умолчанию да)", "trains"], ["dOnly", "bool", "Только прямой поезд (одна колонка покупки)", "trains"], ["slice", "bool", "Поезда берутся из других вариантов", "trains"],
-    ["one", "bool", "На направлении один поезд (текст в единственном числе)", "trains"], ["coach", "bool", "Описание купе (по умолчанию да)", "trains"], ["plat", "bool", "Платформа (по умолчанию да только для Хелма)", "trains"],
-    ["app", "bool", "Покупка только через приложение (без блока пересадки)", "steps"], ["s1", "key:s1", "Шаг 1: покупка билета в «Укрзалізниці»", "steps"], ["s2", "key:s2", "Шаг 2: билет второго перевозчика", "steps"],
-    ["ds2", "key:ds2", "Прямой поезд — шаг 2: продажа билетов", "steps"], ["ds3", "key:ds3", "Прямой поезд — шаг 3: оплата и посадка", "steps"],
-    ["h", "bool", "Свои тексты третьего столбца (buy.h.*)", "multi"], ["third", "text", "Третий столбец: станция пересадки", "multi"], ["uz3", "pair", "Третий столбец: билет УЗ (от — до)", "multi"], ["pkp3", "pair", "Третий столбец: билет перевозчика (от — до)", "multi"],
-    ["split", "pair", "Разбивка вариантов по пересадке: две станции", "multi"], ["xs", "pair", "Один блок вариантов: две станции", "multi"], ["hxs", "pair", "Заголовок блока: две станции пересадки", "multi"],
-    ["hb1", "pair", "Заголовок блока 1 (от — до)", "multi"], ["hb2", "pair", "Заголовок блока 2 (от — до)", "multi"], ["leadx", "text", "Станция для подзаголовка при пересадке", "multi"], ["hurl", "text", "Ссылка на сайт перевозчика", "multi"]
+    ["border", "sel:after=после станции пересадки,before=до станции пересадки", "Пограничный контроль", "trains"],
+    ["direct", "bool", "Есть прямой поезд (по умолчанию да)", "trains"], ["slice", "bool", "Поезда берутся из других вариантов", "trains"],
+    ["coach", "bool", "Описание купе (по умолчанию да)", "trains"],
+    ["split", "pair", "Станции пересадки на странице: две станции (на Перемышле ставится пометка пограничного контроля)", "trains"],
+    ["leadx", "text", "Станция для подзаголовка при пересадке", "trains"]
 ];
 const DIR_TXT = [["title", "Заголовок (title)"], ["desc", "Описание (description)"], ["h1", "Заголовок H1"], ["lead", "Подзаголовок"], ["all", "Заголовок «все варианты»"], ["more", "Заголовок «ещё варианты»"], ["leadm", "Подзаголовок при пересадке на станции (leadm)"]];
 const DIR_LANGS = [["ru", "Русский"], ["uk", "Українська"], ["en", "English"], ["pl", "Polski"]];
@@ -549,6 +545,7 @@ async function viewDirs() {
         v.innerHTML = `<section class="panel"><h2>Направления</h2><div class="errbox">${esc(e.message)}</div><p>Похоже, таблица <b>route_pages</b> ещё не создана. Выполните файл <code>route_pages.sql</code> в Supabase → SQL Editor и обновите страницу.</p></section>`;
         return
     }
+    try { BT = await db("GET", "buy_templates?order=name"); BT_ERR = "" } catch (e) { BT = []; BT_ERR = e.message } /* шаблоны блоков «Как купить билеты» */
     E = null;
     if (OPENCONN) { if (CN.some(c => c.id === OPENCONN)) editConn(OPENCONN); OPENCONN = null }
     if (!DSEL || (DSEL !== "new" && DSEL !== "orph" && !RP.some(r => r.id === DSEL))) DSEL = RP.length ? RP[0].id : "new";
@@ -557,31 +554,24 @@ async function viewDirs() {
 const dirOk = (val, t) => val === undefined || (t === "pair" ? Array.isArray(val) && val.length === 2 && val.every(x => typeof x === "string") : t === "bool" ? typeof val === "boolean" : typeof val === "string");
 /* блок параметров: виджеты для известных ключей, сгруппированные по смыслу; всё остальное (и значения нестандартного вида) остаётся в JSON.
    Группа раскрыта, только если в ней что-то задано; скрытые поля остаются в DOM, поэтому при сохранении значения не теряются. */
-function dirParamsHtml(extra, kind, hasCols) {
-    const hide = k => kind !== "custom" && (k === "x" || k === "border"), one = ([k, t, l]) => {
+function dirParamsHtml(extra, kind) {
+    const hide = k => kind !== "custom" && k === "border", one = ([k, t, l]) => {
         const val = extra[k], tp = t.split(":")[0], id = `data-p="${k}"`;
         if (tp === "pair") return `<div><label>${esc(l)}</label><span><input type="text" ${id} data-i="0" value="${esc((val || [])[0] || "")}" style="width:150px"> → <input type="text" ${id} data-i="1" value="${esc((val || [])[1] || "")}" style="width:150px"></span></div>`;
         if (tp === "bool") return `<div><label>${esc(l)}</label><select ${id}><option value="">по умолчанию</option><option value="true" ${val === true ? "selected" : ""}>да</option><option value="false" ${val === false ? "selected" : ""}>нет</option></select></div>`;
-        if (tp === "key") {
-            const list = (DIR_KEYS[t.split(":")[1]] || [["", "Стандартный (по умолчанию)"]]).slice();
-            if (val && !list.some(z => z[0] === val)) list.push([val, "Текущий: " + val]);
-            return `<div><label>${esc(l)}</label><select ${id} class="keysel" style="max-width:480px">${list.map(([v, n]) => `<option value="${esc(v)}" ${val === v || (!val && v === "") ? "selected" : ""}>${esc(n)}</option>`).join("")}<option value="__other">Другой ключ… (ввести вручную)</option></select></div>`
-        }
-        if (tp === "sel" || tp === "car") {
-            const opts = tp === "car" ? DIR_CARS : t.split(":")[1].split(",").map(o => (/=/.test(o) ? o : "=" + o)).map(o => o.replace(/^=/, ""));
-            const list = (tp === "car" ? opts : (["=нет"].concat(opts))).map(o => { const i = o.indexOf("="); return i < 0 ? [o, o] : [o.slice(0, i), o.slice(i + 1)] });
+        if (tp === "sel") {
+            const list = ["=нет"].concat(t.split(":")[1].split(",").map(o => (/=/.test(o) ? o : "=" + o))).map(o => { const i = o.indexOf("="); return i < 0 ? [o, o] : [o.slice(0, i), o.slice(i + 1)] });
             if (val && !list.some(z => z[0] === val)) list.push([val, val]);
             return `<div><label>${esc(l)}</label><select ${id}>${list.map(([v, n]) => `<option value="${esc(v)}" ${val === v || (!val && v === "") ? "selected" : ""}>${esc(n)}</option>`).join("")}</select></div>`
         }
         return `<div><label>${esc(l)}</label><input type="text" ${id} value="${esc(val || "")}" style="width:230px"></div>`
     };
-    const ok = DIR_P.filter(p => !hide(p[0]) && dirOk(extra[p[0]], p[1].split(":")[0] === "car" ? "text" : p[1].split(":")[0]));
+    const ok = DIR_P.filter(p => !hide(p[0]) && dirOk(extra[p[0]], p[1].split(":")[0]));
     const auto = kind !== "custom" ? '<p class="muted" style="margin:0 0 6px">Для этого типа страницы почти всё задаётся автоматически; менять эти настройки обычно не нужно.</p>' : "";
     return auto + DIR_G.map(([g, title, what, note]) => {
         const items = ok.filter(p => p[3] === g), set = items.filter(p => extra[p[0]] !== undefined).length;
         if (!items.length) return "";
-        const open = set > 0;
-        return `<details class="dgrp" ${open ? "open" : ""}><summary><b>${esc(title)}</b>${set ? ` <span class="chip">задано: ${set}</span>` : ""}</summary><p class="muted" style="margin:4px 0">${esc(what)}${g === "std" && hasCols ? " На этой странице блоки заданы выше, поэтому поля ниже не нужны." : note ? " " + esc(note) : ""}</p><div class="frow">${items.map(one).join("")}</div></details>`
+        return `<details class="dgrp" ${set > 0 ? "open" : ""}><summary><b>${esc(title)}</b>${set ? ` <span class="chip">задано: ${set}</span>` : ""}</summary><p class="muted" style="margin:4px 0">${esc(what)}${note ? " " + esc(note) : ""}</p><div class="frow">${items.map(one).join("")}</div></details>`
     }).join("")
 }
 function dirParamsRead(root, kind) {
@@ -595,74 +585,138 @@ function dirParamsRead(root, kind) {
     });
     return out
 }
-/* ---------- «Блоки покупки»: route_pages.extra.cols, по одному блоку «С пересадкой в …» на каждую станцию ---------- */
-const COL_CARS = {pkp: "PKP Intercity (Польша)", zssk: "ZSSK (Словакия)", cfr: "CFR (Румыния)", cd: "České dráhy (Чехия)", oebb: "ÖBB (Австрия)", mav: "MÁV (Венгрия)", rj: "RegioJet (Чехия)", uz: "Укрзалізниця (оба поезда УЗ)"}; /* ключи — те же, что в CARRIER в build.js */
-const colsOk = v => Array.isArray(v) && v.every(c => c && typeof c === "object" && typeof c.x === "string" && Array.isArray(c.uz) && c.uz.length === 2 && Array.isArray(c.pkp) && c.pkp.length === 2 && typeof c.train === "string");
-/* тексты шага 2 для блока покупки: ключ из «Тексты» → подпись (пусто — стандартный текст по перевозчику) */
-const COL_S2 = [["", "По перевозчику (стандартный текст)"], ["buy.t.s2ov", "ÖBB: поезд следующих суток (продажа УЗ — на следующий день)"], ["buy.t.s2o2", "ÖBB: поезд через сутки (продажа УЗ — через два дня)"], ["buy.t.s2mx", "MÁV: поезд следующих суток (продажа УЗ — на следующий день)"]];
-function colRowHtml(c) {
-    const car = c.car || "rj", cars = Object.assign({}, COL_CARS); if (!cars[car]) cars[car] = car;
-    const s2opts = COL_S2.slice(); if (c.s2 && !s2opts.some(z => z[0] === c.s2)) s2opts.push([c.s2, "Текущий: " + c.s2]);
-    const t = (k, val, w, ph) => `<input type="text" data-c="${k}" value="${esc(val || "")}" style="width:${w}px" ${ph ? `placeholder="${esc(ph)}"` : ""}>`;
-    return `<div class="colrow" style="border:1px solid var(--line,#ddd);border-radius:8px;padding:10px;margin:8px 0">
-        <div class="frow"><div><label>Пересадка в (станция)</label>${t("x", c.x, 170, "Перемышль")}</div>
-        <div><label>Номер поезда УЗ</label>${t("train", c.train, 90, "073П")}</div>
-        <div><label>Второй перевозчик</label><select data-c="car">${Object.entries(cars).map(([k, n]) => `<option value="${esc(k)}" ${k === car ? "selected" : ""}>${esc(n)}</option>`).join("")}</select></div>
-        <div><label>Продажа УЗ открывается в (пусто — 08:00)</label>${t("open", c.open, 90, "09:00")}</div>
-        <button type="button" class="colrm" style="align-self:end">Удалить блок</button></div>
-        <div class="frow"><div><label>Билет Укрзалізниці: от → до</label><span>${t("uz0", (c.uz || [])[0], 150)} → ${t("uz1", (c.uz || [])[1], 170)}</span></div>
-        <div><label>Билет второго перевозчика: от → до</label><span>${t("pkp0", (c.pkp || [])[0], 170)} → ${t("pkp1", (c.pkp || [])[1], 150)}</span></div>
-        <div><label>Текст шага 2</label><select data-c="s2" style="max-width:420px">${s2opts.map(([k, n]) => `<option value="${esc(k)}" ${k === (c.s2 || "") ? "selected" : ""}>${esc(n)}</option>`).join("")}</select></div></div>
-        <details ${c.days ? "open" : ""}><summary class="muted">Особая продажа этого поезда (необязательно)</summary><div class="frow">
-        <div><label>Продажа за сколько суток</label>${t("days", c.days, 70, "10")}</div>
-        <div><label>Время — отправление со станции</label>${t("sale_at", c.sale_at, 130, "Ужгород")}</div>
-        <div><label>Время (запасное, если станции нет в поезде)</label>${t("sale_time", c.sale_time, 90, "11:12")}</div></div>
-        <p class="muted" style="margin:2px 0 0">В инструкцию добавится фраза «Поезд № …: продажа открывается за N суток до отправления[, в ЧЧ:ММ по киевскому времени]». Если указана станция, сайт сам берёт время отправления поезда с неё из варианта, иначе — запасное время.</p></details></div>`
-}
-function colsHtml(r) {
-    const cols = colsOk((r.extra || {}).cols) ? r.extra.cols : [];
-    return `<p class="muted" style="margin:0 0 4px">По одному блоку на каждую станцию пересадки. Если блоков нет, сайт показывает один стандартный блок по параметрам ниже. Станция в билете (например, «Перемышль Главный») подставляется в кнопки и инструкцию как есть.</p>
-        <div id="d_cols">${cols.map(colRowHtml).join("")}</div>
-        <p><button type="button" id="d_coladd">+ Добавить блок</button></p>`
-}
-function colsBind(r) {
-    const box = $("#d_cols");
-    $("#d_coladd").onclick = () => { box.insertAdjacentHTML("beforeend", colRowHtml({uz: [r.from_name, ""], pkp: ["", r.to_name]})) };
-    box.addEventListener("click", e => { if (e.target.classList.contains("colrm")) e.target.closest(".colrow").remove() });
-    box.addEventListener("input", e => { /* станция пересадки подставляется в билеты, пока те пустые или совпадали с ней */
-        if (e.target.dataset.c !== "x") return;
-        const row = e.target.closest(".colrow"), x = e.target.value.trim(), prev = row.dataset.px || "";
-        ["uz1", "pkp0"].forEach(k => { const el = row.querySelector(`[data-c="${k}"]`); if (!el.value.trim() || el.value.trim() === prev) el.value = x });
-        row.dataset.px = x
-    });
-}
-function colsRead(errs) {
-    const out = [];
-    document.querySelectorAll("#d_cols .colrow").forEach((row, i) => {
-        const g = k => row.querySelector(`[data-c="${k}"]`).value.trim(), n = "Блок покупки " + (i + 1) + ": ";
-        const c = {x: g("x"), uz: [g("uz0"), g("uz1")], car: g("car"), pkp: [g("pkp0"), g("pkp1")], train: g("train")};
-        if (g("s2")) c.s2 = g("s2");
-        if (g("open")) c.open = g("open");
-        if (g("days")) c.days = +g("days");
-        if (g("sale_at")) c.sale_at = g("sale_at");
-        if (g("sale_time")) c.sale_time = g("sale_time");
-        if (!c.x) errs.push(n + "укажите станцию пересадки");
-        else if (!findStation(c.x)) errs.push(n + "станции «" + c.x + "» нет в списке станций (проверьте раскладку клавиатуры и написание)");
-        if (!c.train) errs.push(n + "укажите номер поезда УЗ");
-        if (c.uz.some(z => !z)) errs.push(n + "заполните билет Укрзалізниці (от и до)");
-        if (c.pkp.some(z => !z)) errs.push(n + "заполните билет второго перевозчика (от и до)");
-        if (c.open && !/^\d{1,2}:\d{2}$/.test(c.open)) errs.push(n + "время открытия продажи — вида 09:00");
-        if (g("days") && !/^[1-9]\d?$/.test(g("days"))) errs.push(n + "срок продажи — число суток, например 10");
-        if ((c.sale_at || c.sale_time) && !c.days) errs.push(n + "укажите, за сколько суток открывается продажа");
-        if (c.sale_at && !c.sale_time) errs.push(n + "укажите запасное время продажи (на случай, если станции нет в поезде)");
-        if (c.sale_time && !/^\d{1,2}:\d{2}$/.test(c.sale_time)) errs.push(n + "время продажи — вида 11:12");
-        out.push(c)
-    });
+/* ---------- «Как купить билеты»: route_pages.buy = {note, blocks: [{direct, h, steps, btns}]}; тексты на 4 языках вносятся вручную, шаблоны — таблица buy_templates ---------- */
+const BLANGS = ["ru", "uk", "en", "pl"];
+let BT = [], BT_ERR = "", BLN = "ru"; /* шаблоны (таблица buy_templates), ошибка их загрузки, язык, который сейчас редактируется */
+const bTr = o => o && typeof o === "object" ? o : {};
+const bNewBlock = () => ({direct: false, h: {}, steps: [{}, {}, {}], btns: [{pri: true, url: "https://app.uz.gov.ua/start", t: {}}, {pri: false, url: "", t: {}}]});
+const bTpls = kind => BT.filter(t => t.kind === kind).sort((a, b) => a.name.localeCompare(b.name, "ru"));
+/* сколько текстов не переведено (есть русский, нет перевода) по языкам; используется в редакторе и в списке направлений */
+const buyMiss = B => {
+    const out = {uk: 0, en: 0, pl: 0}, chk = o => { const t = bTr(o); if (!t.ru) return; ["uk", "en", "pl"].forEach(l => { if (!t[l]) out[l]++ }) };
+    if (!B || typeof B !== "object") return out;
+    (B.blocks || []).forEach(b => { chk(b.h); (b.steps || []).forEach(chk); (b.btns || []).forEach(x => chk(x.t)) });
+    chk(B.note);
     return out
+};
+/* поле текста на 4 языках: показан только выбранный язык, остальные скрыты (но остаются в форме) */
+const bFld = (o, k, area) => `<div class="bfg">` + BLANGS.map(l => {
+    const val = bTr(o)[l] || "";
+    return `<div class="bf" data-ll="${l}" ${l === BLN ? "" : "hidden"}>${l === "ru" ? "" : '<div class="bref"></div>'}${area ? `<textarea rows="3" data-l="${l}">${esc(val)}</textarea>` : `<input type="text" data-l="${l}" value="${esc(val)}">`}</div>`
+}).join("") + "</div>";
+const bOpts = kind => '<option value="">Шаблон…</option>' + bTpls(kind).map(t => `<option value="${esc(t.id)}">${esc(t.name)}</option>`).join("");
+const buyChips = r => { /* пометки в списке направлений: нет блока покупки / не хватает переводов */
+    const B = r.buy, n = B && Array.isArray(B.blocks) ? B.blocks.length : 0; if (!n) return ' <span class="chip am">нет «Как купить»</span>';
+    const m = buyMiss(B), l = ["uk", "en", "pl"].filter(k => m[k]); return l.length ? ` <span class="chip rd" title="В блоке «Как купить билеты» не хватает переводов">нет перевода: ${l.join(", ")}</span>` : ""
+};
+function bBlockHtml(b, i, n) {
+    return `<div class="bblk" data-i="${i}">
+        <div class="bhead"><b>Блок ${i + 1}</b><label class="bchk"><input type="checkbox" data-k="direct" ${b.direct ? "checked" : ""}> прямой поезд</label><span class="bsp"></span>
+        <select data-k="tpl" title="Готовые блоки: выберите и нажмите «Подставить»">${bOpts("block")}</select><button type="button" data-a="apply">Подставить</button><button type="button" data-a="tsave" title="Сохранить этот блок в список шаблонов">В шаблоны</button><button type="button" data-a="tdel" title="Удалить выбранный шаблон из списка">Удалить шаблон</button>
+        <button type="button" data-a="up" ${i ? "" : "disabled"}>↑</button><button type="button" data-a="down" ${i < n - 1 ? "" : "disabled"}>↓</button><button type="button" data-a="del">Удалить блок</button></div>
+        <label class="bl">Заголовок блока</label><div class="bh">${bFld(b.h, "h")}</div>
+        <div class="bsteps">${(b.steps || []).map((s, j) => `<div class="bstep"><label class="bl">Пункт ${j + 1} <button type="button" data-a="sdel" class="bx" title="Удалить пункт">✕</button></label>${bFld(s, "s", true)}</div>`).join("")}</div>
+        <p><button type="button" data-a="sadd">+ Пункт</button></p>
+        <div class="bbtns">${(b.btns || []).map((x, j) => `<div class="bbtn"><label class="bl">Кнопка ${j + 1} <button type="button" data-a="xdel" class="bx" title="Удалить кнопку">✕</button></label>
+            <div class="bfr"><input type="text" data-k="url" value="${esc(x.url || "")}" placeholder="https://… (ссылка на покупку)"><label class="bchk"><input type="checkbox" data-k="pri" ${x.pri ? "checked" : ""}> основная (залитая)</label></div>${bFld(x.t, "t")}</div>`).join("")}</div>
+        <p><button type="button" data-a="xadd">+ Кнопка</button></p></div>`
+}
+const bNoteHtml = note => `<div class="bnote"><div class="bhead"><b>Примечание под блоками</b><span class="bsp"></span><select data-k="ntpl">${bOpts("note")}</select><button type="button" data-a="napply">Подставить</button><button type="button" data-a="nsave">В шаблоны</button><button type="button" data-a="ndel">Удалить шаблон</button></div><div class="bn">${bFld(note, "n", true)}</div></div>`;
+function buyHtml(r) {
+    const B = bTr(r.buy), blocks = Array.isArray(B.blocks) ? B.blocks : [];
+    return `<div id="b_root">
+        <p class="muted" style="margin:0 0 4px">Блоки идут на сайте в том порядке, в каком стоят здесь. Отметка «прямой поезд» делает блок зелёным. Все тексты вносятся вручную, по пунктам; готовые блоки можно взять из списка «Шаблон…» и поправить. Если у текста нет перевода, поле подсвечено красным, а на сайте до перевода показывается русский текст. Нет блоков — раздел «Как купить билеты» на странице не выводится.</p>
+        ${BT_ERR ? `<div class="errbox">Шаблоны недоступны: ${esc(BT_ERR)}. Выполните db/buy-blocks-1-add.sql в Supabase.</div>` : ""}
+        <div class="btabs" id="b_tabs"></div>
+        <div id="b_blocks">${blocks.map((b, i) => bBlockHtml(b, i, blocks.length)).join("")}</div>
+        <p><button type="button" id="b_add">+ Добавить блок</button></p>
+        <div id="b_note">${bNoteHtml(B.note)}</div></div>`
+}
+/* значения формы → {note, blocks}; errs (необязательно) — список ошибок проверки; без него читаем «как есть» (для счётчиков и предпросмотра) */
+function buyRead(errs) {
+    const root = $("#b_root"), rd = el => { const o = {}; el.querySelectorAll("[data-l]").forEach(x => { const t = x.value.trim(); if (t) o[x.dataset.l] = t }); return o };
+    const blocks = [...root.querySelectorAll(".bblk")].map((el, i) => {
+        const b = {direct: el.querySelector('[data-k="direct"]').checked, h: rd(el.querySelector(".bh")), steps: [...el.querySelectorAll(".bstep")].map(rd),
+            btns: [...el.querySelectorAll(".bbtn")].map(x => ({pri: x.querySelector('[data-k="pri"]').checked, url: x.querySelector('[data-k="url"]').value.trim(), t: rd(x)}))};
+        if (errs) {
+            const n = "Блок покупки " + (i + 1) + ": ";
+            if (!b.h.ru) errs.push(n + "заполните заголовок (RU)");
+            if (!b.steps.length) errs.push(n + "добавьте хотя бы один пункт");
+            b.steps.forEach((s, j) => { if (!s.ru) errs.push(n + "пункт " + (j + 1) + ": заполните текст (RU)") });
+            b.btns.forEach((x, j) => { if (!/^https:\/\/\S+$/i.test(x.url)) errs.push(n + "кнопка " + (j + 1) + ": ссылка должна начинаться с https://"); if (!x.t.ru) errs.push(n + "кнопка " + (j + 1) + ": заполните текст (RU)") })
+        }
+        return b
+    });
+    const note = rd(root.querySelector(".bn"));
+    if (errs && Object.keys(note).length && !note.ru) errs.push("Примечание: заполните текст (RU)");
+    return {note, blocks}
+}
+function buyBind(r) {
+    const root = $("#b_root"), box = $("#b_blocks");
+    /* подсветка непереведённых полей, русский текст-подсказка над переводом и вкладки языков со счётчиками */
+    const refresh = () => {
+        root.querySelectorAll(".bfg").forEach(g => {
+            const ru = g.querySelector('[data-l="ru"]').value.trim();
+            g.querySelectorAll(".bf").forEach(f => {
+                const inp = f.querySelector("[data-l]"); if (inp.dataset.l === "ru") return;
+                f.classList.toggle("nt", !!ru && !inp.value.trim());
+                f.querySelector(".bref").textContent = ru ? "RU: " + ru : ""
+            })
+        });
+        const m = buyMiss(buyRead());
+        $("#b_tabs").innerHTML = BLANGS.map(l => `<button type="button" data-lang="${l}" class="${l === BLN ? "on" : ""}">${l.toUpperCase()}${l !== "ru" && m[l] ? ` <span class="chip rd">нет перевода: ${m[l]}</span>` : ""}</button>`).join("")
+    };
+    const draw = B => { box.innerHTML = B.blocks.map((b, i) => bBlockHtml(b, i, B.blocks.length)).join(""); refresh() };
+    const setLang = l => { BLN = l; root.querySelectorAll("[data-ll]").forEach(e => e.hidden = e.dataset.ll !== l); refresh() };
+    const tplSave = async (kind, name, data) => {
+        name = (name || "").trim(); if (!name) return;
+        if (BT.some(t => t.kind === kind && t.name === name) && !confirm("Шаблон «" + name + "» уже есть. Перезаписать?")) return;
+        try {
+            await db("POST", "buy_templates?on_conflict=kind,name", {kind, name, data, updated_at: new Date().toISOString()}, "resolution=merge-duplicates,return=representation");
+            BT = await db("GET", "buy_templates?order=name"); const B = buyRead(); draw(B); $("#b_note").innerHTML = bNoteHtml(B.note); refresh(); toast("Шаблон сохранён")
+        } catch (e) { alert(e.message || e) }
+    };
+    const tplDel = async sel => {
+        const t = BT.find(z => String(z.id) === sel.value); if (!t) { alert("Выберите шаблон в списке «Шаблон…»"); return }
+        if (!confirm("Удалить шаблон «" + t.name + "» из списка? Блоки на страницах не изменятся.")) return;
+        try { await db("DELETE", "buy_templates?id=eq." + encodeURIComponent(t.id)); BT = BT.filter(z => z.id !== t.id); const B = buyRead(); draw(B); $("#b_note").innerHTML = bNoteHtml(B.note); refresh() } catch (e) { alert(e.message || e) }
+    };
+    const filled = o => Object.keys(o).length > 0;
+    root.addEventListener("input", refresh); root.addEventListener("change", refresh);
+    root.addEventListener("click", e => {
+        const btn = e.target.closest("button"); if (!btn || !root.contains(btn)) return;
+        if (btn.dataset.lang) { setLang(btn.dataset.lang); return }
+        if (btn.id === "b_add") { const B = buyRead(); B.blocks.push(bNewBlock()); draw(B); return }
+        const a = btn.dataset.a; if (!a) return;
+        if (a[0] === "n") { /* примечание */
+            const sel = $('[data-k="ntpl"]'), cur = buyRead().note;
+            if (a === "napply") {
+                const t = BT.find(z => String(z.id) === sel.value); if (!t) { alert("Выберите шаблон в списке «Шаблон…»"); return }
+                if (filled(cur) && !confirm("Заменить текущее примечание шаблоном?")) return;
+                root.querySelectorAll(".bn [data-l]").forEach(x => x.value = bTr(t.data)[x.dataset.l] || ""); refresh()
+            } else if (a === "nsave") { if (!cur.ru) { alert("Сначала заполните русский текст примечания"); return } tplSave("note", prompt("Название шаблона примечания", cur.ru.slice(0, 60)), cur) }
+            else tplDel(sel);
+            return
+        }
+        const el = btn.closest(".bblk"), i = +el.dataset.i, B = buyRead(), b = B.blocks[i];
+        if (a === "up" || a === "down") { const k = a === "up" ? i - 1 : i + 1; [B.blocks[i], B.blocks[k]] = [B.blocks[k], B.blocks[i]]; draw(B) }
+        else if (a === "del") { if (confirm("Удалить блок " + (i + 1) + "?")) { B.blocks.splice(i, 1); draw(B) } }
+        else if (a === "sadd") { b.steps.push({}); draw(B) }
+        else if (a === "sdel") { b.steps.splice([...el.querySelectorAll(".bstep")].indexOf(btn.closest(".bstep")), 1); draw(B) }
+        else if (a === "xadd") { b.btns.push({pri: false, url: "", t: {}}); draw(B) }
+        else if (a === "xdel") { b.btns.splice([...el.querySelectorAll(".bbtn")].indexOf(btn.closest(".bbtn")), 1); draw(B) }
+        else if (a === "apply") {
+            const t = BT.find(z => String(z.id) === el.querySelector('[data-k="tpl"]').value); if (!t) { alert("Выберите шаблон в списке «Шаблон…»"); return }
+            if ((filled(b.h) || b.steps.some(filled)) && !confirm("Заменить текст блока " + (i + 1) + " шаблоном «" + t.name + "»?")) return;
+            const d = JSON.parse(JSON.stringify(t.data)); B.blocks[i] = {direct: !!d.direct, h: bTr(d.h), steps: d.steps || [], btns: d.btns || []}; draw(B)
+        }
+        else if (a === "tsave") { if (!b.h.ru) { alert("Сначала заполните заголовок блока (RU)"); return } tplSave("block", prompt("Название шаблона", b.h.ru + " · " + r.from_name + " → " + r.to_name), b) }
+        else if (a === "tdel") tplDel(el.querySelector('[data-k="tpl"]'))
+    });
+    refresh()
 }
 function dirEditorHtml(r) {
-    const ex = r.extra || {}, handled = new Set(DIR_P.filter(p => !(r.kind !== "custom" && (p[0] === "x" || p[0] === "border")) && dirOk(ex[p[0]], p[1].split(":")[0])).map(p => p[0]));
-    if (colsOk(ex.cols) || ex.cols === undefined) handled.add("cols");
+    const ex = r.extra || {}, handled = new Set(DIR_P.filter(p => !(r.kind !== "custom" && p[0] === "border") && dirOk(ex[p[0]], p[1].split(":")[0])).map(p => p[0]));
     const rest = {}; Object.keys(ex).forEach(k => { if (!handled.has(k)) rest[k] = ex[k] });
     const nm = r.names || {}, sf = n => findStation(n) || {}, nmv = (n, k, c) => (nm[n] || {})[k] || sf(n)[c] || "";
     const tx = r.texts || {};
@@ -672,12 +726,12 @@ function dirEditorHtml(r) {
         <div><label>Куда</label><input type="text" id="e_to" list="d_stl" value="${esc(r.to_name)}" style="width:210px"></div>
         <div><label>Порядок</label><input type="text" id="e_sort" value="${esc(r.sort)}" style="width:70px"></div>
         <label style="align-self:end"><input type="checkbox" id="e_act" ${r.active ? "checked" : ""}> показывать на сайте</label></div>
-        ${r.kind === "custom" ? "" : `<div class="frow">${r.kind === "transfer" ? `<div><label>Станция пересадки</label><input type="text" id="e_x" list="d_stl" value="${esc(r.x || "")}" style="width:210px"></div><div><label>Пограничный контроль</label><select id="e_bd"><option value="">нет</option><option value="after" ${r.border === "after" ? "selected" : ""}>после станции пересадки</option><option value="before" ${r.border === "before" ? "selected" : ""}>до станции пересадки</option></select></div>` : `<label><input type="checkbox" id="e_one" ${r.single ? "checked" : ""}> на направлении один поезд</label>`}</div>`}
+        ${r.kind === "custom" ? "" : `<div class="frow">${r.kind === "transfer" ? `<div><label>Станция пересадки</label><input type="text" id="e_x" list="d_stl" value="${esc(r.x || "")}" style="width:210px"></div><div><label>Пограничный контроль</label><select id="e_bd"><option value="">нет</option><option value="after" ${r.border === "after" ? "selected" : ""}>после станции пересадки</option><option value="before" ${r.border === "before" ? "selected" : ""}>до станции пересадки</option></select></div>` : ""}</div>`}
                 <details class="dgrp"><summary><b>Технические коды</b> <span class="muted">(обычно менять не нужно)</span></summary><p class="muted" style="margin:4px 0">Коды используются в ссылках и в адресах страниц: «ua-pl» — из Украины в Польшу, «pl-ua» — обратно. Порядок — позиция страницы в списке на главной (меньше — выше).</p><div class="frow">
         <div><label>Код направления</label><input type="text" id="e_route" value="${esc(r.route)}" style="width:90px"></div>
         <div><label>Код обратного</label><input type="text" id="e_back" value="${esc(r.back)}" style="width:90px"></div></div></details>
-        <h3 class="dsec">2. Как купить билеты</h3>${colsHtml(r)}
-        <h3 class="dsec">3. Дополнительные настройки</h3>${dirParamsHtml(ex, r.kind, colsOk(ex.cols) && ex.cols.length > 0)}
+        <h3 class="dsec">2. Как купить билеты</h3>${buyHtml(r)}
+        <h3 class="dsec">3. Дополнительные настройки</h3>${dirParamsHtml(ex, r.kind)}
         <details class="dgrp" ${Object.keys(rest).length ? "open" : ""}><summary><b>Технические параметры (JSON)</b>${Object.keys(rest).length ? ` <span class="chip">задано: ${Object.keys(rest).length}</span>` : ""}</summary><p class="muted" style="margin:4px 0">Служебные настройки, для которых нет отдельных полей. Менять только по инструкции разработчика; пусто — значит не нужны.</p><div class="frow"><div style="flex:1 1 100%"><textarea id="e_json" rows="${Object.keys(rest).length ? 4 : 2}" style="width:100%;font-family:monospace">${Object.keys(rest).length ? esc(JSON.stringify(rest, null, 1)) : ""}</textarea></div></div></details>
         <h3 class="dsec">4. Названия и тексты</h3>
         <details class="dgrp"><summary><b>Переводы городов</b> <span class="muted">(для украинской, английской и польской версий)</span></summary>
@@ -688,7 +742,7 @@ function dirEditorHtml(r) {
         <p><button class="pri" id="e_save">Сохранить</button></p>${bpHtml()}</div>`
 }
 /* значения формы направления → поля для таблицы route_pages ({errs, p}); используется и при сохранении, и в предпросмотре */
-function dirCollect(r) {
+function dirCollect(r, lenient) { /* lenient: для предпросмотра, без проверки блоков покупки */
     const root = $("#d_edit"), v = id => $("#" + id).value.trim(), errs = [];
     if (!v("e_from") || !v("e_to")) errs.push("Укажите «откуда» и «куда»");
     if (!/^[a-z]{2}-[a-z]{2}$/.test(v("e_route")) || !/^[a-z]{2}-[a-z]{2}$/.test(v("e_back"))) errs.push("Код направления — вида ua-pl / pl-ua");
@@ -697,15 +751,14 @@ function dirCollect(r) {
     try { const t = $("#e_json").value.trim(); if (t) { extra = JSON.parse(t); if (!extra || typeof extra !== "object" || Array.isArray(extra)) throw new Error("нужен объект {…}") } } catch (e) { errs.push("JSON параметров: " + e.message) }
     const x = r.kind === "transfer" ? v("e_x") : null; if (r.kind === "transfer" && !x) errs.push("Укажите станцию пересадки");
     if (errs.length) return {errs};
-    const cols = colsRead(errs);
+    const buy = buyRead(lenient ? null : errs);
     if (errs.length) return {errs};
     Object.assign(extra, dirParamsRead(root, r.kind));
-    if (cols.length) extra.cols = cols; else delete extra.cols;
     const names = Object.assign({}, r.names || {});
     [["from", v("e_from")], ["to", v("e_to")]].forEach(([w, n]) => { const o = {}; ["uk", "en", "pl"].forEach(k => { const t = root.querySelector(`[data-nm="${w}.${k}"]`).value.trim(); if (t) o[k] = t }); if (Object.keys(o).length) names[n] = o });
     const texts = {}; root.querySelectorAll("[data-tx]").forEach(e => { const [l, k] = e.dataset.tx.split("."), t = e.value.trim(); if (t) (texts[l] = texts[l] || {})[k] = t });
-    const p = {from_name: v("e_from"), to_name: v("e_to"), route: v("e_route"), back: v("e_back"), sort: +v("e_sort"), active: $("#e_act").checked, names, extra, texts};
-    if (r.kind === "transfer") { p.x = x; p.border = v("e_bd") || null } else if (r.kind !== "custom") p.single = $("#e_one").checked;
+    const p = {from_name: v("e_from"), to_name: v("e_to"), route: v("e_route"), back: v("e_back"), sort: +v("e_sort"), active: $("#e_act").checked, names, extra, texts, buy: buy.blocks.length ? {note: buy.note, blocks: buy.blocks} : null};
+    if (r.kind === "transfer") { p.x = x; p.border = v("e_bd") || null }
     return {errs, p}
 }
 /* панель предпросмотра: закреплена внизу экрана, сворачивается; перерисовывается через 0,3 с после последнего изменения формы */
@@ -737,14 +790,9 @@ function bpBind(r, collect) {
 }
 function dirEditorBind(r) {
     const root = $("#d_edit"), v = id => $("#" + id).value.trim();
-    colsBind(r);
-    root.addEventListener("change", e => { /* «Другой ключ…» → поле ручного ввода (ключ из вкладки «Тексты», например buy.t.s2xx) */
-        const sel = e.target; if (!sel.matches || !sel.matches("select.keysel") || sel.value !== "__other") return;
-        const inp = document.createElement("input"); inp.type = "text"; inp.dataset.p = sel.dataset.p; inp.placeholder = "buy.t.s2…"; inp.style.width = "230px";
-        sel.replaceWith(inp); inp.focus()
-    });
+    buyBind(r);
     /* предпросмотр блока «Как купить билеты»: пересобирается при любом изменении формы */
-    bpBind(r, () => dirCollect(r));
+    bpBind(r, () => dirCollect(r, true));
     $("#e_save").onclick = async () => {
         const box = $("#e_err"), {errs, p} = dirCollect(r);
         if (errs.length) { box.innerHTML = '<div class="errbox">' + errs.map(esc).join("<br>") + "</div>"; return }
@@ -769,7 +817,7 @@ function dirListHtml() {
         groups.get(k).sort((a, b) => (/^ua-/.test(b.route) ? 1 : 0) - (/^ua-/.test(a.route) ? 1 : 0)).forEach(r => {
             const n = isSlice(r) ? null : pageConns(r).length;
             h += item(r.id, esc(r.from_name) + " → " + esc(r.to_name),
-                (n == null ? '<span class="chip pu">поезда собираются сами</span>' : `<span class="chip ${n ? "gr" : "am"}">${n} ${plural(n, VARS)}</span>`) + (r.active ? "" : ' <span class="chip rd">скрыта</span>'), !r.active)
+                (n == null ? '<span class="chip pu">поезда собираются сами</span>' : `<span class="chip ${n ? "gr" : "am"}">${n} ${plural(n, VARS)}</span>`) + (r.active ? "" : ' <span class="chip rd">скрыта</span>') + buyChips(r), !r.active)
         })
     });
     return h || '<p class="muted" style="padding:10px 12px;margin:0">Ничего не найдено</p>'
@@ -891,7 +939,6 @@ function drawNewDir(m) {
         <div class="frow"><div><label>Тип страницы</label><select id="d_kind">${Object.entries(DIR_KINDS).map(([k, t]) => `<option value="${k}">${esc(t)}</option>`).join("")}</select></div></div>
         <div class="frow" id="d_tr" style="display:none"><div><label>Станция пересадки</label><input type="text" id="d_x" list="d_stl" placeholder="Хелм" style="width:230px"></div>
         <label style="align-self:center"><input type="checkbox" id="d_bd"> пограничный контроль на этой станции</label></div>
-        <div class="frow" id="d_sg"><label><input type="checkbox" id="d_one"> на направлении один поезд (в покупке «Выберите место», а не «Выберите поезд»)</label></div>
         <div class="frow"><div><label>Имена файлов</label><span><input type="text" id="d_sa" style="width:150px"> – <input type="text" id="d_sb" style="width:150px"></span></div>
         <div class="muted" id="d_files" style="align-self:end"></div></div>
         <details><summary class="muted">Переводы городов (необязательно, иначе в украинской, английской и польской версиях будет русское название)</summary>
@@ -899,11 +946,11 @@ function drawNewDir(m) {
         <div class="frow"><span id="d_nb_l" class="muted" style="align-self:center;width:130px"></span><input type="text" data-n="nb.uk" placeholder="Українська" style="width:170px"><input type="text" data-n="nb.en" placeholder="English" style="width:170px"><input type="text" data-n="nb.pl" placeholder="Polski" style="width:170px"></div></details>
         <div id="d_err"></div>
         <p><button class="pri" id="d_add">Создать направление</button></p></section>`;
-    const val = id => $("#" + id).value, form = () => ({a: val("d_a"), b: val("d_b"), cc: val("d_cc"), sa: val("d_sa"), sb: val("d_sb"), kind: val("d_kind"), x: val("d_x"), border: $("#d_bd").checked, single: $("#d_one").checked,
+    const val = id => $("#" + id).value, form = () => ({a: val("d_a"), b: val("d_b"), cc: val("d_cc"), sa: val("d_sa"), sb: val("d_sb"), kind: val("d_kind"), x: val("d_x"), border: $("#d_bd").checked,
         na: {uk: $('[data-n="na.uk"]').value, en: $('[data-n="na.en"]').value, pl: $('[data-n="na.pl"]').value}, nb: {uk: $('[data-n="nb.uk"]').value, en: $('[data-n="nb.en"]').value, pl: $('[data-n="nb.pl"]').value}});
     const touched = {sa: false, sb: false};
     const upd = () => {
-        const k = val("d_kind"); $("#d_tr").style.display = k === "transfer" ? "" : "none"; $("#d_sg").style.display = k === "transfer" ? "none" : "";
+        const k = val("d_kind"); $("#d_tr").style.display = k === "transfer" ? "" : "none";
         $("#d_na_l").textContent = val("d_a") || "Украинский город"; $("#d_nb_l").textContent = val("d_b") || "Зарубежный город";
         $("#d_files").textContent = val("d_sa") && val("d_sb") ? val("d_sa") + "-" + val("d_sb") + ".html и " + val("d_sb") + "-" + val("d_sa") + ".html" : ""
     };

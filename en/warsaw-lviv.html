@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- build vc81b064d direct=false x=Рава-Русская -->
+<!-- build vc81b064d direct=false x=Хелм -->
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -268,24 +268,20 @@
 <script src="../dict/en.js"></script>
 <script src="../common.js?v=c81b064d"></script>
 <script>
-    const SPLIT = []; /* [станция пересадки, заголовок, пограничный контроль]: страница делится на группы по пересадке */
+    const SPLIT = []; /* [станция пересадки, пограничный контроль]: вариант с пересадкой на этой станции получает пометку */
     const HIDE = [].map(s => s.trim().toLowerCase()); /* номера поездов, скрытых на этой странице */
     const SLICE = false; /* true: варианты собираются из поездов других вариантов (страницы вроде Киев → Хелм) */
     const FROM = "Варшава", TO = "Львов", BACK = "ua-pl"; // FROM/TO: русские названия, как в шапке карточки в админке
     
     const BUY = `<section class="panel" id="buy"><h2>How to buy tickets</h2>
 <div class="buy one">
-
-
-
-<!--A--><div><h3>With a transfer in Rava-Ruska</h3><ol class="steps">
+<div><h3>With a transfer in Rava-Ruska</h3><ol class="steps">
 <li>Open the Ukrzaliznytsia app, choose the route Warszawa Centralna → Lviv and the travel date. Sales open 20 days before departure at 09:00 Kyiv time.</li>
 <li>Tap “З пересадками” (With transfers), then in the option offered pick seats for each train in turn and pay for both tickets in the app.</li>
 <li>After buying, save the e-tickets on your phone. Before you travel, check the dates, departure times and arrival stations.</li></ol>
-<a class="btn pri" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Buy the Warszawa Centralna → Lviv tickets in the UZ app</a></div><!--/A-->
-
+<a class="btn pri" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Buy the Warszawa Centralna → Lviv tickets in the UZ app</a></div>
 </div>
-<p class="buy-note">Train schedules may change. Check the latest information in the UZ app.</p></section>`;
+<p class="buy-note">Train schedules may change. Check the latest information in the UZ app.</p></section>`; /* блок «Как купить билеты»: тексты задаются в админке, собирает build.js */
     const app = document.getElementById("app");
     const HOWBAR = `<a class="howbar" href="#buy"><span class="hi" aria-hidden="true">i</span><span><b>How to buy tickets?</b><small>Step-by-step instructions for each route option.</small></span><span class="go">Instructions →</span></a>`;
     const norm = s => String(s || "").trim().toLowerCase();
@@ -333,29 +329,6 @@
         const LEADX = "", LEADM = "";
         if (LEADX && LEADM && list.some(x => x.p.legs.length > 1 && (s => norm(s[s.length - 1].name).startsWith(norm(LEADX)))(x.p.legs[0].stops))) document.getElementById("lead").textContent = LEADM;
         const direct = HAS_DIRECT ? list.filter(x => x.p.legs.length === 1) : [], transfer = HAS_DIRECT ? list.filter(x => x.p.legs.length > 1) : list;
-        /* блоки покупки: вариант ищем по перевозчику чешского поезда (EC/IC = ČD, RJ = RegioJet) и станции пересадки;
-           время и номер поезда УЗ берём из остановок варианта, а не из шапки, чтобы не зависеть от ручных правок */
-        const tm = s => (String(s).match(/\d{1,2}:\d{2}/) || [""])[0], isUz = L => !/^[A-Za-z]/.test(String(L.train).trim());
-        const carOf = L => /^(EC|IC)\b/i.test(L.train.trim()) ? "cd" : /^RJ\b/i.test(L.train.trim()) ? "rj" : "";
-        const blocks = [];
-        document.querySelectorAll("#more h3[data-car]").forEach(h => {
-            const x = list.find(x => {
-                const L = x.p.legs, car = h.dataset.car, byNum = car === "cd" || car === "rj", cz = byNum ? L.find(l => !isUz(l)) : L[L.length - 1], s = L[0].stops; /* cd и rj определяются по номеру поезда (EC/IC, RJ); у остальных перевозчиков (PKP, ZSSK, CFR, ÖBB, MÁV) номер надёжно не определить (у MÁV он как у УЗ, 031Ш) — ищем по станции пересадки; uz: оба поезда УЗ (003П + 009К) */
-                return L.length > 1 && (car === "uz" ? L.every(isUz) : byNum ? cz && carOf(cz) === car : !carOf(cz) && (car === "mav" || !isUz(cz))) && norm(s[s.length - 1].name).startsWith(norm(h.dataset.x))
-            });
-            if (!x) { blocks.push({blk: h.parentNode, k: [9, 0]}); return }
-            const L = x.p.legs, last = L[L.length - 1].stops, ft = tm(L[0].stops[0].time) || x.h.ft, tt = tm(last[last.length - 1].time) || x.h.tt, u = L.find(isUz);
-            if (h.dataset.dt) h.insertAdjacentText("beforeend", " (" + h.dataset.dt.replace("{t1}", ft).replace("{t2}", tt) + ")");
-            /* особая продажа: время открытия = время отправления поезда УЗ с указанной станции (например, 003Л из Ужгорода) */
-            if (u) h.parentNode.querySelectorAll(".stime[data-at]").forEach(e => { const s = u.stops.find(z => norm(z.name).startsWith(norm(e.dataset.at))), t = s && tm(s.time); if (t) e.textContent = t });
-            if (u) h.parentNode.querySelectorAll(".utr").forEach(e => e.textContent = String(u.train).trim().replace(/^№\s*/, "").toUpperCase());
-            blocks.push({blk: h.parentNode, k: [0, list.indexOf(x)]})
-        });
-        /* блоки покупки идут в том же порядке, что и варианты на странице: в порядке списка вариантов */
-        if (blocks.length) {
-            const box = blocks[0].blk.parentNode;
-            blocks.map((b, i) => Object.assign({i}, b)).sort((a, b) => a.k[0] - b.k[0] || a.k[1] - b.k[1] || a.i - b.i).forEach(b => box.appendChild(b.blk))
-        }
         if (!list.length) {
             app.innerHTML = `<div class="panel"><h2>No options yet</h2><p>Add them in the admin panel.</p></div>`;
             return
@@ -365,11 +338,11 @@
             /* все варианты с пересадкой — одним списком (по времени отправления), без подзаголовков по станциям */
             if (!transfer.length) return "";
             const at = x => { const s = x.p.legs[0].stops; return norm(s[s.length - 1].name) }; /* станция первой пересадки */
-            const bf = x => !SPLIT.length || SPLIT.some(s => s[2] && at(x).startsWith(norm(s[0]))); /* пограничный контроль — по карточке */
+            const bf = x => !SPLIT.length || SPLIT.some(s => s[1] && at(x).startsWith(norm(s[0]))); /* пограничный контроль — по карточке */
             const cards = transfer.map(x => { const c = optHtml(x.o); return bf(x) ? c.replace("<details ", '<details data-b="1" ') : c }).join("");
             const head = direct.length ? `<h2 class="sub">With a transfer</h2>` : ""; /* заголовок только чтобы отделить от блока прямого поезда */
             return head + `<div class="cols${transfer.length === 1 ? " one" : ""}" style="margin-top:${head ? 16 : 6}px">${cards}</div>`
-        })() + HOWBAR;
+        })() + (BUY ? HOWBAR : "");
         
         
     }).catch(() => {

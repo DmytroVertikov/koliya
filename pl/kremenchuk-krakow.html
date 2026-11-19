@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- build vc81b064d direct=false x=Перемышль -->
+<!-- build vc81b064d direct=false x=Хелм -->
 <html lang="pl">
 <head>
     <meta charset="utf-8">
@@ -268,26 +268,21 @@
 <script src="../dict/pl.js"></script>
 <script src="../common.js?v=c81b064d"></script>
 <script>
-    const SPLIT = []; /* [станция пересадки, заголовок, пограничный контроль]: страница делится на группы по пересадке */
+    const SPLIT = []; /* [станция пересадки, пограничный контроль]: вариант с пересадкой на этой станции получает пометку */
     const HIDE = [].map(s => s.trim().toLowerCase()); /* номера поездов, скрытых на этой странице */
     const SLICE = false; /* true: варианты собираются из поездов других вариантов (страницы вроде Киев → Хелм) */
     const FROM = "Кременчуг", TO = "Краков", BACK = "pl-ua"; // FROM/TO: русские названия, как в шапке карточки в админке
     
     const BUY = `<section class="panel" id="buy"><h2>Jak kupić bilety</h2>
 <div class="buy one">
-
-<!--T--><div><h3>Z przesiadką w Przemyślu</h3><ol class="steps">
+<div><h3>Z przesiadką w Przemyślu</h3><ol class="steps">
 <li>Otwórz aplikację Ukrzaliznytsia, wybierz trasę Krzemieńczuk → Przemyśl i datę podróży. Sprzedaż biletów rusza na 20 dni przed odjazdem o 9:00 czasu kijowskiego. Wybierz pociąg i opłać bilet.</li>
 <li>Bilet na pociąg Przemyśl → Kraków kup osobno u polskiego przewoźnika PKP Intercity — na stronie intercity.pl lub w aplikacji PKP Intercity. Można go też kupić na koleo.pl lub w aplikacji KOLEO.</li>
-
 <li>Po zakupie zapisz oba e-bilety w telefonie. Przed podróżą sprawdź daty, godziny odjazdu i stacje docelowe.</li></ol>
 <a class="btn pri" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Kup w aplikacji UZ bilet Krzemieńczuk → Przemyśl</a>
-<a class="btn" href="https://www.intercity.pl/" target="_blank" rel="noopener">Kup na stronie PKP Intercity bilet Przemyśl → Kraków</a></div><!--/T-->
-
-
-
+<a class="btn" href="https://www.intercity.pl/" target="_blank" rel="noopener">Kup na stronie PKP Intercity bilet Przemyśl → Kraków</a></div>
 </div>
-<p class="buy-note">Rozkłady jazdy mogą ulec zmianie. Aktualne informacje znajdziesz w aplikacji UZ i na stronie PKP Intercity.</p></section>`;
+<p class="buy-note">Rozkłady jazdy mogą ulec zmianie. Aktualne informacje znajdziesz w aplikacji UZ i na stronie PKP Intercity.</p></section>`; /* блок «Как купить билеты»: тексты задаются в админке, собирает build.js */
     const app = document.getElementById("app");
     const HOWBAR = `<a class="howbar" href="#buy"><span class="hi" aria-hidden="true">i</span><span><b>Jak kupić bilety?</b><small>Szczegółowa instrukcja dla każdego wariantu trasy.</small></span><span class="go">Instrukcja →</span></a>`;
     const norm = s => String(s || "").trim().toLowerCase();
@@ -335,29 +330,6 @@
         const LEADX = "", LEADM = "";
         if (LEADX && LEADM && list.some(x => x.p.legs.length > 1 && (s => norm(s[s.length - 1].name).startsWith(norm(LEADX)))(x.p.legs[0].stops))) document.getElementById("lead").textContent = LEADM;
         const direct = HAS_DIRECT ? list.filter(x => x.p.legs.length === 1) : [], transfer = HAS_DIRECT ? list.filter(x => x.p.legs.length > 1) : list;
-        /* блоки покупки: вариант ищем по перевозчику чешского поезда (EC/IC = ČD, RJ = RegioJet) и станции пересадки;
-           время и номер поезда УЗ берём из остановок варианта, а не из шапки, чтобы не зависеть от ручных правок */
-        const tm = s => (String(s).match(/\d{1,2}:\d{2}/) || [""])[0], isUz = L => !/^[A-Za-z]/.test(String(L.train).trim());
-        const carOf = L => /^(EC|IC)\b/i.test(L.train.trim()) ? "cd" : /^RJ\b/i.test(L.train.trim()) ? "rj" : "";
-        const blocks = [];
-        document.querySelectorAll("#more h3[data-car]").forEach(h => {
-            const x = list.find(x => {
-                const L = x.p.legs, car = h.dataset.car, byNum = car === "cd" || car === "rj", cz = byNum ? L.find(l => !isUz(l)) : L[L.length - 1], s = L[0].stops; /* cd и rj определяются по номеру поезда (EC/IC, RJ); у остальных перевозчиков (PKP, ZSSK, CFR, ÖBB, MÁV) номер надёжно не определить (у MÁV он как у УЗ, 031Ш) — ищем по станции пересадки; uz: оба поезда УЗ (003П + 009К) */
-                return L.length > 1 && (car === "uz" ? L.every(isUz) : byNum ? cz && carOf(cz) === car : !carOf(cz) && (car === "mav" || !isUz(cz))) && norm(s[s.length - 1].name).startsWith(norm(h.dataset.x))
-            });
-            if (!x) { blocks.push({blk: h.parentNode, k: [9, 0]}); return }
-            const L = x.p.legs, last = L[L.length - 1].stops, ft = tm(L[0].stops[0].time) || x.h.ft, tt = tm(last[last.length - 1].time) || x.h.tt, u = L.find(isUz);
-            if (h.dataset.dt) h.insertAdjacentText("beforeend", " (" + h.dataset.dt.replace("{t1}", ft).replace("{t2}", tt) + ")");
-            /* особая продажа: время открытия = время отправления поезда УЗ с указанной станции (например, 003Л из Ужгорода) */
-            if (u) h.parentNode.querySelectorAll(".stime[data-at]").forEach(e => { const s = u.stops.find(z => norm(z.name).startsWith(norm(e.dataset.at))), t = s && tm(s.time); if (t) e.textContent = t });
-            if (u) h.parentNode.querySelectorAll(".utr").forEach(e => e.textContent = String(u.train).trim().replace(/^№\s*/, "").toUpperCase());
-            blocks.push({blk: h.parentNode, k: [0, list.indexOf(x)]})
-        });
-        /* блоки покупки идут в том же порядке, что и варианты на странице: в порядке списка вариантов */
-        if (blocks.length) {
-            const box = blocks[0].blk.parentNode;
-            blocks.map((b, i) => Object.assign({i}, b)).sort((a, b) => a.k[0] - b.k[0] || a.k[1] - b.k[1] || a.i - b.i).forEach(b => box.appendChild(b.blk))
-        }
         if (!list.length) {
             app.innerHTML = `<div class="panel"><h2>Brak połączeń</h2><p>Dodaj je w panelu administratora.</p></div>`;
             return
@@ -367,11 +339,11 @@
             /* все варианты с пересадкой — одним списком (по времени отправления), без подзаголовков по станциям */
             if (!transfer.length) return "";
             const at = x => { const s = x.p.legs[0].stops; return norm(s[s.length - 1].name) }; /* станция первой пересадки */
-            const bf = x => !SPLIT.length || SPLIT.some(s => s[2] && at(x).startsWith(norm(s[0]))); /* пограничный контроль — по карточке */
+            const bf = x => !SPLIT.length || SPLIT.some(s => s[1] && at(x).startsWith(norm(s[0]))); /* пограничный контроль — по карточке */
             const cards = transfer.map(x => { const c = optHtml(x.o); return bf(x) ? c.replace("<details ", '<details data-b="1" ') : c }).join("");
             const head = direct.length ? `<h2 class="sub">Z przesiadką</h2>` : ""; /* заголовок только чтобы отделить от блока прямого поезда */
             return head + `<div class="cols${transfer.length === 1 ? " one" : ""}" style="margin-top:${head ? 16 : 6}px">${cards}</div>`
-        })() + HOWBAR;
+        })() + (BUY ? HOWBAR : "");
         
         /*B*/document.querySelectorAll(".opt[data-b"+"] .swap").forEach(s => s.insertAdjacentHTML("afterend", `<div class="swap border">🛂 Po przyjeździe do Przemyśla odbywa się kontrola graniczna</div>`));/*/B*/
     }).catch(() => {
