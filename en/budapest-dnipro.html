@@ -258,22 +258,7 @@
 <main class="wrap"><a class="back" href="./">← Home</a> <a class="back" href="./#hu-ua">All routes: Hungary — Ukraine</a> <a class="back" href="dnipro-budapest.html">🔄 Dnipro → Budapest</a>
     <p class="chk" id="chk" hidden>📅 Checked: <b></b></p>
     <div id="app"><p>Loading…</p></div>
-    <div id="more"></div>
-</main>
-<div class="wrap"><aside class="ad wide" data-slot="bottom" hidden></aside></div>
-<footer class="wrap" id="site-footer"></footer>
-<script>window.LANG = "en";</script>
-<script src="../config.js"></script>
-<script src="../pages.js"></script>
-<script src="../dict/en.js"></script>
-<script src="../common.js?v=c81b064d"></script>
-<script>
-    const SPLIT = []; /* [станция пересадки, пограничный контроль]: вариант с пересадкой на этой станции получает пометку */
-    const HIDE = [].map(s => s.trim().toLowerCase()); /* номера поездов, скрытых на этой странице */
-    const SLICE = false; /* true: варианты собираются из поездов других вариантов (страницы вроде Киев → Хелм) */
-    const FROM = "Будапешт", TO = "Днепр", BACK = "ua-hu"; // FROM/TO: русские названия, как в шапке карточки в админке
-    
-    const BUY = `<section class="panel" id="buy"><h2>How to buy tickets</h2>
+    <div id="more"><section class="panel" id="buy"><h2>How to buy tickets</h2>
 <div class="buy two">
 <div><h3>With a transfer in Mukachevo</h3><ol class="steps">
 <li>Open the Ukrzaliznytsia app, choose the route Mukachevo → Dnipro and the travel date. Sales open 20 days before departure at 08:00 Kyiv time. Choose train 003Л and pay for the ticket.</li>
@@ -288,7 +273,22 @@
 <a class="btn pri" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Buy the Budapest → Kyiv ticket in the UZ app</a>
 <a class="btn" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Buy the Kyiv → Dnipro ticket in the UZ app</a></div>
 </div>
-<p class="buy-note">Train schedules may change. Check the latest information in the UZ app and on the PKP Intercity website.</p></section>`; /* блок «Как купить билеты»: тексты задаются в админке, собирает build.js */
+<p class="buy-note">Train schedules may change. Check the latest information in the UZ app and on the PKP Intercity website.</p></section></div> <!-- блок «Как купить билеты» лежит в HTML (виден поисковикам без JS), ниже JS добавляет «Ещё маршруты» -->
+</main>
+<div class="wrap"><aside class="ad wide" data-slot="bottom" hidden></aside></div>
+<footer class="wrap" id="site-footer"></footer>
+<script>window.LANG = "en";</script>
+<script src="../config.js"></script>
+<script src="../pages.js"></script>
+<script src="../dict/en.js"></script>
+<script src="../common.js?v=c81b064d"></script>
+<script>
+    const SPLIT = []; /* [станция пересадки, пограничный контроль]: вариант с пересадкой на этой станции получает пометку */
+    const HIDE = [].map(s => s.trim().toLowerCase()); /* номера поездов, скрытых на этой странице */
+    const SLICE = false; /* true: варианты собираются из поездов других вариантов (страницы вроде Киев → Хелм) */
+    const FROM = "Будапешт", TO = "Днепр", BACK = "ua-hu"; // FROM/TO: русские названия, как в шапке карточки в админке
+    
+    const HAS_BUY = true; /* есть ли на странице блок «Как купить билеты» (он выводится в HTML при сборке, build.js) */
     const app = document.getElementById("app");
     const HOWBAR = `<a class="howbar" href="#buy"><span class="hi" aria-hidden="true">i</span><span><b>How to buy tickets?</b><small>Step-by-step instructions for each route option.</small></span><span class="go">Instructions →</span></a>`;
     const norm = s => String(s || "").trim().toLowerCase();
@@ -349,13 +349,13 @@
             const cards = transfer.map(x => { const c = optHtml(x.o); return bf(x) ? c.replace("<details ", '<details data-b="1" ') : c }).join("");
             const head = direct.length ? `<h2 class="sub">With a transfer</h2>` : ""; /* заголовок только чтобы отделить от блока прямого поезда */
             return head + `<div class="cols${transfer.length === 1 ? " one" : ""}" style="margin-top:${head ? 16 : 6}px">${cards}</div>`
-        })() + (BUY ? HOWBAR : "");
+        })() + (HAS_BUY ? HOWBAR : "");
         
         
     }).catch(() => {
         app.innerHTML = `<div class="panel"><h2>Could not load the data</h2><p>Please refresh the page later.</p></div>`
     });
-    document.getElementById("more").innerHTML = BUY + moreRoutes({h: "More routes", rev: "Return route", from: "More routes from %s", to: "More routes to %s", dir: "All routes in this direction", all: "All countries", home: "./", hash: "hu-ua"});
+    document.getElementById("more").insertAdjacentHTML("beforeend", moreRoutes({h: "More routes", rev: "Return route", from: "More routes from %s", to: "More routes to %s", dir: "All routes in this direction", all: "All countries", home: "./", hash: "hu-ua"}));
 </script>
 </body>
 </html>

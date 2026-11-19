@@ -258,7 +258,14 @@
 <main class="wrap"><a class="back" href="./">← Strona główna</a> <a class="back" href="./#pl-ua">Wszystkie trasy: Polska — Ukraina</a> <a class="back" href="dnipro-przemysl.html">🔄 Dnipro → Przemyśl</a>
     <p class="chk" id="chk" hidden>📅 Sprawdzono: <b></b></p>
     <div id="app"><p>Ładowanie…</p></div>
-    <div id="more"></div>
+    <div id="more"><section class="panel" id="buy"><h2>Jak kupić bilety</h2>
+<div class="buy one">
+<div class="d"><h3>Pociąg bezpośredni</h3><ol class="steps">
+<li>Otwórz aplikację Ukrzaliznytsia, wybierz trasę Przemyśl Główny → Dnipro Główny i datę podróży. Sprzedaż biletów rusza na 20 dni przed odjazdem o 9:00 czasu kijowskiego.</li>
+<li>Wybierz miejsce i zapłać kartą. E-bilet pojawi się w aplikacji. Przy wsiadaniu okaż go razem z paszportem.</li></ol>
+<a class="btn" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Kup w aplikacji UZ bilet Przemyśl Główny → Dnipro Główny</a></div>
+</div>
+<p class="buy-note">Rozkłady jazdy mogą ulec zmianie. Aktualne informacje znajdziesz w aplikacji UZ.</p></section></div> <!-- блок «Как купить билеты» лежит в HTML (виден поисковикам без JS), ниже JS добавляет «Ещё маршруты» -->
 </main>
 <div class="wrap"><aside class="ad wide" data-slot="bottom" hidden></aside></div>
 <footer class="wrap" id="site-footer"></footer>
@@ -273,14 +280,7 @@
     const SLICE = true; /* true: варианты собираются из поездов других вариантов (страницы вроде Киев → Хелм) */
     const FROM = "Перемышль", TO = "Днепр", BACK = "ua-pl"; // FROM/TO: русские названия, как в шапке карточки в админке
     /*D*//*/D*/
-    const BUY = `<section class="panel" id="buy"><h2>Jak kupić bilety</h2>
-<div class="buy one">
-<div class="d"><h3>Pociąg bezpośredni</h3><ol class="steps">
-<li>Otwórz aplikację Ukrzaliznytsia, wybierz trasę Przemyśl Główny → Dnipro Główny i datę podróży. Sprzedaż biletów rusza na 20 dni przed odjazdem o 9:00 czasu kijowskiego.</li>
-<li>Wybierz miejsce i zapłać kartą. E-bilet pojawi się w aplikacji. Przy wsiadaniu okaż go razem z paszportem.</li></ol>
-<a class="btn" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Kup w aplikacji UZ bilet Przemyśl Główny → Dnipro Główny</a></div>
-</div>
-<p class="buy-note">Rozkłady jazdy mogą ulec zmianie. Aktualne informacje znajdziesz w aplikacji UZ.</p></section>`; /* блок «Как купить билеты»: тексты задаются в админке, собирает build.js */
+    const HAS_BUY = true; /* есть ли на странице блок «Как купить билеты» (он выводится в HTML при сборке, build.js) */
     const app = document.getElementById("app");
     const HOWBAR = `<a class="howbar" href="#buy"><span class="hi" aria-hidden="true">i</span><span><b>Jak kupić bilety?</b><small>Szczegółowa instrukcja dla każdego wariantu trasy.</small></span><span class="go">Instrukcja →</span></a>`;
     const norm = s => String(s || "").trim().toLowerCase();
@@ -342,13 +342,13 @@
             const cards = transfer.map(x => { const c = optHtml(x.o); return bf(x) ? c.replace("<details ", '<details data-b="1" ') : c }).join("");
             const head = direct.length ? `<h2 class="sub">Z przesiadką</h2>` : ""; /* заголовок только чтобы отделить от блока прямого поезда */
             return head + `<div class="cols${transfer.length === 1 ? " one" : ""}" style="margin-top:${head ? 16 : 6}px">${cards}</div>`
-        })() + (BUY ? HOWBAR : "");
+        })() + (HAS_BUY ? HOWBAR : "");
         /*D*//*/D*/
         
     }).catch(() => {
         app.innerHTML = `<div class="panel"><h2>Nie udało się załadować danych</h2><p>Odśwież stronę później.</p></div>`
     });
-    document.getElementById("more").innerHTML = BUY + moreRoutes({h: "Inne trasy", rev: "Trasa powrotna", from: "Inne trasy z miasta %s", to: "Inne trasy do miasta %s", dir: "Wszystkie trasy w tym kierunku", all: "Wszystkie kraje", home: "./", hash: "pl-ua"});
+    document.getElementById("more").insertAdjacentHTML("beforeend", moreRoutes({h: "Inne trasy", rev: "Trasa powrotna", from: "Inne trasy z miasta %s", to: "Inne trasy do miasta %s", dir: "Wszystkie trasy w tym kierunku", all: "Wszystkie kraje", home: "./", hash: "pl-ua"}));
 </script>
 </body>
 </html>

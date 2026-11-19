@@ -258,7 +258,16 @@
 <main class="wrap"><a class="back" href="./">← Главная</a> <a class="back" href="./#ua-pl">Все маршруты: Украина — Польша</a> <a class="back" href="krakow-dnipro.html">🔄 Краков → Днепр</a>
     <p class="chk" id="chk" hidden>📅 Проверено: <b></b></p>
     <div id="app"><p>Загрузка…</p></div>
-    <div id="more"></div>
+    <div id="more"><section class="panel" id="buy"><h2>Как купить билеты</h2>
+<div class="buy one">
+<div><h3>С пересадкой в Перемышле</h3><ol class="steps">
+<li>Откройте приложение «Укрзалізниця», выберите маршрут Днепр → Перемышль и укажите дату поездки. Продажа билетов открывается за 20 суток до отправления, в 09:00 по киевскому времени. Выберите поезд и оплатите билет.</li>
+<li>Билет на поезд Перемышль → Краков приобретите отдельно у польского перевозчика PKP Intercity — на официальном сайте intercity.pl или в приложении PKP Intercity. Также билеты можно приобрести на сайте koleo.pl или в приложении KOLEO.</li>
+<li>После покупки сохраните оба электронных билета в телефоне. Перед поездкой проверьте даты, время отправления и станции прибытия.</li></ol>
+<a class="btn pri" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Купить в приложении УЗ билет Днепр → Перемышль</a>
+<a class="btn" href="https://www.intercity.pl/" target="_blank" rel="noopener">Купить на сайте PKP Intercity билет Перемышль → Краков</a></div>
+</div>
+<p class="buy-note">Графики движения поездов могут измениться, актуальную информацию смотрите в приложении УЗ и на сайте PKP Intercity.</p></section></div> <!-- блок «Как купить билеты» лежит в HTML (виден поисковикам без JS), ниже JS добавляет «Ещё маршруты» -->
 </main>
 <div class="wrap"><aside class="ad wide" data-slot="bottom" hidden></aside></div>
 <footer class="wrap" id="site-footer"></footer>
@@ -273,16 +282,7 @@
     const SLICE = false; /* true: варианты собираются из поездов других вариантов (страницы вроде Киев → Хелм) */
     const FROM = "Днепр", TO = "Краков", BACK = "pl-ua"; // FROM/TO: русские названия, как в шапке карточки в админке
     
-    const BUY = `<section class="panel" id="buy"><h2>Как купить билеты</h2>
-<div class="buy one">
-<div><h3>С пересадкой в Перемышле</h3><ol class="steps">
-<li>Откройте приложение «Укрзалізниця», выберите маршрут Днепр → Перемышль и укажите дату поездки. Продажа билетов открывается за 20 суток до отправления, в 09:00 по киевскому времени. Выберите поезд и оплатите билет.</li>
-<li>Билет на поезд Перемышль → Краков приобретите отдельно у польского перевозчика PKP Intercity — на официальном сайте intercity.pl или в приложении PKP Intercity. Также билеты можно приобрести на сайте koleo.pl или в приложении KOLEO.</li>
-<li>После покупки сохраните оба электронных билета в телефоне. Перед поездкой проверьте даты, время отправления и станции прибытия.</li></ol>
-<a class="btn pri" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Купить в приложении УЗ билет Днепр → Перемышль</a>
-<a class="btn" href="https://www.intercity.pl/" target="_blank" rel="noopener">Купить на сайте PKP Intercity билет Перемышль → Краков</a></div>
-</div>
-<p class="buy-note">Графики движения поездов могут измениться, актуальную информацию смотрите в приложении УЗ и на сайте PKP Intercity.</p></section>`; /* блок «Как купить билеты»: тексты задаются в админке, собирает build.js */
+    const HAS_BUY = true; /* есть ли на странице блок «Как купить билеты» (он выводится в HTML при сборке, build.js) */
     const app = document.getElementById("app");
     const HOWBAR = `<a class="howbar" href="#buy"><span class="hi" aria-hidden="true">i</span><span><b>Как купить билеты?</b><small>Подробная инструкция для каждого варианта маршрута.</small></span><span class="go">Инструкция →</span></a>`;
     const norm = s => String(s || "").trim().toLowerCase();
@@ -343,13 +343,13 @@
             const cards = transfer.map(x => { const c = optHtml(x.o); return bf(x) ? c.replace("<details ", '<details data-b="1" ') : c }).join("");
             const head = direct.length ? `<h2 class="sub">С пересадкой</h2>` : ""; /* заголовок только чтобы отделить от блока прямого поезда */
             return head + `<div class="cols${transfer.length === 1 ? " one" : ""}" style="margin-top:${head ? 16 : 6}px">${cards}</div>`
-        })() + (BUY ? HOWBAR : "");
+        })() + (HAS_BUY ? HOWBAR : "");
         
         /*B*/document.querySelectorAll(".opt[data-b"+"] .swap").forEach(s => s.insertAdjacentHTML("afterend", `<div class="swap border">🛂 После прибытия в Перемышль происходит пограничный контроль</div>`));/*/B*/
     }).catch(() => {
         app.innerHTML = `<div class="panel"><h2>Не удалось загрузить данные</h2><p>Обновите страницу позже.</p></div>`
     });
-    document.getElementById("more").innerHTML = BUY + moreRoutes({h: "Ещё маршруты", rev: "Обратное направление", from: "Другие направления из города %s", to: "Другие маршруты в город %s", dir: "Все маршруты этого направления", all: "Все страны", home: "./", hash: "ua-pl"});
+    document.getElementById("more").insertAdjacentHTML("beforeend", moreRoutes({h: "Ещё маршруты", rev: "Обратное направление", from: "Другие направления из города %s", to: "Другие маршруты в город %s", dir: "Все маршруты этого направления", all: "Все страны", home: "./", hash: "ua-pl"}));
 </script>
 </body>
 </html>

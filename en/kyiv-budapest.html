@@ -258,7 +258,20 @@
 <main class="wrap"><a class="back" href="./">← Home</a> <a class="back" href="./#ua-hu">All routes: Ukraine — Hungary</a> <a class="back" href="budapest-kyiv.html">🔄 Budapest → Kyiv</a>
     <p class="chk" id="chk" hidden>📅 Checked: <b></b></p>
     <div id="app"><p>Loading…</p></div>
-    <div id="more"></div>
+    <div id="more"><section class="panel" id="buy"><h2>How to buy tickets</h2>
+<div class="buy two">
+<div class="d"><h3>Direct train</h3><ol class="steps">
+<li>Open the Ukrzaliznytsia app, choose the route Kyiv → Budapest Keleti and the travel date. Sales open 20 days before departure at 08:00 Kyiv time.</li>
+<li>Pick a seat and pay by bank card. The e-ticket will appear in the app. Show it with your passport when boarding.</li></ol>
+<a class="btn" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Buy the Kyiv → Budapest Keleti ticket in the UZ app</a></div>
+<div><h3>With a transfer in Chop or Mukachevo</h3><ol class="steps">
+<li>Open the Ukrzaliznytsia app, choose the train you need on the Ukrainian part of the route (Kyiv → Chop or Kyiv → Mukachevo) and set the travel date. Sales open 20 days before departure, at 08:00 Kyiv time. Pay for the ticket.</li>
+<li>Trains on the Hungarian section (Chop → Budapest and Mukachevo → Budapest) depart the next day, so ticket sales for them in the Ukrzaliznytsia app open the following day. You can also buy the ticket in advance from the Hungarian carrier MÁV, on jegy.mav.hu or in the MÁVPlusz app. MÁV tickets are usually cheaper.</li>
+<li>After buying, save both e-tickets on your phone. Before you travel, check the dates, departure times and arrival stations.</li></ol>
+<a class="btn pri" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Buy tickets in the UZ app</a>
+<a class="btn" href="https://jegy.mav.hu/" target="_blank" rel="noopener">Buy tickets on MÁV</a></div>
+</div>
+<p class="buy-note">Train schedules may change. Check the latest information in the UZ app and on the MÁV website.</p></section></div> <!-- блок «Как купить билеты» лежит в HTML (виден поисковикам без JS), ниже JS добавляет «Ещё маршруты» -->
 </main>
 <div class="wrap"><aside class="ad wide" data-slot="bottom" hidden></aside></div>
 <footer class="wrap" id="site-footer"></footer>
@@ -273,20 +286,7 @@
     const SLICE = false; /* true: варианты собираются из поездов других вариантов (страницы вроде Киев → Хелм) */
     const FROM = "Киев", TO = "Будапешт", BACK = "hu-ua"; // FROM/TO: русские названия, как в шапке карточки в админке
     /*D*//*/D*/
-    const BUY = `<section class="panel" id="buy"><h2>How to buy tickets</h2>
-<div class="buy two">
-<div class="d"><h3>Direct train</h3><ol class="steps">
-<li>Open the Ukrzaliznytsia app, choose the route Kyiv → Budapest Keleti and the travel date. Sales open 20 days before departure at 08:00 Kyiv time.</li>
-<li>Pick a seat and pay by bank card. The e-ticket will appear in the app. Show it with your passport when boarding.</li></ol>
-<a class="btn" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Buy the Kyiv → Budapest Keleti ticket in the UZ app</a></div>
-<div><h3>With a transfer in Chop or Mukachevo</h3><ol class="steps">
-<li>Open the Ukrzaliznytsia app, choose the train you need on the Ukrainian part of the route (Kyiv → Chop or Kyiv → Mukachevo) and set the travel date. Sales open 20 days before departure, at 08:00 Kyiv time. Pay for the ticket.</li>
-<li>Trains on the Hungarian section (Chop → Budapest and Mukachevo → Budapest) depart the next day, so ticket sales for them in the Ukrzaliznytsia app open the following day. You can also buy the ticket in advance from the Hungarian carrier MÁV, on jegy.mav.hu or in the MÁVPlusz app. MÁV tickets are usually cheaper.</li>
-<li>After buying, save both e-tickets on your phone. Before you travel, check the dates, departure times and arrival stations.</li></ol>
-<a class="btn pri" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Buy tickets in the UZ app</a>
-<a class="btn" href="https://jegy.mav.hu/" target="_blank" rel="noopener">Buy tickets on MÁV</a></div>
-</div>
-<p class="buy-note">Train schedules may change. Check the latest information in the UZ app and on the MÁV website.</p></section>`; /* блок «Как купить билеты»: тексты задаются в админке, собирает build.js */
+    const HAS_BUY = true; /* есть ли на странице блок «Как купить билеты» (он выводится в HTML при сборке, build.js) */
     const app = document.getElementById("app");
     const HOWBAR = `<a class="howbar" href="#buy"><span class="hi" aria-hidden="true">i</span><span><b>How to buy tickets?</b><small>Step-by-step instructions for each route option.</small></span><span class="go">Instructions →</span></a>`;
     const norm = s => String(s || "").trim().toLowerCase();
@@ -348,13 +348,13 @@
             const cards = transfer.map(x => { const c = optHtml(x.o); return bf(x) ? c.replace("<details ", '<details data-b="1" ') : c }).join("");
             const head = direct.length ? `<h2 class="sub">With a transfer</h2>` : ""; /* заголовок только чтобы отделить от блока прямого поезда */
             return head + `<div class="cols${transfer.length === 1 ? " one" : ""}" style="margin-top:${head ? 16 : 6}px">${cards}</div>`
-        })() + (BUY ? HOWBAR : "");
+        })() + (HAS_BUY ? HOWBAR : "");
         /*D*//*/D*/
         
     }).catch(() => {
         app.innerHTML = `<div class="panel"><h2>Could not load the data</h2><p>Please refresh the page later.</p></div>`
     });
-    document.getElementById("more").innerHTML = BUY + moreRoutes({h: "More routes", rev: "Return route", from: "More routes from %s", to: "More routes to %s", dir: "All routes in this direction", all: "All countries", home: "./", hash: "ua-hu"});
+    document.getElementById("more").insertAdjacentHTML("beforeend", moreRoutes({h: "More routes", rev: "Return route", from: "More routes from %s", to: "More routes to %s", dir: "All routes in this direction", all: "All countries", home: "./", hash: "ua-hu"}));
 </script>
 </body>
 </html>

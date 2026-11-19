@@ -258,22 +258,7 @@
 <main class="wrap"><a class="back" href="./">← Главная</a> <a class="back" href="./#ua-cz">Все маршруты: Украина — Чехия</a> <a class="back" href="prague-kyiv.html">🔄 Прага → Киев</a>
     <p class="chk" id="chk" hidden>📅 Проверено: <b></b></p>
     <div id="app"><p>Загрузка…</p></div>
-    <div id="more"></div>
-</main>
-<div class="wrap"><aside class="ad wide" data-slot="bottom" hidden></aside></div>
-<footer class="wrap" id="site-footer"></footer>
-<script>window.LANG = "ru";</script>
-<script src="config.js"></script>
-<script src="pages.js"></script>
-<script src="dict/ru.js"></script>
-<script src="common.js?v=c81b064d"></script>
-<script>
-    const SPLIT = [["Перемышль",1],["Чоп",0]]; /* [станция пересадки, пограничный контроль]: вариант с пересадкой на этой станции получает пометку */
-    const HIDE = [].map(s => s.trim().toLowerCase()); /* номера поездов, скрытых на этой странице */
-    const SLICE = false; /* true: варианты собираются из поездов других вариантов (страницы вроде Киев → Хелм) */
-    const FROM = "Киев", TO = "Прага", BACK = "cz-ua"; // FROM/TO: русские названия, как в шапке карточки в админке
-    
-    const BUY = `<section class="panel" id="buy"><h2>Как купить билеты</h2>
+    <div id="more"><section class="panel" id="buy"><h2>Как купить билеты</h2>
 <div class="buy three">
 <div><h3>С пересадкой в Перемышле</h3><ol class="steps">
 <li>Откройте приложение «Укрзалізниця», выберите маршрут Киев → Перемышль и укажите дату поездки. Продажа билетов открывается за 20 суток до отправления, в 09:00 по киевскому времени. Выберите поезд 051К и оплатите билет.</li>
@@ -294,7 +279,22 @@
 <a class="btn pri" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Купить в приложении УЗ билет Киев → Чоп</a>
 <a class="btn" href="https://regiojet.cz/" target="_blank" rel="noopener">Купить на сайте RegioJet билет Чоп → Прага</a></div>
 </div>
-<p class="buy-note">Графики движения поездов могут измениться, актуальную информацию смотрите в приложении УЗ, в приложении ČD My Train и на сайте RegioJet.</p></section>`; /* блок «Как купить билеты»: тексты задаются в админке, собирает build.js */
+<p class="buy-note">Графики движения поездов могут измениться, актуальную информацию смотрите в приложении УЗ, в приложении ČD My Train и на сайте RegioJet.</p></section></div> <!-- блок «Как купить билеты» лежит в HTML (виден поисковикам без JS), ниже JS добавляет «Ещё маршруты» -->
+</main>
+<div class="wrap"><aside class="ad wide" data-slot="bottom" hidden></aside></div>
+<footer class="wrap" id="site-footer"></footer>
+<script>window.LANG = "ru";</script>
+<script src="config.js"></script>
+<script src="pages.js"></script>
+<script src="dict/ru.js"></script>
+<script src="common.js?v=c81b064d"></script>
+<script>
+    const SPLIT = [["Перемышль",1],["Чоп",0]]; /* [станция пересадки, пограничный контроль]: вариант с пересадкой на этой станции получает пометку */
+    const HIDE = [].map(s => s.trim().toLowerCase()); /* номера поездов, скрытых на этой странице */
+    const SLICE = false; /* true: варианты собираются из поездов других вариантов (страницы вроде Киев → Хелм) */
+    const FROM = "Киев", TO = "Прага", BACK = "cz-ua"; // FROM/TO: русские названия, как в шапке карточки в админке
+    
+    const HAS_BUY = true; /* есть ли на странице блок «Как купить билеты» (он выводится в HTML при сборке, build.js) */
     const app = document.getElementById("app");
     const HOWBAR = `<a class="howbar" href="#buy"><span class="hi" aria-hidden="true">i</span><span><b>Как купить билеты?</b><small>Подробная инструкция для каждого варианта маршрута.</small></span><span class="go">Инструкция →</span></a>`;
     const norm = s => String(s || "").trim().toLowerCase();
@@ -355,13 +355,13 @@
             const cards = transfer.map(x => { const c = optHtml(x.o); return bf(x) ? c.replace("<details ", '<details data-b="1" ') : c }).join("");
             const head = direct.length ? `<h2 class="sub">С пересадкой</h2>` : ""; /* заголовок только чтобы отделить от блока прямого поезда */
             return head + `<div class="cols${transfer.length === 1 ? " one" : ""}" style="margin-top:${head ? 16 : 6}px">${cards}</div>`
-        })() + (BUY ? HOWBAR : "");
+        })() + (HAS_BUY ? HOWBAR : "");
         
         /*B*/document.querySelectorAll(".opt[data-b"+"] .swap").forEach(s => s.insertAdjacentHTML("afterend", `<div class="swap border">🛂 После прибытия в Перемышль происходит пограничный контроль</div>`));/*/B*/
     }).catch(() => {
         app.innerHTML = `<div class="panel"><h2>Не удалось загрузить данные</h2><p>Обновите страницу позже.</p></div>`
     });
-    document.getElementById("more").innerHTML = BUY + moreRoutes({h: "Ещё маршруты", rev: "Обратное направление", from: "Другие направления из города %s", to: "Другие маршруты в город %s", dir: "Все маршруты этого направления", all: "Все страны", home: "./", hash: "ua-cz"});
+    document.getElementById("more").insertAdjacentHTML("beforeend", moreRoutes({h: "Ещё маршруты", rev: "Обратное направление", from: "Другие направления из города %s", to: "Другие маршруты в город %s", dir: "Все маршруты этого направления", all: "Все страны", home: "./", hash: "ua-cz"}));
 </script>
 </body>
 </html>
