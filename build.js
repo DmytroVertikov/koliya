@@ -66,17 +66,6 @@ const MORE_DEF = {
   "more.dir": {ru: "Все маршруты этого направления", uk: "Усі маршрути цього напрямку", en: "All routes in this direction", pl: "Wszystkie trasy w tym kierunku"}
 };
 for (const k in MORE_DEF) for (const l of LANGS) if (!I[l][k]) I[l][k] = MORE_DEF[k][l];
-/* особая продажа поезда в блоке покупки (cols: days, sale_at, sale_time): тексты по умолчанию; ключ в ui_texts (админка → «Тексты») главнее */
-const SALE_DEF = {
-  "buy.c.s1e": {ru: "Откройте приложение «Укрзалізниця», выберите маршрут {uz} и укажите дату поездки. Продажа билетов открывается за 20 суток до отправления, в {open} по киевскому времени.{early} Выберите подходящий поезд и оплатите билет.",
-    uk: "Відкрийте застосунок «Укрзалізниця», оберіть маршрут {uz} і вкажіть дату поїздки. Продаж квитків відкривається за 20 діб до відправлення, о {open} за київським часом.{early} Оберіть відповідний поїзд і сплатіть квиток.",
-    en: "Open the Ukrzaliznytsia app, choose the route {uz} and select the travel date. Ticket sales open 20 days before departure, at {open} Kyiv time.{early} Choose a suitable train and pay for the ticket.",
-    pl: "Otwórz aplikację Ukrzaliznytsia, wybierz trasę {uz} i podaj datę podróży. Sprzedaż biletów rusza na 20 dni przed odjazdem, o {open} czasu kijowskiego.{early} Wybierz odpowiedni pociąg i opłać bilet."},
-  "buy.c.early": {ru: " Поезд № {train}: продажа открывается за {days} до отправления.", uk: " Поїзд № {train}: продаж відкривається за {days} до відправлення.", en: " Train No. {train}: sales open {days} before departure.", pl: " Pociąg nr {train}: sprzedaż rusza na {days} przed odjazdem."},
-  "buy.c.earlyt": {ru: " Поезд № {train}: продажа открывается за {days} до отправления, в {time} по киевскому времени.", uk: " Поїзд № {train}: продаж відкривається за {days} до відправлення, о {time} за київським часом.", en: " Train No. {train}: sales open {days} before departure, at {time} Kyiv time.", pl: " Pociąg nr {train}: sprzedaż rusza na {days} przed odjazdem, o {time} czasu kijowskiego."}
-};
-for (const k in SALE_DEF) for (const l of LANGS) if (!I[l][k]) I[l][k] = SALE_DEF[k][l];
-const dayWord = (l, n) => n + " " + (l === "ru" ? (n === 1 ? "сутки" : "суток") : l === "uk" ? (n === 1 ? "добу" : n < 5 ? "доби" : "діб") : l === "en" ? (n === 1 ? "day" : "days") : (n === 1 ? "dzień" : "dni"));
 /* нет перевода — подставляется русский текст */
 for (const l of LANGS.slice(1)) { const miss = Object.keys(I.ru).filter(k => !I[l][k]); for (const k of miss) I[l][k] = I.ru[k]; if (miss.length) console.warn("ВНИМАНИЕ: " + l + ": нет перевода для " + miss.length + " ключей (показан русский): " + miss.slice(0, 8).join(", ") + (miss.length > 8 ? "…" : "")) }
 /* Список страниц маршрутов живёт только в базе (таблица route_pages, админка → «Направления»): sync.js сохраняет его в routes.db.json. */
@@ -94,15 +83,15 @@ for (const p of DBR) {
   const out = /^ua-/.test(p.route), r = {id: p.id, file: p.file, FROM: p.from_name, TO: p.to_name, BACK: p.back, hash: p.route, rev: p.rev};
   if (p.kind !== "custom") {
     Object.assign(r, {like: p.like_id || (out ? "kw" : "wk"), autotxt: true});
-    if (p.kind === "slice") Object.assign(r, {dOnly: true, coach: false, slice: true, ds3: p.single ? "buy.d.s3z" : "buy.d.s3t"});
-    else if (p.kind === "direct") Object.assign(r, {dOnly: true, coach: false, ds2: "buy.d.s2z", ds3: p.single ? "buy.d.s3z" : "buy.d.s3t"});
+    if (p.kind === "slice") Object.assign(r, {coach: false, slice: true});
+    else if (p.kind === "direct") Object.assign(r, {coach: false});
     else {
-      const x = p.x || "Хелм";
-      Object.assign(r, {uz: out ? [p.from_name, x] : [x, p.to_name], pkp: out ? [x, p.to_name] : [p.from_name, x], t3: out ? "buy.t3out" : "buy.t3in", x, direct: false, plat: x === "Хелм", xtxt: true});
+      Object.assign(r, {x: p.x || "Хелм", direct: false, xtxt: true});
       if (p.border) r.border = p.border
     }
   }
   Object.assign(r, p.extra || {});
+  r.buy = p.buy || null; /* блок «Как купить билеты» (см. buyHtml) */
   if (p.texts && Object.keys(p.texts).length) r.texts = p.texts;
   if (k >= 0) ROUTES[k] = r; else ROUTES.push(r);
   for (const [n, t] of Object.entries(p.names || {})) if (!I.ST[n]) I.ST[n] = [t.uk || "", t.en || "", t.pl || ""]
@@ -121,22 +110,14 @@ const st = (n, l) => { const s = I.ST[n], i = {uk: 0, en: 1, pl: 2}[l]; return s
 /* короткое название для компактных ссылок (главная): short_uk / short_en / short_pl из таблицы станций; нет короткого — обычное название; ru остаётся как есть */
 /* короткое название для H1 шапки страницы: без «Главный», «Центральный» и т. п. (как в карточках); нет короткого — обычное */
 const stH1 = (n, l) => { const s = I.ST[n], i = {ru: 6, uk: 7, en: 8, pl: 9}[l]; return s && s[i] ? s[i] : st(n, l) };
-/* «в Перемышле и Чопе»: если у страницы несколько блоков покупки (cols) с разными станциями пересадки, в тексте перечисляются все (по алфавиту); иначе одна станция x */
-const xinS = (n, l) => l === "en" ? "in " + stH1(n, l) : xin(n, l); /* «в Перемышле» без «Главный» для en */
-const xAll = (r, l) => {
-  const xs = [...new Set((r.cols || []).map(c => c.x))].sort((a, b) => a.localeCompare(b, "ru"));
-  if (xs.length < 2) return r.x ? xinS(r.x, l) : "";
-  const J = {ru: " и ", uk: " та ", en: " and ", pl: " i "}[l], rest = n => l === "en" ? stH1(n, l) : xin(n, l).replace(/^\S+\s+/, "");
-  return xinS(xs[0], l) + xs.slice(1).map(n => J + rest(n)).join("")
-};
-/* пара станций для блоков «Как купить билеты»: короткие названия (без «Главный», «Центральный» и т. п.) */
-const pairS = (a, l) => stH1(a[0], l) + " → " + stH1(a[1], l);
+/* «в Хелме» без «Главный» для en: станция пересадки страницы (route_pages.x) для автотекстов */
+const xinS = (n, l) => l === "en" ? "in " + stH1(n, l) : xin(n, l);
+const xAll = (r, l) => r.x ? xinS(r.x, l) : "";
 const stShort = (n, l) => { const s = I.ST[n], i = {uk: 7, en: 8, pl: 9}[l]; return s && i != null && s[i] ? s[i] : st(n, l) };
 const fill = (s, v) => s.replace(/\{(\w+)\}/g, (m, k) => k in v ? v[k] : m);
 const path = (l, f) => (l === "ru" ? "" : l + "/") + f;
 /* версия для ?v= считается от содержимого style.css и common.js: пока они не менялись, страницы при пересборке не меняются */
 const VER = require("crypto").createHash("md5").update(fs.readFileSync(__dirname + "/style.css")).update(fs.readFileSync(__dirname + "/common.js")).digest("hex").slice(0, 8), urls = [SITE];
-const S3T = {ru: "Выберите подходящий поезд и оплатите билет банковской картой. Электронный билет появится в приложении. При посадке предъявите его вместе с паспортом.", uk: "Оберіть відповідний поїзд і сплатіть квиток банківською карткою. Електронний квиток з’явиться в застосунку. Під час посадки пред’явіть його разом із паспортом.", en: "Choose a suitable train and pay by bank card. The e-ticket will appear in the app. Show it with your passport when boarding.", pl: "Wybierz odpowiedni pociąg i zapłać kartą. E-bilet pojawi się w aplikacji. Przy wsiadaniu okaż go razem z paszportem."}; /* шаг 2 покупки для Киев ↔ Хелм: там несколько поездов, на Днепр / Харьков ↔ Хелм поезд один, у них «Выберите место» (buy.d.s3z) */
 /* тексты страниц slice-маршрутов (Киев → Хелм и т.п.) собираются здесь, отдельно вносить их в админке не нужно */
 const SLICE_TXT = {
   ru: (a, b) => ({title: `${a} → ${b} поездом | Колія`, desc: `Поезда ${a} — ${b} без пересадок: время, станции, длительность.`, h1: `Поездом: ${a} → ${b}`, lead: `Расписание поездов ${a} — ${b}: прямые поезда без пересадок. Время в пути, остановки и информация о покупке билетов.`}),
@@ -169,92 +150,49 @@ const FOOT_SRC = [["Укрзалізниця", "https://uz.gov.ua/"], ["PKP Inte
 const fmtDate = x => new Intl.DateTimeFormat("ru-RU", {day: "2-digit", month: "2-digit", year: "numeric", timeZone: "Europe/Kyiv"}).format(x);
 const footDate = (txt, date) => /\{date\}/.test(txt) ? txt.replace(/\{date\}/g, `<time class="fdate">${date}</time>`) : txt.replace(/\d{1,2}\.\d{1,2}\.\d{4}/, `<time class="fdate">${date}</time>`);
 const footerHtml = (d, l) => `<div class="fcols">\n<div><b>🚆 Колія</b><p>${d.f1}</p></div>\n<div><b>${d.f2h}</b>\n<p>${d.f2a}</p>\n<p>${footDate(d.f2b, fmtDate(I.META.updated ? new Date(I.META.updated) : new Date()))}</p>\n<p>${d.f2c}</p></div>\n<div><b>${d.f3h}</b><p>${d.f3}</p></div></div>\n<div class="fbar"><div class="fsrc"><span class="fsl">${d["f.src"]}</span><ul class="fchips">${FOOT_SRC.map(x => `<li><a href="${x[1]}" target="_blank" rel="noopener">${x[0]}</a></li>`).join("")}</ul></div>\n<div class="flow"><span>© ${new Date().getFullYear()} Колія</span><button type="button" class="fb-link" data-fb="other">${d["fb.link"]}</button></div></div>`;
+/* Блок «Как купить билеты»: route_pages.buy = {note: {ru, uk, en, pl}, blocks: [{direct, h: {…}, steps: [{…}, …], btns: [{pri, url, t: {…}}]}]}.
+   Тексты вносятся вручную в админке (вкладка «Направления» → «Как купить билеты»); блоки выводятся в заданном порядке.
+   Нет перевода — показывается русский текст и выводится предупреждение. */
+const esc = s => String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+const jsq = s => s.replace(/\\/g, "\\\\").replace(/`/g, "\\`").replace(/\$\{/g, "\\${"); /* страница кладёт блок в строку-шаблон JS */
+const NOTR = []; /* страницы, где в блоке покупки не хватает переводов: [файл, язык, сколько текстов] */
+const buyHtml = (r, l, d) => {
+  const B = r.buy, blocks = B && Array.isArray(B.blocks) ? B.blocks : [];
+  if (!blocks.length) return "";
+  let miss = 0;
+  const T = o => { const t = o && typeof o === "object" ? o[l] : ""; if (t) return esc(t); if (l !== "ru") miss++; return esc(o && o.ru) }; /* нет перевода — русский */
+  const n = blocks.length, html = `<section class="panel" id="buy"><h2>${d["buy.h"]}</h2>\n<div class="buy${n === 1 ? " one" : n === 2 ? " two" : n === 3 ? " three" : ""}">\n` + blocks.map(b =>
+    `<div${b.direct ? ' class="d"' : ""}><h3>${T(b.h)}</h3><ol class="steps">\n${(b.steps || []).map(s => `<li>${T(s)}</li>`).join("\n")}</ol>\n${(b.btns || []).map(x => `<a class="btn${x.pri ? " pri" : ""}" href="${esc(x.url)}" target="_blank" rel="noopener">${T(x.t)}</a>`).join("\n")}</div>`).join("\n")
+    + `\n</div>` + (B.note && B.note.ru ? `\n<p class="buy-note">${T(B.note)}</p>` : "") + `</section>`;
+  if (miss) NOTR.push([r.file, l, miss]);
+  return jsq(html)
+};
 for (const r of ROUTES) for (const l of LANGS) {
-  const d = I[l], pair = a => st(a[0], l) + " → " + st(a[1], l), pre = l === "ru" ? "" : "../";
+  const d = I[l], pre = l === "ru" ? "" : "../";
   const v = {ver: VER, lang: l, base: pre, home: "./", FROM: r.FROM, TO: r.TO, BACK: r.BACK, hash: r.hash, rev: r.rev,
-    chipRev: stH1(r.TO, l) + " → " + stH1(r.FROM, l), dir: pair([r.FROM, r.TO]), uz: pairS(r.uz || [r.FROM, r.TO], l), pkp: pairS(r.pkp || [r.FROM, r.TO], l), canon: SITE + path(l, r.file)};
+    chipRev: stH1(r.TO, l) + " → " + stH1(r.FROM, l), canon: SITE + path(l, r.file)};
   v.alts = LANGS.map(x => `    <link rel="alternate" hreflang="${x}" href="${SITE + path(x, r.file)}">`).join("\n") + `\n    <link rel="alternate" hreflang="x-default" href="${SITE + r.file}">`;
   v.langs = LANGS.map(x => `<a href="${pre + path(x, r.file)}" hreflang="${x}" lang="${x}"${x === l ? ' class="on"' : ""}>${x.toUpperCase()}</a>`).join("");
-  d["buy.d.s3t"] = S3T[l];
   if (r.slice || r.autotxt) { const tx = (r.xtxt ? TRANSFER_TXT : SLICE_TXT)[l](stH1(r.FROM, l), stH1(r.TO, l), xAll(r, l)); for (const k in tx) if (!d[r.id + "." + k]) d[r.id + "." + k] = tx[k]; for (const k of ["all", "more"]) if (!d[r.id + "." + k]) d[r.id + "." + k] = k === "all" && allTxt(r, l) || d[r.like + "." + k] }
   for (const k of ["title", "desc", "h1", "lead", "all", "more"]) v["r_" + k] = fill(d[r.id + "." + k], v);
-  v["buy.t3"] = fill(d[r.t3 || "buy.t3out"], v); v["buy.t.s1x"] = fill(d[r.s1 || (r.one ? "buy.t.s1one" : "buy.t.s1")], v);
-  const X = r.x || "Хелм", direct = r.direct !== false, plat = r.plat !== undefined ? r.plat : X === "Хелм";
+  const X = r.x || "Хелм", direct = r.direct !== false; /* direct: false — на странице нет прямого поезда, все варианты идут как «с пересадкой» */
   v.stamp = "v" + VER + " direct=" + direct + " x=" + X;
-  /* второй отрезок: PKP Intercity (по умолчанию) или другой перевозчик (car: "zssk" | "cfr" | "oebb"), у него свои тексты покупки */
-  const CARS = {zssk: {url: "https://www.zssk.sk/ideme-vlakom/", s2: "buy.t.s2z", b2: "buy.t.b2z", note: "buy.note.z"}, cfr: {url: "https://bilete.cfrcalatori.ro/", s2: "buy.t.s2c", b2: "buy.t.b2c", note: "buy.note.c"}, cd: {url: "https://www.cd.cz/spojeni-a-jizdenka/", s2: "buy.t.s2cd", b2: "buy.t.b2cd", note: "buy.note.cz"}, oebb: {url: "https://tickets.oebb.at/", s2: "buy.t.s2o", b2: "buy.t.b2o", note: "buy.note.o"}, mav: {url: "https://jegy.mav.hu/", s2: "buy.t.s2m", b2: "buy.t.b2m", note: "buy.note.m"}}, cr = CARS[r.car];
-  v["buy.t.url"] = cr ? cr.url : "https://www.intercity.pl/";
-  v["buy.t.s2"] = fill(d[r.s2 || (cr ? cr.s2 : "buy.t.s2")], v); v["buy.t.b2"] = fill(d[cr ? cr.b2 : "buy.t.b2"], v);
-  v.border = r.border ? fill(d["border." + r.border], v) : ""; v["buy.notex"] = fill(d[r.app || r.dOnly ? "buy.note.a" : cr ? cr.note : "buy.note"], v); v.xin = xin(X, l); v.hasDirect = String(direct); v.slice = String(!!r.slice); v.buyone = r.cols ? (r.cols.length === 1 ? " one" : r.cols.length === 2 ? " two" : " three") : r.third && !direct && !r.dOnly ? " two" : (direct && !r.dOnly ? "" : " one") + (r.third ? " three" : "");
-  v["transfer.h"] = fill(d[plat ? "transfer.h" : "transfer.h2"], v);
-  const JJ = {ru: " и ", uk: " та ", en: " and ", pl: " i "}[l], hdr = a => xin(a[0], l) + a.slice(1).map(n => JJ + (l === "en" ? st(n, l) : xin(n, l).replace(/^\S+\s+/, ""))).join(""); /* hdr: «в Хелме и Варшаве» */
-  /* splitx: группы {s: станция первой пересадки, l: число поездов (0 = любое), h: станции для заголовка}; split: короткая запись только со станциями */
-  const SPX = r.splitx || (r.split || []).map(n => ({s: n, h: r.splith && r.splith[n]}));
+  v.border = r.border ? fill(d["border." + r.border], v) : ""; v.hasDirect = String(direct); v.slice = String(!!r.slice);
+  v.buyhtml = buyHtml(r, l, d);
   v.hide = JSON.stringify(Array.isArray(r.hide) ? r.hide.map(String) : []); /* hide: номера поездов, скрытых на странице «из вариантов других направлений» (правится в админке) */
-  v.split = JSON.stringify(SPX.map(g => [g.s, fill(d["transfer.h2"], {xin: hdr(g.h || [g.s])}), r.border && g.s === "Перемышль" ? 1 : 0, g.l || 0])); if (SPX.length) v["transfer.h"] = fill(d["transfer.h3"], v); v["transfer.hx"] = fill(d["transfer.h3"], v); /* нейтральный заголовок «С пересадкой» — только если на странице есть прямой поезд */
-  /* xs: один общий блок вариантов «С пересадкой в Чопе и Мукачево» вместо разбивки split (заголовок собирается из словаря станций) */
-  /* hxs: заголовок группы и блока покупки с несколькими станциями пересадки, напр. «С пересадкой в Хелме и Варшаве» (разбивки и логики покупки не меняет) */
-  if (r.hxs) { const J = {ru: " и ", uk: " та ", en: " and ", pl: " i "}[l]; const H = fill(d["transfer.h2"], {xin: hdr(r.hxs)}); if (!SPX.length) v["transfer.h"] = H; v["buy.t.h"] = H }
-  if (r.xs) { const J = {ru: " и ", uk: " та ", en: " and ", pl: " i "}[l], rest = n => l === "en" ? st(n, l) : xin(n, l).replace(/^\S+\s+/, ""); const XI = xin(r.xs[0], l) + r.xs.slice(1).map(n => J + rest(n)).join(""), out = r.t3 === "buy.t3out"; if (!SPX.length) v["transfer.h"] = fill(d["transfer.h2"], {xin: XI}); /* split задан: карточки делятся на отдельные группы, xs влияет только на блок покупки */
-    /* блок покупки для всех станций сразу: общий заголовок, шаги и кнопки */
-    v.xp = r.xs.map(n => pairS(out ? [n, r.TO] : [r.FROM, n], l)).join(J); v["buy.t.h"] = fill(d["transfer.h2"], {xin: xin(r.xs[0], l) + r.xs.slice(1).map(n => ({ru: " или ", uk: " або ", en: " or ", pl: " lub "})[l] + rest(n)).join("")}); v.xu = r.xs.map(n => pairS(out ? [r.FROM, n] : [n, r.TO], l)).join({ru: " или ", uk: " або ", en: " or ", pl: " lub "}[l]); v["buy.t.s1x"] = fill(d["buy.x.s1"], v); v["buy.t.s2"] = fill(d[out ? (r.xs2o || "buy.x.s2o") : (r.xs2i || "buy.x.s2i")], v); v["buy.t.b1"] = fill(d["buy.x.b1"], v); v["buy.t.b2"] = fill(d[r.xb2 || "buy.x.b2"], v) }
-  if (r.third) v["buy.h3"] = fill(d["transfer.h2"], Object.assign({}, v, {xin: xin(r.third, l)}));
-  if (r.third) { /* содержимое третьего столбца: по умолчанию копия колонки про первую пересадку; h: true — свои тексты и кнопки (buy.h.*) */
-    const btn = (cls, href, label) => `<a class="btn${cls}" href="${href}" target="_blank" rel="noopener">${label}</a>`;
-    if (r.h) {
-      const hv = Object.assign({}, v, {bud1: pair(r.hb1 || ["Киев", "Будапешт"]), bud2: pair(r.hb2 || ["Будапешт", "Вена"])});
-      v["buy.h.s1"] = fill(d["buy.h.s1"], hv); v["buy.h.s2"] = fill(d["buy.h.s2"], hv);
-      v["buy.h.btns"] = btn(" pri", "https://app.uz.gov.ua/start", fill(d["buy.h.b1"], hv)) + "\n" + btn("", "https://jegy.mav.hu/", fill(d["buy.h.b2"], hv)) + "\n" + btn("", "https://tickets.oebb.at/", fill(d["buy.h.b3"], hv))
-    } else {
-      const v3 = r.pkp3 ? Object.assign({}, v, {pkp: pairS(r.pkp3, l), uz: pairS(r.uz3 || r.uz || [r.FROM, r.TO], l)}) : v; v["buy.h.s1"] = r.hs1 ? fill(d[r.hs1], v3) : v["buy.t.s1x"]; v["buy.h.s2"] = r.hs2 ? fill(d[r.hs2], v3) : v["buy.t.s2"]; /* hs1/hs2: тексты третьей колонки, если у основной (s1/s2) они другие */
-      v["buy.h.btns"] = btn(" pri", "https://app.uz.gov.ua/start", fill(d[r.hb1k || "buy.t.b1"], v3)) + (r.honly ? "" : "\n" + (r.hurl ? btn("", r.hurl, fill(d[r.hb2k || "buy.t.b2"], v3)) : btn("", v["buy.t.url"], v["buy.t.b2"])))
-    }
-  }
-  /* be: Германия — польский сайт для польского участка, немецкий (bahn.de / DB Navigator) для немецкого; be.T — блок «Хелм и Варшава», be.H — блок «Перемышль» */
-  let dbBtnT = "", cBlock = "";
-  if (r.be) {
-    const bb = (cls, href, label) => `<a class="btn${cls}" href="${href}" target="_blank" rel="noopener">${label}</a>`, DB = "https://www.bahn.de/", T = r.be.T, H = r.be.H;
-    v["buy.t.s2"] = fill(d["buy.be.sT"], {pl: pair(T.pl), de: pair(T.de)}); v["buy.t.b2"] = fill(d["buy.t.b2"], {pkp: pair(T.pl)}); dbBtnT = bb("", DB, fill(d["buy.be.bd"], {de: pair(T.de)}));
-    v["buy.h.s2"] = fill(d["buy.be.sH"], {pl: pair(H.pl), de: pair(H.de)});
-    v["buy.h.btns"] = bb(" pri", "https://app.uz.gov.ua/start", fill(d["buy.t.b1"], {uz: pairS(r.uz3 || r.uz, l)})) + "\n" + bb("", "https://www.intercity.pl/", fill(d["buy.t.b2"], {pkp: pair(H.pl)})) + "\n" + bb("", DB, fill(d["buy.be.bd"], {de: pair(H.de)}));
-    v["buy.notex"] = d["buy.note.be"];
-    const C = r.be.C, cv = {uz: pair(C.uz), de: pair(C.de)}; /* третий блок: «С пересадкой в Хелме» (Хелм ↔ Берлин одним поездом), немецкий сайт */
-    cBlock = `<!--C--><div><h3>${fill(d["transfer.h2"], {xin: xin("Хелм", l)})}</h3><ol class="steps">\n<li>${fill(d["buy.t.s1"], cv)}</li>\n<li>${fill(d["buy.be.sC"], cv)}</li>\n<li>${d["buy.t.s4"]}</li></ol>\n${bb(" pri", "https://app.uz.gov.ua/start", fill(d["buy.t.b1"], cv))}\n${bb("", DB, fill(d["buy.be.bd"], cv))}</div><!--/C-->`
-  }
-  /* gen: варианты с разными пересадочными станциями (Чоп, Будапешт…): общие заголовок и шаги вместо «в Чопе» */
-  if (r.gen) { v["transfer.h"] = v["buy.t.h"] = fill(d["transfer.h3"], v); v["buy.t.s1x"] = fill(d["buy.t.s1v"], v); v["buy.t.s2"] = fill(d["buy.t.s2v"], v); v["buy.t.b1"] = fill(d["buy.t.b1v"], v); v["buy.t.b2"] = fill(d["buy.t.b2v"], v) }
+  /* split: станции пересадки, на которых вариант получает пометку «пограничный контроль» (если у страницы задан border; сейчас это Перемышль) */
+  v.split = JSON.stringify((r.split || []).map(n => [n, r.border && n === "Перемышль" ? 1 : 0])); v["transfer.hx"] = fill(d["transfer.h3"], v); /* нейтральный заголовок «С пересадкой» — только если на странице есть прямой поезд */
   v.leadx = r.leadx || ""; v.leadm = JSON.stringify(r.leadx && d[r.id + ".leadm"] ? fill(d[r.id + ".leadm"], v) : ""); /* leadx: станция; если на странице есть пересадка на ней, подзаголовок заменяется на <id>.leadm */
-  { const k2 = r.ds2 || "buy.d.s2", s2 = fill(d[k2], v); v["buy.d.s2"] = r.id === "kw" || !/^buy\.d\.s2v?$/.test(k2) ? s2 : s2.replace(/\s*[^.]*\.\s*$/, ""); } /* фраза про высокий спрос на прямой поезд (последнее предложение) — только на странице Киев → Варшава */ v["buy.d.s3"] = fill(d[r.ds3 || "buy.d.s3"], v); /* dOnly: страница только с прямым поездом (одна колонка покупки УЗ), coach: false: без описания купе */
-  const tpl0b = r.third ? tpl0 : tpl0.replace(/<!--H-->[\s\S]*?<!--\/H-->/g, ""); /* third: третий столбец покупки «С пересадкой в …» (вторая пересадочная станция) */
-  /* cols: любое число блоков покупки «С пересадкой … · УЗ + перевозчик»; train — номер поезда УЗ, который нужно выбрать */
-  const CARRIER = {pkp: {n: "PKP Intercity", url: "https://www.intercity.pl/", s2: "buy.t.s2", b2: "buy.t.b2"}, zssk: {n: "ZSSK", url: "https://www.zssk.sk/ideme-vlakom/", s2: "buy.t.s2z", b2: "buy.t.b2z"}, cfr: {n: "CFR", url: "https://bilete.cfrcalatori.ro/", s2: "buy.t.s2c", b2: "buy.t.b2c"}, oebb: {n: "ÖBB", url: "https://tickets.oebb.at/", s2: "buy.t.s2o", b2: "buy.t.b2o"}, cd: {n: "ČD", url: "https://www.cd.cz/spojeni-a-jizdenka/", s2: "buy.t.s2cd", b2: "buy.t.b2cd"}, rj: {n: "RegioJet", url: "https://regiojet.cz/", s2: "buy.t.s2rj", b2: "buy.t.b2rj"}, mav: {n: "MÁV", url: "https://jegy.mav.hu/", s2: "buy.t.s2m", s2x: "buy.t.s2mx", b2: "buy.t.b2m"}, uz: {n: "УЗ", url: "", s2: "buy.t.s2uz", b2: ""}}; /* uz: оба поезда Укрзалізниці, второй билет тоже в приложении УЗ */
-  /* падежи для «отправление из … , прибытие в …»: [«из/з/z» (родительный), «в/до/do» (винительный или родительный)] */
-  const CASEF = {ru: {"Киев": ["Киева", "Киев"], "Прага": ["Праги", "Прагу"], "Днепр": ["Днепра", "Днепр"], "Чоп": ["Чопа", "Чоп"], "Мукачево": ["Мукачево", "Мукачево"], "Будапешт": ["Будапешта", "Будапешт"]}, uk: {"Киев": ["Києва", "Києва"], "Прага": ["Праги", "Праги"], "Днепр": ["Дніпра", "Дніпра"], "Чоп": ["Чопа", "Чопа"], "Мукачево": ["Мукачева", "Мукачева"], "Будапешт": ["Будапешта", "Будапешта"]}, pl: {"Киев": ["Kijowa", "Kijowa"], "Прага": ["Pragi", "Pragi"], "Днепр": ["Dnipro", "Dnipro"]}};
-  const cf = (n, i) => (CASEF[l] && CASEF[l][n] && CASEF[l][n][i]) || st(n, l);
-  const attr = x => String(x).replace(/&/g, "&amp;").replace(/"/g, "&quot;");
-  const dtTpl = r.cols && /^(kyiv_prague|prague_kyiv)$/.test(r.id) ? fill(d["buy.c.dt"], {a: cf(r.FROM, 0), b: cf(r.TO, 1), t1: "{t1}", t2: "{t2}"}) : "";
-  v.buycols = (r.cols || []).map(c => {
-    const cc = CARRIER[c.car], cv = Object.assign({}, v, {uz: pairS(c.uz, l), pkp: pairS(c.pkp, l), open: c.open || "08:00", train: `<span class="utr">${c.train}</span>`, xin: xin(c.x, l), car: cc.n, a: cf(c.pkp[0], 0), b: cf(c.pkp[1], 1)});
-    const a = (cls, href, label) => `<a class="btn${cls}" href="${href}" target="_blank" rel="noopener">${label}</a>`;
-    return `<div><h3 data-car="${c.car}" data-x="${attr(c.x)}" data-dt="${attr(dtTpl)}">${fill(d["buy.c.h"], cv)}</h3><ol class="steps">\n<li>${c.days ? fill(d["buy.c.s1e"], Object.assign({}, cv, {early: fill(d[c.sale_at || c.sale_time ? "buy.c.earlyt" : "buy.c.early"], Object.assign({}, cv, {days: dayWord(l, +c.days), time: `<span class="stime"${c.sale_at ? ` data-at="${attr(c.sale_at)}"` : ""}>${c.sale_time || ""}</span>`}))})) : fill(d["buy.c.s1"], cv)}</li>\n<li>${fill(d[c.s2 || (cc.s2x && c.pkp[0] === c.x ? cc.s2x : cc.s2)], cv)}</li>\n<li>${fill(d["buy.t.s4"], cv)}</li></ol>\n${a(" pri", "https://app.uz.gov.ua/start", fill(d["buy.t.b1"], cv))}\n${cc.url ? a("", cc.url, fill(d[cc.b2], cv)) : a("", "https://app.uz.gov.ua/start", fill(d["buy.t.b1"], Object.assign({}, cv, {uz: cv.pkp})))}</div>`
-  }).join("\n");
-  const tpl1 = direct ? tpl0b : tpl0b.replace(/<!--D-->[\s\S]*?<!--\/D-->/g, "").replace(/\/\*D\*\/[\s\S]*?\/\*\/D\*\//g, ""),
+  const tpl1 = direct ? tpl0 : tpl0.replace(/\/\*D\*\/[\s\S]*?\/\*\/D\*\//g, ""),
     tpl2 = r.border ? tpl1 : tpl1.replace(/\/\*B\*\/[\s\S]*?\/\*\/B\*\//g, ""),
-    tpl3 = tpl2.replace(/<!--T3-->[\s\S]*?<!--\/T3-->/g, ""), /* строка «При выборе поезда … учитывайте время» убрана на всех страницах */
-    tpl = r.app ? tpl3.replace(/<!--T-->[\s\S]*?<!--\/T-->/g, "") : tpl3.replace(/<!--A-->[\s\S]*?<!--\/A-->/g, "");
-  const tplF = r.dOnly ? tpl.replace(/<!--T-->[\s\S]*?<!--\/T-->/g, "").replace(/<!--A-->[\s\S]*?<!--\/A-->/g, "") : tpl,
-    tplC0 = r.coach === false ? tplF.replace(/\/\*C\*\/[\s\S]*?\/\*\/C\*\//g, "") : tplF,
-    tplC = r.cols ? tplC0.replace(/<!--(T|H|A)-->[\s\S]*?<!--\/\1-->/g, "") : tplC0;
-  let out = tplC.replace(/\{\{([\w.]+)\}\}/g, (m, k) => k in v ? v[k] : k in d ? fill(d[k], v) : (console.warn("нет ключа", k), m));
-  if (cBlock) out = out.replace("<!--/H-->", "<!--/H-->\n" + cBlock).replace('class="buy two"', 'class="buy three"');
-  /* одинаковая высота кнопок покупки: текст по центру, переносы не меняют высоту */
-  if (r.be) out = out.replace("</head>", "<style>.buy .btn{display:flex;align-items:center;justify-content:center;text-align:center;box-sizing:border-box;min-height:5.6rem}</style>\n</head>");
-  if (dbBtnT) out = out.replace("</div><!--/T-->", "\n" + dbBtnT + "</div><!--/T-->");
+    tplC = r.coach === false ? tpl2.replace(/\/\*C\*\/[\s\S]*?\/\*\/C\*\//g, "") : tpl2; /* coach: false — без описания купе в карточках прямого поезда */
+  const out = tplC.replace(/\{\{([\w.]+)\}\}/g, (m, k) => k in v ? v[k] : k in d ? fill(d[k], v) : (console.warn("нет ключа", k), m));
   if (l !== "ru") fs.mkdirSync(l, {recursive: true});
   fs.writeFileSync(path(l, r.file), out);
   urls.push(SITE + path(l, r.file));
   if (l === "ru") console.log("  " + r.file + ": " + (direct ? "есть прямой поезд" : "БЕЗ прямого поезда") + ", пересадка: " + X);
 }
+for (const [f, l, n] of NOTR) console.warn("ВНИМАНИЕ: " + f + " (" + l + "): в блоке «Как купить билеты» нет перевода для " + n + " текстов (показан русский)");
 /* главная: страны, популярные маршруты, полезные ссылки и подвал собираются здесь в статический HTML (без запросов к базе и без JS); скрипт на странице отвечает только за интерактив и страницы направлений по #хэшу */
 const hx = s => String(s == null ? "" : s).replace(/[&<>"']/g, c => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"}[c]));
 const CFG = new Function("window", fs.readFileSync("config.js", "utf8") + "\n;return window.CFG")({});
