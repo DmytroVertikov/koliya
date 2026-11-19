@@ -179,7 +179,7 @@ for (const r of ROUTES) for (const l of LANGS) {
   const X = r.x || "Хелм", direct = r.direct !== false; /* direct: false — на странице нет прямого поезда, все варианты идут как «с пересадкой» */
   v.stamp = "v" + VER + " direct=" + direct + " x=" + X;
   v.border = r.border ? fill(d["border." + r.border], v) : ""; v.hasDirect = String(direct); v.slice = String(!!r.slice);
-  v.ogloc = OGL[l]; v.ogalt = LANGS.filter(x => x !== l).map(x => `    <meta property="og:locale:alternate" content="${OGL[x]}">`).join("\n");
+  v.ogimg = SITE + "og-image.jpg"; v.ogloc = OGL[l]; v.ogalt = LANGS.filter(x => x !== l).map(x => `    <meta property="og:locale:alternate" content="${OGL[x]}">`).join("\n");
   v.jsonld = JSON.stringify({"@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: [
     {"@type": "ListItem", position: 1, name: "Колія", item: SITE + path(l, "")}, {"@type": "ListItem", position: 2, name: v.r_h1, item: SITE + path(l, r.file)}]}).replace(/</g, "\\u003c");
   v.buyhtml = buyHtml(r, l, d); v.hasbuy = String(!!v.buyhtml);
@@ -232,7 +232,7 @@ for (const l of LANGS) {
   const v = {ver: VER, stamp: "v" + VER, lang: l, base: pre, canon: SITE + path(l, ""), ogloc: OGL[l]};
   v.alts = LANGS.map(x => `    <link rel="alternate" hreflang="${x}" href="${SITE + path(x, "")}">`).join("\n") + `\n    <link rel="alternate" hreflang="x-default" href="${SITE}">`;
   v.langs = LANGS.map(x => `<a href="${pre + path(x, "index.html")}" hreflang="${x}" lang="${x}"${x === l ? ' class="on"' : ""}>${x.toUpperCase()}</a>`).join("");
-  v.jsonld = JSON.stringify({"@context": "https://schema.org", "@type": "WebSite", name: "Колія", url: SITE + path(l, ""), inLanguage: l, description: d["ix.lead"]}).replace(/</g, "\\u003c");
+  v.ogimg = SITE + "og-image.jpg"; v.jsonld = JSON.stringify({"@context": "https://schema.org", "@type": "WebSite", name: "Колія", url: SITE + path(l, ""), inLanguage: l, description: d["ix.lead"]}).replace(/</g, "\\u003c");
   /* названия стран: ru — из CTRY, остальные — из словаря CN; заголовки направлений берутся из тех же ключей ix.rtOut / ix.rtIn, что и раньше */
   const names = {}, dirs = {};
   for (const c of CTRY) {
