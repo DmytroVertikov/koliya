@@ -1135,36 +1135,20 @@
   "h": "e9cf2143207e",
   "d": "2026-11-19"
  },
- "https://dmytrovertikov.github.io/koliya/prague-lviv.html": {
-  "h": "0c86b9cddb2b",
-  "d": "2026-11-19"
- },
- "https://dmytrovertikov.github.io/koliya/uk/prague-lviv.html": {
-  "h": "89b2ac59e0ac",
-  "d": "2026-11-19"
- },
- "https://dmytrovertikov.github.io/koliya/en/prague-lviv.html": {
-  "h": "566028e213a6",
-  "d": "2026-11-19"
- },
- "https://dmytrovertikov.github.io/koliya/pl/prague-lviv.html": {
-  "h": "9ad831b5b820",
-  "d": "2026-11-19"
- },
  "https://dmytrovertikov.github.io/koliya/prague-odesa.html": {
-  "h": "0a887efeda8b",
+  "h": "0707b08f78d5",
   "d": "2026-11-19"
  },
  "https://dmytrovertikov.github.io/koliya/uk/prague-odesa.html": {
-  "h": "bd1942a5e245",
+  "h": "c171f86aec9c",
   "d": "2026-11-19"
  },
  "https://dmytrovertikov.github.io/koliya/en/prague-odesa.html": {
-  "h": "4d3a48e67fc8",
+  "h": "a3b0752c2edf",
   "d": "2026-11-19"
  },
  "https://dmytrovertikov.github.io/koliya/pl/prague-odesa.html": {
-  "h": "0a7727ba53da",
+  "h": "b26c409949b5",
   "d": "2026-11-19"
  },
  "https://dmytrovertikov.github.io/koliya/vienna-dnipro.html": {
@@ -1231,6 +1215,22 @@
   "h": "7a8fcf13c7f1",
   "d": "2026-11-19"
  },
+ "https://dmytrovertikov.github.io/koliya/prague-lviv.html": {
+  "h": "0c86b9cddb2b",
+  "d": "2026-11-19"
+ },
+ "https://dmytrovertikov.github.io/koliya/uk/prague-lviv.html": {
+  "h": "89b2ac59e0ac",
+  "d": "2026-11-19"
+ },
+ "https://dmytrovertikov.github.io/koliya/en/prague-lviv.html": {
+  "h": "566028e213a6",
+  "d": "2026-11-19"
+ },
+ "https://dmytrovertikov.github.io/koliya/pl/prague-lviv.html": {
+  "h": "9ad831b5b820",
+  "d": "2026-11-19"
+ },
  "https://dmytrovertikov.github.io/koliya/kremenchuk-budapest.html": {
   "h": "750a49a52af9",
   "d": "2026-11-19"
@@ -1280,19 +1280,19 @@
   "d": "2026-11-19"
  },
  "https://dmytrovertikov.github.io/koliya/": {
-  "h": "2e128a237e33",
+  "h": "cfd9e82a95dc",
   "d": "2026-11-19"
  },
  "https://dmytrovertikov.github.io/koliya/uk/": {
-  "h": "89298e7f1889",
+  "h": "06e866b01398",
   "d": "2026-11-19"
  },
  "https://dmytrovertikov.github.io/koliya/en/": {
-  "h": "a886ba4ef1c4",
+  "h": "f4431a1253fb",
   "d": "2026-11-19"
  },
  "https://dmytrovertikov.github.io/koliya/pl/": {
-  "h": "7b4ed7dcc7a1",
+  "h": "d819baa5ddcb",
   "d": "2026-11-19"
  }
 }
