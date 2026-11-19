@@ -258,7 +258,20 @@
 <main class="wrap"><a class="back" href="./">← Главная</a> <a class="back" href="./#pl-ua">Все маршруты: Польша — Украина</a> <a class="back" href="kyiv-warsaw.html">🔄 Киев → Варшава</a>
     <p class="chk" id="chk" hidden>📅 Проверено: <b></b></p>
     <div id="app"><p>Загрузка…</p></div>
-    <div id="more"></div>
+    <div id="more"><section class="panel" id="buy"><h2>Как купить билеты</h2>
+<div class="buy two">
+<div class="d"><h3>Прямой поезд</h3><ol class="steps">
+<li>Откройте приложение «Укрзалізниця», выберите маршрут Варшава → Киев и укажите дату поездки. Продажа билетов открывается за 20 суток до отправления, в 09:00 по киевскому времени.</li>
+<li>Выберите место в купейном вагоне стандарта RIC и оплатите билет банковской картой. Электронный билет появится в приложении. При посадке предъявите его вместе с паспортом.</li></ol>
+<a class="btn" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Купить в приложении УЗ билет Варшава → Киев</a></div>
+<div><h3>С пересадкой в Хелме</h3><ol class="steps">
+<li>Откройте приложение «Укрзалізниця», выберите маршрут Хелм → Киев и укажите дату поездки. Продажа билетов открывается за 20 суток до отправления, в 09:00 по киевскому времени. Выберите подходящий поезд и оплатите билет.</li>
+<li>Билет на поезд Варшава → Хелм приобретите отдельно у польского перевозчика PKP Intercity — на официальном сайте intercity.pl или в приложении PKP Intercity. Также билеты можно приобрести на сайте koleo.pl или в приложении KOLEO.</li>
+<li>После покупки сохраните оба электронных билета в телефоне. Перед поездкой проверьте даты, время отправления и станции прибытия.</li></ol>
+<a class="btn pri" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Купить в приложении УЗ билет Хелм → Киев</a>
+<a class="btn" href="https://www.intercity.pl/" target="_blank" rel="noopener">Купить на сайте PKP Intercity билет Варшава → Хелм</a></div>
+</div>
+<p class="buy-note">Графики движения поездов могут измениться, актуальную информацию смотрите в приложении УЗ и на сайте PKP Intercity.</p></section></div> <!-- блок «Как купить билеты» лежит в HTML (виден поисковикам без JS), ниже JS добавляет «Ещё маршруты» -->
 </main>
 <div class="wrap"><aside class="ad wide" data-slot="bottom" hidden></aside></div>
 <footer class="wrap" id="site-footer"></footer>
@@ -273,20 +286,7 @@
     const SLICE = false; /* true: варианты собираются из поездов других вариантов (страницы вроде Киев → Хелм) */
     const FROM = "Варшава", TO = "Киев", BACK = "ua-pl"; // FROM/TO: русские названия, как в шапке карточки в админке
     /*D*//*C*/const COACH = `<aside class="coach"><p>В купе предусмотрены три спальных места, расположенные одно над другим. Если средняя полка приведена в спальное положение, пользоваться нижней полкой для сидения нельзя. Для подъёма на верхнюю полку предусмотрена лестница.</p></aside>`;/*/C*//*/D*/
-    const BUY = `<section class="panel" id="buy"><h2>Как купить билеты</h2>
-<div class="buy two">
-<div class="d"><h3>Прямой поезд</h3><ol class="steps">
-<li>Откройте приложение «Укрзалізниця», выберите маршрут Варшава → Киев и укажите дату поездки. Продажа билетов открывается за 20 суток до отправления, в 09:00 по киевскому времени.</li>
-<li>Выберите место в купейном вагоне стандарта RIC и оплатите билет банковской картой. Электронный билет появится в приложении. При посадке предъявите его вместе с паспортом.</li></ol>
-<a class="btn" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Купить в приложении УЗ билет Варшава → Киев</a></div>
-<div><h3>С пересадкой в Хелме</h3><ol class="steps">
-<li>Откройте приложение «Укрзалізниця», выберите маршрут Хелм → Киев и укажите дату поездки. Продажа билетов открывается за 20 суток до отправления, в 09:00 по киевскому времени. Выберите подходящий поезд и оплатите билет.</li>
-<li>Билет на поезд Варшава → Хелм приобретите отдельно у польского перевозчика PKP Intercity — на официальном сайте intercity.pl или в приложении PKP Intercity. Также билеты можно приобрести на сайте koleo.pl или в приложении KOLEO.</li>
-<li>После покупки сохраните оба электронных билета в телефоне. Перед поездкой проверьте даты, время отправления и станции прибытия.</li></ol>
-<a class="btn pri" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Купить в приложении УЗ билет Хелм → Киев</a>
-<a class="btn" href="https://www.intercity.pl/" target="_blank" rel="noopener">Купить на сайте PKP Intercity билет Варшава → Хелм</a></div>
-</div>
-<p class="buy-note">Графики движения поездов могут измениться, актуальную информацию смотрите в приложении УЗ и на сайте PKP Intercity.</p></section>`; /* блок «Как купить билеты»: тексты задаются в админке, собирает build.js */
+    const HAS_BUY = true; /* есть ли на странице блок «Как купить билеты» (он выводится в HTML при сборке, build.js) */
     const app = document.getElementById("app");
     const HOWBAR = `<a class="howbar" href="#buy"><span class="hi" aria-hidden="true">i</span><span><b>Как купить билеты?</b><small>Подробная инструкция для каждого варианта маршрута.</small></span><span class="go">Инструкция →</span></a>`;
     const norm = s => String(s || "").trim().toLowerCase();
@@ -348,7 +348,7 @@
             const cards = transfer.map(x => { const c = optHtml(x.o); return bf(x) ? c.replace("<details ", '<details data-b="1" ') : c }).join("");
             const head = direct.length ? `<h2 class="sub">С пересадкой</h2>` : ""; /* заголовок только чтобы отделить от блока прямого поезда */
             return head + `<div class="cols${transfer.length === 1 ? " one" : ""}" style="margin-top:${head ? 16 : 6}px">${cards}</div>`
-        })() + (BUY ? HOWBAR : "");
+        })() + (HAS_BUY ? HOWBAR : "");
         /*D*//*C*/document.querySelectorAll(".direct .body").forEach(b => {
             b.classList.add("two");
             b.insertAdjacentHTML("beforeend", COACH)
@@ -357,7 +357,7 @@
     }).catch(() => {
         app.innerHTML = `<div class="panel"><h2>Не удалось загрузить данные</h2><p>Обновите страницу позже.</p></div>`
     });
-    document.getElementById("more").innerHTML = BUY + moreRoutes({h: "Ещё маршруты", rev: "Обратное направление", from: "Другие направления из города %s", to: "Другие маршруты в город %s", dir: "Все маршруты этого направления", all: "Все страны", home: "./", hash: "pl-ua"});
+    document.getElementById("more").insertAdjacentHTML("beforeend", moreRoutes({h: "Ещё маршруты", rev: "Обратное направление", from: "Другие направления из города %s", to: "Другие маршруты в город %s", dir: "Все маршруты этого направления", all: "Все страны", home: "./", hash: "pl-ua"}));
 </script>
 </body>
 </html>

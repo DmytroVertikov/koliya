@@ -154,7 +154,6 @@ const footerHtml = (d, l) => `<div class="fcols">\n<div><b>🚆 Колія</b><p
    Тексты вносятся вручную в админке (вкладка «Направления» → «Как купить билеты»); блоки выводятся в заданном порядке.
    Нет перевода — показывается русский текст и выводится предупреждение. */
 const esc = s => String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
-const jsq = s => s.replace(/\\/g, "\\\\").replace(/`/g, "\\`").replace(/\$\{/g, "\\${"); /* страница кладёт блок в строку-шаблон JS */
 const NOTR = []; /* страницы, где в блоке покупки не хватает переводов: [файл, язык, сколько текстов] */
 const buyHtml = (r, l, d) => {
   const B = r.buy, blocks = B && Array.isArray(B.blocks) ? B.blocks : [];
@@ -165,7 +164,7 @@ const buyHtml = (r, l, d) => {
     `<div${b.direct ? ' class="d"' : ""}><h3>${T(b.h)}</h3><ol class="steps">\n${(b.steps || []).map(s => `<li>${T(s)}</li>`).join("\n")}</ol>\n${(b.btns || []).map(x => `<a class="btn${x.pri ? " pri" : ""}" href="${esc(x.url)}" target="_blank" rel="noopener">${T(x.t)}</a>`).join("\n")}</div>`).join("\n")
     + `\n</div>` + (B.note && B.note.ru ? `\n<p class="buy-note">${T(B.note)}</p>` : "") + `</section>`;
   if (miss) NOTR.push([r.file, l, miss]);
-  return jsq(html)
+  return html
 };
 for (const r of ROUTES) for (const l of LANGS) {
   const d = I[l], pre = l === "ru" ? "" : "../";
@@ -178,7 +177,7 @@ for (const r of ROUTES) for (const l of LANGS) {
   const X = r.x || "Хелм", direct = r.direct !== false; /* direct: false — на странице нет прямого поезда, все варианты идут как «с пересадкой» */
   v.stamp = "v" + VER + " direct=" + direct + " x=" + X;
   v.border = r.border ? fill(d["border." + r.border], v) : ""; v.hasDirect = String(direct); v.slice = String(!!r.slice);
-  v.buyhtml = buyHtml(r, l, d);
+  v.buyhtml = buyHtml(r, l, d); v.hasbuy = String(!!v.buyhtml);
   v.hide = JSON.stringify(Array.isArray(r.hide) ? r.hide.map(String) : []); /* hide: номера поездов, скрытых на странице «из вариантов других направлений» (правится в админке) */
   /* split: станции пересадки, на которых вариант получает пометку «пограничный контроль» (если у страницы задан border; сейчас это Перемышль) */
   v.split = JSON.stringify((r.split || []).map(n => [n, r.border && n === "Перемышль" ? 1 : 0])); v["transfer.hx"] = fill(d["transfer.h3"], v); /* нейтральный заголовок «С пересадкой» — только если на странице есть прямой поезд */

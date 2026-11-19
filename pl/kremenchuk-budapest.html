@@ -258,22 +258,7 @@
 <main class="wrap"><a class="back" href="./">← Strona główna</a> <a class="back" href="./#ua-hu">Wszystkie trasy: Ukraina — Węgry</a> <a class="back" href="budapest-kremenchuk.html">🔄 Budapest → Krzemieńczuk</a>
     <p class="chk" id="chk" hidden>📅 Sprawdzono: <b></b></p>
     <div id="app"><p>Ładowanie…</p></div>
-    <div id="more"></div>
-</main>
-<div class="wrap"><aside class="ad wide" data-slot="bottom" hidden></aside></div>
-<footer class="wrap" id="site-footer"></footer>
-<script>window.LANG = "pl";</script>
-<script src="../config.js"></script>
-<script src="../pages.js"></script>
-<script src="../dict/pl.js"></script>
-<script src="../common.js?v=c81b064d"></script>
-<script>
-    const SPLIT = []; /* [станция пересадки, пограничный контроль]: вариант с пересадкой на этой станции получает пометку */
-    const HIDE = [].map(s => s.trim().toLowerCase()); /* номера поездов, скрытых на этой странице */
-    const SLICE = false; /* true: варианты собираются из поездов других вариантов (страницы вроде Киев → Хелм) */
-    const FROM = "Кременчуг", TO = "Будапешт", BACK = "hu-ua"; // FROM/TO: русские названия, как в шапке карточки в админке
-    
-    const BUY = `<section class="panel" id="buy"><h2>Jak kupić bilety</h2>
+    <div id="more"><section class="panel" id="buy"><h2>Jak kupić bilety</h2>
 <div class="buy two">
 <div><h3>Z przesiadką w Mukaczewie</h3><ol class="steps">
 <li>Otwórz aplikację Ukrzaliznytsia, wybierz trasę Krzemieńczuk → Mukaczewo i datę podróży. Sprzedaż biletów rusza na 20 dni przed odjazdem o 08:00 czasu kijowskiego. Wybierz pociąg 132О i opłać bilet.</li>
@@ -288,7 +273,22 @@
 <a class="btn pri" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Kup w aplikacji UZ bilet Krzemieńczuk → Kijów</a>
 <a class="btn" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Kup w aplikacji UZ bilet Kijów → Budapest</a></div>
 </div>
-<p class="buy-note">Rozkłady jazdy mogą ulec zmianie. Aktualne informacje znajdziesz w aplikacji UZ i na stronie MÁV.</p></section>`; /* блок «Как купить билеты»: тексты задаются в админке, собирает build.js */
+<p class="buy-note">Rozkłady jazdy mogą ulec zmianie. Aktualne informacje znajdziesz w aplikacji UZ i na stronie MÁV.</p></section></div> <!-- блок «Как купить билеты» лежит в HTML (виден поисковикам без JS), ниже JS добавляет «Ещё маршруты» -->
+</main>
+<div class="wrap"><aside class="ad wide" data-slot="bottom" hidden></aside></div>
+<footer class="wrap" id="site-footer"></footer>
+<script>window.LANG = "pl";</script>
+<script src="../config.js"></script>
+<script src="../pages.js"></script>
+<script src="../dict/pl.js"></script>
+<script src="../common.js?v=c81b064d"></script>
+<script>
+    const SPLIT = []; /* [станция пересадки, пограничный контроль]: вариант с пересадкой на этой станции получает пометку */
+    const HIDE = [].map(s => s.trim().toLowerCase()); /* номера поездов, скрытых на этой странице */
+    const SLICE = false; /* true: варианты собираются из поездов других вариантов (страницы вроде Киев → Хелм) */
+    const FROM = "Кременчуг", TO = "Будапешт", BACK = "hu-ua"; // FROM/TO: русские названия, как в шапке карточки в админке
+    
+    const HAS_BUY = true; /* есть ли на странице блок «Как купить билеты» (он выводится в HTML при сборке, build.js) */
     const app = document.getElementById("app");
     const HOWBAR = `<a class="howbar" href="#buy"><span class="hi" aria-hidden="true">i</span><span><b>Jak kupić bilety?</b><small>Szczegółowa instrukcja dla każdego wariantu trasy.</small></span><span class="go">Instrukcja →</span></a>`;
     const norm = s => String(s || "").trim().toLowerCase();
@@ -349,13 +349,13 @@
             const cards = transfer.map(x => { const c = optHtml(x.o); return bf(x) ? c.replace("<details ", '<details data-b="1" ') : c }).join("");
             const head = direct.length ? `<h2 class="sub">Z przesiadką</h2>` : ""; /* заголовок только чтобы отделить от блока прямого поезда */
             return head + `<div class="cols${transfer.length === 1 ? " one" : ""}" style="margin-top:${head ? 16 : 6}px">${cards}</div>`
-        })() + (BUY ? HOWBAR : "");
+        })() + (HAS_BUY ? HOWBAR : "");
         
         
     }).catch(() => {
         app.innerHTML = `<div class="panel"><h2>Nie udało się załadować danych</h2><p>Odśwież stronę później.</p></div>`
     });
-    document.getElementById("more").innerHTML = BUY + moreRoutes({h: "Inne trasy", rev: "Trasa powrotna", from: "Inne trasy z miasta %s", to: "Inne trasy do miasta %s", dir: "Wszystkie trasy w tym kierunku", all: "Wszystkie kraje", home: "./", hash: "ua-hu"});
+    document.getElementById("more").insertAdjacentHTML("beforeend", moreRoutes({h: "Inne trasy", rev: "Trasa powrotna", from: "Inne trasy z miasta %s", to: "Inne trasy do miasta %s", dir: "Wszystkie trasy w tym kierunku", all: "Wszystkie kraje", home: "./", hash: "ua-hu"}));
 </script>
 </body>
 </html>

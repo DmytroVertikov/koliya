@@ -258,7 +258,20 @@
 <main class="wrap"><a class="back" href="./">← Головна</a> <a class="back" href="./#ua-pl">Усі маршрути: Україна — Польща</a> <a class="back" href="warsaw-kyiv.html">🔄 Варшава → Київ</a>
     <p class="chk" id="chk" hidden>📅 Перевірено: <b></b></p>
     <div id="app"><p>Завантаження…</p></div>
-    <div id="more"></div>
+    <div id="more"><section class="panel" id="buy"><h2>Як купити квитки</h2>
+<div class="buy two">
+<div class="d"><h3>Прямий поїзд</h3><ol class="steps">
+<li>Відкрийте застосунок «Укрзалізниця», оберіть маршрут Київ → Варшава Центральна і вкажіть дату поїздки. Продаж квитків відкривається за 20 діб до відправлення, о 09:00 за київським часом. На прямий поїзд квитки користуються великим попитом, тому радимо купувати їх одразу після початку продажу.</li>
+<li>Оберіть місце в купейному вагоні стандарту RIC і сплатіть квиток банківською карткою. Електронний квиток з’явиться в застосунку. Під час посадки пред’явіть його разом із паспортом.</li></ol>
+<a class="btn" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Купити в застосунку УЗ квиток Київ → Варшава Центральна</a></div>
+<div><h3>З пересадкою у Хелмі</h3><ol class="steps">
+<li>Відкрийте застосунок «Укрзалізниця», оберіть маршрут Київ → Хелм і вкажіть дату поїздки. Продаж квитків відкривається за 20 діб до відправлення, о 09:00 за київським часом. Оберіть потрібний поїзд і сплатіть квиток.</li>
+<li>Квиток на поїзд Хелм → Варшава придбайте окремо в польського перевізника PKP Intercity — на офіційному сайті intercity.pl або в застосунку PKP Intercity. Також квитки можна купити на сайті koleo.pl або в застосунку KOLEO.</li>
+<li>Після купівлі збережіть обидва електронні квитки в телефоні. Перед поїздкою перевірте дати, час відправлення та станції прибуття.</li></ol>
+<a class="btn pri" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Купити в застосунку УЗ квиток Київ → Хелм</a>
+<a class="btn" href="https://www.intercity.pl/" target="_blank" rel="noopener">Купити на сайті PKP Intercity квиток Хелм → Варшава</a></div>
+</div>
+<p class="buy-note">Графіки руху поїздів можуть змінюватися, актуальну інформацію дивіться в застосунку УЗ та на сайті PKP Intercity.</p></section></div> <!-- блок «Как купить билеты» лежит в HTML (виден поисковикам без JS), ниже JS добавляет «Ещё маршруты» -->
 </main>
 <div class="wrap"><aside class="ad wide" data-slot="bottom" hidden></aside></div>
 <footer class="wrap" id="site-footer"></footer>
@@ -273,20 +286,7 @@
     const SLICE = false; /* true: варианты собираются из поездов других вариантов (страницы вроде Киев → Хелм) */
     const FROM = "Киев", TO = "Варшава", BACK = "pl-ua"; // FROM/TO: русские названия, как в шапке карточки в админке
     /*D*//*C*/const COACH = `<aside class="coach"><p>У купе передбачено три спальні місця, розташовані одне над одним. Якщо середню полицю переведено у спальне положення, сидіти на нижній полиці не можна. Для підйому на верхню полицю передбачено драбину.</p></aside>`;/*/C*//*/D*/
-    const BUY = `<section class="panel" id="buy"><h2>Як купити квитки</h2>
-<div class="buy two">
-<div class="d"><h3>Прямий поїзд</h3><ol class="steps">
-<li>Відкрийте застосунок «Укрзалізниця», оберіть маршрут Київ → Варшава Центральна і вкажіть дату поїздки. Продаж квитків відкривається за 20 діб до відправлення, о 09:00 за київським часом. На прямий поїзд квитки користуються великим попитом, тому радимо купувати їх одразу після початку продажу.</li>
-<li>Оберіть місце в купейному вагоні стандарту RIC і сплатіть квиток банківською карткою. Електронний квиток з’явиться в застосунку. Під час посадки пред’явіть його разом із паспортом.</li></ol>
-<a class="btn" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Купити в застосунку УЗ квиток Київ → Варшава Центральна</a></div>
-<div><h3>З пересадкою у Хелмі</h3><ol class="steps">
-<li>Відкрийте застосунок «Укрзалізниця», оберіть маршрут Київ → Хелм і вкажіть дату поїздки. Продаж квитків відкривається за 20 діб до відправлення, о 09:00 за київським часом. Оберіть потрібний поїзд і сплатіть квиток.</li>
-<li>Квиток на поїзд Хелм → Варшава придбайте окремо в польського перевізника PKP Intercity — на офіційному сайті intercity.pl або в застосунку PKP Intercity. Також квитки можна купити на сайті koleo.pl або в застосунку KOLEO.</li>
-<li>Після купівлі збережіть обидва електронні квитки в телефоні. Перед поїздкою перевірте дати, час відправлення та станції прибуття.</li></ol>
-<a class="btn pri" href="https://app.uz.gov.ua/start" target="_blank" rel="noopener">Купити в застосунку УЗ квиток Київ → Хелм</a>
-<a class="btn" href="https://www.intercity.pl/" target="_blank" rel="noopener">Купити на сайті PKP Intercity квиток Хелм → Варшава</a></div>
-</div>
-<p class="buy-note">Графіки руху поїздів можуть змінюватися, актуальну інформацію дивіться в застосунку УЗ та на сайті PKP Intercity.</p></section>`; /* блок «Как купить билеты»: тексты задаются в админке, собирает build.js */
+    const HAS_BUY = true; /* есть ли на странице блок «Как купить билеты» (он выводится в HTML при сборке, build.js) */
     const app = document.getElementById("app");
     const HOWBAR = `<a class="howbar" href="#buy"><span class="hi" aria-hidden="true">i</span><span><b>Як купити квитки?</b><small>Докладна інструкція для кожного варіанта маршруту.</small></span><span class="go">Інструкція →</span></a>`;
     const norm = s => String(s || "").trim().toLowerCase();
@@ -348,7 +348,7 @@
             const cards = transfer.map(x => { const c = optHtml(x.o); return bf(x) ? c.replace("<details ", '<details data-b="1" ') : c }).join("");
             const head = direct.length ? `<h2 class="sub">З пересадкою</h2>` : ""; /* заголовок только чтобы отделить от блока прямого поезда */
             return head + `<div class="cols${transfer.length === 1 ? " one" : ""}" style="margin-top:${head ? 16 : 6}px">${cards}</div>`
-        })() + (BUY ? HOWBAR : "");
+        })() + (HAS_BUY ? HOWBAR : "");
         /*D*//*C*/document.querySelectorAll(".direct .body").forEach(b => {
             b.classList.add("two");
             b.insertAdjacentHTML("beforeend", COACH)
@@ -357,7 +357,7 @@
     }).catch(() => {
         app.innerHTML = `<div class="panel"><h2>Не вдалося завантажити дані</h2><p>Оновіть сторінку пізніше.</p></div>`
     });
-    document.getElementById("more").innerHTML = BUY + moreRoutes({h: "Інші маршрути", rev: "Зворотний напрямок", from: "Інші напрямки з міста %s", to: "Інші маршрути до міста %s", dir: "Усі маршрути цього напрямку", all: "Усі країни", home: "./", hash: "ua-pl"});
+    document.getElementById("more").insertAdjacentHTML("beforeend", moreRoutes({h: "Інші маршрути", rev: "Зворотний напрямок", from: "Інші напрямки з міста %s", to: "Інші маршрути до міста %s", dir: "Усі маршрути цього напрямку", all: "Усі країни", home: "./", hash: "ua-pl"}));
 </script>
 </body>
 </html>
