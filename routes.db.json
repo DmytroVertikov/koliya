@@ -5980,10 +5980,10 @@
       "blocks": [
         {
           "h": {
-            "en": "With a transfer in Przemyśl Główny",
-            "pl": "Z przesiadką w Przemyślu",
+            "en": "With a transfer in Przemyśl Główny (departure from Kyiv at 20:16, arrival in Prague at 17:52)",
+            "pl": "Z przesiadką w Przemyślu (odjazd z Kijowa o 20:16, przyjazd do Pragi o 17:52)",
             "ru": "С пересадкой в Перемышле (отправление из Киева в 20:16, прибытие в Прагу в 17:52)",
-            "uk": "З пересадкою у Перемишлі"
+            "uk": "З пересадкою у Перемишлі (відправлення з Києва о 20:16, прибуття до Праги о 17:52)"
           },
           "btns": [
             {
@@ -6031,10 +6031,10 @@
         },
         {
           "h": {
-            "en": "With a transfer in Przemyśl Główny",
-            "pl": "Z przesiadką w Przemyślu",
+            "en": "With a transfer in Przemyśl Główny (departure from Kyiv at 11:28, arrival in Prague at 6:58)",
+            "pl": "Z przesiadką w Przemyślu (odjazd z Kijowa o 11:28, przyjazd do Pragi o 6:58)",
             "ru": "С пересадкой в Перемышле (отправление из Киева в 11:28, прибытие в Прагу в 6:58)",
-            "uk": "З пересадкою у Перемишлі"
+            "uk": "З пересадкою у Перемишлі (відправлення з Києва об 11:28, прибуття до Праги о 6:58)"
           },
           "btns": [
             {
@@ -6082,10 +6082,10 @@
         },
         {
           "h": {
-            "en": "With a transfer in Chop",
-            "pl": "Z przesiadką w Czopie",
+            "en": "With a transfer in Chop (departure from Kyiv at 21:01, arrival in Prague at 5:46)",
+            "pl": "Z przesiadką w Czopie (odjazd z Kijowa o 21:01, przyjazd do Pragi o 5:46)",
             "ru": "С пересадкой в Чопе (отправление из Киева в 21:01, прибытие в Прагу в 5:46)",
-            "uk": "З пересадкою у Чопі"
+            "uk": "З пересадкою у Чопі (відправлення з Києва о 21:01, прибуття до Праги о 5:46)"
           },
           "btns": [
             {
