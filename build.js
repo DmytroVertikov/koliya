@@ -117,7 +117,8 @@ const stShort = (n, l) => { const s = I.ST[n], i = {uk: 7, en: 8, pl: 9}[l]; ret
 const fill = (s, v) => s.replace(/\{(\w+)\}/g, (m, k) => k in v ? v[k] : m);
 const path = (l, f) => (l === "ru" ? "" : l + "/") + f;
 /* версия для ?v= считается от содержимого style.css и common.js: пока они не менялись, страницы при пересборке не меняются */
-const VER = require("crypto").createHash("md5").update(fs.readFileSync(__dirname + "/style.css")).update(fs.readFileSync(__dirname + "/common.js")).digest("hex").slice(0, 8), urls = [SITE];
+const OGL = {ru: "ru_RU", uk: "uk_UA", en: "en_US", pl: "pl_PL"};
+const VER = require("crypto").createHash("md5").update(fs.readFileSync(__dirname + "/style.css")).update(fs.readFileSync(__dirname + "/common.js")).digest("hex").slice(0, 8), urls = [SITE], SM = []; /* SM: страницы для sitemap.xml: {loc, alts: [[язык, адрес]], body} */
 /* тексты страниц slice-маршрутов (Киев → Хелм и т.п.) собираются здесь, отдельно вносить их в админке не нужно */
 const SLICE_TXT = {
   ru: (a, b) => ({title: `${a} → ${b} поездом | Колія`, desc: `Поезда ${a} — ${b} без пересадок: время, станции, длительность.`, h1: `Поездом: ${a} → ${b}`, lead: `Расписание поездов ${a} — ${b}: прямые поезда без пересадок. Время в пути, остановки и информация о покупке билетов.`}),
@@ -177,6 +178,9 @@ for (const r of ROUTES) for (const l of LANGS) {
   const X = r.x || "Хелм", direct = r.direct !== false; /* direct: false — на странице нет прямого поезда, все варианты идут как «с пересадкой» */
   v.stamp = "v" + VER + " direct=" + direct + " x=" + X;
   v.border = r.border ? fill(d["border." + r.border], v) : ""; v.hasDirect = String(direct); v.slice = String(!!r.slice);
+  v.ogloc = OGL[l]; v.ogalt = LANGS.filter(x => x !== l).map(x => `    <meta property="og:locale:alternate" content="${OGL[x]}">`).join("\n");
+  v.jsonld = JSON.stringify({"@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: [
+    {"@type": "ListItem", position: 1, name: "Колія", item: SITE + path(l, "")}, {"@type": "ListItem", position: 2, name: v.r_h1, item: SITE + path(l, r.file)}]}).replace(/</g, "\\u003c");
   v.buyhtml = buyHtml(r, l, d); v.hasbuy = String(!!v.buyhtml);
   v.hide = JSON.stringify(Array.isArray(r.hide) ? r.hide.map(String) : []); /* hide: номера поездов, скрытых на странице «из вариантов других направлений» (правится в админке) */
   /* split: станции пересадки, на которых вариант получает пометку «пограничный контроль» (если у страницы задан border; сейчас это Перемышль) */
@@ -188,7 +192,7 @@ for (const r of ROUTES) for (const l of LANGS) {
   const out = tplC.replace(/\{\{([\w.]+)\}\}/g, (m, k) => k in v ? v[k] : k in d ? fill(d[k], v) : (console.warn("нет ключа", k), m));
   if (l !== "ru") fs.mkdirSync(l, {recursive: true});
   fs.writeFileSync(path(l, r.file), out);
-  urls.push(SITE + path(l, r.file));
+  urls.push(SITE + path(l, r.file)); SM.push({loc: SITE + path(l, r.file), alts: LANGS.map(x => [x, SITE + path(x, r.file)]), body: out});
   if (l === "ru") console.log("  " + r.file + ": " + (direct ? "есть прямой поезд" : "БЕЗ прямого поезда") + ", пересадка: " + X);
 }
 for (const [f, l, n] of NOTR) console.warn("ВНИМАНИЕ: " + f + " (" + l + "): в блоке «Как купить билеты» нет перевода для " + n + " текстов (показан русский)");
@@ -211,7 +215,6 @@ const HL = (() => {
 })();
 const hlist = k => HL.filter(x => x.kind === k).sort((x, y) => x.sort - y.sort);
 const hlab = (x, l) => x["label_" + l] || x.label_ru;
-const OGL = {ru: "ru_RU", uk: "uk_UA", en: "en_US", pl: "pl_PL"};
 const ctryOf = p => p.route.replace(/^ua-|-ua$/, "");
 /* страницы, которые показываются на главной сразу, — отмечены галочкой «на главной» во вкладке «Направления» (route_pages.popular);
    остальные маршруты страны лежат в раскрывающемся списке (в HTML они есть). Если у страны нет ни одной отмеченной страницы, показываются все её маршруты. */
@@ -256,6 +259,7 @@ for (const l of LANGS) {
   if (l !== "ru") fs.mkdirSync(l, {recursive: true});
   fs.writeFileSync(path(l, "index.html"), out);
   if (l !== "ru") urls.push(SITE + path(l, ""));
+  SM.push({loc: SITE + path(l, ""), alts: LANGS.map(x => [x, SITE + path(x, "")]), body: out});
 }
 /* словари для браузера: dict/<язык>.js = русский (запасной) + язык страницы + станции + страны */
 fs.mkdirSync("dict", {recursive: true});
@@ -264,5 +268,16 @@ for (const l of LANGS) {
   d.ST = CLIENT.ST; d.CN = CLIENT.CN;
   fs.writeFileSync("dict/" + l + ".js", "/* создаётся командой node sync.js (build.js) из базы, руками не править */\nvar I18N = " + JSON.stringify(d) + ";\n")
 }
-fs.writeFileSync("sitemap.xml", `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map(u => `<url><loc>${u}</loc></url>`).join("\n")}\n</urlset>\n`);
+/* sitemap.xml: у каждой страницы языковые версии (xhtml:link) и lastmod. Дата меняется только когда изменилось содержимое страницы:
+   хеш прошлой сборки лежит в sitemap-lastmod.json (его коммитит та же пересборка), версия ?v= и подпись сборки в хеш не входят. */
+let LM = {}; try { LM = JSON.parse(fs.readFileSync("sitemap-lastmod.json", "utf8")) } catch (e) {}
+const today = new Date().toISOString().slice(0, 10), LMN = {};
+const sm = SM.map(p => {
+  const h = require("crypto").createHash("md5").update(p.body.replace(/<!-- build .*?-->/g, "").replace(/\?v=[0-9a-f]{8}/g, "")).digest("hex").slice(0, 12);
+  LMN[p.loc] = LM[p.loc] && LM[p.loc].h === h ? LM[p.loc] : {h, d: today};
+  return `<url><loc>${p.loc}</loc><lastmod>${LMN[p.loc].d}</lastmod>\n${p.alts.map(([x, u]) => `  <xhtml:link rel="alternate" hreflang="${x}" href="${u}"/>`).join("\n")}\n  <xhtml:link rel="alternate" hreflang="x-default" href="${p.alts[0][1]}"/></url>`
+});
+fs.writeFileSync("sitemap-lastmod.json", JSON.stringify(LMN, null, 1) + "\n");
+fs.writeFileSync("sitemap.xml", `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n${sm.join("\n")}\n</urlset>\n`);
+fs.writeFileSync("robots.txt", "User-agent: *\nAllow: /\nDisallow: /admin/\n\nSitemap: " + SITE + "sitemap.xml\n");
 console.log("Готово:", urls.length - 1, "страниц (+ главные)");
