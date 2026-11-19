@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- build vc81b064d direct=true x=Чоп -->
+<!-- build vab13bc8a direct=true x=Чоп -->
 <html lang="ru">
 <head>
     <meta charset="utf-8">
@@ -290,49 +290,19 @@
 <script src="config.js"></script>
 <script src="pages.js"></script>
 <script src="dict/ru.js"></script>
-<script src="common.js?v=c81b064d"></script>
+<script src="common.js?v=ab13bc8a"></script>
 <script>
-    const SPLIT = []; /* [станция пересадки, пограничный контроль]: вариант с пересадкой на этой станции получает пометку */
-    const HIDE = [].map(s => s.trim().toLowerCase()); /* номера поездов, скрытых на этой странице */
-    const SLICE = false; /* true: варианты собираются из поездов других вариантов (страницы вроде Киев → Хелм) */
+    const CARDS = {"FROM":"Будапешт","TO":"Львов","SLICE":false,"HIDE":[],"SPLIT":[],"HAS_DIRECT":true,"HAS_BUY":true,"dh":"Прямой поезд","ds":"без пересадок","th":"С пересадкой","noH":"Пока нет вариантов","noP":"Добавьте их в админке.","howq":"Как купить билеты?","hows":"Подробная инструкция для каждого варианта маршрута.","how":"Инструкция"}; /* настройки карточек (что показывать на странице); готовый HTML карточек уже лежит в #app (build.js), JS обновляет его свежими данными */
     const FROM = "Будапешт", TO = "Львов", BACK = "ua-hu"; // FROM/TO: русские названия, как в шапке карточки в админке
     /*D*//*C*/const COACH = `<aside class="coach"><p>В купе предусмотрены три спальных места, расположенные одно над другим. Если средняя полка приведена в спальное положение, пользоваться нижней полкой для сидения нельзя. Для подъёма на верхнюю полку предусмотрена лестница.</p></aside>`;/*/C*//*/D*/
-    const HAS_BUY = true; /* есть ли на странице блок «Как купить билеты» (он выводится в HTML при сборке, build.js) */
     const app = document.getElementById("app");
-    const HOWBAR = `<a class="howbar" href="#buy"><span class="hi" aria-hidden="true">i</span><span><b>Как купить билеты?</b><small>Подробная инструкция для каждого варианта маршрута.</small></span><span class="go">Инструкция →</span></a>`;
     const norm = s => String(s || "").trim().toLowerCase();
     fetch(U + "/rest/v1/options?order=sort", {headers: {apikey: K, Authorization: "Bearer " + K}}).then(r => {
         if (!r.ok) throw 0;
         return r.json()
     }).then(all => {
-        const rows = all.filter(o => o.active !== false).map(o => {
-            const p = parseOption(o.dsl);
-            return {o, p, h: p.head || deriveHead(p.legs)}
-        }).filter(x => x.p.legs.length);
-        /* SLICE: страница «A → B» без своих вариантов в базе: поезда берутся из поездов других вариантов (участок от A до B по остановкам поезда) */
-        const hm = s => (String(s).match(/\d{1,2}:\d{2}/) || [""])[0];
-        const sliced = () => {
-            const seen = new Set(), out = [];
-            rows.forEach(x => x.p.legs.forEach(L => {
-                if (HIDE.includes(norm(L.train))) return;
-                const st = L.stops, a = st.findIndex(s => norm(s.name).startsWith(norm(FROM)));
-                if (a < 0) return;
-                const b = st.findIndex((s, i) => i > a && norm(s.name).startsWith(norm(TO)));
-                if (b < 0) return;
-                const key = norm(L.train) + "|" + hm(st[a].time) + ">" + hm(st[b].time);
-                if (seen.has(key)) return;
-                seen.add(key);
-                /* поезд показывается целиком (от начальной до конечной станции), выделены только «откуда» и «куда» страницы */
-                const fq = L.freq && !/^ежедневно$/i.test(L.freq.trim()) ? " ~ " + L.freq.trim() : "",
-                    dsl = L.train.trim() + fq + ": " + st.map((s, i) => (i === a || i === b ? "*" : "") + (s.name + " " + s.time).trim()).join(" > "),
-                    o = {dsl, updated_at: x.o.updated_at, active: true}, p = parseOption(dsl);
-                out.push({o, p, h: deriveHead(p.legs)})
-            }));
-            return out
-        };
-        const list = (SLICE ? sliced() : rows.filter(x => norm(x.h.from).startsWith(norm(FROM)) && norm(x.h.to).startsWith(norm(TO))))
-            /* всегда по времени отправления; одинаковое время сохраняет порядок из базы */
-            .sort((a, b) => (m => m ? m[1] * 60 + +m[2] : 1e4)(String(a.h.ft).match(/(\d{1,2}):(\d{2})/)) - (m => m ? m[1] * 60 + +m[2] : 1e4)(String(b.h.ft).match(/(\d{1,2}):(\d{2})/)));
+        const {list, html} = renderCards(all, CARDS);
+        app.innerHTML = html;
         /* «Проверено»: самая свежая дата сохранения среди показанных вариантов (в админке есть кнопка «Подтвердить актуальность») */
         const ck = list.map(x => Date.parse(x.o.updated_at)).filter(Boolean), ce = document.getElementById("chk");
         if (ck.length && ce) {
@@ -340,33 +310,17 @@
             ce.querySelector("b").textContent = p2(d.getDate()) + "." + p2(d.getMonth() + 1) + "." + d.getFullYear();
             ce.hidden = false
         }
-        const HAS_DIRECT = true; /* false: страница без прямого поезда, все варианты идут как «с пересадкой» */
         /* LEADX: если среди вариантов есть пересадка на этой станции, подзаголовок страницы берётся из LEADM (с этой станцией) */
         const LEADX = "", LEADM = "";
         if (LEADX && LEADM && list.some(x => x.p.legs.length > 1 && (s => norm(s[s.length - 1].name).startsWith(norm(LEADX)))(x.p.legs[0].stops))) document.getElementById("lead").textContent = LEADM;
-        const direct = HAS_DIRECT ? list.filter(x => x.p.legs.length === 1) : [], transfer = HAS_DIRECT ? list.filter(x => x.p.legs.length > 1) : list;
-        if (!list.length) {
-            app.innerHTML = `<div class="panel"><h2>Пока нет вариантов</h2><p>Добавьте их в админке.</p></div>`;
-            return
-        }
-        app.innerHTML = ""/*D*/ + (direct.length ? `<h2 class="sub" style="margin-top:6px">Прямой поезд <small>без пересадок</small></h2><div class="direct direct-wrap" style="margin-top:16px">${direct.map(x => optHtml(x.o)).join("")}</div>` : "")
-            + (direct.length && transfer.length ? `<aside class="ad wide" data-slot="mid" hidden></aside>` : "")/*/D*/
-            + (() => {
-            /* все варианты с пересадкой — одним списком (по времени отправления), без подзаголовков по станциям */
-            if (!transfer.length) return "";
-            const at = x => { const s = x.p.legs[0].stops; return norm(s[s.length - 1].name) }; /* станция первой пересадки */
-            const bf = x => !SPLIT.length || SPLIT.some(s => s[1] && at(x).startsWith(norm(s[0]))); /* пограничный контроль — по карточке */
-            const cards = transfer.map(x => { const c = optHtml(x.o); return bf(x) ? c.replace("<details ", '<details data-b="1" ') : c }).join("");
-            const head = direct.length ? `<h2 class="sub">С пересадкой</h2>` : ""; /* заголовок только чтобы отделить от блока прямого поезда */
-            return head + `<div class="cols${transfer.length === 1 ? " one" : ""}" style="margin-top:${head ? 16 : 6}px">${cards}</div>`
-        })() + (HAS_BUY ? HOWBAR : "");
+        if (!list.length) return;
         /*D*//*C*/document.querySelectorAll(".direct .body").forEach(b => {
             b.classList.add("two");
             b.insertAdjacentHTML("beforeend", COACH)
         });/*/C*//*/D*/
         
     }).catch(() => {
-        app.innerHTML = `<div class="panel"><h2>Не удалось загрузить данные</h2><p>Обновите страницу позже.</p></div>`
+        if (!app.querySelector(".opt")) app.innerHTML = `<div class="panel"><h2>Не удалось загрузить данные</h2><p>Обновите страницу позже.</p></div>` /* карточки из сборки остаются, если база недоступна */
     });
     document.getElementById("more").insertAdjacentHTML("beforeend", moreRoutes({h: "Ещё маршруты", rev: "Обратное направление", from: "Другие направления из города %s", to: "Другие маршруты в город %s", dir: "Все маршруты этого направления", all: "Все страны", home: "./", hash: "hu-ua"}));
 </script>

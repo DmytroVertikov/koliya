@@ -38,6 +38,15 @@ const CFG = new Function("window", fs.readFileSync("config.js", "utf8") + "\n;re
   } catch (e) {
     console.warn("sync.js: не удалось получить переводы из базы (" + e.message + "). Берётся прежний i18n.db.json.")
   }
+  /* варианты маршрутов (options): снимок options.db.json нужен сборке, чтобы карточки лежали в HTML (их видят поисковики). Нет базы — остаётся прежний снимок */
+  try {
+    const opts = await get("options?select=*&order=sort");
+    if (!opts.length) throw new Error("options пуста");
+    fs.writeFileSync("options.db.json", JSON.stringify(opts, null, 1) + "\n");
+    console.log("sync.js: вариантов маршрутов: " + opts.length)
+  } catch (e) {
+    console.warn("sync.js: не удалось получить варианты из базы (" + e.message + "). Берётся прежний options.db.json (если есть).")
+  }
   console.log("sync.js: записей в базе: " + rows.length + ", показывается страниц: " + rows.filter(p => p.active !== false).length);
   require("./build.js")
 })();
