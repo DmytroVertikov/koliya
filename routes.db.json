@@ -10273,37 +10273,37 @@
           "btns": [
             {
               "t": {
-                "en": "Buy the Mukachevo → Kremenchuk ticket in the UZ app",
-                "pl": "Kup w aplikacji UZ bilet Mukaczewo → Krzemieńczuk",
-                "ru": "Купить в приложении УЗ билет Мукачево → Кременчуг",
-                "uk": "Купити в застосунку УЗ квиток Мукачево → Кременчук"
-              },
-              "pri": true,
-              "url": "https://app.uz.gov.ua/start"
-            },
-            {
-              "t": {
                 "en": "Buy the Prague → Chop ticket on RegioJet",
                 "pl": "Kup bilet Praga → Czop na stronie RegioJet",
                 "ru": "Купить на сайте RegioJet билет Прага → Чоп",
                 "uk": "Купити на сайті RegioJet квиток Прага → Чоп"
               },
-              "pri": false,
+              "pri": true,
               "url": "https://regiojet.cz/"
+            },
+            {
+              "t": {
+                "en": "Buy the Mukachevo → Kremenchuk ticket in the UZ app",
+                "pl": "Kup w aplikacji UZ bilet Mukaczewo → Krzemieńczuk",
+                "ru": "Купить в приложении УЗ билет Мукачево → Кременчуг",
+                "uk": "Купити в застосунку УЗ квиток Мукачево → Кременчук"
+              },
+              "pri": false,
+              "url": "https://app.uz.gov.ua/start"
             }
           ],
           "steps": [
+            {
+              "en": "Purchase a ticket for the Prague → Chop route on a RegioJet train operated by the Czech carrier RegioJet — on the official website regiojet.cz or in the RegioJet app.",
+              "pl": "Kup bilet na trasie Praga → Czop na pociąg RJ czeskiego przewoźnika RegioJet — na oficjalnej stronie regiojet.cz lub w aplikacji RegioJet.",
+              "ru": "Приобретите билет Прага → Чоп на поезд RJ у чешского перевозчика RegioJet — на официальном сайте regiojet.cz или в приложении RegioJet.",
+              "uk": "Придбайте квиток Прага → Чоп на поїзд RJ чеського перевізника RegioJet — на офіційному сайті regiojet.cz або в застосунку RegioJet."
+            },
             {
               "en": "Open the Ukrzaliznytsia app, choose the route Mukachevo → Kremenchuk and the travel date. Sales open 20 days before departure at 08:00 Kyiv time. Choose train 132Л and pay for the ticket.",
               "pl": "Otwórz aplikację Ukrzaliznytsia, wybierz trasę Mukaczewo → Krzemieńczuk i datę podróży. Sprzedaż biletów rusza na 20 dni przed odjazdem o 08:00 czasu kijowskiego. Wybierz pociąg 132Л i opłać bilet.",
               "ru": "Откройте приложение «Укрзалізниця», выберите маршрут Мукачево → Кременчуг и укажите дату поездки. Продажа билетов открывается за 20 суток до отправления, в 08:00 по киевскому времени. Выберите поезд 132Л и оплатите билет.",
               "uk": "Відкрийте застосунок «Укрзалізниця», оберіть маршрут Мукачево → Кременчук і вкажіть дату поїздки. Продаж квитків відкривається за 20 діб до відправлення, о 08:00 за київським часом. Оберіть поїзд 132Л і сплатіть квиток."
-            },
-            {
-              "en": "Buy the Prague → Chop ticket for the RJ train separately from the Czech carrier RegioJet, on regiojet.cz or in the RegioJet app.",
-              "pl": "Bilet Praga → Czop na pociąg RJ kup osobno u czeskiego przewoźnika RegioJet — na stronie regiojet.cz lub w aplikacji RegioJet.",
-              "ru": "Билет Прага → Чоп на поезд RJ приобретите отдельно у чешского перевозчика RegioJet — на официальном сайте regiojet.cz или в приложении RegioJet.",
-              "uk": "Квиток Прага → Чоп на поїзд RJ придбайте окремо в чеського перевізника RegioJet — на офіційному сайті regiojet.cz або в застосунку RegioJet."
             },
             {
               "en": "After buying, save both e-tickets on your phone. Before you travel, check the dates, departure times and arrival stations.",
@@ -10324,37 +10324,37 @@
           "btns": [
             {
               "t": {
-                "en": "Buy the Przemyśl → Kremenchuk ticket in the UZ app",
-                "pl": "Kup w aplikacji UZ bilet Przemyśl → Krzemieńczuk",
-                "ru": "Купить в приложении УЗ билет Перемышль → Кременчуг",
-                "uk": "Купити в застосунку УЗ квиток Перемишль → Кременчук"
-              },
-              "pri": true,
-              "url": "https://app.uz.gov.ua/start"
-            },
-            {
-              "t": {
                 "en": "Buy the Prague → Przemyśl ticket on RegioJet",
                 "pl": "Kup bilet Praga → Przemyśl na stronie RegioJet",
                 "ru": "Купить на сайте RegioJet билет Прага → Перемышль",
                 "uk": "Купити на сайті RegioJet квиток Прага → Перемишль"
               },
-              "pri": false,
+              "pri": true,
               "url": "https://regiojet.cz/"
+            },
+            {
+              "t": {
+                "en": "Buy the Przemyśl → Kremenchuk ticket in the UZ app",
+                "pl": "Kup w aplikacji UZ bilet Przemyśl → Krzemieńczuk",
+                "ru": "Купить в приложении УЗ билет Перемышль → Кременчуг",
+                "uk": "Купити в застосунку УЗ квиток Перемишль → Кременчук"
+              },
+              "pri": false,
+              "url": "https://app.uz.gov.ua/start"
             }
           ],
           "steps": [
+            {
+              "en": "Purchase a ticket for the Prague → Przemyśl route on a RegioJet train operated by the Czech carrier RegioJet — on the official website regiojet.cz or in the RegioJet app.",
+              "pl": "Kup bilet na trasie Praga → Przemyśl na pociąg RJ czeskiego przewoźnika RegioJet — na oficjalnej stronie regiojet.cz lub w aplikacji RegioJet.",
+              "ru": "Приобретите билет Прага → Перемышль на поезд RJ у чешского перевозчика RegioJet — на официальном сайте regiojet.cz или в приложении RegioJet.",
+              "uk": "Придбайте квиток Прага → Перемишль на поїзд RJ чеського перевізника RegioJet — на офіційному сайті regiojet.cz або в застосунку RegioJet."
+            },
             {
               "en": "Open the Ukrzaliznytsia app, choose the route Przemyśl → Kremenchuk and the travel date. Sales open 20 days before departure at 09:00 Kyiv time. Choose train 070К and pay for the ticket.",
               "pl": "Otwórz aplikację Ukrzaliznytsia, wybierz trasę Przemyśl → Krzemieńczuk i datę podróży. Sprzedaż biletów rusza na 20 dni przed odjazdem o 09:00 czasu kijowskiego. Wybierz pociąg 070К i opłać bilet.",
               "ru": "Откройте приложение «Укрзалізниця», выберите маршрут Перемышль → Кременчуг и укажите дату поездки. Продажа билетов открывается за 20 суток до отправления, в 09:00 по киевскому времени. Выберите поезд 070К и оплатите билет.",
               "uk": "Відкрийте застосунок «Укрзалізниця», оберіть маршрут Перемишль → Кременчук і вкажіть дату поїздки. Продаж квитків відкривається за 20 діб до відправлення, о 09:00 за київським часом. Оберіть поїзд 070К і сплатіть квиток."
-            },
-            {
-              "en": "Buy the Prague → Przemyśl ticket for the RJ train separately from the Czech carrier RegioJet, on regiojet.cz or in the RegioJet app.",
-              "pl": "Bilet Praga → Przemyśl na pociąg RJ kup osobno u czeskiego przewoźnika RegioJet — na stronie regiojet.cz lub w aplikacji RegioJet.",
-              "ru": "Билет Прага → Перемышль на поезд RJ приобретите отдельно у чешского перевозчика RegioJet — на официальном сайте regiojet.cz или в приложении RegioJet.",
-              "uk": "Квиток Прага → Перемишль на поїзд RJ придбайте окремо в чеського перевізника RegioJet — на офіційному сайті regiojet.cz або в застосунку RegioJet."
             },
             {
               "en": "After buying, save both e-tickets on your phone. Before you travel, check the dates, departure times and arrival stations.",
