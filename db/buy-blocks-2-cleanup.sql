@@ -9,8 +9,15 @@
 begin;
 
 create schema if not exists backup_2026_11_19;
-create table if not exists backup_2026_11_19.route_pages_before as
-    select id, extra, single from public.route_pages;
+-- single мог быть уже удалён (повторный запуск), поэтому копия берёт его только если колонка ещё есть
+do $$
+begin
+    if exists (select 1 from information_schema.columns where table_schema = 'public' and table_name = 'route_pages' and column_name = 'single') then
+        execute 'create table if not exists backup_2026_11_19.route_pages_before as select id, extra, single from public.route_pages';
+    else
+        execute 'create table if not exists backup_2026_11_19.route_pages_before as select id, extra from public.route_pages';
+    end if;
+end $$;
 create table if not exists backup_2026_11_19.ui_texts_removed as
     select * from public.ui_texts
     where (key like 'buy.%' and key <> 'buy.h') or key in ('transfer.h', 'transfer.h2');
