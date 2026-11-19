@@ -42,6 +42,7 @@
         .list div.on { background: #dbe6ff; border-left-color: var(--bl) }
         .list div.ck { border-left-color: var(--am3) }
         .list small { color: var(--mu); display: block; font-weight: 400; font-size: 13px; margin-top: 2px }
+        .seoh { margin: 3px 0 0; font-size: 12.5px; display: flex; gap: 8px; flex-wrap: wrap; align-items: center }
         .chip { display: inline-block; border-radius: 12px; padding: 1px 9px; font-size: 13px; font-weight: 600; background: #f2f4f7; color: #344054; white-space: nowrap }
         .chip.am { background: var(--am2); color: var(--am); box-shadow: inset 0 0 0 1px var(--am3) }
         .chip.gr { background: var(--gr2); color: var(--gr) }
@@ -737,7 +738,7 @@ function dirEditorHtml(r) {
         <details class="dgrp"><summary><b>Переводы городов</b> <span class="muted">(для украинской, английской и польской версий)</span></summary>
         ${[["from", r.from_name], ["to", r.to_name]].map(([w, n]) => `<div class="frow"><span class="muted" style="align-self:center;width:130px">${esc(n)}</span>${[["uk", "name_uk", "Українська"], ["en", "name_en", "English"], ["pl", "name_pl", "Polski"]].map(([k, c, ph]) => `<input type="text" data-nm="${w}.${k}" placeholder="${ph}" value="${esc(nmv(n, k, c))}" style="width:170px">`).join("")}</div>`).join("")}</details>
         <details class="dgrp"><summary><b>Заголовки и описания страницы</b> <span class="muted">(пусто — соберутся автоматически; можно использовать {FROM} и {TO})</span></summary>
-        ${DIR_LANGS.map(([l, ln]) => `<details style="margin-left:14px"><summary class="muted">${ln}</summary>${DIR_TXT.map(([k, kl]) => `<div class="frow"><div style="flex:1 1 100%"><label>${esc(kl)}</label><textarea rows="${k === "lead" ? 3 : 1}" data-tx="${l}.${k}" style="width:100%">${esc((tx[l] || {})[k] || "")}</textarea></div></div>`).join("")}</details>`).join("")}</details>
+        ${DIR_LANGS.map(([l, ln]) => `<details style="margin-left:14px"><summary class="muted">${ln}</summary>${DIR_TXT.map(([k, kl]) => `<div class="frow"><div style="flex:1 1 100%"><label>${esc(kl)}</label><textarea rows="${k === "lead" ? 3 : 1}" data-tx="${l}.${k}" style="width:100%">${esc((tx[l] || {})[k] || "")}</textarea>${SEO_LIM[k] ? `<div class="seoh" data-sh="${l}.${k}"></div>` : ""}</div></div>`).join("")}</details>`).join("")}</details>
         <div id="e_err"></div>
         <p><button class="pri" id="e_save">Сохранить</button></p>${bpHtml()}</div>`
 }
@@ -788,9 +789,29 @@ function bpBind(r, collect) {
     $("#bp_t").onclick = () => { const shut = bp.classList.toggle("shut"); $("#bp_t").textContent = shut ? "▸" : "▾"; try { localStorage.setItem("bpOpen", shut ? "0" : "1") } catch (e) {} if (!shut) run() };
     if (!bp.classList.contains("shut")) run()
 }
+/* SEO-подсказки к title / description / H1: длина (в поиске длинное обрезается, короткое слабо работает), пусто, дубли на других страницах */
+const SEO_LIM = {title: [30, 60, "title"], desc: [70, 160, "description"], h1: [15, 70, "H1"]};
+function seoHint(r, l, k, text) {
+    const lim = SEO_LIM[k]; if (!lim) return "";
+    const t = String(text || "").trim();
+    if (!t) return `<span class="muted">пусто: будет собрано автоматически${l === "ru" ? "" : " (если нет перевода, берётся русский)"}</span>`;
+    const from = ($("#e_from") || {}).value || r.from_name || "", to = ($("#e_to") || {}).value || r.to_name || "";
+    const n = t.replace(/\{FROM\}/g, from).replace(/\{TO\}/g, to).length, out = [];
+    out.push(`<span class="chip ${n < lim[0] || n > lim[1] ? "am" : "gr"}">${n} зн.</span>`);
+    if (n < lim[0]) out.push(`<span class="muted">короткий (лучше ${lim[0]}–${lim[1]})</span>`);
+    else if (n > lim[1]) out.push(`<span class="muted">длинный: в поиске обрежется (лучше ${lim[0]}–${lim[1]})</span>`);
+    if (k !== "h1" && !/\{FROM\}|\{TO\}/.test(t) && !(t.includes(from) && t.includes(to))) out.push(`<span class="muted">нет названий городов: добавьте {FROM} и {TO}</span>`);
+    const dup = RP.filter(x => x.id !== r.id && ((x.texts || {})[l] || {})[k] === t);
+    if (dup.length) out.push(`<span class="chip rd" title="${esc(dup.map(x => x.from_name + " → " + x.to_name).join(", "))}">то же на другой странице: ${dup.length}</span>`);
+    return out.join(" ")
+}
+function seoHintsBind(r) {
+    const root = $("#d_edit"), draw = () => root.querySelectorAll("[data-sh]").forEach(e => { const [l, k] = e.dataset.sh.split("."), ta = root.querySelector(`[data-tx="${l}.${k}"]`); e.innerHTML = seoHint(r, l, k, ta && ta.value) });
+    root.addEventListener("input", draw); draw()
+}
 function dirEditorBind(r) {
     const root = $("#d_edit"), v = id => $("#" + id).value.trim();
-    buyBind(r);
+    buyBind(r); seoHintsBind(r);
     /* предпросмотр блока «Как купить билеты»: пересобирается при любом изменении формы */
     bpBind(r, () => dirCollect(r, true));
     $("#e_save").onclick = async () => {
