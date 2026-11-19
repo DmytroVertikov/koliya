@@ -290,7 +290,9 @@ for (const l of LANGS) {
     const res = ctx.__rc(OPTS, p.C);
     if (!res.list.length) { empty++; continue } /* пустой список: оставляем «Загрузка…», браузер покажет сообщение сам */
     const html = fs.readFileSync(p.file, "utf8").replace(/<div id="app">[\s\S]*?<\/div>\n/, () => `<div id="app">${res.html}</div>\n`);
-    fs.writeFileSync(p.file, html); p.sme.body = html; n++
+    /* разметка TrainTrip: отдельным блоком после BreadcrumbList */
+    const ld = res.ld.length ? `    <script type="application/ld+json">${JSON.stringify({"@context": "https://schema.org", "@graph": res.ld}).replace(/</g, "\\u003c")}</script>\n` : "", html2 = ld ? html.replace(/(<script type="application\/ld\+json">[\s\S]*?<\/script>\n)/, (m) => m + ld) : html;
+    fs.writeFileSync(p.file, html2); p.sme.body = html2; n++
   }
   console.log("карточки в HTML: " + n + " страниц" + (empty ? ", без вариантов: " + empty : ""))
 })();

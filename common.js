@@ -498,6 +498,23 @@ function moreRoutes(o) {
 /* Карточки вариантов страницы маршрута. Одна и та же функция работает в браузере (route.src.html) и при сборке (build.js: готовый HTML
    попадает в страницу, чтобы поисковики видели расписание без JS). all — строки таблицы options, C — настройки страницы (CARDS в шаблоне).
    Возвращает {list, html}: list — подходящие варианты, html — содержимое блока #app. */
+/* Данные для разметки schema.org: каждый поезд из показанных вариантов — TrainTrip (станции посадки/выхода, время, номер поезда).
+   Время местное, как в расписании; даты нет, потому что расписание не привязано к дню. */
+function tripsLd(list) {
+    const seen = new Set(), out = [], hms = s => String(s).match(/\d{1,2}:\d{2}/g) || [], pad = h => h.replace(/^(\d):/, "0$1:");
+    list.forEach(x => x.p.legs.forEach(L => {
+        const sp = legSpan(L.stops), a = L.stops[sp.ib], b = L.stops[sp.ie], dt = hms(a.time).pop(), at = hms(b.time)[0];
+        if (!a || !b || a === b || !dt || !at) return;
+        const key = trainKey(L.train) + "|" + dt + ">" + at + "|" + a.name + ">" + b.name;
+        if (seen.has(key)) return;
+        seen.add(key);
+        const trip = {"@type": "TrainTrip", departureStation: {"@type": "TrainStation", name: stn(a.name)}, arrivalStation: {"@type": "TrainStation", name: stn(b.name)}, departureTime: pad(dt), arrivalTime: pad(at)};
+        if (L.train) trip.trainNumber = String(L.train).trim().replace(/^№\s*/, "");
+        out.push(trip)
+    }));
+    return out.slice(0, 30)
+}
+
 function renderCards(all, C) {
     const norm = s => String(s || "").trim().toLowerCase(), HIDE = (C.HIDE || []).map(norm), FROM = C.FROM, TO = C.TO;
     const rows = all.filter(o => o.active !== false).map(o => {
@@ -542,5 +559,5 @@ function renderCards(all, C) {
             const head = direct.length ? `<h2 class="sub">${C.th}</h2>` : "";
             return head + `<div class="cols${transfer.length === 1 ? " one" : ""}" style="margin-top:${head ? 16 : 6}px">${cards}</div>`
         })() + (C.HAS_BUY ? `<a class="howbar" href="#buy"><span class="hi" aria-hidden="true">i</span><span><b>${C.howq}</b><small>${C.hows}</small></span><span class="go">${C.how} →</span></a>` : "");
-    return {list, html}
+    return {list, html, ld: tripsLd(list)}
 }
