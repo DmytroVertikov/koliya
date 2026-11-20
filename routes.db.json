@@ -6403,10 +6403,10 @@
           "btns": [
             {
               "t": {
-                "en": "Buy the Budapest Keleti → Kyiv ticket in the UZ app",
-                "pl": "Kup w aplikacji UZ bilet Budapest Keleti → Kijów",
+                "en": "Buy the Budapest → Kyiv ticket in the UZ app",
+                "pl": "Kup w aplikacji UZ bilet Budapest → Kijów",
                 "ru": "Купить в приложении УЗ билет Будапешт → Киев",
-                "uk": "Купити в застосунку УЗ квиток Будапешт-Келеті → Київ"
+                "uk": "Купити в застосунку УЗ квиток Будапешт → Київ"
               },
               "pri": false,
               "url": "https://app.uz.gov.ua/start"
