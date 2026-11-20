@@ -6762,10 +6762,10 @@
     "popular": false,
     "buy": {
       "note": {
-        "en": "Train schedules may change. Check the latest information in the UZ app and on the PKP Intercity website.",
-        "pl": "Rozkłady jazdy mogą ulec zmianie. Aktualne informacje znajdziesz w aplikacji UZ i na stronie PKP Intercity.",
-        "ru": "Графики движения поездов могут измениться, актуальную информацию смотрите в приложении УЗ и на сайте PKP Intercity.",
-        "uk": "Графіки руху поїздів можуть змінюватися, актуальну інформацію дивіться в застосунку УЗ та на сайті PKP Intercity."
+        "en": "Train schedules may change. Check the latest information in the UZ app.",
+        "pl": "Rozkłady jazdy mogą ulec zmianie. Aktualne informacje znajdziesz w aplikacji UZ.",
+        "ru": "Графики движения поездов могут измениться, актуальную информацию смотрите в приложении УЗ.",
+        "uk": "Графіки руху поїздів можуть змінюватися, актуальну інформацію дивіться в застосунку УЗ."
       },
       "blocks": [
         {
@@ -6778,37 +6778,37 @@
           "btns": [
             {
               "t": {
-                "en": "Buy the Mukachevo → Dnipro ticket in the UZ app",
-                "pl": "Kup w aplikacji UZ bilet Mukaczewo → Dnipro",
-                "ru": "Купить в приложении УЗ билет Мукачево → Днепр",
-                "uk": "Купити в застосунку УЗ квиток Мукачево → Дніпро"
+                "en": "Buy the Budapest → Mukachevo ticket in the UZ app",
+                "pl": "Kup w aplikacji UZ bilet Budapest → Mukaczewo",
+                "ru": "Купить в приложении УЗ билет Будапешт → Мукачево",
+                "uk": "Купити в застосунку УЗ квиток Будапешт → Мукачево"
               },
               "pri": true,
               "url": "https://app.uz.gov.ua/start"
             },
             {
               "t": {
-                "en": "Buy the Budapest → Mukachevo ticket on MÁV",
-                "pl": "Kup na stronie MÁV bilet Budapest → Mukaczewo",
-                "ru": "Купить на сайте MÁV билет Будапешт → Мукачево",
-                "uk": "Купити на сайті MÁV квиток Будапешт → Мукачево"
+                "en": "Buy the Mukachevo → Dnipro ticket in the UZ app",
+                "pl": "Kup w aplikacji UZ bilet Mukaczewo → Dnipro",
+                "ru": "Купить в приложении УЗ билет Мукачево → Днепр",
+                "uk": "Купити в застосунку УЗ квиток Мукачево → Дніпро"
               },
               "pri": false,
-              "url": "https://jegy.mav.hu/"
+              "url": "https://app.uz.gov.ua/start"
             }
           ],
           "steps": [
             {
-              "en": "Open the Ukrzaliznytsia app, choose the route Mukachevo → Dnipro and the travel date. Sales open 20 days before departure at 08:00 Kyiv time. Choose train 003Л and pay for the ticket.",
-              "pl": "Otwórz aplikację Ukrzaliznytsia, wybierz trasę Mukaczewo → Dnipro i datę podróży. Sprzedaż biletów rusza na 20 dni przed odjazdem o 08:00 czasu kijowskiego. Wybierz pociąg 003Л i opłać bilet.",
-              "ru": "Откройте приложение «Укрзалізниця», выберите маршрут Мукачево → Днепр и укажите дату поездки. Продажа билетов открывается за 20 суток до отправления, в 08:00 по киевскому времени. Выберите поезд 003Л и оплатите билет.",
-              "uk": "Відкрийте застосунок «Укрзалізниця», оберіть маршрут Мукачево → Дніпро і вкажіть дату поїздки. Продаж квитків відкривається за 20 діб до відправлення, о 08:00 за київським часом. Оберіть поїзд 003Л і сплатіть квиток."
+              "en": "Open the Ukrzaliznytsia app, select the Budapest → Mukachevo route and enter your travel date. Tickets go on sale 20 days before departure, at 08:00 Kyiv time. Select train No. 010К and pay for your ticket.",
+              "pl": "Otwórz aplikację „Ukrzaliznytsia”, wybierz trasę Budapeszt → Mukaczewo i wskaż datę podróży. Sprzedaż biletów rozpoczyna się 20 dni przed odjazdem, o godz. 08:00 czasu kijowskiego. Wybierz pociąg nr 010К i opłać bilet.",
+              "ru": "Откройте приложение «Укрзалізниця», выберите маршрут Будапешт → Мукачево и укажите дату поездки. Продажа билетов открывается за 20 суток до отправления, в 08:00 по киевскому времени. Выберите поезд 010К и оплатите билет.",
+              "uk": "Відкрийте застосунок «Укрзалізниця», оберіть маршрут Будапешт → Мукачево і вкажіть дату поїздки. Продаж квитків відкривається за 20 діб до відправлення, о 08:00 за київським часом. Оберіть поїзд № 010К і сплатіть квиток."
             },
             {
-              "en": "Buy the Budapest → Mukachevo ticket separately from the Hungarian carrier MÁV, on jegy.mav.hu or in the MÁVPlusz app.",
-              "pl": "Bilet na pociąg Budapest → Mukaczewo kup osobno u węgierskiego przewoźnika MÁV — na stronie jegy.mav.hu lub w aplikacji MÁVPlusz.",
-              "ru": "Билет на поезд Будапешт → Мукачево приобретите отдельно у венгерского перевозчика MÁV — на официальном сайте jegy.mav.hu или в приложении MÁVPlusz.",
-              "uk": "Квиток на поїзд Будапешт → Мукачево придбайте окремо в угорського перевізника MÁV — на офіційному сайті jegy.mav.hu або в застосунку MÁVPlusz."
+              "en": "The train from Mukachevo to Dnipro departs the following day, so tickets for it go on sale in the Ukrzaliznytsia app one day later.",
+              "pl": "Pociąg z Mukaczewa do Dniepru odjeżdża następnego dnia, dlatego sprzedaż biletów na niego w aplikacji „Ukrzaliznytsia” rozpoczyna się dzień później.",
+              "ru": "Поезд из Мукачево в Днепр отправляется на следующие сутки, поэтому продажа билетов на него в приложении «Укрзалізниця» открывается на следующий день.",
+              "uk": "Поїзд із Мукачевого до Дніпра відправляється наступної доби, тому продаж квитків на нього в застосунку «Укрзалізниця» відкривається наступного дня."
             },
             {
               "en": "After buying, save both e-tickets on your phone. Before you travel, check the dates, departure times and arrival stations.",
@@ -6850,14 +6850,14 @@
           ],
           "steps": [
             {
-              "en": "Open the Ukrzaliznytsia app, choose the route Budapest → Kyiv and the travel date. Sales open 20 days before departure at 08:00 Kyiv time. Choose train 120Д and pay for the ticket.",
-              "pl": "Otwórz aplikację Ukrzaliznytsia, wybierz trasę Budapest → Kijów i datę podróży. Sprzedaż biletów rusza na 20 dni przed odjazdem o 08:00 czasu kijowskiego. Wybierz pociąg 120Д i opłać bilet.",
-              "ru": "Откройте приложение «Укрзалізниця», выберите маршрут Будапешт → Киев и укажите дату поездки. Продажа билетов открывается за 20 суток до отправления, в 08:00 по киевскому времени. Выберите поезд 120Д и оплатите билет.",
-              "uk": "Відкрийте застосунок «Укрзалізниця», оберіть маршрут Будапешт → Київ і вкажіть дату поїздки. Продаж квитків відкривається за 20 діб до відправлення, о 08:00 за київським часом. Оберіть поїзд 120Д і сплатіть квиток."
+              "en": "Open the Ukrzaliznytsia app, select the Budapest → Kyiv route and enter your travel date. Tickets go on sale 20 days before departure, at 08:00 Kyiv time. Select train No. 010К and pay for your ticket.",
+              "pl": "Otwórz aplikację „Ukrzaliznytsia”, wybierz trasę Budapeszt → Kijów i wskaż datę podróży. Sprzedaż biletów rozpoczyna się 20 dni przed odjazdem, o godz. 08:00 czasu kijowskiego. Wybierz pociąg nr 010К i opłać bilet.",
+              "ru": "Откройте приложение «Укрзалізниця», выберите маршрут Будапешт → Киев и укажите дату поездки. Продажа билетов открывается за 20 суток до отправления, в 08:00 по киевскому времени. Выберите поезд 010К и оплатите билет.",
+              "uk": "Відкрийте застосунок «Укрзалізниця», оберіть маршрут Будапешт → Київ і вкажіть дату поїздки. Продаж квитків відкривається за 20 діб до відправлення, о 08:00 за київським часом. Оберіть поїзд № 010К і сплатіть квиток."
             },
             {
-              "en": "The train from Kyiv to Dnipro-Holovnyi departs the next day, so ticket sales for it in the Ukrzaliznytsia app open the next day.",
-              "pl": "Pociąg z Kijowa do Dnipro odjeżdża następnej doby, dlatego sprzedaż biletów na niego w aplikacji Ukrzaliznytsia rusza następnego dnia.",
+              "en": "The train from Kyiv to Dnipro departs the following day, so tickets for it go on sale in the Ukrzaliznytsia app one day later.",
+              "pl": "Pociąg z Kijowa do Dniepru odjeżdża następnego dnia, dlatego sprzedaż biletów na niego w aplikacji „Ukrzaliznytsia” rozpoczyna się dzień później.",
               "ru": "Поезд из Киева в Днепр отправляется на следующие сутки, поэтому продажа билетов на него в приложении «Укрзалізниця» открывается на следующий день.",
               "uk": "Поїзд із Києва до Дніпра відправляється наступної доби, тому продаж квитків на нього в застосунку «Укрзалізниця» відкривається наступного дня."
             },
