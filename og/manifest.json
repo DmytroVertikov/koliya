@@ -1440,30 +1440,6 @@
   "b": "Charków"
  },
  {
-  "f": "og/ru/budapest-kremenchuk.jpg",
-  "l": "ru",
-  "a": "Будапешт",
-  "b": "Кременчуг"
- },
- {
-  "f": "og/uk/budapest-kremenchuk.jpg",
-  "l": "uk",
-  "a": "Будапешт",
-  "b": "Кременчук"
- },
- {
-  "f": "og/en/budapest-kremenchuk.jpg",
-  "l": "en",
-  "a": "Budapest",
-  "b": "Kremenchuk"
- },
- {
-  "f": "og/pl/budapest-kremenchuk.jpg",
-  "l": "pl",
-  "a": "Budapest",
-  "b": "Krzemieńczuk"
- },
- {
   "f": "og/ru/budapest-odesa.jpg",
   "l": "ru",
   "a": "Будапешт",
@@ -1750,6 +1726,30 @@
   "l": "pl",
   "a": "Wiedeń",
   "b": "Dnipro"
+ },
+ {
+  "f": "og/ru/budapest-kremenchuk.jpg",
+  "l": "ru",
+  "a": "Будапешт",
+  "b": "Кременчуг"
+ },
+ {
+  "f": "og/uk/budapest-kremenchuk.jpg",
+  "l": "uk",
+  "a": "Будапешт",
+  "b": "Кременчук"
+ },
+ {
+  "f": "og/en/budapest-kremenchuk.jpg",
+  "l": "en",
+  "a": "Budapest",
+  "b": "Kremenchuk"
+ },
+ {
+  "f": "og/pl/budapest-kremenchuk.jpg",
+  "l": "pl",
+  "a": "Budapest",
+  "b": "Krzemieńczuk"
  },
  {
   "f": "og/ru/budapest-lviv.jpg",
