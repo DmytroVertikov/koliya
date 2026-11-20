@@ -292,7 +292,7 @@ const FOOTER_HTML = () => `<div class="fcols">
 <p>${t("f2c")}</p></div>
 <div><b>${t("f3h")}</b><p>${t("f3")}</p></div></div>
 <div class="fbar"><div class="fsrc"><span class="fsl">${t("f.src")}</span><ul class="fchips">${FOOT_SRC.map(x => `<li><a href="${x[1]}" target="_blank" rel="noopener">${x[0]}</a></li>`).join("")}</ul></div>
-<div class="flow"><span>© ${new Date().getFullYear()} Колія</span><button type="button" class="fb-link" data-fb="other">${t("fb.link")}</button></div></div>`;
+<div class="flow"><span>© ${new Date().getFullYear()} Колія</span><nav class="flinks">${["about", "contacts", "privacy"].map(k => `<a href="${k}.html">${t("f." + k)}</a>`).join("")}</nav><button type="button" class="fb-link" data-fb="other">${t("fb.link")}</button></div></div>`;
 (function () {
     const f = document.getElementById("site-footer");
     if (!f) return;

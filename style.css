@@ -1347,3 +1347,13 @@ header p {
 .dirnav a:hover {
     background: var(--soft)
 }
+
+/* ссылки подвала и служебные страницы (privacy, about, contacts) */
+footer .flinks{display:flex;flex-wrap:wrap;gap:6px 16px}
+footer .flinks a{text-decoration:none;font-weight:600}
+footer .flinks a:hover{text-decoration:underline}
+.doc ul{margin:8px 0 0;padding-left:20px;color:var(--mute);line-height:1.6}
+.doc li{margin:6px 0}
+.doc li b{color:var(--ink)}
+.doc .panel p+p{margin-top:10px}
+button.btn{border:0;font:inherit;font-weight:600;cursor:pointer;display:inline-block;padding:12px 22px}

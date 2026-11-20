@@ -54,7 +54,9 @@ const FB_DEF = {
 };
 for (const k in FB_DEF) for (const l of LANGS) if (!I[l][k]) I[l][k] = FB_DEF[k][l];
 /* подпись к источникам данных в подвале; если ключ есть в ui_texts (админка → «Тексты»), берётся значение из базы */
+const SP = require("./static-pages.js"); /* служебные страницы: privacy, about, contacts (тексты в static-pages.js) */
 const FOOT_DEF = {"f.src": {ru: "Источники данных о поездах:", uk: "Джерела даних про поїзди:", en: "Train data sources:", pl: "Źródła danych o pociągach:"}};
+for (const k in SP.FOOTLINKS) FOOT_DEF["f." + k] = SP.FOOTLINKS[k];
 for (const k in FOOT_DEF) for (const l of LANGS) if (!I[l][k]) I[l][k] = FOOT_DEF[k][l];
 /* что нужно браузеру: тексты интерфейса и станции (без текстов страниц маршрутов) */
 const CLIENT = JSON.parse(JSON.stringify(I));
@@ -150,7 +152,7 @@ const allTxt = (r, l) => { const m = String(r.hash).match(/^ua-([a-z]{2})$|^([a-
 const FOOT_SRC = [["Укрзалізниця", "https://uz.gov.ua/"], ["PKP Intercity", "https://intercity.pl/"], ["RegioJet", "https://regiojet.cz/"], ["České dráhy", "https://www.cd.cz/"], ["ZSSK", "https://www.zssk.sk/"], ["MÁV", "https://jegy.mav.hu/"], ["ÖBB", "https://www.oebb.at/"], ["CFR Călători", "https://www.cfrcalatori.ro/"], ["Deutsche Bahn", "https://www.bahn.de/"]];
 const fmtDate = x => new Intl.DateTimeFormat("ru-RU", {day: "2-digit", month: "2-digit", year: "numeric", timeZone: "Europe/Kyiv"}).format(x);
 const footDate = (txt, date) => /\{date\}/.test(txt) ? txt.replace(/\{date\}/g, `<time class="fdate">${date}</time>`) : txt.replace(/\d{1,2}\.\d{1,2}\.\d{4}/, `<time class="fdate">${date}</time>`);
-const footerHtml = (d, l) => `<div class="fcols">\n<div><b>🚆 Колія</b><p>${d.f1}</p></div>\n<div><b>${d.f2h}</b>\n<p>${d.f2a}</p>\n<p>${footDate(d.f2b, fmtDate(I.META.updated ? new Date(I.META.updated) : new Date()))}</p>\n<p>${d.f2c}</p></div>\n<div><b>${d.f3h}</b><p>${d.f3}</p></div></div>\n<div class="fbar"><div class="fsrc"><span class="fsl">${d["f.src"]}</span><ul class="fchips">${FOOT_SRC.map(x => `<li><a href="${x[1]}" target="_blank" rel="noopener">${x[0]}</a></li>`).join("")}</ul></div>\n<div class="flow"><span>© ${new Date().getFullYear()} Колія</span><button type="button" class="fb-link" data-fb="other">${d["fb.link"]}</button></div></div>`;
+const footerHtml = (d, l) => `<div class="fcols">\n<div><b>🚆 Колія</b><p>${d.f1}</p></div>\n<div><b>${d.f2h}</b>\n<p>${d.f2a}</p>\n<p>${footDate(d.f2b, fmtDate(I.META.updated ? new Date(I.META.updated) : new Date()))}</p>\n<p>${d.f2c}</p></div>\n<div><b>${d.f3h}</b><p>${d.f3}</p></div></div>\n<div class="fbar"><div class="fsrc"><span class="fsl">${d["f.src"]}</span><ul class="fchips">${FOOT_SRC.map(x => `<li><a href="${x[1]}" target="_blank" rel="noopener">${x[0]}</a></li>`).join("")}</ul></div>\n<div class="flow"><span>© ${new Date().getFullYear()} Колія</span><nav class="flinks">${["about", "contacts", "privacy"].map(k => `<a href="${k}.html">${d["f." + k]}</a>`).join("")}</nav><button type="button" class="fb-link" data-fb="other">${d["fb.link"]}</button></div></div>`;
 /* Блок «Как купить билеты»: route_pages.buy = {note: {ru, uk, en, pl}, blocks: [{direct, h: {…}, steps: [{…}, …], btns: [{pri, url, t: {…}}]}]}.
    Тексты вносятся вручную в админке (вкладка «Направления» → «Как купить билеты»); блоки выводятся в заданном порядке.
    Нет перевода — показывается русский текст и выводится предупреждение. */
@@ -263,6 +265,21 @@ for (const l of LANGS) {
   fs.writeFileSync(path(l, "index.html"), out);
   if (l !== "ru") urls.push(SITE + path(l, ""));
   SM.push({loc: SITE + path(l, ""), alts: LANGS.map(x => [x, SITE + path(x, "")]), body: out});
+}
+/* служебные страницы (privacy, about, contacts): шаблон page.src.html, тексты из static-pages.js */
+const pg = fs.readFileSync("page.src.html", "utf8");
+for (const k of Object.keys(SP.P)) for (const l of LANGS) {
+  const d = I[l], pre = l === "ru" ? "" : "../", f = k + ".html", T = SP.P[k][l], loc = SITE + path(l, f);
+  const v = {ver: VER, stamp: "v" + VER, lang: l, base: pre, home: "./", canon: loc, ogloc: OGL[l], ogimg: SITE + "og-image.jpg",
+    p_title: T.title, p_desc: T.desc, p_h1: T.h1, p_lead: T.lead, p_body: T.html, footer: footerHtml(d, l)};
+  v.alts = LANGS.map(x => `    <link rel="alternate" hreflang="${x}" href="${SITE + path(x, f)}">`).join("\n") + `\n    <link rel="alternate" hreflang="x-default" href="${SITE + f}">`;
+  v.ogalt = LANGS.filter(x => x !== l).map(x => `    <meta property="og:locale:alternate" content="${OGL[x]}">`).join("\n");
+  v.langs = LANGS.map(x => `<a href="${pre + path(x, f)}" hreflang="${x}" lang="${x}"${x === l ? ' class="on"' : ""}>${x.toUpperCase()}</a>`).join("");
+  v.jsonld = JSON.stringify({"@context": "https://schema.org", "@type": "WebPage", name: T.h1, url: loc, inLanguage: l, description: T.desc, isPartOf: {"@type": "WebSite", name: "Колія", url: SITE}}).replace(/</g, "\\u003c");
+  const out = pg.replace(/\{\{([\w.]+)\}\}/g, (m, key) => key in v ? v[key] : key in d ? fill(d[key], v) : (console.warn("нет ключа", key), m));
+  if (l !== "ru") fs.mkdirSync(l, {recursive: true});
+  fs.writeFileSync(path(l, f), out);
+  urls.push(loc); SM.push({loc, alts: LANGS.map(x => [x, SITE + path(x, f)]), body: out})
 }
 /* словари для браузера: dict/<язык>.js = русский (запасной) + язык страницы + станции + страны */
 fs.mkdirSync("dict", {recursive: true});

@@ -1280,19 +1280,67 @@
   "d": "2026-11-19"
  },
  "https://koliya.org/": {
-  "h": "351971ee644a",
-  "d": "2026-11-19"
+  "h": "56422974f0f9",
+  "d": "2026-11-20"
  },
  "https://koliya.org/uk/": {
-  "h": "e4e649d73fcc",
-  "d": "2026-11-19"
+  "h": "4bc00642eb33",
+  "d": "2026-11-20"
  },
  "https://koliya.org/en/": {
-  "h": "41e1cf6db625",
-  "d": "2026-11-19"
+  "h": "32aa79cb52f3",
+  "d": "2026-11-20"
  },
  "https://koliya.org/pl/": {
-  "h": "7820b77b511b",
-  "d": "2026-11-19"
+  "h": "90a15690cc15",
+  "d": "2026-11-20"
+ },
+ "https://koliya.org/about.html": {
+  "h": "e133f773bbed",
+  "d": "2026-11-20"
+ },
+ "https://koliya.org/uk/about.html": {
+  "h": "2a89f802b045",
+  "d": "2026-11-20"
+ },
+ "https://koliya.org/en/about.html": {
+  "h": "31a6904751d0",
+  "d": "2026-11-20"
+ },
+ "https://koliya.org/pl/about.html": {
+  "h": "c5007133ffe6",
+  "d": "2026-11-20"
+ },
+ "https://koliya.org/contacts.html": {
+  "h": "e431d710847a",
+  "d": "2026-11-20"
+ },
+ "https://koliya.org/uk/contacts.html": {
+  "h": "ee842e8b1797",
+  "d": "2026-11-20"
+ },
+ "https://koliya.org/en/contacts.html": {
+  "h": "4c2f8e61696b",
+  "d": "2026-11-20"
+ },
+ "https://koliya.org/pl/contacts.html": {
+  "h": "d3e0bd11582a",
+  "d": "2026-11-20"
+ },
+ "https://koliya.org/privacy.html": {
+  "h": "9493c4d2e676",
+  "d": "2026-11-20"
+ },
+ "https://koliya.org/uk/privacy.html": {
+  "h": "95915a65abdf",
+  "d": "2026-11-20"
+ },
+ "https://koliya.org/en/privacy.html": {
+  "h": "043da0c4f79a",
+  "d": "2026-11-20"
+ },
+ "https://koliya.org/pl/privacy.html": {
+  "h": "c529e040f4f4",
+  "d": "2026-11-20"
  }
 }
