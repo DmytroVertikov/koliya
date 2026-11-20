@@ -287,7 +287,7 @@ for (const k of Object.keys(SP.P)) for (const l of LANGS) {
   const parts = {};
   for (const l of LANGS) {
     const d = I[l], N = SP.NF[l], pre = l === "ru" ? "/" : "/" + l + "/";
-    const body = `<div class="doc"><section class="panel"><h2>${N.h2}</h2><p>${N.p}</p><p><a class="btn pri" href="${pre}">${N.home}</a></p><p><button type="button" class="btn fb-open" data-fb="data">${N.fb}</button></p></section></div>`;
+    const body = `<div class="doc"><section class="panel"><h2>${N.h2}</h2><p>${N.p}</p><p style="display:flex;flex-wrap:wrap;gap:10px"><a class="btn pri" style="margin:0;padding:12px 22px" href="${pre}">${N.home}</a><button type="button" class="btn fb-open" style="margin:0" data-fb="data">${N.fb}</button></p></section></div>`;
     const v = {ver: VER, stamp: "v" + VER, lang: l, base: "/", home: pre, canon: SITE, ogloc: OGL[l], ogimg: SITE + "og-image.jpg",
       p_title: N.title, p_desc: N.desc, p_h1: N.h1, p_lead: N.lead, p_body: body.replace(/^<div class="doc">|<\/div>$/g, ""), alts: "", ogalt: "", jsonld: "{}",
       langs: LANGS.map(x => `<a href="${x === "ru" ? "/" : "/" + x + "/"}" hreflang="${x}" lang="${x}"${x === l ? ' class="on"' : ""}>${x.toUpperCase()}</a>`).join(""),
