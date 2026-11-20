@@ -837,7 +837,7 @@ header .wrap{position:relative}
 .pg summary:focus-visible{outline:3px solid var(--acc);outline-offset:2px;border-radius:6px}
 .pg details[open] summary{margin-bottom:8px}
 .how .steps{grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px 24px}
-.ixfb{margin-top:40px}
+.ixfb{margin:40px 0 48px}
 .ixfb h2{margin:0 0 10px;font-family:var(--disp);font-weight:800;font-size:20px}
 .ixfb p{margin:0}
 .ixfb-b{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px!important}
