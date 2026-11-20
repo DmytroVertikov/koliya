@@ -7266,10 +7266,10 @@
     "popular": false,
     "buy": {
       "note": {
-        "en": "Train schedules may change. Check the latest information in the UZ app and on the PKP Intercity website.",
-        "pl": "Rozkłady jazdy mogą ulec zmianie. Aktualne informacje znajdziesz w aplikacji UZ i na stronie PKP Intercity.",
-        "ru": "Графики движения поездов могут измениться, актуальную информацию смотрите в приложении УЗ и на сайте PKP Intercity.",
-        "uk": "Графіки руху поїздів можуть змінюватися, актуальну інформацію дивіться в застосунку УЗ та на сайті PKP Intercity."
+        "en": "Train schedules may change. Check the latest information in the UZ app.",
+        "pl": "Rozkłady jazdy mogą ulec zmianie. Aktualne informacje znajdziesz w aplikacji UZ.",
+        "ru": "Графики движения поездов могут измениться, актуальную информацию смотрите в приложении УЗ.",
+        "uk": "Графіки руху поїздів можуть змінюватися, актуальну інформацію дивіться в застосунку УЗ."
       },
       "blocks": [
         {
@@ -7360,10 +7360,10 @@
               "uk": "Відкрийте застосунок «Укрзалізниця», оберіть маршрут Будапешт → Львів і вкажіть дату поїздки. Продаж квитків відкривається за 20 діб до відправлення, о 08:00 за київським часом. Оберіть поїзд 010К і сплатіть квиток."
             },
             {
-              "en": "The train from Lviv to Odesa departs the next day, so ticket sales for it in the Ukrzaliznytsia app open the next day.",
-              "pl": "Pociąg z Lwów do Odessa odjeżdża następnej doby, dlatego sprzedaż biletów na niego w aplikacji Ukrzaliznytsia rusza następnego dnia.",
-              "ru": "Поезд из Львов в Одесса отправляется на следующие сутки, поэтому продажа билетов на него в приложении «Укрзалізниця» открывается на следующий день.",
-              "uk": "Поїзд із Львів до Одеса відправляється наступної доби, тому продаж квитків на нього в застосунку «Укрзалізниця» відкривається наступного дня."
+              "en": "The train from Lviv to Odesa departs the following day, so tickets for it go on sale in the Ukrzaliznytsia app one day later.",
+              "pl": "Pociąg ze Lwowa do Odessy odjeżdża następnego dnia, dlatego sprzedaż biletów na niego w aplikacji „Ukrzaliznytsia” rozpoczyna się dzień później.",
+              "ru": "Поезд из Львова в Одесса отправляется на следующие сутки, поэтому продажа билетов на него в приложении «Укрзалізниця» открывается на следующий день.",
+              "uk": "Поїзд зі Львова до Одеси відправляється наступної доби, тому продаж квитків на нього в застосунку «Укрзалізниця» відкривається наступного дня."
             },
             {
               "en": "After buying, save both e-tickets on your phone. Before you travel, check the dates, departure times and arrival stations.",
