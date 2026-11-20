@@ -226,4 +226,15 @@ const FOOTLINKS = {
   about: {ru: "О проекте", uk: "Про проєкт", en: "About", pl: "O projekcie"},
   contacts: {ru: "Контакты", uk: "Контакти", en: "Contact", pl: "Kontakt"}
 };
-module.exports = {P, FOOTLINKS};
+/* страница 404 (GitHub Pages отдаёт корневой 404.html для любого несуществующего адреса, язык берётся из префикса /uk/ /en/ /pl/) */
+const NF = {
+  ru: {title: "Страница не найдена | Колія", desc: "Такой страницы нет. Вернитесь на главную и выберите маршрут.", h1: "Страница не найдена", lead: "Ошибка 404: такого адреса на сайте нет.",
+    h2: "Куда дальше?", p: "Возможно, ссылка устарела или в адресе опечатка. Начните с главной: там все направления и маршруты поездов из Украины и в Украину.", home: "На главную", fb: "Сообщить о битой ссылке"},
+  uk: {title: "Сторінку не знайдено | Колія", desc: "Такої сторінки немає. Поверніться на головну й оберіть маршрут.", h1: "Сторінку не знайдено", lead: "Помилка 404: такої адреси на сайті немає.",
+    h2: "Куди далі?", p: "Можливо, посилання застаріло або в адресі є помилка. Почніть з головної: там усі напрямки та маршрути потягів з України та в Україну.", home: "На головну", fb: "Повідомити про зламане посилання"},
+  en: {title: "Page not found | Koliya", desc: "This page does not exist. Go back to the home page and choose a route.", h1: "Page not found", lead: "Error 404: there is no such address on this site.",
+    h2: "Where to next?", p: "The link may be outdated or the address may contain a typo. Start from the home page: it lists all directions and train routes from and to Ukraine.", home: "Go to home page", fb: "Report a broken link"},
+  pl: {title: "Nie znaleziono strony | Koliya", desc: "Takiej strony nie ma. Wróć na stronę główną i wybierz trasę.", h1: "Nie znaleziono strony", lead: "Błąd 404: takiego adresu nie ma w serwisie.",
+    h2: "Co dalej?", p: "Link mógł się zdezaktualizować albo w adresie jest literówka. Zacznij od strony głównej: znajdziesz tam wszystkie kierunki i trasy pociągów z Ukrainy i do Ukrainy.", home: "Na stronę główną", fb: "Zgłoś zepsuty link"}
+};
+module.exports = {P, FOOTLINKS, NF};
