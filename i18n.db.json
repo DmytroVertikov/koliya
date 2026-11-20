@@ -268,10 +268,10 @@
   },
   {
    "key": "f2b",
-   "ru": "Информация на странице обновлена: 01.11.2026.",
-   "uk": "Інформацію на сторінці оновлено: 01.11.2026.",
-   "en": "Page last updated: 01.11.2026.",
-   "pl": "Informacje na stronie zaktualizowano: 01.11.2026."
+   "ru": "Информация на сайте обновлена: {date}.",
+   "uk": "Інформацію на сайті оновлено: {date}.",
+   "en": "Site information last updated: {date}.",
+   "pl": "Informacje w serwisie zaktualizowano: {date}."
   },
   {
    "key": "f2c",

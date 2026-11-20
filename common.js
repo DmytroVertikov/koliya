@@ -297,9 +297,9 @@ const FOOTER_HTML = () => `<div class="fcols">
     const f = document.getElementById("site-footer");
     if (!f) return;
     f.innerHTML = FOOTER_HTML();
-    /* дата обновления = последнее изменение вариантов в базе */
+    /* дата обновления = последнее изменение любых данных в базе (варианты, страницы направлений, тексты) */
     const el = f.querySelector(".fdate");
-    if (el && U && K) fetch(U + "/rest/v1/options?select=updated_at&updated_at=not.is.null&order=updated_at.desc&limit=1", {headers: {apikey: K, Authorization: "Bearer " + K}}).then(r => r.ok ? r.json() : []).then(a => { const d = a[0] && new Date(a[0].updated_at); if (d && !isNaN(d)) el.textContent = fmtDate(d) }).catch(() => { })
+    if (el && U && K) Promise.all(["options", "route_pages", "ui_texts"].map(t => fetch(U + "/rest/v1/" + t + "?select=updated_at&updated_at=not.is.null&order=updated_at.desc&limit=1", {headers: {apikey: K, Authorization: "Bearer " + K}}).then(r => r.ok ? r.json() : []).then(a => a[0] ? Date.parse(a[0].updated_at) : 0).catch(() => 0))).then(a => { const m = Math.max(...a); if (m > 0) el.textContent = fmtDate(new Date(m)) })
 })();
 
 /* Обратная связь: окно <dialog> открывается любой кнопкой с data-fb="<тема>" (data / idea / question / other).
