@@ -5942,20 +5942,20 @@
           "btns": [
             {
               "t": {
-                "en": "Buy the Mukachevo → Kyiv ticket in the UZ app",
-                "pl": "Kup w aplikacji UZ bilet Mukaczewo → Kijów",
+                "en": "Buy the Košice → Mukachevo ticket in the ZSSK app",
+                "pl": "Kup w aplikacji ZSSK bilet Koszyce → Mukaczewo",
                 "ru": "Купить в приложении ZSSK билет Кошице → Мукачево",
-                "uk": "Купити в застосунку УЗ квиток Мукачево → Київ"
+                "uk": "Купити в застосунку ZSSK квиток Кошице → Мукачево"
               },
               "pri": true,
               "url": "https://www.zssk.sk/ideme-vlakom/"
             },
             {
               "t": {
-                "en": "Buy the Košice → Mukachevo ticket in the ZSSK app",
-                "pl": "Kup w aplikacji ZSSK bilet Koszyce → Mukaczewo",
+                "en": "Buy the Mukachevo → Kyiv ticket in the UZ app",
+                "pl": "Kup w aplikacji UZ bilet Mukaczewo → Kijów",
                 "ru": "Купить в приложении УЗ билет Мукачево → Киев",
-                "uk": "Купити в застосунку ZSSK квиток Кошице → Мукачево"
+                "uk": "Купити в застосунку УЗ квиток Мукачево → Київ"
               },
               "pri": false,
               "url": "https://app.uz.gov.ua/start"
@@ -5963,19 +5963,19 @@
           ],
           "steps": [
             {
-              "en": "Open the Ukrzaliznytsia app, choose the route Mukachevo → Kyiv and the travel date. Sales open 20 days before departure at 08:00 Kyiv time. Choose the train you need and pay for the ticket.",
-              "pl": "Otwórz aplikację Ukrzaliznytsia, wybierz trasę Mukaczewo → Kijów i datę podróży. Sprzedaż biletów rusza na 20 dni przed odjazdem o 08:00 czasu kijowskiego. Wybierz odpowiedni pociąg i opłać bilet.",
-              "ru": "Приобретите билет на поезд Кошице → Мукачево в приложении «Укрзалізниця». Продажа билетов открывается за 20 суток до отправления, в 08:00 по киевскому времени. Выберите нужный поезд и оплатите билет. Также билет можно приобрести заранее у словацкого перевозчика ZSSK в его приложении. Обычно у ZSSK билеты дешевле.",
-              "uk": "Відкрийте застосунок «Укрзалізниця», оберіть маршрут Мукачево → Київ і вкажіть дату поїздки. Продаж квитків відкривається за 20 діб до відправлення, о 08:00 за київським часом. Оберіть потрібний поїзд і сплатіть квиток."
+              "en": "Purchase a ticket for the Košice → Mukachevo train in the Ukrzaliznytsia app. Tickets go on sale 20 days before departure, at 08:00 Kyiv time. Choose a suitable train and pay for your ticket. You can also purchase a ticket in advance from the Slovak carrier ZSSK through its app. ZSSK tickets are usually cheaper.",
+              "pl": "Kup bilet na pociąg na trasie Koszyce → Mukaczewo w aplikacji „Ukrzaliznytsia”. Sprzedaż biletów rozpoczyna się 20 dni przed odjazdem, o godz. 08:00 czasu kijowskiego. Wybierz odpowiedni pociąg i opłać bilet. Bilet można również kupić z wyprzedzeniem u słowackiego przewoźnika ZSSK w jego aplikacji. Bilety ZSSK są zazwyczaj tańsze.",
+              "ru": "Приобретите билет на поезд Кошице → Мукачево в приложении «Укрзалізниця». Продажа билетов открывается за 20 суток до отправления, в 08:00 по киевскому времени. Выберите подходящий поезд и оплатите билет. Также билет можно приобрести заранее у словацкого перевозчика ZSSK в его приложении. Обычно у ZSSK билеты дешевле.",
+              "uk": "Придбайте квиток на поїзд Кошице → Мукачево в застосунку «Укрзалізниця». Продаж квитків відкривається за 20 діб до відправлення, о 08:00 за київським часом. Оберіть зручний поїзд і сплатіть квиток. Також квиток можна придбати заздалегідь у словацького перевізника ZSSK у його застосунку. Зазвичай квитки у ZSSK дешевші."
             },
             {
               "en": "You can buy the Košice → Mukachevo ticket in the Ukrzaliznytsia app or separately from the Slovak carrier ZSSK in its app. Tickets from ZSSK are usually cheaper.",
-              "pl": "Bilet na pociąg Koszyce → Mukaczewo możesz kupić w aplikacji Ukrzaliznytsia lub osobno u słowackiego przewoźnika ZSSK w jego aplikacji. Zwykle u ZSSK bilety są tańsze.",
+              "pl": "Kup bilet na trasie Mukaczewo → Kijów w aplikacji „Ukrzaliznytsia”. Wybierz odpowiedni pociąg i opłać bilet.",
               "ru": "Приобретите билет Мукачево → Киев в приложении «Укрзалізниця». Выберите подходящий поезд и оплатите билет.",
-              "uk": "Квиток на поїзд Кошице → Мукачево можна купити в застосунку «Укрзалізниця» або окремо в словацького перевізника ZSSK у його застосунку. Зазвичай у ZSSK квитки дешевші."
+              "uk": "Придбайте квиток Мукачево → Київ у застосунку «Укрзалізниця». Оберіть потрібний поїзд і сплатіть квиток."
             },
             {
-              "en": "After buying, save both e-tickets on your phone. Before you travel, check the dates, departure times and arrival stations.",
+              "en": "Purchase a ticket for the Mukachevo → Kyiv route in the Ukrzaliznytsia app. Choose a suitable train and pay for your ticket.",
               "pl": "Po zakupie zapisz oba e-bilety w telefonie. Przed podróżą sprawdź daty, godziny odjazdu i stacje docelowe.",
               "ru": "После покупки сохраните оба электронных билета в телефоне. Перед поездкой проверьте даты, время отправления и станции прибытия.",
               "uk": "Після купівлі збережіть обидва електронні квитки в телефоні. Перед поїздкою перевірте дати, час відправлення та станції прибуття."
@@ -5985,7 +5985,7 @@
         }
       ]
     },
-    "updated_at": "2026-11-20T15:17:13.408754+00:00"
+    "updated_at": "2026-11-20T15:20:53.175667+00:00"
   },
   {
     "id": "kyiv_prague",
