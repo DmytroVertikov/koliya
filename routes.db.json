@@ -7149,10 +7149,10 @@
     "popular": false,
     "buy": {
       "note": {
-        "en": "Train schedules may change. Check the latest information in the UZ app and on the PKP Intercity website.",
-        "pl": "Rozkłady jazdy mogą ulec zmianie. Aktualne informacje znajdziesz w aplikacji UZ i na stronie PKP Intercity.",
-        "ru": "Графики движения поездов могут измениться, актуальную информацию смотрите в приложении УЗ и на сайте PKP Intercity.",
-        "uk": "Графіки руху поїздів можуть змінюватися, актуальну інформацію дивіться в застосунку УЗ та на сайті PKP Intercity."
+        "en": "Train schedules may change. Check the latest information in the UZ app and on the MÁV website.",
+        "pl": "Rozkłady jazdy mogą ulec zmianie. Aktualne informacje znajdziesz w aplikacji UZ i na stronie MÁV.",
+        "ru": "Графики движения поездов могут измениться, актуальную информацию смотрите в приложении УЗ и на сайте MÁV.",
+        "uk": "Графіки руху поїздів можуть змінюватися, актуальну інформацію дивіться в застосунку УЗ та на сайті MÁV."
       },
       "blocks": [
         {
@@ -7165,20 +7165,20 @@
           "btns": [
             {
               "t": {
-                "en": "Buy the Mukachevo → Kremenchuk ticket in the UZ app",
-                "pl": "Kup w aplikacji UZ bilet Mukaczewo → Krzemieńczuk",
+                "en": "Buy the Budapest → Mukachevo ticket on MÁV",
+                "pl": "Kup na stronie MÁV bilet Budapest → Mukaczewo",
                 "ru": "Купить на сайте MÁV билет Будапешт → Мукачево",
-                "uk": "Купити в застосунку УЗ квиток Мукачево → Кременчук"
+                "uk": "Купити на сайті MÁV квиток Будапешт → Мукачево"
               },
               "pri": true,
               "url": "https://jegy.mav.hu/"
             },
             {
               "t": {
-                "en": "Buy the Budapest → Mukachevo ticket on PKP Intercity",
-                "pl": "Kup na stronie PKP Intercity bilet Budapest → Mukaczewo",
+                "en": "Buy the Mukachevo → Kremenchuk ticket in the UZ app",
+                "pl": "Kup w aplikacji UZ bilet Mukaczewo → Krzemieńczuk",
                 "ru": "Купить в приложении УЗ билет Мукачево → Кременчуг",
-                "uk": "Купити на сайті PKP Intercity квиток Будапешт → Мукачево"
+                "uk": "Купити в застосунку УЗ квиток Мукачево → Кременчук"
               },
               "pri": false,
               "url": "https://app.uz.gov.ua/start"
@@ -7186,16 +7186,16 @@
           ],
           "steps": [
             {
-              "en": "Open the Ukrzaliznytsia app, choose the route Mukachevo → Kremenchuk and the travel date. Sales open 20 days before departure at 09:00 Kyiv time. Choose a suitable train and pay for the ticket.",
-              "pl": "Otwórz aplikację Ukrzaliznytsia, wybierz trasę Mukaczewo → Krzemieńczuk i datę podróży. Sprzedaż biletów rusza na 20 dni przed odjazdem o 9:00 czasu kijowskiego. Wybierz odpowiedni pociąg i opłać bilet.",
+              "en": "Purchase a ticket for the Budapest → Mukachevo train in the Ukrzaliznytsia app. Tickets go on sale 20 days before departure, at 08:00 Kyiv time. Select train No. 034О and pay for your ticket. You can also purchase a ticket in advance from the Hungarian carrier MÁV — on the official website jegy.mav.hu or in the MÁVPlusz app. MÁV tickets are generally cheaper.",
+              "pl": "Kup bilet na pociąg na trasie Budapeszt → Mukaczewo w aplikacji „Ukrzaliznytsia”. Sprzedaż biletów rozpoczyna się 20 dni przed odjazdem, o godz. 08:00 czasu kijowskiego. Wybierz pociąg nr 034О i opłać bilet. Bilet można również kupić z wyprzedzeniem u węgierskiego przewoźnika MÁV — na oficjalnej stronie jegy.mav.hu lub w aplikacji MÁVPlusz. Bilety MÁV są zazwyczaj tańsze.",
               "ru": "Приобретите билет на поезд Будапешт → Мукачево в приложении «Укрзалізниця». Продажа билетов открывается за 20 суток до отправления, в 08:00 по киевскому времени. Выберите поезд 034О и оплатите билет. Также билет можно приобрести заранее у венгерского перевозчика MÁV — на официальном сайте jegy.mav.hu или в приложении MÁVPlusz. Как правило, билеты у MÁV дешевле.",
-              "uk": "Відкрийте застосунок «Укрзалізниця», оберіть маршрут Мукачево → Кременчук і вкажіть дату поїздки. Продаж квитків відкривається за 20 діб до відправлення, о 09:00 за київським часом. Оберіть потрібний поїзд і сплатіть квиток."
+              "uk": "Придбайте квиток на поїзд Будапешт → Мукачево в застосунку «Укрзалізниця». Продаж квитків відкривається за 20 діб до відправлення, о 08:00 за київським часом. Оберіть поїзд № 034О і сплатіть квиток. Також квиток можна придбати заздалегідь в угорського перевізника MÁV — на офіційному сайті jegy.mav.hu або в застосунку MÁVPlusz. Зазвичай квитки у MÁV дешевші."
             },
             {
-              "en": "Buy the Budapest → Mukachevo ticket in the Ukrzaliznytsia app. You can also buy the ticket in advance from the Hungarian carrier MÁV, on the official site jegy.mav.hu or in the MÁVPlusz app. MÁV tickets are usually cheaper.",
-              "pl": "Kup bilet na pociąg Budapest → Mukaczewo w aplikacji Ukrzaliznytsia. Bilet można też kupić wcześniej u węgierskiego przewoźnika MÁV — na oficjalnej stronie jegy.mav.hu lub w aplikacji MÁVPlusz. Zazwyczaj bilety MÁV są tańsze.",
+              "en": "The train from Mukachevo to Kremenchuk departs the following day, so tickets for it go on sale in the Ukrzaliznytsia app one day later.",
+              "pl": "Pociąg z Mukaczewa do Krzemieńczuka odjeżdża następnego dnia, dlatego sprzedaż biletów na niego w aplikacji „Ukrzaliznytsia” rozpoczyna się dzień później.",
               "ru": "Поезд из Мукачево в Кременчуг отправляются на следующие сутки, поэтому продажа билетов на них в приложении «Укрзалізниця» открывается на следующий день.",
-              "uk": "Придбайте квиток на поїзд Будапешт → Мукачево у застосунку «Укрзалізниця». Також квиток можна придбати заздалегідь в угорського перевізника MÁV — на офіційному сайті jegy.mav.hu або в застосунку MÁVPlusz. Як правило, квитки в MÁV дешевші."
+              "uk": "Поїзд із Мукачевого до Кременчука відправляється наступної доби, тому продаж квитків на нього в застосунку «Укрзалізниця» відкривається наступного дня."
             },
             {
               "en": "After buying, save both e-tickets on your phone. Before you travel, check the dates, departure times and arrival stations.",
