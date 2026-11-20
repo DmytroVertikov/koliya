@@ -5495,7 +5495,18 @@
     "x": null,
     "border": null,
     "like_id": "wk",
-    "names": {},
+    "names": {
+      "Киев": {
+        "en": "Kyiv",
+        "pl": "Kijów",
+        "uk": "Київ"
+      },
+      "Берлин": {
+        "en": "Berlin-Lichtenberg",
+        "pl": "Berlin-Lichtenberg",
+        "uk": "Берлін-Ліхтенберг"
+      }
+    },
     "extra": {
       "leadx": "Перемышль",
       "split": [
@@ -5566,47 +5577,47 @@
           "btns": [
             {
               "t": {
-                "en": "Buy the Chełm → Kyiv ticket in the UZ app",
-                "pl": "Kup w aplikacji UZ bilet Chełm → Kijów",
-                "ru": "Купить в приложении УЗ билет Хелм → Киев",
-                "uk": "Купити в застосунку УЗ квиток Хелм → Київ"
+                "en": "Buy the Berlin → Warszawa ticket on DB",
+                "pl": "Kup na stronie DB bilet Berlin → Warszawa",
+                "ru": "Купить на сайте DB билет Берлин → Варшава",
+                "uk": "Купити на сайті DB квиток Берлін → Варшава"
               },
               "pri": true,
-              "url": "https://app.uz.gov.ua/start"
+              "url": "https://www.bahn.de/"
             },
             {
               "t": {
-                "en": "Buy the Warszawa Centralna → Chełm ticket on PKP Intercity",
-                "pl": "Kup na stronie PKP Intercity bilet Warszawa Centralna → Chełm",
+                "en": "Buy the Warszawa → Chełm ticket on PKP Intercity",
+                "pl": "Kup na stronie PKP Intercity bilet Warszawa → Chełm",
                 "ru": "Купить на сайте PKP Intercity билет Варшава → Хелм",
-                "uk": "Купити на сайті PKP Intercity квиток Варшава Центральна → Хелм"
+                "uk": "Купити на сайті PKP Intercity квиток Варшава → Хелм"
               },
               "pri": false,
               "url": "https://www.intercity.pl/"
             },
             {
               "t": {
-                "en": "Buy the Berlin-Lichtenberg → Warszawa Centralna ticket on DB",
-                "pl": "Kup na stronie DB bilet Berlin-Lichtenberg → Warszawa Centralna",
-                "ru": "Купить на сайте DB билет Берлин → Варшава",
-                "uk": "Купити на сайті DB квиток Берлін-Ліхтенберг → Варшава Центральна"
+                "en": "Buy the Chełm → Kyiv ticket in the UZ app",
+                "pl": "Kup w aplikacji UZ bilet Chełm → Kijów",
+                "ru": "Купить в приложении УЗ билет Хелм → Киев",
+                "uk": "Купити в застосунку УЗ квиток Хелм → Київ"
               },
               "pri": false,
-              "url": "https://www.bahn.de/"
+              "url": "https://app.uz.gov.ua/start"
             }
           ],
           "steps": [
             {
-              "en": "Open the Ukrzaliznytsia app, choose the route Chełm → Kyiv and the travel date. Sales open 20 days before departure at 09:00 Kyiv time. Choose a suitable train and pay for the ticket.",
-              "pl": "Otwórz aplikację Ukrzaliznytsia, wybierz trasę Chełm → Kijów i datę podróży. Sprzedaż biletów rusza na 20 dni przed odjazdem o 9:00 czasu kijowskiego. Wybierz odpowiedni pociąg i opłać bilet.",
-              "ru": "Откройте приложение «Укрзалізниця», выберите маршрут Хелм → Киев и укажите дату поездки. Продажа билетов открывается за 20 суток до отправления, в 09:00 по киевскому времени. Выберите подходящий поезд и оплатите билет.",
-              "uk": "Відкрийте застосунок «Укрзалізниця», оберіть маршрут Хелм → Київ і вкажіть дату поїздки. Продаж квитків відкривається за 20 діб до відправлення, о 09:00 за київським часом. Оберіть потрібний поїзд і сплатіть квиток."
+              "en": "Purchase tickets for Berlin → Warsaw on the German website bahn.de or in the DB Navigator app, and for Warsaw → Chełm on the Polish PKP Intercity website (intercity.pl).",
+              "pl": "Kup bilety na trasie Berlin → Warszawa na niemieckiej stronie bahn.de lub w aplikacji DB Navigator, a na trasie Warszawa → Chełm na polskiej stronie PKP Intercity (intercity.pl).",
+              "ru": "Приобретите билеты Берлин → Варшава — на немецком сайте bahn.de или в приложении DB Navigator, а Варшава → Хелм на польском сайте PKP Intercity (intercity.pl).",
+              "uk": "Придбайте квитки Берлін → Варшава — на німецькому сайті bahn.de або в застосунку DB Navigator, а Варшава → Холм — на польському сайті PKP Intercity (intercity.pl)."
             },
             {
-              "en": "Tickets for Warszawa Centralna → Chełm can be bought on the Polish PKP Intercity website (intercity.pl), and for Berlin-Lichtenberg → Warszawa Centralna on the German website bahn.de or in the DB Navigator app.",
-              "pl": "Bilety na odcinek Warszawa Centralna → Chełm kupisz na polskiej stronie PKP Intercity (intercity.pl), a na odcinek Berlin-Lichtenberg → Warszawa Centralna — na niemieckiej stronie bahn.de lub w aplikacji DB Navigator.",
-              "ru": "Билеты Варшава → Хелм можно купить на польском сайте PKP Intercity (intercity.pl), а Берлин → Варшава — на немецком сайте bahn.de или в приложении DB Navigator.",
-              "uk": "Квитки Варшава Центральна → Хелм можна купити на польському сайті PKP Intercity (intercity.pl), а Берлін-Ліхтенберг → Варшава Центральна — на німецькому сайті bahn.de або в застосунку DB Navigator."
+              "en": "Open the Ukrzaliznytsia app, select the Chełm → Kyiv route and enter your travel date. Tickets go on sale 20 days before departure, at 09:00 Kyiv time. Choose a suitable train and pay for your ticket.",
+              "pl": "Otwórz aplikację „Ukrzaliznytsia”, wybierz trasę Chełm → Kijów i wskaż datę podróży. Sprzedaż biletów rozpoczyna się 20 dni przed odjazdem, o godz. 09:00 czasu kijowskiego. Wybierz odpowiedni pociąg i opłać bilet.",
+              "ru": "Откройте приложение «Укрзалізниця», выберите маршрут Хелм → Киев и укажите дату поездки. Продажа билетов открывается за 20 суток до отправления, в 09:00 по киевскому времени. Выберите подходящий поезд и оплатите билет.",
+              "uk": "Відкрийте застосунок «Укрзалізниця», оберіть маршрут Холм → Київ і вкажіть дату поїздки. Продаж квитків відкривається за 20 діб до відправлення, о 09:00 за київським часом. Оберіть потрібний поїзд і сплатіть квиток."
             },
             {
               "en": "After buying, save both e-tickets on your phone. Before you travel, check the dates, departure times and arrival stations.",
@@ -5731,7 +5742,7 @@
         }
       ]
     },
-    "updated_at": "2026-11-13T12:44:27.684265+00:00"
+    "updated_at": "2026-11-20T15:30:10.384563+00:00"
   },
   {
     "id": "kyiv_kosice",
