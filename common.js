@@ -140,6 +140,24 @@ const freqTxt = f => {
     if (!f || /^ежедневно$/.test(x)) return t("d.daily");
     if (/^по нечетным( (дням|числам|датам))?$/.test(x)) return t("d.odd");
     if (/^по четным( (дням|числам|датам))?$/.test(x)) return t("d.even");
+    /* «Ежедневно, кроме среды» / «…кроме среды и пятницы» */
+    const m = x.match(/^ежедневно,? кроме ([а-я, и]+)$/);
+    if (m) {
+        const W = {"понедельника": 0, "вторника": 1, "среды": 2, "четверга": 3, "пятницы": 4, "субботы": 5, "воскресенья": 6},
+            ids = m[1].split(/\s*,\s*|\s+и\s+/).map(w => W[w.trim()]);
+        if (ids.length && ids.every(i => i !== undefined)) {
+            const D = {
+                ru: ["понедельника", "вторника", "среды", "четверга", "пятницы", "субботы", "воскресенья"],
+                uk: ["понеділка", "вівторка", "середи", "четверга", "пʼятниці", "суботи", "неділі"],
+                en: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+                pl: ["poniedziałku", "wtorku", "środy", "czwartku", "piątku", "soboty", "niedzieli"]
+            }[LG] || [], and = {ru: "и", uk: "і", en: "and", pl: "i"}[LG], exc = {ru: "кроме", uk: "крім", en: "except", pl: "oprócz"}[LG];
+            if (D.length && exc) {
+                const names = ids.map(i => D[i]), list = names.length > 1 ? names.slice(0, -1).join(", ") + " " + and + " " + names[names.length - 1] : names[0];
+                return t("d.daily") + (LG === "ru" ? ", " : (LG === "en" ? " " : ", ")) + exc + " " + list
+            }
+        }
+    }
     return f
 };
 
