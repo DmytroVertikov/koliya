@@ -9184,17 +9184,20 @@
           "btns": [
             {
               "t": {
-                "en": "Buy the Chop → Dnipro ticket in the UZ app",
-                "pl": "Kup w aplikacji UZ bilet Czop → Dnipro",
+                "en": "Buy the Vienna → Chop ticket in the UZ app",
+                "pl": "Kup w aplikacji UZ bilet Wiedeń → Czop",
                 "ru": "Купить в приложении УЗ билет Вена → Чоп",
-                "uk": "Купити в застосунку УЗ квиток Чоп → Дніпро"
+                "uk": "Купити в застосунку УЗ квиток Відень → Чоп"
               },
               "pri": true,
               "url": "https://app.uz.gov.ua/start"
             },
             {
               "t": {
-                "ru": "Купить в приложении УЗ билет Чоп → Днепр"
+                "en": "Buy the Chop → Dnipro ticket in the UZ app",
+                "pl": "Kup w aplikacji UZ bilet Czop → Dnipro",
+                "ru": "Купить в приложении УЗ билет Чоп → Днепр",
+                "uk": "Купити в застосунку УЗ квиток Чоп → Дніпро"
               },
               "pri": false,
               "url": "https://app.uz.gov.ua/start"
@@ -9202,16 +9205,16 @@
           ],
           "steps": [
             {
-              "en": "Open the Ukrzaliznytsia app, choose the route Chop → Dnipro and the travel date. Sales open 20 days before departure at 09:00 Kyiv time. Choose a suitable train and pay for the ticket.",
-              "pl": "Otwórz aplikację Ukrzaliznytsia, wybierz trasę Czop → Dnipro i datę podróży. Sprzedaż biletów rusza na 20 dni przed odjazdem o 9:00 czasu kijowskiego. Wybierz odpowiedni pociąg i opłać bilet.",
+              "en": "Open the Ukrzaliznytsia app, select the Vienna → Chop route and enter your travel date. Tickets go on sale 20 days before departure, at 08:00 Kyiv time. Select train No. 347Л and pay for your ticket. You can also purchase a ticket in advance from the Austrian carrier ÖBB — on tickets.oebb.at or in the ÖBB Tickets app. However, in this case, the ticket will be significantly more expensive than in the Ukrzaliznytsia app.",
+              "pl": "Otwórz aplikację „Ukrzaliznytsia”, wybierz trasę Wiedeń → Czop i wskaż datę podróży. Sprzedaż biletów rozpoczyna się 20 dni przed odjazdem, o godz. 08:00 czasu kijowskiego. Wybierz pociąg nr 347Л i opłać bilet. Bilet można również kupić z wyprzedzeniem u austriackiego przewoźnika ÖBB — na stronie tickets.oebb.at lub w aplikacji ÖBB Tickets. W takim przypadku będzie on jednak znacznie droższy niż w aplikacji „Ukrzaliznytsia”.",
               "ru": "Откройте приложение «Укрзалізниця», выберите маршрут Вена → Чоп и укажите дату поездки. Продажа билетов открывается за 20 суток до отправления, в 08:00 по киевскому времени. Выберите поезд 347Л и оплатите билет. Также билет можно приобрести заранее у австрийского перевозчика ÖBB — на tickets.oebb.at или в приложении ÖBB Tickets. Но в таком случае он будет существенно дороже, чем в приложении «Укрзалізниця».",
-              "uk": "Відкрийте застосунок «Укрзалізниця», оберіть маршрут Чоп → Дніпро і вкажіть дату поїздки. Продаж квитків відкривається за 20 діб до відправлення, о 09:00 за київським часом. Оберіть потрібний поїзд і сплатіть квиток."
+              "uk": "Відкрийте застосунок «Укрзалізниця», оберіть маршрут Відень → Чоп і вкажіть дату поїздки. Продаж квитків відкривається за 20 діб до відправлення, о 08:00 за київським часом. Оберіть поїзд № 347Л і сплатіть квиток. Також квиток можна придбати заздалегідь в австрійського перевізника ÖBB — на сайті tickets.oebb.at або в застосунку ÖBB Tickets. Однак у такому разі він коштуватиме значно дорожче, ніж у застосунку «Укрзалізниця»."
             },
             {
-              "en": "Buy the Vienna → Chop ticket separately from the Polish carrier PKP Intercity, on intercity.pl or in the PKP Intercity app. You can also buy it on koleo.pl or in the KOLEO app.",
-              "pl": "Bilet na pociąg Wiedeń → Czop kup osobno u polskiego przewoźnika PKP Intercity — na stronie intercity.pl lub w aplikacji PKP Intercity. Można go też kupić na koleo.pl lub w aplikacji KOLEO.",
+              "en": "The train from Chop to Dnipro departs the following day, so tickets for it go on sale in the Ukrzaliznytsia app one day later.",
+              "pl": "Pociąg z Czopu do Dniepru odjeżdża następnego dnia, dlatego sprzedaż biletów na niego w aplikacji „Ukrzaliznytsia” rozpoczyna się dzień później.",
               "ru": "Поезд из Чопа в Днепр отправляется на следующие сутки, поэтому продажа билетов на него в приложении «Укрзалізниця» открывается на следующий день.",
-              "uk": "Квиток на поїзд Відень → Чоп придбайте окремо в польського перевізника PKP Intercity — на офіційному сайті intercity.pl або в застосунку PKP Intercity. Також квитки можна купити на сайті koleo.pl або в застосунку KOLEO."
+              "uk": "Поїзд із Чопа до Дніпра відправляється наступної доби, тому продаж квитків на нього в застосунку «Укрзалізниця» відкривається наступного дня."
             },
             {
               "en": "After buying, save both e-tickets on your phone. Before you travel, check the dates, departure times and arrival stations.",
