@@ -848,19 +848,19 @@
   "d": "2026-11-20"
  },
  "https://koliya.org/kosice-kyiv.html": {
-  "h": "c38d75fce73a",
+  "h": "1bd0ee032c2a",
   "d": "2026-11-20"
  },
  "https://koliya.org/uk/kosice-kyiv.html": {
-  "h": "8966c395e050",
+  "h": "eeeca1f225a3",
   "d": "2026-11-20"
  },
  "https://koliya.org/en/kosice-kyiv.html": {
-  "h": "a5eec8ec7406",
+  "h": "6b72cf535f3b",
   "d": "2026-11-20"
  },
  "https://koliya.org/pl/kosice-kyiv.html": {
-  "h": "c9e1256a2fee",
+  "h": "2169c2d5ba18",
   "d": "2026-11-20"
  },
  "https://koliya.org/kyiv-prague.html": {
@@ -957,22 +957,6 @@
  },
  "https://koliya.org/pl/budapest-kharkiv.html": {
   "h": "51ebe80924df",
-  "d": "2026-11-20"
- },
- "https://koliya.org/budapest-kremenchuk.html": {
-  "h": "55af2effaa77",
-  "d": "2026-11-20"
- },
- "https://koliya.org/uk/budapest-kremenchuk.html": {
-  "h": "22d3c8e0da82",
-  "d": "2026-11-20"
- },
- "https://koliya.org/en/budapest-kremenchuk.html": {
-  "h": "40c9cca9b599",
-  "d": "2026-11-20"
- },
- "https://koliya.org/pl/budapest-kremenchuk.html": {
-  "h": "2b4dab8b9431",
   "d": "2026-11-20"
  },
  "https://koliya.org/budapest-odesa.html": {
@@ -1167,6 +1151,22 @@
   "h": "6cd9ad58909b",
   "d": "2026-11-20"
  },
+ "https://koliya.org/budapest-kremenchuk.html": {
+  "h": "55af2effaa77",
+  "d": "2026-11-20"
+ },
+ "https://koliya.org/uk/budapest-kremenchuk.html": {
+  "h": "22d3c8e0da82",
+  "d": "2026-11-20"
+ },
+ "https://koliya.org/en/budapest-kremenchuk.html": {
+  "h": "40c9cca9b599",
+  "d": "2026-11-20"
+ },
+ "https://koliya.org/pl/budapest-kremenchuk.html": {
+  "h": "2b4dab8b9431",
+  "d": "2026-11-20"
+ },
  "https://koliya.org/budapest-lviv.html": {
   "h": "0656f1af09b8",
   "d": "2026-11-20"
@@ -1192,11 +1192,11 @@
   "d": "2026-11-20"
  },
  "https://koliya.org/en/lviv-budapest.html": {
-  "h": "e215a4b20f1e",
+  "h": "617a0c930133",
   "d": "2026-11-20"
  },
  "https://koliya.org/pl/lviv-budapest.html": {
-  "h": "912dfa087644",
+  "h": "047171e0f492",
   "d": "2026-11-20"
  },
  "https://koliya.org/lviv-prague.html": {
@@ -1208,11 +1208,11 @@
   "d": "2026-11-20"
  },
  "https://koliya.org/en/lviv-prague.html": {
-  "h": "13f632a99e3d",
+  "h": "39190555b0dc",
   "d": "2026-11-20"
  },
  "https://koliya.org/pl/lviv-prague.html": {
-  "h": "ad7c14cf6254",
+  "h": "08020429f646",
   "d": "2026-11-20"
  },
  "https://koliya.org/prague-lviv.html": {
@@ -1280,67 +1280,67 @@
   "d": "2026-11-20"
  },
  "https://koliya.org/": {
-  "h": "3248ead9c3c8",
+  "h": "81918174a361",
   "d": "2026-11-20"
  },
  "https://koliya.org/uk/": {
-  "h": "514cd3e320cb",
+  "h": "e2ae2806011c",
   "d": "2026-11-20"
  },
  "https://koliya.org/en/": {
-  "h": "46888fb1e1b2",
+  "h": "b1d322fad51e",
   "d": "2026-11-20"
  },
  "https://koliya.org/pl/": {
-  "h": "5e367236e932",
+  "h": "b31884a530e1",
   "d": "2026-11-20"
  },
  "https://koliya.org/about.html": {
-  "h": "14984cea2979",
+  "h": "1fe41e46ee39",
   "d": "2026-11-20"
  },
  "https://koliya.org/uk/about.html": {
-  "h": "e658c85f55af",
+  "h": "c0111e54e8db",
   "d": "2026-11-20"
  },
  "https://koliya.org/en/about.html": {
-  "h": "aff8b7754952",
+  "h": "e9e04c01149d",
   "d": "2026-11-20"
  },
  "https://koliya.org/pl/about.html": {
-  "h": "1e6a41d4c28e",
+  "h": "d46ba5f7aab9",
   "d": "2026-11-20"
  },
  "https://koliya.org/contacts.html": {
-  "h": "7a6c27ea24b1",
+  "h": "3d7e19a01508",
   "d": "2026-11-20"
  },
  "https://koliya.org/uk/contacts.html": {
-  "h": "c5f0f0fdbced",
+  "h": "896bba92df7b",
   "d": "2026-11-20"
  },
  "https://koliya.org/en/contacts.html": {
-  "h": "e8c4ad5f7e52",
+  "h": "398a2b690642",
   "d": "2026-11-20"
  },
  "https://koliya.org/pl/contacts.html": {
-  "h": "dc4f38c489b5",
+  "h": "aac25114e90f",
   "d": "2026-11-20"
  },
  "https://koliya.org/privacy.html": {
-  "h": "4cb176ee1f87",
+  "h": "24b7f0cc8891",
   "d": "2026-11-20"
  },
  "https://koliya.org/uk/privacy.html": {
-  "h": "146a92cf123f",
+  "h": "4dc6abebeff3",
   "d": "2026-11-20"
  },
  "https://koliya.org/en/privacy.html": {
-  "h": "1ca6eb6520cb",
+  "h": "09b9bec5aa99",
   "d": "2026-11-20"
  },
  "https://koliya.org/pl/privacy.html": {
-  "h": "348385536eed",
+  "h": "9565b212b8c8",
   "d": "2026-11-20"
  }
 }
