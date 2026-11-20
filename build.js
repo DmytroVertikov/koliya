@@ -26,6 +26,8 @@ const I = (() => {
 })();
 /* тексты формы обратной связи (common.js) по умолчанию; если ключ fb.* есть в ui_texts (админка → «Тексты»), берётся значение из базы */
 const FB_DEF = {
+  "ix.fb.h": {ru: "Обратная связь", uk: "Зворотний зв’язок", en: "Feedback", pl: "Kontakt"},
+  "ix.fb.p": {ru: "Нашли неточность в расписании, хотите предложить улучшение или задать вопрос? Напишите нам.", uk: "Знайшли неточність у розкладі, хочете запропонувати покращення чи поставити запитання? Напишіть нам.", en: "Found a mistake in a schedule, have an idea or a question? Write to us.", pl: "Znalazłeś błąd w rozkładzie, masz pomysł lub pytanie? Napisz do nas."},
   "fb.link": {ru: "Обратная связь", uk: "Зворотний зв’язок", en: "Feedback", pl: "Kontakt"},
   "fb.report": {ru: "Нашли неточность?", uk: "Знайшли неточність?", en: "Found a mistake?", pl: "Znalazłeś błąd?"},
   "fb.title": {ru: "Обратная связь", uk: "Зворотний зв’язок", en: "Feedback", pl: "Kontakt"},
@@ -265,8 +267,6 @@ for (const l of LANGS) {
     const top = cut(POP[c[0]] ? all.filter(p => POP[c[0]].includes(p.href)) : all), rest = all.filter(p => !top.includes(p));
     return `<div class="pg${top.length > 5 || rest.length ? " wide" : ""}"><h3>${flag(c, 21, 16)}${hx(names[c[0]])}</h3><div class="rts">${top.map(chip).join("")}</div>${rest.length ? `<details><summary>${hx(fill(d["ix.more"], {n: rest.length}))}</summary><div class="rts">${rest.map(chip).join("")}</div></details>` : ""}</div>`
   }).filter(Boolean).join("\n");
-  v.info = `<div><h3>${hx(d["ix.buy.h"])}</h3><p class="lk">${hlist("buy").map(x => `<a href="${hx(x.url)}">${hx(hlab(x, l))}</a>`).join("")}</p></div>
-<div><h3>${hx(d["ix.fly.h"])}</h3><p>${hx(d["ix.fly.p"])}</p><p class="lk">${hlist("airport").map(x => `<a href="${hx(x.url)}" target="_blank" rel="noopener">${hx(st(x.label_ru, l))}</a>`).join("")}</p></div>`;
   /* подвал — тот же состав, что в FOOTER_HTML (common.js); скрипт потом перерисует его так же и уточнит дату обновления */
   v.footer = footerHtml(d, l);
   const out = ix.replace(/\{\{([\w.]+)\}\}/g, (m, k) => k in v ? v[k] : k in d ? fill(d[k], v) : (console.warn("нет ключа", k), m));
