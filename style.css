@@ -1369,3 +1369,6 @@ button.btn{border:0;font:inherit;font-weight:600;cursor:pointer;display:inline-b
 .ckb-b .ckb-yes{background:var(--acc);color:var(--accink)}
 .ckb-b button:hover{filter:brightness(.95)}
 @media (max-width:480px){.ckb-b{width:100%}.ckb-b button{flex:1}}
+
+/* фильтр «Из Украины» / «В Украину»: оставшиеся маршруты идут обычным потоком, без пустой колонки */
+#home[data-dir] .pg .rt.d-o,#home[data-dir] .pg .rt.d-i{grid-column:auto}
