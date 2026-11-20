@@ -19,6 +19,11 @@ jobs:
         with:
           node-version: 20
       - run: node sync.js
+      - name: Картинки для превью маршрутов (og.py), затем пересборка страниц со ссылками на них
+        run: |
+          pip install pillow
+          python3 og.py
+          node build.js
       - name: Commit and push changes
         run: |
           git config user.name "github-actions[bot]"

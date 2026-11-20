@@ -1,0 +1,3 @@
+Шрифты Inter (og/fonts) распространяются по лицензии SIL Open Font License 1.1
+https://github.com/rsms/inter / https://openfontlicense.org
+Copyright (c) 2016 The Inter Project Authors

@@ -169,6 +169,14 @@ const buyHtml = (r, l, d) => {
   if (miss) NOTR.push([r.file, l, miss]);
   return html
 };
+/* превью для соцсетей: картинка маршрута og/<язык>/<страница>.jpg рисуется og.py по og/manifest.json (если файла ещё нет, берётся общая og-image.jpg);
+   alt-текст картинки по умолчанию ниже, ключи og.alt.route и og.alt.home в ui_texts (админка → «Тексты») его переопределяют */
+const OGALT = {
+  route: {ru: "Поезд {a} → {b}: расписание и пересадки. Колія", uk: "Потяг {a} → {b}: розклад і пересадки. Колія", en: "Train {a} → {b}: schedule and transfers. Koliya", pl: "Pociąg {a} → {b}: rozkład i przesiadki. Koliya"},
+  home: {ru: "Колія: поездом из Украины в Европу. Маршруты, расписания, пересадки", uk: "Колія: потягом з України до Європи. Маршрути, розклади, пересадки", en: "Koliya: by train from Ukraine to Europe. Routes, schedules, transfers", pl: "Koliya: pociągiem z Ukrainy do Europy. Trasy, rozkłady, przesiadki"}
+};
+const ogText = (k, l, a, b) => esc(fill((I[l]["og.alt." + k] || OGALT[k][l]), {a, b}));
+const OGM = []; /* картинки маршрутов: {f, l, a, b} → og/manifest.json */
 const PEND = []; /* страницы, в которые карточки вставляются вторым проходом (после dict/*.js и pages.js) */
 for (const r of ROUTES) for (const l of LANGS) {
   const d = I[l], pre = l === "ru" ? "" : "../";
@@ -181,7 +189,9 @@ for (const r of ROUTES) for (const l of LANGS) {
   const X = r.x || "Хелм", direct = r.direct !== false; /* direct: false — на странице нет прямого поезда, все варианты идут как «с пересадкой» */
   v.stamp = "v" + VER + " direct=" + direct + " x=" + X;
   v.border = r.border ? fill(d["border." + r.border], v) : ""; v.hasDirect = String(direct); v.slice = String(!!r.slice);
-  v.ogimg = SITE + "og-image.jpg"; v.ogloc = OGL[l]; v.ogalt = LANGS.filter(x => x !== l).map(x => `    <meta property="og:locale:alternate" content="${OGL[x]}">`).join("\n");
+  const ogf = "og/" + l + "/" + r.file.replace(/\.html$/, "") + ".jpg", ogA = stH1(r.FROM, l), ogB = stH1(r.TO, l);
+  OGM.push({f: ogf, l, a: ogA, b: ogB});
+  v.ogimg = SITE + (fs.existsSync(ogf) ? ogf : "og-image.jpg"); v.ogtext = ogText("route", l, ogA, ogB); v.ogloc = OGL[l]; v.ogalt = LANGS.filter(x => x !== l).map(x => `    <meta property="og:locale:alternate" content="${OGL[x]}">`).join("\n");
   v.jsonld = JSON.stringify({"@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: [
     {"@type": "ListItem", position: 1, name: "Колія", item: SITE + path(l, "")}, {"@type": "ListItem", position: 2, name: v.r_h1, item: SITE + path(l, r.file)}]}).replace(/</g, "\\u003c");
   v.buyhtml = buyHtml(r, l, d); v.hasbuy = String(!!v.buyhtml);
@@ -234,7 +244,7 @@ for (const l of LANGS) {
   const v = {ver: VER, stamp: "v" + VER, lang: l, base: pre, canon: SITE + path(l, ""), ogloc: OGL[l]};
   v.alts = LANGS.map(x => `    <link rel="alternate" hreflang="${x}" href="${SITE + path(x, "")}">`).join("\n") + `\n    <link rel="alternate" hreflang="x-default" href="${SITE}">`;
   v.langs = LANGS.map(x => `<a href="${pre + path(x, "index.html")}" hreflang="${x}" lang="${x}"${x === l ? ' class="on"' : ""}>${x.toUpperCase()}</a>`).join("");
-  v.ogimg = SITE + "og-image.jpg"; v.jsonld = JSON.stringify({"@context": "https://schema.org", "@type": "WebSite", name: "Колія", url: SITE + path(l, ""), inLanguage: l, description: d["ix.lead"]}).replace(/</g, "\\u003c");
+  v.ogimg = SITE + "og-image.jpg"; v.ogtext = ogText("home", l); v.jsonld = JSON.stringify({"@context": "https://schema.org", "@type": "WebSite", name: "Колія", url: SITE + path(l, ""), inLanguage: l, description: d["ix.lead"]}).replace(/</g, "\\u003c");
   /* названия стран: ru — из CTRY, остальные — из словаря CN; заголовки направлений берутся из тех же ключей ix.rtOut / ix.rtIn, что и раньше */
   const names = {}, dirs = {};
   for (const c of CTRY) {
@@ -270,7 +280,7 @@ for (const l of LANGS) {
 const pg = fs.readFileSync("page.src.html", "utf8");
 for (const k of Object.keys(SP.P)) for (const l of LANGS) {
   const d = I[l], pre = l === "ru" ? "" : "../", f = k + ".html", T = SP.P[k][l], loc = SITE + path(l, f);
-  const v = {ver: VER, stamp: "v" + VER, lang: l, base: pre, home: "./", canon: loc, ogloc: OGL[l], ogimg: SITE + "og-image.jpg",
+  const v = {ver: VER, stamp: "v" + VER, lang: l, base: pre, home: "./", canon: loc, ogloc: OGL[l], ogimg: SITE + "og-image.jpg", ogtext: ogText("home", l),
     p_title: T.title, p_desc: T.desc, p_h1: T.h1, p_lead: T.lead, p_body: T.html, footer: footerHtml(d, l)};
   v.alts = LANGS.map(x => `    <link rel="alternate" hreflang="${x}" href="${SITE + path(x, f)}">`).join("\n") + `\n    <link rel="alternate" hreflang="x-default" href="${SITE + f}">`;
   v.ogalt = LANGS.filter(x => x !== l).map(x => `    <meta property="og:locale:alternate" content="${OGL[x]}">`).join("\n");
@@ -288,7 +298,7 @@ for (const k of Object.keys(SP.P)) for (const l of LANGS) {
   for (const l of LANGS) {
     const d = I[l], N = SP.NF[l], pre = l === "ru" ? "/" : "/" + l + "/";
     const body = `<div class="doc"><section class="panel"><h2>${N.h2}</h2><p>${N.p}</p><p style="display:flex;flex-wrap:wrap;gap:10px"><a class="btn pri" style="margin:0;padding:12px 22px" href="${pre}">${N.home}</a><button type="button" class="btn fb-open" style="margin:0" data-fb="data">${N.fb}</button></p></section></div>`;
-    const v = {ver: VER, stamp: "v" + VER, lang: l, base: "/", home: pre, canon: SITE, ogloc: OGL[l], ogimg: SITE + "og-image.jpg",
+    const v = {ver: VER, stamp: "v" + VER, lang: l, base: "/", home: pre, canon: SITE, ogloc: OGL[l], ogimg: SITE + "og-image.jpg", ogtext: ogText("home", l),
       p_title: N.title, p_desc: N.desc, p_h1: N.h1, p_lead: N.lead, p_body: body.replace(/^<div class="doc">|<\/div>$/g, ""), alts: "", ogalt: "", jsonld: "{}",
       langs: LANGS.map(x => `<a href="${x === "ru" ? "/" : "/" + x + "/"}" hreflang="${x}" lang="${x}"${x === l ? ' class="on"' : ""}>${x.toUpperCase()}</a>`).join(""),
       footer: footerHtml(d, l).replace(/href="(about|contacts|privacy)\.html"/g, (m, k) => `href="/${path(l, k + ".html")}"`)};
@@ -303,6 +313,8 @@ for (const k of Object.keys(SP.P)) for (const l of LANGS) {
     .replace(/<body>\n(<header>[\s\S]*<\/footer>)\n<script>window\.LANG[\s\S]*<\/body>/, (m, inner) => `<body>\n<div id="nf-main">\n${inner}\n</div>\n${tpls}\n${sw}\n<script src="/config.js"></script>\n<script src="/pages.js"></script>\n<script src="/common.js?v=${VER}"></script>\n<script src="/consent.js?v=${VER}"></script>\n</body>`);
   fs.writeFileSync("404.html", html)
 }
+fs.mkdirSync("og", {recursive: true});
+fs.writeFileSync("og/manifest.json", JSON.stringify(OGM, null, 1) + "\n"); /* читает og.py */
 /* словари для браузера: dict/<язык>.js = русский (запасной) + язык страницы + станции + страны */
 fs.mkdirSync("dict", {recursive: true});
 for (const l of LANGS) {

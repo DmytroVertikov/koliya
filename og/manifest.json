@@ -1,0 +1,1922 @@
+[
+ {
+  "f": "og/ru/kyiv-warsaw.jpg",
+  "l": "ru",
+  "a": "Киев",
+  "b": "Варшава"
+ },
+ {
+  "f": "og/uk/kyiv-warsaw.jpg",
+  "l": "uk",
+  "a": "Київ",
+  "b": "Варшава"
+ },
+ {
+  "f": "og/en/kyiv-warsaw.jpg",
+  "l": "en",
+  "a": "Kyiv",
+  "b": "Warszawa"
+ },
+ {
+  "f": "og/pl/kyiv-warsaw.jpg",
+  "l": "pl",
+  "a": "Kijów",
+  "b": "Warszawa"
+ },
+ {
+  "f": "og/ru/warsaw-kyiv.jpg",
+  "l": "ru",
+  "a": "Варшава",
+  "b": "Киев"
+ },
+ {
+  "f": "og/uk/warsaw-kyiv.jpg",
+  "l": "uk",
+  "a": "Варшава",
+  "b": "Київ"
+ },
+ {
+  "f": "og/en/warsaw-kyiv.jpg",
+  "l": "en",
+  "a": "Warszawa",
+  "b": "Kyiv"
+ },
+ {
+  "f": "og/pl/warsaw-kyiv.jpg",
+  "l": "pl",
+  "a": "Warszawa",
+  "b": "Kijów"
+ },
+ {
+  "f": "og/ru/kyiv-krakow.jpg",
+  "l": "ru",
+  "a": "Киев",
+  "b": "Краков"
+ },
+ {
+  "f": "og/uk/kyiv-krakow.jpg",
+  "l": "uk",
+  "a": "Київ",
+  "b": "Краків"
+ },
+ {
+  "f": "og/en/kyiv-krakow.jpg",
+  "l": "en",
+  "a": "Kyiv",
+  "b": "Kraków"
+ },
+ {
+  "f": "og/pl/kyiv-krakow.jpg",
+  "l": "pl",
+  "a": "Kijów",
+  "b": "Kraków"
+ },
+ {
+  "f": "og/ru/krakow-kyiv.jpg",
+  "l": "ru",
+  "a": "Краков",
+  "b": "Киев"
+ },
+ {
+  "f": "og/uk/krakow-kyiv.jpg",
+  "l": "uk",
+  "a": "Краків",
+  "b": "Київ"
+ },
+ {
+  "f": "og/en/krakow-kyiv.jpg",
+  "l": "en",
+  "a": "Kraków",
+  "b": "Kyiv"
+ },
+ {
+  "f": "og/pl/krakow-kyiv.jpg",
+  "l": "pl",
+  "a": "Kraków",
+  "b": "Kijów"
+ },
+ {
+  "f": "og/ru/kyiv-khelm.jpg",
+  "l": "ru",
+  "a": "Киев",
+  "b": "Хелм"
+ },
+ {
+  "f": "og/uk/kyiv-khelm.jpg",
+  "l": "uk",
+  "a": "Київ",
+  "b": "Хелм"
+ },
+ {
+  "f": "og/en/kyiv-khelm.jpg",
+  "l": "en",
+  "a": "Kyiv",
+  "b": "Chełm"
+ },
+ {
+  "f": "og/pl/kyiv-khelm.jpg",
+  "l": "pl",
+  "a": "Kijów",
+  "b": "Chełm"
+ },
+ {
+  "f": "og/ru/khelm-kyiv.jpg",
+  "l": "ru",
+  "a": "Хелм",
+  "b": "Киев"
+ },
+ {
+  "f": "og/uk/khelm-kyiv.jpg",
+  "l": "uk",
+  "a": "Хелм",
+  "b": "Київ"
+ },
+ {
+  "f": "og/en/khelm-kyiv.jpg",
+  "l": "en",
+  "a": "Chełm",
+  "b": "Kyiv"
+ },
+ {
+  "f": "og/pl/khelm-kyiv.jpg",
+  "l": "pl",
+  "a": "Chełm",
+  "b": "Kijów"
+ },
+ {
+  "f": "og/ru/kyiv-przemysl.jpg",
+  "l": "ru",
+  "a": "Киев",
+  "b": "Перемышль"
+ },
+ {
+  "f": "og/uk/kyiv-przemysl.jpg",
+  "l": "uk",
+  "a": "Київ",
+  "b": "Перемишль"
+ },
+ {
+  "f": "og/en/kyiv-przemysl.jpg",
+  "l": "en",
+  "a": "Kyiv",
+  "b": "Przemyśl"
+ },
+ {
+  "f": "og/pl/kyiv-przemysl.jpg",
+  "l": "pl",
+  "a": "Kijów",
+  "b": "Przemyśl"
+ },
+ {
+  "f": "og/ru/przemysl-kyiv.jpg",
+  "l": "ru",
+  "a": "Перемышль",
+  "b": "Киев"
+ },
+ {
+  "f": "og/uk/przemysl-kyiv.jpg",
+  "l": "uk",
+  "a": "Перемишль",
+  "b": "Київ"
+ },
+ {
+  "f": "og/en/przemysl-kyiv.jpg",
+  "l": "en",
+  "a": "Przemyśl",
+  "b": "Kyiv"
+ },
+ {
+  "f": "og/pl/przemysl-kyiv.jpg",
+  "l": "pl",
+  "a": "Przemyśl",
+  "b": "Kijów"
+ },
+ {
+  "f": "og/ru/dnipro-warsaw.jpg",
+  "l": "ru",
+  "a": "Днепр",
+  "b": "Варшава"
+ },
+ {
+  "f": "og/uk/dnipro-warsaw.jpg",
+  "l": "uk",
+  "a": "Дніпро",
+  "b": "Варшава"
+ },
+ {
+  "f": "og/en/dnipro-warsaw.jpg",
+  "l": "en",
+  "a": "Dnipro",
+  "b": "Warszawa"
+ },
+ {
+  "f": "og/pl/dnipro-warsaw.jpg",
+  "l": "pl",
+  "a": "Dnipro",
+  "b": "Warszawa"
+ },
+ {
+  "f": "og/ru/warsaw-dnipro.jpg",
+  "l": "ru",
+  "a": "Варшава",
+  "b": "Днепр"
+ },
+ {
+  "f": "og/uk/warsaw-dnipro.jpg",
+  "l": "uk",
+  "a": "Варшава",
+  "b": "Дніпро"
+ },
+ {
+  "f": "og/en/warsaw-dnipro.jpg",
+  "l": "en",
+  "a": "Warszawa",
+  "b": "Dnipro"
+ },
+ {
+  "f": "og/pl/warsaw-dnipro.jpg",
+  "l": "pl",
+  "a": "Warszawa",
+  "b": "Dnipro"
+ },
+ {
+  "f": "og/ru/dnipro-krakow.jpg",
+  "l": "ru",
+  "a": "Днепр",
+  "b": "Краков"
+ },
+ {
+  "f": "og/uk/dnipro-krakow.jpg",
+  "l": "uk",
+  "a": "Дніпро",
+  "b": "Краків"
+ },
+ {
+  "f": "og/en/dnipro-krakow.jpg",
+  "l": "en",
+  "a": "Dnipro",
+  "b": "Kraków"
+ },
+ {
+  "f": "og/pl/dnipro-krakow.jpg",
+  "l": "pl",
+  "a": "Dnipro",
+  "b": "Kraków"
+ },
+ {
+  "f": "og/ru/krakow-dnipro.jpg",
+  "l": "ru",
+  "a": "Краков",
+  "b": "Днепр"
+ },
+ {
+  "f": "og/uk/krakow-dnipro.jpg",
+  "l": "uk",
+  "a": "Краків",
+  "b": "Дніпро"
+ },
+ {
+  "f": "og/en/krakow-dnipro.jpg",
+  "l": "en",
+  "a": "Kraków",
+  "b": "Dnipro"
+ },
+ {
+  "f": "og/pl/krakow-dnipro.jpg",
+  "l": "pl",
+  "a": "Kraków",
+  "b": "Dnipro"
+ },
+ {
+  "f": "og/ru/dnipro-khelm.jpg",
+  "l": "ru",
+  "a": "Днепр",
+  "b": "Хелм"
+ },
+ {
+  "f": "og/uk/dnipro-khelm.jpg",
+  "l": "uk",
+  "a": "Дніпро",
+  "b": "Хелм"
+ },
+ {
+  "f": "og/en/dnipro-khelm.jpg",
+  "l": "en",
+  "a": "Dnipro",
+  "b": "Chełm"
+ },
+ {
+  "f": "og/pl/dnipro-khelm.jpg",
+  "l": "pl",
+  "a": "Dnipro",
+  "b": "Chełm"
+ },
+ {
+  "f": "og/ru/khelm-dnipro.jpg",
+  "l": "ru",
+  "a": "Хелм",
+  "b": "Днепр"
+ },
+ {
+  "f": "og/uk/khelm-dnipro.jpg",
+  "l": "uk",
+  "a": "Хелм",
+  "b": "Дніпро"
+ },
+ {
+  "f": "og/en/khelm-dnipro.jpg",
+  "l": "en",
+  "a": "Chełm",
+  "b": "Dnipro"
+ },
+ {
+  "f": "og/pl/khelm-dnipro.jpg",
+  "l": "pl",
+  "a": "Chełm",
+  "b": "Dnipro"
+ },
+ {
+  "f": "og/ru/dnipro-przemysl.jpg",
+  "l": "ru",
+  "a": "Днепр",
+  "b": "Перемышль"
+ },
+ {
+  "f": "og/uk/dnipro-przemysl.jpg",
+  "l": "uk",
+  "a": "Дніпро",
+  "b": "Перемишль"
+ },
+ {
+  "f": "og/en/dnipro-przemysl.jpg",
+  "l": "en",
+  "a": "Dnipro",
+  "b": "Przemyśl"
+ },
+ {
+  "f": "og/pl/dnipro-przemysl.jpg",
+  "l": "pl",
+  "a": "Dnipro",
+  "b": "Przemyśl"
+ },
+ {
+  "f": "og/ru/przemysl-dnipro.jpg",
+  "l": "ru",
+  "a": "Перемышль",
+  "b": "Днепр"
+ },
+ {
+  "f": "og/uk/przemysl-dnipro.jpg",
+  "l": "uk",
+  "a": "Перемишль",
+  "b": "Дніпро"
+ },
+ {
+  "f": "og/en/przemysl-dnipro.jpg",
+  "l": "en",
+  "a": "Przemyśl",
+  "b": "Dnipro"
+ },
+ {
+  "f": "og/pl/przemysl-dnipro.jpg",
+  "l": "pl",
+  "a": "Przemyśl",
+  "b": "Dnipro"
+ },
+ {
+  "f": "og/ru/kharkiv-warsaw.jpg",
+  "l": "ru",
+  "a": "Харьков",
+  "b": "Варшава"
+ },
+ {
+  "f": "og/uk/kharkiv-warsaw.jpg",
+  "l": "uk",
+  "a": "Харків",
+  "b": "Варшава"
+ },
+ {
+  "f": "og/en/kharkiv-warsaw.jpg",
+  "l": "en",
+  "a": "Kharkiv",
+  "b": "Warszawa"
+ },
+ {
+  "f": "og/pl/kharkiv-warsaw.jpg",
+  "l": "pl",
+  "a": "Charków",
+  "b": "Warszawa"
+ },
+ {
+  "f": "og/ru/warsaw-kharkiv.jpg",
+  "l": "ru",
+  "a": "Варшава",
+  "b": "Харьков"
+ },
+ {
+  "f": "og/uk/warsaw-kharkiv.jpg",
+  "l": "uk",
+  "a": "Варшава",
+  "b": "Харків"
+ },
+ {
+  "f": "og/en/warsaw-kharkiv.jpg",
+  "l": "en",
+  "a": "Warszawa",
+  "b": "Kharkiv"
+ },
+ {
+  "f": "og/pl/warsaw-kharkiv.jpg",
+  "l": "pl",
+  "a": "Warszawa",
+  "b": "Charków"
+ },
+ {
+  "f": "og/ru/kharkiv-krakow.jpg",
+  "l": "ru",
+  "a": "Харьков",
+  "b": "Краков"
+ },
+ {
+  "f": "og/uk/kharkiv-krakow.jpg",
+  "l": "uk",
+  "a": "Харків",
+  "b": "Краків"
+ },
+ {
+  "f": "og/en/kharkiv-krakow.jpg",
+  "l": "en",
+  "a": "Kharkiv",
+  "b": "Kraków"
+ },
+ {
+  "f": "og/pl/kharkiv-krakow.jpg",
+  "l": "pl",
+  "a": "Charków",
+  "b": "Kraków"
+ },
+ {
+  "f": "og/ru/krakow-kharkiv.jpg",
+  "l": "ru",
+  "a": "Краков",
+  "b": "Харьков"
+ },
+ {
+  "f": "og/uk/krakow-kharkiv.jpg",
+  "l": "uk",
+  "a": "Краків",
+  "b": "Харків"
+ },
+ {
+  "f": "og/en/krakow-kharkiv.jpg",
+  "l": "en",
+  "a": "Kraków",
+  "b": "Kharkiv"
+ },
+ {
+  "f": "og/pl/krakow-kharkiv.jpg",
+  "l": "pl",
+  "a": "Kraków",
+  "b": "Charków"
+ },
+ {
+  "f": "og/ru/kharkiv-khelm.jpg",
+  "l": "ru",
+  "a": "Харьков",
+  "b": "Хелм"
+ },
+ {
+  "f": "og/uk/kharkiv-khelm.jpg",
+  "l": "uk",
+  "a": "Харків",
+  "b": "Хелм"
+ },
+ {
+  "f": "og/en/kharkiv-khelm.jpg",
+  "l": "en",
+  "a": "Kharkiv",
+  "b": "Chełm"
+ },
+ {
+  "f": "og/pl/kharkiv-khelm.jpg",
+  "l": "pl",
+  "a": "Charków",
+  "b": "Chełm"
+ },
+ {
+  "f": "og/ru/khelm-kharkiv.jpg",
+  "l": "ru",
+  "a": "Хелм",
+  "b": "Харьков"
+ },
+ {
+  "f": "og/uk/khelm-kharkiv.jpg",
+  "l": "uk",
+  "a": "Хелм",
+  "b": "Харків"
+ },
+ {
+  "f": "og/en/khelm-kharkiv.jpg",
+  "l": "en",
+  "a": "Chełm",
+  "b": "Kharkiv"
+ },
+ {
+  "f": "og/pl/khelm-kharkiv.jpg",
+  "l": "pl",
+  "a": "Chełm",
+  "b": "Charków"
+ },
+ {
+  "f": "og/ru/kharkiv-przemysl.jpg",
+  "l": "ru",
+  "a": "Харьков",
+  "b": "Перемышль"
+ },
+ {
+  "f": "og/uk/kharkiv-przemysl.jpg",
+  "l": "uk",
+  "a": "Харків",
+  "b": "Перемишль"
+ },
+ {
+  "f": "og/en/kharkiv-przemysl.jpg",
+  "l": "en",
+  "a": "Kharkiv",
+  "b": "Przemyśl"
+ },
+ {
+  "f": "og/pl/kharkiv-przemysl.jpg",
+  "l": "pl",
+  "a": "Charków",
+  "b": "Przemyśl"
+ },
+ {
+  "f": "og/ru/przemysl-kharkiv.jpg",
+  "l": "ru",
+  "a": "Перемышль",
+  "b": "Харьков"
+ },
+ {
+  "f": "og/uk/przemysl-kharkiv.jpg",
+  "l": "uk",
+  "a": "Перемишль",
+  "b": "Харків"
+ },
+ {
+  "f": "og/en/przemysl-kharkiv.jpg",
+  "l": "en",
+  "a": "Przemyśl",
+  "b": "Kharkiv"
+ },
+ {
+  "f": "og/pl/przemysl-kharkiv.jpg",
+  "l": "pl",
+  "a": "Przemyśl",
+  "b": "Charków"
+ },
+ {
+  "f": "og/ru/odesa-warsaw.jpg",
+  "l": "ru",
+  "a": "Одесса",
+  "b": "Варшава"
+ },
+ {
+  "f": "og/uk/odesa-warsaw.jpg",
+  "l": "uk",
+  "a": "Одеса",
+  "b": "Варшава"
+ },
+ {
+  "f": "og/en/odesa-warsaw.jpg",
+  "l": "en",
+  "a": "Odesa",
+  "b": "Warszawa"
+ },
+ {
+  "f": "og/pl/odesa-warsaw.jpg",
+  "l": "pl",
+  "a": "Odessa",
+  "b": "Warszawa"
+ },
+ {
+  "f": "og/ru/warsaw-odesa.jpg",
+  "l": "ru",
+  "a": "Варшава",
+  "b": "Одесса"
+ },
+ {
+  "f": "og/uk/warsaw-odesa.jpg",
+  "l": "uk",
+  "a": "Варшава",
+  "b": "Одеса"
+ },
+ {
+  "f": "og/en/warsaw-odesa.jpg",
+  "l": "en",
+  "a": "Warszawa",
+  "b": "Odesa"
+ },
+ {
+  "f": "og/pl/warsaw-odesa.jpg",
+  "l": "pl",
+  "a": "Warszawa",
+  "b": "Odessa"
+ },
+ {
+  "f": "og/ru/odesa-krakow.jpg",
+  "l": "ru",
+  "a": "Одесса",
+  "b": "Краков"
+ },
+ {
+  "f": "og/uk/odesa-krakow.jpg",
+  "l": "uk",
+  "a": "Одеса",
+  "b": "Краків"
+ },
+ {
+  "f": "og/en/odesa-krakow.jpg",
+  "l": "en",
+  "a": "Odesa",
+  "b": "Kraków"
+ },
+ {
+  "f": "og/pl/odesa-krakow.jpg",
+  "l": "pl",
+  "a": "Odessa",
+  "b": "Kraków"
+ },
+ {
+  "f": "og/ru/krakow-odesa.jpg",
+  "l": "ru",
+  "a": "Краков",
+  "b": "Одесса"
+ },
+ {
+  "f": "og/uk/krakow-odesa.jpg",
+  "l": "uk",
+  "a": "Краків",
+  "b": "Одеса"
+ },
+ {
+  "f": "og/en/krakow-odesa.jpg",
+  "l": "en",
+  "a": "Kraków",
+  "b": "Odesa"
+ },
+ {
+  "f": "og/pl/krakow-odesa.jpg",
+  "l": "pl",
+  "a": "Kraków",
+  "b": "Odessa"
+ },
+ {
+  "f": "og/ru/odesa-przemysl.jpg",
+  "l": "ru",
+  "a": "Одесса",
+  "b": "Перемышль"
+ },
+ {
+  "f": "og/uk/odesa-przemysl.jpg",
+  "l": "uk",
+  "a": "Одеса",
+  "b": "Перемишль"
+ },
+ {
+  "f": "og/en/odesa-przemysl.jpg",
+  "l": "en",
+  "a": "Odesa",
+  "b": "Przemyśl"
+ },
+ {
+  "f": "og/pl/odesa-przemysl.jpg",
+  "l": "pl",
+  "a": "Odessa",
+  "b": "Przemyśl"
+ },
+ {
+  "f": "og/ru/przemysl-odesa.jpg",
+  "l": "ru",
+  "a": "Перемышль",
+  "b": "Одесса"
+ },
+ {
+  "f": "og/uk/przemysl-odesa.jpg",
+  "l": "uk",
+  "a": "Перемишль",
+  "b": "Одеса"
+ },
+ {
+  "f": "og/en/przemysl-odesa.jpg",
+  "l": "en",
+  "a": "Przemyśl",
+  "b": "Odesa"
+ },
+ {
+  "f": "og/pl/przemysl-odesa.jpg",
+  "l": "pl",
+  "a": "Przemyśl",
+  "b": "Odessa"
+ },
+ {
+  "f": "og/ru/lviv-warsaw.jpg",
+  "l": "ru",
+  "a": "Львов",
+  "b": "Варшава"
+ },
+ {
+  "f": "og/uk/lviv-warsaw.jpg",
+  "l": "uk",
+  "a": "Львів",
+  "b": "Варшава"
+ },
+ {
+  "f": "og/en/lviv-warsaw.jpg",
+  "l": "en",
+  "a": "Lviv",
+  "b": "Warszawa"
+ },
+ {
+  "f": "og/pl/lviv-warsaw.jpg",
+  "l": "pl",
+  "a": "Lwów",
+  "b": "Warszawa"
+ },
+ {
+  "f": "og/ru/warsaw-lviv.jpg",
+  "l": "ru",
+  "a": "Варшава",
+  "b": "Львов"
+ },
+ {
+  "f": "og/uk/warsaw-lviv.jpg",
+  "l": "uk",
+  "a": "Варшава",
+  "b": "Львів"
+ },
+ {
+  "f": "og/en/warsaw-lviv.jpg",
+  "l": "en",
+  "a": "Warszawa",
+  "b": "Lviv"
+ },
+ {
+  "f": "og/pl/warsaw-lviv.jpg",
+  "l": "pl",
+  "a": "Warszawa",
+  "b": "Lwów"
+ },
+ {
+  "f": "og/ru/lviv-krakow.jpg",
+  "l": "ru",
+  "a": "Львов",
+  "b": "Краков"
+ },
+ {
+  "f": "og/uk/lviv-krakow.jpg",
+  "l": "uk",
+  "a": "Львів",
+  "b": "Краків"
+ },
+ {
+  "f": "og/en/lviv-krakow.jpg",
+  "l": "en",
+  "a": "Lviv",
+  "b": "Kraków"
+ },
+ {
+  "f": "og/pl/lviv-krakow.jpg",
+  "l": "pl",
+  "a": "Lwów",
+  "b": "Kraków"
+ },
+ {
+  "f": "og/ru/krakow-lviv.jpg",
+  "l": "ru",
+  "a": "Краков",
+  "b": "Львов"
+ },
+ {
+  "f": "og/uk/krakow-lviv.jpg",
+  "l": "uk",
+  "a": "Краків",
+  "b": "Львів"
+ },
+ {
+  "f": "og/en/krakow-lviv.jpg",
+  "l": "en",
+  "a": "Kraków",
+  "b": "Lviv"
+ },
+ {
+  "f": "og/pl/krakow-lviv.jpg",
+  "l": "pl",
+  "a": "Kraków",
+  "b": "Lwów"
+ },
+ {
+  "f": "og/ru/lviv-przemysl.jpg",
+  "l": "ru",
+  "a": "Львов",
+  "b": "Перемышль"
+ },
+ {
+  "f": "og/uk/lviv-przemysl.jpg",
+  "l": "uk",
+  "a": "Львів",
+  "b": "Перемишль"
+ },
+ {
+  "f": "og/en/lviv-przemysl.jpg",
+  "l": "en",
+  "a": "Lviv",
+  "b": "Przemyśl"
+ },
+ {
+  "f": "og/pl/lviv-przemysl.jpg",
+  "l": "pl",
+  "a": "Lwów",
+  "b": "Przemyśl"
+ },
+ {
+  "f": "og/ru/przemysl-lviv.jpg",
+  "l": "ru",
+  "a": "Перемышль",
+  "b": "Львов"
+ },
+ {
+  "f": "og/uk/przemysl-lviv.jpg",
+  "l": "uk",
+  "a": "Перемишль",
+  "b": "Львів"
+ },
+ {
+  "f": "og/en/przemysl-lviv.jpg",
+  "l": "en",
+  "a": "Przemyśl",
+  "b": "Lviv"
+ },
+ {
+  "f": "og/pl/przemysl-lviv.jpg",
+  "l": "pl",
+  "a": "Przemyśl",
+  "b": "Lwów"
+ },
+ {
+  "f": "og/ru/kremenchuk-warsaw.jpg",
+  "l": "ru",
+  "a": "Кременчуг",
+  "b": "Варшава"
+ },
+ {
+  "f": "og/uk/kremenchuk-warsaw.jpg",
+  "l": "uk",
+  "a": "Кременчук",
+  "b": "Варшава"
+ },
+ {
+  "f": "og/en/kremenchuk-warsaw.jpg",
+  "l": "en",
+  "a": "Kremenchuk",
+  "b": "Warszawa"
+ },
+ {
+  "f": "og/pl/kremenchuk-warsaw.jpg",
+  "l": "pl",
+  "a": "Krzemieńczuk",
+  "b": "Warszawa"
+ },
+ {
+  "f": "og/ru/warsaw-kremenchuk.jpg",
+  "l": "ru",
+  "a": "Варшава",
+  "b": "Кременчуг"
+ },
+ {
+  "f": "og/uk/warsaw-kremenchuk.jpg",
+  "l": "uk",
+  "a": "Варшава",
+  "b": "Кременчук"
+ },
+ {
+  "f": "og/en/warsaw-kremenchuk.jpg",
+  "l": "en",
+  "a": "Warszawa",
+  "b": "Kremenchuk"
+ },
+ {
+  "f": "og/pl/warsaw-kremenchuk.jpg",
+  "l": "pl",
+  "a": "Warszawa",
+  "b": "Krzemieńczuk"
+ },
+ {
+  "f": "og/ru/kremenchuk-krakow.jpg",
+  "l": "ru",
+  "a": "Кременчуг",
+  "b": "Краков"
+ },
+ {
+  "f": "og/uk/kremenchuk-krakow.jpg",
+  "l": "uk",
+  "a": "Кременчук",
+  "b": "Краків"
+ },
+ {
+  "f": "og/en/kremenchuk-krakow.jpg",
+  "l": "en",
+  "a": "Kremenchuk",
+  "b": "Kraków"
+ },
+ {
+  "f": "og/pl/kremenchuk-krakow.jpg",
+  "l": "pl",
+  "a": "Krzemieńczuk",
+  "b": "Kraków"
+ },
+ {
+  "f": "og/ru/krakow-kremenchuk.jpg",
+  "l": "ru",
+  "a": "Краков",
+  "b": "Кременчуг"
+ },
+ {
+  "f": "og/uk/krakow-kremenchuk.jpg",
+  "l": "uk",
+  "a": "Краків",
+  "b": "Кременчук"
+ },
+ {
+  "f": "og/en/krakow-kremenchuk.jpg",
+  "l": "en",
+  "a": "Kraków",
+  "b": "Kremenchuk"
+ },
+ {
+  "f": "og/pl/krakow-kremenchuk.jpg",
+  "l": "pl",
+  "a": "Kraków",
+  "b": "Krzemieńczuk"
+ },
+ {
+  "f": "og/ru/kremenchuk-przemysl.jpg",
+  "l": "ru",
+  "a": "Кременчуг",
+  "b": "Перемышль"
+ },
+ {
+  "f": "og/uk/kremenchuk-przemysl.jpg",
+  "l": "uk",
+  "a": "Кременчук",
+  "b": "Перемишль"
+ },
+ {
+  "f": "og/en/kremenchuk-przemysl.jpg",
+  "l": "en",
+  "a": "Kremenchuk",
+  "b": "Przemyśl"
+ },
+ {
+  "f": "og/pl/kremenchuk-przemysl.jpg",
+  "l": "pl",
+  "a": "Krzemieńczuk",
+  "b": "Przemyśl"
+ },
+ {
+  "f": "og/ru/przemysl-kremenchuk.jpg",
+  "l": "ru",
+  "a": "Перемышль",
+  "b": "Кременчуг"
+ },
+ {
+  "f": "og/uk/przemysl-kremenchuk.jpg",
+  "l": "uk",
+  "a": "Перемишль",
+  "b": "Кременчук"
+ },
+ {
+  "f": "og/en/przemysl-kremenchuk.jpg",
+  "l": "en",
+  "a": "Przemyśl",
+  "b": "Kremenchuk"
+ },
+ {
+  "f": "og/pl/przemysl-kremenchuk.jpg",
+  "l": "pl",
+  "a": "Przemyśl",
+  "b": "Krzemieńczuk"
+ },
+ {
+  "f": "og/ru/kyiv-bratislava.jpg",
+  "l": "ru",
+  "a": "Киев",
+  "b": "Братислава"
+ },
+ {
+  "f": "og/uk/kyiv-bratislava.jpg",
+  "l": "uk",
+  "a": "Київ",
+  "b": "Братислава"
+ },
+ {
+  "f": "og/en/kyiv-bratislava.jpg",
+  "l": "en",
+  "a": "Kyiv",
+  "b": "Bratislava"
+ },
+ {
+  "f": "og/pl/kyiv-bratislava.jpg",
+  "l": "pl",
+  "a": "Kijów",
+  "b": "Bratysława"
+ },
+ {
+  "f": "og/ru/bratislava-kyiv.jpg",
+  "l": "ru",
+  "a": "Братислава",
+  "b": "Киев"
+ },
+ {
+  "f": "og/uk/bratislava-kyiv.jpg",
+  "l": "uk",
+  "a": "Братислава",
+  "b": "Київ"
+ },
+ {
+  "f": "og/en/bratislava-kyiv.jpg",
+  "l": "en",
+  "a": "Bratislava",
+  "b": "Kyiv"
+ },
+ {
+  "f": "og/pl/bratislava-kyiv.jpg",
+  "l": "pl",
+  "a": "Bratysława",
+  "b": "Kijów"
+ },
+ {
+  "f": "og/ru/kyiv-bucharest.jpg",
+  "l": "ru",
+  "a": "Киев",
+  "b": "Бухарест"
+ },
+ {
+  "f": "og/uk/kyiv-bucharest.jpg",
+  "l": "uk",
+  "a": "Київ",
+  "b": "Бухарест"
+ },
+ {
+  "f": "og/en/kyiv-bucharest.jpg",
+  "l": "en",
+  "a": "Kyiv",
+  "b": "Bucharest"
+ },
+ {
+  "f": "og/pl/kyiv-bucharest.jpg",
+  "l": "pl",
+  "a": "Kijów",
+  "b": "Bukareszt"
+ },
+ {
+  "f": "og/ru/bucharest-kyiv.jpg",
+  "l": "ru",
+  "a": "Бухарест",
+  "b": "Киев"
+ },
+ {
+  "f": "og/uk/bucharest-kyiv.jpg",
+  "l": "uk",
+  "a": "Бухарест",
+  "b": "Київ"
+ },
+ {
+  "f": "og/en/bucharest-kyiv.jpg",
+  "l": "en",
+  "a": "Bucharest",
+  "b": "Kyiv"
+ },
+ {
+  "f": "og/pl/bucharest-kyiv.jpg",
+  "l": "pl",
+  "a": "Bukareszt",
+  "b": "Kijów"
+ },
+ {
+  "f": "og/ru/kyiv-vienna.jpg",
+  "l": "ru",
+  "a": "Киев",
+  "b": "Вена"
+ },
+ {
+  "f": "og/uk/kyiv-vienna.jpg",
+  "l": "uk",
+  "a": "Київ",
+  "b": "Відень"
+ },
+ {
+  "f": "og/en/kyiv-vienna.jpg",
+  "l": "en",
+  "a": "Kyiv",
+  "b": "Vienna"
+ },
+ {
+  "f": "og/pl/kyiv-vienna.jpg",
+  "l": "pl",
+  "a": "Kijów",
+  "b": "Wiedeń"
+ },
+ {
+  "f": "og/ru/vienna-kyiv.jpg",
+  "l": "ru",
+  "a": "Вена",
+  "b": "Киев"
+ },
+ {
+  "f": "og/uk/vienna-kyiv.jpg",
+  "l": "uk",
+  "a": "Відень",
+  "b": "Київ"
+ },
+ {
+  "f": "og/en/vienna-kyiv.jpg",
+  "l": "en",
+  "a": "Vienna",
+  "b": "Kyiv"
+ },
+ {
+  "f": "og/pl/vienna-kyiv.jpg",
+  "l": "pl",
+  "a": "Wiedeń",
+  "b": "Kijów"
+ },
+ {
+  "f": "og/ru/kyiv-chisinau.jpg",
+  "l": "ru",
+  "a": "Киев",
+  "b": "Кишинев"
+ },
+ {
+  "f": "og/uk/kyiv-chisinau.jpg",
+  "l": "uk",
+  "a": "Київ",
+  "b": "Кишинів"
+ },
+ {
+  "f": "og/en/kyiv-chisinau.jpg",
+  "l": "en",
+  "a": "Kyiv",
+  "b": "Chișinău"
+ },
+ {
+  "f": "og/pl/kyiv-chisinau.jpg",
+  "l": "pl",
+  "a": "Kijów",
+  "b": "Kiszyniów"
+ },
+ {
+  "f": "og/ru/chisinau-kyiv.jpg",
+  "l": "ru",
+  "a": "Кишинев",
+  "b": "Киев"
+ },
+ {
+  "f": "og/uk/chisinau-kyiv.jpg",
+  "l": "uk",
+  "a": "Кишинів",
+  "b": "Київ"
+ },
+ {
+  "f": "og/en/chisinau-kyiv.jpg",
+  "l": "en",
+  "a": "Chișinău",
+  "b": "Kyiv"
+ },
+ {
+  "f": "og/pl/chisinau-kyiv.jpg",
+  "l": "pl",
+  "a": "Kiszyniów",
+  "b": "Kijów"
+ },
+ {
+  "f": "og/ru/kyiv-berlin.jpg",
+  "l": "ru",
+  "a": "Киев",
+  "b": "Берлин"
+ },
+ {
+  "f": "og/uk/kyiv-berlin.jpg",
+  "l": "uk",
+  "a": "Київ",
+  "b": "Берлін"
+ },
+ {
+  "f": "og/en/kyiv-berlin.jpg",
+  "l": "en",
+  "a": "Kyiv",
+  "b": "Berlin"
+ },
+ {
+  "f": "og/pl/kyiv-berlin.jpg",
+  "l": "pl",
+  "a": "Kijów",
+  "b": "Berlin"
+ },
+ {
+  "f": "og/ru/berlin-kyiv.jpg",
+  "l": "ru",
+  "a": "Берлин",
+  "b": "Киев"
+ },
+ {
+  "f": "og/uk/berlin-kyiv.jpg",
+  "l": "uk",
+  "a": "Берлін",
+  "b": "Київ"
+ },
+ {
+  "f": "og/en/berlin-kyiv.jpg",
+  "l": "en",
+  "a": "Berlin",
+  "b": "Kyiv"
+ },
+ {
+  "f": "og/pl/berlin-kyiv.jpg",
+  "l": "pl",
+  "a": "Berlin",
+  "b": "Kijów"
+ },
+ {
+  "f": "og/ru/kyiv-kosice.jpg",
+  "l": "ru",
+  "a": "Киев",
+  "b": "Кошице"
+ },
+ {
+  "f": "og/uk/kyiv-kosice.jpg",
+  "l": "uk",
+  "a": "Київ",
+  "b": "Кошице"
+ },
+ {
+  "f": "og/en/kyiv-kosice.jpg",
+  "l": "en",
+  "a": "Kyiv",
+  "b": "Košice"
+ },
+ {
+  "f": "og/pl/kyiv-kosice.jpg",
+  "l": "pl",
+  "a": "Kijów",
+  "b": "Koszyce"
+ },
+ {
+  "f": "og/ru/kosice-kyiv.jpg",
+  "l": "ru",
+  "a": "Кошице",
+  "b": "Киев"
+ },
+ {
+  "f": "og/uk/kosice-kyiv.jpg",
+  "l": "uk",
+  "a": "Кошице",
+  "b": "Київ"
+ },
+ {
+  "f": "og/en/kosice-kyiv.jpg",
+  "l": "en",
+  "a": "Košice",
+  "b": "Kyiv"
+ },
+ {
+  "f": "og/pl/kosice-kyiv.jpg",
+  "l": "pl",
+  "a": "Koszyce",
+  "b": "Kijów"
+ },
+ {
+  "f": "og/ru/kyiv-prague.jpg",
+  "l": "ru",
+  "a": "Киев",
+  "b": "Прага"
+ },
+ {
+  "f": "og/uk/kyiv-prague.jpg",
+  "l": "uk",
+  "a": "Київ",
+  "b": "Прага"
+ },
+ {
+  "f": "og/en/kyiv-prague.jpg",
+  "l": "en",
+  "a": "Kyiv",
+  "b": "Prague"
+ },
+ {
+  "f": "og/pl/kyiv-prague.jpg",
+  "l": "pl",
+  "a": "Kijów",
+  "b": "Praga"
+ },
+ {
+  "f": "og/ru/kyiv-budapest.jpg",
+  "l": "ru",
+  "a": "Киев",
+  "b": "Будапешт"
+ },
+ {
+  "f": "og/uk/kyiv-budapest.jpg",
+  "l": "uk",
+  "a": "Київ",
+  "b": "Будапешт"
+ },
+ {
+  "f": "og/en/kyiv-budapest.jpg",
+  "l": "en",
+  "a": "Kyiv",
+  "b": "Budapest"
+ },
+ {
+  "f": "og/pl/kyiv-budapest.jpg",
+  "l": "pl",
+  "a": "Kijów",
+  "b": "Budapest"
+ },
+ {
+  "f": "og/ru/budapest-kyiv.jpg",
+  "l": "ru",
+  "a": "Будапешт",
+  "b": "Киев"
+ },
+ {
+  "f": "og/uk/budapest-kyiv.jpg",
+  "l": "uk",
+  "a": "Будапешт",
+  "b": "Київ"
+ },
+ {
+  "f": "og/en/budapest-kyiv.jpg",
+  "l": "en",
+  "a": "Budapest",
+  "b": "Kyiv"
+ },
+ {
+  "f": "og/pl/budapest-kyiv.jpg",
+  "l": "pl",
+  "a": "Budapest",
+  "b": "Kijów"
+ },
+ {
+  "f": "og/ru/prague-kyiv.jpg",
+  "l": "ru",
+  "a": "Прага",
+  "b": "Киев"
+ },
+ {
+  "f": "og/uk/prague-kyiv.jpg",
+  "l": "uk",
+  "a": "Прага",
+  "b": "Київ"
+ },
+ {
+  "f": "og/en/prague-kyiv.jpg",
+  "l": "en",
+  "a": "Prague",
+  "b": "Kyiv"
+ },
+ {
+  "f": "og/pl/prague-kyiv.jpg",
+  "l": "pl",
+  "a": "Praga",
+  "b": "Kijów"
+ },
+ {
+  "f": "og/ru/budapest-dnipro.jpg",
+  "l": "ru",
+  "a": "Будапешт",
+  "b": "Днепр"
+ },
+ {
+  "f": "og/uk/budapest-dnipro.jpg",
+  "l": "uk",
+  "a": "Будапешт",
+  "b": "Дніпро"
+ },
+ {
+  "f": "og/en/budapest-dnipro.jpg",
+  "l": "en",
+  "a": "Budapest",
+  "b": "Dnipro"
+ },
+ {
+  "f": "og/pl/budapest-dnipro.jpg",
+  "l": "pl",
+  "a": "Budapest",
+  "b": "Dnipro"
+ },
+ {
+  "f": "og/ru/budapest-kharkiv.jpg",
+  "l": "ru",
+  "a": "Будапешт",
+  "b": "Харьков"
+ },
+ {
+  "f": "og/uk/budapest-kharkiv.jpg",
+  "l": "uk",
+  "a": "Будапешт",
+  "b": "Харків"
+ },
+ {
+  "f": "og/en/budapest-kharkiv.jpg",
+  "l": "en",
+  "a": "Budapest",
+  "b": "Kharkiv"
+ },
+ {
+  "f": "og/pl/budapest-kharkiv.jpg",
+  "l": "pl",
+  "a": "Budapest",
+  "b": "Charków"
+ },
+ {
+  "f": "og/ru/budapest-kremenchuk.jpg",
+  "l": "ru",
+  "a": "Будапешт",
+  "b": "Кременчуг"
+ },
+ {
+  "f": "og/uk/budapest-kremenchuk.jpg",
+  "l": "uk",
+  "a": "Будапешт",
+  "b": "Кременчук"
+ },
+ {
+  "f": "og/en/budapest-kremenchuk.jpg",
+  "l": "en",
+  "a": "Budapest",
+  "b": "Kremenchuk"
+ },
+ {
+  "f": "og/pl/budapest-kremenchuk.jpg",
+  "l": "pl",
+  "a": "Budapest",
+  "b": "Krzemieńczuk"
+ },
+ {
+  "f": "og/ru/budapest-odesa.jpg",
+  "l": "ru",
+  "a": "Будапешт",
+  "b": "Одесса"
+ },
+ {
+  "f": "og/uk/budapest-odesa.jpg",
+  "l": "uk",
+  "a": "Будапешт",
+  "b": "Одеса"
+ },
+ {
+  "f": "og/en/budapest-odesa.jpg",
+  "l": "en",
+  "a": "Budapest",
+  "b": "Odesa"
+ },
+ {
+  "f": "og/pl/budapest-odesa.jpg",
+  "l": "pl",
+  "a": "Budapest",
+  "b": "Odessa"
+ },
+ {
+  "f": "og/ru/dnipro-budapest.jpg",
+  "l": "ru",
+  "a": "Днепр",
+  "b": "Будапешт"
+ },
+ {
+  "f": "og/uk/dnipro-budapest.jpg",
+  "l": "uk",
+  "a": "Дніпро",
+  "b": "Будапешт"
+ },
+ {
+  "f": "og/en/dnipro-budapest.jpg",
+  "l": "en",
+  "a": "Dnipro",
+  "b": "Budapest"
+ },
+ {
+  "f": "og/pl/dnipro-budapest.jpg",
+  "l": "pl",
+  "a": "Dnipro",
+  "b": "Budapest"
+ },
+ {
+  "f": "og/ru/dnipro-prague.jpg",
+  "l": "ru",
+  "a": "Днепр",
+  "b": "Прага"
+ },
+ {
+  "f": "og/uk/dnipro-prague.jpg",
+  "l": "uk",
+  "a": "Дніпро",
+  "b": "Прага"
+ },
+ {
+  "f": "og/en/dnipro-prague.jpg",
+  "l": "en",
+  "a": "Dnipro",
+  "b": "Prague"
+ },
+ {
+  "f": "og/pl/dnipro-prague.jpg",
+  "l": "pl",
+  "a": "Dnipro",
+  "b": "Praga"
+ },
+ {
+  "f": "og/ru/dnipro-vienna.jpg",
+  "l": "ru",
+  "a": "Днепр",
+  "b": "Вена"
+ },
+ {
+  "f": "og/uk/dnipro-vienna.jpg",
+  "l": "uk",
+  "a": "Дніпро",
+  "b": "Відень"
+ },
+ {
+  "f": "og/en/dnipro-vienna.jpg",
+  "l": "en",
+  "a": "Dnipro",
+  "b": "Vienna"
+ },
+ {
+  "f": "og/pl/dnipro-vienna.jpg",
+  "l": "pl",
+  "a": "Dnipro",
+  "b": "Wiedeń"
+ },
+ {
+  "f": "og/ru/kharkiv-budapest.jpg",
+  "l": "ru",
+  "a": "Харьков",
+  "b": "Будапешт"
+ },
+ {
+  "f": "og/uk/kharkiv-budapest.jpg",
+  "l": "uk",
+  "a": "Харків",
+  "b": "Будапешт"
+ },
+ {
+  "f": "og/en/kharkiv-budapest.jpg",
+  "l": "en",
+  "a": "Kharkiv",
+  "b": "Budapest"
+ },
+ {
+  "f": "og/pl/kharkiv-budapest.jpg",
+  "l": "pl",
+  "a": "Charków",
+  "b": "Budapest"
+ },
+ {
+  "f": "og/ru/kharkiv-prague.jpg",
+  "l": "ru",
+  "a": "Харьков",
+  "b": "Прага"
+ },
+ {
+  "f": "og/uk/kharkiv-prague.jpg",
+  "l": "uk",
+  "a": "Харків",
+  "b": "Прага"
+ },
+ {
+  "f": "og/en/kharkiv-prague.jpg",
+  "l": "en",
+  "a": "Kharkiv",
+  "b": "Prague"
+ },
+ {
+  "f": "og/pl/kharkiv-prague.jpg",
+  "l": "pl",
+  "a": "Charków",
+  "b": "Praga"
+ },
+ {
+  "f": "og/ru/odesa-budapest.jpg",
+  "l": "ru",
+  "a": "Одесса",
+  "b": "Будапешт"
+ },
+ {
+  "f": "og/uk/odesa-budapest.jpg",
+  "l": "uk",
+  "a": "Одеса",
+  "b": "Будапешт"
+ },
+ {
+  "f": "og/en/odesa-budapest.jpg",
+  "l": "en",
+  "a": "Odesa",
+  "b": "Budapest"
+ },
+ {
+  "f": "og/pl/odesa-budapest.jpg",
+  "l": "pl",
+  "a": "Odessa",
+  "b": "Budapest"
+ },
+ {
+  "f": "og/ru/odesa-prague.jpg",
+  "l": "ru",
+  "a": "Одесса",
+  "b": "Прага"
+ },
+ {
+  "f": "og/uk/odesa-prague.jpg",
+  "l": "uk",
+  "a": "Одеса",
+  "b": "Прага"
+ },
+ {
+  "f": "og/en/odesa-prague.jpg",
+  "l": "en",
+  "a": "Odesa",
+  "b": "Prague"
+ },
+ {
+  "f": "og/pl/odesa-prague.jpg",
+  "l": "pl",
+  "a": "Odessa",
+  "b": "Praga"
+ },
+ {
+  "f": "og/ru/prague-dnipro.jpg",
+  "l": "ru",
+  "a": "Прага",
+  "b": "Днепр"
+ },
+ {
+  "f": "og/uk/prague-dnipro.jpg",
+  "l": "uk",
+  "a": "Прага",
+  "b": "Дніпро"
+ },
+ {
+  "f": "og/en/prague-dnipro.jpg",
+  "l": "en",
+  "a": "Prague",
+  "b": "Dnipro"
+ },
+ {
+  "f": "og/pl/prague-dnipro.jpg",
+  "l": "pl",
+  "a": "Praga",
+  "b": "Dnipro"
+ },
+ {
+  "f": "og/ru/prague-kharkiv.jpg",
+  "l": "ru",
+  "a": "Прага",
+  "b": "Харьков"
+ },
+ {
+  "f": "og/uk/prague-kharkiv.jpg",
+  "l": "uk",
+  "a": "Прага",
+  "b": "Харків"
+ },
+ {
+  "f": "og/en/prague-kharkiv.jpg",
+  "l": "en",
+  "a": "Prague",
+  "b": "Kharkiv"
+ },
+ {
+  "f": "og/pl/prague-kharkiv.jpg",
+  "l": "pl",
+  "a": "Praga",
+  "b": "Charków"
+ },
+ {
+  "f": "og/ru/prague-odesa.jpg",
+  "l": "ru",
+  "a": "Прага",
+  "b": "Одесса"
+ },
+ {
+  "f": "og/uk/prague-odesa.jpg",
+  "l": "uk",
+  "a": "Прага",
+  "b": "Одеса"
+ },
+ {
+  "f": "og/en/prague-odesa.jpg",
+  "l": "en",
+  "a": "Prague",
+  "b": "Odesa"
+ },
+ {
+  "f": "og/pl/prague-odesa.jpg",
+  "l": "pl",
+  "a": "Praga",
+  "b": "Odessa"
+ },
+ {
+  "f": "og/ru/vienna-dnipro.jpg",
+  "l": "ru",
+  "a": "Вена",
+  "b": "Днепр"
+ },
+ {
+  "f": "og/uk/vienna-dnipro.jpg",
+  "l": "uk",
+  "a": "Відень",
+  "b": "Дніпро"
+ },
+ {
+  "f": "og/en/vienna-dnipro.jpg",
+  "l": "en",
+  "a": "Vienna",
+  "b": "Dnipro"
+ },
+ {
+  "f": "og/pl/vienna-dnipro.jpg",
+  "l": "pl",
+  "a": "Wiedeń",
+  "b": "Dnipro"
+ },
+ {
+  "f": "og/ru/budapest-lviv.jpg",
+  "l": "ru",
+  "a": "Будапешт",
+  "b": "Львов"
+ },
+ {
+  "f": "og/uk/budapest-lviv.jpg",
+  "l": "uk",
+  "a": "Будапешт",
+  "b": "Львів"
+ },
+ {
+  "f": "og/en/budapest-lviv.jpg",
+  "l": "en",
+  "a": "Budapest",
+  "b": "Lviv"
+ },
+ {
+  "f": "og/pl/budapest-lviv.jpg",
+  "l": "pl",
+  "a": "Budapest",
+  "b": "Lwów"
+ },
+ {
+  "f": "og/ru/lviv-budapest.jpg",
+  "l": "ru",
+  "a": "Львов",
+  "b": "Будапешт"
+ },
+ {
+  "f": "og/uk/lviv-budapest.jpg",
+  "l": "uk",
+  "a": "Львів",
+  "b": "Будапешт"
+ },
+ {
+  "f": "og/en/lviv-budapest.jpg",
+  "l": "en",
+  "a": "Lviv",
+  "b": "Budapest"
+ },
+ {
+  "f": "og/pl/lviv-budapest.jpg",
+  "l": "pl",
+  "a": "Lwów",
+  "b": "Budapest"
+ },
+ {
+  "f": "og/ru/lviv-prague.jpg",
+  "l": "ru",
+  "a": "Львов",
+  "b": "Прага"
+ },
+ {
+  "f": "og/uk/lviv-prague.jpg",
+  "l": "uk",
+  "a": "Львів",
+  "b": "Прага"
+ },
+ {
+  "f": "og/en/lviv-prague.jpg",
+  "l": "en",
+  "a": "Lviv",
+  "b": "Prague"
+ },
+ {
+  "f": "og/pl/lviv-prague.jpg",
+  "l": "pl",
+  "a": "Lwów",
+  "b": "Praga"
+ },
+ {
+  "f": "og/ru/prague-lviv.jpg",
+  "l": "ru",
+  "a": "Прага",
+  "b": "Львов"
+ },
+ {
+  "f": "og/uk/prague-lviv.jpg",
+  "l": "uk",
+  "a": "Прага",
+  "b": "Львів"
+ },
+ {
+  "f": "og/en/prague-lviv.jpg",
+  "l": "en",
+  "a": "Prague",
+  "b": "Lviv"
+ },
+ {
+  "f": "og/pl/prague-lviv.jpg",
+  "l": "pl",
+  "a": "Praga",
+  "b": "Lwów"
+ },
+ {
+  "f": "og/ru/kremenchuk-budapest.jpg",
+  "l": "ru",
+  "a": "Кременчуг",
+  "b": "Будапешт"
+ },
+ {
+  "f": "og/uk/kremenchuk-budapest.jpg",
+  "l": "uk",
+  "a": "Кременчук",
+  "b": "Будапешт"
+ },
+ {
+  "f": "og/en/kremenchuk-budapest.jpg",
+  "l": "en",
+  "a": "Kremenchuk",
+  "b": "Budapest"
+ },
+ {
+  "f": "og/pl/kremenchuk-budapest.jpg",
+  "l": "pl",
+  "a": "Krzemieńczuk",
+  "b": "Budapest"
+ },
+ {
+  "f": "og/ru/kremenchuk-prague.jpg",
+  "l": "ru",
+  "a": "Кременчуг",
+  "b": "Прага"
+ },
+ {
+  "f": "og/uk/kremenchuk-prague.jpg",
+  "l": "uk",
+  "a": "Кременчук",
+  "b": "Прага"
+ },
+ {
+  "f": "og/en/kremenchuk-prague.jpg",
+  "l": "en",
+  "a": "Kremenchuk",
+  "b": "Prague"
+ },
+ {
+  "f": "og/pl/kremenchuk-prague.jpg",
+  "l": "pl",
+  "a": "Krzemieńczuk",
+  "b": "Praga"
+ },
+ {
+  "f": "og/ru/prague-kremenchuk.jpg",
+  "l": "ru",
+  "a": "Прага",
+  "b": "Кременчуг"
+ },
+ {
+  "f": "og/uk/prague-kremenchuk.jpg",
+  "l": "uk",
+  "a": "Прага",
+  "b": "Кременчук"
+ },
+ {
+  "f": "og/en/prague-kremenchuk.jpg",
+  "l": "en",
+  "a": "Prague",
+  "b": "Kremenchuk"
+ },
+ {
+  "f": "og/pl/prague-kremenchuk.jpg",
+  "l": "pl",
+  "a": "Praga",
+  "b": "Krzemieńczuk"
+ }
+]
