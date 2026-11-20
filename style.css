@@ -1357,3 +1357,15 @@ footer .flinks a:hover{text-decoration:underline}
 .doc li b{color:var(--ink)}
 .doc .panel p+p{margin-top:10px}
 button.btn{border:0;font:inherit;font-weight:600;cursor:pointer;display:inline-block;padding:12px 22px}
+
+/* баннер согласия на cookie (consent.js) */
+.ckb{position:fixed;left:12px;right:12px;bottom:12px;z-index:60;max-width:760px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;gap:12px 18px;padding:16px 18px;background:var(--card);border:1px solid var(--line);border-radius:18px;box-shadow:0 10px 40px rgba(18,20,92,.22)}
+.ckb-t{flex:1 1 320px}
+.ckb-t b{display:block;color:var(--ink);margin-bottom:2px}
+.ckb-t p{margin:0;color:var(--mute);font-size:14px;line-height:1.5}
+.ckb-t a{color:var(--brand);font-weight:600}
+.ckb-b{display:flex;gap:8px;flex:0 0 auto}
+.ckb-b button{border:0;font:inherit;font-weight:700;cursor:pointer;padding:11px 20px;border-radius:14px;background:var(--soft);color:var(--brand)}
+.ckb-b .ckb-yes{background:var(--acc);color:var(--accink)}
+.ckb-b button:hover{filter:brightness(.95)}
+@media (max-width:480px){.ckb-b{width:100%}.ckb-b button{flex:1}}

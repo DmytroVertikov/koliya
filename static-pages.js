@@ -2,6 +2,27 @@
    Это обычные HTML-фрагменты на четырёх языках. Правьте здесь и запустите node build.js.
    Если появится реклама, статистика (Google Analytics и т.п.) или другой сбор данных, обязательно обновите раздел
    «Реклама и статистика» в privacy и дату UPDATED. */
+/* Google Analytics включён, если в config.js задан GA_ID (например "G-XXXXXXXXXX"): тогда политика описывает статистику и cookie с согласием */
+const GA = (() => { try { return /GA_ID:\s*"G-[A-Z0-9]+"/.test(require("fs").readFileSync("config.js", "utf8")) } catch (e) { return false } })();
+const TXG = {
+  ru: {sum: ["Сайт не использует рекламу и статистику посетителей.", "Рекламы на сайте нет, а статистика посещений включается только с вашего согласия."],
+    ck: ["Сайт не устанавливает собственные cookie.", "Сайт не устанавливает собственные cookie. Cookie статистики (Google Analytics) появляются только если вы согласились в баннере."],
+    li: ["", "<li>Google Analytics: статистика посещений, только после вашего согласия.</li>"],
+    an: ["Сейчас на сайте нет рекламы и нет инструментов статистики посетителей. Если они появятся, мы обновим эту страницу и, где требуется, запросим ваше согласие.", "На сайте нет рекламы. Если вы разрешите это в баннере, мы используем Google Analytics для статистики посещений: какие страницы открывают, из какой страны и с какого устройства. Для этого Google устанавливает cookie и получает данные вашего запроса, включая IP-адрес, и может передавать их за пределы ЕС. Без вашего согласия статистика не подключается. Согласие можно изменить или отозвать в любой момент по ссылке «Настройки cookie» внизу страницы."]},
+  uk: {sum: ["Сайт не використовує рекламу й статистику відвідувачів.", "Реклами на сайті немає, а статистика відвідувань вмикається лише за вашою згодою."],
+    ck: ["Сайт не встановлює власні cookie.", "Сайт не встановлює власні cookie. Cookie статистики (Google Analytics) з’являються лише якщо ви погодилися в банері."],
+    li: ["", "<li>Google Analytics: статистика відвідувань, лише після вашої згоди.</li>"],
+    an: ["Зараз на сайті немає реклами й інструментів статистики відвідувачів. Якщо вони з’являться, ми оновимо цю сторінку та, де потрібно, запитаємо вашу згоду.", "На сайті немає реклами. Якщо ви дозволите це в банері, ми використовуємо Google Analytics для статистики відвідувань: які сторінки відкривають, з якої країни та з якого пристрою. Для цього Google встановлює cookie та отримує дані вашого запиту, зокрема IP-адресу, і може передавати їх за межі ЄС. Без вашої згоди статистика не підключається. Згоду можна змінити або відкликати будь-коли за посиланням «Налаштування cookie» внизу сторінки."]},
+  en: {sum: ["The site does not use advertising or visitor analytics.", "The site shows no advertising, and visit statistics are switched on only with your consent."],
+    ck: ["The site does not set its own cookies.", "The site does not set its own cookies. Analytics cookies (Google Analytics) appear only if you agree in the banner."],
+    li: ["", "<li>Google Analytics: visit statistics, only after your consent.</li>"],
+    an: ["The site currently shows no advertising and uses no visitor analytics. If that changes, we will update this page and, where required, ask for your consent.", "The site shows no advertising. If you allow it in the banner, we use Google Analytics for visit statistics: which pages are opened, from which country and on which device. For this, Google sets cookies and receives data about your request, including your IP address, and may transfer it outside the EU. Without your consent no analytics is loaded. You can change or withdraw your consent at any time with the “Cookie settings” link at the bottom of the page."]},
+  pl: {sum: ["Serwis nie korzysta z reklam ani statystyk odwiedzin.", "Serwis nie wyświetla reklam, a statystyki odwiedzin włączają się tylko za Twoją zgodą."],
+    ck: ["Serwis nie ustawia własnych plików cookie.", "Serwis nie ustawia własnych plików cookie. Cookie statystyczne (Google Analytics) pojawiają się tylko wtedy, gdy wyrazisz zgodę w banerze."],
+    li: ["", "<li>Google Analytics: statystyki odwiedzin, tylko po Twojej zgodzie.</li>"],
+    an: ["Obecnie serwis nie wyświetla reklam i nie korzysta ze statystyk odwiedzin. Jeśli to się zmieni, zaktualizujemy tę stronę i, gdy jest to wymagane, poprosimy o zgodę.", "Serwis nie wyświetla reklam. Jeśli wyrazisz zgodę w banerze, korzystamy z Google Analytics do statystyk odwiedzin: które strony są otwierane, z jakiego kraju i na jakim urządzeniu. W tym celu Google ustawia pliki cookie i otrzymuje dane o Twoim żądaniu, w tym adres IP, i może przekazywać je poza UE. Bez Twojej zgody statystyki nie są ładowane. Zgodę możesz w każdej chwili zmienić lub wycofać linkiem „Ustawienia cookie” na dole strony."]}
+};
+const G = l => ({sum: TXG[l].sum[+GA], ck: TXG[l].ck[+GA], li: TXG[l].li[+GA], an: TXG[l].an[+GA]});
 const UPDATED = {ru: "19.11.2026", uk: "19.11.2026", en: "19 November 2026", pl: "19.11.2026"};
 const FB = (k, label) => `<p><button type="button" class="btn pri fb-open" data-fb="${k}">${label}</button></p>`;
 
@@ -121,17 +142,17 @@ ${FB("question", "Otwórz formularz")}</section>
       title: "Политика конфиденциальности | Колія", desc: "Какие данные собирает сайт «Колія», как они используются и какие сторонние сервисы задействованы.",
       h1: "Политика конфиденциальности", lead: `Обновлено: ${UPDATED.ru}`,
       html: `<section class="panel"><h2>Кратко</h2>
-<p>«Колія» — справочник, а не сервис с аккаунтами. Регистрации нет, личные данные мы специально не собираем. Данные, которые попадают к нам, — это сообщения из формы обратной связи и оценки страниц. Сайт не использует рекламу и статистику посетителей.</p></section>
+<p>«Колія» — справочник, а не сервис с аккаунтами. Регистрации нет, личные данные мы специально не собираем. Данные, которые попадают к нам, — это сообщения из формы обратной связи и оценки страниц. ${G("ru").sum}</p></section>
 <section class="panel"><h2>Какие данные мы получаем</h2>
 <ul><li><b>Форма обратной связи.</b> Если вы отправляете сообщение, мы сохраняем его текст, выбранную тему, адрес страницы, язык и контакт (email или Telegram), если вы его указали. Мы используем это только чтобы разобраться с обращением и ответить вам. Не пишите в сообщении лишних личных данных.</li>
 <li><b>Оценка «Информация помогла?».</b> Мы сохраняем оценку (да или нет), адрес страницы и язык. Без привязки к человеку.</li>
-<li><b>Хранилище браузера.</b> Чтобы не просить об оценке повторно, в вашем браузере сохраняется отметка о том, что вы уже оценили страницу (localStorage). Сайт не устанавливает собственные cookie.</li></ul></section>
+<li><b>Хранилище браузера.</b> Чтобы не просить об оценке повторно, в вашем браузере сохраняется отметка о том, что вы уже оценили страницу (localStorage). ${G("ru").ck}</li></ul></section>
 <section class="panel"><h2>Сторонние сервисы</h2>
 <p>Для работы сайта используются сторонние сервисы. При загрузке страниц они получают технические данные вашего запроса (например, IP-адрес и сведения о браузере) по своим правилам:</p>
-<ul><li>GitHub Pages: хостинг сайта;</li><li>Supabase: база данных расписаний, а также форма обратной связи;</li><li>Google Fonts: шрифты;</li><li>flagcdn.com: изображения флагов стран.</li></ul>
+<ul><li>GitHub Pages: хостинг сайта;</li><li>Supabase: база данных расписаний, а также форма обратной связи;</li><li>Google Fonts: шрифты;</li><li>flagcdn.com: изображения флагов стран.</li>${G("ru").li}</ul>
 <p>Ссылки на сайты перевозчиков ведут на внешние ресурсы, на которых действуют их политики.</p></section>
 <section class="panel"><h2>Реклама и статистика</h2>
-<p>Сейчас на сайте нет рекламы и нет инструментов статистики посетителей. Если они появятся, мы обновим эту страницу и, где требуется, запросим ваше согласие.</p></section>
+<p>${G("ru").an}</p></section>
 <section class="panel"><h2>Хранение и ваши права</h2>
 <p>Сообщения хранятся столько, сколько нужно для обработки обращения. Вы можете попросить нас показать, исправить или удалить ваше сообщение и контакт: напишите через форму обратной связи и укажите, о каком сообщении речь. Если вы находитесь в ЕС или Великобритании, у вас также есть права, предусмотренные GDPR, включая право обратиться в орган по защите данных.</p>
 <p>Мы можем обновлять эту политику. Актуальная версия всегда на этой странице, дата обновления указана вверху.</p>
@@ -141,17 +162,17 @@ ${FB("other", "Написать по вопросу данных")}</section>`
       title: "Політика конфіденційності | Колія", desc: "Які дані збирає сайт «Колія», як вони використовуються та які сторонні сервіси задіяно.",
       h1: "Політика конфіденційності", lead: `Оновлено: ${UPDATED.uk}`,
       html: `<section class="panel"><h2>Коротко</h2>
-<p>«Колія» — довідник, а не сервіс з акаунтами. Реєстрації немає, особисті дані ми навмисно не збираємо. Дані, які потрапляють до нас, — це повідомлення з форми зворотного зв’язку та оцінки сторінок. Сайт не використовує рекламу й статистику відвідувачів.</p></section>
+<p>«Колія» — довідник, а не сервіс з акаунтами. Реєстрації немає, особисті дані ми навмисно не збираємо. Дані, які потрапляють до нас, — це повідомлення з форми зворотного зв’язку та оцінки сторінок. ${G("uk").sum}</p></section>
 <section class="panel"><h2>Які дані ми отримуємо</h2>
 <ul><li><b>Форма зворотного зв’язку.</b> Якщо ви надсилаєте повідомлення, ми зберігаємо його текст, обрану тему, адресу сторінки, мову та контакт (email або Telegram), якщо ви його вказали. Ми використовуємо це лише для того, щоб розібратися зі зверненням і відповісти вам. Не пишіть у повідомленні зайвих особистих даних.</li>
 <li><b>Оцінка «Інформація допомогла?».</b> Ми зберігаємо оцінку (так чи ні), адресу сторінки та мову. Без прив’язки до особи.</li>
-<li><b>Сховище браузера.</b> Щоб не просити про оцінку повторно, у вашому браузері зберігається позначка про те, що ви вже оцінили сторінку (localStorage). Сайт не встановлює власні cookie.</li></ul></section>
+<li><b>Сховище браузера.</b> Щоб не просити про оцінку повторно, у вашому браузері зберігається позначка про те, що ви вже оцінили сторінку (localStorage). ${G("uk").ck}</li></ul></section>
 <section class="panel"><h2>Сторонні сервіси</h2>
 <p>Для роботи сайту використовуються сторонні сервіси. Під час завантаження сторінок вони отримують технічні дані вашого запиту (наприклад, IP-адресу та відомості про браузер) за власними правилами:</p>
-<ul><li>GitHub Pages: хостинг сайту;</li><li>Supabase: база даних розкладів, а також форма зворотного зв’язку;</li><li>Google Fonts: шрифти;</li><li>flagcdn.com: зображення прапорів країн.</li></ul>
+<ul><li>GitHub Pages: хостинг сайту;</li><li>Supabase: база даних розкладів, а також форма зворотного зв’язку;</li><li>Google Fonts: шрифти;</li><li>flagcdn.com: зображення прапорів країн.</li>${G("uk").li}</ul>
 <p>Посилання на сайти перевізників ведуть на зовнішні ресурси, де діють їхні політики.</p></section>
 <section class="panel"><h2>Реклама і статистика</h2>
-<p>Зараз на сайті немає реклами й інструментів статистики відвідувачів. Якщо вони з’являться, ми оновимо цю сторінку та, де потрібно, запитаємо вашу згоду.</p></section>
+<p>${G("uk").an}</p></section>
 <section class="panel"><h2>Зберігання та ваші права</h2>
 <p>Повідомлення зберігаються стільки, скільки потрібно для опрацювання звернення. Ви можете попросити нас показати, виправити або видалити ваше повідомлення й контакт: напишіть через форму зворотного зв’язку та вкажіть, про яке повідомлення йдеться. Якщо ви перебуваєте в ЄС або Великій Британії, ви також маєте права, передбачені GDPR, зокрема право звернутися до органу із захисту даних.</p>
 <p>Ми можемо оновлювати цю політику. Актуальна версія завжди на цій сторінці, дату оновлення вказано вгорі.</p>
@@ -161,17 +182,17 @@ ${FB("other", "Написати з питання даних")}</section>`
       title: "Privacy Policy | Koliya", desc: "What data the Koliya website collects, how it is used and which third-party services are involved.",
       h1: "Privacy Policy", lead: `Last updated: ${UPDATED.en}`,
       html: `<section class="panel"><h2>In short</h2>
-<p>Koliya is a reference site, not a service with accounts. There is no registration and we do not set out to collect personal data. The data that reaches us is the messages sent through the feedback form and page ratings. The site does not use advertising or visitor analytics.</p></section>
+<p>Koliya is a reference site, not a service with accounts. There is no registration and we do not set out to collect personal data. The data that reaches us is the messages sent through the feedback form and page ratings. ${G("en").sum}</p></section>
 <section class="panel"><h2>What data we receive</h2>
 <ul><li><b>Feedback form.</b> If you send a message, we store its text, the chosen topic, the page address, the language and your contact (email or Telegram) if you provide one. We use it only to look into your message and reply to you. Please do not include unnecessary personal data.</li>
 <li><b>“Was this helpful?” rating.</b> We store the rating (yes or no), the page address and the language. It is not linked to a person.</li>
-<li><b>Browser storage.</b> So that we do not ask for a rating twice, your browser keeps a flag that you have already rated a page (localStorage). The site does not set its own cookies.</li></ul></section>
+<li><b>Browser storage.</b> So that we do not ask for a rating twice, your browser keeps a flag that you have already rated a page (localStorage). ${G("en").ck}</li></ul></section>
 <section class="panel"><h2>Third-party services</h2>
 <p>The site relies on third-party services. When pages load, they receive technical data about your request (for example your IP address and browser details) under their own policies:</p>
-<ul><li>GitHub Pages: hosting of the site;</li><li>Supabase: the timetable database and the feedback form;</li><li>Google Fonts: fonts;</li><li>flagcdn.com: country flag images.</li></ul>
+<ul><li>GitHub Pages: hosting of the site;</li><li>Supabase: the timetable database and the feedback form;</li><li>Google Fonts: fonts;</li><li>flagcdn.com: country flag images.</li>${G("en").li}</ul>
 <p>Links to carriers’ websites lead to external resources that have their own policies.</p></section>
 <section class="panel"><h2>Advertising and analytics</h2>
-<p>The site currently shows no advertising and uses no visitor analytics. If that changes, we will update this page and, where required, ask for your consent.</p></section>
+<p>${G("en").an}</p></section>
 <section class="panel"><h2>Retention and your rights</h2>
 <p>Messages are kept for as long as needed to handle the request. You can ask us to show, correct or delete your message and contact: write through the feedback form and say which message you mean. If you are in the EU or the UK, you also have the rights provided by the GDPR, including the right to complain to a data protection authority.</p>
 <p>We may update this policy. The current version is always on this page, with the date of the last update at the top.</p>
@@ -181,17 +202,17 @@ ${FB("other", "Write about my data")}</section>`
       title: "Polityka prywatności | Koliya", desc: "Jakie dane zbiera serwis Koliya, jak są wykorzystywane i z jakich usług zewnętrznych korzysta.",
       h1: "Polityka prywatności", lead: `Ostatnia aktualizacja: ${UPDATED.pl}`,
       html: `<section class="panel"><h2>W skrócie</h2>
-<p>Koliya to serwis informacyjny, a nie usługa z kontami. Nie ma rejestracji i nie zbieramy świadomie danych osobowych. Dane, które do nas trafiają, to wiadomości z formularza kontaktowego i oceny stron. Serwis nie korzysta z reklam ani statystyk odwiedzin.</p></section>
+<p>Koliya to serwis informacyjny, a nie usługa z kontami. Nie ma rejestracji i nie zbieramy świadomie danych osobowych. Dane, które do nas trafiają, to wiadomości z formularza kontaktowego i oceny stron. ${G("pl").sum}</p></section>
 <section class="panel"><h2>Jakie dane otrzymujemy</h2>
 <ul><li><b>Formularz kontaktowy.</b> Jeśli wyślesz wiadomość, zapisujemy jej treść, wybrany temat, adres strony, język oraz kontakt (e-mail lub Telegram), jeśli go podasz. Wykorzystujemy to wyłącznie, aby zająć się zgłoszeniem i odpowiedzieć. Nie podawaj w wiadomości zbędnych danych osobowych.</li>
 <li><b>Ocena „Czy informacja pomogła?”.</b> Zapisujemy ocenę (tak lub nie), adres strony i język. Nie jest powiązana z osobą.</li>
-<li><b>Pamięć przeglądarki.</b> Aby nie prosić o ocenę ponownie, w przeglądarce zapisywany jest znacznik, że strona została już oceniona (localStorage). Serwis nie ustawia własnych plików cookie.</li></ul></section>
+<li><b>Pamięć przeglądarki.</b> Aby nie prosić o ocenę ponownie, w przeglądarce zapisywany jest znacznik, że strona została już oceniona (localStorage). ${G("pl").ck}</li></ul></section>
 <section class="panel"><h2>Usługi zewnętrzne</h2>
 <p>Serwis korzysta z usług zewnętrznych. Podczas ładowania stron otrzymują one dane techniczne Twojego żądania (np. adres IP i informacje o przeglądarce) zgodnie z własnymi zasadami:</p>
-<ul><li>GitHub Pages: hosting serwisu;</li><li>Supabase: baza danych rozkładów oraz formularz kontaktowy;</li><li>Google Fonts: czcionki;</li><li>flagcdn.com: obrazy flag państw.</li></ul>
+<ul><li>GitHub Pages: hosting serwisu;</li><li>Supabase: baza danych rozkładów oraz formularz kontaktowy;</li><li>Google Fonts: czcionki;</li><li>flagcdn.com: obrazy flag państw.</li>${G("pl").li}</ul>
 <p>Linki do stron przewoźników prowadzą do zasobów zewnętrznych, które mają własne polityki.</p></section>
 <section class="panel"><h2>Reklamy i statystyki</h2>
-<p>Obecnie serwis nie wyświetla reklam i nie korzysta ze statystyk odwiedzin. Jeśli to się zmieni, zaktualizujemy tę stronę i, gdy jest to wymagane, poprosimy o zgodę.</p></section>
+<p>${G("pl").an}</p></section>
 <section class="panel"><h2>Przechowywanie i Twoje prawa</h2>
 <p>Wiadomości są przechowywane tak długo, jak potrzeba do obsługi zgłoszenia. Możesz poprosić o wgląd, poprawienie lub usunięcie swojej wiadomości i kontaktu: napisz przez formularz i wskaż, o którą wiadomość chodzi. Jeśli przebywasz w UE lub w Wielkiej Brytanii, przysługują Ci także prawa wynikające z RODO, w tym prawo wniesienia skargi do organu ochrony danych.</p>
 <p>Możemy aktualizować tę politykę. Aktualna wersja jest zawsze na tej stronie, a data ostatniej zmiany widnieje na górze.</p>

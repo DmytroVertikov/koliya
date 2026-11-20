@@ -120,7 +120,7 @@ const fill = (s, v) => s.replace(/\{(\w+)\}/g, (m, k) => k in v ? v[k] : m);
 const path = (l, f) => (l === "ru" ? "" : l + "/") + f;
 /* версия для ?v= считается от содержимого style.css и common.js: пока они не менялись, страницы при пересборке не меняются */
 const OGL = {ru: "ru_RU", uk: "uk_UA", en: "en_US", pl: "pl_PL"};
-const VER = require("crypto").createHash("md5").update(fs.readFileSync(__dirname + "/style.css")).update(fs.readFileSync(__dirname + "/common.js")).digest("hex").slice(0, 8), urls = [SITE], SM = []; /* SM: страницы для sitemap.xml: {loc, alts: [[язык, адрес]], body} */
+const VER = require("crypto").createHash("md5").update(fs.readFileSync(__dirname + "/style.css")).update(fs.readFileSync(__dirname + "/common.js")).update(fs.readFileSync(__dirname + "/consent.js")).digest("hex").slice(0, 8), urls = [SITE], SM = []; /* SM: страницы для sitemap.xml: {loc, alts: [[язык, адрес]], body} */
 /* тексты страниц slice-маршрутов (Киев → Хелм и т.п.) собираются здесь, отдельно вносить их в админке не нужно */
 const SLICE_TXT = {
   ru: (a, b) => ({title: `${a} → ${b} поездом | Колія`, desc: `Поезда ${a} — ${b} без пересадок: время, станции, длительность.`, h1: `Поездом: ${a} → ${b}`, lead: `Расписание поездов ${a} — ${b}: прямые поезда без пересадок. Время в пути, остановки и информация о покупке билетов.`}),
