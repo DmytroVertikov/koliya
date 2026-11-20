@@ -837,6 +837,11 @@ header .wrap{position:relative}
 .pg summary:focus-visible{outline:3px solid var(--acc);outline-offset:2px;border-radius:6px}
 .pg details[open] summary{margin-bottom:8px}
 .how .steps{grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px 24px}
+.ixfb{margin-top:48px;padding-top:22px;border-top:1px solid var(--line);color:var(--mute);font-size:14px}
+.ixfb h2{margin:0 0 8px;font-family:var(--disp);font-weight:700;font-size:15px;color:var(--mute)}
+.ixfb p{margin:4px 0}
+.ixfb-b{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px!important}
+.ixfb-b .btn{margin:0}
 .info{margin-top:48px;padding-top:22px;border-top:1px solid var(--line);color:var(--mute);font-size:14px}
 .info h2{margin:0 0 14px;font-family:var(--disp);font-weight:700;font-size:15px;color:var(--mute)}
 .igrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px 28px}
