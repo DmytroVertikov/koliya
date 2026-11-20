@@ -265,8 +265,7 @@ for (const l of LANGS) {
     const top = cut(POP[c[0]] ? all.filter(p => POP[c[0]].includes(p.href)) : all), rest = all.filter(p => !top.includes(p));
     return `<div class="pg${top.length > 5 || rest.length ? " wide" : ""}"><h3>${flag(c, 21, 16)}${hx(names[c[0]])}</h3><div class="rts">${top.map(chip).join("")}</div>${rest.length ? `<details><summary>${hx(fill(d["ix.more"], {n: rest.length}))}</summary><div class="rts">${rest.map(chip).join("")}</div></details>` : ""}</div>`
   }).filter(Boolean).join("\n");
-  v.info = `<div><h3>${hx(d["ix.help.h"])}</h3><p>${hlist("phone").map(x => `<a href="tel:${hx(x.label_ru.replace(/[^\d+]/g, ""))}"><b>${hx(x.label_ru)}</b></a>`).join(" · ")}</p><p>${hx(d["ix.help.p"])}</p></div>
-<div><h3>${hx(d["ix.buy.h"])}</h3><p class="lk">${hlist("buy").map(x => `<a href="${hx(x.url)}">${hx(hlab(x, l))}</a>`).join("")}</p></div>
+  v.info = `<div><h3>${hx(d["ix.buy.h"])}</h3><p class="lk">${hlist("buy").map(x => `<a href="${hx(x.url)}">${hx(hlab(x, l))}</a>`).join("")}</p></div>
 <div><h3>${hx(d["ix.fly.h"])}</h3><p>${hx(d["ix.fly.p"])}</p><p class="lk">${hlist("airport").map(x => `<a href="${hx(x.url)}" target="_blank" rel="noopener">${hx(st(x.label_ru, l))}</a>`).join("")}</p></div>`;
   /* подвал — тот же состав, что в FOOTER_HTML (common.js); скрипт потом перерисует его так же и уточнит дату обновления */
   v.footer = footerHtml(d, l);
