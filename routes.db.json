@@ -4919,20 +4919,20 @@
           "btns": [
             {
               "t": {
-                "en": "Buy the Wien Hbf → Budapest Keleti ticket on MÁV",
-                "pl": "Kup na stronie MÁV bilet Wiedeń Główny → Budapest Keleti",
+                "en": "Buy the Wien → Budapest ticket on MÁV",
+                "pl": "Kup na stronie MÁV bilet Wiedeń → Budapest",
                 "ru": "Купить на сайте MÁV билет Вена → Будапешт",
-                "uk": "Купити на сайті MÁV квиток Відень-Головна → Будапешт-Келеті"
+                "uk": "Купити на сайті MÁV квиток Відень → Будапешт"
               },
               "pri": true,
               "url": "https://jegy.mav.hu/"
             },
             {
               "t": {
-                "en": "Buy the Wien Hbf → Budapest Keleti ticket on ÖBB",
-                "pl": "Kup na stronie ÖBB bilet Wiedeń Główny → Budapest Keleti",
+                "en": "Buy the Wien → Budapest ticket on ÖBB",
+                "pl": "Kup na stronie ÖBB bilet Wiedeń → Budapest",
                 "ru": "Купить на сайте ÖBB билет Вена → Будапешт",
-                "uk": "Купити на сайті ÖBB квиток Відень-Головна → Будапешт-Келеті"
+                "uk": "Купити на сайті ÖBB квиток Відень → Будапешт"
               },
               "pri": true,
               "url": "https://tickets.oebb.at/"
