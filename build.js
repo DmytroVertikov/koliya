@@ -281,6 +281,28 @@ for (const k of Object.keys(SP.P)) for (const l of LANGS) {
   fs.writeFileSync(path(l, f), out);
   urls.push(loc); SM.push({loc, alts: LANGS.map(x => [x, SITE + path(x, f)]), body: out})
 }
+/* 404.html: GitHub Pages отдаёт его для любого несуществующего адреса (в том числе /uk/…), поэтому все пути абсолютные.
+   В файле русская версия, остальные языки лежат в <template>; скрипт в <head> выбирает язык по префиксу адреса и подставляет его до загрузки словаря. */
+{
+  const parts = {};
+  for (const l of LANGS) {
+    const d = I[l], N = SP.NF[l], pre = l === "ru" ? "/" : "/" + l + "/";
+    const body = `<div class="doc"><section class="panel"><h2>${N.h2}</h2><p>${N.p}</p><p><a class="btn pri" href="${pre}">${N.home}</a></p><p><button type="button" class="btn fb-open" data-fb="data">${N.fb}</button></p></section></div>`;
+    const v = {ver: VER, stamp: "v" + VER, lang: l, base: "/", home: pre, canon: SITE, ogloc: OGL[l], ogimg: SITE + "og-image.jpg",
+      p_title: N.title, p_desc: N.desc, p_h1: N.h1, p_lead: N.lead, p_body: body.replace(/^<div class="doc">|<\/div>$/g, ""), alts: "", ogalt: "", jsonld: "{}",
+      langs: LANGS.map(x => `<a href="${x === "ru" ? "/" : "/" + x + "/"}" hreflang="${x}" lang="${x}"${x === l ? ' class="on"' : ""}>${x.toUpperCase()}</a>`).join(""),
+      footer: footerHtml(d, l).replace(/href="(about|contacts|privacy)\.html"/g, (m, k) => `href="/${path(l, k + ".html")}"`)};
+    const out = pg.replace(/\{\{([\w.]+)\}\}/g, (m, key) => key in v ? v[key] : key in d ? fill(d[key], v) : (console.warn("нет ключа", key), m));
+    parts[l] = {out, title: N.title, desc: N.desc, inner: out.match(/<header>[\s\S]*?<\/footer>/)[0]};
+  }
+  const sw = `<script>(function(){var m=location.pathname.match(/^\\/(uk|en|pl)(\\/|$)/),L=m?m[1]:"ru";window.LANG=L;if(L!=="ru"){var t=document.getElementById("nf-"+L);document.documentElement.lang=L;document.title=t.dataset.title;document.getElementById("nf-main").innerHTML=t.innerHTML}document.write('<script src="/dict/'+L+'.js"><\\/script>')})()</script>`;
+  const tpls = LANGS.filter(l => l !== "ru").map(l => `<template id="nf-${l}" data-title="${parts[l].title}">${parts[l].inner}</template>`).join("\n");
+  let html = parts.ru.out
+    .replace(/<link rel="canonical"[^\n]*\n/, "").replace(/<meta property="og:url"[^\n]*\n/, "").replace(/<script type="application\/ld\+json">[^\n]*\n/, "")
+    .replace('<meta name="theme-color"', '<meta name="robots" content="noindex">\n    <meta name="theme-color"')
+    .replace(/<body>\n(<header>[\s\S]*<\/footer>)\n<script>window\.LANG[\s\S]*<\/body>/, (m, inner) => `<body>\n<div id="nf-main">\n${inner}\n</div>\n${tpls}\n${sw}\n<script src="/config.js"></script>\n<script src="/pages.js"></script>\n<script src="/common.js?v=${VER}"></script>\n<script src="/consent.js?v=${VER}"></script>\n</body>`);
+  fs.writeFileSync("404.html", html)
+}
 /* словари для браузера: dict/<язык>.js = русский (запасной) + язык страницы + станции + страны */
 fs.mkdirSync("dict", {recursive: true});
 for (const l of LANGS) {
