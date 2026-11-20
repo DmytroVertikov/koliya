@@ -146,7 +146,8 @@
           "direct": false
         }
       ]
-    }
+    },
+    "updated_at": "2026-11-13T12:44:27.684265+00:00"
   },
   {
     "id": "wk",
@@ -295,7 +296,8 @@
           "direct": false
         }
       ]
-    }
+    },
+    "updated_at": "2026-11-13T12:44:27.684265+00:00"
   },
   {
     "id": "kyiv_krakow",
@@ -412,7 +414,8 @@
           "direct": false
         }
       ]
-    }
+    },
+    "updated_at": "2026-11-13T12:44:27.684265+00:00"
   },
   {
     "id": "krakow_kyiv",
@@ -529,7 +532,8 @@
           "direct": false
         }
       ]
-    }
+    },
+    "updated_at": "2026-11-13T12:44:27.684265+00:00"
   },
   {
     "id": "kyiv_khelm",
@@ -612,7 +616,8 @@
           "direct": true
         }
       ]
-    }
+    },
+    "updated_at": "2026-11-13T12:44:27.684265+00:00"
   },
   {
     "id": "khelm_kyiv",
@@ -684,7 +689,8 @@
           "direct": true
         }
       ]
-    }
+    },
+    "updated_at": "2026-11-13T12:44:27.684265+00:00"
   },
   {
     "id": "kyiv_przemysl",
@@ -753,7 +759,8 @@
           "direct": true
         }
       ]
-    }
+    },
+    "updated_at": "2026-11-13T12:44:27.684265+00:00"
   },
   {
     "id": "przemysl_kyiv",
@@ -822,7 +829,8 @@
           "direct": true
         }
       ]
-    }
+    },
+    "updated_at": "2026-11-13T12:44:27.684265+00:00"
   },
   {
     "id": "dnipro_warsaw",
@@ -938,7 +946,8 @@
           "direct": false
         }
       ]
-    }
+    },
+    "updated_at": "2026-11-13T12:44:27.684265+00:00"
   },
   {
     "id": "warsaw_dnipro",
@@ -1054,7 +1063,8 @@
           "direct": false
         }
       ]
-    }
+    },
+    "updated_at": "2026-11-13T12:44:27.684265+00:00"
   },
   {
     "id": "dnipro_krakow",
@@ -1171,7 +1181,8 @@
           "direct": false
         }
       ]
-    }
+    },
+    "updated_at": "2026-11-13T12:44:27.684265+00:00"
   },
   {
     "id": "krakow_dnipro",
@@ -1288,7 +1299,8 @@
           "direct": false
         }
       ]
-    }
+    },
+    "updated_at": "2026-11-13T12:44:27.684265+00:00"
   },
   {
     "id": "dnipro_khelm",
@@ -1357,7 +1369,8 @@
           "direct": true
         }
       ]
-    }
+    },
+    "updated_at": "2026-11-13T12:44:27.684265+00:00"
   },
   {
     "id": "khelm_dnipro",
@@ -1426,7 +1439,8 @@
           "direct": true
         }
       ]
-    }
+    },
+    "updated_at": "2026-11-13T12:44:27.684265+00:00"
   },
   {
     "id": "dnipro_przemysl",
@@ -1501,7 +1515,8 @@
           "direct": true
         }
       ]
-    }
+    },
+    "updated_at": "2026-11-13T12:44:27.684265+00:00"
   },
   {
     "id": "przemysl_dnipro",
@@ -1570,7 +1585,8 @@
           "direct": true
         }
       ]
-    }
+    },
+    "updated_at": "2026-11-13T12:44:27.684265+00:00"
   },
   {
     "id": "kharkiv_warsaw",
@@ -1686,7 +1702,8 @@
           "direct": false
         }
       ]
-    }
+    },
+    "updated_at": "2026-11-13T12:44:27.684265+00:00"
   },
   {
     "id": "warsaw_kharkiv",
@@ -1802,7 +1819,8 @@
           "direct": false
         }
       ]
-    }
+    },
+    "updated_at": "2026-11-13T12:44:27.684265+00:00"
   },
   {
     "id": "kharkiv_krakow",
@@ -1919,7 +1937,8 @@
           "direct": false
         }
       ]
-    }
+    },
+    "updated_at": "2026-11-13T12:44:27.684265+00:00"
   },
   {
     "id": "krakow_kharkiv",
@@ -2036,7 +2055,8 @@
           "direct": false
         }
       ]
-    }
+    },
+    "updated_at": "2026-11-13T12:44:27.684265+00:00"
   },
   {
     "id": "kharkiv_khelm",
@@ -2105,7 +2125,8 @@
           "direct": true
         }
       ]
-    }
+    },
+    "updated_at": "2026-11-13T12:44:27.684265+00:00"
   },
   {
     "id": "khelm_kharkiv",
@@ -2174,7 +2195,8 @@
           "direct": true
         }
       ]
-    }
+    },
+    "updated_at": "2026-11-13T12:44:27.684265+00:00"
   },
   {
     "id": "kharkiv_przemysl",
@@ -2243,7 +2265,8 @@
           "direct": true
         }
       ]
-    }
+    },
+    "updated_at": "2026-11-13T12:44:27.684265+00:00"
   },
   {
     "id": "przemysl_kharkiv",
@@ -2312,7 +2335,8 @@
           "direct": true
         }
       ]
-    }
+    },
+    "updated_at": "2026-11-13T12:44:27.684265+00:00"
   },
   {
     "id": "odesa_warsaw",
@@ -2429,7 +2453,8 @@
           "direct": false
         }
       ]
-    }
+    },
+    "updated_at": "2026-11-13T12:44:27.684265+00:00"
   },
   {
     "id": "warsaw_odesa",
@@ -2546,7 +2571,8 @@
           "direct": false
         }
       ]
-    }
+    },
+    "updated_at": "2026-11-13T12:44:27.684265+00:00"
   },
   {
     "id": "odesa_krakow",
@@ -2663,7 +2689,8 @@
           "direct": false
         }
       ]
-    }
+    },
+    "updated_at": "2026-11-13T12:44:27.684265+00:00"
   },
   {
     "id": "krakow_odesa",
@@ -2780,7 +2807,8 @@
           "direct": false
         }
       ]
-    }
+    },
+    "updated_at": "2026-11-13T12:44:27.684265+00:00"
   },
   {
     "id": "odesa_przemysl",
@@ -2849,7 +2877,8 @@
           "direct": true
         }
       ]
-    }
+    },
+    "updated_at": "2026-11-13T12:44:27.684265+00:00"
   },
   {
     "id": "przemysl_odesa",
@@ -2918,7 +2947,8 @@
           "direct": true
         }
       ]
-    }
+    },
+    "updated_at": "2026-11-13T12:44:27.684265+00:00"
   },
   {
     "id": "lviv_warsaw",
@@ -3024,7 +3054,8 @@
           "direct": false
         }
       ]
-    }
+    },
+    "updated_at": "2026-11-13T12:44:27.684265+00:00"
   },
   {
     "id": "warsaw_lviv",
@@ -3130,7 +3161,8 @@
           "direct": false
         }
       ]
-    }
+    },
+    "updated_at": "2026-11-13T12:44:27.684265+00:00"
   },
   {
     "id": "lviv_krakow",
@@ -3247,7 +3279,8 @@
           "direct": false
         }
       ]
-    }
+    },
+    "updated_at": "2026-11-13T12:44:27.684265+00:00"
   },
   {
     "id": "krakow_lviv",
@@ -3364,7 +3397,8 @@
           "direct": false
         }
       ]
-    }
+    },
+    "updated_at": "2026-11-13T12:44:27.684265+00:00"
   },
   {
     "id": "lviv_przemysl",
@@ -3433,7 +3467,8 @@
           "direct": true
         }
       ]
-    }
+    },
+    "updated_at": "2026-11-13T12:44:27.684265+00:00"
   },
   {
     "id": "przemysl_lviv",
@@ -3502,7 +3537,8 @@
           "direct": true
         }
       ]
-    }
+    },
+    "updated_at": "2026-11-13T12:44:27.684265+00:00"
   },
   {
     "id": "kremenchuk_warsaw",
@@ -3619,7 +3655,8 @@
           "direct": false
         }
       ]
-    }
+    },
+    "updated_at": "2026-11-13T12:44:27.684265+00:00"
   },
   {
     "id": "warsaw_kremenchuk",
@@ -3736,7 +3773,8 @@
           "direct": false
         }
       ]
-    }
+    },
+    "updated_at": "2026-11-13T12:44:27.684265+00:00"
   },
   {
     "id": "kremenchuk_krakow",
@@ -3853,7 +3891,8 @@
           "direct": false
         }
       ]
-    }
+    },
+    "updated_at": "2026-11-13T12:44:27.684265+00:00"
   },
   {
     "id": "krakow_kremenchuk",
@@ -3970,7 +4009,8 @@
           "direct": false
         }
       ]
-    }
+    },
+    "updated_at": "2026-11-13T12:44:27.684265+00:00"
   },
   {
     "id": "kremenchuk_przemysl",
@@ -4039,7 +4079,8 @@
           "direct": true
         }
       ]
-    }
+    },
+    "updated_at": "2026-11-13T12:44:27.684265+00:00"
   },
   {
     "id": "przemysl_kremenchuk",
@@ -4108,7 +4149,8 @@
           "direct": true
         }
       ]
-    }
+    },
+    "updated_at": "2026-11-13T12:44:27.684265+00:00"
   },
   {
     "id": "kyiv_bratislava",
@@ -4224,7 +4266,8 @@
           "direct": false
         }
       ]
-    }
+    },
+    "updated_at": "2026-11-13T12:44:27.684265+00:00"
   },
   {
     "id": "bratislava_kyiv",
@@ -4351,7 +4394,8 @@
           "direct": false
         }
       ]
-    }
+    },
+    "updated_at": "2026-11-13T12:44:27.684265+00:00"
   },
   {
     "id": "kyiv_bucharest",
@@ -4451,7 +4495,8 @@
           "direct": true
         }
       ]
-    }
+    },
+    "updated_at": "2026-11-13T12:44:27.684265+00:00"
   },
   {
     "id": "bucharest_kyiv",
@@ -4551,7 +4596,8 @@
           "direct": true
         }
       ]
-    }
+    },
+    "updated_at": "2026-11-13T12:44:27.684265+00:00"
   },
   {
     "id": "kyiv_vienna",
@@ -4761,7 +4807,8 @@
           "direct": false
         }
       ]
-    }
+    },
+    "updated_at": "2026-11-13T12:44:27.684265+00:00"
   },
   {
     "id": "vienna_kyiv",
@@ -4982,7 +5029,8 @@
           "direct": false
         }
       ]
-    }
+    },
+    "updated_at": "2026-11-13T12:44:27.684265+00:00"
   },
   {
     "id": "kyiv_chisinau",
@@ -5082,7 +5130,8 @@
           "direct": true
         }
       ]
-    }
+    },
+    "updated_at": "2026-11-13T12:44:27.684265+00:00"
   },
   {
     "id": "chisinau_kyiv",
@@ -5182,7 +5231,8 @@
           "direct": true
         }
       ]
-    }
+    },
+    "updated_at": "2026-11-13T12:44:27.684265+00:00"
   },
   {
     "id": "kyiv_berlin",
@@ -5430,7 +5480,8 @@
           "direct": false
         }
       ]
-    }
+    },
+    "updated_at": "2026-11-13T12:44:27.684265+00:00"
   },
   {
     "id": "berlin_kyiv",
@@ -5679,7 +5730,8 @@
           "direct": false
         }
       ]
-    }
+    },
+    "updated_at": "2026-11-13T12:44:27.684265+00:00"
   },
   {
     "id": "kyiv_kosice",
@@ -5804,7 +5856,8 @@
           "direct": false
         }
       ]
-    }
+    },
+    "updated_at": "2026-11-13T12:44:27.684265+00:00"
   },
   {
     "id": "kosice_kyiv",
@@ -5920,7 +5973,8 @@
           "direct": false
         }
       ]
-    }
+    },
+    "updated_at": "2026-11-13T12:44:27.684265+00:00"
   },
   {
     "id": "kyiv_prague",
@@ -6154,7 +6208,8 @@
           "direct": false
         }
       ]
-    }
+    },
+    "updated_at": "2026-11-13T12:44:27.684265+00:00"
   },
   {
     "id": "kyiv_budapest",
@@ -6325,7 +6380,8 @@
           "direct": false
         }
       ]
-    }
+    },
+    "updated_at": "2026-11-13T12:44:27.684265+00:00"
   },
   {
     "id": "budapest_kyiv",
@@ -6491,7 +6547,8 @@
           "direct": false
         }
       ]
-    }
+    },
+    "updated_at": "2026-11-13T12:44:27.684265+00:00"
   },
   {
     "id": "prague_kyiv",
@@ -6725,7 +6782,8 @@
           "direct": false
         }
       ]
-    }
+    },
+    "updated_at": "2026-11-13T12:44:27.684265+00:00"
   },
   {
     "id": "budapest_dnipro",
@@ -6893,7 +6951,8 @@
           "direct": false
         }
       ]
-    }
+    },
+    "updated_at": "2026-11-17T10:03:29.162917+00:00"
   },
   {
     "id": "budapest_kharkiv",
@@ -7112,7 +7171,8 @@
           "direct": false
         }
       ]
-    }
+    },
+    "updated_at": "2026-11-17T20:16:15.124235+00:00"
   },
   {
     "id": "budapest_kremenchuk",
@@ -7229,7 +7289,8 @@
           "direct": false
         }
       ]
-    }
+    },
+    "updated_at": "2026-11-18T11:09:25.392293+00:00"
   },
   {
     "id": "budapest_odesa",
@@ -7397,7 +7458,8 @@
           "direct": false
         }
       ]
-    }
+    },
+    "updated_at": "2026-11-17T20:39:59.029488+00:00"
   },
   {
     "id": "dnipro_budapest",
@@ -7616,7 +7678,8 @@
           "direct": false
         }
       ]
-    }
+    },
+    "updated_at": "2026-11-17T10:03:29.162917+00:00"
   },
   {
     "id": "dnipro_prague",
@@ -7784,7 +7847,8 @@
           "direct": false
         }
       ]
-    }
+    },
+    "updated_at": "2026-11-15T19:17:29.810598+00:00"
   },
   {
     "id": "dnipro_vienna",
@@ -7901,7 +7965,8 @@
           "direct": false
         }
       ]
-    }
+    },
+    "updated_at": "2026-11-18T12:47:35.91422+00:00"
   },
   {
     "id": "kharkiv_budapest",
@@ -8120,7 +8185,8 @@
           "direct": false
         }
       ]
-    }
+    },
+    "updated_at": "2026-11-17T20:16:15.124235+00:00"
   },
   {
     "id": "kharkiv_prague",
@@ -8288,7 +8354,8 @@
           "direct": false
         }
       ]
-    }
+    },
+    "updated_at": "2026-11-16T15:44:48.675244+00:00"
   },
   {
     "id": "odesa_budapest",
@@ -8456,7 +8523,8 @@
           "direct": false
         }
       ]
-    }
+    },
+    "updated_at": "2026-11-17T20:39:59.029488+00:00"
   },
   {
     "id": "odesa_prague",
@@ -8627,7 +8695,8 @@
           "direct": false
         }
       ]
-    }
+    },
+    "updated_at": "2026-11-16T15:56:41.751596+00:00"
   },
   {
     "id": "prague_dnipro",
@@ -8795,7 +8864,8 @@
           "direct": false
         }
       ]
-    }
+    },
+    "updated_at": "2026-11-15T19:17:29.810598+00:00"
   },
   {
     "id": "prague_kharkiv",
@@ -8963,7 +9033,8 @@
           "direct": false
         }
       ]
-    }
+    },
+    "updated_at": "2026-11-16T15:44:48.675244+00:00"
   },
   {
     "id": "prague_odesa",
@@ -9131,7 +9202,8 @@
           "direct": false
         }
       ]
-    }
+    },
+    "updated_at": "2026-11-16T15:56:41.751596+00:00"
   },
   {
     "id": "vienna_dnipro",
@@ -9248,7 +9320,8 @@
           "direct": false
         }
       ]
-    }
+    },
+    "updated_at": "2026-11-18T12:47:35.91422+00:00"
   },
   {
     "id": "budapest_lviv",
@@ -9402,7 +9475,8 @@
           "direct": false
         }
       ]
-    }
+    },
+    "updated_at": "2026-11-18T08:51:39.058159+00:00"
   },
   {
     "id": "lviv_budapest",
@@ -9562,7 +9636,8 @@
           "direct": false
         }
       ]
-    }
+    },
+    "updated_at": "2026-11-18T08:51:39.058159+00:00"
   },
   {
     "id": "lviv_prague",
@@ -9730,7 +9805,8 @@
           "direct": false
         }
       ]
-    }
+    },
+    "updated_at": "2026-11-16T16:22:18.206548+00:00"
   },
   {
     "id": "prague_lviv",
@@ -9898,7 +9974,8 @@
           "direct": false
         }
       ]
-    }
+    },
+    "updated_at": "2026-11-16T16:22:18.206548+00:00"
   },
   {
     "id": "kremenchuk_budapest",
@@ -10066,7 +10143,8 @@
           "direct": false
         }
       ]
-    }
+    },
+    "updated_at": "2026-11-18T11:09:25.392293+00:00"
   },
   {
     "id": "kremenchuk_prague",
@@ -10234,7 +10312,8 @@
           "direct": false
         }
       ]
-    }
+    },
+    "updated_at": "2026-11-17T09:33:22.742746+00:00"
   },
   {
     "id": "prague_kremenchuk",
@@ -10402,6 +10481,7 @@
           "direct": false
         }
       ]
-    }
+    },
+    "updated_at": "2026-11-17T09:33:22.742746+00:00"
   }
 ]
